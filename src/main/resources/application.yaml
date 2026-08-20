@@ -1,3 +1,41 @@
 spring:
   application:
     name: regulation-backend
+
+  config:
+    import: optional:file:.env[.properties]
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+
+    hibernate:
+      ddl-auto: validate
+
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: ${SERVER_PORT:8080}
+
+app:
+  bootstrap-admin:
+    username: ${BOOTSTRAP_ADMIN_USERNAME}
+    password: ${BOOTSTRAP_ADMIN_PASSWORD}
+    email: ${BOOTSTRAP_ADMIN_EMAIL}
+    full-name: ${BOOTSTRAP_ADMIN_FULL_NAME}
+
+  jwt:
+    secret: ${JWT_SECRET}
+    issuer: ${JWT_ISSUER:regulation-backend}
+    access-token-expiration: ${JWT_ACCESS_TOKEN_EXPIRATION:900}
