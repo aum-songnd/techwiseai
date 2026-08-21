@@ -13,56 +13,61 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.university.regulation.security.RestAccessDeniedHandler;
+import com.university.regulation.security.RestAuthenticationEntryPoint;
+
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http,
-            Converter<Jwt, ? extends AbstractAuthenticationToken>
-                    jwtAuthenticationConverter
-    ) throws Exception {
+        @Bean
+        public SecurityFilterChain securityFilterChain(
+                        HttpSecurity http,
+                        Converter<Jwt, ? extends AbstractAuthenticationToken> jwtAuthenticationConverter,
+                        RestAuthenticationEntryPoint authenticationEntryPoint,
+                        RestAccessDeniedHandler accessDeniedHandler) throws Exception {
 
-        http
-                .csrf(AbstractHttpConfigurer::disable)
+                http
+                                .csrf(AbstractHttpConfigurer::disable)
 
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(
-                                SessionCreationPolicy.STATELESS
-                        )
-                )
+                                .sessionManagement(session -> session.sessionCreationPolicy(
+                                                SessionCreationPolicy.STATELESS))
 
-                .authorizeHttpRequests(authorize -> authorize
+                                .authorizeHttpRequests(authorize -> authorize
 
-                        .requestMatchers(
-                                "/actuator/health",
-                                "/api/v1/public/**",
-                                "/api/v1/auth/login"
-                        ).permitAll()
+                                                .requestMatchers(
+                                                                "/actuator/health",
+                                                                "/api/v1/public/**",
+                                                                "/api/v1/auth/login")
+                                                .permitAll()
 
-                        .requestMatchers(
-                                "/api/v1/admin/**"
-                        ).hasRole("ADMIN")
+                                                .requestMatchers(
+                                                                "/api/v1/admin/**")
+                                                .hasRole("ADMIN")
 
-                        .anyRequest().authenticated()
-                )
+                                                .anyRequest().authenticated())
 
-                .oauth2ResourceServer(resourceServer ->
-                        resourceServer.jwt(jwt ->
-                                jwt.jwtAuthenticationConverter(
-                                        jwtAuthenticationConverter
-                                )
-                        )
-                );
+                                .exceptionHandling(exception -> exception
+                                                .authenticationEntryPoint(authenticationEntryPoint)
+                                                .accessDeniedHandler(accessDeniedHandler))
 
-        return http.build();
-    }
+                                .oauth2ResourceServer(resourceServer -> resourceServer
 
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration configuration
-    ) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
+                                                .authenticationEntryPoint(
+                                                                authenticationEntryPoint)
+
+                                                .accessDeniedHandler(
+                                                                accessDeniedHandler)
+
+                                                .jwt(jwt -> jwt.jwtAuthenticationConverter(
+                                                                jwtAuthenticationConverter)));
+
+                return http.build();
+        }
+
+        @Bean
+        public AuthenticationManager authenticationManager(
+                        AuthenticationConfiguration configuration) throws Exception {
+                return configuration.getAuthenticationManager();
+        }
 }

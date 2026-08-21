@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.university.regulation.auth.dto.LoginRequest;
 import com.university.regulation.auth.dto.LoginResponse;
 import com.university.regulation.auth.service.AuthService;
+import com.university.regulation.common.response.ApiResponse;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
@@ -18,16 +20,27 @@ public class AuthController {
 
     private final AuthService authService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(
+            AuthService authService
+    ) {
         this.authService = authService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(
-            @Valid @RequestBody LoginRequest request
+    public ResponseEntity<ApiResponse<LoginResponse>> login(
+            @Valid @RequestBody LoginRequest loginRequest,
+            HttpServletRequest request
     ) {
-        return ResponseEntity.ok(
-                authService.login(request)
-        );
+        LoginResponse loginResponse =
+                authService.login(loginRequest);
+
+        ApiResponse<LoginResponse> response =
+                ApiResponse.success(
+                        "Đăng nhập thành công",
+                        loginResponse,
+                        request.getRequestURI()
+                );
+
+        return ResponseEntity.ok(response);
     }
 }
