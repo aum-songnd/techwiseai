@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,15 +28,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+     <ClerkProvider>
+      <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TooltipProvider>
-          <Header/>
-          {children}</TooltipProvider>
+         <div className="flex flex-col min-h-screen">
+           <Header/>
+          <main className="flex-1">{children}</main>
           <Footer/>
+         </div>
+          </TooltipProvider>
       </body>
     </html>
+     </ClerkProvider>
   );
 }
