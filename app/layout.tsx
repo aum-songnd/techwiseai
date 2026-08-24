@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
      <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className="font-poppins">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

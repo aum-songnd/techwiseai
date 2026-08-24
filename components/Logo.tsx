@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 const Logo = ({className,spanDesign}: {className?: string, spanDesign?:string}) => {
   return (
-    <Link href={"/"}> 
+    <Link href={"/"} className='inline-flex'> 
     <h2 className={cn(
         "text-2xl text-shop_dark_green font-black uppercase" ,
         "tracking-wider hover:text-shop_light_green hoverEffect group font-sans", 
