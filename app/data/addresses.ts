@@ -1,0 +1,40 @@
+import { Address } from "./types";
+
+export const addresses: Address[] = [
+  {
+    id: "addr-1",
+    userId: "user-001",
+    name: "Nhà riêng",
+    email: "minhtran@example.com",
+    address: "123 Đường Nguyễn Trãi, Phường 5",
+    city: "Hà Nội",
+    state: "HN",
+    zip: "100000",
+    isDefault: true,
+    createdAt: "2026-01-10T02:00:00.000Z",
+  },
+  {
+    id: "addr-2",
+    userId: "user-001",
+    name: "Công ty",
+    email: "minhtran@example.com",
+    address: "45 Đường Láng Hạ, Tầng 8",
+    city: "Hà Nội",
+    state: "HN",
+    zip: "100000",
+    isDefault: false,
+    createdAt: "2026-02-20T07:15:00.000Z",
+  },
+  {
+    id: "addr-3",
+    userId: "user-002",
+    name: "Nhà riêng",
+    email: "lan.nguyen@example.com",
+    address: "78 Đường Lê Lợi, Quận 1",
+    city: "TP. Hồ Chí Minh",
+    state: "SG",
+    zip: "700000",
+    isDefault: true,
+    createdAt: "2026-03-05T04:45:00.000Z",
+  },
+];

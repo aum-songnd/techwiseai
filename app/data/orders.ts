@@ -1,0 +1,75 @@
+import { Order } from "./types";
+
+export const orders: Order[] = [
+  {
+    id: "order-1",
+    orderNumber: "ORD-20260601-001",
+    invoice: {
+      id: "in_1PqXYZ",
+      number: "INV-0001",
+      hostedInvoiceUrl: "https://invoice.example.com/in_1PqXYZ",
+    },
+    stripeCheckoutSessionId: "cs_test_a1b2c3",
+    stripeCustomerId: "cus_Qw12345",
+    userId: "user-001",
+    customerName: "Trần Anh Minh",
+    email: "minhtran@example.com",
+    stripePaymentIntentId: "pi_3PqAbc1D2eF3gH4i",
+    products: [
+      {
+        productId: "prod-iphone-15",
+        productName: "iPhone 15 Pro Max",
+        quantity: 1,
+        price: 32990000,
+      },
+      {
+        productId: "prod-sony-wh1000xm5",
+        productName: "Sony WH-1000XM5",
+        quantity: 1,
+        price: 7990000,
+      },
+    ],
+    totalPrice: 40980000,
+    currency: "VND",
+    amountDiscount: 2500000,
+    shippingAddress: {
+      name: "Trần Anh Minh",
+      address: "123 Đường Nguyễn Trãi, Phường 5",
+      city: "Hà Nội",
+      state: "HN",
+      zip: "100000",
+    },
+    status: "shipped",
+    orderDate: "2026-06-01T03:20:00.000Z",
+  },
+  {
+    id: "order-2",
+    orderNumber: "ORD-20260715-002",
+    stripeCheckoutSessionId: "cs_test_d4e5f6",
+    stripeCustomerId: "cus_Rt67890",
+    userId: "user-002",
+    customerName: "Nguyễn Thị Lan",
+    email: "lan.nguyen@example.com",
+    stripePaymentIntentId: "pi_3PrDef4G5hI6jK7l",
+    products: [
+      {
+        productId: "prod-galaxy-watch-6",
+        productName: "Samsung Galaxy Watch 6",
+        quantity: 2,
+        price: 6690000,
+      },
+    ],
+    totalPrice: 13380000,
+    currency: "VND",
+    amountDiscount: 600000,
+    shippingAddress: {
+      name: "Nguyễn Thị Lan",
+      address: "78 Đường Lê Lợi, Quận 1",
+      city: "TP. Hồ Chí Minh",
+      state: "SG",
+      zip: "700000",
+    },
+    status: "pending",
+    orderDate: "2026-07-15T09:05:00.000Z",
+  },
+];
