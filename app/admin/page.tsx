@@ -2,14 +2,12 @@ import React from 'react';
 import Container from '@/components/Container';
 import HomeBanner from '@/components/HomeBanner';
 
-const Home = () => {
+const Admin = () => {
   return (
     <div>
-      <Container className="bg-shop-light-pink">
-        <HomeBanner />
-      </Container>
+     ADMIN
     </div>
   );
 }
 
-export default Home;
+export default Admin;
