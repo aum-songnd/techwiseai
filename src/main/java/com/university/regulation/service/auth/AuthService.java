@@ -1,4 +1,4 @@
-package com.university.regulation.auth.service;
+package com.university.regulation.service.auth;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import com.university.regulation.auth.dto.LoginRequest;
-import com.university.regulation.auth.dto.LoginResponse;
+import com.university.regulation.dto.auth.LoginRequest;
+import com.university.regulation.dto.auth.LoginResponse;
 
 @Service
 public class AuthService {

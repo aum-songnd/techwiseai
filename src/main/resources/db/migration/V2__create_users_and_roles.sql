@@ -2,11 +2,11 @@ CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
     username VARCHAR(100) NOT NULL,
-    email VARCHAR(255),
-    password_hash VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
 
+    password_hash VARCHAR(255) NOT NULL,
     full_name VARCHAR(255) NOT NULL,
-    student_code VARCHAR(50),
 
     enabled BOOLEAN NOT NULL DEFAULT TRUE,
     locked BOOLEAN NOT NULL DEFAULT FALSE,
@@ -18,19 +18,18 @@ CREATE TABLE users (
         NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- Không phân biệt chữ hoa/chữ thường khi kiểm tra username.
+-- Username không phân biệt chữ hoa/chữ thường và không được trùng.
 CREATE UNIQUE INDEX uk_users_username_lower
     ON users (LOWER(username));
 
--- Email có thể để trống nhưng nếu có thì không được trùng.
+-- Email không phân biệt chữ hoa/chữ thường và không được trùng.
 CREATE UNIQUE INDEX uk_users_email_lower
-    ON users (LOWER(email))
-    WHERE email IS NOT NULL;
+    ON users (LOWER(email));
 
--- Mã sinh viên có thể để trống nhưng nếu có thì không được trùng.
-CREATE UNIQUE INDEX uk_users_student_code
-    ON users (student_code)
-    WHERE student_code IS NOT NULL;
+-- Số điện thoại có thể để trống nhưng nếu có thì không được trùng.
+CREATE UNIQUE INDEX uk_users_phone
+    ON users (phone)
+    WHERE phone IS NOT NULL;
 
 
 CREATE TABLE roles (
@@ -43,11 +42,7 @@ CREATE TABLE roles (
     created_at TIMESTAMP WITH TIME ZONE
         NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT uk_roles_code UNIQUE (code),
-
-    CONSTRAINT chk_roles_code CHECK (
-        code IN ('ADMIN', 'STAFF', 'STUDENT', 'GUEST')
-    )
+    CONSTRAINT uk_roles_code UNIQUE (code)
 );
 
 
@@ -72,6 +67,7 @@ CREATE TABLE user_roles (
         ON DELETE CASCADE
 );
 
+
 INSERT INTO roles (
     code,
     name,
@@ -81,20 +77,15 @@ VALUES
     (
         'ADMIN',
         'Quản trị hệ thống',
-        'Quản lý người dùng, phân quyền, tài liệu và cấu hình hệ thống'
+        'Quản lý toàn bộ hệ thống, người dùng, sản phẩm, đơn hàng và cấu hình'
     ),
     (
         'STAFF',
-        'Cán bộ nhà trường',
-        'Upload, cập nhật và gửi duyệt tài liệu'
+        'Nhân viên',
+        'Quản lý sản phẩm, tồn kho, khách hàng và xử lý đơn hàng'
     ),
     (
-        'STUDENT',
-        'Sinh viên',
-        'Tra cứu tài liệu và sử dụng chức năng hỏi đáp'
-    ),
-    (
-        'GUEST',
-        'Khách',
-        'Tra cứu các nội dung được công khai'
+        'CUSTOMER',
+        'Khách hàng',
+        'Mua sản phẩm, quản lý giỏ hàng, địa chỉ và theo dõi đơn hàng'
     );

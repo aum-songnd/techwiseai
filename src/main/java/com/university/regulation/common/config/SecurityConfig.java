@@ -36,9 +36,11 @@ public class SecurityConfig {
                                 .authorizeHttpRequests(authorize -> authorize
 
                                                 .requestMatchers(
-                                                                "/actuator/health",
-                                                                "/api/v1/public/**",
-                                                                "/api/v1/auth/login")
+                                                        "/actuator/health",
+                                                                "/api/v1/auth/login",
+                                                                "/api/v1/categories",
+                                                                "/api/v1/products"
+                                                        )
                                                 .permitAll()
 
                                                 .requestMatchers(

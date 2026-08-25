@@ -29,72 +29,37 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(
-        name = "username",
-        nullable = false,
-        length = 100
-    )
+    @Column(name = "username", nullable = false, length = 100)
     private String username;
 
-    @Column(
-        name = "email",
-        length = 255
-    )
+    @Column(name = "email", nullable = false, length = 255)
     private String email;
 
-    @Column(
-        name = "password_hash",
-        nullable = false,
-        length = 255
-    )
+    @Column(name = "password_hash", nullable = false, length = 255)
     private String passwordHash;
 
-    @Column(
-        name = "full_name",
-        nullable = false,
-        length = 255
-    )
+    @Column(name = "full_name", nullable = false, length = 255)
     private String fullName;
 
-    @Column(
-        name = "student_code",
-        length = 50
-    )
-    private String studentCode;
+    @Column(name = "phone", length = 20, unique = true)
+    private String phone;
 
-    @Column(
-        name = "enabled",
-        nullable = false
-    )
+    @Column(name = "enabled", nullable = false)
     private boolean enabled = true;
 
-    @Column(
-        name = "locked",
-        nullable = false
-    )
+    @Column(name = "locked", nullable = false)
     private boolean locked = false;
 
     @CreationTimestamp
-    @Column(
-        name = "created_at",
-        nullable = false,
-        updatable = false
-    )
+    @Column(name = "created_at", nullable = false, updatable = false)
     private OffsetDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(
-        name = "updated_at",
-        nullable = false
-    )
+    @Column(name = "updated_at", nullable = false)
     private OffsetDateTime updatedAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "user_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() {
@@ -140,12 +105,12 @@ public class User {
         this.fullName = fullName;
     }
 
-    public String getStudentCode() {
-        return studentCode;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setStudentCode(String studentCode) {
-        this.studentCode = studentCode;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public boolean isEnabled() {

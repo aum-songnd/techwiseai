@@ -1,4 +1,4 @@
-package com.university.regulation.auth.dto;
+package com.university.regulation.dto.auth;
 
 import java.util.List;
 

@@ -19,7 +19,9 @@ public interface UserRepository
 
     boolean existsByEmailIgnoreCase(String email);
 
-    boolean existsByStudentCode(String studentCode);
+    boolean existsByPhone(String phone);
+
+    Optional<User> findByPhone(String phone);
 
     @EntityGraph(attributePaths = "roles")
     Optional<User> findWithRolesByUsernameIgnoreCase(String username);

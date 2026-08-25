@@ -1,4 +1,4 @@
-package com.university.regulation.auth.service;
+package com.university.regulation.service.auth;
 
 import java.time.Instant;
 import java.util.List;

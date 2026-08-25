@@ -1,4 +1,4 @@
-package com.university.regulation.auth.controller;
+package com.university.regulation.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.university.regulation.auth.dto.LoginRequest;
-import com.university.regulation.auth.dto.LoginResponse;
-import com.university.regulation.auth.service.AuthService;
 import com.university.regulation.common.response.ApiResponse;
+import com.university.regulation.dto.auth.LoginRequest;
+import com.university.regulation.dto.auth.LoginResponse;
+import com.university.regulation.service.auth.AuthService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
