@@ -27,7 +27,7 @@ export interface Brand {
 export type ProductStatus = "new" | "hot" | "sale";
 export type ProductVariant =
   | "gadget"
-  | "appliances"
+  | "applicances"
   | "refrigerators"
   | "others";
 

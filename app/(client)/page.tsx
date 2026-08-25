@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <Container className="bg-shop-light-pink">
         <HomeBanner />
-        <div className='py-10'>
+        <div className='py-5'>
             <ProductGrid />
         </div>
       
