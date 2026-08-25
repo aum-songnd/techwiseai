@@ -1,6 +1,3 @@
-// Các type dùng chung cho mock data — khớp field với schema Sanity gốc
-// nhưng bỏ hết phần đặc thù Sanity (_type, _ref, slug object, portable text...)
-// để dễ dùng cho backend riêng.
 
 export interface Category {
   id: string;
