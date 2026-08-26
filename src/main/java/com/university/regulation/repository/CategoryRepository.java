@@ -9,6 +9,10 @@ import com.university.regulation.models.category.Category;
 
 public interface CategoryRepository
         extends JpaRepository<Category, UUID> {
+    boolean existsByNameIgnoreCase(String name);
+    boolean existsBySlugIgnoreCase(String slug);
 
+    boolean existsByNameIgnoreCaseAndIdNot(String name, UUID id);
+    boolean existsBySlugIgnoreCaseAndIdNot(String slug, UUID id);
     List<Category> findAllByActiveTrueOrderByDisplayOrderAsc();
 }

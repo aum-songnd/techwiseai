@@ -11,24 +11,29 @@ import com.university.regulation.models.product.Product;
 
 public interface ProductRepository extends JpaRepository<Product, UUID> {
 
-    Page<Product> findAllByActiveTrue(Pageable pageable);
+        Page<Product> findAllByActiveTrue(Pageable pageable);
 
-    Page<Product> findAllByActiveTrueAndCategorySlug(
-            String categorySlug,
-            Pageable pageable
-    );
+        Page<Product> findAllByActiveTrueAndCategorySlug(
+                        String categorySlug,
+                        Pageable pageable);
 
-    Page<Product> findAllByActiveTrueAndFeaturedTrue(
-            Pageable pageable
-    );
+        Page<Product> findAllByActiveTrueAndFeaturedTrue(
+                        Pageable pageable);
 
-    Page<Product> findAllByActiveTrueAndHotTrue(
-            Pageable pageable
-    );
+        Page<Product> findAllByActiveTrueAndHotTrue(
+                        Pageable pageable);
 
-    Optional<Product> findBySlugAndActiveTrue(String slug);
+        Optional<Product> findBySlugAndActiveTrue(String slug);
 
-    boolean existsBySlugIgnoreCase(String slug);
+        boolean existsBySlugIgnoreCase(String slug);
 
-    boolean existsBySkuIgnoreCase(String sku);
+        boolean existsBySkuIgnoreCase(String sku);
+
+        boolean existsBySlugIgnoreCaseAndIdNot(
+                        String slug,
+                        UUID id);
+
+        boolean existsBySkuIgnoreCaseAndIdNot(
+                        String sku,
+                        UUID id);
 }

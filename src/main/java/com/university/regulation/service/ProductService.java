@@ -2,6 +2,7 @@ package com.university.regulation.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import com.university.regulation.common.api.PageResponse;
 import com.university.regulation.dto.categories.CategoryResponse;
 import com.university.regulation.dto.products.ProductRequest;
 import com.university.regulation.dto.products.ProductResponse;
+import com.university.regulation.dto.products.UpdateProductRequest;
 import com.university.regulation.models.category.Category;
 import com.university.regulation.models.product.Product;
 import com.university.regulation.repository.CategoryRepository;
@@ -25,161 +27,260 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductService {
 
-    private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
+        private final ProductRepository productRepository;
+        private final CategoryRepository categoryRepository;
 
-    @Transactional(readOnly = true)
-    public PageResponse<ProductResponse> getProducts(
-            String category,
-            Boolean featured,
-            Boolean hot,
-            Pageable pageable) {
-        Page<Product> productPage;
+        @Transactional(readOnly = true)
+        public ProductResponse getProductById(UUID id) {
+                Product product = productRepository
+                                .findById(id)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Không tìm thấy sản phẩm"));
 
-        if (category != null && !category.isBlank()) {
-            productPage = productRepository
-                    .findAllByActiveTrueAndCategorySlug(
-                            category,
-                            pageable);
-        } else if (Boolean.TRUE.equals(featured)) {
-            productPage = productRepository
-                    .findAllByActiveTrueAndFeaturedTrue(
-                            pageable);
-        } else if (Boolean.TRUE.equals(hot)) {
-            productPage = productRepository
-                    .findAllByActiveTrueAndHotTrue(
-                            pageable);
-        } else {
-            productPage = productRepository
-                    .findAllByActiveTrue(pageable);
+                return toResponse(product);
         }
 
-        Page<ProductResponse> responsePage = productPage.map(this::toResponse);
+        @Transactional(readOnly = true)
+        public PageResponse<ProductResponse> getProducts(
+                        String category,
+                        Boolean featured,
+                        Boolean hot,
+                        Pageable pageable) {
+                Page<Product> productPage;
 
-        return PageResponse.from(responsePage);
-    }
+                if (category != null && !category.isBlank()) {
+                        productPage = productRepository
+                                        .findAllByActiveTrueAndCategorySlug(
+                                                        category,
+                                                        pageable);
+                } else if (Boolean.TRUE.equals(featured)) {
+                        productPage = productRepository
+                                        .findAllByActiveTrueAndFeaturedTrue(
+                                                        pageable);
+                } else if (Boolean.TRUE.equals(hot)) {
+                        productPage = productRepository
+                                        .findAllByActiveTrueAndHotTrue(
+                                                        pageable);
+                } else {
+                        productPage = productRepository
+                                        .findAllByActiveTrue(pageable);
+                }
 
-    private ProductResponse toResponse(Product product) {
-        CategoryResponse categoryResponse = new CategoryResponse(
-                product.getCategory().getId(),
-                product.getCategory().getName(),
-                product.getCategory().getSlug(),
-                product.getCategory().getDescription(),
-                product.getCategory().getImageUrl(),
-                product.getCategory().getDisplayOrder());
+                Page<ProductResponse> responsePage = productPage.map(this::toResponse);
 
-        boolean onSale = isOnSale(product);
-        boolean inStock = product.getStockQuantity() > 0;
-
-        return new ProductResponse(
-                product.getId(),
-                product.getName(),
-                product.getSlug(),
-                product.getSku(),
-                product.getShortDescription(),
-                product.getDescription(),
-                product.getThumbnailUrl(),
-
-                categoryResponse,
-
-                product.getPrice(),
-                product.getOriginalPrice(),
-                calculateDiscountPercent(product),
-
-                product.getStockQuantity(),
-                product.getRatingAverage(),
-                product.getReviewCount(),
-
-                product.isFeatured(),
-                product.isHot(),
-                onSale,
-                inStock);
-    }
-
-    private boolean isOnSale(Product product) {
-        return product.getOriginalPrice() != null
-                && product.getOriginalPrice()
-                        .compareTo(product.getPrice()) > 0;
-    }
-
-    private int calculateDiscountPercent(Product product) {
-        BigDecimal originalPrice = product.getOriginalPrice();
-        BigDecimal price = product.getPrice();
-
-        if (originalPrice == null
-                || originalPrice.compareTo(BigDecimal.ZERO) <= 0
-                || originalPrice.compareTo(price) <= 0) {
-            return 0;
+                return PageResponse.from(responsePage);
         }
 
-        return originalPrice
-                .subtract(price)
-                .multiply(BigDecimal.valueOf(100))
-                .divide(
-                        originalPrice,
-                        0,
-                        RoundingMode.HALF_UP)
-                .intValue();
-    }
+        private ProductResponse toResponse(Product product) {
+                CategoryResponse categoryResponse = new CategoryResponse(
+                                product.getCategory().getId(),
+                                product.getCategory().getName(),
+                                product.getCategory().getSlug(),
+                                product.getCategory().getDescription(),
+                                product.getCategory().getImageUrl(),
+                                product.getCategory().getDisplayOrder());
 
-    @Transactional
-    public ProductResponse createProduct(ProductRequest request) {
-        String normalizedSlug = request.slug()
-                .trim()
-                .toLowerCase();
+                boolean onSale = isOnSale(product);
+                boolean inStock = product.getStockQuantity() > 0;
 
-        String normalizedSku = request.sku()
-                .trim()
-                .toUpperCase();
+                return new ProductResponse(
+                                product.getId(),
+                                product.getName(),
+                                product.getSlug(),
+                                product.getSku(),
+                                product.getShortDescription(),
+                                product.getDescription(),
+                                product.getThumbnailUrl(),
 
-        if (productRepository.existsBySlugIgnoreCase(normalizedSlug)) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "Slug sản phẩm đã tồn tại");
+                                categoryResponse,
+
+                                product.getPrice(),
+                                product.getOriginalPrice(),
+                                calculateDiscountPercent(product),
+
+                                product.getStockQuantity(),
+                                product.getRatingAverage(),
+                                product.getReviewCount(),
+
+                                product.isFeatured(),
+                                product.isHot(),
+                                onSale,
+                                inStock);
         }
 
-        if (productRepository.existsBySkuIgnoreCase(normalizedSku)) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "SKU sản phẩm đã tồn tại");
+        private boolean isOnSale(Product product) {
+                return product.getOriginalPrice() != null
+                                && product.getOriginalPrice()
+                                                .compareTo(product.getPrice()) > 0;
         }
 
-        if (request.originalPrice() != null
-                && request.originalPrice()
-                        .compareTo(request.price()) < 0) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Giá gốc phải lớn hơn hoặc bằng giá bán");
+        private int calculateDiscountPercent(Product product) {
+                BigDecimal originalPrice = product.getOriginalPrice();
+                BigDecimal price = product.getPrice();
+
+                if (originalPrice == null
+                                || originalPrice.compareTo(BigDecimal.ZERO) <= 0
+                                || originalPrice.compareTo(price) <= 0) {
+                        return 0;
+                }
+
+                return originalPrice
+                                .subtract(price)
+                                .multiply(BigDecimal.valueOf(100))
+                                .divide(
+                                                originalPrice,
+                                                0,
+                                                RoundingMode.HALF_UP)
+                                .intValue();
         }
 
-        Category category = categoryRepository
-                .findById(request.categoryId())
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Không tìm thấy danh mục"));
+        @Transactional
+        public ProductResponse createProduct(ProductRequest request) {
+                String normalizedSlug = request.slug()
+                                .trim()
+                                .toLowerCase();
 
-        Product product = new Product();
+                String normalizedSku = request.sku()
+                                .trim()
+                                .toUpperCase();
 
-        product.setCategory(category);
-        product.setName(request.name().trim());
-        product.setSlug(normalizedSlug);
-        product.setSku(normalizedSku);
-        product.setShortDescription(request.shortDescription());
-        product.setDescription(request.description());
-        product.setPrice(request.price());
-        product.setOriginalPrice(request.originalPrice());
-        product.setStockQuantity(request.stockQuantity());
-        product.setThumbnailUrl(request.thumbnailUrl());
+                if (productRepository.existsBySlugIgnoreCase(normalizedSlug)) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.CONFLICT,
+                                        "Slug sản phẩm đã tồn tại");
+                }
 
-        product.setFeatured(Boolean.TRUE.equals(request.featured()));
-        product.setHot(Boolean.TRUE.equals(request.hot()));
+                if (productRepository.existsBySkuIgnoreCase(normalizedSku)) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.CONFLICT,
+                                        "SKU sản phẩm đã tồn tại");
+                }
 
-        product.setActive(
-                request.active() == null
-                        || Boolean.TRUE.equals(request.active()));
+                if (request.originalPrice() != null
+                                && request.originalPrice()
+                                                .compareTo(request.price()) < 0) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.BAD_REQUEST,
+                                        "Giá gốc phải lớn hơn hoặc bằng giá bán");
+                }
 
-        Product savedProduct = productRepository.save(product);
+                Category category = categoryRepository
+                                .findById(request.categoryId())
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Không tìm thấy danh mục"));
 
-        return toResponse(savedProduct);
-    }
+                Product product = new Product();
+
+                product.setCategory(category);
+                product.setName(request.name().trim());
+                product.setSlug(normalizedSlug);
+                product.setSku(normalizedSku);
+                product.setShortDescription(request.shortDescription());
+                product.setDescription(request.description());
+                product.setPrice(request.price());
+                product.setOriginalPrice(request.originalPrice());
+                product.setStockQuantity(request.stockQuantity());
+                product.setThumbnailUrl(request.thumbnailUrl());
+
+                product.setFeatured(Boolean.TRUE.equals(request.featured()));
+                product.setHot(Boolean.TRUE.equals(request.hot()));
+
+                product.setActive(
+                                request.active() == null
+                                                || Boolean.TRUE.equals(request.active()));
+
+                Product savedProduct = productRepository.save(product);
+
+                return toResponse(savedProduct);
+        }
+
+        @Transactional
+        public ProductResponse updateProduct(
+                        UUID id,
+                        UpdateProductRequest request) {
+                Product product = productRepository
+                                .findById(id)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Không tìm thấy sản phẩm"));
+
+                Category category = categoryRepository
+                                .findById(request.getCategoryId())
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Không tìm thấy danh mục"));
+
+                String normalizedSlug = request
+                                .getSlug()
+                                .trim()
+                                .toLowerCase();
+
+                String normalizedSku = request
+                                .getSku()
+                                .trim()
+                                .toUpperCase();
+
+                boolean slugExists = productRepository.existsBySlugIgnoreCaseAndIdNot(
+                                normalizedSlug,
+                                id);
+
+                if (slugExists) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.CONFLICT,
+                                        "Slug sản phẩm đã tồn tại");
+                }
+
+                boolean skuExists = productRepository.existsBySkuIgnoreCaseAndIdNot(
+                                normalizedSku,
+                                id);
+
+                if (skuExists) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.CONFLICT,
+                                        "SKU sản phẩm đã tồn tại");
+                }
+
+                if (request.getOriginalPrice() != null
+                                && request.getOriginalPrice()
+                                                .compareTo(request.getPrice()) < 0) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.BAD_REQUEST,
+                                        "Giá gốc phải lớn hơn hoặc bằng giá bán");
+                }
+
+                product.setCategory(category);
+                product.setName(request.getName().trim());
+                product.setSlug(normalizedSlug);
+                product.setSku(normalizedSku);
+                product.setShortDescription(
+                                trimToNull(request.getShortDescription()));
+                product.setDescription(
+                                trimToNull(request.getDescription()));
+                product.setPrice(request.getPrice());
+                product.setOriginalPrice(request.getOriginalPrice());
+                product.setStockQuantity(request.getStockQuantity());
+                product.setThumbnailUrl(
+                                trimToNull(request.getThumbnailUrl()));
+                product.setFeatured(request.getFeatured());
+                product.setHot(request.getHot());
+                product.setActive(request.getActive());
+
+                Product updatedProduct = productRepository.save(product);
+
+                return toResponse(updatedProduct);
+        }
+
+        private String trimToNull(String value) {
+                if (value == null) {
+                        return null;
+                }
+
+                String trimmedValue = value.trim();
+
+                return trimmedValue.isEmpty()
+                                ? null
+                                : trimmedValue;
+        }
 }

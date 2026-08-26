@@ -39,7 +39,9 @@ public class SecurityConfig {
                                                         "/actuator/health",
                                                                 "/api/v1/auth/login",
                                                                 "/api/v1/categories",
-                                                                "/api/v1/products"
+                                                                "/api/v1/products",
+                                                                "/api/v1/products/{id}",
+                                                                "/api/v1/categories/{id}"
                                                         )
                                                 .permitAll()
 

@@ -1,8 +1,10 @@
 package com.university.regulation.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +29,18 @@ public class CategoryController {
         return ApiResponse.success(
                 "Lấy danh sách danh mục thành công",
                 categoryService.getCategories(),
+                request.getRequestURI()
+        );
+    }
+
+    @GetMapping("/{id}")
+    public ApiResponse<CategoryResponse> getCategory(
+        @PathVariable UUID id,
+        HttpServletRequest request
+    ) {
+        return ApiResponse.success(
+                "Lấy thông tin danh mục thành công",
+                categoryService.getCategoryById(id),
                 request.getRequestURI()
         );
     }
