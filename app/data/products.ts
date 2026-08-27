@@ -5,7 +5,7 @@ export const products: Product[] = [
     id: "prod-iphone-15",
     name: "iPhone 15 Pro Max",
     slug: "iphone-15-pro-max",
-        images: ["https://shopcart.reactbd.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Foe6m9gg8%2Fproduction%2F9d449761da7e68b17b5fbd5aac5647d40b96903d-500x500.png&w=750&q=75"],
+        images: ["m1.png"],
 
     description:
       "Flagship mới nhất của Apple với chip A17 Pro, khung titan và camera 48MP.",

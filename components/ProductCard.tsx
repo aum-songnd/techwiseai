@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "../app/data/types";
+import { productImages } from "../images";
 
 interface ProductCardProps {
   product: Product & { categories?: string[] };
@@ -21,6 +22,9 @@ const formatPrice = (value: number) =>
 const ProductCard = ({ product }: ProductCardProps) => {
   const finalPrice = product.price - (product.discount || 0);
   const hasDiscount = product.discount > 0;
+  const productImage = product.images?.[0]
+    ? productImages[product.images[0]]
+    : undefined;
 
   return (
     <Link
@@ -28,12 +32,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
       className="group flex flex-col rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow"
     >
       <div className="relative aspect-square w-full bg-gray-50 overflow-hidden">
-        {product.images?.[0] ? (
-          <img
-            src={product.images[0]}
+        {productImage ? (
+          <Image
+            src={productImage}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
+          />
         ) : (
           <div className="flex items-center justify-center h-full text-xs text-gray-400">
             Không có ảnh
@@ -60,7 +64,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </span>
         )}
 
-        <h3 className="text-sm font-medium text-gray-800 line-clamp-2">
+        <h3 className="text-sm font-medium text-shop_dark_green line-clamp-2">
           {product.name}
         </h3>
 
