@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Product } from "../app/data/types";
 import { productImages } from "../images";
 import AddToCart from "./AddToCart";
-import { div } from "motion/react-client";
 
 interface ProductCardProps {
   product: Product & { categories?: string[] };
