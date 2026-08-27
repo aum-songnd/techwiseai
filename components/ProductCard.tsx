@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "../app/data/types";
 import { productImages } from "../images";
+import AddToCart from "./AddToCart";
+import { div } from "motion/react-client";
 
 interface ProductCardProps {
   product: Product & { categories?: string[] };
@@ -27,6 +29,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     : undefined;
 
   return (
+    <div>
     <Link
       href={`/product/${product.slug}`}
       className="group flex flex-col rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow"
@@ -56,30 +59,41 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         )}
       </div>
-
+  </Link>
       <div className="flex flex-col gap-1 p-3">
         {product.categories?.[0] && (
-          <span className="text-[11px] uppercase tracking-wide text-gray-400">
+          <span className="text-[12px] uppercase tracking-wide text-gray-400">
             {product.categories[0]}
           </span>
         )}
 
-        <h3 className="text-sm font-medium text-shop_dark_green line-clamp-2">
+        <h3 className="text-[17px] font-bold text-shop_dark_green line-clamp-2">
           {product.name}
         </h3>
 
+        <div className="flex items-center gap-2.5">
+          <p className="text-sm font-medium">In Stock</p>
+          <p
+            className={`${product?.stock === 0 ? "text-red-600" : "text-shop_dark_green/80 font-semibold"}`}
+          >
+            {(product?.stock as number) > 0 ? product?.stock : "unavailable"}
+          </p>
+        </div>
+
         <div className="flex items-center gap-2 mt-1">
-          <span className="text-sm font-semibold text-gray-900">
+          <span className="text-sm font-semibold text-shop_dark_green/80">
             {formatPrice(finalPrice)}
           </span>
           {hasDiscount && (
-            <span className="text-xs text-gray-400 line-through">
+            <span className="text-sm text-gray-400 line-through">
               {formatPrice(product.price)}
             </span>
           )}
         </div>
+        <AddToCart/>
       </div>
-    </Link>
+      
+  </div>
   );
 };
 
