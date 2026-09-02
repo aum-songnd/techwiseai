@@ -12,7 +12,7 @@ const AddToCart = ({ product }: AddToCartProps) => {
 
   return (
     <div>
-      <Button disabled={isOutOfStock}>
+      <Button disabled={isOutOfStock}  className='bg-shop_dark_green rounded-2xl '>
         <ShoppingBag />
         {isOutOfStock ? "Hết hàng" : "Thêm vào giỏ"}
       </Button>

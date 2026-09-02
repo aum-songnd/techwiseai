@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,37 +30,39 @@ const ProductCard = ({ product }: ProductCardProps) => {
     : undefined;
 
   return (
-    <div>
-    <Link
-      href={`/product/${product.slug}`}
-      className="group flex flex-col rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow"
-    >
-      <div className="relative aspect-square w-full bg-gray-50 overflow-hidden">
-        {productImage ? (
-          <Image
-            src={productImage}
-            alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        ) : (
-          <div className="flex items-center justify-center h-full text-xs text-gray-400">
-            Không có ảnh
-          </div>
-        )}
+    <div className="group flex flex-col rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow">
+      <Link href={`/product/${product.slug}`} className="flex flex-col">
+        <div className="relative aspect-square w-full bg-gray-100 overflow-hidden flex items-center justify-center">
+          {productImage ? (
+            <div className="relative w-[80%] h-[80%]">
+              <Image
+                src={productImage}
+                alt={product.name}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+              />
+            </div>
+          ) : (
+            <div className="flex items-center justify-center h-full text-xs text-gray-400">
+              Không có ảnh
+            </div>
+          )}
 
-        {product.status && (
-          <span className="absolute top-2 left-2 text-[11px] font-medium px-2 py-0.5 rounded-full bg-black/80 text-white">
-            {statusLabel[product.status] ?? product.status}
-          </span>
-        )}
+          {product.status && (
+            <span className="absolute top-2 left-2 text-[11px] font-medium px-2 py-0.5 rounded-full bg-black/80 text-white">
+              {statusLabel[product.status] ?? product.status}
+            </span>
+          )}
 
-        {product.stock === 0 && (
-          <div className="absolute inset-0 bg-white/70 flex items-center justify-center text-sm font-medium text-gray-600">
-            Hết hàng
-          </div>
-        )}
-      </div>
-  </Link>
+          {product.stock === 0 && (
+            <div className="absolute inset-0 bg-white/70 flex items-center justify-center text-sm font-medium text-gray-600">
+              Hết hàng
+            </div>
+          )}
+        </div>
+      </Link>
+
       <div className="flex flex-col gap-1 p-3">
         {product.categories?.[0] && (
           <span className="text-[12px] uppercase tracking-wide text-gray-400">
@@ -89,10 +93,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </span>
           )}
         </div>
-        <AddToCart/>
+        <AddToCart />
       </div>
-      
-  </div>
+    </div>
   );
 };
 
