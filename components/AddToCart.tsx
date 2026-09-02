@@ -12,7 +12,7 @@ const AddToCart = ({ product }: AddToCartProps) => {
 
   return (
     <div>
-      <Button disabled={isOutOfStock}  className='bg-shop_dark_green rounded-2xl '>
+      <Button disabled={isOutOfStock}  className='bg-shop_dark_green rounded-2xl px-6 py-4 text-white text-sm hover:bg-shop_light_green hover:text-black transition-colors duration-300'>
         <ShoppingBag />
         {isOutOfStock ? "Hết hàng" : "Thêm vào giỏ"}
       </Button>
