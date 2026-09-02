@@ -12,9 +12,9 @@ interface ProductCardProps {
 }
 
 const statusLabel: Record<string, string> = {
-  new: "Mới",
-  hot: "Bán chạy",
-  sale: "Giảm giá",
+  new: "NEW",
+  hot: "HOT",
+  sale: "SALE",
 };
 
 const formatPrice = (value: number) =>

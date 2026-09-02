@@ -63,11 +63,12 @@ export const categoriesData = [
 
 export const productType = [
     {
-        title: "Laptop", value: "laptop"
-    },
-    {
         title: "Phone", value: "phone"
     },
+    {
+        title: "Laptop", value: "laptop"
+    },
+    
     {
         title: "Earphone", value: "earphone"
     },

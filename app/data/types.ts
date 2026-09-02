@@ -26,8 +26,8 @@ export interface Brand {
 
 export type ProductStatus = "new" | "hot" | "sale";
 export type ProductVariant =
-  | "laptop"
   | "phone"
+  | "laptop"
   | "earphone"
   | "others";
 
