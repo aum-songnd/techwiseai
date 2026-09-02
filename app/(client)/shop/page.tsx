@@ -1,9 +1,20 @@
-import React from 'react'
+// app/(client)/shop/page.tsx
+import React from "react";
+import Shop from "../../../components/Shop";
+import { getAllProducts, getCategories, getAllBrands } from "@/constants/queries";
 
-const ShopPage = () => {
+const ShopPage = async () => {
+  const [products, categories, brands] = await Promise.all([
+    getAllProducts(),
+    getCategories(),
+    getAllBrands(),
+  ]);
+
   return (
-    <div>ShopPage</div>
-  )
-}
+    <div className="bg-white">
+      <Shop products={products} categories={categories} brands={brands} />
+    </div>
+  );
+};
 
-export default ShopPage
+export default ShopPage;
