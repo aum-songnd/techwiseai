@@ -1,7 +1,7 @@
 // app/(client)/shop/page.tsx
 import React from "react";
 import Shop from "../../../components/Shop";
-import { getAllProducts, getCategories, getAllBrands } from "@/constants/queries";
+import { getAllProducts, getCategories, getAllBrands } from "@/constants/queriesShopPage";
 
 const ShopPage = async () => {
   const [products, categories, brands] = await Promise.all([
