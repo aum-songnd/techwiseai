@@ -39,3 +39,7 @@ app:
     secret: ${JWT_SECRET}
     issuer: ${JWT_ISSUER:regulation-backend}
     access-token-expiration: ${JWT_ACCESS_TOKEN_EXPIRATION:900}
+  cloudinary:
+    cloud-name: ${CLOUDINARY_CLOUD_NAME}
+    api-key: ${CLOUDINARY_API_KEY}
+    api-secret: ${CLOUDINARY_API_SECRET}

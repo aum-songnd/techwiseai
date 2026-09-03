@@ -1,4 +1,4 @@
-package com.university.regulation.controller;
+package com.university.regulation.controller.admin_controller;
 
 import java.util.UUID;
 
@@ -14,53 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.university.regulation.common.response.ApiResponse;
 import com.university.regulation.dto.categories.CategoryRequest;
 import com.university.regulation.dto.categories.CategoryResponse;
-import com.university.regulation.dto.products.ProductRequest;
-import com.university.regulation.dto.products.ProductResponse;
-import com.university.regulation.dto.products.UpdateProductRequest;
 import com.university.regulation.service.CategoryService;
-import com.university.regulation.service.ProductService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+
 @RestController
 @RequestMapping("/api/v1/admin/")
 @RequiredArgsConstructor
-public class AdminProductController {
-
-        private final ProductService productService;
+public class AdminCategoryController {
         private final CategoryService categoryService;
-
-        @PostMapping("/products")
-        public ResponseEntity<ApiResponse<ProductResponse>> createProduct(
-                        @Valid @RequestBody ProductRequest request,
-                        HttpServletRequest httpRequest) {
-                ProductResponse product = productService.createProduct(request);
-
-                ApiResponse<ProductResponse> response = ApiResponse.success(
-                                HttpStatus.CREATED,
-                                "Tạo sản phẩm thành công",
-                                product,
-                                httpRequest.getRequestURI());
-
-                return ResponseEntity
-                                .status(HttpStatus.CREATED)
-                                .body(response);
-        }
-
-        @PutMapping("/products/{id}")
-        public ApiResponse<ProductResponse> updateProduct(
-                        @PathVariable UUID id,
-                        @Valid @RequestBody UpdateProductRequest request,
-                        HttpServletRequest httpRequest) {
-                ProductResponse product = productService.updateProduct(id, request);
-
-                return ApiResponse.success(
-                                "Cập nhật sản phẩm thành công",
-                                product,
-                                httpRequest.getRequestURI());
-        }
 
         @PostMapping("/categories")
         public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(
