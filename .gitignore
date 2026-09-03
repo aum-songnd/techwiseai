@@ -34,3 +34,7 @@ build/
 
 ### env
 .env
+
+# document
+document.txt
+
