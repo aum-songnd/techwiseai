@@ -50,7 +50,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           )}
 
           {product.status && (
-            <span className="absolute top-2 left-2 text-[11px] font-medium px-2 py-0.5 rounded-full bg-black/80 text-white">
+            <span className="absolute top-2 left-2 text-[11px] font-medium px-2 py-0.5 rounded-full bg-shop_orange/80 text-white">
               {statusLabel[product.status] ?? product.status}
             </span>
           )}
