@@ -8,7 +8,7 @@ export const categories: Category[] = [
     description: "Các dòng smartphone mới nhất từ nhiều thương hiệu.",
     range: 3000000,
     featured: true,
-    imageUrl: "https://placehold.co/400x300?text=Dien+thoai",
+    imageUrl: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:0/q:70/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-gamning.png",
   },
   {
     id: "cat-laptop",
@@ -17,7 +17,7 @@ export const categories: Category[] = [
     description: "Laptop văn phòng, gaming và đồ hoạ.",
     range: 8000000,
     featured: true,
-    imageUrl: "https://placehold.co/400x300?text=Laptop",
+    imageUrl: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:0/q:70/plain/https://cellphones.com.vn/media/wysiwyg/Group_846.png",
   },
   {
     id: "cat-headphone",
@@ -26,7 +26,7 @@ export const categories: Category[] = [
     description: "Tai nghe có dây và không dây, chống ồn chủ động.",
     range: 500000,
     featured: false,
-    imageUrl: "https://placehold.co/400x300?text=Tai+nghe",
+    imageUrl: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://cellphones.com.vn/media/wysiwyg/chup-taii.png",
   },
   {
     id: "cat-smartwatch",
@@ -35,6 +35,6 @@ export const categories: Category[] = [
     description: "Smartwatch theo dõi sức khoẻ và thể thao.",
     range: 1500000,
     featured: true,
-    imageUrl: "https://placehold.co/400x300?text=Smartwatch",
+    imageUrl: "https://cdn2.cellphones.com.vn/insecure/rs:fill:150:150/q:100/plain/https://cellphones.com.vn/media/wysiwyg/chay-bo.png",
   },
 ];

@@ -1,5 +1,4 @@
-// app/(client)/shop/page.tsx
-import React from "react";
+import React, { Suspense } from "react";
 import Shop from "../../../components/Shop";
 import { getAllProducts, getCategories, getAllBrands } from "@/constants/queriesShopPage";
 
@@ -12,7 +11,9 @@ const ShopPage = async () => {
 
   return (
     <div className="bg-white">
-      <Shop products={products} categories={categories} brands={brands} />
+      <Suspense fallback={null}>
+        <Shop products={products} categories={categories} brands={brands} />
+      </Suspense>
     </div>
   );
 };

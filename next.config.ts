@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "scontent.fhan5-10.fna.fbcdn.net",
       },
+       {
+        protocol: "https",
+        hostname: "cdn2.cellphones.com.vn",
+      },
       
     ],
   },

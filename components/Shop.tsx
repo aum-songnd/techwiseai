@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import Image, { type StaticImageData } from "next/image";
+import { useSearchParams } from "next/navigation";
 import type { Product, Category, Brand } from "../app/data/types";
 import { productImages } from "../images";
 
@@ -30,11 +31,28 @@ const resolveProductImage = (
 };
 
 const Shop = ({ products, categories, brands }: ShopProps) => {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const categorySlugParam = searchParams.get("category");
+
+  const initialCategory = categorySlugParam
+    ? categories.find((c) => c.slug === categorySlugParam)?.id ?? null
+    : null;
+
+  const [activeCategory, setActiveCategory] = useState<string | null>(
+    initialCategory
+  );
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<
-    "default" | "price-asc" | "price-desc"
-  >("default");
+  const [sortBy, setSortBy] = useState<"default" | "price-asc" | "price-desc">("default");
+
+  // Đồng bộ lại state khi query param "category" trên URL thay đổi
+  useEffect(() => {
+    if (categorySlugParam) {
+      const matched = categories.find((c) => c.slug === categorySlugParam);
+      setActiveCategory(matched ? matched.id : null);
+    } else {
+      setActiveCategory(null);
+    }
+  }, [categorySlugParam, categories]);
 
   const filteredProducts = useMemo(() => {
     let result = products.filter((product) => {
@@ -52,18 +70,14 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
     if (sortBy === "price-asc") {
       result = [...result].sort(
         (a, b) =>
-          a.price -
-          (a.discount ?? 0) -
-          (b.price - (b.discount ?? 0))
+          a.price - (a.discount ?? 0) - (b.price - (b.discount ?? 0))
       );
     }
 
     if (sortBy === "price-desc") {
       result = [...result].sort(
         (a, b) =>
-          b.price -
-          (b.discount ?? 0) -
-          (a.price - (a.discount ?? 0))
+          b.price - (b.discount ?? 0) - (a.price - (a.discount ?? 0))
       );
     }
 
@@ -81,9 +95,7 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
       <aside className="md:col-span-1 space-y-8">
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-darkColor">
-              Danh mục
-            </h3>
+            <h3 className="font-semibold text-darkColor">Danh mục</h3>
           </div>
 
           <ul className="space-y-2">
@@ -120,9 +132,7 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
         </div>
 
         <div>
-          <h3 className="font-semibold mb-3 text-darkColor">
-            Thương hiệu
-          </h3>
+          <h3 className="font-semibold mb-3 text-darkColor">Thương hiệu</h3>
 
           <ul className="space-y-2">
             <li>
@@ -157,9 +167,7 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
           </ul>
         </div>
 
-        {(activeCategory ||
-          activeBrand ||
-          sortBy !== "default") && (
+        {(activeCategory || activeBrand || sortBy !== "default") && (
           <button
             type="button"
             onClick={handleResetFilters}
@@ -180,21 +188,14 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
             value={sortBy}
             onChange={(event) =>
               setSortBy(
-                event.target.value as
-                  | "default"
-                  | "price-asc"
-                  | "price-desc"
+                event.target.value as "default" | "price-asc" | "price-desc"
               )
             }
             className="text-sm border rounded-md px-3 py-1.5 outline-none hoverEffect focus:border-shop_light_green"
           >
             <option value="default">Mặc định</option>
-            <option value="price-asc">
-              Giá: Thấp đến cao
-            </option>
-            <option value="price-desc">
-              Giá: Cao đến thấp
-            </option>
+            <option value="price-asc">Giá: Thấp đến cao</option>
+            <option value="price-desc">Giá: Cao đến thấp</option>
           </select>
         </div>
 
@@ -205,16 +206,13 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
             {filteredProducts.map((product) => {
-              const finalPrice =
-                product.price - (product.discount ?? 0);
+              const finalPrice = product.price - (product.discount ?? 0);
 
               const brand = brands.find(
                 (item) => item.id === product.brandId
               );
 
-              const imageSrc = resolveProductImage(
-                product.images?.[0]
-              );
+              const imageSrc = resolveProductImage(product.images?.[0]);
 
               return (
                 <div
@@ -239,9 +237,7 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
                     )}
                   </div>
 
-                  <p className="text-xs text-lightColor">
-                    {brand?.title}
-                  </p>
+                  <p className="text-xs text-lightColor">{brand?.title}</p>
 
                   <h2 className="font-medium text-sm text-darkColor line-clamp-1">
                     {product.name}
