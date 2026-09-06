@@ -33,16 +33,25 @@ const resolveProductImage = (
 const Shop = ({ products, categories, brands }: ShopProps) => {
   const searchParams = useSearchParams();
   const categorySlugParam = searchParams.get("category");
+  const brandSlugParam = searchParams.get("brand");
 
   const initialCategory = categorySlugParam
     ? categories.find((c) => c.slug === categorySlugParam)?.id ?? null
     : null;
 
+  const initialBrand = brandSlugParam
+    ? brands.find((b) => b.slug === brandSlugParam)?.id ?? null
+    : null;
+
   const [activeCategory, setActiveCategory] = useState<string | null>(
     initialCategory
   );
-  const [activeBrand, setActiveBrand] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<"default" | "price-asc" | "price-desc">("default");
+  const [activeBrand, setActiveBrand] = useState<string | null>(
+    initialBrand
+  );
+  const [sortBy, setSortBy] = useState<
+    "default" | "price-asc" | "price-desc"
+  >("default");
 
   // Đồng bộ lại state khi query param "category" trên URL thay đổi
   useEffect(() => {
@@ -53,6 +62,16 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
       setActiveCategory(null);
     }
   }, [categorySlugParam, categories]);
+
+  // Đồng bộ lại state khi query param "brand" trên URL thay đổi
+  useEffect(() => {
+    if (brandSlugParam) {
+      const matched = brands.find((b) => b.slug === brandSlugParam);
+      setActiveBrand(matched ? matched.id : null);
+    } else {
+      setActiveBrand(null);
+    }
+  }, [brandSlugParam, brands]);
 
   const filteredProducts = useMemo(() => {
     let result = products.filter((product) => {

@@ -3,6 +3,7 @@ import Container from '@/components/Container';
 import HomeBanner from '@/components/HomeBanner';
 import ProductGrid from '@/components/ProductGrid';
 import HomeCategories from '@/components/HomeCategories';
+import HomeBrands from '@/components/HomeBrands';
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
             <ProductGrid />
         </div>
         <HomeCategories/>
+        <HomeBrands/>
       </Container>
     </div>
   );
