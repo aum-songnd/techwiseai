@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Heart } from "lucide-react";
 import { Product } from "../app/data/types";
 import { productImages } from "../images";
 import AddToCart from "./AddToCart";
@@ -23,11 +24,19 @@ const formatPrice = (value: number) =>
   );
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const finalPrice = product.price - (product.discount || 0);
   const hasDiscount = product.discount > 0;
   const productImage = product.images?.[0]
     ? productImages[product.images[0]]
     : undefined;
+
+  const handleToggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault(); // tránh trigger Link khi bấm heart
+    e.stopPropagation();
+    setIsFavorite((prev) => !prev);
+  };
 
   return (
     <div className="group flex flex-col rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow">
@@ -54,6 +63,22 @@ const ProductCard = ({ product }: ProductCardProps) => {
               {statusLabel[product.status] ?? product.status}
             </span>
           )}
+
+          <button
+            onClick={handleToggleFavorite}
+            aria-label={isFavorite ? "Bỏ yêu thích" : "Thêm vào yêu thích"}
+            className={`absolute top-2 right-2 z-10 flex items-center justify-center w-7 h-7 rounded-full  transition-colors ${
+              isFavorite
+                ? "bg-shop_dark_green border-shop_dark_green"
+                : "bg-gray-100 hover:border-gray-300"
+            }`}
+          >
+            <Heart
+              size={14}
+              className={isFavorite ? "text-white" : "text-gray-500"}
+              fill="none"
+            />
+          </button>
 
           {product.stock === 0 && (
             <div className="absolute inset-0 bg-white/70 flex items-center justify-center text-sm font-medium text-gray-600">
