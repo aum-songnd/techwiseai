@@ -4,6 +4,7 @@ import HomeBanner from '@/components/HomeBanner';
 import ProductGrid from '@/components/ProductGrid';
 import HomeCategories from '@/components/HomeCategories';
 import HomeBrands from '@/components/HomeBrands';
+import HomeLatestBlog from '@/components/HomeLatestBlog';
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         </div>
         <HomeCategories/>
         <HomeBrands/>
+        <HomeLatestBlog/>
       </Container>
     </div>
   );
