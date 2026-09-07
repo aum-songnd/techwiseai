@@ -3,6 +3,7 @@ package com.university.regulation.common.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -20,59 +21,92 @@ import com.university.regulation.security.RestAuthenticationEntryPoint;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-        @Bean
-        public SecurityFilterChain securityFilterChain(
-                        HttpSecurity http,
-                        Converter<Jwt, ? extends AbstractAuthenticationToken> jwtAuthenticationConverter,
-                        RestAuthenticationEntryPoint authenticationEntryPoint,
-                        RestAccessDeniedHandler accessDeniedHandler) throws Exception {
+    @Bean
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            Converter<Jwt, ? extends AbstractAuthenticationToken>
+                    jwtAuthenticationConverter,
+            RestAuthenticationEntryPoint authenticationEntryPoint,
+            RestAccessDeniedHandler accessDeniedHandler
+    ) throws Exception {
 
-                http
-                                .csrf(AbstractHttpConfigurer::disable)
+        http
+                .csrf(AbstractHttpConfigurer::disable)
 
-                                .sessionManagement(session -> session.sessionCreationPolicy(
-                                                SessionCreationPolicy.STATELESS))
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(
+                                SessionCreationPolicy.STATELESS
+                        )
+                )
 
-                                .authorizeHttpRequests(authorize -> authorize
+                .authorizeHttpRequests(authorize -> authorize
 
-                                                .requestMatchers(
-                                                        "/actuator/health",
-                                                                "/api/v1/auth/login",
-                                                                "/api/v1/auth/register",
-                                                                "/api/v1/categories",
-                                                                "/api/v1/products",
-                                                                "/api/v1/products/{id}",
-                                                                "/api/v1/categories/{id}"
-                                                        )
-                                                .permitAll()
+                        // API công khai
+                        .requestMatchers(
+                                "/actuator/health",
+                                "/api/v1/auth/login",
+                                "/api/v1/auth/register"
+                        )
+                        .permitAll()
 
-                                                .requestMatchers(
-                                                                "/api/v1/admin/**")
-                                                .hasRole("ADMIN")
+                        // Danh mục và sản phẩm công khai chỉ cho phép GET
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/v1/categories",
+                                "/api/v1/categories/**",
+                                "/api/v1/products",
+                                "/api/v1/products/**"
+                        )
+                        .permitAll()
 
-                                                .anyRequest().authenticated())
+                        // API quản trị
+                        .requestMatchers("/api/v1/admin/**")
+                        .hasRole("ADMIN")
 
-                                .exceptionHandling(exception -> exception
-                                                .authenticationEntryPoint(authenticationEntryPoint)
-                                                .accessDeniedHandler(accessDeniedHandler))
+                        // Giỏ hàng bắt buộc đăng nhập
+                        .requestMatchers(
+                                "/api/v1/cart",
+                                "/api/v1/cart/**"
+                        )
+                        .authenticated()
 
-                                .oauth2ResourceServer(resourceServer -> resourceServer
+                        // Các API còn lại cũng cần đăng nhập
+                        .anyRequest()
+                        .authenticated()
+                )
 
-                                                .authenticationEntryPoint(
-                                                                authenticationEntryPoint)
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(
+                                authenticationEntryPoint
+                        )
+                        .accessDeniedHandler(
+                                accessDeniedHandler
+                        )
+                )
 
-                                                .accessDeniedHandler(
-                                                                accessDeniedHandler)
+                .oauth2ResourceServer(resourceServer ->
+                        resourceServer
+                                .authenticationEntryPoint(
+                                        authenticationEntryPoint
+                                )
+                                .accessDeniedHandler(
+                                        accessDeniedHandler
+                                )
+                                .jwt(jwt ->
+                                        jwt.jwtAuthenticationConverter(
+                                                jwtAuthenticationConverter
+                                        )
+                                )
+                );
 
-                                                .jwt(jwt -> jwt.jwtAuthenticationConverter(
-                                                                jwtAuthenticationConverter)));
+        return http.build();
+    }
 
-                return http.build();
-        }
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration configuration
+    ) throws Exception {
 
-        @Bean
-        public AuthenticationManager authenticationManager(
-                        AuthenticationConfiguration configuration) throws Exception {
-                return configuration.getAuthenticationManager();
-        }
+        return configuration.getAuthenticationManager();
+    }
 }
