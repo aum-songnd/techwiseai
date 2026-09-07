@@ -6,7 +6,7 @@ import { categories } from "../app/data";
 
 const HomeCategories = () => {
   return (
-    <div className="bg-white border-2 border-shop-light-green my-10 md:my-20 p-5 lg:p-7 rounded-md">
+    <div className="bg-white border-2 border-shop-light-green my-10 md:my-10 p-5 lg:p-7 rounded-md">
       <Title className="border-b-2 border-gray-200 text-[25px]">
         Danh mục phổ biến
       </Title>

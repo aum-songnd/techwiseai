@@ -28,7 +28,7 @@ const HomeLatestBlog = () => {
   if (latestBlogs.length === 0) return null;
 
   return (
-    <div className="my-10 md:my-20">
+    <div className="my-10 md:my-10">
       <h2 className="text-[28px] md:text-[32px] font-bold text-darkColor mb-6">
         Latest Blog
       </h2>

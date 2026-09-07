@@ -18,7 +18,7 @@ const Footer = () => {
       <div className='space-y-4'>
         <Logo />
         <SubText>
-          Discover curated furniture collections at TECHWISEAI, blending style and comfort to elevate your living spaces.
+          Explore smartphones, laptops, earphones, smartwatches, and more at TECHWISEAI.
         </SubText>
         <SocialMedia />
       </div>
