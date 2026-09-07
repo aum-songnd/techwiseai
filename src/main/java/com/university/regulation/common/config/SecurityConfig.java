@@ -66,9 +66,12 @@ public class SecurityConfig {
                         // Giỏ hàng bắt buộc đăng nhập
                         .requestMatchers(
                                 "/api/v1/cart",
-                                "/api/v1/cart/**"
+                                "/api/v1/cart/**",
+                                "/api/v1/orders",
+                                "/api/v1/orders/**"
                         )
                         .authenticated()
+                        
 
                         // Các API còn lại cũng cần đăng nhập
                         .anyRequest()
