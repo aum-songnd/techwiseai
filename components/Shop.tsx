@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState, useEffect } from "react";
 import Image, { type StaticImageData } from "next/image";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { Product, Category, Brand } from "../app/data/types";
 import { productImages } from "../images";
@@ -20,14 +21,16 @@ const formatVND = (value: number) =>
 
 const resolveProductImage = (
   fileName?: string
-): StaticImageData | null => {
+): StaticImageData | string | null => {
   if (!fileName) return null;
 
   const localImage = (
     productImages as Record<string, StaticImageData | undefined>
   )[fileName];
 
-  return localImage ?? null;
+  // Nếu không có trong map ảnh local (vd fileName là URL đầy đủ
+  // như "https://placehold.co/..."), dùng luôn chuỗi đó làm src.
+  return localImage ?? fileName;
 };
 
 const Shop = ({ products, categories, brands }: ShopProps) => {
@@ -52,6 +55,20 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
   const [sortBy, setSortBy] = useState<
     "default" | "price-asc" | "price-desc"
   >("default");
+
+  // Theo dõi việc cuộn trang để thu gọn thanh tiêu đề + sort,
+  // đẩy nó dán sát lên trên (gần header) khi người dùng cuộn xuống.
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 80);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Đồng bộ lại state khi query param "category" trên URL thay đổi
   useEffect(() => {
@@ -111,7 +128,7 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-      <aside className="md:col-span-1 space-y-8">
+      <aside className="md:col-span-1 space-y-8 md:sticky md:top-24 md:self-start">
         <div>
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold text-darkColor">Danh mục</h3>
@@ -198,8 +215,18 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
       </aside>
 
       <div className="md:col-span-3">
-        <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
-          <h1 className="text-xl font-semibold text-darkColor">
+        <div
+          className={`flex items-center justify-between flex-wrap gap-3 md:sticky md:z-40 transition-all duration-300 ease-in-out ${
+            isScrolled
+              ? "md:top-16 md:py-2.5 md:px-4 mb-4 bg-white md:rounded-xl md:shadow-md md:border md:border-gray-100"
+              : "md:top-24 md:py-3 md:-mx-1 md:px-1 mb-6 bg-white/95 backdrop-blur-sm"
+          }`}
+        >
+          <h1
+            className={`font-semibold text-darkColor transition-all duration-300 ease-in-out ${
+              isScrolled ? "text-sm md:text-base" : "text-xl"
+            }`}
+          >
             Tất cả sản phẩm ({filteredProducts.length})
           </h1>
 
@@ -210,7 +237,9 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
                 event.target.value as "default" | "price-asc" | "price-desc"
               )
             }
-            className="text-sm border rounded-md px-3 py-1.5 outline-none hoverEffect focus:border-shop_light_green"
+            className={`border rounded-md outline-none hoverEffect focus:border-shop_light_green transition-all duration-300 ease-in-out ${
+              isScrolled ? "text-xs px-2.5 py-1" : "text-sm px-3 py-1.5"
+            }`}
           >
             <option value="default">Mặc định</option>
             <option value="price-asc">Giá: Thấp đến cao</option>
@@ -234,19 +263,22 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
               const imageSrc = resolveProductImage(product.images?.[0]);
 
               return (
-                <div
+                <Link
                   key={product.id}
-                  className="border rounded-lg p-3 hoverEffect hover:shadow-md group"
+                  href={`/product/${product.slug}`}
+                  className="border rounded-lg p-3 hoverEffect hover:shadow-md group block"
                 >
-                  <div className="relative w-full h-40 mb-3 overflow-hidden rounded-md bg-shop_light_bg">
+                  <div className="relative w-full aspect-square mb-3 overflow-hidden rounded-md bg-shop_light_bg flex items-center justify-center">
                     {imageSrc && (
-                      <Image
-                        src={imageSrc}
-                        alt={product.name}
-                        fill
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                        className="object-cover group-hover:scale-105 hoverEffect"
-                      />
+                      <div className="relative w-[85%] h-[85%]">
+                        <Image
+                          src={imageSrc}
+                          alt={product.name}
+                          fill
+                          sizes="(max-width: 768px) 50vw, 25vw"
+                          className="object-contain group-hover:scale-105 hoverEffect"
+                        />
+                      </div>
                     )}
 
                     {product.status && (
@@ -279,7 +311,7 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
                       ? `Còn ${product.stock} sản phẩm`
                       : "Hết hàng"}
                   </p>
-                </div>
+                </Link>
               );
             })}
           </div>
