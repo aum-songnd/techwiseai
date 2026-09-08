@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.university.regulation.common.api.PageResponse;
 import com.university.regulation.common.response.ApiResponse;
+import com.university.regulation.dto.products.ProductDetailResponse;
 import com.university.regulation.dto.products.ProductResponse;
 import com.university.regulation.service.ProductService;
 
@@ -26,15 +27,16 @@ public class ProductController {
         private final ProductService productService;
 
         @GetMapping("/{id}")
-        public ApiResponse<ProductResponse> getProductById(
+        public ApiResponse<ProductDetailResponse> getProductDetail(
                         @PathVariable UUID id,
-                        HttpServletRequest request) {
-                ProductResponse product = productService.getProductById(id);
+                        HttpServletRequest httpRequest) {
+
+                ProductDetailResponse product = productService.getProductDetail(id);
 
                 return ApiResponse.success(
                                 "Lấy thông tin sản phẩm thành công",
                                 product,
-                                request.getRequestURI());
+                                httpRequest.getRequestURI());
         }
 
         @GetMapping

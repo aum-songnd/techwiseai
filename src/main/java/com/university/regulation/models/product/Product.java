@@ -2,7 +2,12 @@ package com.university.regulation.models.product;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import com.university.regulation.models.category.Category;
 
@@ -77,6 +82,13 @@ public class Product {
 
     @Column(nullable = false)
     private boolean active = true;
+
+    @Column(name = "brand", length = 100)
+    private String brand;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "specifications", nullable = false, columnDefinition = "jsonb")
+    private Map<String, String> specifications = new HashMap<>();
 
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt;

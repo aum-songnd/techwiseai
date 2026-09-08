@@ -2,6 +2,7 @@ package com.university.regulation.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -13,12 +14,16 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.university.regulation.common.api.PageResponse;
 import com.university.regulation.dto.categories.CategoryResponse;
+import com.university.regulation.dto.products.ProductDetailResponse;
+import com.university.regulation.dto.products.ProductImageResponse;
 import com.university.regulation.dto.products.ProductRequest;
 import com.university.regulation.dto.products.ProductResponse;
 import com.university.regulation.dto.products.UpdateProductRequest;
 import com.university.regulation.models.category.Category;
 import com.university.regulation.models.product.Product;
+import com.university.regulation.models.product.ProductImage;
 import com.university.regulation.repository.CategoryRepository;
+import com.university.regulation.repository.ProductImageRepository;
 import com.university.regulation.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +34,7 @@ public class ProductService {
 
         private final ProductRepository productRepository;
         private final CategoryRepository categoryRepository;
+        private final ProductImageRepository productImageRepository;
 
         @Transactional(readOnly = true)
         public ProductResponse getProductById(UUID id) {
@@ -282,5 +288,67 @@ public class ProductService {
                 return trimmedValue.isEmpty()
                                 ? null
                                 : trimmedValue;
+        }
+
+        @Transactional(readOnly = true)
+        public ProductDetailResponse getProductDetail(UUID productId) {
+
+                Product product = productRepository.findById(productId)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Không tìm thấy sản phẩm"));
+
+                // API public không cho xem sản phẩm hoặc danh mục đã bị ẩn.
+                if (!product.isActive()
+                                || product.getCategory() == null
+                                || !product.getCategory().isActive()) {
+
+                        throw new ResponseStatusException(
+                                        HttpStatus.NOT_FOUND,
+                                        "Không tìm thấy sản phẩm");
+                }
+
+                List<ProductImageResponse> images = productImageRepository
+                                .findAllByProduct_IdOrderByDisplayOrderAsc(productId)
+                                .stream()
+                                .map(this::toImageResponse)
+                                .toList();
+
+                ProductResponse baseResponse = toResponse(product);
+
+                return new ProductDetailResponse(
+                                baseResponse.id(),
+                                baseResponse.name(),
+                                baseResponse.slug(),
+                                baseResponse.sku(),
+                                product.getBrand(),
+                                baseResponse.shortDescription(),
+                                baseResponse.description(),
+                                baseResponse.thumbnailUrl(),
+                                baseResponse.category(),
+                                baseResponse.price(),
+                                baseResponse.originalPrice(),
+                                baseResponse.discountPercent(),
+                                baseResponse.stockQuantity(),
+                                baseResponse.ratingAverage(),
+                                baseResponse.reviewCount(),
+                                baseResponse.featured(),
+                                baseResponse.hot(),
+                                baseResponse.onSale(),
+                                baseResponse.inStock(),
+                                product.getSpecifications(),
+                                images);
+        }
+
+        private ProductImageResponse toImageResponse(
+                        ProductImage image) {
+
+                return new ProductImageResponse(
+                                image.getId(),
+                                image.getProduct().getId(),
+                                image.getImageUrl(),
+                                image.getAltText(),
+                                image.getDisplayOrder(),
+                                image.isPrimaryImage());
         }
 }
