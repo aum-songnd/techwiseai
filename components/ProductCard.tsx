@@ -1,12 +1,27 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
 import { Product } from "../app/data/types";
 import { productImages } from "../images";
 import AddToCart from "./AddToCart";
+
+// Ảnh có thể là tên file local (map trong productImages) hoặc URL đầy đủ
+// từ API thật (vd "https://placehold.co/..."). Nếu không có trong map local
+// thì dùng thẳng chuỗi đó làm src, giống cách Shop.tsx đang xử lý.
+const resolveProductImage = (
+  fileName?: string
+): StaticImageData | string | null => {
+  if (!fileName) return null;
+
+  const localImage = (
+    productImages as Record<string, StaticImageData | undefined>
+  )[fileName];
+
+  return localImage ?? fileName;
+};
 
 interface ProductCardProps {
   product: Product & { categories?: string[] };
@@ -28,9 +43,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const finalPrice = product.price - (product.discount || 0);
   const hasDiscount = product.discount > 0;
-  const productImage = product.images?.[0]
-    ? productImages[product.images[0]]
-    : undefined;
+  const productImage = resolveProductImage(product.images?.[0]);
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault(); // tránh trigger Link khi bấm heart
@@ -40,7 +53,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <div className="group flex flex-col rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow">
-      <Link href={`/product/${product.slug}`} className="flex flex-col">
+      <Link href={`/product/${product.id}`} className="flex flex-col">
         <div className="relative aspect-square w-full bg-gray-100 overflow-hidden flex items-center justify-center">
           {productImage ? (
             <div className="relative w-[80%] h-[80%]">

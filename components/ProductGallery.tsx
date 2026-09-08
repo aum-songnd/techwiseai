@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { productImages } from "@/images";
 
 interface ProductGalleryProps {
@@ -9,9 +9,14 @@ interface ProductGalleryProps {
   productName: string;
 }
 
-// productImages chỉ map các key ảnh local (vd "m1.png"). Với các sản phẩm
-// dùng thẳng URL (vd placehold.co) thì fallback về chính chuỗi đó.
-const resolveImage = (key: string) => productImages[key] ?? key;
+// productImages chỉ map các key ảnh local (vd "m1.png"). Với ảnh URL đầy đủ
+// từ API thật thì fallback về chính chuỗi đó, giống cách ProductCard xử lý.
+const resolveImage = (key: string): StaticImageData | string => {
+  const localImage = (
+    productImages as Record<string, StaticImageData | undefined>
+  )[key];
+  return localImage ?? key;
+};
 
 const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
   const [activeIndex, setActiveIndex] = useState(0);

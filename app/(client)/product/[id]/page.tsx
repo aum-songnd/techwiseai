@@ -3,13 +3,10 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
 import AddToCart from "@/components/AddToCart";
-import {
-  getProductBySlug,
-  getCategoryNames,
-  getBrandTitle,
-  getRelatedProducts,
-  getAllProductSlugs,
-} from "@/app/data/product-helpers";
+import { getProductById, getProducts } from "@/lib/api";
+import type { Product } from "@/app/data/types";
+
+export const revalidate = 60;
 
 const statusLabel: Record<string, string> = {
   new: "NEW",
@@ -22,26 +19,55 @@ const formatPrice = (value: number) =>
     value
   );
 
-export function generateStaticParams() {
-  return getAllProductSlugs().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  try {
+    const products = await getProducts();
+    return products.map((p) => ({ id: p.id }));
+  } catch {
+    return [];
+  }
 }
 
 interface ProductPageProps {
-  params: { slug: string };
+  params: { id: string };
 }
 
-const ProductPage = ({ params }: ProductPageProps) => {
-  const product = getProductBySlug(params.slug);
+const ProductPage = async ({ params }: ProductPageProps) => {
+  let product: Product & { categories?: string[] };
 
-  if (!product) {
+  try {
+    product = (await getProductById(params.id)) as Product & {
+      categories?: string[];
+    };
+  } catch (err) {
+    console.error("Lỗi getProductById:", err);
     notFound();
   }
 
-  const categoryNames = getCategoryNames(product);
-  const brandTitle = getBrandTitle(product);
-  const relatedProducts = getRelatedProducts(product);
-  const finalPrice = product.price - (product.discount || 0);
-  const hasDiscount = product.discount > 0;
+  const categoryNames = product!.categories ?? [];
+  const brandTitle = (product as any).brandTitle as string | undefined; // API hiện chưa gắn brand cho sản phẩm
+
+  // Related products: cùng category đầu tiên, loại trừ chính nó, tối đa 4 sản phẩm
+  let relatedProducts: (Product & { categories?: string[] })[] = [];
+  try {
+    const allProducts = (await getProducts()) as (Product & {
+      categories?: string[];
+    })[];
+    const mainCategory = categoryNames[0];
+
+    relatedProducts = allProducts
+      .filter(
+        (p) =>
+          p.id !== product!.id &&
+          (mainCategory ? p.categories?.includes(mainCategory) : true)
+      )
+      .slice(0, 4);
+  } catch {
+    relatedProducts = [];
+  }
+
+  const finalPrice = product!.price - (product!.discount || 0);
+  const hasDiscount = product!.discount > 0;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -62,12 +88,12 @@ const ProductPage = ({ params }: ProductPageProps) => {
         )}
         <span>/</span>
         <span className="text-shop_dark_green font-medium line-clamp-1">
-          {product.name}
+          {product!.name}
         </span>
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <ProductGallery images={product.images} productName={product.name} />
+        <ProductGallery images={product!.images} productName={product!.name} />
 
         <div className="flex flex-col gap-4">
           {categoryNames[0] && (
@@ -78,11 +104,11 @@ const ProductPage = ({ params }: ProductPageProps) => {
 
           <div className="flex items-start justify-between gap-3">
             <h1 className="text-2xl font-bold text-shop_dark_green">
-              {product.name}
+              {product!.name}
             </h1>
-            {product.status && (
+            {product!.status && (
               <span className="shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full bg-shop_orange/80 text-white">
-                {statusLabel[product.status] ?? product.status}
+                {statusLabel[product!.status] ?? product!.status}
               </span>
             )}
           </div>
@@ -102,7 +128,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
             </span>
             {hasDiscount && (
               <span className="text-base text-gray-400 line-through">
-                {formatPrice(product.price)}
+                {formatPrice(product!.price)}
               </span>
             )}
           </div>
@@ -111,23 +137,25 @@ const ProductPage = ({ params }: ProductPageProps) => {
             <p className="text-sm font-medium">Tình trạng</p>
             <p
               className={
-                product.stock === 0
+                product!.stock === 0
                   ? "text-red-600"
                   : "text-shop_dark_green/80 font-semibold"
               }
             >
-              {product.stock > 0 ? `Còn ${product.stock} sản phẩm` : "Hết hàng"}
+              {product!.stock > 0
+                ? `Còn ${product!.stock} sản phẩm`
+                : "Hết hàng"}
             </p>
           </div>
 
-          {product.description && (
+          {(product as any).description && (
             <p className="text-sm text-gray-600 leading-relaxed">
-              {product.description}
+              {(product as any).description}
             </p>
           )}
 
           <div className="mt-2">
-            <AddToCart product={product} />
+            <AddToCart product={product!} />
           </div>
         </div>
       </div>
@@ -139,10 +167,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {relatedProducts.map((related) => (
-              <ProductCard
-                key={related.id}
-                product={{ ...related, categories: getCategoryNames(related) }}
-              />
+              <ProductCard key={related.id} product={related} />
             ))}
           </div>
         </section>

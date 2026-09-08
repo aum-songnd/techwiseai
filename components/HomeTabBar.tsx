@@ -1,21 +1,21 @@
-import { productType } from '@/constants/data'
 import React from 'react'
 
-interface Props{
+interface Props {
+    tabs: string[];
     selectedTab: string;
-    onTabSelect: (tab:string) => void;
+    onTabSelect: (tab: string) => void;
 }
 
-const HomeTabBar = ({selectedTab,onTabSelect}: Props) => {
+const HomeTabBar = ({ tabs, selectedTab, onTabSelect }: Props) => {
   return (
     <div className='flex items-center justify-between flex-wrap gap-5'>
         <div className='flex items-center gap-3 text-sm font-semibold'>
-            {productType?.map((item) => (
-                <button onClick={()=> onTabSelect(item?.title)}
-                key={item?.title} className={`border border-shop_light_green/70 px-4 py-1.5
+            {tabs?.map((title) => (
+                <button onClick={() => onTabSelect(title)}
+                key={title} className={`border border-shop_light_green/70 px-4 py-1.5
                 md:px-10 md:py-2 rounded-full hover:bg-shop_light_green hover:text-white hoverEffect
-                ${selectedTab === item?.title ?"bg-shop_light_green text-white border-shop_light_green":"bg-shop_light_green/10"}`}>
-                    {item.title}
+                ${selectedTab === title ? "bg-shop_light_green text-white border-shop_light_green" : "bg-shop_light_green/10"}`}>
+                    {title}
                 </button>
             ))}
         </div>

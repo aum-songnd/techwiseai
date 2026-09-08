@@ -1,45 +1,62 @@
-// src/constants/queries.ts
-import { products, categories, brands } from "../app/data/index";
+// constants/queriesShopPage.ts
+//
+// Lớp "thích nghi" cho trang Shop: gọi lại các hàm fetch thật trong lib/api.ts,
+// đổi tên cho khớp với những gì page.tsx đang import (getAllProducts, getAllBrands...)
+// để không phải sửa page.tsx. Toàn bộ logic fetch thật (base URL, xử lý lỗi...)
+// chỉ nằm ở lib/api.ts — sửa ở đó là áp dụng cho mọi nơi.
+
+import {
+  getProducts,
+  getCategories as getCategoriesFromApi,
+  getBrands,
+} from "@/lib/api";
 import type { Product, Category, Brand } from "../app/data/types";
 
-// giả lập độ trễ mạng như gọi API thật
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// ---------- Re-export giữ nguyên tên hàm cũ ----------
+export const getAllProducts = getProducts;
 
-export const getAllProducts = async (): Promise<Product[]> => {
-  await delay(150);
-  return products;
-};
-
-export const getCategories = async (): Promise<Category[]> => {
-  await delay(150);
-  return categories;
-};
+export const getCategories = getCategoriesFromApi;
 
 export const getAllBrands = async (): Promise<Brand[]> => {
-  await delay(150);
-  return brands;
+  try {
+    return await getBrands();
+  } catch (error) {
+    // Backend chưa có endpoint /brands -> trả mảng rỗng để UI không crash
+    console.warn("[queriesShopPage] /brands chưa sẵn sàng:", error);
+    return [];
+  }
 };
 
+// ---------- Các hàm dẫn xuất, lọc dựa trên dữ liệu đã fetch ----------
 export const getFeaturedProducts = async (): Promise<Product[]> => {
-  await delay(150);
+  const products = await getAllProducts();
   return products.filter((p) => p.isFeatured);
 };
 
-export const getProductBySlug = async (slug: string): Promise<Product | null> => {
-  await delay(150);
-  return products.find((p) => p.slug === slug) ?? null;
-};
-
-export const getProductsByCategory = async (categorySlug: string): Promise<Product[]> => {
-  await delay(150);
+export const getProductsByCategory = async (
+  categorySlug: string
+): Promise<Product[]> => {
+  const [products, categories] = await Promise.all([
+    getAllProducts(),
+    getCategories(),
+  ]);
   const category = categories.find((c) => c.slug === categorySlug);
   if (!category) return [];
   return products.filter((p) => p.categoryIds.includes(category.id));
 };
 
-export const getProductsByBrand = async (brandSlug: string): Promise<Product[]> => {
-  await delay(150);
+export const getProductsByBrand = async (
+  brandSlug: string
+): Promise<Product[]> => {
+  const [products, brands] = await Promise.all([
+    getAllProducts(),
+    getAllBrands(),
+  ]);
   const brand = brands.find((b) => b.slug === brandSlug);
   if (!brand) return [];
   return products.filter((p) => p.brandId === brand.id);
 };
+
+// getProductBySlug: lib/api.ts đã có sẵn hàm gọi route /products/:slug riêng,
+// re-export thẳng luôn thay vì lọc lại từ getAllProducts (nhanh hơn, ít data hơn).
+export { getProductBySlug } from "@/lib/api";

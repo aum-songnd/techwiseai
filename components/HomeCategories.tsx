@@ -2,9 +2,27 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Title } from "./ui/text";
-import { categories } from "../app/data";
+import { getCategories } from "@/lib/api";
 
-const HomeCategories = () => {
+// API trả về thêm field imageUrl mà Category type gốc (mock) chưa khai báo.
+// Mở rộng type tại đây để tránh dùng `any`.
+type CategoryWithImage = Awaited<ReturnType<typeof getCategories>>[number] & {
+  imageUrl?: string;
+};
+
+const HomeCategories = async () => {
+  let categories: CategoryWithImage[] = [];
+
+  try {
+    categories = (await getCategories()) as CategoryWithImage[];
+  } catch (err) {
+    console.error("Lỗi getCategories:", err);
+  }
+
+  if (categories.length === 0) {
+    return null;
+  }
+
   return (
     <div className="bg-white border-2 border-shop-light-green my-10 md:my-10 p-5 lg:p-7 rounded-md">
       <Title className="border-b-2 border-gray-200 text-[25px]">
@@ -39,15 +57,6 @@ const HomeCategories = () => {
               <span className="text-sm font-semibold text-shop_dark_green line-clamp-1">
                 {category.title}
               </span>
-              {category.range && (
-                <span className="text-xs text-gray-500">
-                  Từ{" "}
-                  {new Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(category.range)}
-                </span>
-              )}
             </div>
           </div>
         ))}
