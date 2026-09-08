@@ -33,7 +33,18 @@ const resolveProductImage = (
   return localImage ?? fileName;
 };
 
-const Shop = ({ products, categories, brands }: ShopProps) => {
+const Shop = ({
+  products: productsProp,
+  categories: categoriesProp,
+  brands: brandsProp,
+}: ShopProps) => {
+  // Phòng hộ: nếu API trả về sai kiểu (không phải mảng) hoặc undefined,
+  // luôn fallback về mảng rỗng thay vì để .filter/.find/.map ném lỗi
+  // "products.filter is not a function" và làm trắng trang.
+  const products = Array.isArray(productsProp) ? productsProp : [];
+  const categories = Array.isArray(categoriesProp) ? categoriesProp : [];
+  const brands = Array.isArray(brandsProp) ? brandsProp : [];
+
   const searchParams = useSearchParams();
   const categorySlugParam = searchParams.get("category");
   const brandSlugParam = searchParams.get("brand");
@@ -265,7 +276,7 @@ const Shop = ({ products, categories, brands }: ShopProps) => {
               return (
                 <Link
                   key={product.id}
-                  href={`/product/${product.slug}`}
+                  href={`/product/${product.id}`}
                   className="border rounded-lg p-3 hoverEffect hover:shadow-md group block"
                 >
                   <div className="relative w-full aspect-square mb-3 overflow-hidden rounded-md bg-shop_light_bg flex items-center justify-center">
