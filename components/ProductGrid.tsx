@@ -5,28 +5,49 @@ import { motion, AnimatePresence } from "motion/react";
 import NoProductAvailable from "./NoProductAvailable";
 import Container from "./Container";
 import HomeTabBar from "./HomeTabBar";
-import { productType } from "@/constants/data";
-import { getProducts } from "../lib/api";
+import { getProducts, getCategories } from "../lib/api";
 import { Product } from "../app/data/types";
 
-type ProductWithCategories = Product & { categories?: string[] };
+type ProductWithCategories = Product & {
+  categories?: string[];
+  categoryIds?: string[];
+};
+
+type Tab = { id: string; title: string };
 
 const ProductGrid = () => {
   const [allProducts, setAllProducts] = useState<ProductWithCategories[]>([]);
-  const [selectedTab, setSelectedTab] = useState(productType[0]?.title || "");
+  const [tabs, setTabs] = useState<Tab[]>([]);
+  const [selectedTabId, setSelectedTabId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Gọi API thật 1 lần khi mount
   useEffect(() => {
     let ignore = false;
 
-    async function loadProducts() {
+    async function loadData() {
       setLoading(true);
       setErrorMessage(null);
       try {
-        const data = await getProducts();
-        if (!ignore) setAllProducts(data as ProductWithCategories[]);
+        const [products, categories] = await Promise.all([
+          getProducts(),
+          getCategories(),
+        ]);
+
+        if (ignore) return;
+
+        setAllProducts(products as ProductWithCategories[]);
+
+        const dynamicTabs: Tab[] = categories.map((c) => ({
+          id: c.id,
+          title: c.title,
+        }));
+        setTabs(dynamicTabs);
+
+        // Mặc định chọn category đầu tiên thay vì "Tất cả"
+        if (dynamicTabs.length > 0) {
+          setSelectedTabId(dynamicTabs[0].id);
+        }
       } catch (err) {
         if (!ignore) {
           setErrorMessage(
@@ -38,29 +59,34 @@ const ProductGrid = () => {
       }
     }
 
-    loadProducts();
+    loadData();
     return () => {
       ignore = true;
     };
   }, []);
 
-  // Lọc theo tab: nếu tab khớp tên category thì lọc, không thì hiện tất cả
   const products = React.useMemo(() => {
-    const tab = selectedTab?.toLowerCase();
-    if (!tab) return allProducts;
+    if (!selectedTabId) return [];
 
-    const filtered = allProducts.filter((p) =>
-      p.categories?.some((c) => c.toLowerCase() === tab)
-    );
-
-    return (filtered.length > 0 ? filtered : allProducts)
+    return allProducts
+      .filter((p) => p.categoryIds?.includes(selectedTabId))
       .slice()
       .sort((a, b) => a.name.localeCompare(b.name));
-  }, [allProducts, selectedTab]);
+  }, [allProducts, selectedTabId]);
+
+  const selectedTabTitle =
+    tabs.find((t) => t.id === selectedTabId)?.title ?? "";
 
   return (
     <Container className="flex flex-col lg:px-0 my-10">
-      <HomeTabBar selectedTab={selectedTab} onTabSelect={setSelectedTab} />
+      <HomeTabBar
+        tabs={tabs.map((t) => t.title)}
+        selectedTab={selectedTabTitle}
+        onTabSelect={(title: string) => {
+          const matched = tabs.find((t) => t.title === title);
+          if (matched) setSelectedTabId(matched.id);
+        }}
+      />
 
       {loading ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
@@ -100,7 +126,7 @@ const ProductGrid = () => {
           </>
         </div>
       ) : (
-        <NoProductAvailable selectedTab={selectedTab} />
+        <NoProductAvailable selectedTab={selectedTabTitle} />
       )}
     </Container>
   );

@@ -84,6 +84,7 @@ function mapCategory(raw: ApiCategoryRaw): Category {
     id: raw.id,
     slug: raw.slug,
     title: raw.name,
+    imageUrl: raw.imageUrl,
   } as Category;
 }
 
