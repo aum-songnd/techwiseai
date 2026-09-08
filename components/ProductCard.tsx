@@ -118,7 +118,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </span>
           )}
         </div>
-        <AddToCart />
+        <AddToCart product={product} />
       </div>
     </div>
   );
