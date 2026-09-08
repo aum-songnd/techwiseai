@@ -6,12 +6,15 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { Product, Category, Brand } from "../app/data/types";
 import { productImages } from "../images";
+import { getProductsPaginated } from "../lib/api";
 
 type ShopProps = {
   products: Product[];
   categories: Category[];
   brands: Brand[];
 };
+
+const PAGE_SIZE = 20;
 
 const formatVND = (value: number) =>
   new Intl.NumberFormat("vi-VN", {
@@ -41,7 +44,7 @@ const Shop = ({
   // Phòng hộ: nếu API trả về sai kiểu (không phải mảng) hoặc undefined,
   // luôn fallback về mảng rỗng thay vì để .filter/.find/.map ném lỗi
   // "products.filter is not a function" và làm trắng trang.
-  const products = Array.isArray(productsProp) ? productsProp : [];
+  const initialProducts = Array.isArray(productsProp) ? productsProp : [];
   const categories = Array.isArray(categoriesProp) ? categoriesProp : [];
   const brands = Array.isArray(brandsProp) ? brandsProp : [];
 
@@ -49,93 +52,133 @@ const Shop = ({
   const categorySlugParam = searchParams.get("category");
   const brandSlugParam = searchParams.get("brand");
 
-  const initialCategory = categorySlugParam
-    ? categories.find((c) => c.slug === categorySlugParam)?.id ?? null
-    : null;
-
-  const initialBrand = brandSlugParam
-    ? brands.find((b) => b.slug === brandSlugParam)?.id ?? null
-    : null;
-
+  // Lưu trực tiếp SLUG (không phải id) vì API /products lọc theo
+  // query param `category`/`brand` dùng slug.
   const [activeCategory, setActiveCategory] = useState<string | null>(
-    initialCategory
+    categorySlugParam
   );
   const [activeBrand, setActiveBrand] = useState<string | null>(
-    initialBrand
+    brandSlugParam
   );
   const [sortBy, setSortBy] = useState<
     "default" | "price-asc" | "price-desc"
   >("default");
 
-  // Theo dõi việc cuộn trang để thu gọn thanh tiêu đề + sort,
-  // đẩy nó dán sát lên trên (gần header) khi người dùng cuộn xuống.
-  const [isScrolled, setIsScrolled] = useState(false);
+  // ---------- Phân trang + lọc: Shop tự gọi API mỗi khi trang/bộ lọc đổi ----------
+  // Việc lọc theo danh mục/thương hiệu được thực hiện ở SERVER qua query
+  // param `category`/`brand` (dùng slug), nên `products` dưới đây đã là
+  // đúng tập kết quả đã lọc của trang hiện tại, và `totalPages`/
+  // `totalElements` cũng phản ánh đúng số lượng sau khi lọc.
+  const [page, setPage] = useState(0);
+  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [totalElements, setTotalElements] = useState<number>(
+    initialProducts.length
+  );
+  const [loadingProducts, setLoadingProducts] = useState(false);
+  const [productsError, setProductsError] = useState<string | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80);
-    };
+    let ignore = false;
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    async function loadPage() {
+      setLoadingProducts(true);
+      setProductsError(null);
+      try {
+        const result = await getProductsPaginated({
+          page,
+          size: PAGE_SIZE,
+          category: activeCategory ?? undefined,
+          brand: activeBrand ?? undefined,
+        });
+        if (ignore) return;
+        setProducts(result.items);
+        setTotalPages(Math.max(1, result.totalPages));
+        setTotalElements(result.totalElements);
+      } catch (err) {
+        if (!ignore) {
+          setProductsError(
+            err instanceof Error ? err.message : "Lỗi không xác định"
+          );
+        }
+      } finally {
+        if (!ignore) setLoadingProducts(false);
+      }
+    }
+
+    loadPage();
+    return () => {
+      ignore = true;
+    };
+  }, [page, activeCategory, activeBrand]);
+
+  const handlePageChange = (nextPage: number) => {
+    if (nextPage < 0 || nextPage >= totalPages || nextPage === page) return;
+    setPage(nextPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSelectCategory = (slug: string | null) => {
+    setActiveCategory(slug);
+    setPage(0);
+  };
+
+  const handleSelectBrand = (slug: string | null) => {
+    setActiveBrand(slug);
+    setPage(0);
+  };
 
   // Đồng bộ lại state khi query param "category" trên URL thay đổi
   useEffect(() => {
-    if (categorySlugParam) {
-      const matched = categories.find((c) => c.slug === categorySlugParam);
-      setActiveCategory(matched ? matched.id : null);
-    } else {
-      setActiveCategory(null);
-    }
-  }, [categorySlugParam, categories]);
+    setActiveCategory(categorySlugParam ?? null);
+    setPage(0);
+  }, [categorySlugParam]);
 
   // Đồng bộ lại state khi query param "brand" trên URL thay đổi
   useEffect(() => {
-    if (brandSlugParam) {
-      const matched = brands.find((b) => b.slug === brandSlugParam);
-      setActiveBrand(matched ? matched.id : null);
-    } else {
-      setActiveBrand(null);
-    }
-  }, [brandSlugParam, brands]);
+    setActiveBrand(brandSlugParam ?? null);
+    setPage(0);
+  }, [brandSlugParam]);
 
-  const filteredProducts = useMemo(() => {
-    let result = products.filter((product) => {
-      const matchCategory = activeCategory
-        ? product.categoryIds.includes(activeCategory)
-        : true;
+  // Sắp xếp giá vẫn xử lý ở client trên tập sản phẩm của trang hiện tại,
+  // vì backend hiện chưa xác nhận có hỗ trợ query param sắp xếp hay không.
+  const sortedProducts = useMemo(() => {
+    if (sortBy === "default") return products;
 
-      const matchBrand = activeBrand
-        ? product.brandId === activeBrand
-        : true;
-
-      return matchCategory && matchBrand;
-    });
+    const result = [...products];
 
     if (sortBy === "price-asc") {
-      result = [...result].sort(
+      result.sort(
         (a, b) =>
           a.price - (a.discount ?? 0) - (b.price - (b.discount ?? 0))
       );
     }
 
     if (sortBy === "price-desc") {
-      result = [...result].sort(
+      result.sort(
         (a, b) =>
           b.price - (b.discount ?? 0) - (a.price - (a.discount ?? 0))
       );
     }
 
     return result;
-  }, [products, activeCategory, activeBrand, sortBy]);
+  }, [products, sortBy]);
 
   const handleResetFilters = () => {
     setActiveCategory(null);
     setActiveBrand(null);
     setSortBy("default");
+    setPage(0);
   };
+
+  // Danh sách số trang hiển thị (tối đa 5 nút quanh trang hiện tại)
+  const pageNumbers = useMemo(() => {
+    const maxButtons = 5;
+    let start = Math.max(0, page - Math.floor(maxButtons / 2));
+    const end = Math.min(totalPages, start + maxButtons);
+    start = Math.max(0, end - maxButtons);
+    return Array.from({ length: end - start }, (_, i) => start + i);
+  }, [page, totalPages]);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -149,7 +192,7 @@ const Shop = ({
             <li>
               <button
                 type="button"
-                onClick={() => setActiveCategory(null)}
+                onClick={() => handleSelectCategory(null)}
                 className={`text-sm hoverEffect ${
                   activeCategory === null
                     ? "text-shop_light_green font-medium"
@@ -164,9 +207,9 @@ const Shop = ({
               <li key={category.id}>
                 <button
                   type="button"
-                  onClick={() => setActiveCategory(category.id)}
+                  onClick={() => handleSelectCategory(category.slug)}
                   className={`text-sm hoverEffect ${
-                    activeCategory === category.id
+                    activeCategory === category.slug
                       ? "text-shop_light_green font-medium"
                       : "text-lightColor"
                   }`}
@@ -185,7 +228,7 @@ const Shop = ({
             <li>
               <button
                 type="button"
-                onClick={() => setActiveBrand(null)}
+                onClick={() => handleSelectBrand(null)}
                 className={`text-sm hoverEffect ${
                   activeBrand === null
                     ? "text-shop_light_green font-medium"
@@ -200,9 +243,9 @@ const Shop = ({
               <li key={brand.id}>
                 <button
                   type="button"
-                  onClick={() => setActiveBrand(brand.id)}
+                  onClick={() => handleSelectBrand(brand.slug)}
                   className={`text-sm hoverEffect ${
-                    activeBrand === brand.id
+                    activeBrand === brand.slug
                       ? "text-shop_light_green font-medium"
                       : "text-lightColor"
                   }`}
@@ -226,19 +269,9 @@ const Shop = ({
       </aside>
 
       <div className="md:col-span-3">
-        <div
-          className={`flex items-center justify-between flex-wrap gap-3 md:sticky md:z-40 transition-all duration-300 ease-in-out ${
-            isScrolled
-              ? "md:top-16 md:py-2.5 md:px-4 mb-4 bg-white md:rounded-xl md:shadow-md md:border md:border-gray-100"
-              : "md:top-24 md:py-3 md:-mx-1 md:px-1 mb-6 bg-white/95 backdrop-blur-sm"
-          }`}
-        >
-          <h1
-            className={`font-semibold text-darkColor transition-all duration-300 ease-in-out ${
-              isScrolled ? "text-sm md:text-base" : "text-xl"
-            }`}
-          >
-            Tất cả sản phẩm ({filteredProducts.length})
+        <div className="flex items-center justify-between flex-wrap gap-3 mb-6 py-3">
+          <h1 className="font-semibold text-darkColor text-xl">
+            Tất cả sản phẩm ({totalElements})
           </h1>
 
           <select
@@ -248,9 +281,7 @@ const Shop = ({
                 event.target.value as "default" | "price-asc" | "price-desc"
               )
             }
-            className={`border rounded-md outline-none hoverEffect focus:border-shop_light_green transition-all duration-300 ease-in-out ${
-              isScrolled ? "text-xs px-2.5 py-1" : "text-sm px-3 py-1.5"
-            }`}
+            className="border rounded-md outline-none hoverEffect focus:border-shop_light_green text-sm px-3 py-1.5"
           >
             <option value="default">Mặc định</option>
             <option value="price-asc">Giá: Thấp đến cao</option>
@@ -258,18 +289,39 @@ const Shop = ({
           </select>
         </div>
 
-        {filteredProducts.length === 0 ? (
+        {loadingProducts ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
+            {Array.from({ length: PAGE_SIZE }).map((_, i) => (
+              <div
+                key={i}
+                className="border rounded-lg p-3 animate-pulse space-y-3"
+              >
+                <div className="aspect-square w-full bg-gray-200 rounded-md" />
+                <div className="h-3 w-1/2 bg-gray-200 rounded" />
+                <div className="h-4 w-3/4 bg-gray-200 rounded" />
+              </div>
+            ))}
+          </div>
+        ) : productsError ? (
+          <p className="text-red-600 text-sm">
+            Không tải được sản phẩm: {productsError}
+          </p>
+        ) : sortedProducts.length === 0 ? (
           <p className="text-lightColor text-sm">
             Không có sản phẩm nào phù hợp.
           </p>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
-            {filteredProducts.map((product) => {
+            {sortedProducts.map((product) => {
               const finalPrice = product.price - (product.discount ?? 0);
 
-              const brand = brands.find(
-                (item) => item.id === product.brandId
-              );
+              // API hiện chưa gắn brand cho sản phẩm, nên brandId luôn
+              // undefined -> không tìm được brand nào. Hiển thị tên danh
+              // mục (categories) thay cho tên thương hiệu cho tới khi API
+              // bổ sung brand.
+              const categoryLabel = (product as any).categories?.[0] as
+                | string
+                | undefined;
 
               const imageSrc = resolveProductImage(product.images?.[0]);
 
@@ -299,7 +351,7 @@ const Shop = ({
                     )}
                   </div>
 
-                  <p className="text-xs text-lightColor">{brand?.title}</p>
+                  <p className="text-xs text-lightColor">{categoryLabel}</p>
 
                   <h2 className="font-medium text-sm text-darkColor line-clamp-1">
                     {product.name}
@@ -325,6 +377,72 @@ const Shop = ({
                 </Link>
               );
             })}
+          </div>
+        )}
+
+        {!loadingProducts &&
+          !productsError &&
+          sortedProducts.length > 0 &&
+          totalPages > 1 && (
+          <div className="flex items-center justify-center gap-1.5 mt-8">
+            <button
+              type="button"
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 0}
+              className="px-3 py-1.5 text-sm rounded-md border hoverEffect disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Trước
+            </button>
+
+            {pageNumbers[0] > 0 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => handlePageChange(0)}
+                  className="px-3 py-1.5 text-sm rounded-md border hoverEffect"
+                >
+                  1
+                </button>
+                <span className="px-1 text-sm text-lightColor">…</span>
+              </>
+            )}
+
+            {pageNumbers.map((p) => (
+              <button
+                key={p}
+                type="button"
+                onClick={() => handlePageChange(p)}
+                className={`px-3 py-1.5 text-sm rounded-md border hoverEffect ${
+                  p === page
+                    ? "bg-shop_light_green text-white border-shop_light_green"
+                    : ""
+                }`}
+              >
+                {p + 1}
+              </button>
+            ))}
+
+            {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
+              <>
+                <span className="px-1 text-sm text-lightColor">…</span>
+                <button
+                  type="button"
+                  onClick={() => handlePageChange(totalPages - 1)}
+                  className="px-3 py-1.5 text-sm rounded-md border hoverEffect"
+                >
+                  {totalPages}
+                </button>
+              </>
+            )}
+
+            <button
+              type="button"
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page >= totalPages - 1}
+              className="px-3 py-1.5 text-sm rounded-md border hoverEffect disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Sau
+            </button>
           </div>
         )}
       </div>

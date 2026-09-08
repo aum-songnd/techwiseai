@@ -78,6 +78,23 @@ async function fetchEnvelope<T>(
   return json.data;
 }
 
+// Một số danh sách (categories, brands) có thể được backend trả về dưới
+// dạng mảng thuần HOẶC dưới dạng object phân trang { items: [...] } giống
+// /products. Nếu chỉ giả định là mảng thuần và thực tế backend trả object
+// phân trang, `data.map` sẽ ném lỗi (hoặc bị catch và fallback về rỗng),
+// khiến sidebar danh mục/thương hiệu hiển thị trống hoặc sai. Hàm này
+// chuẩn hoá cả 2 trường hợp về một mảng duy nhất.
+function normalizeList<T>(
+  data: T[] | ApiPaginated<T> | null | undefined
+): T[] {
+  if (!data) return [];
+  if (Array.isArray(data)) return data;
+  if (Array.isArray((data as ApiPaginated<T>).items)) {
+    return (data as ApiPaginated<T>).items;
+  }
+  return [];
+}
+
 // ---------- Hàm map dữ liệu API -> type mà frontend đang dùng ----------
 function mapCategory(raw: ApiCategoryRaw): Category {
   return {
@@ -115,11 +132,69 @@ function mapProduct(raw: ApiProductRaw): Product {
 }
 
 // ---------- PRODUCTS ----------
-export async function getProducts(): Promise<Product[]> {
-  const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>("/products", {
-    next: { revalidate: 60 },
-  });
-  return (data.items ?? []).map(mapProduct);
+export interface GetProductsParams {
+  page?: number;
+  size?: number;
+  /** Slug danh mục, dùng để lọc server-side qua query param `category`. */
+  category?: string;
+  /** Slug thương hiệu, dùng để lọc server-side qua query param `brand`. */
+  brand?: string;
+}
+
+export interface GetProductsResult {
+  items: Product[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  first: boolean;
+  last: boolean;
+}
+
+export async function getProducts(
+  params: GetProductsParams = {}
+): Promise<Product[]> {
+  const { page = 0, size = 20, category, brand } = params;
+  const query = new URLSearchParams({
+    page: String(page),
+    size: String(size),
+    ...(category ? { category } : {}),
+    ...(brand ? { brand } : {}),
+  }).toString();
+
+  const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
+    `/products?${query}`,
+    { next: { revalidate: 60 } }
+  );
+  return normalizeList(data).map(mapProduct);
+}
+
+// Bản đầy đủ, trả kèm thông tin phân trang (dùng khi cần hiển thị/điều khiển trang)
+export async function getProductsPaginated(
+  params: GetProductsParams = {}
+): Promise<GetProductsResult> {
+  const { page = 0, size = 20, category, brand } = params;
+  const query = new URLSearchParams({
+    page: String(page),
+    size: String(size),
+    ...(category ? { category } : {}),
+    ...(brand ? { brand } : {}),
+  }).toString();
+
+  const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
+    `/products?${query}`,
+    { next: { revalidate: 60 } }
+  );
+
+  return {
+    items: normalizeList(data).map(mapProduct),
+    page: data.page,
+    size: data.size,
+    totalElements: data.totalElements,
+    totalPages: data.totalPages,
+    first: data.first,
+    last: data.last,
+  };
 }
 
 export async function getProductBySlug(slug: string): Promise<Product> {
@@ -131,26 +206,32 @@ export async function getProductBySlug(slug: string): Promise<Product> {
 
 // ---------- CATEGORIES ----------
 export async function getCategories(): Promise<Category[]> {
-  const data = await fetchEnvelope<ApiCategoryRaw[]>("/categories", {
-    next: { revalidate: 300 },
-  });
-  return (data ?? []).map(mapCategory);
+  const data = await fetchEnvelope<ApiCategoryRaw[] | ApiPaginated<ApiCategoryRaw>>(
+    "/categories",
+    { next: { revalidate: 300 } }
+  );
+  return normalizeList(data).map(mapCategory);
 }
 
 // ---------- BRANDS ----------
-// Ghi chú: khi kiểm tra thực tế, backend chưa có brand gắn trên sản phẩm.
-// Hàm này thử gọi /brands phòng khi backend bổ sung sau; nếu endpoint chưa
-// tồn tại, nơi gọi nó (constants/queriesShopPage.ts) đã bọc try/catch để
-// trả về mảng rỗng thay vì làm crash app.
+// Ghi chú: khi kiểm tra thực tế, backend chưa có brand gắn trên sản phẩm,
+// và /brands có thể chưa tồn tại (404) hoặc trả rỗng. Hàm này tự bọc
+// try/catch để luôn trả về mảng rỗng khi lỗi, không phụ thuộc nơi gọi
+// phải tự xử lý — tránh crash trang khi backend chưa có endpoint này.
 export async function getBrands(): Promise<Brand[]> {
-  const data = await fetchEnvelope<ApiCategoryRaw[]>("/brands", {
-    next: { revalidate: 300 },
-  });
-  return (data ?? []).map((b) => ({
-    id: b.id,
-    slug: b.slug,
-    title: b.name,
-  })) as Brand[];
+  try {
+    const data = await fetchEnvelope<
+      ApiCategoryRaw[] | ApiPaginated<ApiCategoryRaw>
+    >("/brands", { next: { revalidate: 300 } });
+
+    return normalizeList(data).map((b) => ({
+      id: b.id,
+      slug: b.slug,
+      title: b.name,
+    })) as Brand[];
+  } catch {
+    return [];
+  }
 }
 
 // ---------- CART ----------
