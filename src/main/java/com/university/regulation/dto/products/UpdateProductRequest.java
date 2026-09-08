@@ -41,6 +41,8 @@ public class UpdateProductRequest {
     )
     private String sku;
 
+    @Size(max = 100, message = "Thương hiệu không được vượt quá 100 ký tự") private String brand;
+
     @Size(
             max = 1000,
             message = "Mô tả ngắn không được vượt quá 1000 ký tự"

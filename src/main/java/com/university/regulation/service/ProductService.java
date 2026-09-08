@@ -95,6 +95,7 @@ public class ProductService {
                                 product.getName(),
                                 product.getSlug(),
                                 product.getSku(),
+                                product.getBrand(),
                                 product.getShortDescription(),
                                 product.getDescription(),
                                 product.getThumbnailUrl(),
@@ -183,6 +184,7 @@ public class ProductService {
                 product.setName(request.name().trim());
                 product.setSlug(normalizedSlug);
                 product.setSku(normalizedSku);
+                product.setBrand(request.brand());
                 product.setShortDescription(request.shortDescription());
                 product.setDescription(request.description());
                 product.setPrice(request.price());
@@ -260,6 +262,7 @@ public class ProductService {
                 product.setName(request.getName().trim());
                 product.setSlug(normalizedSlug);
                 product.setSku(normalizedSku);
+                product.setBrand(trimToNull(request.getBrand()));
                 product.setShortDescription(
                                 trimToNull(request.getShortDescription()));
                 product.setDescription(
@@ -350,5 +353,20 @@ public class ProductService {
                                 image.getAltText(),
                                 image.getDisplayOrder(),
                                 image.isPrimaryImage());
+        }
+
+        @Transactional
+        public void deleteProduct(UUID productId) {
+                Product product = productRepository.findById(productId)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Không tìm thấy sản phẩm"));
+
+                if (!product.isActive()) {
+                        return;
+                }
+
+                product.setActive(false);
+                productRepository.save(product);
         }
 }

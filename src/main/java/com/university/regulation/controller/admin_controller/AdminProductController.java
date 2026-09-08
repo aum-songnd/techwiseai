@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,7 +21,6 @@ import com.university.regulation.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
 
 @RestController
 @RequestMapping("/api/v1/admin/")
@@ -59,17 +59,15 @@ public class AdminProductController {
                                 httpRequest.getRequestURI());
         }
 
-        // @GetMapping("/products/{productId}/images")
-        // public ApiResponse<?> getProductImages(
-        //                 @PathVariable UUID productId,
-        //                 @RequestParam(defaultValue = "0") int page,
-        //                 @RequestParam(defaultValue = "10") int size,
-        //                 HttpServletRequest httpRequest) {
-        //         var images = productService.getProductImages(productId, page, size);
-        //         return ApiResponse.success(
-        //                         "Lấy danh sách ảnh sản phẩm thành công",
-        //                         images,
-        //                         httpRequest.getRequestURI());
-        // }
-        
+        @DeleteMapping("/{productId}")
+        public ApiResponse<Void> deleteProduct(
+                        @PathVariable UUID productId,
+                        HttpServletRequest httpRequest) {
+                productService.deleteProduct(productId);
+
+                return ApiResponse.success(
+                                "Xóa sản phẩm thành công",
+                                null,
+                                httpRequest.getRequestURI());
+        }
 }

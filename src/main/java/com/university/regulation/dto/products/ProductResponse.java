@@ -10,6 +10,7 @@ public record ProductResponse(
         String name,
         String slug,
         String sku,
+        String brand,
         String shortDescription,
         String description,
         String thumbnailUrl,
