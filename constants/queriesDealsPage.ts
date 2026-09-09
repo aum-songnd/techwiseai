@@ -1,8 +1,12 @@
 // constants/queriesDealsPage.ts
-import { products } from "../app/data/index";
+import { getAllProductsByCategory } from "../lib/api";
 import type { Product } from "../app/data/types";
 
 export const getHotProducts = async (): Promise<Product[]> => {
-  return products.filter((product) => product.status === "hot");
+  try {
+    const products = await getAllProductsByCategory();
+    return products.filter((product) => product.status === "hot");
+  } catch {
+    return [];
+  }
 };
-
