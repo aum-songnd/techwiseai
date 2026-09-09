@@ -102,6 +102,14 @@ function mapCategory(raw: ApiCategoryRaw): Category {
     slug: raw.slug,
     title: raw.name,
     imageUrl: raw.imageUrl,
+    // displayOrder không có trong Category type gốc (mock) nhưng API có
+    // trả về; gắn thêm để nơi gọi (vd HomeCategories) có thể sort đúng
+    // thứ tự backend cấu hình.
+    displayOrder: raw.displayOrder,
+    // Category type yêu cầu field `featured` (bắt buộc), nhưng API
+    // /categories không trả field này (chỉ sản phẩm mới có featured).
+    // Gán mặc định false để thoả type; không có ý nghĩa nghiệp vụ thật.
+    featured: false,
   } as Category;
 }
 

@@ -8,74 +8,132 @@ import HomeTabBar from "./HomeTabBar";
 import { getProducts, getCategories } from "../lib/api";
 import { Product } from "../app/data/types";
 
-type ProductWithCategories = Product & {
-  categories?: string[];
-  categoryIds?: string[];
-};
+// slugs: 1 tab có thể gộp nhiều category (vd tab "Khác" gộp Tai nghe,
+// Máy ảnh, Linh kiện, Phụ kiện) nên dùng mảng thay vì 1 slug đơn.
+type Tab = { key: string; title: string; slugs: string[] };
 
-type Tab = { id: string; title: string };
+const PRODUCTS_LIMIT = 20;
+
+// Các danh mục đã có mặt ở khối "Danh mục phổ biến" (HomeCategories) nên
+// không cần tách tab riêng ở đây nữa — gộp chung vào 1 tab "Khác".
+const OTHER_CATEGORY_TITLES = ["Tai nghe", "Máy ảnh", "Linh kiện", "Phụ kiện"];
+const OTHER_TAB_KEY = "khac";
+const OTHER_TAB_TITLE = "Khác";
 
 const ProductGrid = () => {
-  const [allProducts, setAllProducts] = useState<ProductWithCategories[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [tabs, setTabs] = useState<Tab[]>([]);
-  const [selectedTabId, setSelectedTabId] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [selectedTabKey, setSelectedTabKey] = useState<string | null>(null);
 
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [categoriesError, setCategoriesError] = useState<string | null>(null);
+
+  const [loadingProducts, setLoadingProducts] = useState(false);
+  const [productsError, setProductsError] = useState<string | null>(null);
+
+  // Bước 1: tải danh sách category để dựng tab bar, chọn tab đầu tiên
+  // làm mặc định (giống hành vi cũ). Các category thuộc
+  // OTHER_CATEGORY_TITLES được gộp chung vào 1 tab "Khác" duy nhất.
   useEffect(() => {
     let ignore = false;
 
-    async function loadData() {
-      setLoading(true);
-      setErrorMessage(null);
+    async function loadCategories() {
+      setLoadingCategories(true);
+      setCategoriesError(null);
       try {
-        const [products, categories] = await Promise.all([
-          getProducts(),
-          getCategories(),
-        ]);
-
+        const categories = await getCategories();
         if (ignore) return;
 
-        setAllProducts(products as ProductWithCategories[]);
+        const mainCategories = categories.filter(
+          (c) => !OTHER_CATEGORY_TITLES.includes(c.title)
+        );
+        const otherCategories = categories.filter((c) =>
+          OTHER_CATEGORY_TITLES.includes(c.title)
+        );
 
-        const dynamicTabs: Tab[] = categories.map((c) => ({
-          id: c.id,
+        const dynamicTabs: Tab[] = mainCategories.map((c) => ({
+          key: c.slug,
           title: c.title,
+          slugs: [c.slug],
         }));
+
+        if (otherCategories.length > 0) {
+          dynamicTabs.push({
+            key: OTHER_TAB_KEY,
+            title: OTHER_TAB_TITLE,
+            slugs: otherCategories.map((c) => c.slug),
+          });
+        }
+
         setTabs(dynamicTabs);
 
-        // Mặc định chọn category đầu tiên thay vì "Tất cả"
         if (dynamicTabs.length > 0) {
-          setSelectedTabId(dynamicTabs[0].id);
+          setSelectedTabKey(dynamicTabs[0].key);
         }
       } catch (err) {
         if (!ignore) {
-          setErrorMessage(
+          setCategoriesError(
             err instanceof Error ? err.message : "Lỗi không xác định"
           );
         }
       } finally {
-        if (!ignore) setLoading(false);
+        if (!ignore) setLoadingCategories(false);
       }
     }
 
-    loadData();
+    loadCategories();
     return () => {
       ignore = true;
     };
   }, []);
 
-  const products = React.useMemo(() => {
-    if (!selectedTabId) return [];
+  // Bước 2: mỗi khi tab đổi, gọi API /products lọc theo ?category=<slug>
+  // ở SERVER cho từng slug thuộc tab đó (tab thường chỉ có 1 slug, riêng
+  // tab "Khác" có nhiều slug), rồi gộp + sắp xếp lại kết quả.
+  useEffect(() => {
+    const selectedTab = tabs.find((t) => t.key === selectedTabKey);
+    if (!selectedTab) return;
 
-    return allProducts
-      .filter((p) => p.categoryIds?.includes(selectedTabId))
-      .slice()
-      .sort((a, b) => a.name.localeCompare(b.name));
-  }, [allProducts, selectedTabId]);
+    let ignore = false;
+
+    async function loadProducts() {
+      setLoadingProducts(true);
+      setProductsError(null);
+      try {
+        const resultsBySlug = await Promise.all(
+          selectedTab!.slugs.map((slug) =>
+            getProducts({ category: slug, size: PRODUCTS_LIMIT })
+          )
+        );
+        if (ignore) return;
+
+        const merged = resultsBySlug.flat();
+        const sorted = merged
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .slice(0, PRODUCTS_LIMIT);
+        setProducts(sorted);
+      } catch (err) {
+        if (!ignore) {
+          setProductsError(
+            err instanceof Error ? err.message : "Lỗi không xác định"
+          );
+        }
+      } finally {
+        if (!ignore) setLoadingProducts(false);
+      }
+    }
+
+    loadProducts();
+    return () => {
+      ignore = true;
+    };
+  }, [selectedTabKey, tabs]);
 
   const selectedTabTitle =
-    tabs.find((t) => t.id === selectedTabId)?.title ?? "";
+    tabs.find((t) => t.key === selectedTabKey)?.title ?? "";
+
+  const loading = loadingCategories || loadingProducts;
+  const errorMessage = categoriesError ?? productsError;
 
   return (
     <Container className="flex flex-col lg:px-0 my-10">
@@ -84,7 +142,7 @@ const ProductGrid = () => {
         selectedTab={selectedTabTitle}
         onTabSelect={(title: string) => {
           const matched = tabs.find((t) => t.title === title);
-          if (matched) setSelectedTabId(matched.id);
+          if (matched) setSelectedTabKey(matched.key);
         }}
       />
 
@@ -111,7 +169,7 @@ const ProductGrid = () => {
       ) : products?.length ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
           <>
-            {products?.slice(0, 20).map((product) => (
+            {products.slice(0, PRODUCTS_LIMIT).map((product) => (
               <AnimatePresence key={product?.id}>
                 <motion.div
                   layout

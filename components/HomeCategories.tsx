@@ -4,10 +4,32 @@ import Image from "next/image";
 import { Title } from "./ui/text";
 import { getCategories } from "@/lib/api";
 
-// API trả về thêm field imageUrl mà Category type gốc (mock) chưa khai báo.
-// Mở rộng type tại đây để tránh dùng `any`.
+// API trả về thêm field imageUrl/displayOrder mà Category type gốc (mock)
+// chưa khai báo. Mở rộng type tại đây để tránh dùng `any`.
 type CategoryWithImage = Awaited<ReturnType<typeof getCategories>>[number] & {
   imageUrl?: string;
+  displayOrder?: number;
+};
+
+// API chỉ trả imageUrl dạng placeholder chung chung (placehold.co/...),
+// nên dùng ảnh thật đã có sẵn trong /public, map theo tên danh mục.
+// Ưu tiên ảnh local; nếu category nào không khớp tên nào ở đây thì mới
+// fallback về imageUrl từ API.
+const CATEGORY_IMAGE_BY_TITLE: Record<string, string> = {
+  "laptop": "/laptop.webp",
+  "điện thoại": "/mobile.webp",
+  "tai nghe": "/earphone.webp",
+  "máy ảnh": "/camera.webp",
+  "linh kiện": "/ssd.webp",
+  "phụ kiện": "/accessory.webp",
+};
+
+const normalizeTitle = (title: string) => title.trim().toLowerCase();
+
+const resolveCategoryImage = (
+  category: CategoryWithImage
+): string | undefined => {
+  return CATEGORY_IMAGE_BY_TITLE[normalizeTitle(category.title)] ?? category.imageUrl;
 };
 
 const HomeCategories = async () => {
@@ -15,6 +37,13 @@ const HomeCategories = async () => {
 
   try {
     categories = (await getCategories()) as CategoryWithImage[];
+    // Sắp xếp theo displayOrder mà backend cấu hình (số nhỏ hiện trước).
+    // Category không có displayOrder (undefined) bị đẩy xuống cuối.
+    categories = [...categories].sort((a, b) => {
+      const orderA = a.displayOrder ?? Number.MAX_SAFE_INTEGER;
+      const orderB = b.displayOrder ?? Number.MAX_SAFE_INTEGER;
+      return orderA - orderB;
+    });
   } catch (err) {
     console.error("Lỗi getCategories:", err);
   }
@@ -24,42 +53,48 @@ const HomeCategories = async () => {
   }
 
   return (
-    <div className="bg-white border-2 border-shop-light-green my-10 md:my-10 p-5 lg:p-7 rounded-md">
-      <Title className="border-b-2 border-gray-200 text-[25px]">
+    <div className="bg-white shadow-sm ring-1 ring-gray-100 my-10 md:my-10 p-5 lg:p-7 rounded-xl">
+      <Title className="border-b border-gray-100 text-[25px] pb-3">
         Danh mục phổ biến
       </Title>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-5">
-        {categories.map((category) => (
-          <div
-            key={category.id}
-            className="group flex flex-col rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
-          >
-            <Link href={`/shop?category=${category.slug}`}>
-              <div className="relative w-full aspect-square bg-gray-50 overflow-hidden">
-                {category.imageUrl ? (
+      <div
+        className="grid gap-4 mt-5"
+        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))" }}
+      >
+        {categories.map((category) => {
+          const imageSrc = resolveCategoryImage(category);
+
+          return (
+            <Link
+              key={category.id}
+              href={`/shop?category=${category.slug}`}
+              className="group flex flex-col rounded-xl bg-gray-50/60 overflow-hidden ring-1 ring-gray-100 hover:ring-shop-light-green hover:shadow-md transition-all duration-200"
+            >
+              <div className="relative w-full aspect-square overflow-hidden">
+                {imageSrc ? (
                   <Image
-                    src={category.imageUrl}
+                    src={imageSrc}
                     alt={category.title}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    sizes="(max-width: 640px) 33vw, (max-width: 1024px) 20vw, 12vw"
                   />
                 ) : (
-                  <div className="flex items-center justify-center h-full text-xs text-gray-400">
+                  <div className="flex items-center justify-center h-full text-[10px] text-gray-400">
                     Không có ảnh
                   </div>
                 )}
               </div>
-            </Link>
 
-            <div className="p-3 flex flex-col gap-0.5">
-              <span className="text-sm font-semibold text-shop_dark_green line-clamp-1">
-                {category.title}
-              </span>
-            </div>
-          </div>
-        ))}
+              <div className="p-2.5 flex flex-col items-center">
+                <span className="text-xs font-semibold text-shop_dark_green text-center line-clamp-1">
+                  {category.title}
+                </span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
