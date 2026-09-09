@@ -31,6 +31,9 @@ interface ApiProductRaw {
   name: string;
   slug: string;
   sku?: string;
+  // API trả brand dưới dạng STRING thuần (vd "Microsoft"), không phải
+  // object có id/slug như category. Không có bảng brand riêng gắn theo id.
+  brand?: string;
   shortDescription?: string;
   description?: string;
   thumbnailUrl?: string;
@@ -117,7 +120,6 @@ function mapProduct(raw: ApiProductRaw): Product {
   const originalPrice = raw.originalPrice ?? raw.price;
   const discount = Math.max(0, originalPrice - raw.price);
 
-  // API chưa gắn brand cho sản phẩm -> để undefined, UI tự ẩn phần liên quan brand
   let status: "new" | "hot" | "sale" | undefined;
   if (raw.hot) status = "hot";
   else if (raw.onSale) status = "sale";
@@ -132,7 +134,11 @@ function mapProduct(raw: ApiProductRaw): Product {
     images: raw.thumbnailUrl ? [raw.thumbnailUrl] : [],
     categoryIds: raw.category ? [raw.category.id] : [],
     categories: raw.category ? [raw.category.name] : [],
-    brandId: undefined,
+    // Không có brand entity riêng theo id/slug -> dùng luôn chuỗi brand
+    // thô của API. Giữ cả brandId (để tương thích chỗ nào đang đọc field
+    // này) lẫn brand (tên hiển thị) trỏ về cùng giá trị.
+    brandId: raw.brand ?? undefined,
+    brand: raw.brand ?? undefined,
     stock: raw.stockQuantity ?? 0,
     status,
     isFeatured: !!raw.featured,
@@ -203,6 +209,27 @@ export async function getProductsPaginated(
     first: data.first,
     last: data.last,
   };
+}
+
+// Backend không có bảng brand riêng gắn theo id/slug cho sản phẩm (chỉ có
+// field `brand` dạng string thô trên mỗi product). Vì vậy không thể lọc
+// brand đáng tin cậy ở server qua query param `brand`. Hàm này lấy TOÀN
+// BỘ sản phẩm của một category (size lớn, 1 lần gọi) để nơi gọi (Shop)
+// tự dựng danh sách brand duy nhất và tự lọc/phân trang ở client.
+export async function getAllProductsByCategory(
+  category?: string
+): Promise<Product[]> {
+  const query = new URLSearchParams({
+    page: "0",
+    size: "2000",
+    ...(category ? { category } : {}),
+  }).toString();
+
+  const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
+    `/products?${query}`,
+    { next: { revalidate: 60 } }
+  );
+  return normalizeList(data).map(mapProduct);
 }
 
 export async function getProductBySlug(slug: string): Promise<Product> {

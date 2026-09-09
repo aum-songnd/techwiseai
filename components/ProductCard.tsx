@@ -56,15 +56,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <Link href={`/product/${product.id}`} className="flex flex-col">
         <div className="relative aspect-square w-full bg-gray-100 overflow-hidden flex items-center justify-center">
           {productImage ? (
-            <div className="relative w-[80%] h-[80%]">
-              <Image
-                src={productImage}
-                alt={product.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-              />
-            </div>
+            <Image
+              src={productImage}
+              alt={product.name}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+            />
           ) : (
             <div className="flex items-center justify-center h-full text-xs text-gray-400">
               Không có ảnh

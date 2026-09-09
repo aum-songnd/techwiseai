@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { Product, Category, Brand } from "../app/data/types";
 import { productImages } from "../images";
-import { getProductsPaginated } from "../lib/api";
+import { getAllProductsByCategory } from "../lib/api";
 
 type ShopProps = {
   products: Product[];
@@ -39,41 +39,42 @@ const resolveProductImage = (
 const Shop = ({
   products: productsProp,
   categories: categoriesProp,
-  brands: brandsProp,
+  // brandsProp đến từ /brands API cũ (object id/slug), nhưng dữ liệu brand
+  // thật của product là string thô (vd "Microsoft") nên không dùng prop
+  // này để lọc nữa - brand list được tự dựng trực tiếp từ sản phẩm.
+  brands: _brandsProp,
 }: ShopProps) => {
   // Phòng hộ: nếu API trả về sai kiểu (không phải mảng) hoặc undefined,
   // luôn fallback về mảng rỗng thay vì để .filter/.find/.map ném lỗi
   // "products.filter is not a function" và làm trắng trang.
   const initialProducts = Array.isArray(productsProp) ? productsProp : [];
   const categories = Array.isArray(categoriesProp) ? categoriesProp : [];
-  const brands = Array.isArray(brandsProp) ? brandsProp : [];
 
   const searchParams = useSearchParams();
   const categorySlugParam = searchParams.get("category");
-  const brandSlugParam = searchParams.get("brand");
+  const brandParam = searchParams.get("brand");
 
-  // Lưu trực tiếp SLUG (không phải id) vì API /products lọc theo
-  // query param `category`/`brand` dùng slug.
+  // activeCategory: SLUG, vẫn lọc ở SERVER qua query param `category`.
   const [activeCategory, setActiveCategory] = useState<string | null>(
     categorySlugParam
   );
-  const [activeBrand, setActiveBrand] = useState<string | null>(
-    brandSlugParam
-  );
+  // activeBrand: lưu ĐÚNG chuỗi brand thô của API (vd "Microsoft"), KHÔNG
+  // phải slug, vì product.brand là string tự do, không có id/slug riêng.
+  // Lọc brand được thực hiện hoàn toàn ở CLIENT (xem bên dưới).
+  const [activeBrand, setActiveBrand] = useState<string | null>(brandParam);
   const [sortBy, setSortBy] = useState<
     "default" | "price-asc" | "price-desc"
   >("default");
 
-  // ---------- Phân trang + lọc: Shop tự gọi API mỗi khi trang/bộ lọc đổi ----------
-  // Việc lọc theo danh mục/thương hiệu được thực hiện ở SERVER qua query
-  // param `category`/`brand` (dùng slug), nên `products` dưới đây đã là
-  // đúng tập kết quả đã lọc của trang hiện tại, và `totalPages`/
-  // `totalElements` cũng phản ánh đúng số lượng sau khi lọc.
+  // ---------- Nạp toàn bộ sản phẩm theo category ----------
+  // Backend chỉ hỗ trợ lọc tin cậy theo `category` (slug) ở server. Brand
+  // không có bảng/id riêng (chỉ là field string trên product) nên KHÔNG
+  // lọc brand ở server. Thay vào đó, nạp toàn bộ sản phẩm của category
+  // đang chọn (1 lần gọi, size lớn) rồi tự dựng danh sách brand + tự lọc/
+  // phân trang brand hoàn toàn ở client.
   const [page, setPage] = useState(0);
-  const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [totalPages, setTotalPages] = useState<number>(1);
-  const [totalElements, setTotalElements] = useState<number>(
-    initialProducts.length
+  const [categoryProducts, setCategoryProducts] = useState<Product[]>(
+    initialProducts
   );
   const [loadingProducts, setLoadingProducts] = useState(false);
   const [productsError, setProductsError] = useState<string | null>(null);
@@ -81,20 +82,15 @@ const Shop = ({
   useEffect(() => {
     let ignore = false;
 
-    async function loadPage() {
+    async function loadCategoryProducts() {
       setLoadingProducts(true);
       setProductsError(null);
       try {
-        const result = await getProductsPaginated({
-          page,
-          size: PAGE_SIZE,
-          category: activeCategory ?? undefined,
-          brand: activeBrand ?? undefined,
-        });
+        const items = await getAllProductsByCategory(
+          activeCategory ?? undefined
+        );
         if (ignore) return;
-        setProducts(result.items);
-        setTotalPages(Math.max(1, result.totalPages));
-        setTotalElements(result.totalElements);
+        setCategoryProducts(items);
       } catch (err) {
         if (!ignore) {
           setProductsError(
@@ -106,46 +102,43 @@ const Shop = ({
       }
     }
 
-    loadPage();
+    loadCategoryProducts();
     return () => {
       ignore = true;
     };
-  }, [page, activeCategory, activeBrand]);
+  }, [activeCategory]);
 
-  const handlePageChange = (nextPage: number) => {
-    if (nextPage < 0 || nextPage >= totalPages || nextPage === page) return;
-    setPage(nextPage);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  // Danh sách thương hiệu duy nhất, tự dựng từ field `brand` thật của
+  // sản phẩm đã nạp (chỉ trong phạm vi category đang chọn).
+  const brandOptions = useMemo(() => {
+    const seen = new Map<string, string>(); // key (lowercase) -> label gốc
+    for (const p of categoryProducts) {
+      const raw = (p as unknown as { brand?: string }).brand;
+      const label = raw?.trim();
+      if (!label) continue;
+      const key = label.toLowerCase();
+      if (!seen.has(key)) seen.set(key, label);
+    }
+    return Array.from(seen.entries())
+      .map(([key, label]) => ({ key, label }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [categoryProducts]);
 
-  const handleSelectCategory = (slug: string | null) => {
-    setActiveCategory(slug);
-    setPage(0);
-  };
+  // Lọc theo brand ở client (so khớp không phân biệt hoa/thường).
+  const brandFilteredProducts = useMemo(() => {
+    if (!activeBrand) return categoryProducts;
+    const key = activeBrand.toLowerCase();
+    return categoryProducts.filter((p) => {
+      const raw = (p as unknown as { brand?: string }).brand;
+      return raw?.trim().toLowerCase() === key;
+    });
+  }, [categoryProducts, activeBrand]);
 
-  const handleSelectBrand = (slug: string | null) => {
-    setActiveBrand(slug);
-    setPage(0);
-  };
+  // Sắp xếp giá ở client trên tập đã lọc brand.
+  const sortedFilteredProducts = useMemo(() => {
+    if (sortBy === "default") return brandFilteredProducts;
 
-  // Đồng bộ lại state khi query param "category" trên URL thay đổi
-  useEffect(() => {
-    setActiveCategory(categorySlugParam ?? null);
-    setPage(0);
-  }, [categorySlugParam]);
-
-  // Đồng bộ lại state khi query param "brand" trên URL thay đổi
-  useEffect(() => {
-    setActiveBrand(brandSlugParam ?? null);
-    setPage(0);
-  }, [brandSlugParam]);
-
-  // Sắp xếp giá vẫn xử lý ở client trên tập sản phẩm của trang hiện tại,
-  // vì backend hiện chưa xác nhận có hỗ trợ query param sắp xếp hay không.
-  const sortedProducts = useMemo(() => {
-    if (sortBy === "default") return products;
-
-    const result = [...products];
+    const result = [...brandFilteredProducts];
 
     if (sortBy === "price-asc") {
       result.sort(
@@ -162,7 +155,51 @@ const Shop = ({
     }
 
     return result;
-  }, [products, sortBy]);
+  }, [brandFilteredProducts, sortBy]);
+
+  const totalElements = sortedFilteredProducts.length;
+  const totalPages = Math.max(1, Math.ceil(totalElements / PAGE_SIZE));
+
+  // Phân trang ở client trên tập đã lọc + sắp xếp.
+  const sortedProducts = useMemo(() => {
+    const start = page * PAGE_SIZE;
+    return sortedFilteredProducts.slice(start, start + PAGE_SIZE);
+  }, [sortedFilteredProducts, page]);
+
+  // Nếu bộ lọc đổi làm số trang giảm xuống dưới trang hiện tại -> kéo về
+  // trang hợp lệ gần nhất để tránh hiển thị trang trống.
+  useEffect(() => {
+    if (page > totalPages - 1) setPage(Math.max(0, totalPages - 1));
+  }, [totalPages, page]);
+
+  const handlePageChange = (nextPage: number) => {
+    if (nextPage < 0 || nextPage >= totalPages || nextPage === page) return;
+    setPage(nextPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSelectCategory = (slug: string | null) => {
+    setActiveCategory(slug);
+    setActiveBrand(null);
+    setPage(0);
+  };
+
+  const handleSelectBrand = (brandLabel: string | null) => {
+    setActiveBrand(brandLabel);
+    setPage(0);
+  };
+
+  // Đồng bộ lại state khi query param "category" trên URL thay đổi
+  useEffect(() => {
+    setActiveCategory(categorySlugParam ?? null);
+    setPage(0);
+  }, [categorySlugParam]);
+
+  // Đồng bộ lại state khi query param "brand" trên URL thay đổi
+  useEffect(() => {
+    setActiveBrand(brandParam ?? null);
+    setPage(0);
+  }, [brandParam]);
 
   const handleResetFilters = () => {
     setActiveCategory(null);
@@ -239,18 +276,18 @@ const Shop = ({
               </button>
             </li>
 
-            {brands.map((brand) => (
-              <li key={brand.id}>
+            {brandOptions.map((brand) => (
+              <li key={brand.key}>
                 <button
                   type="button"
-                  onClick={() => handleSelectBrand(brand.slug)}
+                  onClick={() => handleSelectBrand(brand.label)}
                   className={`text-sm hoverEffect ${
-                    activeBrand === brand.slug
+                    activeBrand?.toLowerCase() === brand.key
                       ? "text-shop_light_green font-medium"
                       : "text-lightColor"
                   }`}
                 >
-                  {brand.title}
+                  {brand.label}
                 </button>
               </li>
             ))}
@@ -315,13 +352,13 @@ const Shop = ({
             {sortedProducts.map((product) => {
               const finalPrice = product.price - (product.discount ?? 0);
 
-              // API hiện chưa gắn brand cho sản phẩm, nên brandId luôn
-              // undefined -> không tìm được brand nào. Hiển thị tên danh
-              // mục (categories) thay cho tên thương hiệu cho tới khi API
-              // bổ sung brand.
-              const categoryLabel = (product as any).categories?.[0] as
-                | string
-                | undefined;
+              // Ưu tiên hiển thị brand thật từ API; nếu sản phẩm không có
+              // brand thì fallback về tên danh mục.
+              const brandLabel = (product as unknown as { brand?: string })
+                .brand;
+              const categoryLabel =
+                brandLabel ??
+                ((product as any).categories?.[0] as string | undefined);
 
               const imageSrc = resolveProductImage(product.images?.[0]);
 
@@ -333,15 +370,13 @@ const Shop = ({
                 >
                   <div className="relative w-full aspect-square mb-3 overflow-hidden rounded-md bg-shop_light_bg flex items-center justify-center">
                     {imageSrc && (
-                      <div className="relative w-[85%] h-[85%]">
-                        <Image
-                          src={imageSrc}
-                          alt={product.name}
-                          fill
-                          sizes="(max-width: 768px) 50vw, 25vw"
-                          className="object-contain group-hover:scale-105 hoverEffect"
-                        />
-                      </div>
+                      <Image
+                        src={imageSrc}
+                        alt={product.name}
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        className="object-cover group-hover:scale-105 hoverEffect"
+                      />
                     )}
 
                     {product.status && (
