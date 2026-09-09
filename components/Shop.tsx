@@ -354,11 +354,11 @@ const Shop = ({
 
               // Ưu tiên hiển thị brand thật từ API; nếu sản phẩm không có
               // brand thì fallback về tên danh mục.
-              const brandLabel = (product as unknown as { brand?: string })
-                .brand;
-              const categoryLabel =
-                brandLabel ??
-                ((product as any).categories?.[0] as string | undefined);
+              const extra = product as unknown as {
+                brand?: string;
+                categories?: string[];
+              };
+              const categoryLabel = extra.brand ?? extra.categories?.[0];
 
               const imageSrc = resolveProductImage(product.images?.[0]);
 

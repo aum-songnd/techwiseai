@@ -142,6 +142,8 @@ function mapProduct(raw: ApiProductRaw): Product {
     stock: raw.stockQuantity ?? 0,
     status,
     isFeatured: !!raw.featured,
+    // description ưu tiên bản đầy đủ, fallback về bản rút gọn nếu thiếu.
+    description: raw.description ?? raw.shortDescription ?? undefined,
   } as unknown as Product;
 }
 

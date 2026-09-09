@@ -8,6 +8,15 @@ import type { Product } from "@/app/data/types";
 
 export const revalidate = 60;
 
+// API trả thêm các field không có trong Product type gốc (mock): brand
+// (string thô, không phải object id/slug), description, categories (tên
+// danh mục). Khai báo rõ thay vì dùng `any` ở từng chỗ đọc field.
+type ApiProduct = Product & {
+  categories?: string[];
+  brand?: string;
+  description?: string;
+};
+
 const statusLabel: Record<string, string> = {
   new: "NEW",
   hot: "HOT",
@@ -33,26 +42,22 @@ interface ProductPageProps {
 }
 
 const ProductPage = async ({ params }: ProductPageProps) => {
-  let product: Product & { categories?: string[] };
+  let product: ApiProduct;
 
   try {
-    product = (await getProductById(params.id)) as Product & {
-      categories?: string[];
-    };
+    product = (await getProductById(params.id)) as ApiProduct;
   } catch (err) {
     console.error("Lỗi getProductById:", err);
     notFound();
   }
 
   const categoryNames = product!.categories ?? [];
-  const brandTitle = (product as any).brandTitle as string | undefined; // API hiện chưa gắn brand cho sản phẩm
+  const brandTitle = product!.brand;
 
   // Related products: cùng category đầu tiên, loại trừ chính nó, tối đa 4 sản phẩm
-  let relatedProducts: (Product & { categories?: string[] })[] = [];
+  let relatedProducts: ApiProduct[] = [];
   try {
-    const allProducts = (await getProducts()) as (Product & {
-      categories?: string[];
-    })[];
+    const allProducts = (await getProducts()) as ApiProduct[];
     const mainCategory = categoryNames[0];
 
     relatedProducts = allProducts
@@ -148,9 +153,9 @@ const ProductPage = async ({ params }: ProductPageProps) => {
             </p>
           </div>
 
-          {(product as any).description && (
+          {product!.description && (
             <p className="text-sm text-gray-600 leading-relaxed">
-              {(product as any).description}
+              {product!.description}
             </p>
           )}
 
