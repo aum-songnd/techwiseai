@@ -12,6 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.university.regulation.common.response.ApiResponse;
 
@@ -21,125 +22,120 @@ import jakarta.validation.ConstraintViolationException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(GlobalExceptionHandler.class);
+        private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ApiResponse<Object>>
-    handleAuthenticationException(
-            AuthenticationException exception,
-            HttpServletRequest request
-    ) {
-        ApiResponse<Object> body = ApiResponse.error(
-                HttpStatus.UNAUTHORIZED,
-                "LOGIN_FAILED",
-                "Tên đăng nhập hoặc mật khẩu không chính xác",
-                request.getRequestURI()
-        );
+        @ExceptionHandler(AuthenticationException.class)
+        public ResponseEntity<ApiResponse<Object>> handleAuthenticationException(
+                        AuthenticationException exception,
+                        HttpServletRequest request) {
+                ApiResponse<Object> body = ApiResponse.error(
+                                HttpStatus.UNAUTHORIZED,
+                                "LOGIN_FAILED",
+                                "Tên đăng nhập hoặc mật khẩu không chính xác",
+                                request.getRequestURI());
 
-        return ResponseEntity
-                .status(HttpStatus.UNAUTHORIZED)
-                .body(body);
-    }
+                return ResponseEntity
+                                .status(HttpStatus.UNAUTHORIZED)
+                                .body(body);
+        }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<Object>>
-    handleValidationException(
-            MethodArgumentNotValidException exception,
-            HttpServletRequest request
-    ) {
-        Map<String, String> errors = new LinkedHashMap<>();
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        public ResponseEntity<ApiResponse<Object>> handleValidationException(
+                        MethodArgumentNotValidException exception,
+                        HttpServletRequest request) {
+                Map<String, String> errors = new LinkedHashMap<>();
 
-        exception.getBindingResult()
-                .getFieldErrors()
-                .forEach(fieldError ->
-                        errors.putIfAbsent(
-                                fieldError.getField(),
-                                fieldError.getDefaultMessage()
-                        )
-                );
+                exception.getBindingResult()
+                                .getFieldErrors()
+                                .forEach(fieldError -> errors.putIfAbsent(
+                                                fieldError.getField(),
+                                                fieldError.getDefaultMessage()));
 
-        ApiResponse<Object> body = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "VALIDATION_ERROR",
-                "Dữ liệu gửi lên không hợp lệ",
-                errors,
-                request.getRequestURI()
-        );
+                ApiResponse<Object> body = ApiResponse.error(
+                                HttpStatus.BAD_REQUEST,
+                                "VALIDATION_ERROR",
+                                "Dữ liệu gửi lên không hợp lệ",
+                                errors,
+                                request.getRequestURI());
 
-        return ResponseEntity
-                .badRequest()
-                .body(body);
-    }
+                return ResponseEntity
+                                .badRequest()
+                                .body(body);
+        }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ApiResponse<Object>>
-    handleConstraintViolationException(
-            ConstraintViolationException exception,
-            HttpServletRequest request
-    ) {
-        Map<String, String> errors = new LinkedHashMap<>();
+        @ExceptionHandler(ConstraintViolationException.class)
+        public ResponseEntity<ApiResponse<Object>> handleConstraintViolationException(
+                        ConstraintViolationException exception,
+                        HttpServletRequest request) {
+                Map<String, String> errors = new LinkedHashMap<>();
 
-        exception.getConstraintViolations()
-                .forEach(violation ->
-                        errors.put(
-                                violation.getPropertyPath().toString(),
-                                violation.getMessage()
-                        )
-                );
+                exception.getConstraintViolations()
+                                .forEach(violation -> errors.put(
+                                                violation.getPropertyPath().toString(),
+                                                violation.getMessage()));
 
-        ApiResponse<Object> body = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "VALIDATION_ERROR",
-                "Tham số gửi lên không hợp lệ",
-                errors,
-                request.getRequestURI()
-        );
+                ApiResponse<Object> body = ApiResponse.error(
+                                HttpStatus.BAD_REQUEST,
+                                "VALIDATION_ERROR",
+                                "Tham số gửi lên không hợp lệ",
+                                errors,
+                                request.getRequestURI());
 
-        return ResponseEntity
-                .badRequest()
-                .body(body);
-    }
+                return ResponseEntity
+                                .badRequest()
+                                .body(body);
+        }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ApiResponse<Object>>
-    handleHttpMessageNotReadableException(
-            HttpMessageNotReadableException exception,
-            HttpServletRequest request
-    ) {
-        ApiResponse<Object> body = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "INVALID_REQUEST_BODY",
-                "Nội dung JSON không hợp lệ hoặc bị thiếu",
-                request.getRequestURI()
-        );
+        @ExceptionHandler(HttpMessageNotReadableException.class)
+        public ResponseEntity<ApiResponse<Object>> handleHttpMessageNotReadableException(
+                        HttpMessageNotReadableException exception,
+                        HttpServletRequest request) {
+                ApiResponse<Object> body = ApiResponse.error(
+                                HttpStatus.BAD_REQUEST,
+                                "INVALID_REQUEST_BODY",
+                                "Nội dung JSON không hợp lệ hoặc bị thiếu",
+                                request.getRequestURI());
 
-        return ResponseEntity
-                .badRequest()
-                .body(body);
-    }
+                return ResponseEntity
+                                .badRequest()
+                                .body(body);
+        }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<Object>>
-    handleUnexpectedException(
-            Exception exception,
-            HttpServletRequest request
-    ) {
-        log.error(
-                "Unexpected error at {}",
-                request.getRequestURI(),
-                exception
-        );
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<ApiResponse<Object>> handleUnexpectedException(
+                        Exception exception,
+                        HttpServletRequest request) {
+                log.error(
+                                "Unexpected error at {}",
+                                request.getRequestURI(),
+                                exception);
 
-        ApiResponse<Object> body = ApiResponse.error(
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                "INTERNAL_SERVER_ERROR",
-                "Hệ thống xảy ra lỗi, vui lòng thử lại sau",
-                request.getRequestURI()
-        );
+                ApiResponse<Object> body = ApiResponse.error(
+                                HttpStatus.INTERNAL_SERVER_ERROR,
+                                "INTERNAL_SERVER_ERROR",
+                                "Hệ thống xảy ra lỗi, vui lòng thử lại sau",
+                                request.getRequestURI());
 
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(body);
-    }
+                return ResponseEntity
+                                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                .body(body);
+        }
+
+        @ExceptionHandler(ResponseStatusException.class)
+        public ResponseEntity<ApiResponse<Object>> handleResponseStatusException(
+                        ResponseStatusException exception,
+                        HttpServletRequest request) {
+                HttpStatus status = HttpStatus.valueOf(
+                                exception.getStatusCode().value());
+
+                ApiResponse<Object> response = ApiResponse.error(
+                                status,
+                                status.name(),
+                                exception.getReason(),
+                                request.getRequestURI());
+
+                return ResponseEntity
+                                .status(status)
+                                .body(response);
+        }
 }
