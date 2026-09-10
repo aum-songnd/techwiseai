@@ -27,7 +27,7 @@ const resolveProductImage = (
 };
 
 interface ProductCardProps {
-  product: Product & { categories?: string[] };
+  product: Product;
 }
 
 const statusLabel: Record<string, string> = {
@@ -47,7 +47,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
   const isProductFavorite = isFavorite(product.id);
 
-  const finalPrice = product.price - (product.discount || 0);
+  const finalPrice = product.finalPrice;
   const hasDiscount = product.discount > 0;
   const productImage = resolveProductImage(product.images?.[0]);
 

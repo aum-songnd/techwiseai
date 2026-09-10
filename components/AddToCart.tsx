@@ -8,7 +8,7 @@ import { Product } from "../app/data/types";
 import { useCart } from "../context/CartContext";
 
 interface AddToCartProps {
-  product: Product & { categories?: string[] };
+  product: Product;
 }
 
 const formatPrice = (value: number) =>

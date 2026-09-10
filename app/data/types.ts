@@ -1,4 +1,3 @@
-
 export interface Category {
   id: string;
   title: string;
@@ -7,6 +6,7 @@ export interface Category {
   range?: number; // "Starting from"
   featured: boolean;
   imageUrl?: string;
+  displayOrder?: number;
 }
 
 export interface BlogCategory {
@@ -25,11 +25,7 @@ export interface Brand {
 }
 
 export type ProductStatus = "new" | "hot" | "sale";
-export type ProductVariant =
-  | "phone"
-  | "laptop"
-  | "earphone"
-  | "others";
+export type ProductVariant = "phone" | "laptop" | "earphone" | "others";
 
 export interface Product {
   id: string;
@@ -39,9 +35,13 @@ export interface Product {
   description?: string;
   price: number;
   discount: number;
-  categoryIds: string[];
+  finalPrice: number;
+
+  categories?: string[];
+
   stock: number;
-  brandId: string;
+  brand?: string;
+
   status?: ProductStatus;
   variant?: ProductVariant;
   isFeatured: boolean;
@@ -80,49 +80,3 @@ export interface Address {
   createdAt: string; // ISO date
 }
 
-export type OrderStatus =
-  | "pending"
-  | "processing"
-  | "paid"
-  | "shipped"
-  | "out_for_delivery"
-  | "delivered"
-  | "cancelled";
-
-export interface OrderProductItem {
-  productId: string;
-  productName: string;
-  quantity: number;
-  price: number;
-}
-
-export interface OrderInvoice {
-  id: string;
-  number: string;
-  hostedInvoiceUrl: string;
-}
-
-export interface Order {
-  id: string;
-  orderNumber: string;
-  invoice?: OrderInvoice;
-  stripeCheckoutSessionId?: string;
-  stripeCustomerId: string;
-  userId: string; // thay cho clerkUserId — id user trong hệ thống auth riêng
-  customerName: string;
-  email: string;
-  stripePaymentIntentId: string;
-  products: OrderProductItem[];
-  totalPrice: number;
-  currency: string;
-  amountDiscount: number;
-  shippingAddress: {
-    name: string;
-    address: string;
-    city: string;
-    state: string;
-    zip: string;
-  };
-  status: OrderStatus;
-  orderDate: string; // ISO date
-}

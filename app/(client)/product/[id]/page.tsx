@@ -4,19 +4,13 @@ import ProductCard from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
 import AddToCart from "@/components/AddToCart";
 import { getProductById, getProducts } from "@/lib/api";
-import type { Product } from "@/app/data/types";
 import { Truck, RotateCcw, ShieldCheck } from "lucide-react";
 
 export const revalidate = 60;
 
-// API trả thêm các field không có trong Product type gốc (mock): brand
-// (string thô, không phải object id/slug), description, categories (tên
-// danh mục). Khai báo rõ thay vì dùng `any` ở từng chỗ đọc field.
-type ApiProduct = Product & {
-  categories?: string[];
-  brand?: string;
-  description?: string;
-};
+// `categories`, `brand`, `description`, `finalPrice` giờ đã là field
+// chính thức trong Product type (xem app/data/types.ts) nên không cần
+// khai báo type mở rộng riêng (ApiProduct) như trước nữa.
 
 const statusLabel: Record<string, string> = {
   new: "NEW",
@@ -55,10 +49,10 @@ interface ProductPageProps {
 const ProductPage = async ({ params }: ProductPageProps) => {
   const { id } = await params;
 
-  let product: ApiProduct;
+  let product: Awaited<ReturnType<typeof getProductById>>;
 
   try {
-    product = (await getProductById(id)) as ApiProduct;
+    product = await getProductById(id);
   } catch (err) {
     console.error("Lỗi getProductById:", err);
     notFound();
@@ -69,9 +63,9 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   const descriptionItems = parseDescription(product!.description);
 
   // Related products: cùng category đầu tiên, loại trừ chính nó, tối đa 4 sản phẩm
-  let relatedProducts: ApiProduct[] = [];
+  let relatedProducts: Awaited<ReturnType<typeof getProducts>> = [];
   try {
-    const allProducts = (await getProducts()) as ApiProduct[];
+    const allProducts = await getProducts();
     const mainCategory = categoryNames[0];
 
     relatedProducts = allProducts
@@ -85,7 +79,10 @@ const ProductPage = async ({ params }: ProductPageProps) => {
     relatedProducts = [];
   }
 
-  const finalPrice = product!.price - (product!.discount || 0);
+  // Giá bán thực tế đã được tính sẵn ở tầng mapping (lib/api.ts ->
+  // mapProduct). Không cần tự trừ `price - discount` ở đây nữa, tránh
+  // nhầm lẫn giữa "giá gốc" và "giá bán".
+  const finalPrice = product!.finalPrice;
   const hasDiscount = product!.discount > 0;
 
   return (

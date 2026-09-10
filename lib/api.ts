@@ -107,18 +107,28 @@ function mapCategory(raw: ApiCategoryRaw): Category {
     imageUrl: raw.imageUrl,
     // displayOrder không có trong Category type gốc (mock) nhưng API có
     // trả về; gắn thêm để nơi gọi (vd HomeCategories) có thể sort đúng
-    // thứ tự backend cấu hình.
+    // thứ tự backend cấu hình. Field này giờ đã khai báo optional sẵn
+    // trong Category type nên không cần ép kiểu nữa.
     displayOrder: raw.displayOrder,
     // Category type yêu cầu field `featured` (bắt buộc), nhưng API
     // /categories không trả field này (chỉ sản phẩm mới có featured).
     // Gán mặc định false để thoả type; không có ý nghĩa nghiệp vụ thật.
     featured: false,
-  } as Category;
+  };
 }
 
 function mapProduct(raw: ApiProductRaw): Product {
-  const originalPrice = raw.originalPrice ?? raw.price;
-  const discount = Math.max(0, originalPrice - raw.price);
+  // price      = giá GỐC (trước giảm)
+  // discount   = số tiền được giảm
+  // finalPrice = giá bán thực tế = raw.price (giá API trả về để bán)
+  //
+  // Trước đây nơi gọi (vd trang chi tiết sản phẩm) phải tự tính lại
+  // `product.price - product.discount` mỗi khi cần hiển thị giá bán,
+  // rất dễ nhầm vì tên field `price` gây cảm giác đó đã là giá bán.
+  // Giờ tính sẵn `finalPrice` ở đây, chỉ một chỗ duy nhất.
+  const price = raw.originalPrice ?? raw.price;
+  const discount = Math.max(0, price - raw.price);
+  const finalPrice = raw.price;
 
   let status: "new" | "hot" | "sale" | undefined;
   if (raw.hot) status = "hot";
@@ -129,22 +139,23 @@ function mapProduct(raw: ApiProductRaw): Product {
     id: raw.id,
     slug: raw.slug,
     name: raw.name,
-    price: originalPrice,
+    price,
     discount,
+    finalPrice,
     images: raw.thumbnailUrl ? [raw.thumbnailUrl] : [],
-    categoryIds: raw.category ? [raw.category.id] : [],
+    // Chỉ có tên category, không có id liên kết riêng để lọc -> dùng
+    // thẳng `categories` (tên).
     categories: raw.category ? [raw.category.name] : [],
-    // Không có brand entity riêng theo id/slug -> dùng luôn chuỗi brand
-    // thô của API. Giữ cả brandId (để tương thích chỗ nào đang đọc field
-    // này) lẫn brand (tên hiển thị) trỏ về cùng giá trị.
-    brandId: raw.brand ?? undefined,
-    brand: raw.brand ?? undefined,
+    // Không có brand entity riêng theo id/slug -> chỉ có `brand` (tên
+    // hiển thị, dùng luôn để lọc/so khớp nếu cần). Field này optional
+    // trong type nên không cần ép kiểu (as unknown as Product) nữa.
+    brand: raw.brand,
     stock: raw.stockQuantity ?? 0,
     status,
     isFeatured: !!raw.featured,
     // description ưu tiên bản đầy đủ, fallback về bản rút gọn nếu thiếu.
-    description: raw.description ?? raw.shortDescription ?? undefined,
-  } as unknown as Product;
+    description: raw.description ?? raw.shortDescription,
+  };
 }
 
 // ---------- PRODUCTS ----------
@@ -265,7 +276,7 @@ export async function getBrands(): Promise<Brand[]> {
       id: b.id,
       slug: b.slug,
       title: b.name,
-    })) as Brand[];
+    }));
   } catch {
     return [];
   }

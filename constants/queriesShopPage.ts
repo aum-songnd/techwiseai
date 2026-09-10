@@ -42,7 +42,9 @@ export const getProductsByCategory = async (
   ]);
   const category = categories.find((c) => c.slug === categorySlug);
   if (!category) return [];
-  return products.filter((p) => p.categoryIds.includes(category.id));
+  // Product không còn categoryIds — API chỉ trả TÊN category trên mỗi
+  // sản phẩm, nên phải so khớp theo tên (title) thay vì id.
+  return products.filter((p) => p.categories?.includes(category.title));
 };
 
 export const getProductsByBrand = async (
@@ -54,7 +56,9 @@ export const getProductsByBrand = async (
   ]);
   const brand = brands.find((b) => b.slug === brandSlug);
   if (!brand) return [];
-  return products.filter((p) => p.brandId === brand.id);
+  // Product không còn brandId — API chỉ trả TÊN brand (string) trên mỗi
+  // sản phẩm, nên phải so khớp theo tên (title) thay vì id.
+  return products.filter((p) => p.brand === brand.title);
 };
 
 // getProductBySlug: lib/api.ts đã có sẵn hàm gọi route /products/:slug riêng,
