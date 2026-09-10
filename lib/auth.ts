@@ -79,10 +79,19 @@ export function getToken(): string | null {
 
 export function setToken(token: string) {
   localStorage.setItem(TOKEN_KEY, token);
+  // Báo cho các context khác (vd CartContext) biết vừa có token mới,
+  // vì bản thân localStorage.setItem không tự kích hoạt re-render/refetch
+  // ở tab hiện tại (storage event chỉ bắn ở các tab khác).
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("auth:login"));
+  }
 }
 
 export function clearToken() {
   localStorage.removeItem(TOKEN_KEY);
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("auth:logout"));
+  }
 }
 
 // ---- User info storage (thay cho việc gọi API /me, vì backend chưa có) ----

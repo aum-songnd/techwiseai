@@ -271,34 +271,6 @@ export async function getBrands(): Promise<Brand[]> {
   }
 }
 
-// ---------- CART ----------
-export interface AddToCartPayload {
-  productId: string;
-  quantity: number;
-}
-
-export interface CartItem {
-  productId: string;
-  quantity: number;
-}
-
-export interface CartResponse {
-  id: string;
-  items: CartItem[];
-  total: number;
-}
-
-export async function addToCart(
-  payload: AddToCartPayload
-): Promise<CartResponse> {
-  return fetchEnvelope<CartResponse>("/cart", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-    cache: "no-store",
-  });
-}
-
 export async function getProductById(id: string): Promise<Product> {
   const raw = await fetchEnvelope<ApiProductRaw>(`/products/${id}`, {
     next: { revalidate: 60 },

@@ -23,10 +23,46 @@ const resolveProductImage = (
 };
 
 const CartPage = () => {
-  const { items, updateQuantity, removeFromCart, totalPrice, isLoaded } =
-    useCart();
+  const {
+    items,
+    updateQuantity,
+    removeFromCart,
+    totalAmount,
+    isLoaded,
+    requiresLogin,
+  } = useCart();
 
-  if (isLoaded && items.length === 0) {
+  // Đang tải giỏ hàng từ server
+  if (!isLoaded) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-20 text-center text-gray-400 text-sm">
+        Đang tải giỏ hàng...
+      </div>
+    );
+  }
+
+  // Chưa đăng nhập -> API /cart yêu cầu token (CartAuthRequiredError)
+  if (requiresLogin) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-20 flex flex-col items-center text-center gap-4">
+        <ShoppingBag className="w-14 h-14 text-gray-300" />
+        <h1 className="text-xl font-bold text-shop_dark_green">
+          Vui lòng đăng nhập để xem giỏ hàng
+        </h1>
+        <p className="text-gray-500 text-sm">
+          Đăng nhập để đồng bộ giỏ hàng của bạn trên mọi thiết bị.
+        </p>
+        <Link
+          href="/sign-in"
+          className="mt-2 bg-shop_dark_green/90 rounded-2xl px-6 py-3 text-white text-sm hover:bg-shop_dark_green transition-colors duration-300"
+        >
+          Đăng nhập
+        </Link>
+      </div>
+    );
+  }
+
+  if (items.length === 0) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-20 flex flex-col items-center text-center gap-4">
         <ShoppingBag className="w-14 h-14 text-gray-300" />
@@ -56,8 +92,9 @@ const CartPage = () => {
         {/* Danh sách sản phẩm */}
         <div className="lg:col-span-2 flex flex-col gap-4">
           {items.map((item) => {
-            const image = resolveProductImage(item.images?.[0]);
-            const finalPrice = item.price - (item.discount || 0);
+            const image = resolveProductImage(item.thumbnailUrl);
+            const hasDiscount =
+              !!item.originalPrice && item.originalPrice > item.unitPrice;
 
             return (
               <div
@@ -65,7 +102,7 @@ const CartPage = () => {
                 className="flex items-center gap-4 border border-gray-200 rounded-lg p-3"
               >
                 <Link
-                  href={`/product/${item.id}`}
+                  href={`/product/${item.slug ?? item.productId}`}
                   className="relative w-20 h-20 shrink-0 bg-gray-100 rounded-md overflow-hidden"
                 >
                   {image ? (
@@ -85,21 +122,26 @@ const CartPage = () => {
 
                 <div className="flex-1 min-w-0">
                   <Link
-                    href={`/product/${item.id}`}
+                    href={`/product/${item.slug ?? item.productId}`}
                     className="font-semibold text-shop_dark_green line-clamp-1 hover:underline"
                   >
                     {item.name}
                   </Link>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-sm font-medium text-shop_dark_green/80">
-                      {formatPrice(finalPrice)}
+                      {formatPrice(item.unitPrice)}
                     </span>
-                    {item.discount > 0 && (
+                    {hasDiscount && (
                       <span className="text-xs text-gray-400 line-through">
-                        {formatPrice(item.price)}
+                        {formatPrice(item.originalPrice!)}
                       </span>
                     )}
                   </div>
+                  {!item.available && (
+                    <p className="text-xs text-red-500 mt-1">
+                      Sản phẩm hiện không còn hàng
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex items-center border border-gray-300 rounded-full">
@@ -115,7 +157,7 @@ const CartPage = () => {
                   </span>
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    disabled={item.quantity >= (item.stock ?? Infinity)}
+                    disabled={item.quantity >= item.stockQuantity}
                     aria-label="Tăng số lượng"
                     className="p-1.5 text-gray-500 hover:text-shop_dark_green disabled:opacity-40"
                   >
@@ -124,7 +166,7 @@ const CartPage = () => {
                 </div>
 
                 <p className="w-24 text-right text-sm font-semibold text-shop_dark_green shrink-0">
-                  {formatPrice(finalPrice * item.quantity)}
+                  {formatPrice(item.subtotal)}
                 </p>
 
                 <button
@@ -147,7 +189,7 @@ const CartPage = () => {
             </h2>
             <div className="flex items-center justify-between text-sm mb-2">
               <span className="text-gray-500">Tạm tính</span>
-              <span className="font-medium">{formatPrice(totalPrice)}</span>
+              <span className="font-medium">{formatPrice(totalAmount)}</span>
             </div>
             <div className="flex items-center justify-between text-sm mb-4">
               <span className="text-gray-500">Phí vận chuyển</span>
@@ -156,12 +198,15 @@ const CartPage = () => {
             <div className="border-t border-gray-200 pt-4 flex items-center justify-between mb-4">
               <span className="font-bold text-shop_dark_green">Tổng cộng</span>
               <span className="font-bold text-lg text-shop_dark_green">
-                {formatPrice(totalPrice)}
+                {formatPrice(totalAmount)}
               </span>
             </div>
-            <button className="w-full bg-shop_dark_green/90 rounded-2xl px-6 py-3 text-white text-sm hover:bg-shop_dark_green transition-colors duration-300">
+            <Link
+              href="/checkout"
+              className="block text-center w-full bg-shop_dark_green/90 rounded-2xl px-6 py-3 text-white text-sm hover:bg-shop_dark_green transition-colors duration-300"
+            >
               Tiến hành thanh toán
-            </button>
+            </Link>
             <Link
               href="/"
               className="block text-center text-sm text-gray-500 hover:text-shop_dark_green mt-3"
