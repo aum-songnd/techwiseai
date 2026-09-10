@@ -37,6 +37,21 @@ interface LoginData {
   [key: string]: unknown;
 }
 
+function extractErrorMessage(body: ApiWrapper<unknown> | ApiErrorResponse, fallback = "Yêu cầu thất bại"): string {
+  const errors = (body as ApiWrapper<unknown>).errors;
+
+  if (errors && typeof errors === "object") {
+    const detailMessages = Object.values(errors)
+      .filter((v): v is string => typeof v === "string" && v.length > 0);
+
+    if (detailMessages.length > 0) {
+      return detailMessages.join(" ");
+    }
+  }
+
+  return (body as ApiErrorResponse).message || fallback;
+}
+
 function normalizeLoginResponse(raw: unknown): AuthResponse {
   const wrapper = raw as ApiWrapper<LoginData>;
   const authData = wrapper.data || (raw as LoginData);
@@ -101,7 +116,7 @@ export async function loginRequest(username: string, password: string): Promise<
   const body: ApiWrapper<LoginData> = await res.json().catch(() => ({}));
 
   if (!res.ok || body.success === false) {
-    throw new Error(body.message || "Đăng nhập thất bại");
+    throw new Error(extractErrorMessage(body, "Đăng nhập thất bại"));
   }
 
   return normalizeLoginResponse(body);
@@ -125,8 +140,7 @@ export async function registerRequest(payload: RegisterPayload): Promise<User> {
   const body: ApiWrapper<User> = await res.json().catch(() => ({}));
 
   if (!res.ok || body.success === false) {
-    const err = body as ApiErrorResponse;
-    throw new Error(err.message || "Đăng ký thất bại");
+    throw new Error(extractErrorMessage(body, "Đăng ký thất bại"));
   }
 
   if (!body.data) {
@@ -149,8 +163,7 @@ export async function fetchCurrentUser(token: string): Promise<User> {
   const body: ApiWrapper<User> = await res.json().catch(() => ({}));
 
   if (!res.ok || body.success === false) {
-    const err = body as ApiErrorResponse;
-    throw new Error(err.message || "Không lấy được thông tin người dùng");
+    throw new Error(extractErrorMessage(body, "Không lấy được thông tin người dùng"));
   }
 
   const user = body.data || (body as unknown as User);
