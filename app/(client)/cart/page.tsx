@@ -37,7 +37,7 @@ const CartPage = () => {
           Hãy khám phá thêm sản phẩm và thêm vào giỏ hàng nhé.
         </p>
         <Link
-          href="/shop"
+          href="/"
           className="mt-2 bg-shop_dark_green/90 rounded-2xl px-6 py-3 text-white text-sm hover:bg-shop_dark_green transition-colors duration-300"
         >
           Tiếp tục mua sắm
@@ -163,7 +163,7 @@ const CartPage = () => {
               Tiến hành thanh toán
             </button>
             <Link
-              href="/shop"
+              href="/"
               className="block text-center text-sm text-gray-500 hover:text-shop_dark_green mt-3"
             >
               Tiếp tục mua sắm

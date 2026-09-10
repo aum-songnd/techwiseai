@@ -172,7 +172,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
           </div>
 
           {/* Cam kết dịch vụ - lấp khoảng trống cột phải */}
-          <div className="mt-20 bg-gray-200 border border-gray-300 rounded-lg divide-y divide-gray-300">
+          <div className="mt-3 bg-gray-200 border border-gray-300 rounded-lg divide-y divide-gray-300">
             <div className="flex items-center gap-3 px-4 py-3">
               <Truck className="w-5 h-5 text-shop_dark_green shrink-0" />
               <div className="text-sm">

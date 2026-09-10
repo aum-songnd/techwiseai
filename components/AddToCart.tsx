@@ -10,12 +10,18 @@ interface AddToCartProps {
   product: Product & { categories?: string[] };
 }
 
+const formatPrice = (value: number) =>
+  new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
+    value
+  );
+
 const AddToCart = ({ product }: AddToCartProps) => {
   const { items, addToCart, updateQuantity } = useCart();
 
   const isOutOfStock = product?.stock === 0;
   const itemInCart = items.find((item) => item.id === product.id);
   const quantityInCart = itemInCart?.quantity ?? 0;
+  const unitPrice = product.price - (product.discount || 0);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -36,40 +42,57 @@ const AddToCart = ({ product }: AddToCartProps) => {
     updateQuantity(product.id, quantityInCart + 1);
   };
 
-  // Đã có trong giỏ -> chỉ hiện bộ đếm +/-, số lượng lấy trực tiếp từ CartContext
+  // Đã có trong giỏ -> hiện dòng "Số lượng" (bộ đếm +/-) và dòng "Tạm tính"
   if (quantityInCart > 0) {
     return (
-      <div className="flex items-center border border-gray-300 rounded-full w-fit">
-        <button
-          onClick={decreaseQuantity}
-          aria-label="Giảm số lượng"
-          className="p-2 text-gray-500 hover:text-shop_dark_green"
-        >
-          <Minus size={14} />
-        </button>
-        <span className="w-6 text-center text-sm">{quantityInCart}</span>
-        <button
-          onClick={increaseQuantity}
-          disabled={quantityInCart >= (product.stock ?? Infinity)}
-          aria-label="Tăng số lượng"
-          className="p-2 text-gray-500 hover:text-shop_dark_green disabled:opacity-40"
-        >
-          <Plus size={14} />
-        </button>
+      <div className="flex flex-col justify-center gap-2 w-full h-[72px]">
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-gray-500">Số lượng</p>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={decreaseQuantity}
+              aria-label="Giảm số lượng"
+              className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors"
+            >
+              <Minus size={12} />
+            </button>
+            <span className="text-sm font-medium w-4 text-center">
+              {quantityInCart}
+            </span>
+            <button
+              onClick={increaseQuantity}
+              disabled={quantityInCart >= (product.stock ?? Infinity)}
+              aria-label="Tăng số lượng"
+              className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 disabled:opacity-40 transition-colors"
+            >
+              <Plus size={12} />
+            </button>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between border-t border-gray-200 pt-2">
+          <p className="text-sm font-bold text-gray-800">Tạm tính</p>
+          <p className="text-sm font-bold text-shop_dark_green">
+            {formatPrice(unitPrice * quantityInCart)}
+          </p>
+        </div>
       </div>
     );
   }
 
-  // Chưa có trong giỏ -> chỉ hiện nút thêm vào giỏ
+  // Chưa có trong giỏ -> chỉ hiện nút thêm vào giỏ (giữ nguyên kích thước gốc của nút,
+  // khung bọc ngoài mới là phần giữ cho card không đổi kích thước)
   return (
-    <Button
-      onClick={handleAddToCart}
-      disabled={isOutOfStock}
-      className="bg-shop_dark_green/90 rounded-2xl px-6 py-4 text-white text-sm hover:bg-shop_dark_green hover:text-white transition-colors duration-300"
-    >
-      <ShoppingBag />
-      {isOutOfStock ? "Hết hàng" : "Thêm vào giỏ"}
-    </Button>
+    <div className="w-full h-[72px] flex items-center justify-center">
+      <Button
+        onClick={handleAddToCart}
+        disabled={isOutOfStock}
+        className="w-full bg-shop_dark_green/90 rounded-2xl px-6 py-4 text-white text-sm hover:bg-shop_dark_green hover:text-white transition-colors duration-300"
+      >
+        <ShoppingBag />
+        {isOutOfStock ? "Hết hàng" : "Thêm vào giỏ"}
+      </Button>
+    </div>
   );
 };
 
