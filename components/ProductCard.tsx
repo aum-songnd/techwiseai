@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Heart } from "lucide-react";
 import { Product } from "../app/data/types";
 import { productImages } from "../images";
 import AddToCart from "./AddToCart";
+import { useFavorite } from "@/context/FavoriteContext";
+import { useAuth } from "@/context/AuthContext";
 
 // Ảnh có thể là tên file local (map trong productImages) hoặc URL đầy đủ
 // từ API thật (vd "https://placehold.co/..."). Nếu không có trong map local
@@ -39,7 +42,10 @@ const formatPrice = (value: number) =>
   );
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { isFavorite, toggleFavorite } = useFavorite();
+  const { isSignedIn } = useAuth();
+  const router = useRouter();
+  const isProductFavorite = isFavorite(product.id);
 
   const finalPrice = product.price - (product.discount || 0);
   const hasDiscount = product.discount > 0;
@@ -48,7 +54,19 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault(); // tránh trigger Link khi bấm heart
     e.stopPropagation();
-    setIsFavorite((prev) => !prev);
+
+    // Chưa đăng nhập -> điều hướng sang trang đăng nhập, kèm redirect quay
+    // lại trang hiện tại sau khi đăng nhập xong, giống cách AddToCart.tsx làm.
+    if (!isSignedIn) {
+      const redirectTo =
+        typeof window !== "undefined"
+          ? window.location.pathname + window.location.search
+          : "/";
+      router.push(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
+      return;
+    }
+
+    toggleFavorite(product);
   };
 
   return (
@@ -77,17 +95,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
           <button
             onClick={handleToggleFavorite}
-            aria-label={isFavorite ? "Bỏ yêu thích" : "Thêm vào yêu thích"}
+            aria-label={isProductFavorite ? "Bỏ yêu thích" : "Thêm vào yêu thích"}
             className={`absolute top-2 right-2 z-10 flex items-center justify-center w-7 h-7 rounded-full  transition-colors ${
-              isFavorite
+              isProductFavorite
                 ? "bg-shop_dark_green border-shop_dark_green"
                 : "bg-gray-100 hover:border-gray-300"
             }`}
           >
             <Heart
               size={14}
-              className={isFavorite ? "text-white" : "text-gray-500"}
-              fill="none"
+              className={isProductFavorite ? "text-white" : "text-gray-500"}
+              fill={isProductFavorite ? "currentColor" : "none"}
             />
           </button>
 
