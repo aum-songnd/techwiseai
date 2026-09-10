@@ -114,6 +114,16 @@ export function clearStoredUser() {
   localStorage.removeItem(USER_KEY);
 }
 
+// ---- Kiểm tra quyền admin ----
+// Dùng chung cho Header (hiện/ẩn link "Quản trị") và app/admin/layout.tsx
+// (chặn truy cập). Chưa rõ tên quyền thật backend trả về ("ADMIN" hay
+// "ROLE_ADMIN") nên check cả 2 — nếu sau này xác nhận được tên chính xác,
+// sửa lại 1 chỗ này là áp dụng cho toàn bộ.
+export function isAdminUser(user: User | null = getStoredUser()): boolean {
+  const authorities = user?.authorities ?? [];
+  return authorities.includes("ADMIN") || authorities.includes("ROLE_ADMIN");
+}
+
 // ---- API calls (đi qua Next.js API route nội bộ, không còn CORS) ----
 export async function loginRequest(username: string, password: string): Promise<AuthResponse> {
   const res = await fetch(`/api/auth/login`, {

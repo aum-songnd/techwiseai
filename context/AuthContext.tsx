@@ -57,8 +57,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (username: string, password: string) => {
     const { token, user } = await loginRequest(username, password);
-    setToken(token);
+    // LƯU Ý THỨ TỰ: setStoredUser phải chạy TRƯỚC setToken, vì setToken
+    // bắn ra event "auth:login" ngay lập tức — nếu user chưa kịp lưu vào
+    // localStorage, các listener của event này (vd Header đọc
+    // isAdminUser()) sẽ đọc phải dữ liệu cũ/rỗng và hiển thị sai cho tới
+    // khi F5 lại trang.
     setStoredUser(user);
+    setToken(token);
     setUser(user);
   };
 
