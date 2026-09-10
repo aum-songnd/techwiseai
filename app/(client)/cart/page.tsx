@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
@@ -27,10 +27,12 @@ const CartPage = () => {
     items,
     updateQuantity,
     removeFromCart,
+    clearCart,
     totalAmount,
     isLoaded,
     requiresLogin,
   } = useCart();
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   // Đang tải giỏ hàng từ server
   if (!isLoaded) {
@@ -82,11 +84,27 @@ const CartPage = () => {
     );
   }
 
+  const handleClearCart = () => {
+    setIsConfirmOpen(true);
+  };
+
+  const confirmClearCart = () => {
+    clearCart();
+    setIsConfirmOpen(false);
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-shop_dark_green mb-6">
-        Giỏ hàng
-      </h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold text-shop_dark_green">Giỏ hàng</h1>
+        <button
+          onClick={handleClearCart}
+          className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-500 transition-colors"
+        >
+          <Trash2 size={14} />
+          Xóa tất cả
+        </button>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Danh sách sản phẩm */}
@@ -216,6 +234,40 @@ const CartPage = () => {
           </div>
         </div>
       </div>
+
+      {isConfirmOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
+          onClick={() => setIsConfirmOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-lg font-bold text-shop_dark_green mb-2">
+              Xóa toàn bộ giỏ hàng?
+            </h2>
+            <p className="text-sm text-gray-500 mb-6">
+              Tất cả sản phẩm trong giỏ hàng sẽ bị xóa. Hành động này không
+              thể hoàn tác.
+            </p>
+            <div className="flex items-center justify-end gap-3">
+              <button
+                onClick={() => setIsConfirmOpen(false)}
+                className="px-4 py-2 text-sm rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
+              >
+                Hủy
+              </button>
+              <button
+                onClick={confirmClearCart}
+                className="px-4 py-2 text-sm rounded-xl bg-red-500 text-white hover:bg-red-600 transition-colors"
+              >
+                Xóa tất cả
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

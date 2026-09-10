@@ -262,34 +262,58 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
-  const removeFromCart = useCallback(async (itemId: string) => {
-    // Huỷ mọi debounce update số lượng đang chờ cho item này, tránh nó
-    // commit lại sau khi item đã bị xoá.
-    const existingTimeout = updateTimeoutsRef.current.get(itemId);
-    if (existingTimeout) clearTimeout(existingTimeout);
-    updateTimeoutsRef.current.delete(itemId);
-    pendingQuantitiesRef.current.delete(itemId);
+  const removeFromCart = useCallback(
+    async (itemId: string) => {
+      // Huỷ mọi debounce update số lượng đang chờ cho item này, tránh nó
+      // commit lại sau khi item đã bị xoá.
+      const existingTimeout = updateTimeoutsRef.current.get(itemId);
+      if (existingTimeout) clearTimeout(existingTimeout);
+      updateTimeoutsRef.current.delete(itemId);
+      pendingQuantitiesRef.current.delete(itemId);
 
-    try {
-      await removeCartItem(itemId);
-      // Endpoint DELETE chưa xác nhận trả về cart mới nhất -> gọi lại GET
-      // để đảm bảo state khớp thực tế trên server.
-      const data = await getCart();
-      setCart(data);
-    } catch (err) {
-      if (err instanceof CartAuthRequiredError) {
-        setRequiresLogin(true);
-      } else {
-        console.error("Lỗi xóa sản phẩm khỏi giỏ:", err);
+      // Optimistic: xoá khỏi UI ngay lập tức, không đợi network. Trước
+      // đây phải await xong DELETE rồi await thêm GET nữa mới setCart,
+      // nghĩa là UI đứng im chờ 2 round-trip liên tiếp -> cảm giác chậm.
+      setCart((prev) => {
+        const items = prev.items.filter((item) => item.id !== itemId);
+        return {
+          ...prev,
+          items,
+          totalItems: items.length,
+          totalQuantity: items.reduce((sum, i) => sum + i.quantity, 0),
+          totalAmount: items.reduce((sum, i) => sum + i.subtotal, 0),
+        };
+      });
+
+      try {
+        await removeCartItem(itemId);
+        // Đồng bộ âm thầm với server sau đó để chắc chắn khớp dữ liệu
+        // thật (vd tổng tiền, item khác có thay đổi) — không chặn UI vì
+        // item đã biến mất ngay từ bước optimistic ở trên.
+        const data = await getCart();
+        setCart(data);
+      } catch (err) {
+        if (err instanceof CartAuthRequiredError) {
+          setRequiresLogin(true);
+        } else {
+          console.error("Lỗi xóa sản phẩm khỏi giỏ:", err);
+          // Request thất bại -> khôi phục lại đúng trạng thái thật từ
+          // server (item vừa xoá lạc quan có thể cần được đưa trở lại).
+          fetchCartFromServer();
+        }
       }
-    }
-  }, []);
+    },
+    [fetchCartFromServer]
+  );
 
   const clearCart = useCallback(async () => {
     // Huỷ toàn bộ debounce đang chờ vì cả giỏ sắp bị xoá.
     updateTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
     updateTimeoutsRef.current.clear();
     pendingQuantitiesRef.current.clear();
+
+    // Optimistic: trống giỏ hàng trên UI ngay, không đợi network.
+    setCart((prev) => ({ ...EMPTY_CART, cartId: prev.cartId }));
 
     try {
       await clearCartApi();
@@ -300,9 +324,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         setRequiresLogin(true);
       } else {
         console.error("Lỗi xóa toàn bộ giỏ hàng:", err);
+        // Request thất bại -> khôi phục lại đúng trạng thái thật từ server.
+        fetchCartFromServer();
       }
     }
-  }, []);
+  }, [fetchCartFromServer]);
 
   const getItemByProductId = useCallback(
     (productId: string) => cart.items.find((item) => item.productId === productId),

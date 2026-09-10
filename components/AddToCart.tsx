@@ -17,18 +17,19 @@ const formatPrice = (value: number) =>
   );
 
 const AddToCart = ({ product }: AddToCartProps) => {
-  const { getItemByProductId, addToCart, updateQuantity, requiresLogin } =
+  const { getItemByProductId, addToCart, updateQuantity, requiresLogin, isAddingToCart } =
     useCart();
   const router = useRouter();
 
   const isOutOfStock = product?.stock === 0;
   const itemInCart = getItemByProductId(product.id);
   const quantityInCart = itemInCart?.quantity ?? 0;
+  const isAdding = isAddingToCart(product.id);
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isOutOfStock) return;
+    if (isOutOfStock || isAdding) return;
 
     // Chưa đăng nhập -> API /cart sẽ luôn thất bại, điều hướng sang
     // trang đăng nhập ngay thay vì gọi API rồi báo lỗi.
@@ -104,11 +105,11 @@ const AddToCart = ({ product }: AddToCartProps) => {
     <div className="w-full h-[72px] flex items-center justify-center">
       <Button
         onClick={handleAddToCart}
-        disabled={isOutOfStock}
-        className="w-full bg-shop_dark_green/90 rounded-2xl px-6 py-4 text-white text-sm hover:bg-shop_dark_green hover:text-white transition-colors duration-300"
+        disabled={isOutOfStock || isAdding}
+        className="w-full bg-shop_dark_green/90 rounded-2xl px-6 py-4 text-white text-sm hover:bg-shop_dark_green hover:text-white transition-colors duration-300 disabled:opacity-70"
       >
         <ShoppingBag />
-        {isOutOfStock ? "Hết hàng" : "Thêm vào giỏ"}
+        {isOutOfStock ? "Hết hàng" : isAdding ? "Đang thêm..." : "Thêm vào giỏ"}
       </Button>
     </div>
   );
