@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 
-const SignInPage = () => {
+const SignInForm = () => {
   const { login } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -92,6 +92,14 @@ const SignInPage = () => {
         </p>
       </div>
     </div>
+  );
+};
+
+const SignInPage = () => {
+  return (
+    <Suspense fallback={null}>
+      <SignInForm />
+    </Suspense>
   );
 };
 
