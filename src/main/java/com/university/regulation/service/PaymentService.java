@@ -3,6 +3,7 @@ package com.university.regulation.service;
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.university.regulation.dto.payment.PaymentRequest;
 import com.university.regulation.dto.payment.PaymentResponse;
+import com.university.regulation.dto.payment.VnpayIpnResponse;
 import com.university.regulation.models.enums.OrderStatus;
 import com.university.regulation.models.enums.PaymentMethod;
 import com.university.regulation.models.enums.PaymentStatus;
@@ -200,7 +202,7 @@ public class PaymentService {
         return order;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public PaymentResponse processVnpayReturn(
             Map<String, String> params) {
         if (!vnpayService.verifySignature(params)) {
@@ -226,22 +228,92 @@ public class PaymentService {
         if (payment.getPaymentMethod() != PaymentMethod.VNPAY) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "Giao dịch không sử dụng phương thức VNPAY");
+                    "Giao dịch không sử dụng VNPAY");
         }
 
-        validateVnpayAmount(payment, params.get("vnp_Amount"));
+        if (!isValidVnpayAmount(
+                payment,
+                params.get("vnp_Amount"))) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Số tiền thanh toán không hợp lệ");
+        }
 
-        // Không cập nhật ngược giao dịch đã thanh toán.
-        if (payment.getStatus() == PaymentStatus.PAID) {
-            return toResponse(payment);
+        // Không cập nhật database tại Return URL.
+        return toResponse(payment);
+    }
+
+    @Transactional
+    public VnpayIpnResponse processVnpayIpn(
+            Map<String, String> params) {
+        // 1. Kiểm tra request
+        if (params == null || params.isEmpty()) {
+            return new VnpayIpnResponse(
+                    "99",
+                    "Invalid request");
+        }
+
+        // 2. Kiểm tra chữ ký
+        if (!vnpayService.verifySignature(params)) {
+            return new VnpayIpnResponse(
+                    "97",
+                    "Invalid signature");
+        }
+
+        String transactionCode = params.get("vnp_TxnRef");
+
+        if (transactionCode == null
+                || transactionCode.isBlank()) {
+            return new VnpayIpnResponse(
+                    "01",
+                    "Order not found");
+        }
+
+        // 3. Tìm giao dịch
+        Optional<Payment> paymentOptional = paymentRepository.findByTransactionCode(
+                transactionCode);
+
+        if (paymentOptional.isEmpty()) {
+            return new VnpayIpnResponse(
+                    "01",
+                    "Order not found");
+        }
+
+        Payment payment = paymentOptional.get();
+
+        if (payment.getPaymentMethod() != PaymentMethod.VNPAY) {
+            return new VnpayIpnResponse(
+                    "01",
+                    "Order not found");
+        }
+
+        // 4. Kiểm tra số tiền
+        if (!isValidVnpayAmount(
+                payment,
+                params.get("vnp_Amount"))) {
+            return new VnpayIpnResponse(
+                    "04",
+                    "Invalid amount");
+        }
+
+        // 5. Chống xử lý callback nhiều lần
+        if (payment.getStatus() != PaymentStatus.PENDING) {
+            return new VnpayIpnResponse(
+                    "02",
+                    "Order already confirmed");
         }
 
         String responseCode = params.get("vnp_ResponseCode");
+
         String transactionStatus = params.get("vnp_TransactionStatus");
+
         String providerTransactionId = params.get("vnp_TransactionNo");
 
         payment.setProviderTransactionId(
                 emptyToNull(providerTransactionId));
+
+        // URL cũ không cần sử dụng sau khi giao dịch hoàn tất.
+        payment.setPaymentUrl(null);
 
         if ("00".equals(responseCode)
                 && "00".equals(transactionStatus)) {
@@ -250,32 +322,27 @@ public class PaymentService {
             payment.setPaidAt(OffsetDateTime.now());
             payment.setFailureReason(null);
 
-        } else if ("24".equals(responseCode)) {
-
-            payment.setStatus(PaymentStatus.CANCELLED);
-            payment.setFailureReason(
-                    "Khách hàng hủy giao dịch trên VNPAY");
-
         } else {
 
             payment.setStatus(PaymentStatus.FAILED);
+            payment.setPaidAt(null);
             payment.setFailureReason(
                     "Thanh toán VNPAY thất bại, mã phản hồi: "
                             + responseCode);
         }
 
-        Payment savedPayment = paymentRepository.save(payment);
+        paymentRepository.save(payment);
 
-        return toResponse(savedPayment);
+        return new VnpayIpnResponse(
+                "00",
+                "Confirm Success");
     }
 
-    private void validateVnpayAmount(
+    private boolean isValidVnpayAmount(
             Payment payment,
             String vnpAmount) {
         if (vnpAmount == null || vnpAmount.isBlank()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Thiếu số tiền giao dịch VNPAY");
+            return false;
         }
 
         try {
@@ -285,15 +352,11 @@ public class PaymentService {
                     .movePointRight(2)
                     .toBigIntegerExact();
 
-            if (!expectedAmount.equals(receivedAmount)) {
-                throw new ResponseStatusException(
-                        HttpStatus.BAD_REQUEST,
-                        "Số tiền thanh toán không hợp lệ");
-            }
-        } catch (NumberFormatException exception) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Số tiền VNPAY không đúng định dạng");
+            return expectedAmount.equals(receivedAmount);
+
+        } catch (NumberFormatException
+                | ArithmeticException exception) {
+            return false;
         }
     }
 

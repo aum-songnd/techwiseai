@@ -3,6 +3,7 @@ package com.university.regulation.controller;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.university.regulation.common.response.ApiResponse;
 import com.university.regulation.dto.payment.PaymentRequest;
 import com.university.regulation.dto.payment.PaymentResponse;
+import com.university.regulation.dto.payment.VnpayIpnResponse;
 import com.university.regulation.service.PaymentService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -97,5 +99,23 @@ public class PaymentController {
         };
 
         return ApiResponse.success(message, response, request.getRequestURI());
+    }
+
+    @GetMapping("/vnpay/ipn")
+    public ResponseEntity<VnpayIpnResponse> handleVnpayIpn(
+            @RequestParam Map<String, String> params) {
+        try {
+            VnpayIpnResponse response = paymentService.processVnpayIpn(params);
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception exception) {
+
+            // VNPAY đọc kết quả trong RspCode.
+            return ResponseEntity.ok(
+                    new VnpayIpnResponse(
+                            "99",
+                            "Unknown error"));
+        }
     }
 }
