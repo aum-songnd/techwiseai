@@ -4,8 +4,7 @@ import "../globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Container from "@/components/Container";
-import { ClerkProvider } from "@clerk/nextjs";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,20 +27,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-     <ClerkProvider>
-      <html lang="en" className="font-poppins">
+    <html lang="en" className="font-poppins">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TooltipProvider>
-         <div className="flex flex-col min-h-screen">
-           <Header/>
-          <main className="flex-1">{children}</main>
-          <Footer/>
-         </div>
+        <AuthProvider>
+          <TooltipProvider>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
           </TooltipProvider>
+        </AuthProvider>
       </body>
     </html>
-     </ClerkProvider>
   );
 }

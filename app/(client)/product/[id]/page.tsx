@@ -38,14 +38,16 @@ export async function generateStaticParams() {
 }
 
 interface ProductPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 const ProductPage = async ({ params }: ProductPageProps) => {
+  const { id } = await params;
+
   let product: ApiProduct;
 
   try {
-    product = (await getProductById(params.id)) as ApiProduct;
+    product = (await getProductById(id)) as ApiProduct;
   } catch (err) {
     console.error("Lỗi getProductById:", err);
     notFound();

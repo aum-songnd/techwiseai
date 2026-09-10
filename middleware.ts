@@ -1,14 +1,9 @@
-import { clerkMiddleware } from '@clerk/nextjs/server';
-
-export default clerkMiddleware();
+// Middleware của Clerk đã được gỡ bỏ.
+// Vì JWT lưu ở localStorage (chỉ truy cập được từ client), middleware
+// (chạy ở edge/server) không thể đọc token để bảo vệ route.
+// Việc bảo vệ route được xử lý ở client qua component <RequireAuth>
+// (xem components/RequireAuth.tsx).
 
 export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for Clerk's auto-proxy path
-    '/__clerk/:path*',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
-  ],
+  matcher: [],
 };
