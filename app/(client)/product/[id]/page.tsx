@@ -5,6 +5,7 @@ import ProductGallery from "@/components/ProductGallery";
 import AddToCart from "@/components/AddToCart";
 import { getProductById, getProducts } from "@/lib/api";
 import type { Product } from "@/app/data/types";
+import { Truck, RotateCcw, ShieldCheck } from "lucide-react";
 
 export const revalidate = 60;
 
@@ -27,6 +28,16 @@ const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
     value
   );
+
+// Mô tả từ API là 1 chuỗi thô, các ý cách nhau bởi dấu "•".
+// Tách thành mảng câu để render thành list thay vì 1 đoạn dính chữ.
+const parseDescription = (raw?: string) => {
+  if (!raw) return [];
+  return raw
+    .split("•")
+    .map((s) => s.trim())
+    .filter(Boolean);
+};
 
 export async function generateStaticParams() {
   try {
@@ -55,6 +66,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   const categoryNames = product!.categories ?? [];
   const brandTitle = product!.brand;
+  const descriptionItems = parseDescription(product!.description);
 
   // Related products: cùng category đầu tiên, loại trừ chính nó, tối đa 4 sản phẩm
   let relatedProducts: ApiProduct[] = [];
@@ -155,17 +167,60 @@ const ProductPage = async ({ params }: ProductPageProps) => {
             </p>
           </div>
 
-          {product!.description && (
-            <p className="text-sm text-gray-600 leading-relaxed">
-              {product!.description}
-            </p>
-          )}
-
           <div className="mt-2">
             <AddToCart product={product!} />
           </div>
+
+          {/* Cam kết dịch vụ - lấp khoảng trống cột phải */}
+          <div className="mt-20 bg-gray-200 border border-gray-300 rounded-lg divide-y divide-gray-300">
+            <div className="flex items-center gap-3 px-4 py-3">
+              <Truck className="w-5 h-5 text-shop_dark_green shrink-0" />
+              <div className="text-sm">
+                <p className="font-medium text-gray-800">
+                  Miễn phí vận chuyển
+                </p>
+                <p className="text-gray-500">
+                  Cho đơn hàng từ 500.000đ trong nội thành
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-3">
+              <RotateCcw className="w-5 h-5 text-shop_dark_green shrink-0" />
+              <div className="text-sm">
+                <p className="font-medium text-gray-800">
+                  Đổi trả trong 7 ngày
+                </p>
+                <p className="text-gray-500">
+                  Miễn phí đổi trả nếu sản phẩm lỗi do nhà sản xuất
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-3">
+              <ShieldCheck className="w-5 h-5 text-shop_dark_green shrink-0" />
+              <div className="text-sm">
+                <p className="font-medium text-gray-800">
+                  Bảo hành chính hãng
+                </p>
+                <p className="text-gray-500">12 tháng tại trung tâm ủy quyền</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Mô tả sản phẩm - tách riêng thành section full-width, dễ đọc hơn */}
+      {descriptionItems.length > 0 && (
+        <section className="mt-10 border-t border-gray-200 pt-8">
+          <h2 className="text-lg font-bold text-shop_dark_green mb-4">
+            Mô tả sản phẩm
+          </h2>
+          <ul className="list-disc pl-5 space-y-2 text-sm text-gray-600 leading-relaxed max-w-3xl">
+            {descriptionItems.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {relatedProducts.length > 0 && (
         <section className="mt-14">

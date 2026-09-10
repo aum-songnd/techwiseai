@@ -26,16 +26,14 @@ const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
     <div className="flex flex-col gap-3">
       <div className="relative aspect-square w-full bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
         {activeImage ? (
-          <div className="relative w-[80%] h-[80%]">
-            <Image
-              src={resolveImage(activeImage)}
-              alt={productName}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 90vw, 40vw"
-              priority
-            />
-          </div>
+          <Image
+            src={resolveImage(activeImage)}
+            alt={productName}
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 90vw, 40vw"
+            priority
+          />
         ) : (
           <span className="text-xs text-gray-400">Không có ảnh</span>
         )}

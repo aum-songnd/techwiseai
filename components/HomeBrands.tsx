@@ -87,7 +87,7 @@ const HomeBrands = async () => {
   if (brands.length === 0) return null;
 
   return (
-    <div className="bg-gray-100 border-2 border-shop-light-green my-10 md:my-10 p-5 lg:p-7 rounded-md">
+    <div className="bg-gray-100  border-shop-light-green my-10 md:my-10 p-5 lg:p-7 rounded-md">
       <Title className=" border-gray-200 text-[25px]">
         Thương hiệu nổi bật
       </Title>
