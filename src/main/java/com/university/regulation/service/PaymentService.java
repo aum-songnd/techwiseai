@@ -1,6 +1,8 @@
 package com.university.regulation.service;
 
+import java.math.BigInteger;
 import java.time.OffsetDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ public class PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final OrderRepository orderRepository;
+    private final VnpayService vnpayService;
 
     /**
      * Tạo thanh toán cho đơn hàng của khách hàng.
@@ -33,19 +36,20 @@ public class PaymentService {
     @Transactional
     public PaymentResponse createPayment(
             PaymentRequest request,
-            String username) {
+            String username,
+            String clientIp) {
         Order order = getOwnedOrder(request.orderId(), username);
-
-        if (order.getStatus() == OrderStatus.CANCELLED) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Không thể thanh toán đơn hàng đã hủy");
-        }
 
         if (paymentRepository.existsByOrderId(order.getId())) {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "Đơn hàng đã có thông tin thanh toán");
+        }
+
+        if (order.getStatus() == OrderStatus.CANCELLED) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Không thể thanh toán đơn hàng đã hủy");
         }
 
         Payment payment = new Payment();
@@ -57,13 +61,16 @@ public class PaymentService {
         payment.setCurrency("VND");
         payment.setTransactionCode(generateTransactionCode());
 
-        /*
-         * COD không có đường dẫn thanh toán.
-         * VNPAY sẽ được bổ sung paymentUrl ở bước tích hợp VNPAY.
-         */
-        payment.setPaymentUrl(null);
-
         Payment savedPayment = paymentRepository.save(payment);
+
+        if (request.paymentMethod() == PaymentMethod.VNPAY) {
+            String paymentUrl = vnpayService.createPaymentUrl(
+                    savedPayment,
+                    clientIp);
+
+            savedPayment.setPaymentUrl(paymentUrl);
+            savedPayment = paymentRepository.save(savedPayment);
+        }
 
         return toResponse(savedPayment);
     }
@@ -191,5 +198,108 @@ public class PaymentService {
         }
 
         return order;
+    }
+
+    @Transactional
+    public PaymentResponse processVnpayReturn(
+            Map<String, String> params) {
+        if (!vnpayService.verifySignature(params)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Chữ ký VNPAY không hợp lệ");
+        }
+
+        String transactionCode = params.get("vnp_TxnRef");
+
+        if (transactionCode == null || transactionCode.isBlank()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Thiếu mã giao dịch VNPAY");
+        }
+
+        Payment payment = paymentRepository
+                .findByTransactionCode(transactionCode)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Không tìm thấy giao dịch thanh toán"));
+
+        if (payment.getPaymentMethod() != PaymentMethod.VNPAY) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Giao dịch không sử dụng phương thức VNPAY");
+        }
+
+        validateVnpayAmount(payment, params.get("vnp_Amount"));
+
+        // Không cập nhật ngược giao dịch đã thanh toán.
+        if (payment.getStatus() == PaymentStatus.PAID) {
+            return toResponse(payment);
+        }
+
+        String responseCode = params.get("vnp_ResponseCode");
+        String transactionStatus = params.get("vnp_TransactionStatus");
+        String providerTransactionId = params.get("vnp_TransactionNo");
+
+        payment.setProviderTransactionId(
+                emptyToNull(providerTransactionId));
+
+        if ("00".equals(responseCode)
+                && "00".equals(transactionStatus)) {
+
+            payment.setStatus(PaymentStatus.PAID);
+            payment.setPaidAt(OffsetDateTime.now());
+            payment.setFailureReason(null);
+
+        } else if ("24".equals(responseCode)) {
+
+            payment.setStatus(PaymentStatus.CANCELLED);
+            payment.setFailureReason(
+                    "Khách hàng hủy giao dịch trên VNPAY");
+
+        } else {
+
+            payment.setStatus(PaymentStatus.FAILED);
+            payment.setFailureReason(
+                    "Thanh toán VNPAY thất bại, mã phản hồi: "
+                            + responseCode);
+        }
+
+        Payment savedPayment = paymentRepository.save(payment);
+
+        return toResponse(savedPayment);
+    }
+
+    private void validateVnpayAmount(
+            Payment payment,
+            String vnpAmount) {
+        if (vnpAmount == null || vnpAmount.isBlank()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Thiếu số tiền giao dịch VNPAY");
+        }
+
+        try {
+            BigInteger receivedAmount = new BigInteger(vnpAmount);
+
+            BigInteger expectedAmount = payment.getAmount()
+                    .movePointRight(2)
+                    .toBigIntegerExact();
+
+            if (!expectedAmount.equals(receivedAmount)) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Số tiền thanh toán không hợp lệ");
+            }
+        } catch (NumberFormatException exception) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Số tiền VNPAY không đúng định dạng");
+        }
+    }
+
+    private String emptyToNull(String value) {
+        return value == null || value.isBlank()
+                ? null
+                : value;
     }
 }

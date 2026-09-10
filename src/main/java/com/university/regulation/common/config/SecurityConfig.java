@@ -55,7 +55,9 @@ public class SecurityConfig {
                                 "/api/v1/categories",
                                 "/api/v1/categories/**",
                                 "/api/v1/products",
-                                "/api/v1/products/**"
+                                "/api/v1/products/**",
+                                "/api/v1/payments/vnpay/return",
+                                "/api/v1/payments/vnpay/ipn"
                         )
                         .permitAll()
 

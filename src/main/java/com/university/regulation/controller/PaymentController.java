@@ -1,5 +1,6 @@
 package com.university.regulation.controller;
 
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.security.core.Authentication;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.university.regulation.common.response.ApiResponse;
@@ -33,19 +35,18 @@ public class PaymentController {
     public ApiResponse<PaymentResponse> createPayment(
             @Valid @RequestBody PaymentRequest request,
             Authentication authentication,
-            HttpServletRequest httpRequest
-    ) {
-        PaymentResponse payment =
-                paymentService.createPayment(
-                        request,
-                        authentication.getName()
-                );
+            HttpServletRequest httpRequest) {
+        String clientIp = getClientIp(httpRequest);
+
+        PaymentResponse response = paymentService.createPayment(
+                request,
+                authentication.getName(),
+                clientIp);
 
         return ApiResponse.success(
-                "Tạo thanh toán thành công",
-                payment,
-                httpRequest.getRequestURI()
-        );
+                "Tạo thông tin thanh toán thành công",
+                response,
+                httpRequest.getRequestURI());
     }
 
     /**
@@ -55,18 +56,46 @@ public class PaymentController {
     public ApiResponse<PaymentResponse> getMyPayment(
             @PathVariable UUID orderId,
             Authentication authentication,
-            HttpServletRequest httpRequest
-    ) {
-        PaymentResponse payment =
-                paymentService.getMyPaymentByOrderId(
-                        orderId,
-                        authentication.getName()
-                );
+            HttpServletRequest httpRequest) {
+        PaymentResponse payment = paymentService.getMyPaymentByOrderId(
+                orderId,
+                authentication.getName());
 
         return ApiResponse.success(
                 "Lấy thông tin thanh toán thành công",
                 payment,
-                httpRequest.getRequestURI()
-        );
+                httpRequest.getRequestURI());
+    }
+
+    private String getClientIp(HttpServletRequest request) {
+        String forwardedFor = request.getHeader("X-Forwarded-For");
+
+        if (forwardedFor != null && !forwardedFor.isBlank()) {
+            return forwardedFor.split(",")[0].trim();
+        }
+
+        String realIp = request.getHeader("X-Real-IP");
+
+        if (realIp != null && !realIp.isBlank()) {
+            return realIp.trim();
+        }
+
+        return request.getRemoteAddr();
+    }
+
+    @GetMapping("/vnpay/return")
+    public ApiResponse<PaymentResponse> handleVnpayReturn(
+            @RequestParam Map<String, String> params,
+            HttpServletRequest request) {
+        PaymentResponse response = paymentService.processVnpayReturn(params);
+
+        String message = switch (response.status()) {
+            case PAID -> "Thanh toán VNPAY thành công";
+            case CANCELLED -> "Giao dịch VNPAY đã bị hủy";
+            case FAILED -> "Thanh toán VNPAY thất bại";
+            default -> "Đang xử lý thanh toán VNPAY";
+        };
+
+        return ApiResponse.success(message, response, request.getRequestURI());
     }
 }
