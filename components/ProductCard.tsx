@@ -52,7 +52,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <div className="group flex flex-col rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow">
+    <div className="group flex h-full flex-col rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow">
       <Link href={`/product/${product.id}`} className="flex flex-col">
         <div className="relative aspect-square w-full bg-gray-100 overflow-hidden flex items-center justify-center">
           {productImage ? (
@@ -99,14 +99,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </Link>
 
-      <div className="flex flex-col gap-1 p-3">
-        {product.categories?.[0] && (
-          <span className="text-[12px] uppercase tracking-wide text-gray-400">
-            {product.categories[0]}
-          </span>
-        )}
+      <div className="flex flex-1 flex-col gap-1 p-3">
+        <span className="text-[12px] uppercase tracking-wide text-gray-400 min-h-[14px]">
+          {product.categories?.[0] ?? "\u00A0"}
+        </span>
 
-        <h3 className="text-[17px] font-bold text-shop_dark_green line-clamp-2">
+        <h3 className="text-[17px] leading-snug font-bold text-shop_dark_green line-clamp-2 min-h-[2.9em]">
           {product.name}
         </h3>
 
@@ -119,7 +117,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 mt-1">
+        <div className="flex items-center gap-2 mt-1 min-h-[20px]">
           <span className="text-sm font-semibold text-shop_dark_green/80">
             {formatPrice(finalPrice)}
           </span>
@@ -129,6 +127,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </span>
           )}
         </div>
+
+        <div className="flex-1" />
+
         <AddToCart product={product} />
       </div>
     </div>

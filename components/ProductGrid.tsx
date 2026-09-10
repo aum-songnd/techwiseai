@@ -176,6 +176,7 @@ const ProductGrid = () => {
                   initial={{ opacity: 0.2 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  className="h-full"
                 >
                   <ProductCard key={product?.id} product={product} />
                 </motion.div>

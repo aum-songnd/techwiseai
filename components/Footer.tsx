@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Container from './Container';
 import FooterTop from './FooterTop';
 import Logo from './Logo';
@@ -59,9 +60,18 @@ const Footer = () => {
       </div>
       </div>
       <div className='py-6 border-t text-center text-sm text-gray-600'>
-        <div>
-        © {new Date().getFullYear()} <Logo className='text-sm'/>
-        . All rights reserved.
+        <div className='flex flex-col items-center gap-2'>
+          <div>
+          © {new Date().getFullYear()} <Logo className='text-sm'/>
+          . All rights reserved.
+          </div>
+          <Image
+            src="/capybara.gif"
+            alt="Capybara"
+            width={80}
+            height={80}
+            unoptimized
+          />
         </div>
       </div>
     </Container>
