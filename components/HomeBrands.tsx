@@ -87,55 +87,67 @@ const HomeBrands = async () => {
   if (brands.length === 0) return null;
 
   return (
-    <div className="bg-gray-100  border-shop-light-green my-10 md:my-10 p-5 lg:p-7 rounded-md">
-      <Title className=" border-gray-200 text-[25px]">
-        Thương hiệu nổi bật
-      </Title>
+    <div className="relative overflow-hidden rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-white via-emerald-50/40 to-emerald-100/70 my-10 md:my-10 p-5 lg:p-7">
+      {/* Quầng sáng trang trí duy nhất, đặt lệch góc trái để đồng bộ với
+          HomeCategories mà không lặp lại y hệt vị trí. */}
+      <div className="pointer-events-none absolute -top-16 -left-16 h-48 w-48 rounded-full bg-shop-light-green/25 blur-3xl" />
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 mt-5 pb-10">
-        {brands.map((brand) => {
+      <div className="relative border-b border-emerald-200 pb-3">
+        <Title className="text-[25px]">Thương hiệu nổi bật</Title>
+        <p className="mt-1 text-sm text-gray-400">
+          Những thương hiệu được khách hàng tin dùng
+        </p>
+      </div>
+
+      <div className="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 mt-5 pb-10">
+        {brands.map((brand, index) => {
           const imageSrc = resolveImage(brand.imageUrl);
 
           return (
-            <div
+            <Link
               key={brand.key}
-              className="group flex flex-col rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
+              href={`/shop?brand=${encodeURIComponent(brand.label)}`}
+              className="group flex flex-col overflow-hidden rounded-xl border-2 border-emerald-200 bg-white opacity-0 animate-[brand-in_0.5s_ease-out_forwards] transition-all duration-300 hover:-translate-y-1 hover:border-shop-light-green hover:shadow-lg"
+              style={{ animationDelay: `${index * 50}ms` }}
             >
-              <Link href={`/shop?brand=${encodeURIComponent(brand.label)}`}>
-                <div className="relative w-full aspect-square bg-gray-50 overflow-hidden">
-                  {imageSrc ? (
-                    <Image
-                      src={imageSrc}
-                      alt={brand.label}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-xs text-gray-400">
-                      Không có ảnh
-                    </div>
-                  )}
-                </div>
-                <p className="text-center text-xs font-medium text-darkColor py-1.5 truncate px-1">
-                  {brand.label}
-                </p>
-              </Link>
-            </div>
+              <div className="relative w-full aspect-square overflow-hidden bg-gradient-to-br from-emerald-50 to-emerald-100">
+                {imageSrc ? (
+                  <Image
+                    src={imageSrc}
+                    alt={brand.label}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full text-xs text-gray-400">
+                    Không có ảnh
+                  </div>
+                )}
+              </div>
+              <p className="text-center text-xs font-semibold text-shop_dark_green py-2 truncate px-1 border-t-2 border-emerald-100">
+                {brand.label}
+              </p>
+            </Link>
           );
         })}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-6 rounded-lg border-gray-200  px-4 py-4 bg-white" >
+      <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 mb-2 rounded-xl border border-emerald-100/70 bg-white p-4">
         {features.map((feature) => {
           const Icon = feature.icon;
           return (
-            <div key={feature.title} className="group flex items-center gap-3 ">
-              <Icon
-                size={50}
-                strokeWidth={1.5}
-                className="shrink-0 text-gray-700 group-hover:text-orange-500 transition-colors duration-300"
-              />
+            <div
+              key={feature.title}
+              className="group flex items-center gap-3 rounded-lg p-2 transition-colors duration-300 hover:bg-emerald-50/60"
+            >
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-emerald-50 transition-colors duration-300 group-hover:bg-shop-light-green/15">
+                <Icon
+                  size={26}
+                  strokeWidth={1.75}
+                  className="text-shop_dark_green transition-colors duration-300 group-hover:text-shop-light-green"
+                />
+              </div>
               <div className="flex flex-col">
                 <span className="text-sm font-semibold text-darkColor">
                   {feature.title}
@@ -148,6 +160,25 @@ const HomeBrands = async () => {
           );
         })}
       </div>
+
+      <style>{`
+        @keyframes brand-in {
+          from {
+            opacity: 0;
+            transform: translateY(6px) scale(0.96);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-\\[brand-in_0\\.5s_ease-out_forwards\\] {
+            animation: none;
+            opacity: 1;
+          }
+        }
+      `}</style>
     </div>
   );
 };
