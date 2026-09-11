@@ -8,11 +8,38 @@ import HomeTabBar from "./HomeTabBar";
 import { getProducts, getCategories } from "../lib/api";
 import { Product } from "../app/data/types";
 
-// slugs: 1 tab có thể gộp nhiều category (vd tab "Khác" gộp Tai nghe,
-// Máy ảnh, Linh kiện, Phụ kiện) nên dùng mảng thay vì 1 slug đơn.
+
 type Tab = { key: string; title: string; slugs: string[] };
 
 const PRODUCTS_LIMIT = 20;
+
+const SKELETON_COUNT = 10;
+
+const SLOW_NETWORK_HINT_MS = 4000;
+
+const MAX_IMAGE_WAIT_MS = 8000;
+
+const getPrimaryImage = (product: Product): string | undefined => {
+  const p = product as unknown as { images?: string[]; image?: string };
+  return p.images?.[0] ?? p.image;
+};
+
+const preloadImage = (src: string) =>
+  new Promise<void>((resolve) => {
+    const img = new window.Image();
+    img.onload = () => resolve();
+    img.onerror = () => resolve();
+    img.src = src;
+  });
+
+const waitForImages = (srcs: string[]) => {
+  if (srcs.length === 0) return Promise.resolve();
+  const loadAll = Promise.all(srcs.map(preloadImage));
+  const timeout = new Promise<void>((resolve) =>
+    setTimeout(resolve, MAX_IMAGE_WAIT_MS)
+  );
+  return Promise.race([loadAll, timeout]);
+};
 
 // Các danh mục đã có mặt ở khối "Danh mục phổ biến" (HomeCategories) nên
 // không cần tách tab riêng ở đây nữa — gộp chung vào 1 tab "Khác".
@@ -30,6 +57,8 @@ const ProductGrid = () => {
 
   const [loadingProducts, setLoadingProducts] = useState(false);
   const [productsError, setProductsError] = useState<string | null>(null);
+
+  const [isSlowNetwork, setIsSlowNetwork] = useState(false);
 
   // Bước 1: tải danh sách category để dựng tab bar, chọn tab đầu tiên
   // làm mặc định (giống hành vi cũ). Các category thuộc
@@ -111,6 +140,16 @@ const ProductGrid = () => {
         const sorted = merged
           .sort((a, b) => a.name.localeCompare(b.name))
           .slice(0, PRODUCTS_LIMIT);
+
+        // Preload hết ảnh của các sản phẩm sắp hiện ra TRƯỚC khi ẩn
+        // skeleton — tránh tình trạng data JSON về nhanh nhưng ảnh còn
+        // đang tải, khiến người dùng thấy khoảng trống/giật hình.
+        const imageSrcs = sorted
+          .map(getPrimaryImage)
+          .filter((src): src is string => Boolean(src));
+        await waitForImages(imageSrcs);
+        if (ignore) return;
+
         setProducts(sorted);
       } catch (err) {
         if (!ignore) {
@@ -129,10 +168,24 @@ const ProductGrid = () => {
     };
   }, [selectedTabKey, tabs]);
 
+  const loading = loadingCategories || loadingProducts;
+
+  // Chỉ đếm giờ khi đang thực sự loading; báo "mạng đang chậm" nếu quá
+  // SLOW_NETWORK_HINT_MS mà vẫn chưa xong, thay vì để người dùng nhìn
+  // skeleton vô thời hạn không biết chuyện gì đang xảy ra.
+  useEffect(() => {
+    if (!loading) {
+      setIsSlowNetwork(false);
+      return;
+    }
+
+    const timer = setTimeout(() => setIsSlowNetwork(true), SLOW_NETWORK_HINT_MS);
+    return () => clearTimeout(timer);
+  }, [loading]);
+
   const selectedTabTitle =
     tabs.find((t) => t.key === selectedTabKey)?.title ?? "";
 
-  const loading = loadingCategories || loadingProducts;
   const errorMessage = categoriesError ?? productsError;
 
   return (
@@ -147,21 +200,56 @@ const ProductGrid = () => {
       />
 
       {loading ? (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <div
-              key={i}
-              className="flex flex-col rounded-lg border border-gray-200 bg-white overflow-hidden animate-pulse"
-            >
-              <div className="aspect-square w-full bg-gray-200" />
-              <div className="flex flex-col gap-2 p-3">
-                <div className="h-3 w-1/3 bg-gray-200 rounded" />
-                <div className="h-4 w-3/4 bg-gray-200 rounded" />
-                <div className="h-4 w-1/2 bg-gray-200 rounded" />
+        <>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-10">
+            {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
+              <div
+                key={i}
+                className="flex flex-col rounded-lg border border-emerald-100 bg-white overflow-hidden"
+              >
+                <div className="product-skeleton-shimmer aspect-square w-full" />
+                <div className="flex flex-col gap-2 p-3">
+                  <div className="product-skeleton-shimmer h-3 w-1/3 rounded" />
+                  <div className="product-skeleton-shimmer h-4 w-3/4 rounded" />
+                  <div className="product-skeleton-shimmer h-4 w-1/2 rounded" />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+
+          {isSlowNetwork && (
+            <p className="mt-4 text-center text-xs text-gray-400">
+              Mạng đang hơi chậm, sản phẩm sắp hiện ra ngay đây...
+            </p>
+          )}
+
+          <style>{`
+            .product-skeleton-shimmer {
+              background: linear-gradient(
+                90deg,
+                rgb(236 253 245) 25%,
+                rgb(209 250 229) 37%,
+                rgb(236 253 245) 63%
+              );
+              background-size: 400% 100%;
+              animation: product-skeleton-shimmer 1.4s ease infinite;
+            }
+            @keyframes product-skeleton-shimmer {
+              0% {
+                background-position: 100% 50%;
+              }
+              100% {
+                background-position: 0 50%;
+              }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .product-skeleton-shimmer {
+                animation: none;
+                background: rgb(236 253 245);
+              }
+            }
+          `}</style>
+        </>
       ) : errorMessage ? (
         <div className="p-6 text-center text-red-600 mt-10">
           Không tải được sản phẩm: {errorMessage}
