@@ -78,7 +78,7 @@ public class ProductService {
                 return PageResponse.from(responsePage);
         }
 
-        private ProductResponse toResponse(Product product) {
+        public ProductResponse toResponse(Product product) {
                 CategoryResponse categoryResponse = new CategoryResponse(
                                 product.getCategory().getId(),
                                 product.getCategory().getName(),

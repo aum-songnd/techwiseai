@@ -36,65 +36,64 @@ public class SecurityConfig {
                         RestAccessDeniedHandler accessDeniedHandler) throws Exception {
 
                 http            
-                                .cors(cors -> cors.configurationSource(corsConfigurationSource))
-                                .csrf(AbstractHttpConfigurer::disable)
+                        .cors(cors -> cors.configurationSource(corsConfigurationSource))
+                        .csrf(AbstractHttpConfigurer::disable)
 
-                                .sessionManagement(session -> session.sessionCreationPolicy(
-                                                SessionCreationPolicy.STATELESS))
+                        .sessionManagement(session -> session.sessionCreationPolicy(
+                                        SessionCreationPolicy.STATELESS))
 
-                                .authorizeHttpRequests(authorize -> authorize
+                        .authorizeHttpRequests(authorize -> authorize
 
-                                                // API công khai
-                                                .requestMatchers(
-                                                                "/actuator/health",
-                                                                "/api/v1/auth/login",
-                                                                "/api/v1/auth/register")
-                                                .permitAll()
+                                        // API công khai
+                                        .requestMatchers(
+                                                        "/actuator/health",
+                                                        "/api/v1/auth/login",
+                                                        "/api/v1/auth/register")
+                                        .permitAll()
 
-                                                // Danh mục và sản phẩm công khai chỉ cho phép GET
-                                                .requestMatchers(
-                                                                HttpMethod.GET,
-                                                                "/api/v1/categories",
-                                                                "/api/v1/categories/**",
-                                                                "/api/v1/products",
-                                                                "/api/v1/products/**",
-                                                                "/api/v1/payments/vnpay/return",
-                                                                "/api/v1/payments/vnpay/ipn")
-                                                .permitAll()
+                                        .requestMatchers(
+                                                        HttpMethod.GET,
+                                                        "/api/v1/categories",
+                                                        "/api/v1/categories/**",
+                                                        "/api/v1/products",
+                                                        "/api/v1/products/**",
+                                                        "/api/v1/payments/vnpay/return",
+                                                        "/api/v1/payments/vnpay/ipn")
+                                        .permitAll()
 
-                                                // API quản trị
-                                                .requestMatchers("/api/v1/admin/**")
-                                                .hasRole("ADMIN")
+                                        // API quản trị
+                                        .requestMatchers("/api/v1/admin/**")
+                                        .hasRole("ADMIN")
+                                        .requestMatchers(
+                                                        "/api/v1/cart",
+                                                        "/api/v1/cart/**",
+                                                        "/api/v1/orders",
+                                                        "/api/v1/orders/**",
+                                                        "/api/v1/payments",
+                                                        "/api/v1/payments/**",
+                                                        "/api/v1/favorites",
+                                                        "/api/v1/favorites/**")
+                                        .authenticated()
 
-                                                // Giỏ hàng bắt buộc đăng nhập
-                                                .requestMatchers(
-                                                                "/api/v1/cart",
-                                                                "/api/v1/cart/**",
-                                                                "/api/v1/orders",
-                                                                "/api/v1/orders/**",
-                                                                "/api/v1/payments",
-                                                                "/api/v1/payments/**")
-                                                .authenticated()
+                                        // Các API còn lại cũng cần đăng nhập
+                                        .anyRequest()
+                                        .authenticated())
 
-                                                // Các API còn lại cũng cần đăng nhập
-                                                .anyRequest()
-                                                .authenticated())
+                        .exceptionHandling(exception -> exception
+                                        .authenticationEntryPoint(
+                                                        authenticationEntryPoint)
+                                        .accessDeniedHandler(
+                                                        accessDeniedHandler))
 
-                                .exceptionHandling(exception -> exception
-                                                .authenticationEntryPoint(
-                                                                authenticationEntryPoint)
-                                                .accessDeniedHandler(
-                                                                accessDeniedHandler))
+                        .oauth2ResourceServer(resourceServer -> resourceServer
+                                        .authenticationEntryPoint(
+                                                        authenticationEntryPoint)
+                                        .accessDeniedHandler(
+                                                        accessDeniedHandler)
+                                        .jwt(jwt -> jwt.jwtAuthenticationConverter(
+                                                        jwtAuthenticationConverter)));
 
-                                .oauth2ResourceServer(resourceServer -> resourceServer
-                                                .authenticationEntryPoint(
-                                                                authenticationEntryPoint)
-                                                .accessDeniedHandler(
-                                                                accessDeniedHandler)
-                                                .jwt(jwt -> jwt.jwtAuthenticationConverter(
-                                                                jwtAuthenticationConverter)));
-
-                return http.build();
+        return http.build();
         }
 
         @Bean

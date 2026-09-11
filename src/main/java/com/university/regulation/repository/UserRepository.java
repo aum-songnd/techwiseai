@@ -23,6 +23,8 @@ public interface UserRepository
 
     Optional<User> findByPhone(String phone);
 
+    Optional<User> findByUsername(String username);
+
     @EntityGraph(attributePaths = "roles")
     Optional<User> findWithRolesByUsernameIgnoreCase(String username);
 }
