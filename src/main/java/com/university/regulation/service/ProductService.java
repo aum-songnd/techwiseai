@@ -25,6 +25,7 @@ import com.university.regulation.models.product.ProductImage;
 import com.university.regulation.repository.CategoryRepository;
 import com.university.regulation.repository.ProductImageRepository;
 import com.university.regulation.repository.ProductRepository;
+import com.university.regulation.specification.ProductSpecification;
 
 import lombok.RequiredArgsConstructor;
 
@@ -368,5 +369,25 @@ public class ProductService {
 
                 product.setActive(false);
                 productRepository.save(product);
+        }
+
+        @Transactional(readOnly = true)
+        public PageResponse<ProductResponse> searchProducts(
+                        String keyword,
+                        Pageable pageable) {
+
+                if (keyword == null || keyword.isBlank()) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.BAD_REQUEST,
+                                        "Từ khóa tìm kiếm không được để trống");
+                }
+
+                Page<Product> productPage = productRepository.findAll(
+                                ProductSpecification.searchByKeyword(keyword),
+                                pageable);
+
+                Page<ProductResponse> responsePage = productPage.map(this::toResponse);
+
+                return PageResponse.from(responsePage);
         }
 }

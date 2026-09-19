@@ -61,4 +61,19 @@ public class ProductController {
                                 products,
                                 request.getRequestURI());
         }
+
+        @GetMapping("/search")
+        public ApiResponse<PageResponse<ProductResponse>> searchProducts(
+                        @RequestParam String keyword,
+                        @PageableDefault(page = 0, size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable,
+                        HttpServletRequest request) {
+                PageResponse<ProductResponse> products = productService.searchProducts(
+                                keyword,
+                                pageable);
+
+                return ApiResponse.success(
+                                "Tìm kiếm sản phẩm thành công",
+                                products,
+                                request.getRequestURI());
+        }
 }
