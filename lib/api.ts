@@ -245,6 +245,19 @@ export async function getAllProductsByCategory(
   return normalizeList(data).map(mapProduct);
 }
 
+// api search
+export async function searchProducts(keyword: string): Promise<Product[]> {
+  const query = new URLSearchParams({
+    keyword
+  }).toString();
+
+  const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
+    `/products/search?${query}`,
+    { cache: "no-store" }
+  );
+  return normalizeList(data).map(mapProduct);
+}
+
 export async function getProductBySlug(slug: string): Promise<Product> {
   const raw = await fetchEnvelope<ApiProductRaw>(`/products/${slug}`, {
     next: { revalidate: 60 },
