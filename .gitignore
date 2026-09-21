@@ -38,3 +38,6 @@ build/
 # document
 document.txt
 
+# ### Node ###
+node_modules/
+
