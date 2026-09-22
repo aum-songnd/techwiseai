@@ -43,9 +43,9 @@ const HomeLatestBlog = () => {
             <Link
               key={blog.id}
               href={`/blog/${blog.slug}`}
-              className="group flex flex-col rounded-lg border border-gray-300 overflow-hidden hover:shadow-md transition-shadow bg-white"
+              className="group flex flex-col aspect-[2/2] rounded-lg border border-gray-300 overflow-hidden hover:shadow-md transition-shadow bg-white"
             >
-              <div className="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden">
+              <div className="relative w-full h-[45%] shrink-0 bg-gray-100 overflow-hidden">
                 {blog.mainImageUrl ? (
                   <Image
                     src={blog.mainImageUrl}
@@ -61,7 +61,7 @@ const HomeLatestBlog = () => {
                 )}
               </div>
 
-              <div className="flex flex-col gap-3 p-4">
+              <div className="flex flex-col flex-1 gap-3 p-4">
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pb-2 border-b border-gray-300 inline-flex w-fit">
                     {categories.map((category, idx) => (

@@ -87,12 +87,12 @@ const HomeBrands = async () => {
   if (brands.length === 0) return null;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-white via-emerald-50/40 to-emerald-100/70 my-10 md:my-10 p-5 lg:p-7">
+    <div className="relative overflow-hidden rounded-2xl border-2 border-gray-50 bg-gradient-to-br from-white via-emerald-50/40 to-emerald-100/70 my-10 md:my-10 p-5 lg:p-7">
       {/* Quầng sáng trang trí duy nhất, đặt lệch góc trái để đồng bộ với
           HomeCategories mà không lặp lại y hệt vị trí. */}
       <div className="pointer-events-none absolute -top-16 -left-16 h-48 w-48 rounded-full bg-shop-light-green/25 blur-3xl" />
 
-      <div className="relative border-b border-emerald-200 pb-3">
+      <div className="relative border-b border-gray-300 pb-3">
         <Title className="text-[25px]">Thương hiệu nổi bật</Title>
         <p className="mt-1 text-sm text-gray-400">
           Những thương hiệu được khách hàng tin dùng
