@@ -47,3 +47,4 @@ ai-data/images/
 ai-data/test-images/
 ai-data/logs/
 
+ai-data/.venv/
