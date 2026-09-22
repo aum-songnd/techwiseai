@@ -39,16 +39,22 @@ export const quickLinkData = [
 
 export const categoriesData = [
     {
-        title: "Phone", href: "/phone"
+        title: "Laptop", href: "laptop"
     },
     {
-        title: "Smartphones", href: "/smartphones"
+        title: "Điện thoại", href: "dien-thoai"
     },
     {
-        title: "Earphone", href: "/earphone"
+        title: "Tai nghe", href: "tai-nghe"
     },
-     {
-        title: "Laptop Accessories", href: "/laptop-accessories"
+    {
+        title: "Máy ảnh", href: "may-anh"
+    },
+    {
+        title: "Linh kiện", href: "linh-kien"
+    },
+    {
+        title: "Phụ kiện", href: "phu-kien"
     },
 ];
 
