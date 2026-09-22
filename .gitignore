@@ -41,3 +41,9 @@ document.txt
 # ### Node ###
 node_modules/
 
+# AI dataset generated locally
+ai-data/raw/
+ai-data/images/
+ai-data/test-images/
+ai-data/logs/
+
