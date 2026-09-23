@@ -33,8 +33,8 @@ const WishlistPage = () => {
     isLoading,
   } = useFavorite() as {
     favoriteProducts: FavoriteProduct[];
-    removeFromFavorite: (productId: string) => void;
-    resetFavorite: () => void;
+    removeFromFavorite: (productId: string) => Promise<void>;
+    resetFavorite: () => Promise<void>;
     isLoading?: boolean;
   };
 
