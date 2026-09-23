@@ -31,14 +31,34 @@ const features = [
 
 // API không có bảng brand riêng kèm logo (chỉ có field `brand` dạng
 // string thô trên mỗi product, giống lib/api.ts và Shop.tsx đang xử lý).
-// Vì vậy không có ảnh logo thương hiệu thật -> dùng tạm ảnh sản phẩm đầu
-// tiên tìm thấy của mỗi brand làm ảnh đại diện, kèm tên brand hiển thị rõ.
+// Với những brand đã có logo thật đặt sẵn trong /public (vd public/brands/
+// acer.png), ưu tiên dùng logo đó. Brand nào chưa có logo thì fallback về
+// ảnh sản phẩm đầu tiên tìm thấy, kèm tên brand hiển thị rõ.
 const MAX_BRANDS = 8;
+
+// === ĐỔI Ở ĐÂY === key phải là tên brand viết thường (khớp với `brand` mà
+// API trả về, sau khi .toLowerCase()). Value là đường dẫn public tới file
+// logo. Các file logo đang nằm thẳng trong thư mục `public/` (vd
+// public/acer.png) nên đường dẫn chỉ cần "/acer.png". Thêm brand mới có
+// logo thì chỉ cần bổ sung một dòng vào đây, không cần sửa gì khác.
+const BRAND_LOGOS: Record<string, string> = {
+  acer: "/acer.png",
+  apple: "/apple.png",
+  asus: "/asus.png",
+  dell: "/dell.png",
+  gigabyte: "/gigabyte.png",
+  hp: "/hp.png",
+  lenovo: "/lenovo.png",
+  microsoft: "/microsoft.png",
+};
 
 type BrandCard = {
   key: string;
   label: string;
   imageUrl?: string;
+  // true khi imageUrl là logo thật (từ BRAND_LOGOS) thay vì ảnh sản phẩm
+  // fallback -> dùng để hiển thị khác nhau (object-contain vs object-cover).
+  isLogo?: boolean;
 };
 
 const resolveImage = (
@@ -64,16 +84,24 @@ async function getFeaturedBrands(): Promise<BrandCard[]> {
 
       const key = label.toLowerCase();
       if (!seen.has(key)) {
+        const logoPath = BRAND_LOGOS[key];
         seen.set(key, {
           key,
           label,
-          imageUrl: product.images?.[0],
+          imageUrl: logoPath ?? product.images?.[0],
+          isLogo: !!logoPath,
         });
       }
     }
 
     return Array.from(seen.values())
-      .sort((a, b) => a.label.localeCompare(b.label))
+      .sort((a, b) => {
+        // Ưu tiên brand có logo thật lên trước, tránh trường hợp brand có
+        // logo (vd "Dell") bị các brand không có logo xếp trước bảng chữ
+        // cái đẩy ra ngoài top MAX_BRANDS.
+        if (a.isLogo !== b.isLogo) return a.isLogo ? -1 : 1;
+        return a.label.localeCompare(b.label);
+      })
       .slice(0, MAX_BRANDS);
   } catch {
     // Lỗi gọi API -> ẩn section thay vì làm crash trang chủ.
@@ -110,13 +138,23 @@ const HomeBrands = async () => {
               className="group flex flex-col overflow-hidden rounded-xl border-2 border-emerald-200 bg-white opacity-0 animate-[brand-in_0.5s_ease-out_forwards] transition-all duration-300 hover:-translate-y-1 hover:border-shop-light-green hover:shadow-lg"
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="relative w-full aspect-square overflow-hidden bg-gradient-to-br from-emerald-50 to-emerald-100">
+              <div
+                className={`relative w-full aspect-square overflow-hidden ${
+                  brand.isLogo
+                    ? "bg-white"
+                    : "bg-gradient-to-br from-emerald-50 to-emerald-100"
+                }`}
+              >
                 {imageSrc ? (
                   <Image
                     src={imageSrc}
                     alt={brand.label}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    className={
+                      brand.isLogo
+                        ? "object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                        : "object-cover group-hover:scale-110 transition-transform duration-300"
+                    }
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
                 ) : (
