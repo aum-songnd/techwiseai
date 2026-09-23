@@ -1,33 +1,5 @@
 "use client";
 
-/**
- * Trang: Sản phẩm yêu thích (Wishlist)
- * Route gợi ý: app/(client)/wishlist/page.tsx  ->  /wishlist
- *
- * File này được viết dựa theo phong cách code có sẵn của bạn
- * (Header.tsx, HeaderMenu.tsx, AddToCart.tsx) và đúng bố cục trong ảnh chụp
- * màn hình bạn gửi: bảng có cột Image / Category / Type / Status / Price / Action
- * + nút "Reset Favorite" bên dưới.
- *
- * ⚠️ GIẢ ĐỊNH CẦN KIỂM TRA LẠI:
- * Dự án của bạn đã có <FavoriteButton /> trong Header nên chắc chắn đã có
- * một Context quản lý danh sách yêu thích (giống CartContext). Mình giả định
- * nó tên là `FavoriteContext` với hook `useFavorite()` trả về:
- *   - favoriteProducts: Product[]           -> danh sách sản phẩm yêu thích
- *   - removeFromFavorite(productId: string) -> bỏ 1 sản phẩm khỏi wishlist
- *   - resetFavorite()                       -> xoá toàn bộ wishlist
- *   - isLoading?: boolean
- *
- * Nếu hook/context thật của bạn có tên hàm khác, chỉ cần đổi lại phần
- * import + destructure bên dưới (đã đánh dấu === ĐỔI Ở ĐÂY ===), phần UI
- * không cần đụng vào.
- *
- * Đã cập nhật theo type Product thật (lib/api.ts):
- *   - ảnh nằm ở `images: string[]` (không phải `image` số ít)
- *   - không có field `type` -> đổi cột "Type" thành "Brand" (`brand?: string`)
- *   - `categories: string[]` đã là tên category sẵn, không cần optional nữa
- */
-
 import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -131,7 +103,13 @@ const WishlistPage = () => {
                         <td className="py-4 pr-4">
                           <div className="flex items-center gap-4">
                             <button
-                              onClick={() => removeFromFavorite(product.id)}
+                              onClick={() => {
+                                // removeFromFavorite giờ gọi API và có thể lỗi
+                                // (vd mất mạng) -> bắt lỗi ở đây để không bị
+                                // unhandled promise rejection; state đã tự
+                                // rollback bên trong FavoriteContext.
+                                removeFromFavorite(product.id).catch(() => {});
+                              }}
                               aria-label="Bỏ khỏi yêu thích"
                               className="text-gray-400 hover:text-red-500 hoverEffect"
                             >
@@ -231,7 +209,9 @@ const WishlistPage = () => {
                         </div>
                       </div>
                       <button
-                        onClick={() => removeFromFavorite(product.id)}
+                        onClick={() => {
+                          removeFromFavorite(product.id).catch(() => {});
+                        }}
                         aria-label="Bỏ khỏi yêu thích"
                         className="text-gray-400 hover:text-red-500 hoverEffect"
                       >
@@ -247,7 +227,9 @@ const WishlistPage = () => {
             {/* ===== Nút Reset Favorite ===== */}
             <div className="mt-8">
               <button
-                onClick={resetFavorite}
+                onClick={() => {
+                  resetFavorite().catch(() => {});
+                }}
                 className="px-5 py-2.5 rounded-md border border-gray-300 text-sm font-medium text-darkColor hover:border-red-400 hover:text-red-500 hoverEffect"
               >
                 Reset Favorite

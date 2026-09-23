@@ -1,5 +1,6 @@
 // lib/api.ts
 import type { Product, Category, Brand } from "../app/data/types";
+import { getToken } from "./auth"; // === ĐỔI Ở ĐÂY === nếu api.ts không nằm cùng thư mục với lib/auth.ts
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
@@ -79,6 +80,29 @@ async function fetchEnvelope<T>(
   }
 
   return json.data;
+}
+
+// Giống fetchEnvelope, nhưng tự đính kèm header `Authorization: Bearer <token>`.
+// Dùng cho các endpoint bắt buộc đăng nhập (favorites, cart, orders...).
+// Nếu chưa có token (chưa đăng nhập / hết hạn), ném lỗi ngay để nơi gọi
+// (FavoriteContext) bắt và xử lý thay vì để backend trả 401 khó phân biệt.
+async function fetchEnvelopeAuthed<T>(
+  path: string,
+  init?: RequestInit
+): Promise<T> {
+  const token = getToken();
+  if (!token) {
+    throw new Error("Chưa đăng nhập");
+  }
+
+  return fetchEnvelope<T>(path, {
+    ...init,
+    headers: {
+      "Content-Type": "application/json",
+      ...(init?.headers ?? {}),
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
 
 // Một số danh sách (categories, brands) có thể được backend trả về dưới
@@ -300,4 +324,69 @@ export async function getProductById(id: string): Promise<Product> {
     next: { revalidate: 60 },
   });
   return mapProduct(raw);
+}
+
+// ---------- FAVORITES (WISHLIST) ----------
+// Backend lưu wishlist theo user (bắt buộc đăng nhập), không còn dùng
+// localStorage nữa. Xem mục 7 trong đặc tả API.
+
+// LƯU Ý: shape thật của backend KHÁC với tài liệu đặc tả (đã kiểm tra qua
+// DevTools). Thực tế mỗi phần tử trả về là bản ghi favorite kèm nguyên object
+// `product` đầy đủ (giống hệt ApiProductRaw của /products), KHÔNG phải bản
+// rút gọn { productId, productName, price, thumbnailUrl } như spec mô tả.
+interface ApiFavoriteRaw {
+  id: string; // id của BẢN GHI favorite, không phải id sản phẩm
+  createdAt: string;
+  product: ApiProductRaw;
+}
+
+interface ApiFavoriteCreatedRaw {
+  id: string;
+  createdAt: string;
+  product?: ApiProductRaw;
+}
+
+// Vì `product` trả về đã đầy đủ (slug, category, brand, stockQuantity...)
+// giống hệt /products, chỉ cần map thẳng bằng mapProduct() có sẵn — KHÔNG
+// cần gọi thêm getProductById cho từng sản phẩm (tránh N+1 request và các
+// lỗi 500 do gọi nhầm /products/undefined trước đây).
+export async function getFavorites(): Promise<Product[]> {
+  const data = await fetchEnvelopeAuthed<ApiFavoriteRaw[]>("/favorites", {
+    cache: "no-store",
+  });
+
+  const list = normalizeList(data);
+  return list
+    .filter((f) => !!f.product)
+    .map((f) => mapProduct(f.product));
+}
+
+export async function addFavorite(productId: string): Promise<void> {
+  await fetchEnvelopeAuthed<ApiFavoriteCreatedRaw>("/favorites", {
+    method: "POST",
+    body: JSON.stringify({ productId }),
+  });
+}
+
+// Lưu ý: endpoint xoá dùng productId trên URL (`/favorites/{productId}`),
+// KHÔNG phải favoriteId, nên nơi gọi (FavoriteContext) chỉ cần giữ productId.
+export async function removeFavorite(productId: string): Promise<void> {
+  await fetchEnvelopeAuthed<null>(`/favorites/${productId}`, {
+    method: "DELETE",
+  });
+}
+
+export async function removeAllFavorites(): Promise<void> {
+  await fetchEnvelopeAuthed<null>("/favorites", {
+    method: "DELETE",
+  });
+}
+
+// Không bắt buộc dùng ngay, nhưng hữu ích nếu sau này cần đồng bộ trạng thái
+// tim (yêu thích) trên trang chi tiết sản phẩm mà không tải cả danh sách.
+export async function checkFavorite(productId: string): Promise<boolean> {
+  const data = await fetchEnvelopeAuthed<{ isFavorite: boolean }>(
+    `/favorites/check?productId=${encodeURIComponent(productId)}`
+  );
+  return data.isFavorite;
 }
