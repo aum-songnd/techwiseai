@@ -74,7 +74,37 @@ async function fetchOrderEnvelope<T>(
   return json.data;
 }
 
-// ---------- ORDERS ----------
+// Chuẩn hoá response phân trang: chấp nhận cả 2 kiểu thường gặp —
+// { items: [...], totalElements, totalPages, page, size } (DTO tuỳ biến,
+// giống /products, /favorites) LẪN { content: [...], totalElements,
+// totalPages, number, size } (format Page mặc định của Spring Data khi
+// controller trả thẳng Page<T> mà không bọc DTO riêng). Đây là nghi vấn
+// chính khiến /orders hiển thị rỗng dù backend có dữ liệu thật — nếu vẫn
+// còn rỗng sau khi sửa, cần in thử response thật ra console để đối chiếu
+// thêm.
+function normalizePagedOrders<TRaw, TMapped>(
+  raw: unknown,
+  mapItem: (item: TRaw) => TMapped
+): { items: TMapped[]; page: number; size: number; totalElements: number; totalPages: number } {
+  const data = (raw ?? {}) as Record<string, unknown>;
+
+  const rawItems: TRaw[] = Array.isArray(data.items)
+    ? (data.items as TRaw[])
+    : Array.isArray(data.content)
+    ? (data.content as TRaw[])
+    : Array.isArray(raw)
+    ? (raw as TRaw[])
+    : [];
+
+  return {
+    items: rawItems.map(mapItem),
+    page: (data.page as number) ?? (data.number as number) ?? 0,
+    size: (data.size as number) ?? rawItems.length,
+    totalElements:
+      (data.totalElements as number) ?? rawItems.length,
+    totalPages: (data.totalPages as number) ?? 1,
+  };
+}
 
 export type PaymentMethod = "COD" | "VNPAY" | "MOMO";
 
@@ -163,7 +193,22 @@ export async function getOrders(page = 0, size = 10): Promise<PagedOrders> {
     page: String(page),
     size: String(size),
   }).toString();
-  return fetchOrderEnvelope<PagedOrders>(`/orders?${query}`);
+  const raw = await fetchOrderEnvelope<unknown>(`/orders?${query}`);
+  const result = normalizePagedOrders<OrderListItem, OrderListItem>(
+    raw,
+    (item) => item
+  );
+
+  // Debug tạm: nếu danh sách rỗng mà response gốc không phải mảng/objects
+  // rỗng thật sự, in ra console để đối chiếu field thật, tránh phải
+  // chụp DevTools gửi qua lại nhiều lần. Có thể xoá khi đã xác nhận field
+  // đúng.
+  if (result.items.length === 0) {
+    // eslint-disable-next-line no-console
+    console.warn("[orders-api] getOrders() trả về rỗng — response gốc:", raw);
+  }
+
+  return result;
 }
 
 export async function getOrderById(orderId: string): Promise<OrderData> {

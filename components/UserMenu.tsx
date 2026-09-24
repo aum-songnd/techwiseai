@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { LogOut, User as UserIcon } from "lucide-react";
+import { LogOut, Package, User as UserIcon } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useOutsideClick } from "@/hooks";
 import UserProfileModal from "./UserProfileModal";
@@ -53,6 +54,15 @@ const UserMenu = () => {
             <UserIcon className="w-4 h-4" />
             Quản lý tài khoản
           </button>
+
+          <Link
+            href="/orders"
+            onClick={() => setIsOpen(false)}
+            className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50"
+          >
+            <Package className="w-4 h-4" />
+            Đơn hàng của tôi
+          </Link>
 
           <button
             onClick={handleLogout}
