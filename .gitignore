@@ -32,9 +32,14 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-
 # vercel
 .vercel
+# AI dataset generated locally
+ai-data
+ai-data/raw/
+ai-data/images/
+ai-data/test-images/
+ai-data/logs/
 
 # typescript
 *.tsbuildinfo
