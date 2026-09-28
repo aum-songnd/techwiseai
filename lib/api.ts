@@ -4,7 +4,7 @@ import { getToken } from "./auth"; // === ĐỔI Ở ĐÂY === nếu api.ts khô
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-production.up.railway.app/api/v1";
+  "https://techwiseai-backend.up.railway.app/api/v1";
 
 // ---------- Shape thật của API (theo response thực tế đã kiểm tra) ----------
 interface ApiEnvelope<T> {
