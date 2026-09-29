@@ -32,7 +32,10 @@ export default function Chat() {
             className="
               flex h-16 w-16 items-center justify-center
               rounded-full
-              bg-gradient-to-r from-blue-600 to-purple-600
+              bg-gradient-to-br
+              from-[#06271C]
+              via-[#2FBF7F]
+              to-[#0E3E2C]
               text-white
               shadow-xl shadow-blue-500/30
               transition-all duration-300
