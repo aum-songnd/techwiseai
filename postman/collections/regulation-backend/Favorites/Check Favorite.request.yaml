@@ -1,0 +1,9 @@
+$kind: http-request
+name: Check Favorite
+order: 3000
+method: GET
+url: '{{baseUrl}}/api/v1/favorites/check'
+queryParams:
+  - key: productId
+    value: '{{productId}}'
+    description: UUID of the product to check

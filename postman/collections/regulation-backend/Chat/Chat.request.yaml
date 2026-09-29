@@ -1,0 +1,14 @@
+$kind: http-request
+name: Chat
+order: 1000
+method: POST
+url: '{{baseUrl}}/api/chat'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "message": "What laptops do you have under 20 million VND?"
+    }

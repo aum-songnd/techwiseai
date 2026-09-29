@@ -1,0 +1,18 @@
+$kind: http-request
+name: Create Category
+order: 1000
+method: POST
+url: '{{baseUrl}}/api/v1/admin/categories'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Laptops",
+      "slug": "laptops",
+      "description": "Laptop computers and accessories",
+      "image_url": "https://example.com/images/laptops.jpg",
+      "display_order": 1
+    }

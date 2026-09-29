@@ -1,0 +1,31 @@
+$kind: http-request
+name: Update Product
+order: 2000
+method: PUT
+url: '{{baseUrl}}/api/v1/admin/products/{{productId}}'
+pathVariables:
+  - key: productId
+    value: '{{productId}}'
+    description: UUID of the product to update
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "categoryId": "{{categoryId}}",
+      "name": "Dell XPS 15 Updated",
+      "slug": "dell-xps-15-updated",
+      "sku": "DELL-XPS-15-001",
+      "brand": "Dell",
+      "shortDescription": "Updated description",
+      "description": "Updated full description...",
+      "price": 34000000,
+      "originalPrice": 38000000,
+      "stockQuantity": 45,
+      "thumbnailUrl": "https://example.com/images/dell-xps-15-new.jpg",
+      "featured": true,
+      "hot": true,
+      "active": true
+    }

@@ -1,0 +1,9 @@
+$kind: http-request
+name: Get Payment by Order
+order: 2000
+method: GET
+url: '{{baseUrl}}/api/v1/payments/orders/{{orderId}}'
+pathVariables:
+  - key: orderId
+    value: '{{orderId}}'
+    description: UUID of the order

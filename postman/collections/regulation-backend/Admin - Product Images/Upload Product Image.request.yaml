@@ -1,0 +1,28 @@
+$kind: http-request
+name: Upload Product Image
+order: 2000
+method: POST
+url: '{{baseUrl}}/api/v1/admin/products/{{productId}}/images'
+pathVariables:
+  - key: productId
+    value: '{{productId}}'
+    description: UUID of the product
+body:
+  type: formdata
+  content:
+    - key: file
+      type: file
+      src: ''
+      description: Image file to upload
+    - key: altText
+      type: text
+      value: 'Product front view'
+      description: Alt text for the image (optional)
+    - key: displayOrder
+      type: text
+      value: '0'
+      description: Display order (default 0)
+    - key: primaryImage
+      type: text
+      value: 'false'
+      description: Set as primary image (default false)

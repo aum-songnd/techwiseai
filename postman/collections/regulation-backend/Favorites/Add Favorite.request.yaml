@@ -1,0 +1,14 @@
+$kind: http-request
+name: Add Favorite
+order: 2000
+method: POST
+url: '{{baseUrl}}/api/v1/favorites'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "productId": "{{productId}}"
+    }

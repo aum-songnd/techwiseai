@@ -1,0 +1,4 @@
+$kind: collection
+name: Products
+description: Public product browsing endpoints.
+order: 2000

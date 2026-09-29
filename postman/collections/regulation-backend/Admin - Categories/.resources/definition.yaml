@@ -1,0 +1,4 @@
+$kind: collection
+name: Admin - Categories
+description: Admin endpoints for category management. Requires ADMIN role.
+order: 9000

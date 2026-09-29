@@ -1,0 +1,9 @@
+$kind: http-request
+name: Remove Favorite
+order: 4000
+method: DELETE
+url: '{{baseUrl}}/api/v1/favorites/{{productId}}'
+pathVariables:
+  - key: productId
+    value: '{{productId}}'
+    description: UUID of the product to remove from favorites

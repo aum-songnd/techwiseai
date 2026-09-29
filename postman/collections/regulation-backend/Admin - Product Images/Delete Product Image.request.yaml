@@ -1,0 +1,12 @@
+$kind: http-request
+name: Delete Product Image
+order: 5000
+method: DELETE
+url: '{{baseUrl}}/api/v1/admin/products/{{productId}}/images/{{imageId}}'
+pathVariables:
+  - key: productId
+    value: '{{productId}}'
+    description: UUID of the product
+  - key: imageId
+    value: '{{imageId}}'
+    description: UUID of the image to delete

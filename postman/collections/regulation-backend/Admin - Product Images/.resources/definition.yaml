@@ -1,0 +1,4 @@
+$kind: collection
+name: Admin - Product Images
+description: Admin endpoints for managing product images. Requires ADMIN role.
+order: 11000

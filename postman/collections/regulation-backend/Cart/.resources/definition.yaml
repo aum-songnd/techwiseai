@@ -1,0 +1,4 @@
+$kind: collection
+name: Cart
+description: Shopping cart management. Requires authentication (CUSTOMER role).
+order: 4000

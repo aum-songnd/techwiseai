@@ -1,0 +1,20 @@
+$kind: http-request
+name: VNPay IPN
+order: 4000
+method: GET
+url: '{{baseUrl}}/api/v1/payments/vnpay/ipn'
+auth:
+  type: noauth
+queryParams:
+  - key: vnp_TxnRef
+    value: ''
+    description: VNPay transaction reference
+    disabled: true
+  - key: vnp_ResponseCode
+    value: ''
+    description: VNPay response code (00 = success)
+    disabled: true
+  - key: vnp_SecureHash
+    value: ''
+    description: VNPay secure hash for IPN verification
+    disabled: true
