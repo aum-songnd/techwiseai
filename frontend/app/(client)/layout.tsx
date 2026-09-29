@@ -8,6 +8,7 @@ import AdminRedirect from "@/components/AdminRedirect";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { FavoriteProvider } from "@/context/FavoriteContext";
+import Chat from "@/components/Chat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
           <CartProvider>
             <FavoriteProvider>
               <TooltipProvider>
+<<<<<<< HEAD:frontend/app/(client)/layout.tsx
 
                 <AdminRedirect>
                   <div className="flex flex-col min-h-screen">
@@ -46,6 +48,15 @@ export default function RootLayout({
                     <Footer />
                   </div>
                 </AdminRedirect>
+=======
+                <div className="flex flex-col min-h-screen">
+                  <Header />
+                  <main className="flex-1">{children}</main>
+                  <Footer />
+                </div>
+
+                <Chat />
+>>>>>>> 4426a1e (Them giao dien chat):app/(client)/layout.tsx
               </TooltipProvider>
             </FavoriteProvider>
           </CartProvider>
