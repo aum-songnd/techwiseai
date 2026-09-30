@@ -1,28 +1,28 @@
 "use client";
 
-// components/AdminRedirect.tsx
-//
-// Đặt trong layout của nhóm route (client). Nếu người đang đăng nhập là
-// ADMIN mà đang ở trang dành cho khách (trang chủ, shop, ...), tự chuyển
-// thẳng sang /admin. Chạy lại mỗi khi pathname đổi nên cũng bắt được
-// trường hợp vừa đăng nhập xong rồi router.push("/").
-
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { getToken, isAdminUser } from "@/lib/auth";
 
-const AdminRedirect = () => {
+// Tránh cảnh báo useLayoutEffect khi SSR
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+const AdminRedirect = ({ children }: { children?: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const [redirecting, setRedirecting] = useState(false);
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     if (pathname?.startsWith("/admin")) return;
     if (getToken() && isAdminUser()) {
+      setRedirecting(true);
       router.replace("/admin");
     }
   }, [pathname, router]);
 
-  return null;
+  if (redirecting) return null;
+  return <>{children}</>;
 };
 
 export default AdminRedirect;

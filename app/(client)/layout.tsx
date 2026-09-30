@@ -38,14 +38,15 @@ export default function RootLayout({
           <CartProvider>
             <FavoriteProvider>
               <TooltipProvider>
-                {/* Admin đăng nhập xong (hoặc vào trang khách) -> chuyển
-                    thẳng sang /admin. */}
-                <AdminRedirect />
-                <div className="flex flex-col min-h-screen">
-                  <Header />
-                  <main className="flex-1">{children}</main>
-                  <Footer />
-                </div>
+                {/* Admin vào trang khách -> chuyển thẳng sang /admin,
+                    không render Header/Footer/nội dung khách. */}
+                <AdminRedirect>
+                  <div className="flex flex-col min-h-screen">
+                    <Header />
+                    <main className="flex-1">{children}</main>
+                    <Footer />
+                  </div>
+                </AdminRedirect>
               </TooltipProvider>
             </FavoriteProvider>
           </CartProvider>

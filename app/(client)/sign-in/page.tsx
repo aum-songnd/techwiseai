@@ -4,6 +4,7 @@ import React, { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { isAdminUser } from "@/lib/auth";
 
 const SignInForm = () => {
   const { login } = useAuth();
@@ -24,7 +25,9 @@ const SignInForm = () => {
 
     try {
       await login(username, password);
-      router.push("/");
+      // Admin đi thẳng /admin, không qua trang khách.
+      // Yêu cầu login() đã lưu token/user vào localStorage trước khi resolve.
+      router.replace(isAdminUser() ? "/admin" : "/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Đăng nhập thất bại");
     } finally {
