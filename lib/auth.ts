@@ -1,4 +1,9 @@
 const TOKEN_KEY = "access_token";
+const USER_KEY = "auth_user";
+const EXPIRES_KEY = "auth_expires_at";
+
+// Thời gian sống của phiên đăng nhập: 1 tiếng kể từ lúc đăng nhập.
+export const SESSION_DURATION_MS = 60 * 60* 1000;
 
 export interface User {
   id?: string;
@@ -69,16 +74,42 @@ function normalizeLoginResponse(raw: unknown): AuthResponse {
   return { token, user };
 }
 
-const USER_KEY = "auth_user";
+// ---- Thời điểm hết hạn phiên ----
+// Trả về timestamp (ms) hết hạn phiên, hoặc null nếu chưa đăng nhập.
+// Nếu có token từ trước khi có tính năng này (chưa có expiry), tự gán
+// 1 tiếng kể từ bây giờ để không bị kẹt phiên vĩnh viễn.
+export function getSessionExpiry(): number | null {
+  if (typeof window === "undefined") return null;
+  if (!localStorage.getItem(TOKEN_KEY)) return null;
+
+  const raw = localStorage.getItem(EXPIRES_KEY);
+  const parsed = raw ? Number(raw) : NaN;
+  if (Number.isFinite(parsed)) return parsed;
+
+  const expiresAt = Date.now() + SESSION_DURATION_MS;
+  localStorage.setItem(EXPIRES_KEY, String(expiresAt));
+  return expiresAt;
+}
 
 // ---- Token storage ----
 export function getToken(): string | null {
   if (typeof window === "undefined") return null;
-  return localStorage.getItem(TOKEN_KEY);
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (!token) return null;
+
+  // Token đã quá hạn phiên -> coi như không có
+  // (nhờ vậy fetchEnvelopeAuthed trong api.ts cũng tự chặn theo)
+  const expiresAt = getSessionExpiry();
+  if (expiresAt !== null && Date.now() >= expiresAt) return null;
+
+  return token;
 }
 
 export function setToken(token: string) {
   localStorage.setItem(TOKEN_KEY, token);
+  // Ghi mốc hết hạn = bây giờ + 1 tiếng. Chỉ gọi setToken khi đăng nhập,
+  // đừng gọi khi khôi phục session vì sẽ làm reset đồng hồ.
+  localStorage.setItem(EXPIRES_KEY, String(Date.now() + SESSION_DURATION_MS));
   // Báo cho các context khác (vd CartContext) biết vừa có token mới,
   // vì bản thân localStorage.setItem không tự kích hoạt re-render/refetch
   // ở tab hiện tại (storage event chỉ bắn ở các tab khác).
@@ -89,6 +120,7 @@ export function setToken(token: string) {
 
 export function clearToken() {
   localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(EXPIRES_KEY);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("auth:logout"));
   }

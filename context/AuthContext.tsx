@@ -2,6 +2,7 @@
 
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -16,6 +17,7 @@ import {
   getStoredUser,
   setStoredUser,
   clearStoredUser,
+  getSessionExpiry,
   loginRequest,
   registerRequest,
 } from "@/lib/auth";
@@ -35,11 +37,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const logout = useCallback(() => {
+    clearToken();
+    clearStoredUser();
+    setUser(null);
+  }, []);
+
   // Khôi phục session khi app khởi động — không gọi API,
   // chỉ đọc lại token + user đã lưu từ lần login trước.
   useEffect(() => {
-    const token = getToken();
+    const token = getToken(); // trả về null nếu đã quá 1 tiếng
     if (!token) {
+      // Dọn user cũ còn sót lại (vd phiên đã hết hạn lúc đóng tab)
+      clearToken();
+      clearStoredUser();
       setIsLoading(false);
       return;
     }
@@ -48,12 +59,50 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (storedUser) {
       setUser(storedUser);
     } else {
-      // Có token nhưng không có user lưu kèm (dữ liệu cũ/thiếu) -> coi như hết hạn
       clearToken();
       setUser(null);
     }
     setIsLoading(false);
   }, []);
+
+  // Tự đăng xuất khi hết hạn phiên (1 tiếng kể từ lúc đăng nhập)
+  useEffect(() => {
+    if (!user) return;
+
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    const expireNow = () => {
+      logout();
+      window.location.href = "/sign-in?expired=1";
+    };
+
+    const schedule = () => {
+      if (timer) clearTimeout(timer);
+      const expiresAt = getSessionExpiry();
+      if (expiresAt === null) return;
+
+      const remaining = expiresAt - Date.now();
+      if (remaining <= 0) {
+        expireNow();
+      } else {
+        timer = setTimeout(expireNow, remaining);
+      }
+    };
+
+    // Máy sleep / tab nền bị throttle thì setTimeout có thể trễ,
+    // nên kiểm tra lại mỗi khi người dùng quay lại tab.
+    const onVisible = () => {
+      if (document.visibilityState === "visible") schedule();
+    };
+
+    schedule();
+    document.addEventListener("visibilitychange", onVisible);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [user, logout]);
 
   const login = async (username: string, password: string) => {
     const { token, user } = await loginRequest(username, password);
@@ -63,7 +112,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // isAdminUser()) sẽ đọc phải dữ liệu cũ/rỗng và hiển thị sai cho tới
     // khi F5 lại trang.
     setStoredUser(user);
-    setToken(token);
+    setToken(token); // setToken cũng ghi mốc hết hạn = now + 1 tiếng
     setUser(user);
   };
 
@@ -71,12 +120,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // tự đăng nhập ở đây. Trang sign-up cần tự điều hướng sang /sign-in.
   const register = async (payload: RegisterPayload) => {
     await registerRequest(payload);
-  };
-
-  const logout = () => {
-    clearToken();
-    clearStoredUser();
-    setUser(null);
   };
 
   return (

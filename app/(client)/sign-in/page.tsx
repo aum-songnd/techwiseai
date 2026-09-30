@@ -10,6 +10,7 @@ const SignInForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const justRegistered = searchParams.get("registered") === "1";
+  const sessionExpired = searchParams.get("expired") === "1";
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +40,12 @@ const SignInForm = () => {
         {justRegistered && (
           <p className="text-sm text-center text-green-600 bg-green-50 rounded-lg py-2 px-3">
             Đăng ký thành công! Vui lòng đăng nhập.
+          </p>
+        )}
+
+        {sessionExpired && (
+          <p className="text-sm text-center text-amber-700 bg-amber-50 rounded-lg py-2 px-3">
+            Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.
           </p>
         )}
 
