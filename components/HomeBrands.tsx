@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import { Truck, RotateCcw, Headphones, ShieldCheck } from "lucide-react";
 import { Title } from "./ui/text";
-import { productImages } from "../images";
+import MarqueeRow from "./MarqueeRow";
 import { getAllProductsByCategory } from "../lib/api";
 
 const features = [
@@ -31,9 +31,8 @@ const features = [
 
 // API không có bảng brand riêng kèm logo (chỉ có field `brand` dạng
 // string thô trên mỗi product, giống lib/api.ts và Shop.tsx đang xử lý).
-// Với những brand đã có logo thật đặt sẵn trong /public (vd public/brands/
-// acer.png), ưu tiên dùng logo đó. Brand nào chưa có logo thì fallback về
-// ảnh sản phẩm đầu tiên tìm thấy, kèm tên brand hiển thị rõ.
+// Brand có logo thật trong /public thì hiện logo; brand chưa có logo thì
+// hiện tên brand dạng chữ trong thẻ.
 const MAX_BRANDS = 8;
 
 // === ĐỔI Ở ĐÂY === key phải là tên brand viết thường (khớp với `brand` mà
@@ -55,20 +54,8 @@ const BRAND_LOGOS: Record<string, string> = {
 type BrandCard = {
   key: string;
   label: string;
-  imageUrl?: string;
-  // true khi imageUrl là logo thật (từ BRAND_LOGOS) thay vì ảnh sản phẩm
-  // fallback -> dùng để hiển thị khác nhau (object-contain vs object-cover).
-  isLogo?: boolean;
-};
-
-const resolveImage = (
-  fileName?: string
-): StaticImageData | string | null => {
-  if (!fileName) return null;
-  const localImage = (
-    productImages as Record<string, StaticImageData | undefined>
-  )[fileName];
-  return localImage ?? fileName;
+  // Đường dẫn logo (từ BRAND_LOGOS). undefined -> hiện tên brand dạng chữ.
+  logoUrl?: string;
 };
 
 async function getFeaturedBrands(): Promise<BrandCard[]> {
@@ -84,13 +71,7 @@ async function getFeaturedBrands(): Promise<BrandCard[]> {
 
       const key = label.toLowerCase();
       if (!seen.has(key)) {
-        const logoPath = BRAND_LOGOS[key];
-        seen.set(key, {
-          key,
-          label,
-          imageUrl: logoPath ?? product.images?.[0],
-          isLogo: !!logoPath,
-        });
+        seen.set(key, { key, label, logoUrl: BRAND_LOGOS[key] });
       }
     }
 
@@ -99,7 +80,9 @@ async function getFeaturedBrands(): Promise<BrandCard[]> {
         // Ưu tiên brand có logo thật lên trước, tránh trường hợp brand có
         // logo (vd "Dell") bị các brand không có logo xếp trước bảng chữ
         // cái đẩy ra ngoài top MAX_BRANDS.
-        if (a.isLogo !== b.isLogo) return a.isLogo ? -1 : 1;
+        const hasLogoA = !!a.logoUrl;
+        const hasLogoB = !!b.logoUrl;
+        if (hasLogoA !== hasLogoB) return hasLogoA ? -1 : 1;
         return a.label.localeCompare(b.label);
       })
       .slice(0, MAX_BRANDS);
@@ -109,85 +92,84 @@ async function getFeaturedBrands(): Promise<BrandCard[]> {
   }
 }
 
+const ChevronIcon = ({ className = "" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="m9 6 6 6-6 6" />
+  </svg>
+);
+
+const BrandItem = ({ brand }: { brand: BrandCard }) => (
+  // mr-4 là khoảng cách giữa các thẻ (marquee không dùng gap).
+  <Link
+    href={`/shop?brand=${encodeURIComponent(brand.label)}`}
+    title={brand.label}
+    className="mr-4 flex h-20 w-40 shrink-0 items-center justify-center rounded-xl bg-gray-50 transition-colors duration-200 hover:bg-gray-100 md:h-24 md:w-48"
+  >
+    {brand.logoUrl ? (
+      <div className="relative h-full w-full">
+        <Image
+          src={brand.logoUrl}
+          alt={brand.label}
+          fill
+          // mix-blend-multiply để nền trắng của file logo hòa vào nền thẻ.
+          className="object-contain p-5 mix-blend-multiply"
+          sizes="(max-width: 768px) 160px, 192px"
+        />
+      </div>
+    ) : (
+      <span className="truncate px-3 text-sm font-medium text-gray-700">
+        {brand.label}
+      </span>
+    )}
+  </Link>
+);
+
 const HomeBrands = async () => {
   const brands = await getFeaturedBrands();
 
   if (brands.length === 0) return null;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border-2 border-gray-50 bg-gradient-to-br from-white via-emerald-50/40 to-emerald-100/70 my-10 md:my-10 p-5 lg:p-7">
-      {/* Quầng sáng trang trí duy nhất, đặt lệch góc trái để đồng bộ với
-          HomeCategories mà không lặp lại y hệt vị trí. */}
-      <div className="pointer-events-none absolute -top-16 -left-16 h-48 w-48 rounded-full bg-shop-light-green/25 blur-3xl" />
-
-      <div className="relative border-b border-gray-300 pb-3">
-        <Title className="text-[25px]">Thương hiệu nổi bật</Title>
-        <p className="mt-1 text-sm text-gray-400">
-          Những thương hiệu được khách hàng tin dùng
-        </p>
+    <section className="my-8">
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <Title className="text-[22px]">Thương hiệu nổi bật</Title>
+        <Link
+          href="/shop"
+          className="inline-flex shrink-0 items-center text-sm text-gray-500 transition-colors hover:text-black"
+        >
+          Xem tất cả
+          <ChevronIcon className="h-4 w-4" />
+        </Link>
       </div>
 
-      <div className="relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 mt-5 pb-10">
-        {brands.map((brand, index) => {
-          const imageSrc = resolveImage(brand.imageUrl);
+      {/* Chạy sang phải, ngược chiều với marquee danh mục. */}
+      <MarqueeRow direction="right" speed={35}>
+        {brands.map((brand) => (
+          <BrandItem key={brand.key} brand={brand} />
+        ))}
+      </MarqueeRow>
 
-          return (
-            <Link
-              key={brand.key}
-              href={`/shop?brand=${encodeURIComponent(brand.label)}`}
-              className="group flex flex-col overflow-hidden rounded-xl border-2 border-emerald-200 bg-white opacity-0 animate-[brand-in_0.5s_ease-out_forwards] transition-all duration-300 hover:-translate-y-1 hover:border-shop-light-green hover:shadow-lg"
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-              <div
-                className={`relative w-full aspect-square overflow-hidden ${
-                  brand.isLogo
-                    ? "bg-white"
-                    : "bg-gradient-to-br from-emerald-50 to-emerald-100"
-                }`}
-              >
-                {imageSrc ? (
-                  <Image
-                    src={imageSrc}
-                    alt={brand.label}
-                    fill
-                    className={
-                      brand.isLogo
-                        ? "object-contain p-4 group-hover:scale-105 transition-transform duration-300"
-                        : "object-cover group-hover:scale-110 transition-transform duration-300"
-                    }
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-xs text-gray-400">
-                    Không có ảnh
-                  </div>
-                )}
-              </div>
-              <p className="text-center text-xs font-semibold text-shop_dark_green py-2 truncate px-1 border-t-2 border-emerald-100">
-                {brand.label}
-              </p>
-            </Link>
-          );
-        })}
-      </div>
-
-      <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 mb-2 rounded-xl border border-emerald-100/70 bg-white p-4">
+      <div className="mt-6 grid grid-cols-1 gap-4 border-t border-gray-200 pt-6 sm:grid-cols-2 md:grid-cols-4 md:gap-0">
         {features.map((feature) => {
           const Icon = feature.icon;
           return (
-            <div
-              key={feature.title}
-              className="group flex items-center gap-3 rounded-lg p-2 transition-colors duration-300 hover:bg-emerald-50/60"
-            >
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-emerald-50 transition-colors duration-300 group-hover:bg-shop-light-green/15">
-                <Icon
-                  size={26}
-                  strokeWidth={1.75}
-                  className="text-shop_dark_green transition-colors duration-300 group-hover:text-shop-light-green"
-                />
-              </div>
+            <div key={feature.title} className="flex items-center gap-3 md:pr-5">
+              <Icon
+                size={26}
+                strokeWidth={1.5}
+                className="shrink-0 text-gray-700"
+              />
               <div className="flex flex-col">
-                <span className="text-sm font-semibold text-darkColor">
+                <span className="text-sm font-medium text-gray-900">
                   {feature.title}
                 </span>
                 <span className="text-xs text-gray-500">
@@ -198,26 +180,7 @@ const HomeBrands = async () => {
           );
         })}
       </div>
-
-      <style>{`
-        @keyframes brand-in {
-          from {
-            opacity: 0;
-            transform: translateY(6px) scale(0.96);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-\\[brand-in_0\\.5s_ease-out_forwards\\] {
-            animation: none;
-            opacity: 1;
-          }
-        }
-      `}</style>
-    </div>
+    </section>
   );
 };
 

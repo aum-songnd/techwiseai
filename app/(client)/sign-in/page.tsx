@@ -4,12 +4,14 @@ import React, { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { isAdminUser } from "@/lib/auth";
 
 const SignInForm = () => {
   const { login } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const justRegistered = searchParams.get("registered") === "1";
+  const sessionExpired = searchParams.get("expired") === "1";
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +25,9 @@ const SignInForm = () => {
 
     try {
       await login(username, password);
-      router.push("/");
+      // Admin đi thẳng /admin, không qua trang khách.
+      // Yêu cầu login() đã lưu token/user vào localStorage trước khi resolve.
+      router.replace(isAdminUser() ? "/admin" : "/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Đăng nhập thất bại");
     } finally {
@@ -39,6 +43,12 @@ const SignInForm = () => {
         {justRegistered && (
           <p className="text-sm text-center text-green-600 bg-green-50 rounded-lg py-2 px-3">
             Đăng ký thành công! Vui lòng đăng nhập.
+          </p>
+        )}
+
+        {sessionExpired && (
+          <p className="text-sm text-center text-amber-700 bg-amber-50 rounded-lg py-2 px-3">
+            Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.
           </p>
         )}
 

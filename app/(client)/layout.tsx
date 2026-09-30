@@ -4,6 +4,7 @@ import "../globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AdminRedirect from "@/components/AdminRedirect";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { FavoriteProvider } from "@/context/FavoriteContext";
@@ -37,11 +38,15 @@ export default function RootLayout({
           <CartProvider>
             <FavoriteProvider>
               <TooltipProvider>
-                <div className="flex flex-col min-h-screen">
-                  <Header />
-                  <main className="flex-1">{children}</main>
-                  <Footer />
-                </div>
+                {/* Admin vào trang khách -> chuyển thẳng sang /admin,
+                    không render Header/Footer/nội dung khách. */}
+                <AdminRedirect>
+                  <div className="flex flex-col min-h-screen">
+                    <Header />
+                    <main className="flex-1">{children}</main>
+                    <Footer />
+                  </div>
+                </AdminRedirect>
               </TooltipProvider>
             </FavoriteProvider>
           </CartProvider>
