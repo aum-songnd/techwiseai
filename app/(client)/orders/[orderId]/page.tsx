@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { PackageSearch } from "lucide-react";
+import { Check, PackageSearch } from "lucide-react";
 import {
   cancelOrder,
   getOrderById,
@@ -28,7 +28,6 @@ const formatDateTime = (iso: string) => {
   }
 };
 
-// Nhãn hiển thị cho từng trạng thái, theo đúng luồng đã kiểm thử:
 // PENDING → CONFIRMED → PROCESSING → SHIPPING → DELIVERED, CANCELLED.
 const STATUS_LABEL: Record<OrderStatus, string> = {
   PENDING: "Chờ xác nhận",
@@ -39,10 +38,33 @@ const STATUS_LABEL: Record<OrderStatus, string> = {
   CANCELLED: "Đã hủy",
 };
 
+// Mô tả ngắn cho từng bước để khách biết đơn đang ở đâu.
+const STATUS_DESCRIPTION: Record<OrderStatus, string> = {
+  PENDING: "Cửa hàng đã nhận đơn và đang chờ xác nhận.",
+  CONFIRMED: "Đơn hàng đã được xác nhận, sắp chuẩn bị hàng.",
+  PROCESSING: "Cửa hàng đang chuẩn bị và đóng gói sản phẩm.",
+  SHIPPING: "Đơn hàng đang trên đường giao đến bạn.",
+  DELIVERED: "Đơn hàng đã được giao thành công.",
+  CANCELLED: "Đơn hàng đã bị hủy.",
+};
+
+// Các bước xử lý theo đúng thứ tự (không gồm CANCELLED).
+const PROGRESS_STEPS: OrderStatus[] = [
+  "PENDING",
+  "CONFIRMED",
+  "PROCESSING",
+  "SHIPPING",
+  "DELIVERED",
+];
+
 // Chỉ cho phép khách tự hủy khi đơn còn ở giai đoạn sớm. Cần đối chiếu
 // lại với luồng thật của backend (mục 8.1 đặc tả) nếu PROCESSING trở đi
 // vẫn còn cho phép hủy.
 const CANCELLABLE_STATUSES: OrderStatus[] = ["PENDING", "CONFIRMED"];
+
+// Đơn còn đang được xử lý thì tự làm mới trạng thái định kỳ.
+const FINAL_STATUSES: OrderStatus[] = ["DELIVERED", "CANCELLED"];
+const POLL_INTERVAL_MS = 15000;
 
 const OrderDetailPage = () => {
   const params = useParams<{ orderId: string }>();
@@ -54,24 +76,32 @@ const OrderDetailPage = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isCancelling, setIsCancelling] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [justPlaced, setJustPlaced] = useState(false);
 
+  // Trang checkout chuyển sang đây kèm ?placed=1 -> hiện thông báo đặt
+  // hàng thành công. Đọc bằng window để không phải bọc Suspense.
   useEffect(() => {
-    if (!orderId) return;
+    const placed = new URLSearchParams(window.location.search).get("placed");
+    if (placed === "1") setJustPlaced(true);
+  }, []);
 
-    let ignore = false;
-
-    const load = async () => {
-      setIsLoading(true);
-      setErrorMessage(null);
+  const load = useCallback(
+    async (isCancelled: () => boolean, silent = false) => {
+      if (!orderId) return;
+      if (!silent) {
+        setIsLoading(true);
+        setErrorMessage(null);
+      }
       try {
         const data = await getOrderById(orderId);
-        if (!ignore) setOrder(data);
+        if (!isCancelled()) setOrder(data);
       } catch (err) {
         if (err instanceof OrderAuthRequiredError) {
           router.push("/sign-in");
           return;
         }
-        if (!ignore) {
+        // Lần làm mới ngầm thất bại thì giữ nguyên dữ liệu đang hiển thị.
+        if (!silent && !isCancelled()) {
           setErrorMessage(
             err instanceof Error
               ? err.message
@@ -79,15 +109,38 @@ const OrderDetailPage = () => {
           );
         }
       } finally {
-        if (!ignore) setIsLoading(false);
+        if (!silent && !isCancelled()) setIsLoading(false);
       }
-    };
+    },
+    [orderId, router]
+  );
 
-    load();
+  // Tải lần đầu.
+  useEffect(() => {
+    let ignore = false;
+    load(() => ignore);
     return () => {
       ignore = true;
     };
-  }, [orderId, router]);
+  }, [load]);
+
+  // Tự làm mới trạng thái khi đơn chưa ở trạng thái cuối.
+  const currentStatus = order?.status;
+  useEffect(() => {
+    if (!currentStatus || FINAL_STATUSES.includes(currentStatus)) return;
+
+    let ignore = false;
+    const timer = setInterval(() => {
+      if (document.visibilityState === "visible") {
+        load(() => ignore, true);
+      }
+    }, POLL_INTERVAL_MS);
+
+    return () => {
+      ignore = true;
+      clearInterval(timer);
+    };
+  }, [currentStatus, load]);
 
   const handleCancel = async () => {
     if (!orderId) return;
@@ -96,6 +149,7 @@ const OrderDetailPage = () => {
       const updated = await cancelOrder(orderId);
       setOrder(updated);
       setIsConfirmOpen(false);
+      setJustPlaced(false);
     } catch (err) {
       setErrorMessage(
         err instanceof Error ? err.message : "Hủy đơn hàng thất bại."
@@ -134,9 +188,35 @@ const OrderDetailPage = () => {
   if (!order) return null;
 
   const canCancel = CANCELLABLE_STATUSES.includes(order.status);
+  const isCancelled = order.status === "CANCELLED";
+  const currentStepIndex = PROGRESS_STEPS.indexOf(order.status);
+
+  // Thời điểm đơn chuyển sang từng bước (lấy lần ghi nhận gần nhất).
+  const stepTimes: Partial<Record<OrderStatus, string>> = {};
+  for (const entry of order.statusHistory ?? []) {
+    stepTimes[entry.status] = entry.changedAt;
+  }
+  if (!stepTimes.PENDING) stepTimes.PENDING = order.createdAt;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
+      {justPlaced && !isCancelled && (
+        <div className="mb-6 flex items-start gap-3 rounded-lg border border-shop_dark_green/20 bg-shop_dark_green/5 p-4">
+          <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-shop_dark_green text-white">
+            <Check className="h-3 w-3" strokeWidth={3} />
+          </div>
+          <div className="text-sm">
+            <p className="font-semibold text-shop_dark_green">
+              Đặt hàng thành công
+            </p>
+            <p className="text-gray-600 mt-0.5">
+              Cửa hàng sẽ xác nhận đơn của bạn sớm. Bạn có thể theo dõi tiến
+              trình xử lý ngay bên dưới.
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-shop_dark_green">
@@ -148,7 +228,7 @@ const OrderDetailPage = () => {
         </div>
         <span
           className={`text-xs font-semibold px-3 py-1.5 rounded-full ${
-            order.status === "CANCELLED"
+            isCancelled
               ? "bg-red-50 text-red-500"
               : order.status === "DELIVERED"
               ? "bg-green-50 text-green-600"
@@ -162,6 +242,99 @@ const OrderDetailPage = () => {
       {errorMessage && (
         <p className="text-sm text-red-500 mb-4">{errorMessage}</p>
       )}
+
+      {/* Tiến trình xử lý đơn hàng */}
+      <div className="border border-gray-200 rounded-lg p-5 mb-6">
+        <h2 className="font-bold text-shop_dark_green mb-1">
+          Tiến trình đơn hàng
+        </h2>
+        <p className="text-sm text-gray-500 mb-5">
+          {STATUS_DESCRIPTION[order.status]}
+        </p>
+
+        {isCancelled ? (
+          <div className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-500">
+            Đơn hàng đã hủy
+            {stepTimes.CANCELLED
+              ? ` lúc ${formatDateTime(stepTimes.CANCELLED)}`
+              : ""}
+            . Tồn kho đã được hoàn lại.
+          </div>
+        ) : (
+          <ol className="flex flex-col md:flex-row md:items-start">
+            {PROGRESS_STEPS.map((step, idx) => {
+              const isDone = idx < currentStepIndex;
+              const isCurrent = idx === currentStepIndex;
+              const isLast = idx === PROGRESS_STEPS.length - 1;
+              // Đơn đã giao xong thì bước cuối cũng tính là hoàn thành.
+              const showCheck = isDone || (isCurrent && step === "DELIVERED");
+              const time = stepTimes[step];
+
+              return (
+                <li
+                  key={step}
+                  className="relative flex md:flex-1 md:flex-col md:items-center gap-3 md:gap-2 pb-6 md:pb-0 last:pb-0"
+                  aria-current={isCurrent ? "step" : undefined}
+                >
+                  {/* Đường nối */}
+                  {!isLast && (
+                    <>
+                      <span
+                        aria-hidden
+                        className={`absolute left-[13px] top-7 bottom-0 w-0.5 md:hidden ${
+                          isDone ? "bg-shop_dark_green" : "bg-gray-200"
+                        }`}
+                      />
+                      <span
+                        aria-hidden
+                        className={`hidden md:block absolute top-[13px] left-1/2 h-0.5 w-full ${
+                          isDone ? "bg-shop_dark_green" : "bg-gray-200"
+                        }`}
+                      />
+                    </>
+                  )}
+
+                  {/* Chấm trạng thái */}
+                  <span
+                    className={`relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-semibold ${
+                      showCheck
+                        ? "border-shop_dark_green bg-shop_dark_green text-white"
+                        : isCurrent
+                        ? "border-shop_dark_green bg-white text-shop_dark_green ring-4 ring-shop_dark_green/15"
+                        : "border-gray-300 bg-white text-gray-400"
+                    }`}
+                  >
+                    {showCheck ? (
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                    ) : (
+                      idx + 1
+                    )}
+                  </span>
+
+                  <div className="md:text-center">
+                    <p
+                      className={`text-sm ${
+                        isCurrent
+                          ? "font-semibold text-shop_dark_green"
+                          : isDone
+                          ? "font-medium text-shop_dark_green"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {STATUS_LABEL[step]}
+                    </p>
+                    {time && (isDone || isCurrent) && (
+                      <p className="text-xs text-gray-500 mt-0.5">
+                        {formatDateTime(time)}
+                      </p>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        )}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 flex flex-col gap-6">

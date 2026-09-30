@@ -6,6 +6,7 @@
 // thuộc tài khoản có ROLE_ADMIN, nếu không backend trả 403.
 
 import { getToken } from "./auth";
+import { normalizeStatusHistory } from "./orders-api";
 import type {
   OrderData,
   OrderItem,
@@ -142,7 +143,10 @@ export async function getAdminOrders(
 export async function getAdminOrderById(
   orderId: string
 ): Promise<AdminOrderDetail> {
-  return fetchAdminOrderEnvelope<AdminOrderDetail>(`/admin/orders/${orderId}`);
+  const order = await fetchAdminOrderEnvelope<AdminOrderDetail>(
+    `/admin/orders/${orderId}`
+  );
+  return { ...order, statusHistory: normalizeStatusHistory(order.statusHistory) };
 }
 
 export interface UpdateOrderStatusPayload {
@@ -160,7 +164,7 @@ export async function updateOrderStatus(
   orderId: string,
   payload: UpdateOrderStatusPayload
 ): Promise<AdminOrderDetail> {
-  return fetchAdminOrderEnvelope<AdminOrderDetail>(
+  const order = await fetchAdminOrderEnvelope<AdminOrderDetail>(
     `/admin/orders/${orderId}/status`,
     {
       method: "PATCH",
@@ -168,4 +172,5 @@ export async function updateOrderStatus(
       body: JSON.stringify(payload),
     }
   );
+  return { ...order, statusHistory: normalizeStatusHistory(order.statusHistory) };
 }

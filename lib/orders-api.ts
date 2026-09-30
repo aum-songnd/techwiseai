@@ -125,6 +125,64 @@ export interface OrderStatusHistoryEntry {
   changedAt: string;
 }
 
+// Chuẩn hoá 1 phần tử lịch sử trạng thái. Backend chưa có tài liệu về tên
+// field của statusHistory nên chấp nhận nhiều tên thường gặp; nếu vẫn
+// không tìm thấy trạng thái thì in response gốc ra console để đối chiếu.
+export function normalizeStatusHistory(raw: unknown): OrderStatusHistoryEntry[] {
+  if (!Array.isArray(raw)) return [];
+
+  const pick = (obj: Record<string, unknown>, keys: string[]) => {
+    for (const key of keys) {
+      const value = obj[key];
+      if (value !== undefined && value !== null && value !== "") return value;
+    }
+    return undefined;
+  };
+
+  return raw.map((item) => {
+    const entry = (item ?? {}) as Record<string, unknown>;
+
+    const status = pick(entry, [
+      "status",
+      "newStatus",
+      "toStatus",
+      "orderStatus",
+      "currentStatus",
+      "statusTo",
+    ]) as OrderStatus | undefined;
+
+    const changedAt = pick(entry, [
+      "changedAt",
+      "createdAt",
+      "updatedAt",
+      "changedTime",
+      "timestamp",
+      "time",
+      "date",
+    ]) as string | undefined;
+
+    const note = pick(entry, ["note", "comment", "reason", "description"]) as
+      | string
+      | undefined;
+
+    if (!status) {
+      // eslint-disable-next-line no-console
+      console.warn("[orders-api] statusHistory không có field trạng thái:", item);
+    }
+
+    return {
+      status: (status ?? "PENDING") as OrderStatus,
+      changedAt: changedAt ?? "",
+      note,
+    };
+  });
+}
+
+function withHistory<T extends { statusHistory?: unknown }>(order: T): T {
+  if (!order || order.statusHistory === undefined) return order;
+  return { ...order, statusHistory: normalizeStatusHistory(order.statusHistory) };
+}
+
 export interface CreateOrderPayload {
   recipientName: string;
   recipientPhone: string;
@@ -181,11 +239,12 @@ export interface PagedOrders {
 export async function createOrder(
   payload: CreateOrderPayload
 ): Promise<OrderData> {
-  return fetchOrderEnvelope<OrderData>("/orders", {
+  const order = await fetchOrderEnvelope<OrderData>("/orders", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
+  return withHistory(order);
 }
 
 export async function getOrders(page = 0, size = 10): Promise<PagedOrders> {
@@ -212,13 +271,16 @@ export async function getOrders(page = 0, size = 10): Promise<PagedOrders> {
 }
 
 export async function getOrderById(orderId: string): Promise<OrderData> {
-  return fetchOrderEnvelope<OrderData>(`/orders/${orderId}`);
+  const order = await fetchOrderEnvelope<OrderData>(`/orders/${orderId}`);
+  return withHistory(order);
 }
 
 export async function cancelOrder(orderId: string): Promise<OrderData> {
-  return fetchOrderEnvelope<OrderData>(`/orders/${orderId}/cancel`, {
-    method: "PATCH",
-  });
+  const order = await fetchOrderEnvelope<OrderData>(
+    `/orders/${orderId}/cancel`,
+    { method: "PATCH" }
+  );
+  return withHistory(order);
 }
 
 // ---------- PAYMENTS ----------
