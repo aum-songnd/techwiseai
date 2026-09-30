@@ -1,24 +1,40 @@
-import React from 'react'
-import Image from 'next/image'
-import { Title } from './ui/text'
-import Link from 'next/link' 
-import { banner_1 } from '@/images'
+import React from "react";
+import { banner_1 } from "@/images";
+import BannerCarousel, { type BannerSlide } from "./BannerCarousel";
+
+// === ĐỔI Ở ĐÂY === thêm/sửa/xóa banner bằng cách chỉnh mảng này.
+// Hiện mới có banner_1 trong "@/images" nên cả 3 slide đang dùng chung ảnh
+// đó làm chỗ giữ chỗ. Có ảnh mới thì import thêm (vd banner_2, banner_3)
+// rồi thay vào trường `image`.
+const slides: BannerSlide[] = [
+  {
+    id: "headphone-sale",
+    titleLines: ["Giảm đến 50%", "cho tai nghe chọn lọc"],
+    buttonLabel: "Mua ngay",
+    href: "/shop",
+    image: banner_1,
+    bgClass: "bg-shop_light_pink",
+  },
+  {
+    id: "new-arrivals",
+    titleLines: ["Sản phẩm mới về", "khám phá ngay hôm nay"],
+    buttonLabel: "Xem ngay",
+    href: "/shop",
+    image: banner_1,
+    bgClass: "bg-gray-100",
+  },
+  {
+    id: "free-shipping",
+    titleLines: ["Miễn phí giao hàng", "cho đơn từ 100$"],
+    buttonLabel: "Mua sắm ngay",
+    href: "/shop",
+    image: banner_1,
+    bgClass: "bg-emerald-50",
+  },
+];
 
 const HomeBanner = () => {
-  return (
-    <div className='py-16 md:py-0 bg-shop_light_pink rounded-lg px-10 lg:px-24 flex items-center  justify-between'>
-        <div className='space-y-5'>
-            <Title> Grab Upto 50% off on <br />
-              Selected headphone
-            </Title>
-            <Link href={"/shop"} className='bg-shop_btn_dark_green/90 text-white/90 px-5 py-2 rounded-md text-sm font-semibold hover:text-white
-            hover:bg-shop_dark_green hoverEffect'>Buy now </Link>
-        </div>
-        <div>
-          <Image src={banner_1} alt="banner_1" className="hidden md:inline-flex w-96"/>
-        </div>
-    </div>
-  )
-}
+  return <BannerCarousel slides={slides} />;
+};
 
-export default HomeBanner
+export default HomeBanner;
