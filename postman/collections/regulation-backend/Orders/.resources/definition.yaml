@@ -1,4 +1,0 @@
-$kind: collection
-name: Orders
-description: Customer order management. Requires CUSTOMER role.
-order: 6000

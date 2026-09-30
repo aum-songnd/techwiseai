@@ -1,4 +1,0 @@
-$kind: collection
-name: Chat
-description: AI chat assistant endpoint.
-order: 8000

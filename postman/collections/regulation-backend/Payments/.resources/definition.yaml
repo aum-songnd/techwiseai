@@ -1,4 +1,0 @@
-$kind: collection
-name: Payments
-description: Payment creation and VNPay callback handling.
-order: 7000

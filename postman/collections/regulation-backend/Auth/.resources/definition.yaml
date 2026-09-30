@@ -1,4 +1,0 @@
-$kind: collection
-name: Auth
-description: Authentication endpoints — login and register.
-order: 1000

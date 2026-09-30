@@ -1,4 +1,0 @@
-$kind: collection
-name: Favorites
-description: Wishlist / favorites management. Requires authentication.
-order: 5000

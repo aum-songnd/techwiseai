@@ -1,9 +1,0 @@
-$kind: http-request
-name: Delete Product
-order: 3000
-method: DELETE
-url: '{{baseUrl}}/api/v1/admin/{{productId}}'
-pathVariables:
-  - key: productId
-    value: '{{productId}}'
-    description: UUID of the product to delete

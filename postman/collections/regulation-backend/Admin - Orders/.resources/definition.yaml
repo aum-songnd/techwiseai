@@ -1,4 +1,0 @@
-$kind: collection
-name: Admin - Orders
-description: Admin endpoints for order management. Requires ADMIN role.
-order: 12000

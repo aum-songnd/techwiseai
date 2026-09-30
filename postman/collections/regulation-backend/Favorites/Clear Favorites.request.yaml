@@ -1,5 +1,0 @@
-$kind: http-request
-name: Clear Favorites
-order: 5000
-method: DELETE
-url: '{{baseUrl}}/api/v1/favorites'

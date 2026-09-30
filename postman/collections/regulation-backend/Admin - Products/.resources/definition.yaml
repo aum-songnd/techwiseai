@@ -1,4 +1,0 @@
-$kind: collection
-name: Admin - Products
-description: Admin endpoints for product management. Requires ADMIN role.
-order: 10000

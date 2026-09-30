@@ -1,5 +1,0 @@
-$kind: http-request
-name: Get Favorites
-order: 1000
-method: GET
-url: '{{baseUrl}}/api/v1/favorites'
