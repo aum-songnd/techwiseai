@@ -51,16 +51,42 @@ const BRAND_LOGOS: Record<string, string> = {
   microsoft: "/microsoft.png",
 };
 
-// Mỗi thẻ có 2 lớp viền dày xếp sát nhau phía sau, mỗi lớp một màu pastel.
+// Mỗi thẻ có một tông màu pastel riêng: nền thẻ gần như trắng (chỉ ám nhẹ
+// ở góc để logo vẫn nổi), cùng 2 lớp viền dày cùng tông xếp sát phía sau.
 // Lặp vòng theo index nên brand mới vẫn hoạt động. Viết đủ tên class để
 // Tailwind không purge. outer = lớp xa thẻ nhất, inner = lớp sát thẻ.
-// Bảng màu khác HomeCategories để 2 hàng cạnh nhau không trùng màu ở
-// cùng vị trí.
+// Thứ tự màu lệch so với HomeCategories để 2 hàng không trùng màu cùng vị trí.
 const LAYER_PALETTES = [
-  { outer: "border-amber-200 bg-amber-50", inner: "border-emerald-200 bg-emerald-50" },
-  { outer: "border-sky-200 bg-sky-50", inner: "border-violet-200 bg-violet-50" },
-  { outer: "border-lime-200 bg-lime-50", inner: "border-rose-200 bg-rose-50" },
-  { outer: "border-cyan-200 bg-cyan-50", inner: "border-fuchsia-200 bg-fuchsia-50" },
+  {
+    card: "border-violet-100 bg-gradient-to-br from-white via-white to-violet-50",
+    inner: "border-violet-200 bg-violet-50",
+    outer: "border-violet-100 bg-violet-50/60",
+  },
+  {
+    card: "border-cyan-100 bg-gradient-to-br from-white via-white to-cyan-50",
+    inner: "border-cyan-200 bg-cyan-50",
+    outer: "border-cyan-100 bg-cyan-50/60",
+  },
+  {
+    card: "border-emerald-100 bg-gradient-to-br from-white via-white to-emerald-50",
+    inner: "border-emerald-200 bg-emerald-50",
+    outer: "border-emerald-100 bg-emerald-50/60",
+  },
+  {
+    card: "border-amber-100 bg-gradient-to-br from-white via-white to-amber-50",
+    inner: "border-amber-200 bg-amber-50",
+    outer: "border-amber-100 bg-amber-50/60",
+  },
+  {
+    card: "border-sky-100 bg-gradient-to-br from-white via-white to-sky-50",
+    inner: "border-sky-200 bg-sky-50",
+    outer: "border-sky-100 bg-sky-50/60",
+  },
+  {
+    card: "border-rose-100 bg-gradient-to-br from-white via-white to-rose-50",
+    inner: "border-rose-200 bg-rose-50",
+    outer: "border-rose-100 bg-rose-50/60",
+  },
 ];
 
 type BrandCard = {
@@ -140,13 +166,15 @@ const BrandItem = ({ brand, index }: { brand: BrandCard; index: number }) => {
           className={`absolute inset-0 -translate-y-1 translate-x-1.5 rounded-xl border-2 ${palette.inner}`}
         />
 
-        <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <div
+          className={`relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl border shadow-sm shadow-black/5 ${palette.card}`}
+        >
           {brand.logoUrl ? (
             <Image
               src={brand.logoUrl}
               alt={brand.label}
               fill
-              className="object-contain p-5"
+              className="object-contain p-5 mix-blend-multiply"
               sizes="(max-width: 768px) 176px, 208px"
             />
           ) : (

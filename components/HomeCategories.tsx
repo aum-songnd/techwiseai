@@ -25,14 +25,41 @@ const CATEGORY_IMAGE_BY_TITLE: Record<string, string> = {
   "phụ kiện": "/accessory.webp",
 };
 
-// Mỗi thẻ có 2 lớp viền dày xếp sát nhau phía sau, mỗi lớp một màu pastel.
+// Mỗi thẻ có một tông màu pastel riêng: nền thẻ chuyển sắc nhẹ (trắng ở
+// giữa, đậm dần ra 2 góc), cùng 2 lớp viền dày cùng tông xếp sát phía sau.
 // Lặp vòng theo index nên danh mục mới vẫn hoạt động. Viết đủ tên class
 // để Tailwind không purge. outer = lớp xa thẻ nhất, inner = lớp sát thẻ.
 const LAYER_PALETTES = [
-  { outer: "border-violet-200 bg-violet-50", inner: "border-sky-200 bg-sky-50" },
-  { outer: "border-fuchsia-200 bg-fuchsia-50", inner: "border-amber-200 bg-amber-50" },
-  { outer: "border-emerald-200 bg-emerald-50", inner: "border-cyan-200 bg-cyan-50" },
-  { outer: "border-amber-200 bg-amber-50", inner: "border-lime-200 bg-lime-50" },
+  {
+    card: "border-cyan-100 bg-gradient-to-br from-cyan-50 via-white to-cyan-100",
+    inner: "border-cyan-200 bg-cyan-50",
+    outer: "border-cyan-100 bg-cyan-50/60",
+  },
+  {
+    card: "border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-emerald-100",
+    inner: "border-emerald-200 bg-emerald-50",
+    outer: "border-emerald-100 bg-emerald-50/60",
+  },
+  {
+    card: "border-amber-100 bg-gradient-to-br from-amber-50 via-white to-amber-100",
+    inner: "border-amber-200 bg-amber-50",
+    outer: "border-amber-100 bg-amber-50/60",
+  },
+  {
+    card: "border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-100",
+    inner: "border-sky-200 bg-sky-50",
+    outer: "border-sky-100 bg-sky-50/60",
+  },
+  {
+    card: "border-rose-100 bg-gradient-to-br from-rose-50 via-white to-rose-100",
+    inner: "border-rose-200 bg-rose-50",
+    outer: "border-rose-100 bg-rose-50/60",
+  },
+  {
+    card: "border-violet-100 bg-gradient-to-br from-violet-50 via-white to-violet-100",
+    inner: "border-violet-200 bg-violet-50",
+    outer: "border-violet-100 bg-violet-50/60",
+  },
 ];
 
 const normalizeTitle = (title: string) => title.trim().toLowerCase();
@@ -86,13 +113,15 @@ const CategoryItem = ({
           className={`absolute inset-0 -translate-y-1 translate-x-1.5 rounded-xl border-2 ${palette.inner}`}
         />
 
-        <div className="relative h-full w-full overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
+        <div
+          className={`relative h-full w-full overflow-hidden rounded-xl border shadow-sm shadow-black/5 ${palette.card}`}
+        >
           {imageSrc ? (
             <Image
               src={imageSrc}
               alt={category.title}
               fill
-              // mix-blend-multiply để nền trắng của ảnh hòa vào nền xám nhạt.
+              // mix-blend-multiply để nền trắng của ảnh hòa vào màu nền thẻ.
               className="object-contain p-4 mix-blend-multiply"
               sizes="(max-width: 768px) 192px, 224px"
             />
