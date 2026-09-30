@@ -51,44 +51,6 @@ const BRAND_LOGOS: Record<string, string> = {
   microsoft: "/microsoft.png",
 };
 
-// Mỗi thẻ có một tông màu pastel riêng: nền thẻ gần như trắng (chỉ ám nhẹ
-// ở góc để logo vẫn nổi), cùng 2 lớp viền dày cùng tông xếp sát phía sau.
-// Lặp vòng theo index nên brand mới vẫn hoạt động. Viết đủ tên class để
-// Tailwind không purge. outer = lớp xa thẻ nhất, inner = lớp sát thẻ.
-// Thứ tự màu lệch so với HomeCategories để 2 hàng không trùng màu cùng vị trí.
-const LAYER_PALETTES = [
-  {
-    card: "border-violet-100 bg-gradient-to-br from-white via-white to-violet-50",
-    inner: "border-violet-200 bg-violet-50",
-    outer: "border-violet-100 bg-violet-50/60",
-  },
-  {
-    card: "border-cyan-100 bg-gradient-to-br from-white via-white to-cyan-50",
-    inner: "border-cyan-200 bg-cyan-50",
-    outer: "border-cyan-100 bg-cyan-50/60",
-  },
-  {
-    card: "border-emerald-100 bg-gradient-to-br from-white via-white to-emerald-50",
-    inner: "border-emerald-200 bg-emerald-50",
-    outer: "border-emerald-100 bg-emerald-50/60",
-  },
-  {
-    card: "border-amber-100 bg-gradient-to-br from-white via-white to-amber-50",
-    inner: "border-amber-200 bg-amber-50",
-    outer: "border-amber-100 bg-amber-50/60",
-  },
-  {
-    card: "border-sky-100 bg-gradient-to-br from-white via-white to-sky-50",
-    inner: "border-sky-200 bg-sky-50",
-    outer: "border-sky-100 bg-sky-50/60",
-  },
-  {
-    card: "border-rose-100 bg-gradient-to-br from-white via-white to-rose-50",
-    inner: "border-rose-200 bg-rose-50",
-    outer: "border-rose-100 bg-rose-50/60",
-  },
-];
-
 type BrandCard = {
   key: string;
   label: string;
@@ -145,66 +107,44 @@ const ChevronIcon = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
-const BrandItem = ({ brand, index }: { brand: BrandCard; index: number }) => {
-  const palette = LAYER_PALETTES[index % LAYER_PALETTES.length];
-
-  return (
-    // mr-8 là khoảng cách giữa các thẻ (marquee không dùng gap), đủ rộng
-    // để các lớp viền nhô sang phải không đè lên thẻ kế bên.
-    <Link
-      href={`/shop?brand=${encodeURIComponent(brand.label)}`}
-      className="group mr-8 flex w-44 shrink-0 flex-col md:w-52"
-    >
-      <div className="relative h-24 w-full transition-transform duration-300 group-hover:-translate-y-1 md:h-28">
-        {/* 2 lớp viền dày, màu khác nhau, xếp sát phía sau thẻ chính */}
-        <div
-          aria-hidden="true"
-          className={`absolute inset-0 -translate-y-2 translate-x-3 rounded-xl border-2 ${palette.outer}`}
+const BrandItem = ({ brand }: { brand: BrandCard }) => (
+  // mr-4 là khoảng cách giữa các thẻ (marquee không dùng gap).
+  <Link
+    href={`/shop?brand=${encodeURIComponent(brand.label)}`}
+    title={brand.label}
+    className="mr-4 flex h-20 w-40 shrink-0 items-center justify-center rounded-xl bg-gray-50 transition-colors duration-200 hover:bg-gray-100 md:h-24 md:w-48"
+  >
+    {brand.logoUrl ? (
+      <div className="relative h-full w-full">
+        <Image
+          src={brand.logoUrl}
+          alt={brand.label}
+          fill
+          // mix-blend-multiply để nền trắng của file logo hòa vào nền thẻ.
+          className="object-contain p-5 mix-blend-multiply"
+          sizes="(max-width: 768px) 160px, 192px"
         />
-        <div
-          aria-hidden="true"
-          className={`absolute inset-0 -translate-y-1 translate-x-1.5 rounded-xl border-2 ${palette.inner}`}
-        />
-
-        <div
-          className={`relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl border shadow-sm shadow-black/5 ${palette.card}`}
-        >
-          {brand.logoUrl ? (
-            <Image
-              src={brand.logoUrl}
-              alt={brand.label}
-              fill
-              className="object-contain p-5 mix-blend-multiply"
-              sizes="(max-width: 768px) 176px, 208px"
-            />
-          ) : (
-            <span className="truncate px-3 text-base font-semibold text-gray-700">
-              {brand.label}
-            </span>
-          )}
-        </div>
       </div>
-
-      <span className="mt-3 line-clamp-1 text-left text-sm font-medium text-gray-700 transition-colors group-hover:text-shop-light-green">
+    ) : (
+      <span className="truncate px-3 text-sm font-medium text-gray-700">
         {brand.label}
       </span>
-    </Link>
-  );
-};
+    )}
+  </Link>
+);
 
 const HomeBrands = async () => {
   const brands = await getFeaturedBrands();
 
   if (brands.length === 0) return null;
 
-  // Không có khung viền/nền bao quanh cả section.
   return (
     <section className="my-8">
       <div className="mb-4 flex items-center justify-between gap-4">
         <Title className="text-[22px]">Thương hiệu nổi bật</Title>
         <Link
           href="/shop"
-          className="inline-flex shrink-0 items-center text-sm text-gray-500 transition-colors hover:text-shop-light-green"
+          className="inline-flex shrink-0 items-center text-sm text-gray-500 transition-colors hover:text-black"
         >
           Xem tất cả
           <ChevronIcon className="h-4 w-4" />
@@ -213,26 +153,23 @@ const HomeBrands = async () => {
 
       {/* Chạy sang phải, ngược chiều với marquee danh mục. */}
       <MarqueeRow direction="right" speed={35}>
-        {brands.map((brand, index) => (
-          <BrandItem key={brand.key} brand={brand} index={index} />
+        {brands.map((brand) => (
+          <BrandItem key={brand.key} brand={brand} />
         ))}
       </MarqueeRow>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 border-t border-gray-200 pt-6 sm:grid-cols-2 md:grid-cols-4 md:gap-0 md:divide-x md:divide-gray-200">
+      <div className="mt-6 grid grid-cols-1 gap-4 border-t border-gray-200 pt-6 sm:grid-cols-2 md:grid-cols-4 md:gap-0">
         {features.map((feature) => {
           const Icon = feature.icon;
           return (
-            <div
-              key={feature.title}
-              className="flex items-center gap-3 md:px-5 md:first:pl-0 md:last:pr-0"
-            >
+            <div key={feature.title} className="flex items-center gap-3 md:pr-5">
               <Icon
-                size={30}
+                size={26}
                 strokeWidth={1.5}
-                className="shrink-0 text-shop_dark_green"
+                className="shrink-0 text-gray-700"
               />
               <div className="flex flex-col">
-                <span className="text-sm font-semibold text-darkColor">
+                <span className="text-sm font-medium text-gray-900">
                   {feature.title}
                 </span>
                 <span className="text-xs text-gray-500">

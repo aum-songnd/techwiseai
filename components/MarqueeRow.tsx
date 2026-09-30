@@ -38,9 +38,6 @@ const MarqueeRow = ({
       pauseOnHover
       autoFill
       gradient={false}
-      // pt-3: chừa chỗ cho các lớp viền nhô lên phía trên thẻ (container
-      // của marquee có overflow hidden nên sẽ cắt mất nếu không có padding).
-      className="pt-3 pb-1"
     >
       {children}
     </Marquee>

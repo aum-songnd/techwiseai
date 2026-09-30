@@ -25,43 +25,6 @@ const CATEGORY_IMAGE_BY_TITLE: Record<string, string> = {
   "phụ kiện": "/accessory.webp",
 };
 
-// Mỗi thẻ có một tông màu pastel riêng: nền thẻ chuyển sắc nhẹ (trắng ở
-// giữa, đậm dần ra 2 góc), cùng 2 lớp viền dày cùng tông xếp sát phía sau.
-// Lặp vòng theo index nên danh mục mới vẫn hoạt động. Viết đủ tên class
-// để Tailwind không purge. outer = lớp xa thẻ nhất, inner = lớp sát thẻ.
-const LAYER_PALETTES = [
-  {
-    card: "border-cyan-100 bg-gradient-to-br from-cyan-50 via-white to-cyan-100",
-    inner: "border-cyan-200 bg-cyan-50",
-    outer: "border-cyan-100 bg-cyan-50/60",
-  },
-  {
-    card: "border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-emerald-100",
-    inner: "border-emerald-200 bg-emerald-50",
-    outer: "border-emerald-100 bg-emerald-50/60",
-  },
-  {
-    card: "border-amber-100 bg-gradient-to-br from-amber-50 via-white to-amber-100",
-    inner: "border-amber-200 bg-amber-50",
-    outer: "border-amber-100 bg-amber-50/60",
-  },
-  {
-    card: "border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-100",
-    inner: "border-sky-200 bg-sky-50",
-    outer: "border-sky-100 bg-sky-50/60",
-  },
-  {
-    card: "border-rose-100 bg-gradient-to-br from-rose-50 via-white to-rose-100",
-    inner: "border-rose-200 bg-rose-50",
-    outer: "border-rose-100 bg-rose-50/60",
-  },
-  {
-    card: "border-violet-100 bg-gradient-to-br from-violet-50 via-white to-violet-100",
-    inner: "border-violet-200 bg-violet-50",
-    outer: "border-violet-100 bg-violet-50/60",
-  },
-];
-
 const normalizeTitle = (title: string) => title.trim().toLowerCase();
 
 const resolveCategoryImage = (
@@ -85,55 +48,33 @@ const ChevronIcon = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
-const CategoryItem = ({
-  category,
-  index,
-}: {
-  category: CategoryWithImage;
-  index: number;
-}) => {
+const CategoryItem = ({ category }: { category: CategoryWithImage }) => {
   const imageSrc = resolveCategoryImage(category);
-  const palette = LAYER_PALETTES[index % LAYER_PALETTES.length];
 
   return (
-    // mr-8 là khoảng cách giữa các thẻ (marquee không dùng gap), đủ rộng
-    // để các lớp viền nhô sang phải không đè lên thẻ kế bên.
+    // mr-4 là khoảng cách giữa các thẻ (marquee không dùng gap).
     <Link
       href={`/shop?category=${category.slug}`}
-      className="group mr-8 flex w-48 shrink-0 flex-col md:w-56"
+      className="group mr-4 flex w-44 shrink-0 flex-col md:w-52"
     >
-      <div className="relative h-32 w-full transition-transform duration-300 group-hover:-translate-y-1 md:h-40">
-        {/* 2 lớp viền dày, màu khác nhau, xếp sát phía sau thẻ chính */}
-        <div
-          aria-hidden="true"
-          className={`absolute inset-0 -translate-y-2 translate-x-3 rounded-xl border-2 ${palette.outer}`}
-        />
-        <div
-          aria-hidden="true"
-          className={`absolute inset-0 -translate-y-1 translate-x-1.5 rounded-xl border-2 ${palette.inner}`}
-        />
-
-        <div
-          className={`relative h-full w-full overflow-hidden rounded-xl border shadow-sm shadow-black/5 ${palette.card}`}
-        >
-          {imageSrc ? (
-            <Image
-              src={imageSrc}
-              alt={category.title}
-              fill
-              // mix-blend-multiply để nền trắng của ảnh hòa vào màu nền thẻ.
-              className="object-contain p-4 mix-blend-multiply"
-              sizes="(max-width: 768px) 192px, 224px"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center text-[11px] text-gray-400">
-              Không có ảnh
-            </div>
-          )}
-        </div>
+      <div className="relative h-28 w-full overflow-hidden rounded-xl bg-gray-50 transition-colors duration-200 group-hover:bg-gray-100 md:h-36">
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt={category.title}
+            fill
+            // mix-blend-multiply để nền trắng của ảnh hòa vào nền thẻ.
+            className="object-contain p-4 mix-blend-multiply"
+            sizes="(max-width: 768px) 176px, 208px"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center text-[11px] text-gray-400">
+            Không có ảnh
+          </div>
+        )}
       </div>
 
-      <span className="mt-3 line-clamp-1 text-left text-sm font-medium text-gray-700 transition-colors group-hover:text-shop-light-green">
+      <span className="mt-2 line-clamp-1 text-sm text-gray-700 transition-colors group-hover:text-black">
         {category.title}
       </span>
     </Link>
@@ -160,14 +101,13 @@ const HomeCategories = async () => {
     return null;
   }
 
-  // Không có khung viền/nền bao quanh cả section.
   return (
     <section className="my-8">
       <div className="mb-4 flex items-center justify-between gap-4">
         <Title className="text-[22px]">Danh mục phổ biến</Title>
         <Link
           href="/shop"
-          className="inline-flex shrink-0 items-center text-sm text-gray-500 transition-colors hover:text-shop-light-green"
+          className="inline-flex shrink-0 items-center text-sm text-gray-500 transition-colors hover:text-black"
         >
           Xem tất cả
           <ChevronIcon className="h-4 w-4" />
@@ -175,8 +115,8 @@ const HomeCategories = async () => {
       </div>
 
       <MarqueeRow direction="left" speed={35}>
-        {categories.map((category, index) => (
-          <CategoryItem key={category.id} category={category} index={index} />
+        {categories.map((category) => (
+          <CategoryItem key={category.id} category={category} />
         ))}
       </MarqueeRow>
     </section>
