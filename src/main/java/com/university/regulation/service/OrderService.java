@@ -27,12 +27,9 @@ import com.university.regulation.dto.order.UpdateOrderStatusRequest;
 import com.university.regulation.models.cart.Cart;
 import com.university.regulation.models.cart.CartItem;
 import com.university.regulation.models.enums.OrderStatus;
-import com.university.regulation.models.enums.PaymentMethod;
-import com.university.regulation.models.enums.PaymentStatus;
 import com.university.regulation.models.order.Order;
 import com.university.regulation.models.order.OrderItem;
 import com.university.regulation.models.order.OrderStatusHistory;
-import com.university.regulation.models.payment.Payment;
 import com.university.regulation.models.product.Product;
 import com.university.regulation.models.user.User;
 import com.university.regulation.repository.CartItemRepository;
@@ -214,34 +211,34 @@ public class OrderService {
                 return toOrderDetailResponse(savedOrder);
         }
 
-        @Transactional
-        public void markCodAsPaid(UUID orderId) {
-                Payment payment = paymentRepository
-                                .findByOrderId(orderId)
-                                .orElse(null);
+        // @Transactional
+        // public void markCodAsPaid(UUID orderId) {
+        //         Payment payment = paymentRepository
+        //                         .findByOrderId(orderId)
+        //                         .orElse(null);
 
-                if (payment == null) {
-                        return;
-                }
+        //         if (payment == null) {
+        //                 return;
+        //         }
 
-                if (payment.getPaymentMethod() != PaymentMethod.COD) {
-                        return;
-                }
+        //         if (payment.getPaymentMethod() != PaymentMethod.COD) {
+        //                 return;
+        //         }
 
-                if (payment.getStatus() == PaymentStatus.PAID) {
-                        return;
-                }
+        //         if (payment.getStatus() == PaymentStatus.PAID) {
+        //                 return;
+        //         }
 
-                if (payment.getStatus() != PaymentStatus.PENDING) {
-                        throw new ResponseStatusException(
-                                        HttpStatus.BAD_REQUEST,
-                                        "Trạng thái thanh toán không hợp lệ");
-                }
+        //         if (payment.getStatus() != PaymentStatus.PENDING) {
+        //                 throw new ResponseStatusException(
+        //                                 HttpStatus.BAD_REQUEST,
+        //                                 "Trạng thái thanh toán không hợp lệ");
+        //         }
 
-                payment.setStatus(PaymentStatus.PAID);
-                payment.setPaidAt(OffsetDateTime.now());
-                payment.setFailureReason(null);
-        }
+        //         payment.setStatus(PaymentStatus.PAID);
+        //         payment.setPaidAt(OffsetDateTime.now());
+        //         payment.setFailureReason(null);
+        // }
 
         /**
          * Lấy danh sách đơn của khách hàng hiện tại.
@@ -409,7 +406,7 @@ public class OrderService {
                                 normalizeNullable(request.note()));
 
                 if (newStatus == OrderStatus.DELIVERED) {
-                        paymentService.markCodAsPaid(order.getId());
+                        paymentService.handleOrderDelivered(order.getId());
                 }
 
                 if (newStatus == OrderStatus.CANCELLED) {
