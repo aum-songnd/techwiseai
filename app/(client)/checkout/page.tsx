@@ -131,15 +131,25 @@ const CheckoutPage = () => {
         note: note.trim() || undefined,
       });
 
-      // 2) Khởi tạo phiên thanh toán cho đơn vừa tạo.
-      const payment = await createPayment({
-        orderId: order.id,
-        paymentMethod,
-      });
-
       // Giỏ hàng đã được backend xóa trong transaction tạo đơn -> đồng
-      // bộ lại state phía client cho khớp.
+      // bộ lại state phía client cho khớp (làm ngay, trước khi tạo thanh toán).
       clearCart();
+
+      // 2) Khởi tạo phiên thanh toán cho đơn vừa tạo.
+      let payment;
+      try {
+        payment = await createPayment({
+          orderId: order.id,
+          paymentMethod,
+        });
+      } catch (payErr) {
+        // Đơn đã được tạo thành công; nếu báo lỗi ở đây khách sẽ đặt lại và
+        // bị trùng đơn. Đưa khách sang trang chi tiết đơn thay vì ở lại form.
+        // eslint-disable-next-line no-console
+        console.error("[checkout] createPayment lỗi:", payErr);
+        router.push(`/orders/${order.id}?placed=1`);
+        return;
+      }
 
       if (payment.paymentUrl) {
         // VNPAY / MoMo: chuyển hướng sang cổng thanh toán.
@@ -148,7 +158,7 @@ const CheckoutPage = () => {
       }
 
       // COD hoặc phương thức không cần redirect: sang trang chi tiết đơn.
-      router.push(`/orders/${order.id}`);
+      router.push(`/orders/${order.id}?placed=1`);
     } catch (err) {
       if (err instanceof OrderAuthRequiredError) {
         router.push("/sign-in");

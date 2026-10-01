@@ -11,9 +11,8 @@ import {
   type AdminOrderDetail,
 } from "../../../../../lib/admin-orders-api";
 import {
-  getPaymentByOrder,
   type OrderStatus,
-  type PaymentData,
+  type PaymentStatus,
 } from "../../../../../lib/orders-api";
 
 const formatPrice = (value: number) =>
@@ -39,6 +38,7 @@ const STATUS_LABEL: Record<OrderStatus, string> = {
   SHIPPING: "Đang giao hàng",
   DELIVERED: "Đã giao hàng",
   CANCELLED: "Đã hủy",
+  RETURNED: "Trả hàng",
 };
 
 // Bước tiếp theo theo luồng PENDING → CONFIRMED → PROCESSING → SHIPPING
@@ -57,10 +57,22 @@ const NEXT_STEP: Partial<
 // backend từ chối, thông báo lỗi sẽ hiển thị ra bên dưới.
 const ADMIN_CANCELLABLE: OrderStatus[] = ["PENDING", "CONFIRMED", "PROCESSING"];
 
-const PAYMENT_STATUS_LABEL: Record<PaymentData["status"], string> = {
+const PAYMENT_STATUS_LABEL: Record<PaymentStatus, string> = {
   PENDING: "Chưa thanh toán",
-  COMPLETED: "Đã thanh toán",
+  PAID: "Đã thanh toán",
   FAILED: "Thanh toán thất bại",
+  CANCELLED: "Đã hủy thanh toán",
+};
+
+const PAYMENT_METHOD_LABEL: Record<string, string> = {
+  COD: "Thanh toán khi nhận hàng (COD)",
+  VNPAY: "VNPay",
+  MOMO: "MoMo",
+};
+
+const getMethodLabel = (method?: string | null): string => {
+  if (!method) return "—";
+  return PAYMENT_METHOD_LABEL[method.toUpperCase()] ?? method;
 };
 
 const AdminOrderDetailPage = () => {
@@ -69,7 +81,6 @@ const AdminOrderDetailPage = () => {
   const orderId = params?.orderId;
 
   const [order, setOrder] = useState<AdminOrderDetail | null>(null);
-  const [payment, setPayment] = useState<PaymentData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
@@ -104,14 +115,6 @@ const AdminOrderDetailPage = () => {
         }
       } finally {
         if (!ignore) setIsLoading(false);
-      }
-
-      // Thông tin thanh toán chỉ để tham khảo: lỗi/không có thì bỏ qua.
-      try {
-        const p = await getPaymentByOrder(orderId);
-        if (!ignore) setPayment(p);
-      } catch {
-        /* đơn COD có thể chưa có bản ghi thanh toán */
       }
     };
 
@@ -190,7 +193,12 @@ const AdminOrderDetailPage = () => {
 
   const next = NEXT_STEP[order.status];
   const canCancel = ADMIN_CANCELLABLE.includes(order.status);
-  const isFinal = order.status === "DELIVERED" || order.status === "CANCELLED";
+  const isFinal =
+    order.status === "DELIVERED" ||
+    order.status === "CANCELLED" ||
+    order.status === "RETURNED";
+  // Ưu tiên phương thức từ bản ghi thanh toán, fallback sang đơn hàng.
+  const paymentMethod = order.paymentMethod;
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
@@ -204,7 +212,7 @@ const AdminOrderDetailPage = () => {
       <div className="flex items-center justify-between mt-3 mb-6">
         <div>
           <h1 className="text-2xl font-bold text-shop_dark_green">
-            Đơn hàng #{order.id.slice(0, 8)}
+            Đơn hàng {order.orderCode ?? `#${order.id.slice(0, 8)}`}
           </h1>
           <p className="text-sm text-gray-500 mt-1">
             Đặt lúc {formatDateTime(order.createdAt)}
@@ -217,6 +225,8 @@ const AdminOrderDetailPage = () => {
               ? "bg-red-50 text-red-500"
               : order.status === "DELIVERED"
               ? "bg-green-50 text-green-600"
+              : order.status === "RETURNED"
+              ? "bg-orange-50 text-orange-600"
               : order.status === "PENDING"
               ? "bg-amber-50 text-amber-600"
               : "bg-shop_dark_green/10 text-shop_dark_green"
@@ -373,26 +383,26 @@ const AdminOrderDetailPage = () => {
             <div className="flex flex-col gap-2 text-sm">
               <p>
                 <span className="text-gray-500">Phương thức: </span>
-                {order.paymentMethod}
+                {getMethodLabel(paymentMethod)}
               </p>
               <p>
                 <span className="text-gray-500">Trạng thái: </span>
-                {payment
-                  ? PAYMENT_STATUS_LABEL[payment.status] ?? payment.status
-                  : order.paymentMethod === "COD"
+                {order.paymentStatus
+                  ? PAYMENT_STATUS_LABEL[order.paymentStatus] ?? order.paymentStatus
+                  : paymentMethod === "COD"
                   ? "Thu tiền khi giao hàng"
                   : "Chưa có thông tin"}
               </p>
-              {payment?.transactionNo && (
+              {order.transactionNo && (
                 <p>
                   <span className="text-gray-500">Mã giao dịch: </span>
-                  {payment.transactionNo}
+                  {order.transactionNo}
                 </p>
               )}
-              {payment?.paidAt && (
+              {order.paidAt && (
                 <p>
                   <span className="text-gray-500">Thanh toán lúc: </span>
-                  {formatDateTime(payment.paidAt)}
+                  {formatDateTime(order.paidAt)}
                 </p>
               )}
             </div>

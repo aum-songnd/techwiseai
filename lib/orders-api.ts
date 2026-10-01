@@ -108,18 +108,17 @@ function normalizePagedOrders<TRaw, TMapped>(
 
 export type PaymentMethod = "COD" | "VNPAY" | "MOMO";
 
-// Luồng: PENDING → CONFIRMED → PROCESSING → SHIPPING → DELIVERED → COMPLETED.
-// (COMPLETED = admin xác nhận hoàn tất đơn sau khi đã giao; cần backend hỗ trợ.)
-// CANCELLED chỉ được chuyển từ các trạng thái còn cho phép hủy (xem đặc tả
-// mục 8.1).
+// Khớp đúng enum của BE.
+// Luồng: PENDING → CONFIRMED → PROCESSING → SHIPPING → DELIVERED.
+// CANCELLED / RETURNED là các nhánh kết thúc khác (huỷ đơn / trả hàng).
 export type OrderStatus =
   | "PENDING"
   | "CONFIRMED"
   | "PROCESSING"
   | "SHIPPING"
   | "DELIVERED"
-  | "COMPLETED"
-  | "CANCELLED";
+  | "CANCELLED"
+  | "RETURNED";
 
 export interface OrderStatusHistoryEntry {
   status: OrderStatus;
@@ -197,26 +196,38 @@ export interface OrderItem {
   id: string;
   productId: string;
   productName: string;
+  productSku?: string;
+  // BE trả "productThumbnailUrl" (đã đối chiếu response thật); giữ thumbnailUrl
+  // làm tên dự phòng.
+  productThumbnailUrl?: string;
   thumbnailUrl?: string;
   unitPrice: number;
   quantity: number;
   subtotal: number;
 }
 
-// LƯU Ý: shape thật của response /orders (POST & GET chi tiết) CHƯA được
-// xác nhận qua DevTools như api.ts đã làm với /favorites. Cần kiểm tra
-// response thực tế và chỉnh lại field cho khớp trước khi dùng production.
+// Shape thật của GET /orders/{id} (đã đối chiếu response thực tế). Lưu ý:
+// response KHÔNG có paymentMethod / paymentStatus — thông tin thanh toán nằm
+// ở bản ghi riêng, lấy qua getPaymentByOrder (GET /payments/orders/{id}).
 export interface OrderData {
   id: string;
+  orderCode?: string;
+  userId?: string;
+  username?: string;
   status: OrderStatus;
   recipientName: string;
   recipientPhone: string;
   shippingAddress: string;
-  paymentMethod: PaymentMethod;
-  note?: string;
+  paymentMethod?: PaymentMethod;
+  note?: string | null;
   items: OrderItem[];
+  subtotal?: number;
+  discountAmount?: number;
+  shippingFee?: number;
+  totalQuantity?: number;
   totalAmount: number;
   createdAt: string;
+  updatedAt?: string;
   // Chỉ chắc chắn có khi gọi GET chi tiết đơn (/orders/{orderId}); response
   // của POST /orders có thể không kèm field này.
   statusHistory?: OrderStatusHistoryEntry[];
@@ -292,7 +303,7 @@ export interface CreatePaymentPayload {
   paymentMethod: PaymentMethod;
 }
 
-export type PaymentStatus = "PENDING" | "COMPLETED" | "FAILED";
+export type PaymentStatus = "PENDING" | "PAID" | "FAILED" | "CANCELLED";
 
 export interface PaymentData {
   paymentId: string;

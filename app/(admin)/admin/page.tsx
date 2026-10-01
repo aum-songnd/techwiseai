@@ -502,9 +502,9 @@ const AdminInventory = () => {
       <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_320px] gap-x-6 gap-y-4 items-start">
         {/* Hàng 1 (trái): tab danh mục + sắp xếp + thêm — ngang hàng với "Tổng quan tồn kho" */}
         <div className="min-w-0 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 xl:col-start-1 xl:row-start-1">
-          {/* Tabs: cuộn ngang trên mobile, wrap từ sm trở lên */}
-          <div className="-mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto sm:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="flex gap-2 w-max sm:w-auto sm:flex-wrap">
+          {/* Tabs: tự xuống dòng ở mọi kích thước màn hình */}
+          <div className="min-w-0">
+            <div className="flex flex-wrap gap-2">
               {categoryTabs.map((tab) => (
                 <button
                   key={tab.value}

@@ -13,6 +13,7 @@ import type {
   OrderStatus,
   OrderStatusHistoryEntry,
   PaymentMethod,
+  PaymentStatus,
 } from "./orders-api";
 
 const API_BASE_URL =
@@ -87,24 +88,43 @@ async function fetchAdminOrderEnvelope<T>(
 // được xác nhận thực tế, cần đối chiếu response thật khi tích hợp.
 export interface AdminOrderListItem {
   id: string;
+  orderCode?: string;
   status: OrderStatus;
   customerId?: string;
   customerName?: string;
+  username?: string;
   totalAmount: number;
   totalItems: number;
-  paymentMethod: PaymentMethod;
+  paymentMethod?: PaymentMethod;
   createdAt: string;
 }
 
+// Shape thật của GET /admin/orders/{id} (đã đối chiếu response thực tế):
+// có orderCode, userId, username, subtotal, discountAmount, shippingFee,
+// totalQuantity, updatedAt; KHÔNG có paymentMethod / paymentStatus.
 export interface AdminOrderDetail {
   id: string;
+  orderCode?: string;
   status: OrderStatus;
+  userId?: string;
+  username?: string;
   customerId?: string;
   customerName?: string;
+  subtotal?: number;
+  discountAmount?: number;
+  shippingFee?: number;
+  totalQuantity?: number;
+  updatedAt?: string;
   recipientName: string;
   recipientPhone: string;
   shippingAddress: string;
-  paymentMethod: PaymentMethod;
+  // Endpoint /payments/orders/{id} chỉ dành cho chủ đơn (admin bị 404), nên
+  // thông tin thanh toán phải nằm ngay trong response /admin/orders/{id}.
+  // Các field dưới đây là tuỳ chọn vì BE có thể chưa trả đủ.
+  paymentMethod?: PaymentMethod;
+  paymentStatus?: PaymentStatus;
+  transactionNo?: string;
+  paidAt?: string;
   note?: string;
   items: OrderItem[];
   totalAmount: number;
@@ -137,7 +157,91 @@ export async function getAdminOrders(
     ...(status ? { status } : {}),
   }).toString();
 
-  return fetchAdminOrderEnvelope<PagedAdminOrders>(`/admin/orders?${query}`);
+  const result = await fetchAdminOrderEnvelope<PagedAdminOrders>(
+    `/admin/orders?${query}`
+  );
+  // BE có thể trả danh sách ở "items" (DTO tuỳ biến) hoặc "content" (Page của
+  // Spring). Giữ nguyên cấu trúc gốc, chỉ bổ sung customerName từ username.
+  const raw = result as unknown as Record<string, unknown>;
+  const withCustomer = (list: unknown) =>
+    (list as AdminOrderListItem[]).map((o) => ({
+      ...o,
+      customerName: o.customerName ?? o.username,
+    }));
+
+  if (Array.isArray(raw.items)) {
+    return { ...result, items: withCustomer(raw.items) };
+  }
+  if (Array.isArray(raw.content)) {
+    return {
+      ...(raw as object),
+      content: withCustomer(raw.content),
+    } as unknown as PagedAdminOrders;
+  }
+  return result;
+}
+
+const METHOD_KEYS = [
+  "paymentMethod",
+  "paymentMethodCode",
+  "paymentMethodName",
+  "paymentType",
+  "payment_method",
+  "method",
+];
+
+function pickValue(obj: Record<string, unknown>, keys: string[]): unknown {
+  for (const key of keys) {
+    const v = obj[key];
+    if (v !== undefined && v !== null && v !== "") return v;
+  }
+  return undefined;
+}
+
+// Đưa thông tin thanh toán về các field phẳng paymentMethod / paymentStatus /
+// transactionNo / paidAt, dù BE trả phẳng hay lồng trong "payment",
+// "paymentInfo", "payments[0]".
+function normalizeAdminOrder(order: AdminOrderDetail): AdminOrderDetail {
+  const rec = (order ?? {}) as unknown as Record<string, unknown>;
+
+  const nestedRaw =
+    pickValue(rec, ["payment", "paymentInfo", "paymentDetail"]) ??
+    (Array.isArray(rec.payments) ? rec.payments[0] : undefined);
+  const nested =
+    nestedRaw && typeof nestedRaw === "object"
+      ? (nestedRaw as Record<string, unknown>)
+      : {};
+
+  let method = pickValue(rec, METHOD_KEYS) ?? pickValue(nested, [...METHOD_KEYS, "code", "name"]);
+  if (method && typeof method === "object") {
+    method = pickValue(method as Record<string, unknown>, ["code", "name", "method"]);
+  }
+
+  const status =
+    pickValue(rec, ["paymentStatus"]) ?? pickValue(nested, ["paymentStatus", "status"]);
+  const transactionNo =
+    pickValue(rec, ["transactionNo"]) ?? pickValue(nested, ["transactionNo"]);
+  const paidAt = pickValue(rec, ["paidAt"]) ?? pickValue(nested, ["paidAt"]);
+
+  const paymentMethod =
+    typeof method === "string" ? (method.trim().toUpperCase() as PaymentMethod) : undefined;
+
+  if (!paymentMethod) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      "[admin-orders-api] /admin/orders/{id} không có phương thức thanh toán. Các field BE trả:",
+      Object.keys(rec)
+    );
+  }
+
+  return {
+    ...order,
+    customerName: order.customerName ?? order.username,
+    paymentMethod,
+    paymentStatus: typeof status === "string" ? (status as PaymentStatus) : undefined,
+    transactionNo: typeof transactionNo === "string" ? transactionNo : undefined,
+    paidAt: typeof paidAt === "string" ? paidAt : undefined,
+  };
 }
 
 export async function getAdminOrderById(
@@ -146,7 +250,10 @@ export async function getAdminOrderById(
   const order = await fetchAdminOrderEnvelope<AdminOrderDetail>(
     `/admin/orders/${orderId}`
   );
-  return { ...order, statusHistory: normalizeStatusHistory(order.statusHistory) };
+  return normalizeAdminOrder({
+    ...order,
+    statusHistory: normalizeStatusHistory(order.statusHistory),
+  });
 }
 
 export interface UpdateOrderStatusPayload {
@@ -172,5 +279,8 @@ export async function updateOrderStatus(
       body: JSON.stringify(payload),
     }
   );
-  return { ...order, statusHistory: normalizeStatusHistory(order.statusHistory) };
+  return normalizeAdminOrder({
+    ...order,
+    statusHistory: normalizeStatusHistory(order.statusHistory),
+  });
 }

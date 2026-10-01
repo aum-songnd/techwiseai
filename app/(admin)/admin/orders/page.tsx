@@ -21,9 +21,8 @@ import {
   type AdminOrderDetail,
 } from "../../../../lib/admin-orders-api";
 import {
-  getPaymentByOrder,
   type OrderStatus,
-  type PaymentData,
+  type PaymentStatus,
 } from "../../../../lib/orders-api";
 import StatusBadge from "@/components/admin/StatusBadge";
 
@@ -102,11 +101,26 @@ const PAYMENT_LABELS: Record<string, string> = {
   MOMO: "MoMo",
 };
 
+const PAYMENT_METHOD_KEYS = [
+  "paymentMethod",
+  "paymentMethodName",
+  "paymentMethodCode",
+  "paymentType",
+  "payment_method",
+  "method",
+];
+
 const getPaymentLabel = (order: unknown): string | null => {
-  let raw = pick(order, ["paymentMethod", "paymentType", "payment_method"]);
+  let raw = pick(order, PAYMENT_METHOD_KEYS);
   if (!raw) {
-    const payment = pick(order, ["payment"]);
-    raw = pick(payment, ["method", "code", "name"]);
+    // Có thể BE lồng trong object "payment" / "paymentInfo" / "payments[0]"
+    const nested =
+      pick(order, ["payment", "paymentInfo", "paymentDetail"]) ??
+      (() => {
+        const list = pick(order, ["payments"]);
+        return Array.isArray(list) ? list[0] : undefined;
+      })();
+    raw = pick(nested, [...PAYMENT_METHOD_KEYS, "code", "name"]);
   }
   if (raw && typeof raw === "object") {
     raw = pick(raw, ["code", "method", "name"]);
@@ -124,8 +138,8 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "PROCESSING", label: "Đang xử lý" },
   { key: "SHIPPING", label: "Đang giao" },
   { key: "DELIVERED", label: "Đã giao" },
-  { key: "COMPLETED", label: "Hoàn thành" },
   { key: "CANCELLED", label: "Đã hủy" },
+  { key: "RETURNED", label: "Trả hàng" },
 ];
 
 const STATUS_LABELS: Record<string, string> = {
@@ -134,14 +148,15 @@ const STATUS_LABELS: Record<string, string> = {
   PROCESSING: "Đang xử lý",
   SHIPPING: "Đang giao",
   DELIVERED: "Đã giao",
-  COMPLETED: "Hoàn thành",
   CANCELLED: "Đã hủy",
+  RETURNED: "Trả hàng",
 };
 
-const PAYMENT_STATUS_LABELS: Record<PaymentData["status"], string> = {
+const PAYMENT_STATUS_LABELS: Record<PaymentStatus, string> = {
   PENDING: "Chưa thanh toán",
-  COMPLETED: "Đã thanh toán",
+  PAID: "Đã thanh toán",
   FAILED: "Thanh toán thất bại",
+  CANCELLED: "Đã hủy thanh toán",
 };
 
 // Các mốc trong "Tiến trình đơn hàng"
@@ -151,7 +166,6 @@ const PROGRESS_STEPS: { status: OrderStatus; label: string; hint: string }[] = [
   { status: "PROCESSING", label: "Chuẩn bị hàng", hint: "Chờ xử lý" },
   { status: "SHIPPING", label: "Bàn giao vận chuyển", hint: "Chờ giao hàng" },
   { status: "DELIVERED", label: "Giao thành công", hint: "Chờ giao hàng" },
-  { status: "COMPLETED", label: "Hoàn thành", hint: "Chờ hoàn tất" },
 ];
 
 // Hành động kế tiếp (nút to bên phải tiêu đề)
@@ -162,7 +176,6 @@ const NEXT_ACTION: Partial<
   CONFIRMED: { next: "PROCESSING", label: "Bắt đầu xử lý" },
   PROCESSING: { next: "SHIPPING", label: "Giao cho vận chuyển" },
   SHIPPING: { next: "DELIVERED", label: "Đã giao hàng" },
-  DELIVERED: { next: "COMPLETED", label: "Hoàn thành đơn" },
 };
 
 const getHistoryTime = (
@@ -225,11 +238,14 @@ const AdminOrdersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [keyword, setKeyword] = useState("");
+  // Số đơn của từng tab trạng thái (hiển thị cạnh tên tab)
+  const [statusCounts, setStatusCounts] = useState<
+    Partial<Record<TabKey, number>>
+  >({});
 
   // Chi tiết (cột phải)
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [detail, setDetail] = useState<AdminOrderDetail | null>(null);
-  const [payment, setPayment] = useState<PaymentData | null>(null);
   // Ảnh sản phẩm lấy bù từ /products/{id} khi đơn hàng không kèm ảnh
   const [productImages, setProductImages] = useState<Record<string, string>>({});
   const [isDetailLoading, setIsDetailLoading] = useState(false);
@@ -256,6 +272,40 @@ const AdminOrdersPage = () => {
     },
     [router]
   );
+
+  // Tải số đơn cho từng trạng thái (mỗi tab 1 request nhẹ, size = 1, chỉ lấy totalElements)
+  const loadCounts = useCallback(async () => {
+    const entries = await Promise.all(
+      TABS.map(async (tab) => {
+        try {
+          const res = await getAdminOrders({
+            page: 0,
+            size: 1,
+            status: tab.key === "ALL" ? undefined : tab.key,
+          });
+          const raw = res as unknown as Record<string, unknown>;
+          const list = Array.isArray(raw.items)
+            ? raw.items
+            : Array.isArray(raw.content)
+            ? raw.content
+            : [];
+          return [tab.key, (raw.totalElements as number) ?? list.length] as const;
+        } catch {
+          return null;
+        }
+      })
+    );
+    setStatusCounts((prev) => ({
+      ...prev,
+      ...Object.fromEntries(
+        entries.filter((e): e is readonly [TabKey, number] => e !== null)
+      ),
+    }));
+  }, []);
+
+  useEffect(() => {
+    loadCounts();
+  }, [loadCounts]);
 
   // Tải danh sách
   useEffect(() => {
@@ -308,33 +358,27 @@ const AdminOrdersPage = () => {
   useEffect(() => {
     if (!selectedId) {
       setDetail(null);
-      setPayment(null);
       return;
     }
     let ignore = false;
-    setPayment(null);
 
     const loadDetail = async () => {
       setIsDetailLoading(true);
       setDetailError(null);
       try {
         const result = await getAdminOrderById(selectedId);
-        if (!ignore) setDetail(result);
+        if (!ignore) {
+          setDetail(result);
+          // Tạm thời: đối chiếu field phương thức thanh toán trong chi tiết đơn.
+          // eslint-disable-next-line no-console
+          console.log("[orders] chi tiết đơn (admin):", result);
+        }
       } catch (err) {
         if (ignore) return;
         const msg = handleError(err, "Không tải được chi tiết đơn hàng.");
         if (msg) setDetailError(msg);
       } finally {
         if (!ignore) setIsDetailLoading(false);
-      }
-
-      // Phương thức thanh toán lấy từ API thanh toán (/payments/orders/{id}).
-      // Lỗi/không có bản ghi thì bỏ qua (đơn COD có thể chưa có).
-      try {
-        const p = await getPaymentByOrder(selectedId);
-        if (!ignore) setPayment(p);
-      } catch {
-        /* bỏ qua */
       }
     };
 
@@ -405,7 +449,6 @@ const AdminOrdersPage = () => {
     try {
       const updated = await updateOrderStatus(detail.id, { status: action.next });
       setDetail(updated);
-      getPaymentByOrder(detail.id).then(setPayment).catch(() => {});
       setItems((prev) =>
         prev.map((o) =>
           o.id === updated.id ? { ...o, status: updated.status } : o
@@ -413,6 +456,8 @@ const AdminOrdersPage = () => {
       );
       // Báo cho layout tải lại số đơn chưa hoàn thành ở menu
       window.dispatchEvent(new Event("admin-orders-changed"));
+      // Cập nhật lại số đơn trên các tab
+      loadCounts();
     } catch (err) {
       const msg = handleError(err, "Không cập nhật được trạng thái đơn hàng.");
       if (msg) setDetailError(msg);
@@ -460,13 +505,24 @@ const AdminOrdersPage = () => {
               key={tab.key}
               type="button"
               onClick={() => changeTab(tab.key)}
-              className={`whitespace-nowrap px-3 py-1.5 text-[13px] font-medium rounded-lg transition-colors ${
+              className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 text-[13px] font-medium rounded-lg transition-colors ${
                 activeTab === tab.key
                   ? "bg-shop_dark_green text-white"
                   : "bg-white text-gray-600 border border-gray-200/80 hover:bg-gray-100"
               }`}
             >
               {tab.label}
+              {statusCounts[tab.key] !== undefined && (
+                <span
+                  className={`inline-flex items-center justify-center h-5 min-w-5 px-1 text-[11px] leading-none font-semibold rounded-full ${
+                    activeTab === tab.key
+                      ? "bg-white/20 text-white"
+                      : "bg-gray-100 text-gray-600"
+                  }`}
+                >
+                  {statusCounts[tab.key]}
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -504,7 +560,7 @@ const AdminOrdersPage = () => {
                   }`}
                 >
                   <p className="text-base font-semibold text-gray-900 truncate">
-                    Mã đơn: #{order.id.slice(0, 8)}
+                    Mã đơn: {order.orderCode ?? `#${order.id.slice(0, 8)}`}
                   </p>
                   <p className="text-sm text-gray-500 mt-0.5 truncate">
                     {order.customerName || "Khách vãng lai"}
@@ -601,10 +657,12 @@ const AdminOrdersPage = () => {
     );
     const cancelled = detail.status === "CANCELLED";
     const itemsList = (detail.items ?? []) as unknown[];
-    const paymentLabel =
-      getPaymentLabel(payment) ?? getPaymentLabel(detail) ?? null;
-    const paymentStatusLabel = payment
-      ? PAYMENT_STATUS_LABELS[payment.status] ?? payment.status
+    // Thông tin thanh toán lấy từ chính /admin/orders/{id} (endpoint
+    // /payments/orders/{id} chỉ dành cho chủ đơn nên admin bị 404).
+    const payment = detail.paymentStatus ? detail : null;
+    const paymentLabel = getPaymentLabel(detail) ?? null;
+    const paymentStatusLabel = detail.paymentStatus
+      ? PAYMENT_STATUS_LABELS[detail.paymentStatus] ?? detail.paymentStatus
       : paymentLabel === PAYMENT_LABELS.COD
       ? "Thu tiền khi giao hàng"
       : "Chưa có thông tin";
@@ -623,7 +681,7 @@ const AdminOrdersPage = () => {
           <span className="hidden lg:inline">Đơn hàng</span>
           <ChevronRight className="hidden lg:block w-3 h-3" />
           <span className="px-2.5 py-1 rounded-full bg-shop_dark_green/10 text-shop_dark_green font-medium">
-            #{detail.id.slice(0, 8)}
+            {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}
           </span>
         </div>
 
@@ -631,7 +689,7 @@ const AdminOrdersPage = () => {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-3 min-w-0">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 truncate">
-              Mã đơn: #{detail.id.slice(0, 8)}
+              Mã đơn: {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}
             </h2>
             <StatusBadge status={detail.status} />
           </div>
