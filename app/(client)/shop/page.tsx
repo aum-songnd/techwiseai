@@ -26,23 +26,22 @@ const ShopPage = async () => {
     if (productsResult.status === "fulfilled") {
       products = productsResult.value;
     } else {
-      console.error("[ShopPage] Lỗi lấy products:", productsResult.reason);
       loadError = "Không tải được danh sách sản phẩm. Vui lòng thử lại sau.";
     }
 
     if (categoriesResult.status === "fulfilled") {
       categories = categoriesResult.value;
     } else {
-      console.error("[ShopPage] Lỗi lấy categories:", categoriesResult.reason);
+
     }
 
     if (brandsResult.status === "fulfilled") {
       brands = brandsResult.value;
     } else {
-      console.error("[ShopPage] Lỗi lấy brands:", brandsResult.reason);
+
     }
   } catch (error) {
-    console.error("[ShopPage] Lỗi không xác định:", error);
+
     loadError = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
   }
 

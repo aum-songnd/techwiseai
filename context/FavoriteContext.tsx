@@ -81,7 +81,6 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
         if (!cancelled) setFavoriteProducts(products);
       })
       .catch((err) => {
-        console.error("Không tải được danh sách yêu thích:", err);
         if (!cancelled) setFavoriteProducts([]);
       })
       .finally(() => {
@@ -115,7 +114,7 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
         await addFavoriteApi(product.id);
       } catch (err) {
         setFavoriteProducts((prev) => prev.filter((p) => p.id !== product.id));
-        console.error("Không thêm được vào yêu thích:", err);
+
         throw err;
       }
     },
@@ -131,7 +130,7 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
         await removeFavoriteApi(productId);
       } catch (err) {
         setFavoriteProducts(prevProducts); // rollback
-        console.error("Không xoá được khỏi yêu thích:", err);
+
         throw err;
       }
     },
@@ -157,7 +156,7 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
       await removeAllFavoritesApi();
     } catch (err) {
       setFavoriteProducts(prevProducts); // rollback
-      console.error("Không xoá được toàn bộ danh sách yêu thích:", err);
+
       throw err;
     }
   }, [favoriteProducts]);

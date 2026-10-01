@@ -143,10 +143,6 @@ const CheckoutPage = () => {
           paymentMethod,
         });
       } catch (payErr) {
-        // Đơn đã được tạo thành công; nếu báo lỗi ở đây khách sẽ đặt lại và
-        // bị trùng đơn. Đưa khách sang trang chi tiết đơn thay vì ở lại form.
-        // eslint-disable-next-line no-console
-        console.error("[checkout] createPayment lỗi:", payErr);
         router.push(`/orders/${order.id}?placed=1`);
         return;
       }

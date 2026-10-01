@@ -54,7 +54,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   try {
     product = await getProductById(id);
   } catch (err) {
-    console.error("Lỗi getProductById:", err);
     notFound();
   }
 

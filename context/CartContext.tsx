@@ -95,7 +95,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         setRequiresLogin(true);
         setCart(EMPTY_CART);
       } else {
-        console.error("Lỗi lấy giỏ hàng:", err);
+
       }
     } finally {
       setIsLoaded(true);
@@ -134,7 +134,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       if (err instanceof CartAuthRequiredError) {
         setRequiresLogin(true);
       } else {
-        console.error("Lỗi thêm sản phẩm vào giỏ:", err);
+
       }
     } finally {
       setPendingProductIds((prev) => {
@@ -187,9 +187,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         if (err instanceof CartAuthRequiredError) {
           setRequiresLogin(true);
         } else {
-          console.error("Lỗi cập nhật số lượng:", err);
-          // Optimistic update có thể đã sai lệch so với server (vd hết
-          // hàng giữa chừng) -> đồng bộ lại cho chắc.
+
           fetchCartFromServer();
         }
       } finally {
@@ -296,9 +294,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         if (err instanceof CartAuthRequiredError) {
           setRequiresLogin(true);
         } else {
-          console.error("Lỗi xóa sản phẩm khỏi giỏ:", err);
-          // Request thất bại -> khôi phục lại đúng trạng thái thật từ
-          // server (item vừa xoá lạc quan có thể cần được đưa trở lại).
+
           fetchCartFromServer();
         }
       }
@@ -323,8 +319,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       if (err instanceof CartAuthRequiredError) {
         setRequiresLogin(true);
       } else {
-        console.error("Lỗi xóa toàn bộ giỏ hàng:", err);
-        // Request thất bại -> khôi phục lại đúng trạng thái thật từ server.
+
         fetchCartFromServer();
       }
     }

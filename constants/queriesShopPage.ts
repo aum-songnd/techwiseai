@@ -22,7 +22,6 @@ export const getAllBrands = async (): Promise<Brand[]> => {
     return await getBrands();
   } catch (error) {
     // Backend chưa có endpoint /brands -> trả mảng rỗng để UI không crash
-    console.warn("[queriesShopPage] /brands chưa sẵn sàng:", error);
     return [];
   }
 };

@@ -94,7 +94,7 @@ const HomeCategories = async () => {
       return orderA - orderB;
     });
   } catch (err) {
-    console.error("Lỗi getCategories:", err);
+
   }
 
   if (categories.length === 0) {

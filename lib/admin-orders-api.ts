@@ -226,13 +226,6 @@ function normalizeAdminOrder(order: AdminOrderDetail): AdminOrderDetail {
   const paymentMethod =
     typeof method === "string" ? (method.trim().toUpperCase() as PaymentMethod) : undefined;
 
-  if (!paymentMethod) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      "[admin-orders-api] /admin/orders/{id} không có phương thức thanh toán. Các field BE trả:",
-      Object.keys(rec)
-    );
-  }
 
   return {
     ...order,

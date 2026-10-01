@@ -166,10 +166,6 @@ export function normalizeStatusHistory(raw: unknown): OrderStatusHistoryEntry[] 
       | string
       | undefined;
 
-    if (!status) {
-      // eslint-disable-next-line no-console
-      console.warn("[orders-api] statusHistory không có field trạng thái:", item);
-    }
 
     return {
       status: (status ?? "PENDING") as OrderStatus,
@@ -271,14 +267,6 @@ export async function getOrders(page = 0, size = 10): Promise<PagedOrders> {
     (item) => item
   );
 
-  // Debug tạm: nếu danh sách rỗng mà response gốc không phải mảng/objects
-  // rỗng thật sự, in ra console để đối chiếu field thật, tránh phải
-  // chụp DevTools gửi qua lại nhiều lần. Có thể xoá khi đã xác nhận field
-  // đúng.
-  if (result.items.length === 0) {
-    // eslint-disable-next-line no-console
-    console.warn("[orders-api] getOrders() trả về rỗng — response gốc:", raw);
-  }
 
   return result;
 }

@@ -54,7 +54,6 @@ const SearchBar = () => {
         setSearchedKeyword(searchKeyword);
         setHasSearched(true);
 
-        console.log("Kết quả tìm kiếm:", results);
       } catch (error: unknown) {
         const message =
           error instanceof Error
