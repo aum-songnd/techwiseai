@@ -276,10 +276,22 @@ export async function getOrderById(orderId: string): Promise<OrderData> {
   return withHistory(order);
 }
 
-export async function cancelOrder(orderId: string): Promise<OrderData> {
+// reason: lý do khách hủy đơn. Gửi trong body JSON; backend cần nhận field này
+// (đang gửi cả "reason" lẫn "note" — giữ lại field mà DTO của BE dùng).
+export async function cancelOrder(
+  orderId: string,
+  reason?: string
+): Promise<OrderData> {
+  const trimmed = reason?.trim();
   const order = await fetchOrderEnvelope<OrderData>(
     `/orders/${orderId}/cancel`,
-    { method: "PATCH" }
+    trimmed
+      ? {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ reason: trimmed, note: trimmed }),
+        }
+      : { method: "PATCH" }
   );
   return withHistory(order);
 }

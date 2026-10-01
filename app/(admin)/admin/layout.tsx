@@ -41,7 +41,6 @@ const OPEN_ORDER_STATUSES = [
   "CONFIRMED",
   "PROCESSING",
   "SHIPPING",
-  "DELIVERED",
 ] as const;
 
 // Dùng size=1 chỉ để đọc totalElements của từng trạng thái, không tải cả đơn.

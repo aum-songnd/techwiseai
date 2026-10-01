@@ -434,12 +434,9 @@ const AdminInventory = () => {
       {titleSlot &&
         createPortal(
           <div className="leading-tight">
-            <h1 className="text-lg font-bold tracking-tight text-gray-900 truncate">
-              Kho hàng
+            <h1 className="text-lg font-bold text-[20px] tracking-tight text-gray-900 truncate">
+              Tổng quan kho hàng
             </h1>
-            <p className="hidden sm:block text-xs text-gray-500 truncate">
-              Theo dõi sản phẩm, tồn kho và tình trạng hàng.
-            </p>
           </div>,
           titleSlot
         )}

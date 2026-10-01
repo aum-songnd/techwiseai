@@ -200,6 +200,35 @@ const getHistoryTime = (
     : null;
 };
 
+// Chỉ hủy được khi đơn ở các trạng thái này (backend không cho hủy từ SHIPPING trở đi).
+const CANCELLABLE_STATUSES: OrderStatus[] = [
+  "PENDING",
+  "CONFIRMED",
+  "PROCESSING",
+];
+
+// Lý do hủy gợi ý (admin có thể chọn nhanh hoặc tự nhập)
+const CANCEL_REASONS = [
+  "Khách yêu cầu hủy đơn",
+  "Hết hàng",
+  "Không liên lạc được với khách",
+  "Thông tin giao hàng không hợp lệ",
+  "Khách chưa thanh toán",
+];
+
+const getHistoryNote = (
+  detail: AdminOrderDetail,
+  status: OrderStatus
+): string | null => {
+  const history = (detail.statusHistory ?? []) as unknown[];
+  const found = history.find(
+    (h) => pickString(h, ["newStatus", "status", "toStatus"]) === status
+  );
+  return found
+    ? pickString(found, ["note", "reason", "cancelReason", "comment"])
+    : null;
+};
+
 // Phương thức thanh toán online: bắt buộc PAID mới được xác nhận đơn.
 // COD (và các phương thức khác) có thể xác nhận ngay khi khách đặt.
 const ONLINE_PAYMENT_METHODS = ["VNPAY", "MOMO"];
@@ -283,6 +312,10 @@ const AdminOrdersPage = () => {
   const [isDetailLoading, setIsDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  // Popup nhập lý do hủy đơn
+  const [cancelOpen, setCancelOpen] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
+  const [cancelError, setCancelError] = useState<string | null>(null);
 
   // Tiêu đề được đưa lên topbar của layout bằng portal (giống trang Kho hàng)
   const [titleSlot, setTitleSlot] = useState<HTMLElement | null>(null);
@@ -542,6 +575,51 @@ const AdminOrdersPage = () => {
     }
   };
 
+  const openCancelDialog = () => {
+    if (!detail || !CANCELLABLE_STATUSES.includes(detail.status)) return;
+    setCancelReason("");
+    setCancelError(null);
+    setCancelOpen(true);
+  };
+
+  const closeCancelDialog = () => {
+    if (isUpdating) return;
+    setCancelOpen(false);
+  };
+
+  const handleConfirmCancel = async () => {
+    if (!detail || !CANCELLABLE_STATUSES.includes(detail.status)) return;
+    const reason = cancelReason.trim();
+    if (!reason) {
+      setCancelError("Vui lòng nhập lý do hủy đơn.");
+      return;
+    }
+    setIsUpdating(true);
+    setCancelError(null);
+    setDetailError(null);
+    try {
+      // Lý do hủy gửi qua field "note" của UpdateOrderStatusPayload.
+      const updated = await updateOrderStatus(detail.id, {
+        status: "CANCELLED",
+        note: reason,
+      });
+      setDetail(updated);
+      setItems((prev) =>
+        prev.map((o) =>
+          o.id === updated.id ? { ...o, status: updated.status } : o
+        )
+      );
+      setCancelOpen(false);
+      window.dispatchEvent(new Event("admin-orders-changed"));
+      loadCounts();
+    } catch (err) {
+      const msg = handleError(err, "Không hủy được đơn hàng.");
+      if (msg) setCancelError(msg);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
   // Tìm kiếm trong trang đang hiển thị
   const visibleItems = useMemo(() => {
     const q = keyword.trim().toLowerCase();
@@ -581,7 +659,7 @@ const AdminOrdersPage = () => {
               key={tab.key}
               type="button"
               onClick={() => changeTab(tab.key)}
-              className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 text-[13px] font-medium rounded-lg transition-colors ${
+              className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 text-[13px] font-medium rounded-2xl transition-colors ${
                 activeTab === tab.key
                   ? "bg-shop_dark_green text-white"
                   : "bg-white text-gray-600 border border-gray-200/80 hover:bg-gray-100"
@@ -764,22 +842,27 @@ const AdminOrdersPage = () => {
         </div>
 
         {/* Tiêu đề + nút hành động */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-3 min-w-0">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 truncate">
-              Mã đơn: {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}
-            </h2>
-            <StatusBadge status={detail.status} />
-          </div>
+        <div className="flex flex-wrap items-center justify-self-end gap-3">
           {action && (
             <button
               type="button"
               onClick={handleAdvanceStatus}
               disabled={isUpdating || awaitingPayment}
               title={awaitingPayment ? "Chờ khách thanh toán xong mới xác nhận được" : undefined}
-              className="px-5 py-2.5 text-base font-semibold text-white rounded-full bg-shop_dark_green hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-5 py-1.5 text-base font-semibold text-[13px] text-white rounded-full bg-shop_dark_green hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isUpdating ? "Đang cập nhật..." : action.label}
+            </button>
+          )}
+          {/* Nút hủy đơn: chỉ hiện khi chờ xác nhận / đã xác nhận / đang xử lý */}
+          {CANCELLABLE_STATUSES.includes(detail.status) && (
+            <button
+              type="button"
+              onClick={openCancelDialog}
+              disabled={isUpdating}
+              className="px-5 py-1.5 text-[13px] font-semibold text-red-600 rounded-full border border-red-200 bg-white hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Hủy đơn hàng
             </button>
           )}
         </div>
@@ -874,12 +957,20 @@ const AdminOrdersPage = () => {
           <div className="space-y-4 min-w-0">
             <Card title="Tiến trình đơn hàng">
               {cancelled ? (
-                <p className="text-base text-red-600">
-                  Đơn hàng đã bị hủy
-                  {getHistoryTime(detail, "CANCELLED")
-                    ? ` lúc ${formatDateTime(getHistoryTime(detail, "CANCELLED"))}`
-                    : "."}
-                </p>
+                <div className="space-y-1.5">
+                  <p className="text-base text-red-600">
+                    Đơn hàng đã bị hủy
+                    {getHistoryTime(detail, "CANCELLED")
+                      ? ` lúc ${formatDateTime(getHistoryTime(detail, "CANCELLED"))}`
+                      : "."}
+                  </p>
+                  {getHistoryNote(detail, "CANCELLED") && (
+                    <p className="text-[13px] text-gray-700">
+                      <span className="text-gray-500">Lý do hủy: </span>
+                      {getHistoryNote(detail, "CANCELLED")}
+                    </p>
+                  )}
+                </div>
               ) : (
                 <ol className="relative space-y-2 pl-4">
                   <span className="absolute left-[4px] top-1.5 bottom-1.5 w-px bg-gray-200" />
@@ -958,9 +1049,6 @@ const AdminOrdersPage = () => {
             <h1 className="text-xl font-bold tracking-tight text-gray-900 truncate">
               Đơn hàng
             </h1>
-            <p className="hidden sm:block text-sm text-gray-500 truncate">
-              Chọn đơn ở cột trái để xem chi tiết và xử lý.
-            </p>
           </div>,
           titleSlot
         )}
@@ -973,6 +1061,88 @@ const AdminOrdersPage = () => {
           {renderDetail()}
         </section>
       </div>
+
+      {/* Popup nhập lý do hủy đơn */}
+      {cancelOpen && detail && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40"
+          onClick={closeCancelDialog}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cancel-dialog-title"
+            className="w-full max-w-md bg-white rounded-2xl shadow-xl p-5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3
+              id="cancel-dialog-title"
+              className="text-lg font-bold text-gray-900"
+            >
+              Hủy đơn hàng
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              Đơn {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}. Vui lòng
+              cho biết lý do hủy đơn.
+            </p>
+
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {CANCEL_REASONS.map((r) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => {
+                    setCancelReason(r);
+                    setCancelError(null);
+                  }}
+                  className={`px-3 py-1.5 text-[13px] rounded-2xl border transition-colors ${
+                    cancelReason === r
+                      ? "bg-shop_dark_green text-white border-shop_dark_green"
+                      : "bg-white text-gray-600 border-gray-200 hover:bg-gray-100"
+                  }`}
+                >
+                  {r}
+                </button>
+              ))}
+            </div>
+
+            <textarea
+              value={cancelReason}
+              onChange={(e) => {
+                setCancelReason(e.target.value);
+                setCancelError(null);
+              }}
+              rows={3}
+              maxLength={500}
+              placeholder="Nhập lý do hủy đơn..."
+              className="mt-3 w-full px-3 py-2 text-sm rounded-xl border border-gray-200 outline-none resize-none placeholder:text-gray-400 focus:border-shop_dark_green/50"
+            />
+
+            {cancelError && (
+              <p className="mt-2 text-sm text-red-600">{cancelError}</p>
+            )}
+
+            <div className="mt-4 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={closeCancelDialog}
+                disabled={isUpdating}
+                className="px-5 py-1.5 text-[13px] font-semibold text-gray-600 rounded-full border border-gray-200 bg-white hover:bg-gray-100 transition-colors disabled:opacity-50"
+              >
+                Đóng
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmCancel}
+                disabled={isUpdating || !cancelReason.trim()}
+                className="px-5 py-1.5 text-[13px] font-semibold text-white rounded-full bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isUpdating ? "Đang hủy..." : "Xác nhận hủy"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
