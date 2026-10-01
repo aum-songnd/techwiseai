@@ -27,6 +27,7 @@ import com.university.regulation.dto.order.UpdateOrderStatusRequest;
 import com.university.regulation.models.cart.Cart;
 import com.university.regulation.models.cart.CartItem;
 import com.university.regulation.models.enums.OrderStatus;
+import com.university.regulation.models.enums.PaymentMethod;
 import com.university.regulation.models.order.Order;
 import com.university.regulation.models.order.OrderItem;
 import com.university.regulation.models.order.OrderStatusHistory;
@@ -213,31 +214,31 @@ public class OrderService {
 
         // @Transactional
         // public void markCodAsPaid(UUID orderId) {
-        //         Payment payment = paymentRepository
-        //                         .findByOrderId(orderId)
-        //                         .orElse(null);
+        // Payment payment = paymentRepository
+        // .findByOrderId(orderId)
+        // .orElse(null);
 
-        //         if (payment == null) {
-        //                 return;
-        //         }
+        // if (payment == null) {
+        // return;
+        // }
 
-        //         if (payment.getPaymentMethod() != PaymentMethod.COD) {
-        //                 return;
-        //         }
+        // if (payment.getPaymentMethod() != PaymentMethod.COD) {
+        // return;
+        // }
 
-        //         if (payment.getStatus() == PaymentStatus.PAID) {
-        //                 return;
-        //         }
+        // if (payment.getStatus() == PaymentStatus.PAID) {
+        // return;
+        // }
 
-        //         if (payment.getStatus() != PaymentStatus.PENDING) {
-        //                 throw new ResponseStatusException(
-        //                                 HttpStatus.BAD_REQUEST,
-        //                                 "Trạng thái thanh toán không hợp lệ");
-        //         }
+        // if (payment.getStatus() != PaymentStatus.PENDING) {
+        // throw new ResponseStatusException(
+        // HttpStatus.BAD_REQUEST,
+        // "Trạng thái thanh toán không hợp lệ");
+        // }
 
-        //         payment.setStatus(PaymentStatus.PAID);
-        //         payment.setPaidAt(OffsetDateTime.now());
-        //         payment.setFailureReason(null);
+        // payment.setStatus(PaymentStatus.PAID);
+        // payment.setPaidAt(OffsetDateTime.now());
+        // payment.setFailureReason(null);
         // }
 
         /**
@@ -616,6 +617,11 @@ public class OrderService {
                                 .map(this::toOrderItemResponse)
                                 .toList();
 
+                PaymentMethod paymentMethod = paymentRepository
+                                .findByOrderId(order.getId())
+                                .map(payment -> payment.getPaymentMethod())
+                                .orElse(null);
+
                 List<OrderStatusHistoryResponse> history = historyRepository
                                 .findAllByOrderIdOrderByCreatedAtAsc(
                                                 order.getId())
@@ -633,6 +639,7 @@ public class OrderService {
                                 order.getUser().getId(),
                                 order.getUser().getUsername(),
                                 order.getStatus(),
+                                paymentMethod,
                                 order.getRecipientName(),
                                 order.getRecipientPhone(),
                                 order.getShippingAddress(),

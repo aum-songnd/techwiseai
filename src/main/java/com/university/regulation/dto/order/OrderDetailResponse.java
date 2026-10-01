@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.university.regulation.models.enums.OrderStatus;
+import com.university.regulation.models.enums.PaymentMethod;
 
 public record OrderDetailResponse(
 
@@ -18,6 +19,8 @@ public record OrderDetailResponse(
         String username,
 
         OrderStatus status,
+
+        PaymentMethod paymentMethod,
 
         String recipientName,
 
