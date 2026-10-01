@@ -25,6 +25,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Logo from "@/components/Logo";
+import { getAdminOrders } from "@/lib/admin-orders-api";
 import {
   clearStoredUser,
   clearToken,
@@ -32,6 +33,37 @@ import {
   getToken,
   isAdminUser,
 } from "@/lib/auth";
+
+// Các trạng thái "chưa hoàn thành" (đơn còn phải xử lý) -> cộng vào badge
+// ở menu Đơn hàng. COMPLETED và CANCELLED không được tính.
+const OPEN_ORDER_STATUSES = [
+  "PENDING",
+  "CONFIRMED",
+  "PROCESSING",
+  "SHIPPING",
+  "DELIVERED",
+] as const;
+
+// Dùng size=1 chỉ để đọc totalElements của từng trạng thái, không tải cả đơn.
+const countOpenOrders = async (): Promise<number> => {
+  const counts = await Promise.all(
+    OPEN_ORDER_STATUSES.map(async (status) => {
+      const res = (await getAdminOrders({
+        page: 0,
+        size: 1,
+        status,
+      })) as unknown as Record<string, unknown>;
+      if (typeof res.totalElements === "number") return res.totalElements;
+      const list = Array.isArray(res.items)
+        ? res.items
+        : Array.isArray(res.content)
+        ? res.content
+        : [];
+      return list.length;
+    })
+  );
+  return counts.reduce((a, b) => a + b, 0);
+};
 
 type NavItem = {
   href: string;
@@ -64,6 +96,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const [checked, setChecked] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profile, setProfile] = useState<AdminProfile | null>(null);
+  const [openOrders, setOpenOrders] = useState(0);
 
   useEffect(() => {
     const token = getToken();
@@ -74,6 +107,27 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     setProfile(readProfile());
     setChecked(true);
   }, [router]);
+
+  // Đếm đơn chưa hoàn thành: tải lại khi đổi trang, và khi trang đơn hàng
+  // bắn event "admin-orders-changed" sau khi đổi trạng thái một đơn.
+  useEffect(() => {
+    if (!checked) return;
+    let ignore = false;
+    const refresh = async () => {
+      try {
+        const total = await countOpenOrders();
+        if (!ignore) setOpenOrders(total);
+      } catch {
+        // Lỗi tải thì giữ nguyên số cũ, không chặn giao diện
+      }
+    };
+    refresh();
+    window.addEventListener("admin-orders-changed", refresh);
+    return () => {
+      ignore = true;
+      window.removeEventListener("admin-orders-changed", refresh);
+    };
+  }, [checked, pathname]);
 
   // Đổi trang thì đóng sidebar (mobile)
   useEffect(() => {
@@ -166,6 +220,14 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
               >
                 <Icon className="w-[18px] h-[18px] shrink-0" />
                 {item.label}
+                {item.href === "/admin/orders" && openOrders > 0 && (
+                  <span
+                    className="ml-auto min-w-[20px] h-5 px-1.5 rounded-full bg-shop_dark_green text-white text-[11px] font-semibold flex items-center justify-center"
+                    title={`${openOrders} đơn chưa hoàn thành`}
+                  >
+                    {openOrders > 99 ? "99+" : openOrders}
+                  </span>
+                )}
               </Link>
             );
           })}

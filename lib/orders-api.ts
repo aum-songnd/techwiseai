@@ -108,7 +108,8 @@ function normalizePagedOrders<TRaw, TMapped>(
 
 export type PaymentMethod = "COD" | "VNPAY" | "MOMO";
 
-// Luồng đã kiểm thử: PENDING → CONFIRMED → PROCESSING → SHIPPING → DELIVERED.
+// Luồng: PENDING → CONFIRMED → PROCESSING → SHIPPING → DELIVERED → COMPLETED.
+// (COMPLETED = admin xác nhận hoàn tất đơn sau khi đã giao; cần backend hỗ trợ.)
 // CANCELLED chỉ được chuyển từ các trạng thái còn cho phép hủy (xem đặc tả
 // mục 8.1).
 export type OrderStatus =
@@ -117,6 +118,7 @@ export type OrderStatus =
   | "PROCESSING"
   | "SHIPPING"
   | "DELIVERED"
+  | "COMPLETED"
   | "CANCELLED";
 
 export interface OrderStatusHistoryEntry {

@@ -124,6 +124,7 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "PROCESSING", label: "Đang xử lý" },
   { key: "SHIPPING", label: "Đang giao" },
   { key: "DELIVERED", label: "Đã giao" },
+  { key: "COMPLETED", label: "Hoàn thành" },
   { key: "CANCELLED", label: "Đã hủy" },
 ];
 
@@ -133,6 +134,7 @@ const STATUS_LABELS: Record<string, string> = {
   PROCESSING: "Đang xử lý",
   SHIPPING: "Đang giao",
   DELIVERED: "Đã giao",
+  COMPLETED: "Hoàn thành",
   CANCELLED: "Đã hủy",
 };
 
@@ -148,7 +150,8 @@ const PROGRESS_STEPS: { status: OrderStatus; label: string; hint: string }[] = [
   { status: "CONFIRMED", label: "Cửa hàng xác nhận", hint: "Chờ xác nhận" },
   { status: "PROCESSING", label: "Chuẩn bị hàng", hint: "Chờ xử lý" },
   { status: "SHIPPING", label: "Bàn giao vận chuyển", hint: "Chờ giao hàng" },
-  { status: "DELIVERED", label: "Giao thành công", hint: "Chờ hoàn tất" },
+  { status: "DELIVERED", label: "Giao thành công", hint: "Chờ giao hàng" },
+  { status: "COMPLETED", label: "Hoàn thành", hint: "Chờ hoàn tất" },
 ];
 
 // Hành động kế tiếp (nút to bên phải tiêu đề)
@@ -159,6 +162,7 @@ const NEXT_ACTION: Partial<
   CONFIRMED: { next: "PROCESSING", label: "Bắt đầu xử lý" },
   PROCESSING: { next: "SHIPPING", label: "Giao cho vận chuyển" },
   SHIPPING: { next: "DELIVERED", label: "Đã giao hàng" },
+  DELIVERED: { next: "COMPLETED", label: "Hoàn thành đơn" },
 };
 
 const getHistoryTime = (
@@ -407,6 +411,8 @@ const AdminOrdersPage = () => {
           o.id === updated.id ? { ...o, status: updated.status } : o
         )
       );
+      // Báo cho layout tải lại số đơn chưa hoàn thành ở menu
+      window.dispatchEvent(new Event("admin-orders-changed"));
     } catch (err) {
       const msg = handleError(err, "Không cập nhật được trạng thái đơn hàng.");
       if (msg) setDetailError(msg);

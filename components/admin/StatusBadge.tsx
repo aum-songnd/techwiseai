@@ -6,6 +6,7 @@ export const STATUS_LABEL: Record<OrderStatus, string> = {
   PROCESSING: "Đang xử lý",
   SHIPPING: "Đang giao hàng",
   DELIVERED: "Đã giao hàng",
+  COMPLETED: "Hoàn thành",
   CANCELLED: "Đã hủy",
 };
 
@@ -14,7 +15,8 @@ const DOT: Record<OrderStatus, string> = {
   CONFIRMED: "bg-gray-400",
   PROCESSING: "bg-gray-400",
   SHIPPING: "bg-gray-400",
-  DELIVERED: "bg-shop_light_green",
+  DELIVERED: "bg-sky-400",
+  COMPLETED: "bg-shop_light_green",
   CANCELLED: "bg-red-400",
 };
 
