@@ -15,6 +15,7 @@ import {
 import {
   getAdminOrders,
   getAdminOrderById,
+  getAdminPaymentByOrderId,
   updateOrderStatus,
   OrderAuthRequiredError,
   type AdminOrderListItem,
@@ -27,6 +28,16 @@ import {
 import StatusBadge from "@/components/admin/StatusBadge";
 
 const PAGE_SIZE = 10;
+
+// Dữ liệu từ GET /admin/payments/orders/{orderId}
+type AdminPayment = {
+  status?: string | null;
+  paymentMethod?: string | null;
+  transactionCode?: string | null;
+  providerTransactionId?: string | null;
+  failureReason?: string | null;
+  paidAt?: string | null;
+};
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
@@ -183,10 +194,29 @@ const getHistoryTime = (
   status: OrderStatus
 ): string | null => {
   const history = (detail.statusHistory ?? []) as unknown[];
-  const found = history.find((h) => pickString(h, ["status", "toStatus"]) === status);
+  const found = history.find((h) => pickString(h, ["newStatus", "status", "toStatus"]) === status);
   return found
     ? pickString(found, ["createdAt", "changedAt", "updatedAt", "timestamp"])
     : null;
+};
+
+// Phương thức thanh toán online: bắt buộc PAID mới được xác nhận đơn.
+// COD (và các phương thức khác) có thể xác nhận ngay khi khách đặt.
+const ONLINE_PAYMENT_METHODS = ["VNPAY", "MOMO"];
+
+// Đơn đang chờ xác nhận nhưng chưa thanh toán online -> chưa được xác nhận.
+const isAwaitingPayment = (
+  detail: AdminOrderDetail,
+  paymentStatus?: string | null
+): boolean => {
+  if (detail.status !== "PENDING") return false;
+  const method = String(pick(detail, PAYMENT_METHOD_KEYS) ?? "")
+    .trim()
+    .toUpperCase();
+  return (
+    ONLINE_PAYMENT_METHODS.includes(method) &&
+    (paymentStatus ?? detail.paymentStatus) !== "PAID"
+  );
 };
 
 /* --------------------------- Small pieces --------------------------- */
@@ -246,6 +276,8 @@ const AdminOrdersPage = () => {
   // Chi tiết (cột phải)
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [detail, setDetail] = useState<AdminOrderDetail | null>(null);
+  // Thông tin thanh toán của đơn đang chọn (endpoint riêng cho admin)
+  const [payment, setPayment] = useState<AdminPayment | null>(null);
   // Ảnh sản phẩm lấy bù từ /products/{id} khi đơn hàng không kèm ảnh
   const [productImages, setProductImages] = useState<Record<string, string>>({});
   const [isDetailLoading, setIsDetailLoading] = useState(false);
@@ -365,13 +397,16 @@ const AdminOrdersPage = () => {
     const loadDetail = async () => {
       setIsDetailLoading(true);
       setDetailError(null);
+      setPayment(null);
       try {
-        const result = await getAdminOrderById(selectedId);
+        // Đơn COD có thể chưa có bản ghi thanh toán -> bỏ qua lỗi, coi như null
+        const [result, pay] = await Promise.all([
+          getAdminOrderById(selectedId),
+          getAdminPaymentByOrderId(selectedId).catch(() => null),
+        ]);
         if (!ignore) {
           setDetail(result);
-          // Tạm thời: đối chiếu field phương thức thanh toán trong chi tiết đơn.
-          // eslint-disable-next-line no-console
-          console.log("[orders] chi tiết đơn (admin):", result);
+          setPayment(pay);
         }
       } catch (err) {
         if (ignore) return;
@@ -387,6 +422,43 @@ const AdminOrdersPage = () => {
       ignore = true;
     };
   }, [selectedId, handleError]);
+
+  // Đơn thanh toán online chưa PAID -> tải lại chi tiết khi admin quay lại tab,
+  // để thấy trạng thái thanh toán mới sau khi VNPay gọi IPN.
+  useEffect(() => {
+    if (!selectedId || !detail || detail.id !== selectedId) return;
+    const method = String(pick(detail, PAYMENT_METHOD_KEYS) ?? "").toUpperCase();
+    if (
+      method === "COD" ||
+      payment?.status === "PAID" ||
+      detail.paymentStatus === "PAID"
+    )
+      return;
+
+    let ignore = false;
+    const refresh = async () => {
+      if (document.visibilityState !== "visible") return;
+      try {
+        const [fresh, pay] = await Promise.all([
+          getAdminOrderById(selectedId),
+          getAdminPaymentByOrderId(selectedId).catch(() => null),
+        ]);
+        if (!ignore) {
+          setDetail(fresh);
+          setPayment(pay);
+        }
+      } catch {
+        // im lặng: lần tải đầu đã báo lỗi nếu có
+      }
+    };
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      ignore = true;
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, [selectedId, detail, payment]);
 
   // Đơn hàng không trả ảnh -> lấy thumbnailUrl từ chi tiết sản phẩm (API công khai)
   useEffect(() => {
@@ -444,6 +516,10 @@ const AdminOrdersPage = () => {
     if (!detail) return;
     const action = NEXT_ACTION[detail.status];
     if (!action) return;
+    if (isAwaitingPayment(detail, payment?.status)) {
+      setDetailError("Đơn thanh toán online phải được thanh toán trước khi xác nhận.");
+      return;
+    }
     setIsUpdating(true);
     setDetailError(null);
     try {
@@ -652,17 +728,19 @@ const AdminOrdersPage = () => {
     }
 
     const action = NEXT_ACTION[detail.status];
+    const awaitingPayment = isAwaitingPayment(detail, payment?.status);
     const currentIndex = PROGRESS_STEPS.findIndex(
       (s) => s.status === detail.status
     );
     const cancelled = detail.status === "CANCELLED";
     const itemsList = (detail.items ?? []) as unknown[];
-    // Thông tin thanh toán lấy từ chính /admin/orders/{id} (endpoint
-    // /payments/orders/{id} chỉ dành cho chủ đơn nên admin bị 404).
-    const payment = detail.paymentStatus ? detail : null;
+    // Thông tin thanh toán lấy từ /admin/payments/orders/{orderId}
+    // (/payments/orders/{id} chỉ dành cho chủ đơn nên admin bị 404).
     const paymentLabel = getPaymentLabel(detail) ?? null;
-    const paymentStatusLabel = detail.paymentStatus
-      ? PAYMENT_STATUS_LABELS[detail.paymentStatus] ?? detail.paymentStatus
+    const paymentStatusValue = payment?.status ?? detail.paymentStatus ?? null;
+    const paymentStatusLabel = paymentStatusValue
+      ? PAYMENT_STATUS_LABELS[paymentStatusValue as PaymentStatus] ??
+        paymentStatusValue
       : paymentLabel === PAYMENT_LABELS.COD
       ? "Thu tiền khi giao hàng"
       : "Chưa có thông tin";
@@ -697,13 +775,21 @@ const AdminOrdersPage = () => {
             <button
               type="button"
               onClick={handleAdvanceStatus}
-              disabled={isUpdating}
+              disabled={isUpdating || awaitingPayment}
+              title={awaitingPayment ? "Chờ khách thanh toán xong mới xác nhận được" : undefined}
               className="px-5 py-2.5 text-base font-semibold text-white rounded-full bg-shop_dark_green hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isUpdating ? "Đang cập nhật..." : action.label}
             </button>
           )}
         </div>
+
+        {awaitingPayment && (
+          <p className="text-sm text-amber-700 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
+            Đơn thanh toán qua {paymentLabel ?? "online"} — chỉ xác nhận được sau
+            khi khách thanh toán thành công.
+          </p>
+        )}
 
         {detailError && (
           <p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
@@ -840,11 +926,17 @@ const AdminOrdersPage = () => {
               <InfoRow label="Ngày đặt" value={formatDateTime(detail.createdAt)} />
               <InfoRow label="Phương thức thanh toán" value={paymentLabel ?? "—"} />
               <InfoRow label="Trạng thái thanh toán" value={paymentStatusLabel} />
-              {payment?.transactionNo && (
-                <InfoRow label="Mã giao dịch" value={payment.transactionNo} />
+              {(payment?.providerTransactionId || payment?.transactionCode) && (
+                <InfoRow
+                  label="Mã giao dịch"
+                  value={payment.providerTransactionId ?? payment.transactionCode}
+                />
               )}
               {payment?.paidAt && (
                 <InfoRow label="Thanh toán lúc" value={formatDateTime(payment.paidAt)} />
+              )}
+              {payment?.failureReason && (
+                <InfoRow label="Lý do thất bại" value={payment.failureReason} />
               )}
               <InfoRow
                 label="Trạng thái"

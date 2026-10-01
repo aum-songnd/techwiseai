@@ -256,6 +256,32 @@ export async function getAdminOrderById(
   });
 }
 
+// Thông tin thanh toán của 1 đơn (GET /admin/payments/orders/{orderId}).
+// /admin/orders/{id} không kèm thông tin này nên admin phải gọi endpoint riêng.
+export interface AdminPaymentInfo {
+  id: string;
+  orderId: string;
+  paymentMethod?: PaymentMethod;
+  status?: PaymentStatus;
+  amount?: number;
+  currency?: string;
+  transactionCode?: string | null;
+  providerTransactionId?: string | null;
+  paymentUrl?: string | null;
+  failureReason?: string | null;
+  paidAt?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export async function getAdminPaymentByOrderId(
+  orderId: string
+): Promise<AdminPaymentInfo> {
+  return fetchAdminOrderEnvelope<AdminPaymentInfo>(
+    `/admin/payments/orders/${orderId}`
+  );
+}
+
 export interface UpdateOrderStatusPayload {
   status: OrderStatus;
   note?: string;
