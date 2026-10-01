@@ -81,11 +81,7 @@ const Blog = ({ blogs, blogCategories, authors }: Props) => {
                       className="object-cover group-hover:scale-105 hoverEffect"
                     />
                   )}
-                  {blog.isLatest && (
-                    <span className="absolute top-3 left-3 bg-shop_orange text-white text-xs px-2 py-1 rounded">
-                      Mới nhất
-                    </span>
-                  )}
+                  
                 </div>
 
                 <div className="p-4 flex flex-col gap-2">

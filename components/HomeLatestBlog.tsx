@@ -1,8 +1,13 @@
-import React from "react";
+"use client";
+
+import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import { blogs, blogCategories } from "../app/data";
+import { Title } from "./ui/text";
 
 const formatDate = (isoDate: string) =>
   new Intl.DateTimeFormat("en-US", {
@@ -22,71 +27,132 @@ const HomeLatestBlog = () => {
     .sort(
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-    )
-    .slice(0, 4);
+    );
+
+  
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      loop: true,
+      slidesToScroll: 1,
+      dragFree: false,
+    },
+    [Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })]
+  );
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [snapCount, setSnapCount] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onInit = () => {
+      setSnapCount(emblaApi.scrollSnapList().length);
+      onSelect();
+    };
+    onInit();
+    emblaApi.on("reInit", onInit);
+    emblaApi.on("select", onSelect);
+    return () => {
+      emblaApi.off("reInit", onInit);
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   if (latestBlogs.length === 0) return null;
 
+
   return (
     <div className="my-10 md:my-10">
-      <h2 className="text-[28px] md:text-[32px] font-bold text-darkColor mb-6">
-        Latest Blog
-      </h2>
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <Title className="text-[22px]">Latest Blog</Title>
+        </div>
+      <div
+        className="cursor-grab overflow-hidden px-1 py-1 active:cursor-grabbing"
+        ref={emblaRef}
+      >
+        <div className="-ml-6 flex">
+          {latestBlogs.map((blog) => {
+            const categories = blogCategories.filter((c) =>
+              blog.blogCategoryIds.includes(c.id)
+            );
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {latestBlogs.map((blog) => {
-          const categories = blogCategories.filter((c) =>
-            blog.blogCategoryIds.includes(c.id)
-          );
-
-          return (
-            <Link
-              key={blog.id}
-              href={`/blog/${blog.slug}`}
-              className="group flex flex-col aspect-[2/2] rounded-lg border border-gray-300 overflow-hidden hover:shadow-md transition-shadow bg-white"
-            >
-              <div className="relative w-full h-[45%] shrink-0 bg-gray-100 overflow-hidden">
-                {blog.mainImageUrl ? (
-                  <Image
-                    src={blog.mainImageUrl}
-                    alt={blog.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-xs text-gray-400">
-                    No image
-                  </div>
-                )}
-              </div>
-
-              <div className="flex flex-col flex-1 gap-3 p-4">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pb-2 border-b border-gray-300 inline-flex w-fit">
-                    {categories.map((category, idx) => (
-                      <React.Fragment key={category.id}>
-                        {idx > 0 && <span className="text-gray-300">|</span>}
-                        <span className="text-shop_dark_green font-semibold text-sm">
-                          {category.title}
-                        </span>
-                      </React.Fragment>
-                    ))}
+            return (
+              <div
+                key={blog.id}
+                className="flex min-w-0 shrink-0 grow-0 basis-full pl-6 sm:basis-1/2 lg:basis-1/4"
+              >
+                <Link
+                  href={`/blog/${blog.slug}`}
+                  draggable={false}
+                  className="group flex w-full flex-col overflow-hidden rounded-lg border border-gray-300 bg-white transition-shadow hover:shadow-md"
+                >
+                  <div className="relative aspect-[11/5] w-full shrink-0 overflow-hidden bg-gray-100">
+                    {blog.mainImageUrl ? (
+                      <Image
+                        src={blog.mainImageUrl}
+                        alt={blog.title}
+                        fill
+                        draggable={false}
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center text-xs text-gray-400">
+                        No image
+                      </div>
+                    )}
                   </div>
 
-                  <span className="flex items-center gap-1.5 text-gray-500 text-sm whitespace-nowrap pb-2 border-b border-gray-300 w-fit">
-                    <Calendar className="w-4 h-4" />
-                    {formatDate(blog.publishedAt)}
-                  </span>
-                </div>
+                  <div className="flex flex-1 flex-col gap-3 p-4">
+                    <div className="flex items-stretch justify-start gap-6">
+                      <div className="flex flex-wrap content-center items-center gap-x-4 gap-y-1 border-b border-gray-300 pb-2">
+                        {categories.map((category) => (
+                          <span
+                            key={category.id}
+                            className="text-sm font-semibold text-shop_dark_green"
+                          >
+                            {category.title}
+                          </span>
+                        ))}
+                      </div>
 
-                <h3 className="text-[17px] font-bold text-darkColor leading-snug line-clamp-2 group-hover:text-shop_dark_green transition-colors duration-300">
-                  {blog.title}
-                </h3>
+                      <span className="flex items-center gap-1.5 border-b border-gray-300 pb-2 text-sm text-gray-500">
+                        <Calendar className="h-4 w-4 shrink-0" />
+                        {formatDate(blog.publishedAt)}
+                      </span>
+                    </div>
+
+                    <h3 className="line-clamp-2 text-[17px] font-bold leading-snug text-darkColor transition-colors duration-300 group-hover:text-shop_dark_green">
+                      {blog.title}
+                    </h3>
+                  </div>
+                </Link>
               </div>
-            </Link>
-          );
-        })}
+            );
+          })}
+        </div>
+      </div>
+
+      {/* pagination dots */}
+      <div className="mt-5 flex justify-center gap-2">
+        {Array.from({ length: snapCount }).map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            aria-label={`Go to slide ${i + 1}`}
+            onClick={() => emblaApi?.scrollTo(i)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === selectedIndex
+                ? "w-6 bg-shop_dark_green"
+                : "w-2 bg-gray-300 hover:bg-gray-400"
+            }`}
+          />
+        ))}
       </div>
     </div>
   );

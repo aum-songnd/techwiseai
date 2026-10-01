@@ -1,7 +1,7 @@
 "use client";
 
 // app/admin/products/page.tsx
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getCategories, getProductsPaginated } from "@/lib/api";
 import {
   adminCreateProduct,
@@ -10,6 +10,49 @@ import {
   ProductPayload,
 } from "@/lib/admin-api";
 import type { Category, Product } from "@/app/data/types";
+
+// Bỏ dấu tiếng Việt + chữ thường để tìm kiếm không phân biệt dấu
+const normalize = (s: string) =>
+  s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase()
+    .trim();
+
+// Lấy toàn bộ sản phẩm: duyệt lần lượt từng trang cho đến khi hết dữ liệu.
+// Giả định `page` bắt đầu từ 0 (kiểu Spring). Nếu API của bạn bắt đầu từ 1
+// thì đổi `let page = 0` thành `let page = 1`.
+const FETCH_SIZE = 100; // số sản phẩm mỗi request khi tải dữ liệu
+const PAGE_SIZE = 25; // số sản phẩm hiển thị mỗi trang
+const MAX_PAGES = 100; // chặn vòng lặp vô hạn
+
+const fetchAllProducts = async (): Promise<Product[]> => {
+  const all: Product[] = [];
+  const seen = new Set<string>();
+  let page = 0;
+
+  while (page < MAX_PAGES) {
+    const result = await getProductsPaginated({ size: FETCH_SIZE, page });
+    const items = result.items;
+
+    let added = 0;
+    for (const item of items) {
+      if (!seen.has(item.id)) {
+        seen.add(item.id);
+        all.push(item);
+        added++;
+      }
+    }
+
+    // Hết dữ liệu: trang không đủ size, hoặc không có sản phẩm mới
+    if (items.length < FETCH_SIZE || added === 0) break;
+    page++;
+  }
+
+  return all;
+};
 
 const emptyForm: ProductPayload = {
   name: "",
@@ -37,16 +80,52 @@ const AdminProductsPage = () => {
   const [form, setForm] = useState<ProductPayload>(emptyForm);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [newBrandMode, setNewBrandMode] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const listTopRef = useRef<HTMLDivElement | null>(null);
+
+  // Danh sách thương hiệu lấy từ các sản phẩm hiện có (không trùng, sắp xếp A-Z)
+  const brands = useMemo(() => {
+    const set = new Set<string>();
+    products.forEach((p) => {
+      if (p.brand && p.brand.trim()) set.add(p.brand.trim());
+    });
+    return Array.from(set).sort((a, b) => a.localeCompare(b, "vi"));
+  }, [products]);
+
+  const filteredProducts = useMemo(() => {
+    const tokens = normalize(search).split(/\s+/).filter(Boolean);
+    if (tokens.length === 0) return products;
+    return products.filter((p) => {
+      const haystack = normalize(
+        `${p.name} ${p.brand ?? ""} ${p.slug} ${(p.categories ?? []).join(" ")}`
+      );
+      // Mỗi từ khóa phải xuất hiện đâu đó, không cần đúng thứ tự
+      return tokens.every((t) => haystack.includes(t));
+    });
+  }, [products, search]);
+
+  // Phân trang phía client trên danh sách đã lọc
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PAGE_SIZE));
+  const safePage = Math.min(currentPage, totalPages); // tránh vượt trang sau khi xóa/lọc
+  const startIndex = (safePage - 1) * PAGE_SIZE;
+  const pagedProducts = filteredProducts.slice(startIndex, startIndex + PAGE_SIZE);
+
+  const goToPage = (p: number) => {
+    setCurrentPage(Math.min(Math.max(1, p), totalPages));
+    listTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const loadData = async () => {
     setLoading(true);
     setError(null);
     try {
-      const [productsResult, categoriesResult] = await Promise.all([
-        getProductsPaginated({ size: 100 }),
+      const [allProducts, categoriesResult] = await Promise.all([
+        fetchAllProducts(),
         getCategories(),
       ]);
-      setProducts(productsResult.items);
+      setProducts(allProducts);
       setCategories(categoriesResult);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Không tải được dữ liệu");
@@ -62,6 +141,7 @@ const AdminProductsPage = () => {
   const resetForm = () => {
     setEditingId(null);
     setForm(emptyForm);
+    setNewBrandMode(false);
   };
 
   // LƯU Ý: Product (từ GET /products) không có categoryId, chỉ có
@@ -72,6 +152,7 @@ const AdminProductsPage = () => {
   // response /products hoặc gọi thêm getProductById để lấy đủ dữ liệu).
   const startEdit = (product: Product) => {
     setEditingId(product.id);
+    setNewBrandMode(false);
     setForm({
       name: product.name,
       slug: product.slug,
@@ -89,6 +170,7 @@ const AdminProductsPage = () => {
       onSale: product.status === "sale",
       active: true,
     });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -182,11 +264,36 @@ const AdminProductsPage = () => {
 
         <div>
           <label className="block text-sm mb-1">Thương hiệu</label>
-          <input
-            value={form.brand}
-            onChange={(e) => setForm({ ...form, brand: e.target.value })}
+          <select
+            value={newBrandMode ? "__new__" : form.brand}
+            onChange={(e) => {
+              if (e.target.value === "__new__") {
+                setNewBrandMode(true);
+                setForm({ ...form, brand: "" });
+              } else {
+                setNewBrandMode(false);
+                setForm({ ...form, brand: e.target.value });
+              }
+            }}
             className="w-full border rounded px-3 py-2"
-          />
+          >
+            <option value="">-- Chọn thương hiệu --</option>
+            {brands.map((b) => (
+              <option key={b} value={b}>
+                {b}
+              </option>
+            ))}
+            <option value="__new__">+ Thêm thương hiệu mới...</option>
+          </select>
+          {newBrandMode && (
+            <input
+              autoFocus
+              value={form.brand}
+              onChange={(e) => setForm({ ...form, brand: e.target.value })}
+              placeholder="Nhập tên thương hiệu mới"
+              className="w-full border rounded px-3 py-2 mt-2"
+            />
+          )}
         </div>
 
         <div>
@@ -312,11 +419,52 @@ const AdminProductsPage = () => {
         </div>
       </form>
 
+      <div
+        ref={listTopRef}
+        className="flex flex-wrap items-center justify-between gap-3 mb-4"
+      >
+        <h2 className="font-medium">
+          {search.trim()
+            ? `Tìm thấy ${filteredProducts.length} / tổng ${products.length} sản phẩm`
+            : `Danh sách sản phẩm (tổng ${products.length})`}
+        </h2>
+        <div className="relative w-full sm:w-80">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1); // đổi từ khóa -> về trang 1
+            }}
+            placeholder="Tìm theo tên, thương hiệu..."
+            className="w-full border rounded px-3 py-2 pr-9 text-sm"
+          />
+          {search && (
+            <button
+              type="button"
+              onClick={() => {
+                setSearch("");
+                setCurrentPage(1);
+              }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+              aria-label="Xóa tìm kiếm"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+      </div>
+
       {loading ? (
         <p>Đang tải...</p>
       ) : products.length === 0 ? (
         <p className="text-lightColor">Chưa có sản phẩm nào.</p>
+      ) : filteredProducts.length === 0 ? (
+        <p className="text-lightColor">
+          Không tìm thấy sản phẩm nào khớp với &quot;{search}&quot;.
+        </p>
       ) : (
+        <>
         <table className="w-full bg-white border rounded-lg overflow-hidden">
           <thead className="bg-shop_light_bg text-left text-sm">
             <tr>
@@ -328,7 +476,7 @@ const AdminProductsPage = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((p) => (
+            {pagedProducts.map((p) => (
               <tr key={p.id} className="border-t text-sm">
                 <td className="p-3">{p.name}</td>
                 <td className="p-3 text-lightColor">{p.brand ?? "-"}</td>
@@ -354,6 +502,38 @@ const AdminProductsPage = () => {
             ))}
           </tbody>
         </table>
+
+        <div className="flex flex-wrap items-center justify-between gap-3 mt-4 text-sm">
+          <span className="text-lightColor">
+            Hiển thị {startIndex + 1}–
+            {Math.min(startIndex + PAGE_SIZE, filteredProducts.length)} trong
+            tổng {filteredProducts.length} sản phẩm
+          </span>
+          {totalPages > 1 && (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => goToPage(safePage - 1)}
+                disabled={safePage <= 1}
+                className="px-3 py-1.5 rounded border disabled:opacity-40"
+              >
+                ← Trước
+              </button>
+              <span>
+                Trang {safePage}/{totalPages}
+              </span>
+              <button
+                type="button"
+                onClick={() => goToPage(safePage + 1)}
+                disabled={safePage >= totalPages}
+                className="px-3 py-1.5 rounded border disabled:opacity-40"
+              >
+                Tiếp →
+              </button>
+            </div>
+          )}
+        </div>
+        </>
       )}
     </div>
   );
