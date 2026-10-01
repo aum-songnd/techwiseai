@@ -21,6 +21,7 @@ import {
   Menu,
   Package,
   ShoppingCart,
+  Users,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -76,6 +77,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/admin/orders", label: "Đơn hàng", icon: ShoppingCart },
   { href: "/admin/categories", label: "Danh mục", icon: Layers },
   { href: "/admin/products", label: "Sản phẩm", icon: Package },
+  { href: "/admin/users", label: "Người dùng", icon: Users },
 ];
 
 type AdminProfile = {
