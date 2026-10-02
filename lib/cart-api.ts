@@ -98,6 +98,18 @@ async function fetchCartEnvelope<T>(
   return json.data;
 }
 
+async function ensureCartMutationSucceeded(
+  response: Response,
+  path: string
+): Promise<void> {
+  if (response.ok) return;
+
+  const text = await response.text().catch(() => "");
+  throw new Error(
+    `API giỏ hàng lỗi (${response.status}) tại ${path}: ${text || response.statusText}`
+  );
+}
+
 export async function getCart(): Promise<CartData> {
   return fetchCartEnvelope<CartData>("/cart");
 }
@@ -128,18 +140,20 @@ export async function updateCartItemQuantity(
 
 export async function removeCartItem(itemId: string): Promise<void> {
   const headers = requireAuthHeaders();
-  await fetch(`${API_BASE_URL}/cart/items/${itemId}`, {
+  const response = await fetch(`${API_BASE_URL}/cart/items/${itemId}`, {
     method: "DELETE",
     cache: "no-store",
     headers,
   });
+  await ensureCartMutationSucceeded(response, `/cart/items/${itemId}`);
 }
 
 export async function clearCartApi(): Promise<void> {
   const headers = requireAuthHeaders();
-  await fetch(`${API_BASE_URL}/cart`, {
+  const response = await fetch(`${API_BASE_URL}/cart`, {
     method: "DELETE",
     cache: "no-store",
     headers,
   });
+  await ensureCartMutationSucceeded(response, "/cart");
 }

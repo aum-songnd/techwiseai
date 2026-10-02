@@ -136,24 +136,24 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
       inFlightItemIdsRef.current.add(itemId);
       try {
-        let data: CartData;
+        let data: CartData | undefined;
         if (quantity <= 0) {
           await removeCartItem(itemId);
-          data = await getCart();
         } else {
           data = await updateCartItemQuantity(itemId, quantity);
         }
 
         const stillLatest = pendingQuantitiesRef.current.get(itemId) === quantity;
         if (stillLatest) {
-          setCart(data);
+          if (data) setCart(data);
           pendingQuantitiesRef.current.delete(itemId);
         }
       } catch (err) {
         if (err instanceof CartAuthRequiredError) {
+          pendingQuantitiesRef.current.delete(itemId);
           setRequiresLogin(true);
-        } else {
-
+        } else if (pendingQuantitiesRef.current.get(itemId) === quantity) {
+          pendingQuantitiesRef.current.delete(itemId);
           fetchCartFromServer();
         }
       } finally {
@@ -235,9 +235,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
       try {
         await removeCartItem(itemId);
-
-        const data = await getCart();
-        setCart(data);
       } catch (err) {
         if (err instanceof CartAuthRequiredError) {
           setRequiresLogin(true);
@@ -260,8 +257,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     try {
       await clearCartApi();
-      const data = await getCart();
-      setCart(data);
     } catch (err) {
       if (err instanceof CartAuthRequiredError) {
         setRequiresLogin(true);

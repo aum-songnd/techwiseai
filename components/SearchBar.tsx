@@ -43,18 +43,20 @@ const SearchBar = () => {
       return;
     }
 
+    const controller = new AbortController();
     const timeoutId = setTimeout(async () => {
       try {
         setIsLoading(true);
         setError("");
 
-        const results = await searchProducts(searchKeyword);
+        const results = await searchProducts(searchKeyword, controller.signal);
 
         setSearchResults(results);
         setSearchedKeyword(searchKeyword);
         setHasSearched(true);
 
       } catch (error: unknown) {
+        if (controller.signal.aborted) return;
         const message =
           error instanceof Error
             ? error.message
@@ -63,12 +65,13 @@ const SearchBar = () => {
         setError(message);
         setSearchResults([]);
       } finally {
-        setIsLoading(false);
+        if (!controller.signal.aborted) setIsLoading(false);
       }
     }, 400);
 
     return () => {
       clearTimeout(timeoutId);
+      controller.abort();
     };
   }, [keyword]);
 

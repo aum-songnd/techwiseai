@@ -92,7 +92,10 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   let relatedProducts: Awaited<ReturnType<typeof getProducts>> = [];
   try {
-    const allProducts = await getProducts();
+    const allProducts = await getProducts({
+      size: 5,
+      category: mainCategory ? toSlug(mainCategory) : undefined,
+    });
 
     relatedProducts = allProducts
       .filter(

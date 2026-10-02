@@ -112,7 +112,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       ignore = true;
       window.removeEventListener("admin-orders-changed", refresh);
     };
-  }, [checked, pathname]);
+  }, [checked]);
 
   useEffect(() => {
     setSidebarOpen(false);

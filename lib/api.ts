@@ -172,39 +172,38 @@ export interface GetProductsResult {
   last: boolean;
 }
 
-export async function getProducts(
-  params: GetProductsParams = {}
-): Promise<Product[]> {
+function buildProductsQuery(params: GetProductsParams): string {
   const { page = 0, size = 20, category, brand } = params;
-  const query = new URLSearchParams({
+  return new URLSearchParams({
     page: String(page),
     size: String(size),
     ...(category ? { category } : {}),
     ...(brand ? { brand } : {}),
   }).toString();
+}
 
+async function fetchProductsPage(
+  params: GetProductsParams
+): Promise<ApiPaginated<ApiProductRaw>> {
+  const query = buildProductsQuery(params);
   const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
     `/products?${query}`,
     { next: { revalidate: 60 } }
   );
+  return data;
+}
+
+export async function getProducts(
+  params: GetProductsParams = {}
+): Promise<Product[]> {
+  const data = await fetchProductsPage(params);
   return normalizeList(data).map(mapProduct);
 }
 
 export async function getProductsPaginated(
   params: GetProductsParams = {}
 ): Promise<GetProductsResult> {
-  const { page = 0, size = 20, category, brand } = params;
-  const query = new URLSearchParams({
-    page: String(page),
-    size: String(size),
-    ...(category ? { category } : {}),
-    ...(brand ? { brand } : {}),
-  }).toString();
-
-  const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
-    `/products?${query}`,
-    { next: { revalidate: 60 } }
-  );
+  const data = await fetchProductsPage(params);
 
   return {
     items: normalizeList(data).map(mapProduct),
@@ -233,14 +232,17 @@ export async function getAllProductsByCategory(
   return normalizeList(data).map(mapProduct);
 }
 
-export async function searchProducts(keyword: string): Promise<Product[]> {
+export async function searchProducts(
+  keyword: string,
+  signal?: AbortSignal
+): Promise<Product[]> {
   const query = new URLSearchParams({
     keyword
   }).toString();
 
   const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
     `/products/search?${query}`,
-    { cache: "no-store" }
+    { cache: "no-store", signal }
   );
   return normalizeList(data).map(mapProduct);
 }

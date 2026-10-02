@@ -6,6 +6,7 @@ import Container from "./Container";
 import FlashSaleCountdown from "./FlashSaleCountdown";
 import { getProducts } from "../lib/api";
 import { Product } from "../app/data/types";
+import { useOptionalHomeProductFeed } from "./HomeProductFeed";
 
 const FETCH_SIZE = 60;
 const FLASH_LIMIT = 10;
@@ -76,21 +77,27 @@ const BrushStroke = ({
 );
 
 type FlashSaleProps = {
-
   variant?: "full" | "banner";
 };
 
 const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const sharedProducts = useOptionalHomeProductFeed();
+  const [fallbackProducts, setFallbackProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(!sharedProducts);
+  const products = sharedProducts ?? fallbackProducts;
 
   useEffect(() => {
+    if (sharedProducts) {
+      setLoading(false);
+      return;
+    }
+
     let ignore = false;
 
     async function load() {
       try {
         const result = await getProducts({ size: FETCH_SIZE });
-        if (!ignore) setProducts(result);
+        if (!ignore) setFallbackProducts(result);
       } catch {
 
       } finally {
@@ -102,7 +109,7 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [sharedProducts]);
 
   const { deals, endsAt, maxDiscount } = useMemo(() => {
     const now = Date.now();

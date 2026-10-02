@@ -228,8 +228,26 @@ const Shop = ({
     useState<Product[]>(initialProducts);
   const [loadingProducts, setLoadingProducts] = useState(false);
   const [productsError, setProductsError] = useState<string | null>(null);
+  const skipInitialCategoryFetch = useRef(true);
+  const categoryProductsCache = useRef(
+    new Map<string, Product[]>([[categorySlugParam ?? "", initialProducts]])
+  );
 
   useEffect(() => {
+    if (skipInitialCategoryFetch.current) {
+      skipInitialCategoryFetch.current = false;
+      return;
+    }
+
+    const categoryKey = activeCategory ?? "";
+    const cachedProducts = categoryProductsCache.current.get(categoryKey);
+    if (cachedProducts) {
+      setCategoryProducts(cachedProducts);
+      setProductsError(null);
+      setLoadingProducts(false);
+      return;
+    }
+
     let ignore = false;
 
     async function loadCategoryProducts() {
@@ -240,6 +258,7 @@ const Shop = ({
           activeCategory ?? undefined
         );
         if (ignore) return;
+        categoryProductsCache.current.set(categoryKey, items);
         setCategoryProducts(items);
       } catch (err) {
         if (!ignore) {

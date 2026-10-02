@@ -1,18 +1,23 @@
 import React, { Suspense } from "react";
 import Shop from "../../../components/Shop";
 import {
-  getAllProducts,
+  getAllProductsByCategory,
   getCategories,
 } from "@/constants/queriesShopPage";
 import type { Product, Category } from "@/app/data/types";
 
-const ShopPage = async () => {
+type ShopPageProps = {
+  searchParams: Promise<{ category?: string }>;
+};
+
+const ShopPage = async ({ searchParams }: ShopPageProps) => {
+  const { category } = await searchParams;
   let products: Product[] = [];
   let categories: Category[] = [];
   let loadError: string | null = null;
 
   const [productsResult, categoriesResult] = await Promise.allSettled([
-    getAllProducts(),
+    getAllProductsByCategory(category),
     getCategories(),
   ]);
 
@@ -37,7 +42,10 @@ const ShopPage = async () => {
   return (
     <div className="bg-white">
       <Suspense fallback={null}>
-        <Shop products={products} categories={categories} />
+        <Shop
+          products={products}
+          categories={categories}
+        />
       </Suspense>
     </div>
   );

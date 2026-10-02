@@ -4,7 +4,7 @@ import Image from "next/image";
 import ServiceFeatures from "./ServiceFeatures";
 import { Title } from "./ui/text";
 import MarqueeRow from "./MarqueeRow";
-import { getAllProductsByCategory } from "../lib/api";
+import type { Product } from "@/app/data/types";
 
 const MAX_BRANDS = 8;
 
@@ -26,15 +26,10 @@ type BrandCard = {
   logoUrl?: string;
 };
 
-async function getFeaturedBrands(): Promise<BrandCard[]> {
-  try {
-
-    const products = await getAllProductsByCategory();
-
+function getFeaturedBrands(products: Product[]): BrandCard[] {
     const seen = new Map<string, BrandCard>();
     for (const product of products) {
-      const raw = (product as unknown as { brand?: string }).brand;
-      const label = raw?.trim();
+      const label = product.brand?.trim();
       if (!label) continue;
 
       const key = label.toLowerCase();
@@ -52,10 +47,6 @@ async function getFeaturedBrands(): Promise<BrandCard[]> {
         return a.label.localeCompare(b.label);
       })
       .slice(0, MAX_BRANDS);
-  } catch {
-
-    return [];
-  }
 }
 
 const ChevronIcon = ({ className = "" }: { className?: string }) => (
@@ -99,8 +90,8 @@ const BrandItem = ({ brand }: { brand: BrandCard }) => (
   </Link>
 );
 
-const HomeBrands = async () => {
-  const brands = await getFeaturedBrands();
+const HomeBrands = ({ products }: { products: Product[] }) => {
+  const brands = getFeaturedBrands(products);
 
   if (brands.length === 0) return null;
 

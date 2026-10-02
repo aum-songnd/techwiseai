@@ -2,12 +2,15 @@
 
 import {
   getProducts,
+  getAllProductsByCategory as getAllProductsByCategoryFromApi,
   getCategories as getCategoriesFromApi,
   getBrands,
 } from "@/lib/api";
 import type { Product, Brand } from "../app/data/types";
 
 export const getAllProducts = getProducts;
+
+export const getAllProductsByCategory = getAllProductsByCategoryFromApi;
 
 export const getCategories = getCategoriesFromApi;
 
