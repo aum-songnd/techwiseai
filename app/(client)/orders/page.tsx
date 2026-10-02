@@ -40,6 +40,7 @@ const STATUS_LABEL: Record<OrderStatus, string> = {
   SHIPPING: "Đang giao hàng",
   DELIVERED: "Đã giao hàng",
   CANCELLED: "Đã hủy",
+  RETURNED: "Đã trả hàng",
 };
 
 type TabKey = "ALL" | OrderStatus;
@@ -51,6 +52,7 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "SHIPPING", label: "Đang giao" },
   { key: "DELIVERED", label: "Đã giao" },
   { key: "CANCELLED", label: "Đã hủy" },
+  { key: "RETURNED", label: "Đã trả hàng" },
 ];
 
 const OrdersHistoryPage = () => {

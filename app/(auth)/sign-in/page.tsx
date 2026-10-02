@@ -25,8 +25,6 @@ const SignInForm = () => {
 
     try {
       await login(username, password);
-      // Admin đi thẳng /admin, không qua trang khách.
-      // Yêu cầu login() đã lưu token/user vào localStorage trước khi resolve.
       router.replace(isAdminUser() ? "/admin" : "/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Đăng nhập thất bại");

@@ -6,8 +6,8 @@ export const STATUS_LABEL: Record<OrderStatus, string> = {
   PROCESSING: "Đang xử lý",
   SHIPPING: "Đang giao hàng",
   DELIVERED: "Đã giao hàng",
-  COMPLETED: "Hoàn thành",
   CANCELLED: "Đã hủy",
+  RETURNED: "Đã trả hàng",
 };
 
 const DOT: Record<OrderStatus, string> = {
@@ -16,8 +16,8 @@ const DOT: Record<OrderStatus, string> = {
   PROCESSING: "bg-gray-400",
   SHIPPING: "bg-gray-400",
   DELIVERED: "bg-sky-400",
-  COMPLETED: "bg-shop_light_green",
   CANCELLED: "bg-red-400",
+  RETURNED: "bg-amber-400",
 };
 
 const StatusBadge = ({ status }: { status: OrderStatus }) => (
