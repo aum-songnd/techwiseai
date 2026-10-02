@@ -5,17 +5,20 @@ import ProductGrid from '@/components/ProductGrid';
 import HomeCategories from '@/components/HomeCategories';
 import HomeBrands from '@/components/HomeBrands';
 import HomeLatestBlog from '@/components/HomeLatestBlog';
+import FlashSale from '@/components/FlashSale';
 
 const Home = () => {
   return (
     <div>
-      <Container className="bg-shop-light-pink">
-        <HomeBanner />
+      <Container>
+         <HomeBanner />
+        
+        <HomeCategories/>
         <div className='py-5'>
             <ProductGrid />
         </div>
-        <HomeCategories/>
-        <HomeBrands/>
+        <FlashSale/>
+          <HomeBrands/>
         <HomeLatestBlog/>
       </Container>
     </div>
