@@ -43,12 +43,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   }, []);
 
-  // Khôi phục session khi app khởi động — không gọi API,
-  // chỉ đọc lại token + user đã lưu từ lần login trước.
   useEffect(() => {
-    const token = getToken(); // trả về null nếu đã quá 1 tiếng
+    const token = getToken();
     if (!token) {
-      // Dọn user cũ còn sót lại (vd phiên đã hết hạn lúc đóng tab)
+
       clearToken();
       clearStoredUser();
       setIsLoading(false);
@@ -65,7 +63,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false);
   }, []);
 
-  // Tự đăng xuất khi hết hạn phiên (1 tiếng kể từ lúc đăng nhập)
   useEffect(() => {
     if (!user) return;
 
@@ -89,8 +86,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     };
 
-    // Máy sleep / tab nền bị throttle thì setTimeout có thể trễ,
-    // nên kiểm tra lại mỗi khi người dùng quay lại tab.
     const onVisible = () => {
       if (document.visibilityState === "visible") schedule();
     };
@@ -106,18 +101,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (username: string, password: string) => {
     const { token, user } = await loginRequest(username, password);
-    // LƯU Ý THỨ TỰ: setStoredUser phải chạy TRƯỚC setToken, vì setToken
-    // bắn ra event "auth:login" ngay lập tức — nếu user chưa kịp lưu vào
-    // localStorage, các listener của event này (vd Header đọc
-    // isAdminUser()) sẽ đọc phải dữ liệu cũ/rỗng và hiển thị sai cho tới
-    // khi F5 lại trang.
+
     setStoredUser(user);
-    setToken(token); // setToken cũng ghi mốc hết hạn = now + 1 tiếng
+    setToken(token);
     setUser(user);
   };
 
-  // API /auth/register chỉ tạo tài khoản, không trả token, nên không
-  // tự đăng nhập ở đây. Trang sign-up cần tự điều hướng sang /sign-in.
   const register = async (payload: RegisterPayload) => {
     await registerRequest(payload);
   };

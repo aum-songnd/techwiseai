@@ -28,7 +28,6 @@ const formatDateTime = (iso: string) => {
   }
 };
 
-// PENDING → CONFIRMED → PROCESSING → SHIPPING → DELIVERED, CANCELLED.
 const STATUS_LABEL: Record<OrderStatus, string> = {
   PENDING: "Chờ xác nhận",
   CONFIRMED: "Đã xác nhận",
@@ -39,7 +38,6 @@ const STATUS_LABEL: Record<OrderStatus, string> = {
   RETURNED: "Trả hàng",
 };
 
-// Mô tả ngắn cho từng bước để khách biết đơn đang ở đâu.
 const STATUS_DESCRIPTION: Record<OrderStatus, string> = {
   PENDING: "Cửa hàng đã nhận đơn và đang chờ xác nhận.",
   CONFIRMED: "Đơn hàng đã được xác nhận, sắp chuẩn bị hàng.",
@@ -50,7 +48,6 @@ const STATUS_DESCRIPTION: Record<OrderStatus, string> = {
   RETURNED: "Đơn hàng đã được trả lại.",
 };
 
-// Các bước xử lý theo đúng thứ tự (không gồm CANCELLED).
 const PROGRESS_STEPS: OrderStatus[] = [
   "PENDING",
   "CONFIRMED",
@@ -59,12 +56,8 @@ const PROGRESS_STEPS: OrderStatus[] = [
   "DELIVERED",
 ];
 
-// Chỉ cho phép khách tự hủy khi đơn còn ở giai đoạn sớm. Cần đối chiếu
-// lại với luồng thật của backend (mục 8.1 đặc tả) nếu PROCESSING trở đi
-// vẫn còn cho phép hủy.
 const CANCELLABLE_STATUSES: OrderStatus[] = ["PENDING", "CONFIRMED"];
 
-// Lý do hủy gợi ý để khách chọn nhanh (cũng có thể tự nhập).
 const CANCEL_REASONS = [
   "Muốn thay đổi địa chỉ hoặc số điện thoại nhận hàng",
   "Muốn đổi sản phẩm khác",
@@ -73,7 +66,6 @@ const CANCEL_REASONS = [
   "Đổi ý, không muốn mua nữa",
 ];
 
-// Đơn còn đang được xử lý thì tự làm mới trạng thái định kỳ.
 const FINAL_STATUSES: OrderStatus[] = ["DELIVERED", "CANCELLED", "RETURNED"];
 const POLL_INTERVAL_MS = 15000;
 
@@ -91,8 +83,6 @@ const OrderDetailPage = () => {
   const [cancelDialogError, setCancelDialogError] = useState<string | null>(null);
   const [justPlaced, setJustPlaced] = useState(false);
 
-  // Trang checkout chuyển sang đây kèm ?placed=1 -> hiện thông báo đặt
-  // hàng thành công. Đọc bằng window để không phải bọc Suspense.
   useEffect(() => {
     const placed = new URLSearchParams(window.location.search).get("placed");
     if (placed === "1") setJustPlaced(true);
@@ -113,7 +103,7 @@ const OrderDetailPage = () => {
           router.push("/sign-in");
           return;
         }
-        // Lần làm mới ngầm thất bại thì giữ nguyên dữ liệu đang hiển thị.
+
         if (!silent && !isCancelled()) {
           setErrorMessage(
             err instanceof Error
@@ -128,7 +118,6 @@ const OrderDetailPage = () => {
     [orderId, router]
   );
 
-  // Tải lần đầu.
   useEffect(() => {
     let ignore = false;
     load(() => ignore);
@@ -137,7 +126,6 @@ const OrderDetailPage = () => {
     };
   }, [load]);
 
-  // Tự làm mới trạng thái khi đơn chưa ở trạng thái cuối.
   const currentStatus = order?.status;
   useEffect(() => {
     if (!currentStatus || FINAL_STATUSES.includes(currentStatus)) return;
@@ -217,14 +205,12 @@ const OrderDetailPage = () => {
   const isReturned = order.status === "RETURNED";
   const currentStepIndex = PROGRESS_STEPS.indexOf(order.status);
 
-  // Thời điểm đơn chuyển sang từng bước (lấy lần ghi nhận gần nhất).
   const stepTimes: Partial<Record<OrderStatus, string>> = {};
   for (const entry of order.statusHistory ?? []) {
     stepTimes[entry.status] = entry.changedAt;
   }
   if (!stepTimes.PENDING) stepTimes.PENDING = order.createdAt;
 
-  // Lý do hủy (nếu có) nằm trong ghi chú của bản ghi CANCELLED.
   let cancelNote: string | null = null;
   for (const entry of order.statusHistory ?? []) {
     if (entry.status === "CANCELLED" && entry.note) cancelNote = entry.note;
@@ -275,7 +261,6 @@ const OrderDetailPage = () => {
         <p className="text-sm text-red-500 mb-4">{errorMessage}</p>
       )}
 
-      {/* Tiến trình xử lý đơn hàng */}
       <div className="border border-gray-200 rounded-lg p-5 mb-6">
         <h2 className="font-bold text-shop_dark_green mb-1">
           Tiến trình đơn hàng
@@ -312,7 +297,7 @@ const OrderDetailPage = () => {
               const isDone = idx < currentStepIndex;
               const isCurrent = idx === currentStepIndex;
               const isLast = idx === PROGRESS_STEPS.length - 1;
-              // Đơn đã giao xong thì bước cuối cũng tính là hoàn thành.
+
               const showCheck = isDone || (isCurrent && step === "DELIVERED");
               const time = stepTimes[step];
 
@@ -322,7 +307,7 @@ const OrderDetailPage = () => {
                   className="relative flex md:flex-1 md:flex-col md:items-center gap-3 md:gap-2 pb-6 md:pb-0 last:pb-0"
                   aria-current={isCurrent ? "step" : undefined}
                 >
-                  {/* Đường nối */}
+
                   {!isLast && (
                     <>
                       <span
@@ -340,7 +325,6 @@ const OrderDetailPage = () => {
                     </>
                   )}
 
-                  {/* Chấm trạng thái */}
                   <span
                     className={`relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-semibold ${
                       showCheck
@@ -384,7 +368,7 @@ const OrderDetailPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 flex flex-col gap-6">
-          {/* Sản phẩm trong đơn */}
+
           <div className="border border-gray-200 rounded-lg p-5">
             <h2 className="font-bold text-shop_dark_green mb-4">Sản phẩm</h2>
             <div className="flex flex-col divide-y divide-gray-100">
@@ -415,7 +399,6 @@ const OrderDetailPage = () => {
             </div>
           </div>
 
-          {/* Lịch sử trạng thái */}
           {order.statusHistory && order.statusHistory.length > 0 && (
             <div className="border border-gray-200 rounded-lg p-5">
               <h2 className="font-bold text-shop_dark_green mb-4">
@@ -441,7 +424,6 @@ const OrderDetailPage = () => {
           )}
         </div>
 
-        {/* Thông tin nhận hàng */}
         <div className="md:col-span-1">
           <div className="border border-gray-200 rounded-lg p-5 sticky top-24">
             <h2 className="font-bold text-shop_dark_green mb-4">

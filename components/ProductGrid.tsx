@@ -15,16 +15,12 @@ const TABS: { key: TabKey; title: string }[] = [
   { key: "new", title: "Mới ra mắt" },
 ];
 
-// Lấy một lượng sản phẩm đủ lớn 1 lần rồi chia 2 tab ở client,
-// nên chuyển tab là tức thì, không gọi lại API.
 const FETCH_SIZE = 60;
 const PRODUCTS_LIMIT = 15;
 const SKELETON_COUNT = 10;
 const SLOW_NETWORK_HINT_MS = 4000;
 const MAX_IMAGE_WAIT_MS = 8000;
 
-// Các field phục vụ phân loại tab mà Product type gốc chưa khai báo.
-// Field nào API không trả thì được bỏ qua (xem getSold/getCreatedAt).
 type ProductExtras = {
   soldCount?: number;
   sold?: number;
@@ -77,7 +73,6 @@ const ProductGrid = () => {
         const result = await getProducts({ size: FETCH_SIZE });
         if (ignore) return;
 
-        // Preload ảnh của các sản phẩm sắp hiện trước khi ẩn skeleton.
         const srcs = result
           .slice(0, PRODUCTS_LIMIT)
           .map(getPrimaryImage)
@@ -111,7 +106,7 @@ const ProductGrid = () => {
   }, [loading]);
 
   const listsByTab = useMemo(() => {
-    // Bán chạy: nhiều lượt bán nhất; cùng số lượt thì ưu tiên status "hot".
+
     const best = [...products]
       .sort(
         (a, b) =>
@@ -120,7 +115,6 @@ const ProductGrid = () => {
       )
       .slice(0, PRODUCTS_LIMIT);
 
-    // Mới ra mắt: status "new" lên trước, rồi theo ngày tạo mới nhất.
     const fresh = [...products]
       .sort(
         (a, b) =>

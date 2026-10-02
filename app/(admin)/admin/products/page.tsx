@@ -1,6 +1,5 @@
 "use client";
 
-// app/admin/products/page.tsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getCategories, getProductsPaginated } from "@/lib/api";
 import {
@@ -11,7 +10,6 @@ import {
 } from "@/lib/admin-api";
 import type { Category, Product } from "@/app/data/types";
 
-// Bỏ dấu tiếng Việt + chữ thường để tìm kiếm không phân biệt dấu
 const normalize = (s: string) =>
   s
     .normalize("NFD")
@@ -21,12 +19,9 @@ const normalize = (s: string) =>
     .toLowerCase()
     .trim();
 
-// Lấy toàn bộ sản phẩm: duyệt lần lượt từng trang cho đến khi hết dữ liệu.
-// Giả định `page` bắt đầu từ 0 (kiểu Spring). Nếu API của bạn bắt đầu từ 1
-// thì đổi `let page = 0` thành `let page = 1`.
-const FETCH_SIZE = 100; // số sản phẩm mỗi request khi tải dữ liệu
-const PAGE_SIZE = 25; // số sản phẩm hiển thị mỗi trang
-const MAX_PAGES = 100; // chặn vòng lặp vô hạn
+const FETCH_SIZE = 100;
+const PAGE_SIZE = 25;
+const MAX_PAGES = 100;
 
 const fetchAllProducts = async (): Promise<Product[]> => {
   const all: Product[] = [];
@@ -46,7 +41,6 @@ const fetchAllProducts = async (): Promise<Product[]> => {
       }
     }
 
-    // Hết dữ liệu: trang không đủ size, hoặc không có sản phẩm mới
     if (items.length < FETCH_SIZE || added === 0) break;
     page++;
   }
@@ -85,7 +79,6 @@ const AdminProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const listTopRef = useRef<HTMLDivElement | null>(null);
 
-  // Danh sách thương hiệu lấy từ các sản phẩm hiện có (không trùng, sắp xếp A-Z)
   const brands = useMemo(() => {
     const set = new Set<string>();
     products.forEach((p) => {
@@ -101,14 +94,13 @@ const AdminProductsPage = () => {
       const haystack = normalize(
         `${p.name} ${p.brand ?? ""} ${p.slug} ${(p.categories ?? []).join(" ")}`
       );
-      // Mỗi từ khóa phải xuất hiện đâu đó, không cần đúng thứ tự
+
       return tokens.every((t) => haystack.includes(t));
     });
   }, [products, search]);
 
-  // Phân trang phía client trên danh sách đã lọc
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PAGE_SIZE));
-  const safePage = Math.min(currentPage, totalPages); // tránh vượt trang sau khi xóa/lọc
+  const safePage = Math.min(currentPage, totalPages);
   const startIndex = (safePage - 1) * PAGE_SIZE;
   const pagedProducts = filteredProducts.slice(startIndex, startIndex + PAGE_SIZE);
 
@@ -144,12 +136,6 @@ const AdminProductsPage = () => {
     setNewBrandMode(false);
   };
 
-  // LƯU Ý: Product (từ GET /products) không có categoryId, chỉ có
-  // `categories: string[]` (tên) -> không thể tự chọn sẵn category trong
-  // dropdown khi sửa, phải tự chọn lại. Tương tự `sku` cũng không có
-  // trong response nên để trống, cần tự nhập lại nếu backend yêu cầu sku
-  // không đổi khi update (nếu lỗi 400 vì sku trống, cần bổ sung sku vào
-  // response /products hoặc gọi thêm getProductById để lấy đủ dữ liệu).
   const startEdit = (product: Product) => {
     setEditingId(product.id);
     setNewBrandMode(false);
@@ -434,7 +420,7 @@ const AdminProductsPage = () => {
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
-              setCurrentPage(1); // đổi từ khóa -> về trang 1
+              setCurrentPage(1);
             }}
             placeholder="Tìm theo tên, thương hiệu..."
             className="w-full border rounded px-3 py-2 pr-9 text-sm"

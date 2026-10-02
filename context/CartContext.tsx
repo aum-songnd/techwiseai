@@ -3,10 +3,10 @@
 import React, {
   createContext,
   useContext,
-  useEffect,
-  useState,
   useCallback,
+  useEffect,
   useRef,
+  useState,
 } from "react";
 import {
   getCart,
@@ -28,17 +28,14 @@ interface CartContextValue {
   totalQuantity: number;
   totalAmount: number;
   isLoaded: boolean;
-  // true khi chưa đăng nhập -> mọi thao tác giỏ hàng cần đăng nhập trước
+
   requiresLogin: boolean;
   addToCart: (productId: string, quantity?: number) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
   removeFromCart: (itemId: string) => Promise<void>;
   clearCart: () => Promise<void>;
   getItemByProductId: (productId: string) => CartItem | undefined;
-  // true khi đang có request addCartItem cho đúng productId này đang chạy
-  // -> AddToCart.tsx dùng để show spinner/disable nút, tránh cảm giác
-  // "bấm không phản hồi" trong lúc chờ network (đặc biệt lúc backend
-  // Railway cold-start, có thể mất vài giây cho request đầu tiên).
+
   isAddingToCart: (productId: string) => boolean;
 }
 
@@ -61,30 +58,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     new Set()
   );
 
-  // Debounce cho updateQuantity: giữ nút +/- bấm liên tiếp trước đây bắn
-  // 1 request PUT cho MỖI lần click (thấy rõ trên Network tab: 5 request
-  // tuần tự ~600-800ms/request cho 5 lần bấm). Giờ chỉ gửi request THẬT
-  // SỰ sau khi người dùng ngừng bấm 1 khoảng ngắn, còn UI cập nhật ngay
-  // (optimistic) để cảm giác bấm mượt tức thì.
   const UPDATE_DEBOUNCE_MS = 500;
   const updateTimeoutsRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(
     new Map()
   );
   const pendingQuantitiesRef = useRef<Map<string, number>>(new Map());
-  // Đánh dấu item nào đang có request PUT/DELETE bay tới server. Nếu 2
-  // request cho CÙNG 1 item chạy chồng lên nhau, response có thể về
-  // KHÔNG đúng thứ tự gửi đi (request cũ chạy lâu hơn, về sau) -> response
-  // cũ (giá trị nhỏ hơn/lớn hơn) ghi đè lên state mới hơn, gây hiện tượng
-  // UI nhảy ngược tạm thời rồi mới đúng lại. Ref này đảm bảo tại một thời
-  // điểm chỉ có tối đa 1 request cho mỗi item, request tiếp theo phải đợi
-  // request hiện tại xong.
+
   const inFlightItemIdsRef = useRef<Set<string>>(new Set());
 
-  // Lấy giỏ hàng từ server. Tách riêng thành hàm để có thể gọi lại mỗi
-  // khi user vừa đăng nhập (event "auth:login"), không chỉ lúc mount —
-  // trước đây requiresLogin chỉ được xác định 1 lần lúc mount nên nếu
-  // user đăng nhập xong (không reload trang), requiresLogin vẫn treo
-  // ở true và AddToCart cứ điều hướng nhầm sang trang đăng nhập.
   const fetchCartFromServer = useCallback(async () => {
     try {
       const data = await getCart();
@@ -105,9 +86,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     fetchCartFromServer();
 
-    // auth:login/auth:logout do lib/auth.ts bắn ra sau setToken/clearToken
-    // -> đồng bộ lại trạng thái giỏ hàng ngay trong cùng tab, không cần
-    // reload trang.
     const handleLogin = () => {
       fetchCartFromServer();
     };
@@ -145,11 +123,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  // Gửi request thật lên server, dùng giá trị quantity MỚI NHẤT đã ghi
-  // nhận. Nếu đã có 1 request khác cho item này đang bay -> bỏ qua lần
-  // gọi này (giá trị mới nhất vẫn còn trong pendingQuantitiesRef, sẽ được
-  // gửi ngay khi request hiện tại xong, xem finally bên dưới) thay vì bắn
-  // thêm 1 request song song.
   const commitQuantityUpdate = useCallback(
     async (itemId: string) => {
       updateTimeoutsRef.current.delete(itemId);
@@ -171,13 +144,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
           data = await updateCartItemQuantity(itemId, quantity);
         }
 
-        // Trong lúc request này bay, nếu người dùng đã bấm thêm (giá trị
-        // pending hiện tại KHÁC giá trị vừa gửi) -> response này đã lỗi
-        // thời. Áp dụng nó sẽ đè state đã tiến xa hơn về một giá trị cũ
-        // hơn, gây "nhảy loạn" (vd giảm từ 5 xuống 1, response xác nhận
-        // quantity=4 về sau khiến UI bật ngược lên 4 trước khi nhảy lại
-        // xuống 1). Bỏ qua, để request kế tiếp (bắn ngay ở finally) tự
-        // mang về giá trị đúng cuối cùng.
         const stillLatest = pendingQuantitiesRef.current.get(itemId) === quantity;
         if (stillLatest) {
           setCart(data);
@@ -192,9 +158,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         }
       } finally {
         inFlightItemIdsRef.current.delete(itemId);
-        // Trong lúc request vừa rồi chạy, nếu người dùng bấm thêm (còn
-        // giá trị pending khác giá trị vừa gửi) -> gửi tiếp NGAY, không
-        // cần đợi thêm 500ms debounce nữa.
+
         if (pendingQuantitiesRef.current.has(itemId)) {
           commitQuantityUpdate(itemId);
         }
@@ -207,12 +171,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     async (itemId: string, quantity: number) => {
       const clampedQty = Math.max(0, quantity);
 
-      // 1. Cập nhật UI ngay lập tức (optimistic), chưa gọi API.
-      // Về 0 -> xoá HẲN khỏi mảng items ngay, không chỉ set quantity:0 —
-      // nếu chỉ set quantity:0, những nơi render trực tiếp theo mảng
-      // items (vd trang /cart) sẽ vẫn hiển thị dòng đó cho tới khi
-      // getCart() thật sự trả về sau debounce + network (~1s), gây cảm
-      // giác "phải đợi mới mất".
       setCart((prev) => {
         const items =
           clampedQty <= 0
@@ -235,9 +193,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         };
       });
 
-      // 2. Ghi nhận giá trị mới nhất, huỷ timeout cũ (nếu có) và đặt lại
-      // -> nhiều lần bấm liên tiếp chỉ tạo ra 1 request duy nhất, gửi đi
-      // sau khi người dùng ngừng bấm UPDATE_DEBOUNCE_MS.
       pendingQuantitiesRef.current.set(itemId, clampedQty);
 
       const existingTimeout = updateTimeoutsRef.current.get(itemId);
@@ -251,27 +206,22 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     [commitQuantityUpdate]
   );
 
-  // Huỷ hết timeout đang chờ khi CartProvider unmount, tránh gọi setState
-  // sau khi component đã gỡ bỏ.
   useEffect(() => {
+    const timeouts = updateTimeoutsRef.current;
     return () => {
-      updateTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
-      updateTimeoutsRef.current.clear();
+      timeouts.forEach((timeout) => clearTimeout(timeout));
+      timeouts.clear();
     };
   }, []);
 
   const removeFromCart = useCallback(
     async (itemId: string) => {
-      // Huỷ mọi debounce update số lượng đang chờ cho item này, tránh nó
-      // commit lại sau khi item đã bị xoá.
+
       const existingTimeout = updateTimeoutsRef.current.get(itemId);
       if (existingTimeout) clearTimeout(existingTimeout);
       updateTimeoutsRef.current.delete(itemId);
       pendingQuantitiesRef.current.delete(itemId);
 
-      // Optimistic: xoá khỏi UI ngay lập tức, không đợi network. Trước
-      // đây phải await xong DELETE rồi await thêm GET nữa mới setCart,
-      // nghĩa là UI đứng im chờ 2 round-trip liên tiếp -> cảm giác chậm.
       setCart((prev) => {
         const items = prev.items.filter((item) => item.id !== itemId);
         return {
@@ -285,9 +235,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
       try {
         await removeCartItem(itemId);
-        // Đồng bộ âm thầm với server sau đó để chắc chắn khớp dữ liệu
-        // thật (vd tổng tiền, item khác có thay đổi) — không chặn UI vì
-        // item đã biến mất ngay từ bước optimistic ở trên.
+
         const data = await getCart();
         setCart(data);
       } catch (err) {
@@ -303,12 +251,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   const clearCart = useCallback(async () => {
-    // Huỷ toàn bộ debounce đang chờ vì cả giỏ sắp bị xoá.
+
     updateTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
     updateTimeoutsRef.current.clear();
     pendingQuantitiesRef.current.clear();
 
-    // Optimistic: trống giỏ hàng trên UI ngay, không đợi network.
     setCart((prev) => ({ ...EMPTY_CART, cartId: prev.cartId }));
 
     try {

@@ -32,7 +32,6 @@ const formatPrice = (value: number) =>
     value
   );
 
-// Mô tả từ API là 1 chuỗi thô, các ý cách nhau bởi dấu "•".
 const parseDescription = (raw?: string) => {
   if (!raw) return [];
   return raw
@@ -41,11 +40,8 @@ const parseDescription = (raw?: string) => {
     .filter(Boolean);
 };
 
-// "Surface Pro 7 Core i5 / 16GB / 256GB Chính Hãng" -> "Surface Pro 7 Core i5"
 const getShortName = (name: string) => name.split("/")[0].trim() || name;
 
-// "Laptop" -> "laptop", "Điện thoại" -> "dien-thoai"
-// Shop.tsx lọc category theo SLUG nên phải đổi tên -> slug trước khi link.
 const toSlug = (name: string) =>
   name
     .normalize("NFD")
@@ -61,7 +57,6 @@ const categoryHref = (name: string) =>
   `/shop?category=${encodeURIComponent(toSlug(name))}`;
 
 const brandHref = (name: string) => `/shop?brand=${encodeURIComponent(name)}`;
-
 
 export async function generateStaticParams() {
   try {
@@ -83,7 +78,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   try {
     product = await getProductById(id);
-  } catch (err) {
+  } catch {
     notFound();
   }
 
@@ -91,12 +86,10 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   const mainCategory = categoryNames[0];
   const brandTitle = product!.brand;
 
-  // Ý đầu = đoạn giới thiệu ngắn, các ý còn lại = tính năng nổi bật
   const descriptionItems = parseDescription(product!.description);
   const intro = descriptionItems[0];
   const features = descriptionItems.slice(1);
 
-  // Related products: cùng category đầu tiên, loại trừ chính nó, tối đa 4 sản phẩm
   let relatedProducts: Awaited<ReturnType<typeof getProducts>> = [];
   try {
     const allProducts = await getProducts();
@@ -112,7 +105,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
     relatedProducts = [];
   }
 
-  // finalPrice đã được tính sẵn ở lib/api.ts -> mapProduct
   const finalPrice = product!.finalPrice;
   const hasDiscount = product!.discount > 0;
   const discountPercent =
@@ -124,7 +116,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6 md:py-8">
-      {/* Breadcrumb */}
+
       <nav
         aria-label="Breadcrumb"
         className="text-sm text-gray-500 mb-6 flex flex-wrap items-center gap-1.5"
@@ -164,7 +156,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         </span>
       </nav>
 
-      {/* Khối chính: gallery trái, thông tin phải */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
         <div className=" self-start">
           <ProductGallery
@@ -174,7 +165,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         </div>
 
         <div className="flex flex-col">
-          {/* Badge trạng thái */}
+
           {product!.status && (
             <span
               className={`self-start text-[11px] font-semibold px-2.5 py-1 rounded-2xl mb-3 ${
@@ -189,7 +180,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
             {product!.name}
           </h1>
 
-          {/* Category + brand */}
           <div className="mt-2 flex flex-wrap items-center gap-x-2 text-sm text-gray-500">
             {mainCategory && (
               <Link
@@ -213,7 +203,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
             )}
           </div>
 
-          {/* Giá */}
           <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1">
             <span className="text-3xl font-bold text-gray-900">
               {formatPrice(finalPrice)}
@@ -232,7 +221,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
             )}
           </div>
 
-          {/* Tình trạng */}
           <p
             className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium ${
               inStock ? "text-green-600" : "text-red-600"
@@ -246,14 +234,12 @@ const ProductPage = async ({ params }: ProductPageProps) => {
             {inStock ? `Còn hàng (${product!.stock} sản phẩm)` : "Hết hàng"}
           </p>
 
-          {/* Giới thiệu ngắn */}
           {intro && (
             <p className="mt-4 text-sm text-gray-600 leading-relaxed">
               {intro}
             </p>
           )}
 
-          {/* Số lượng + thêm vào giỏ */}
           <div className="mt-6">
             <AddToCart product={product!} />
           </div>
@@ -262,7 +248,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         </div>
       </div>
 
-      {/* Tính năng nổi bật */}
       {features.length > 0 && (
         <section className="mt-12 border-t border-gray-200 pt-8">
           <h2 className="text-lg font-bold text-gray-900 mb-4">
@@ -282,7 +267,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         </section>
       )}
 
-      {/* Sản phẩm liên quan */}
       {relatedProducts.length > 0 && (
         <section className="mt-14 border-t border-gray-200 pt-8">
           <div className="flex items-center justify-between mb-4">

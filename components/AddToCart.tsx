@@ -31,8 +31,6 @@ const AddToCart = ({ product }: AddToCartProps) => {
     e.stopPropagation();
     if (isOutOfStock || isAdding) return;
 
-    // Chưa đăng nhập -> API /cart sẽ luôn thất bại, điều hướng sang
-    // trang đăng nhập ngay thay vì gọi API rồi báo lỗi.
     if (requiresLogin) {
       const redirectTo =
         typeof window !== "undefined"
@@ -59,7 +57,6 @@ const AddToCart = ({ product }: AddToCartProps) => {
     updateQuantity(itemInCart.id, quantityInCart + 1);
   };
 
-  // Đã có trong giỏ -> hiện dòng "Số lượng" (bộ đếm +/-) và dòng "Tạm tính"
   if (itemInCart && quantityInCart > 0) {
     const stockLimit = itemInCart.stockQuantity ?? product.stock ?? Infinity;
 
@@ -99,8 +96,6 @@ const AddToCart = ({ product }: AddToCartProps) => {
     );
   }
 
-  // Chưa có trong giỏ -> chỉ hiện nút thêm vào giỏ (giữ nguyên kích thước gốc của nút,
-  // khung bọc ngoài mới là phần giữ cho card không đổi kích thước)
   return (
     <div className="w-full h-[72px] flex items-center justify-center">
       <Button

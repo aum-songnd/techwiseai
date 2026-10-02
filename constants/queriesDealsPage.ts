@@ -1,4 +1,4 @@
-// constants/queriesDealsPage.ts
+
 import { getAllProductsByCategory } from "../lib/api";
 import type { Product } from "../app/data/types";
 

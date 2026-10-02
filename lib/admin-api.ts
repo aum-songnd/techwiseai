@@ -1,16 +1,4 @@
-// lib/admin-api.ts
-//
-// Các hàm gọi API ADMIN (tạo/sửa/xóa category, product) — gọi THẲNG ra
-// backend từ client kèm Bearer token (đã xác nhận không bị CORS).
-// Khác với lib/api.ts (chạy ở server/RSC, chỉ đọc, không cần token) và
-// lib/cart-api.ts (đi qua proxy nội bộ /api/cart) — file này chạy ở
-// CLIENT và tự gắn Authorization header lấy từ lib/auth.ts.
-//
-// LƯU Ý: tên field trong payload request (CategoryPayload, ProductPayload)
-// được SUY RA từ field response (ApiCategoryRaw, ApiProductRaw trong
-// lib/api.ts) vì chưa có doc chính thức cho body request. Nếu backend trả
-// lỗi 400 "field X is required/invalid" khi test thực tế, chỉnh lại tên
-// field tương ứng ở đây — chỉ cần sửa 1 chỗ này, không phải sửa UI.
+
 
 import { getToken } from "./auth";
 
@@ -69,7 +57,6 @@ async function fetchAdminEnvelope<T>(
     },
   });
 
-  // Response DELETE có thể không trả body -> bọc try/catch, coi {} là hợp lệ
   const body = (await res.json().catch(() => ({}))) as Partial<
     ApiEnvelope<T>
   >;
@@ -83,7 +70,6 @@ async function fetchAdminEnvelope<T>(
   return body.data as T;
 }
 
-// ---------- CATEGORIES ----------
 export interface CategoryPayload {
   name: string;
   slug: string;
@@ -110,14 +96,11 @@ export async function adminUpdateCategory(
   });
 }
 
-// ---------- PRODUCTS ----------
 export interface ProductPayload {
   name: string;
   slug: string;
   sku: string;
-  // LƯU Ý: GET /products (lib/api.ts) không trả categoryId, chỉ trả tên
-  // category -> khi sửa sản phẩm, không thể tự chọn sẵn category trong
-  // dropdown, người dùng phải tự chọn lại mỗi lần sửa.
+
   categoryId: string;
   brand?: string;
   shortDescription?: string;
@@ -149,7 +132,6 @@ export async function adminUpdateProduct(
   });
 }
 
-// Xóa mềm: backend set active=false, giữ lại dữ liệu cho lịch sử đơn hàng
 export async function adminDeleteProduct(id: string) {
   return fetchAdminEnvelope(`/admin/products/${id}`, {
     method: "DELETE",

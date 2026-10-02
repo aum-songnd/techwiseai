@@ -1,14 +1,8 @@
-// lib/admin-orders-api.ts
-//
-// ĐÃ ĐỔI giống orders-api.ts: gọi THẲNG backend (không qua proxy "/api")
-// vì app chưa có route handler /api/admin/orders -> trước đó bị Next.js
-// tự trả 404. Dùng getToken() từ lib/auth như api.ts; token này phải
-// thuộc tài khoản có ROLE_ADMIN, nếu không backend trả 403.
+
 
 import { getToken } from "./auth";
 import { normalizeStatusHistory } from "./orders-api";
 import type {
-  OrderData,
   OrderItem,
   OrderStatus,
   OrderStatusHistoryEntry,
@@ -81,11 +75,6 @@ async function fetchAdminOrderEnvelope<T>(
   return json.data;
 }
 
-// ---------- ADMIN ORDERS ----------
-
-// Đơn hàng nhìn từ phía admin — cùng shape với OrderData khách hàng nhưng
-// kèm thêm thông tin chủ đơn (khách hàng nào đặt). Field customer* chưa
-// được xác nhận thực tế, cần đối chiếu response thật khi tích hợp.
 export interface AdminOrderListItem {
   id: string;
   orderCode?: string;
@@ -99,9 +88,6 @@ export interface AdminOrderListItem {
   createdAt: string;
 }
 
-// Shape thật của GET /admin/orders/{id} (đã đối chiếu response thực tế):
-// có orderCode, userId, username, subtotal, discountAmount, shippingFee,
-// totalQuantity, updatedAt; KHÔNG có paymentMethod / paymentStatus.
 export interface AdminOrderDetail {
   id: string;
   orderCode?: string;
@@ -118,9 +104,7 @@ export interface AdminOrderDetail {
   recipientName: string;
   recipientPhone: string;
   shippingAddress: string;
-  // Endpoint /payments/orders/{id} chỉ dành cho chủ đơn (admin bị 404), nên
-  // thông tin thanh toán phải nằm ngay trong response /admin/orders/{id}.
-  // Các field dưới đây là tuỳ chọn vì BE có thể chưa trả đủ.
+
   paymentMethod?: PaymentMethod;
   paymentStatus?: PaymentStatus;
   transactionNo?: string;
@@ -143,7 +127,7 @@ export interface PagedAdminOrders {
 export interface GetAdminOrdersParams {
   page?: number;
   size?: number;
-  /** Lọc theo trạng thái, vd "PENDING" — chỉ áp dụng nếu controller đã khai báo tham số này. */
+
   status?: OrderStatus;
 }
 
@@ -160,8 +144,7 @@ export async function getAdminOrders(
   const result = await fetchAdminOrderEnvelope<PagedAdminOrders>(
     `/admin/orders?${query}`
   );
-  // BE có thể trả danh sách ở "items" (DTO tuỳ biến) hoặc "content" (Page của
-  // Spring). Giữ nguyên cấu trúc gốc, chỉ bổ sung customerName từ username.
+
   const raw = result as unknown as Record<string, unknown>;
   const withCustomer = (list: unknown) =>
     (list as AdminOrderListItem[]).map((o) => ({
@@ -198,9 +181,6 @@ function pickValue(obj: Record<string, unknown>, keys: string[]): unknown {
   return undefined;
 }
 
-// Đưa thông tin thanh toán về các field phẳng paymentMethod / paymentStatus /
-// transactionNo / paidAt, dù BE trả phẳng hay lồng trong "payment",
-// "paymentInfo", "payments[0]".
 function normalizeAdminOrder(order: AdminOrderDetail): AdminOrderDetail {
   const rec = (order ?? {}) as unknown as Record<string, unknown>;
 
@@ -226,7 +206,6 @@ function normalizeAdminOrder(order: AdminOrderDetail): AdminOrderDetail {
   const paymentMethod =
     typeof method === "string" ? (method.trim().toUpperCase() as PaymentMethod) : undefined;
 
-
   return {
     ...order,
     customerName: order.customerName ?? order.username,
@@ -249,8 +228,6 @@ export async function getAdminOrderById(
   });
 }
 
-// Thông tin thanh toán của 1 đơn (GET /admin/payments/orders/{orderId}).
-// /admin/orders/{id} không kèm thông tin này nên admin phải gọi endpoint riêng.
 export interface AdminPaymentInfo {
   id: string;
   orderId: string;
@@ -280,12 +257,6 @@ export interface UpdateOrderStatusPayload {
   note?: string;
 }
 
-// LƯU Ý (theo đúng cảnh báo trong đặc tả mục 8): nếu AdminOrderController
-// thực tế dùng các endpoint riêng theo hành động (vd PATCH .../confirm,
-// .../processing, .../shipping, .../delivered) thay vì một endpoint
-// .../status dùng chung, thì cần đổi lại hàm này — hoặc tách thành nhiều
-// hàm updateStatusToConfirmed/…/updateStatusToDelivered gọi đúng
-// @PatchMapping thực tế của backend.
 export async function updateOrderStatus(
   orderId: string,
   payload: UpdateOrderStatusPayload

@@ -2,7 +2,6 @@ const TOKEN_KEY = "access_token";
 const USER_KEY = "auth_user";
 const EXPIRES_KEY = "auth_expires_at";
 
-// Thời gian sống của phiên đăng nhập: 1 tiếng kể từ lúc đăng nhập.
 export const SESSION_DURATION_MS = 60 * 60* 1000;
 
 export interface User {
@@ -74,10 +73,6 @@ function normalizeLoginResponse(raw: unknown): AuthResponse {
   return { token, user };
 }
 
-// ---- Thời điểm hết hạn phiên ----
-// Trả về timestamp (ms) hết hạn phiên, hoặc null nếu chưa đăng nhập.
-// Nếu có token từ trước khi có tính năng này (chưa có expiry), tự gán
-// 1 tiếng kể từ bây giờ để không bị kẹt phiên vĩnh viễn.
 export function getSessionExpiry(): number | null {
   if (typeof window === "undefined") return null;
   if (!localStorage.getItem(TOKEN_KEY)) return null;
@@ -91,14 +86,11 @@ export function getSessionExpiry(): number | null {
   return expiresAt;
 }
 
-// ---- Token storage ----
 export function getToken(): string | null {
   if (typeof window === "undefined") return null;
   const token = localStorage.getItem(TOKEN_KEY);
   if (!token) return null;
 
-  // Token đã quá hạn phiên -> coi như không có
-  // (nhờ vậy fetchEnvelopeAuthed trong api.ts cũng tự chặn theo)
   const expiresAt = getSessionExpiry();
   if (expiresAt !== null && Date.now() >= expiresAt) return null;
 
@@ -107,12 +99,9 @@ export function getToken(): string | null {
 
 export function setToken(token: string) {
   localStorage.setItem(TOKEN_KEY, token);
-  // Ghi mốc hết hạn = bây giờ + 1 tiếng. Chỉ gọi setToken khi đăng nhập,
-  // đừng gọi khi khôi phục session vì sẽ làm reset đồng hồ.
+
   localStorage.setItem(EXPIRES_KEY, String(Date.now() + SESSION_DURATION_MS));
-  // Báo cho các context khác (vd CartContext) biết vừa có token mới,
-  // vì bản thân localStorage.setItem không tự kích hoạt re-render/refetch
-  // ở tab hiện tại (storage event chỉ bắn ở các tab khác).
+
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("auth:login"));
   }
@@ -126,7 +115,6 @@ export function clearToken() {
   }
 }
 
-// ---- User info storage (thay cho việc gọi API /me, vì backend chưa có) ----
 export function getStoredUser(): User | null {
   if (typeof window === "undefined") return null;
   const raw = localStorage.getItem(USER_KEY);
@@ -146,17 +134,11 @@ export function clearStoredUser() {
   localStorage.removeItem(USER_KEY);
 }
 
-// ---- Kiểm tra quyền admin ----
-// Dùng chung cho Header (hiện/ẩn link "Quản trị") và app/admin/layout.tsx
-// (chặn truy cập). Chưa rõ tên quyền thật backend trả về ("ADMIN" hay
-// "ROLE_ADMIN") nên check cả 2 — nếu sau này xác nhận được tên chính xác,
-// sửa lại 1 chỗ này là áp dụng cho toàn bộ.
 export function isAdminUser(user: User | null = getStoredUser()): boolean {
   const authorities = user?.authorities ?? [];
   return authorities.includes("ADMIN") || authorities.includes("ROLE_ADMIN");
 }
 
-// ---- API calls (đi qua Next.js API route nội bộ, không còn CORS) ----
 export async function loginRequest(username: string, password: string): Promise<AuthResponse> {
   const res = await fetch(`/api/auth/login`, {
     method: "POST",
@@ -201,7 +183,6 @@ export async function registerRequest(payload: RegisterPayload): Promise<User> {
   return body.data;
 }
 
-// ---- Lấy thông tin user hiện tại bằng token (dùng để khôi phục session) ----
 export async function fetchCurrentUser(token: string): Promise<User> {
   const res = await fetch(`/api/auth/me`, {
     method: "GET",

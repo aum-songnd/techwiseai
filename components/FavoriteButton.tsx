@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Heart } from "lucide-react";
 import { useFavorite } from "@/context/FavoriteContext";
 
-// Icon trái tim + badge số lượng, dùng đúng vị trí <FavoriteButton/> trong Header.tsx của bạn
 const FavoriteButton = () => {
   const { favoriteCount } = useFavorite();
 

@@ -6,14 +6,8 @@ import { Title } from "./ui/text";
 import MarqueeRow from "./MarqueeRow";
 import { getAllProductsByCategory } from "../lib/api";
 
-
 const MAX_BRANDS = 8;
 
-// === ĐỔI Ở ĐÂY === key phải là tên brand viết thường (khớp với `brand` mà
-// API trả về, sau khi .toLowerCase()). Value là đường dẫn public tới file
-// logo. Các file logo đang nằm thẳng trong thư mục `public/` (vd
-// public/acer.png) nên đường dẫn chỉ cần "/acer.png". Thêm brand mới có
-// logo thì chỉ cần bổ sung một dòng vào đây, không cần sửa gì khác.
 const BRAND_LOGOS: Record<string, string> = {
   acer: "/acer.png",
   apple: "/apple.png",
@@ -28,13 +22,13 @@ const BRAND_LOGOS: Record<string, string> = {
 type BrandCard = {
   key: string;
   label: string;
-  // Đường dẫn logo (từ BRAND_LOGOS). undefined -> hiện tên brand dạng chữ.
+
   logoUrl?: string;
 };
 
 async function getFeaturedBrands(): Promise<BrandCard[]> {
   try {
-    // Không truyền category -> lấy toàn bộ sản phẩm để gom brand.
+
     const products = await getAllProductsByCategory();
 
     const seen = new Map<string, BrandCard>();
@@ -51,9 +45,7 @@ async function getFeaturedBrands(): Promise<BrandCard[]> {
 
     return Array.from(seen.values())
       .sort((a, b) => {
-        // Ưu tiên brand có logo thật lên trước, tránh trường hợp brand có
-        // logo (vd "Dell") bị các brand không có logo xếp trước bảng chữ
-        // cái đẩy ra ngoài top MAX_BRANDS.
+
         const hasLogoA = !!a.logoUrl;
         const hasLogoB = !!b.logoUrl;
         if (hasLogoA !== hasLogoB) return hasLogoA ? -1 : 1;
@@ -61,7 +53,7 @@ async function getFeaturedBrands(): Promise<BrandCard[]> {
       })
       .slice(0, MAX_BRANDS);
   } catch {
-    // Lỗi gọi API -> ẩn section thay vì làm crash trang chủ.
+
     return [];
   }
 }
@@ -82,7 +74,7 @@ const ChevronIcon = ({ className = "" }: { className?: string }) => (
 );
 
 const BrandItem = ({ brand }: { brand: BrandCard }) => (
-  // mr-4 là khoảng cách giữa các thẻ (marquee không dùng gap).
+
   <Link
     href={`/shop?brand=${encodeURIComponent(brand.label)}`}
     title={brand.label}
@@ -94,7 +86,7 @@ const BrandItem = ({ brand }: { brand: BrandCard }) => (
           src={brand.logoUrl}
           alt={brand.label}
           fill
-          // mix-blend-multiply để nền trắng của file logo hòa vào nền thẻ.
+
           className="object-contain p-5 mix-blend-multiply"
           sizes="(max-width: 768px) 160px, 192px"
         />
@@ -125,7 +117,6 @@ const HomeBrands = async () => {
         </Link>
       </div>
 
-      {/* Chạy sang phải, ngược chiều với marquee danh mục. */}
       <MarqueeRow direction="right" speed={35}>
         {brands.map((brand) => (
           <BrandItem key={brand.key} brand={brand} />

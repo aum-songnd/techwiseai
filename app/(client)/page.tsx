@@ -12,7 +12,7 @@ const Home = () => {
     <div>
       <Container>
          <HomeBanner />
-        
+
         <HomeCategories/>
         <div className='py-5'>
             <ProductGrid />

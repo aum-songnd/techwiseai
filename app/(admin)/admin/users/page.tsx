@@ -1,12 +1,5 @@
 "use client";
 
-// app/(admin)/admin/users/page.tsx
-//
-// Quản lý tài khoản khách hàng: danh sách, tìm kiếm, phân trang,
-// khóa / mở khóa tài khoản. Ô tìm kiếm được đưa lên topbar qua portal
-// (#admin-header-actions) trên màn hình md trở lên, giống các trang admin khác;
-// trên mobile slot đó bị ẩn nên có thêm một ô tìm kiếm trong nội dung trang.
-
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Lock, LockOpen, Search } from "lucide-react";
@@ -20,7 +13,7 @@ import {
 const PAGE_SIZE = 10;
 
 const isActiveUser = (u: AdminUser) => u.active !== false;
-// Trang này chỉ quản lý khách hàng, không hiện tài khoản quản trị.
+
 const isCustomer = (u: AdminUser) => {
   const auth = u.authorities ?? [];
   return !(auth.includes("ADMIN") || auth.includes("ROLE_ADMIN"));
@@ -50,12 +43,10 @@ const AdminUsersPage = () => {
   const [keyword, setKeyword] = useState("");
   const [slot, setSlot] = useState<HTMLElement | null>(null);
 
-  // Slot trên topbar chỉ tồn tại sau khi layout render xong.
   useEffect(() => {
     setSlot(document.getElementById("admin-header-actions"));
   }, []);
 
-  // Debounce ô tìm kiếm 400ms, đổi từ khóa thì về trang đầu.
   useEffect(() => {
     const t = setTimeout(() => {
       setKeyword(searchInput);

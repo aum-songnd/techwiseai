@@ -1,17 +1,6 @@
-// lib/orders-api.ts
-//
-// ĐÃ ĐỔI: ban đầu viết theo convention của cart-api.ts (gọi qua proxy nội
-// bộ "/api/..."), nhưng thực tế app KHÔNG có route handler /api/orders,
-// /api/payments -> Next.js tự trả 404 (HTML "This page could not be
-// found", không phải lỗi từ backend). Vì chưa có proxy cho các route
-// này, đổi sang gọi THẲNG backend giống api.ts (dùng getToken() từ
-// lib/auth) để không phụ thuộc việc phải viết thêm route handler.
-//
-// Nếu sau này bạn dựng proxy /api/orders riêng (giống /api/cart), chỉ
-// cần đổi lại API_BASE_URL thành "/api" và requireAuthHeaders đọc token
-// từ localStorage như cart-api.ts.
 
-import { getToken } from "./auth"; // đổi đường dẫn nếu auth.ts không nằm cùng thư mục lib/
+
+import { getToken } from "./auth";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
@@ -74,14 +63,6 @@ async function fetchOrderEnvelope<T>(
   return json.data;
 }
 
-// Chuẩn hoá response phân trang: chấp nhận cả 2 kiểu thường gặp —
-// { items: [...], totalElements, totalPages, page, size } (DTO tuỳ biến,
-// giống /products, /favorites) LẪN { content: [...], totalElements,
-// totalPages, number, size } (format Page mặc định của Spring Data khi
-// controller trả thẳng Page<T> mà không bọc DTO riêng). Đây là nghi vấn
-// chính khiến /orders hiển thị rỗng dù backend có dữ liệu thật — nếu vẫn
-// còn rỗng sau khi sửa, cần in thử response thật ra console để đối chiếu
-// thêm.
 function normalizePagedOrders<TRaw, TMapped>(
   raw: unknown,
   mapItem: (item: TRaw) => TMapped
@@ -108,9 +89,6 @@ function normalizePagedOrders<TRaw, TMapped>(
 
 export type PaymentMethod = "COD" | "VNPAY" | "MOMO";
 
-// Khớp đúng enum của BE.
-// Luồng: PENDING → CONFIRMED → PROCESSING → SHIPPING → DELIVERED.
-// CANCELLED / RETURNED là các nhánh kết thúc khác (huỷ đơn / trả hàng).
 export type OrderStatus =
   | "PENDING"
   | "CONFIRMED"
@@ -126,9 +104,6 @@ export interface OrderStatusHistoryEntry {
   changedAt: string;
 }
 
-// Chuẩn hoá 1 phần tử lịch sử trạng thái. Backend chưa có tài liệu về tên
-// field của statusHistory nên chấp nhận nhiều tên thường gặp; nếu vẫn
-// không tìm thấy trạng thái thì in response gốc ra console để đối chiếu.
 export function normalizeStatusHistory(raw: unknown): OrderStatusHistoryEntry[] {
   if (!Array.isArray(raw)) return [];
 
@@ -166,7 +141,6 @@ export function normalizeStatusHistory(raw: unknown): OrderStatusHistoryEntry[] 
       | string
       | undefined;
 
-
     return {
       status: (status ?? "PENDING") as OrderStatus,
       changedAt: changedAt ?? "",
@@ -193,8 +167,7 @@ export interface OrderItem {
   productId: string;
   productName: string;
   productSku?: string;
-  // BE trả "productThumbnailUrl" (đã đối chiếu response thật); giữ thumbnailUrl
-  // làm tên dự phòng.
+
   productThumbnailUrl?: string;
   thumbnailUrl?: string;
   unitPrice: number;
@@ -202,9 +175,6 @@ export interface OrderItem {
   subtotal: number;
 }
 
-// Shape thật của GET /orders/{id} (đã đối chiếu response thực tế). Lưu ý:
-// response KHÔNG có paymentMethod / paymentStatus — thông tin thanh toán nằm
-// ở bản ghi riêng, lấy qua getPaymentByOrder (GET /payments/orders/{id}).
 export interface OrderData {
   id: string;
   orderCode?: string;
@@ -224,8 +194,7 @@ export interface OrderData {
   totalAmount: number;
   createdAt: string;
   updatedAt?: string;
-  // Chỉ chắc chắn có khi gọi GET chi tiết đơn (/orders/{orderId}); response
-  // của POST /orders có thể không kèm field này.
+
   statusHistory?: OrderStatusHistoryEntry[];
 }
 
@@ -267,7 +236,6 @@ export async function getOrders(page = 0, size = 10): Promise<PagedOrders> {
     (item) => item
   );
 
-
   return result;
 }
 
@@ -276,8 +244,6 @@ export async function getOrderById(orderId: string): Promise<OrderData> {
   return withHistory(order);
 }
 
-// reason: lý do khách hủy đơn. Gửi trong body JSON; backend cần nhận field này
-// (đang gửi cả "reason" lẫn "note" — giữ lại field mà DTO của BE dùng).
 export async function cancelOrder(
   orderId: string,
   reason?: string
@@ -296,8 +262,6 @@ export async function cancelOrder(
   return withHistory(order);
 }
 
-// ---------- PAYMENTS ----------
-
 export interface CreatePaymentPayload {
   orderId: string;
   paymentMethod: PaymentMethod;
@@ -309,8 +273,7 @@ export interface PaymentData {
   paymentId: string;
   orderId: string;
   paymentMethod: PaymentMethod;
-  // Chỉ có giá trị với cổng thanh toán online (VNPAY, MOMO). Với COD sẽ
-  // không có field này -> nơi gọi coi như thanh toán đã "khởi tạo xong".
+
   paymentUrl?: string;
   amount: number;
   status: PaymentStatus;

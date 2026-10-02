@@ -1,20 +1,5 @@
 "use client";
 
-/**
- * FavoriteContext — quản lý danh sách sản phẩm yêu thích (wishlist).
- *
- * ĐÃ CHUYỂN từ localStorage sang gọi API backend (module Favorites, mục 7
- * trong đặc tả API). Wishlist giờ gắn theo user đã đăng nhập:
- *  - Đăng nhập xong -> tự tải wishlist từ server.
- *  - Đăng xuất -> danh sách được xoá khỏi state (không xoá dữ liệu trên server).
- *  - Thêm/xoá đều gọi API, có cập nhật lạc quan (optimistic update) để UI
- *    phản hồi ngay, và tự rollback nếu API lỗi.
- *
- * Cách dùng: bọc app bằng <FavoriteProvider> trong app/layout.tsx (đặt BÊN
- * TRONG <AuthProvider>, vì context này cần useAuth), rồi gọi useFavorite()
- * ở bất kỳ component client nào.
- */
-
 import React, {
   createContext,
   useCallback,
@@ -24,18 +9,14 @@ import React, {
   useState,
 } from "react";
 import { Product } from "@/app/data/types";
-import { useAuth } from "@/context/AuthContext"; // === ĐỔI Ở ĐÂY === nếu path/tên khác
+import { useAuth } from "@/context/AuthContext";
 import {
   getFavorites,
   addFavorite as addFavoriteApi,
   removeFavorite as removeFavoriteApi,
   removeAllFavorites as removeAllFavoritesApi,
-} from "@/lib/api"; // === ĐỔI Ở ĐÂY === nếu path api.ts khác
+} from "@/lib/api";
 
-// Product gốc (types.ts) chỉ khai báo categoryIds/brandId, nhưng API thật
-// (lib/api.ts -> mapProduct) trả thêm categories (tên danh mục dạng string[]),
-// brand (string thô) và description. Khai báo mở rộng ở đây, giống hệt
-// pattern `ApiProduct` trong trang chi tiết sản phẩm của bạn.
 export type FavoriteProduct = Product & {
   categories?: string[];
   brand?: string;
@@ -62,8 +43,6 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
   const [favoriteProducts, setFavoriteProducts] = useState<FavoriteProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Đợi AuthContext xác định xong trạng thái đăng nhập rồi mới quyết định:
-  // đã đăng nhập -> tải wishlist từ server; chưa đăng nhập -> để rỗng.
   useEffect(() => {
     if (isAuthLoading) return;
 
@@ -80,7 +59,7 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
       .then((products) => {
         if (!cancelled) setFavoriteProducts(products);
       })
-      .catch((err) => {
+      .catch(() => {
         if (!cancelled) setFavoriteProducts([]);
       })
       .finally(() => {
@@ -97,13 +76,9 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
     [favoriteProducts]
   );
 
-  // Cập nhật lạc quan: thêm vào UI ngay, gọi API nền; nếu lỗi thì rollback
-  // lại và ném lỗi ra để nơi gọi (vd nút tim trên ProductCard) có thể hiện
-  // thông báo nếu muốn.
   const addToFavorite = useCallback(
     async (product: FavoriteProduct) => {
-      // === ĐỔI Ở ĐÂY === nếu muốn tự điều hướng sang /sign-in ngay tại đây
-      // khi user bấm tim lúc chưa đăng nhập, thay vì chỉ bỏ qua.
+
       if (!isSignedIn) return;
 
       setFavoriteProducts((prev) =>
@@ -129,7 +104,7 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
       try {
         await removeFavoriteApi(productId);
       } catch (err) {
-        setFavoriteProducts(prevProducts); // rollback
+        setFavoriteProducts(prevProducts);
 
         throw err;
       }
@@ -155,7 +130,7 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
     try {
       await removeAllFavoritesApi();
     } catch (err) {
-      setFavoriteProducts(prevProducts); // rollback
+      setFavoriteProducts(prevProducts);
 
       throw err;
     }

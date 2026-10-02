@@ -3,46 +3,27 @@ import Shop from "../../../components/Shop";
 import {
   getAllProducts,
   getCategories,
-  getAllBrands,
 } from "@/constants/queriesShopPage";
-import type { Product, Category, Brand } from "@/app/data/types";
+import type { Product, Category } from "@/app/data/types";
 
 const ShopPage = async () => {
   let products: Product[] = [];
   let categories: Category[] = [];
-  let brands: Brand[] = [];
   let loadError: string | null = null;
 
-  try {
-    // Promise.allSettled thay vì Promise.all: một API lỗi (vd /brands chưa
-    // có) sẽ không kéo sập luôn cả products/categories đang chạy tốt.
-    const [productsResult, categoriesResult, brandsResult] =
-      await Promise.allSettled([
-        getAllProducts(),
-        getCategories(),
-        getAllBrands(),
-      ]);
+  const [productsResult, categoriesResult] = await Promise.allSettled([
+    getAllProducts(),
+    getCategories(),
+  ]);
 
-    if (productsResult.status === "fulfilled") {
-      products = productsResult.value;
-    } else {
-      loadError = "Không tải được danh sách sản phẩm. Vui lòng thử lại sau.";
-    }
+  if (productsResult.status === "fulfilled") {
+    products = productsResult.value;
+  } else {
+    loadError = "Không tải được danh sách sản phẩm. Vui lòng thử lại sau.";
+  }
 
-    if (categoriesResult.status === "fulfilled") {
-      categories = categoriesResult.value;
-    } else {
-
-    }
-
-    if (brandsResult.status === "fulfilled") {
-      brands = brandsResult.value;
-    } else {
-
-    }
-  } catch (error) {
-
-    loadError = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
+  if (categoriesResult.status === "fulfilled") {
+    categories = categoriesResult.value;
   }
 
   if (loadError) {
@@ -56,7 +37,7 @@ const ShopPage = async () => {
   return (
     <div className="bg-white">
       <Suspense fallback={null}>
-        <Shop products={products} categories={categories} brands={brands} />
+        <Shop products={products} categories={categories} />
       </Suspense>
     </div>
   );

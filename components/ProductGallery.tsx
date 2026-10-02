@@ -9,8 +9,6 @@ interface ProductGalleryProps {
   productName: string;
 }
 
-// productImages chỉ map các key ảnh local (vd "m1.png"). Với ảnh URL đầy đủ
-// từ API thật thì fallback về chính chuỗi đó, giống cách ProductCard xử lý.
 const resolveImage = (key: string): StaticImageData | string => {
   const localImage = (
     productImages as Record<string, StaticImageData | undefined>
@@ -24,7 +22,7 @@ const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Khung ảnh chính: ảnh phủ kín toàn bộ card */}
+
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-gray-200 bg-gray-100">
         {activeImage ? (
           <Image
@@ -43,7 +41,6 @@ const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
         )}
       </div>
 
-      {/* Thumbnail */}
       {images && images.length > 1 && (
         <div className="flex flex-wrap gap-3">
           {images.map((img, index) => (

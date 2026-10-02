@@ -3,11 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 
-// Root layout riêng cho khu vực quản trị: có <html>/<body> và AuthProvider
-// (admin/layout.tsx cần useAuth) nhưng KHÔNG có Header/Footer/Cart của
-// trang khách. Đặt tại app/(admin)/layout.tsx, còn các trang admin nằm ở
-// app/(admin)/admin/... nên URL vẫn là /admin/...
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

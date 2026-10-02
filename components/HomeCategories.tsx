@@ -4,17 +4,11 @@ import Image from "next/image";
 import { Title } from "./ui/text";
 import { getCategories } from "@/lib/api";
 
-// API trả về thêm field imageUrl/displayOrder mà Category type gốc (mock)
-// chưa khai báo. Mở rộng type tại đây để tránh dùng `any`.
 type CategoryWithImage = Awaited<ReturnType<typeof getCategories>>[number] & {
   imageUrl?: string;
   displayOrder?: number;
 };
 
-// API chỉ trả imageUrl dạng placeholder chung chung (placehold.co/...),
-// nên dùng ảnh thật đã có sẵn trong /public, map theo tên danh mục.
-// Ưu tiên ảnh local; nếu category nào không khớp tên nào ở đây thì mới
-// fallback về imageUrl từ API.
 const CATEGORY_IMAGE_BY_TITLE: Record<string, string> = {
   laptop: "/laptop.webp",
   "điện thoại": "/mobile.webp",
@@ -34,15 +28,11 @@ const resolveCategoryImage = (
   );
 };
 
-// Bố cục bento 6 ô (desktop 4 cột):
-//   hàng 1:  [ rộng (2) ] [ hẹp ] [ hẹp ]
-//   hàng 2:  [ hẹp ] [ rộng (2) ] [ hẹp ]
-// Mỗi ô có: độ rộng, vị trí chữ và vị trí/kích thước ảnh riêng.
 type TileLayout = {
-  span: string; // col-span trên mobile (2 cột) / desktop (4 cột)
-  text: string; // vị trí khối chữ
-  image: string; // vị trí + kích thước ảnh (ảnh bị cắt sát mép ô)
-  objectPosition: string; // căn ảnh bên trong khung
+  span: string;
+  text: string;
+  image: string;
+  objectPosition: string;
 };
 
 const TILE_LAYOUTS: TileLayout[] = [
@@ -104,7 +94,7 @@ const CategoryTile = ({
             src={imageSrc}
             alt={category.title}
             fill
-            // mix-blend-multiply để nền trắng của ảnh hòa vào nền thẻ.
+
             className="object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-105"
             style={{ objectPosition: layout.objectPosition }}
             sizes="(max-width: 768px) 50vw, 25vw"
@@ -129,22 +119,20 @@ const HomeCategories = async () => {
 
   try {
     categories = (await getCategories()) as CategoryWithImage[];
-    // Sắp xếp theo displayOrder mà backend cấu hình (số nhỏ hiện trước).
-    // Category không có displayOrder (undefined) bị đẩy xuống cuối.
+
     categories = [...categories].sort((a, b) => {
       const orderA = a.displayOrder ?? Number.MAX_SAFE_INTEGER;
       const orderB = b.displayOrder ?? Number.MAX_SAFE_INTEGER;
       return orderA - orderB;
     });
-  } catch (err) {
-    // Lỗi API: ẩn section thay vì làm hỏng cả trang chủ.
+  } catch {
+
   }
 
   if (categories.length === 0) {
     return null;
   }
 
-  // Bố cục bento được thiết kế cho đúng 6 ô.
   const tiles = categories.slice(0, TILE_LAYOUTS.length);
 
   return (

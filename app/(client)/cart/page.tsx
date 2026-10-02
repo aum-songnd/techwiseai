@@ -35,10 +35,9 @@ const CartPage = () => {
     requiresLogin,
   } = useCart();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  // Chỉ là UI: chưa nối API mã giảm giá
+
   const [promoCode, setPromoCode] = useState("");
 
-  // Đang tải giỏ hàng từ server
   if (!isLoaded) {
     return (
       <div
@@ -49,7 +48,6 @@ const CartPage = () => {
     );
   }
 
-  // Chưa đăng nhập -> API /cart yêu cầu token (CartAuthRequiredError)
   if (requiresLogin) {
     return (
       <div
@@ -117,7 +115,6 @@ const CartPage = () => {
     setIsConfirmOpen(false);
   };
 
-  // Tạm tính theo giá gốc, giảm giá = chênh lệch so với giá bán thực tế
   const originalTotal = items.reduce(
     (sum, item) => sum + (item.originalPrice ?? item.unitPrice) * item.quantity,
     0
@@ -126,7 +123,6 @@ const CartPage = () => {
   const discountPercent =
     originalTotal > 0 ? Math.round((discountAmount / originalTotal) * 100) : 0;
 
-  // Miễn phí vận chuyển khi đơn (sau giảm giá) đạt ngưỡng
   const isFreeShip = totalAmount >= FREE_SHIP_THRESHOLD;
   const remainingForFreeShip = FREE_SHIP_THRESHOLD - totalAmount;
   const shipProgress = Math.min(
@@ -136,7 +132,7 @@ const CartPage = () => {
 
   return (
     <div className={`font-sans bg-neutral-50 text-neutral-900`}>
-      {/* Dải tiêu đề màu xám: tiêu đề + thanh miễn phí vận chuyển */}
+
       <div >
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 sm:flex-row sm:items-end sm:justify-between sm:py-10">
           <div className="flex items-end gap-3">
@@ -150,7 +146,6 @@ const CartPage = () => {
             </span>
           </div>
 
-          {/* Thanh tiến độ freeship */}
           <div className="w-full sm:max-w-xs">
             <p className="mb-2 flex items-center gap-2 text-xs text-neutral-700">
               {isFreeShip ? (
@@ -186,7 +181,7 @@ const CartPage = () => {
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:items-start lg:gap-14">
-          {/* Cột trái: danh sách + flash sale */}
+
           <div className="flex flex-col gap-10 lg:col-span-2">
             <section>
               <div className="flex justify-end border-b border-neutral-200 pb-3">
@@ -212,7 +207,7 @@ const CartPage = () => {
                       key={item.id}
                       className="flex gap-4 border-b border-neutral-200 py-6 sm:gap-6"
                     >
-                      {/* Ảnh */}
+
                       <Link
                         href={href}
                         className="relative h-28 w-24 shrink-0 overflow-hidden rounded-2xl bg-neutral-200 sm:h-32 sm:w-28"
@@ -232,7 +227,6 @@ const CartPage = () => {
                         )}
                       </Link>
 
-                      {/* Thông tin + hành động */}
                       <div className="flex min-w-0 flex-1 flex-col justify-between gap-4">
                         <div className="flex items-start justify-between gap-4">
                           <div className="min-w-0">
@@ -252,7 +246,6 @@ const CartPage = () => {
                             )}
                           </div>
 
-                          {/* Giá */}
                           <div className="shrink-0 text-right">
                             {hasDiscount && (
                               <p className="text-xs text-neutral-400 line-through">
@@ -268,7 +261,7 @@ const CartPage = () => {
                         </div>
 
                         <div className="flex items-center justify-between">
-                          {/* Số lượng */}
+
                           <div className="flex items-center gap-4 text-sm">
                             <button
                               type="button"
@@ -296,7 +289,6 @@ const CartPage = () => {
                             </button>
                           </div>
 
-                          {/* Xóa */}
                           <button
                             type="button"
                             onClick={() => removeFromCart(item.id)}
@@ -316,7 +308,6 @@ const CartPage = () => {
             <FlashSale variant="banner" />
           </div>
 
-          {/* Cột phải: tóm tắt đơn hàng */}
           <aside className="lg:col-span-1">
             <h2
               className={`font-sans text-2xl font-bold uppercase tracking-tight`}
@@ -359,7 +350,6 @@ const CartPage = () => {
               Thuế và phí vận chuyển được tính khi thanh toán.
             </p>
 
-            {/* Mã giảm giá (UI, chưa nối logic) */}
             <div className="mt-6">
               <label
                 htmlFor="promo"
@@ -402,7 +392,6 @@ const CartPage = () => {
         </div>
       </div>
 
-      {/* Modal xác nhận xóa tất cả */}
       {isConfirmOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"

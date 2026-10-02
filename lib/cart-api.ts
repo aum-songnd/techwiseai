@@ -1,4 +1,4 @@
-// lib/cart-api.ts
+
 const API_BASE_URL = "/api";
 
 const ACCESS_TOKEN_KEY = "access_token";

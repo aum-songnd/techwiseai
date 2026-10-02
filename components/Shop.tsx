@@ -13,14 +13,13 @@ import {
   Star,
   X,
 } from "lucide-react";
-import type { Product, Category, Brand } from "../app/data/types";
+import type { Product, Category } from "../app/data/types";
 import { productImages } from "../images";
 import { getAllProductsByCategory } from "../lib/api";
 
 type ShopProps = {
   products: Product[];
   categories: Category[];
-  brands: Brand[];
 };
 
 type SortValue =
@@ -55,30 +54,21 @@ const resolveProductImage = (
     productImages as Record<string, StaticImageData | undefined>
   )[fileName];
 
-  // Nếu không có trong map ảnh local (vd fileName là URL đầy đủ
-  // như "https://placehold.co/..."), dùng luôn chuỗi đó làm src.
   return localImage ?? fileName;
 };
 
 const getFinalPrice = (p: Product) => p.price - (p.discount ?? 0);
 
-// % giảm giá (0 nếu không giảm) - dùng để sắp xếp theo mức giảm.
 const getDiscountPercent = (p: Product) =>
   p.price > 0 && (p.discount ?? 0) > 0
     ? ((p.discount ?? 0) / p.price) * 100
     : 0;
 
-// Sản phẩm đang sale: có giảm giá, hoặc backend gắn status "sale".
 const isOnSale = (p: Product) =>
   (p.discount ?? 0) > 0 || p.status === "sale";
 
-/* ------------------------------------------------------------------ */
-/* Mức giá gợi ý (tự sinh từ giá thấp nhất / cao nhất của backend)     */
-/* ------------------------------------------------------------------ */
-
 type PriceRange = { from: number; to: number };
 
-// 1200000 -> "1,2 triệu", 100000000 -> "100 triệu"
 const formatShortVND = (value: number) => {
   const fmt = (n: number) =>
     new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 2 }).format(n);
@@ -88,8 +78,6 @@ const formatShortVND = (value: number) => {
   return fmt(value);
 };
 
-// Tạo các khoảng giá "đẹp": làm tròn xuống min, làm tròn lên max,
-// các mốc ở giữa theo thang 1-2-5 (vd 1tr, 2tr, 5tr, 10tr, 20tr, 50tr, 100tr).
 const buildPriceRanges = (prices: number[]): PriceRange[] => {
   const valid = prices.filter((n) => Number.isFinite(n) && n > 0);
   if (valid.length === 0) return [];
@@ -99,8 +87,8 @@ const buildPriceRanges = (prices: number[]): PriceRange[] => {
 
   const magMin = Math.pow(10, Math.floor(Math.log10(rawMin)));
   const magMax = Math.pow(10, Math.floor(Math.log10(rawMax)));
-  const lo = Math.floor(rawMin / magMin) * magMin; // 1.200.000 -> 1.000.000
-  const hi = Math.ceil(rawMax / magMax) * magMax; // 99.000.000 -> 100.000.000
+  const lo = Math.floor(rawMin / magMin) * magMin;
+  const hi = Math.ceil(rawMax / magMax) * magMax;
 
   if (lo === hi) return [{ from: lo, to: hi }];
 
@@ -118,9 +106,6 @@ const buildPriceRanges = (prices: number[]): PriceRange[] => {
   let boundaries = buildBoundaries([1, 2, 5]);
   if (boundaries.length > 8) boundaries = buildBoundaries([1]);
 
-  // Khoảng giá quá hẹp (ít mốc, vd 1,2tr–1,9tr) -> chia đều ~4 khoảng với
-  // bước "đẹp" (1, 2, 2,5, 5 x 10^n). Luôn có bước tối thiểu > 0 và giới hạn
-  // số vòng lặp để không bao giờ lặp vô hạn / sinh hàng nghìn ô.
   if (boundaries.length < 3) {
     const rawStep = (hi - lo) / 4;
     const stepMag = Math.pow(10, Math.floor(Math.log10(rawStep)));
@@ -144,10 +129,6 @@ const buildPriceRanges = (prices: number[]): PriceRange[] => {
   }
   return ranges;
 };
-
-/* ------------------------------------------------------------------ */
-/* Component nhỏ dùng lại                                              */
-/* ------------------------------------------------------------------ */
 
 const FilterTag = ({
   label,
@@ -208,36 +189,25 @@ const AccordionSection = ({
   </section>
 );
 
-/* ------------------------------------------------------------------ */
-/* Shop                                                                */
-/* ------------------------------------------------------------------ */
-
 const Shop = ({
   products: productsProp,
   categories: categoriesProp,
-  // brandsProp đến từ /brands API cũ (object id/slug), nhưng dữ liệu brand
-  // thật của product là string thô (vd "Microsoft") nên không dùng prop
-  // này để lọc nữa - brand list được tự dựng trực tiếp từ sản phẩm.
-  brands: _brandsProp,
 }: ShopProps) => {
-  // Phòng hộ: nếu API trả về sai kiểu (không phải mảng) hoặc undefined,
-  // luôn fallback về mảng rỗng thay vì để .filter/.find/.map ném lỗi.
+
   const initialProducts = Array.isArray(productsProp) ? productsProp : [];
   const categories = Array.isArray(categoriesProp) ? categoriesProp : [];
 
   const searchParams = useSearchParams();
   const categorySlugParam = searchParams.get("category");
   const brandParam = searchParams.get("brand");
-  // ?sale=1 (hoặc true) -> chỉ hiện sản phẩm đang giảm giá (link từ khối Flash Sale)
+
   const saleParam = searchParams.get("sale");
   const saleFromUrl = saleParam === "1" || saleParam === "true";
 
-  // activeCategory: SLUG, vẫn lọc ở SERVER qua query param `category`.
   const [activeCategory, setActiveCategory] = useState<string | null>(
     categorySlugParam
   );
-  // activeBrands: các chuỗi brand thô của API (vd "Microsoft"). Cho phép
-  // chọn nhiều brand (checkbox). Lọc brand hoàn toàn ở CLIENT.
+
   const [activeBrands, setActiveBrands] = useState<string[]>(
     brandParam ? [brandParam] : []
   );
@@ -246,7 +216,6 @@ const Shop = ({
   const [priceMax, setPriceMax] = useState("");
   const [sortBy, setSortBy] = useState<SortValue>("default");
 
-  // UI state
   const [brandSearch, setBrandSearch] = useState("");
   const [openSections, setOpenSections] = useState({ price: true, brand: true });
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -254,7 +223,6 @@ const Shop = ({
   const [wishlist, setWishlist] = useState<Set<string | number>>(new Set());
   const sortRef = useRef<HTMLDivElement>(null);
 
-  // ---------- Nạp toàn bộ sản phẩm theo category ----------
   const [page, setPage] = useState(0);
   const [categoryProducts, setCategoryProducts] =
     useState<Product[]>(initialProducts);
@@ -290,7 +258,6 @@ const Shop = ({
     };
   }, [activeCategory]);
 
-  // Đóng dropdown sort khi click ra ngoài
   useEffect(() => {
     if (!sortOpen) return;
     const onDown = (e: MouseEvent) => {
@@ -302,7 +269,6 @@ const Shop = ({
     return () => document.removeEventListener("mousedown", onDown);
   }, [sortOpen]);
 
-  // Khoá scroll nền khi mở drawer mobile
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? "hidden" : "";
     return () => {
@@ -310,9 +276,8 @@ const Shop = ({
     };
   }, [drawerOpen]);
 
-  // ---------- Dữ liệu dẫn xuất ----------
   const brandOptions = useMemo(() => {
-    const seen = new Map<string, string>(); // key (lowercase) -> label gốc
+    const seen = new Map<string, string>();
     for (const p of categoryProducts) {
       const raw = (p as unknown as { brand?: string }).brand;
       const label = raw?.trim();
@@ -325,8 +290,6 @@ const Shop = ({
       .sort((a, b) => a.label.localeCompare(b.label));
   }, [categoryProducts]);
 
-  // Mức giá gợi ý: dựa trên giá thấp nhất / cao nhất của sản phẩm backend
-  // (theo category, không phụ thuộc brand/giá đang lọc để các ô không nhảy).
   const priceRanges = useMemo(
     () => buildPriceRanges(categoryProducts.map(getFinalPrice)),
     [categoryProducts]
@@ -343,7 +306,6 @@ const Shop = ({
     [activeBrands]
   );
 
-  // Lọc brand + giá ở client
   const filteredProducts = useMemo(() => {
     const min = priceMin ? Number(priceMin) : null;
     const max = priceMax ? Number(priceMax) : null;
@@ -395,7 +357,6 @@ const Shop = ({
     if (page > totalPages - 1) setPage(Math.max(0, totalPages - 1));
   }, [totalPages, page]);
 
-  // Đồng bộ state khi query param trên URL thay đổi
   useEffect(() => {
     setActiveCategory(categorySlugParam ?? null);
     setPage(0);
@@ -411,7 +372,6 @@ const Shop = ({
     setPage(0);
   }, [saleFromUrl]);
 
-  // ---------- Handlers ----------
   const handlePageChange = (nextPage: number) => {
     if (nextPage < 0 || nextPage >= totalPages || nextPage === page) return;
     setPage(nextPage);
@@ -451,7 +411,6 @@ const Shop = ({
     setPage(0);
   };
 
-  // Chọn 1 mức giá gợi ý -> tự nhập vào 2 ô Từ/Đến. Bấm lại mức đang chọn -> bỏ.
   const handleSelectPriceRange = (range: PriceRange) => {
     const isActive =
       priceMin === String(range.from) && priceMax === String(range.to);
@@ -507,7 +466,6 @@ const Shop = ({
     return Array.from({ length: end - start }, (_, i) => start + i);
   }, [page, totalPages]);
 
-  // ---------- Tag đang chọn ----------
   const activeCategoryTitle = categories.find(
     (c) => c.slug === activeCategory
   )?.title;
@@ -528,12 +486,9 @@ const Shop = ({
   const currentSortLabel =
     SORT_OPTIONS.find((o) => o.value === sortBy)?.label ?? "Sắp xếp";
 
-  /* ---------------------------------------------------------------- */
-  /* Nội dung sidebar (dùng chung cho desktop + drawer mobile)        */
-  /* ---------------------------------------------------------------- */
   const filterPanel = (
     <div>
-      {/* Reset + tag đang chọn */}
+
       <div className="pb-5">
         <button
           type="button"
@@ -571,7 +526,6 @@ const Shop = ({
         )}
       </div>
 
-      {/* Lọc sản phẩm đang sale */}
       <section className="border-t border-gray-100 py-5">
         <label className="flex cursor-pointer items-center justify-between gap-3">
           <span className="text-base font-semibold text-darkColor">
@@ -598,7 +552,6 @@ const Shop = ({
         </label>
       </section>
 
-      {/* Giá */}
       <AccordionSection
         title="Giá"
         open={openSections.price}
@@ -652,7 +605,6 @@ const Shop = ({
         </div>
       </AccordionSection>
 
-      {/* Thương hiệu */}
       <AccordionSection
         title="Thương hiệu"
         open={openSections.brand}
@@ -711,13 +663,10 @@ const Shop = ({
     </div>
   );
 
-  /* ---------------------------------------------------------------- */
-  /* Render                                                            */
-  /* ---------------------------------------------------------------- */
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-8 lg:py-10">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-x-10">
-        {/* Cột trái: tiêu đề + breadcrumb + bộ lọc (desktop) */}
+
         <div className="lg:col-span-1 lg:self-start">
           <nav aria-label="Breadcrumb" className="mt-4 text-xs text-lightColor">
             <Link href="/" className="hover:text-darkColor hoverEffect">
@@ -730,9 +679,8 @@ const Shop = ({
           <div className="mt-8 hidden lg:block">{filterPanel}</div>
         </div>
 
-        {/* Cột phải */}
         <div className="lg:col-span-3">
-          {/* Thanh danh mục + sort */}
+
           <div className="mb-6 flex items-center justify-between gap-3 lg:pt-2">
             <div className="flex min-w-0 flex-1 items-center gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {[{ id: "__all", slug: null, title: "Tất cả" }, ...categories.map((c) => ({ id: c.id, slug: c.slug, title: c.title }))].map(
@@ -763,7 +711,7 @@ const Shop = ({
             </div>
 
             <div className="flex shrink-0 items-center gap-2">
-              {/* Nút mở bộ lọc (mobile/tablet) */}
+
               <button
                 type="button"
                 onClick={() => setDrawerOpen(true)}
@@ -773,7 +721,6 @@ const Shop = ({
                 Bộ lọc
               </button>
 
-              {/* Sort dropdown */}
               <div ref={sortRef} className="relative">
                 <button
                   type="button"
@@ -824,8 +771,6 @@ const Shop = ({
             </div>
           </div>
 
-
-          {/* Lưới sản phẩm */}
           {loadingProducts ? (
             <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
               {Array.from({ length: 9 }).map((_, i) => (
@@ -881,7 +826,7 @@ const Shop = ({
                     key={product.id}
                     className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white hoverEffect hover:shadow-md"
                   >
-                    {/* Khung ảnh */}
+
                     <div className="relative aspect-[5/4] w-full overflow-hidden bg-shop_light_bg">
                       <Link
                         href={`/product/${product.id}`}
@@ -930,7 +875,6 @@ const Shop = ({
                       </button>
                     </div>
 
-                    {/* Thông tin: dòng 1 brand + sao, dòng 2 giá, dòng 3 tên */}
                     <Link
                       href={`/product/${product.id}`}
                       className="block px-3 pb-3 pt-3"
@@ -971,7 +915,6 @@ const Shop = ({
             </div>
           )}
 
-          {/* Phân trang */}
           {!loadingProducts &&
             !productsError &&
             sortedProducts.length > 0 &&
@@ -1041,7 +984,6 @@ const Shop = ({
         </div>
       </div>
 
-      {/* Drawer bộ lọc (mobile / tablet) */}
       <div
         className={`fixed inset-0 z-50 lg:hidden ${
           drawerOpen ? "" : "pointer-events-none"

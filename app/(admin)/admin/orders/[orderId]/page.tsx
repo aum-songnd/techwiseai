@@ -41,8 +41,6 @@ const STATUS_LABEL: Record<OrderStatus, string> = {
   RETURNED: "Trả hàng",
 };
 
-// Bước tiếp theo theo luồng PENDING → CONFIRMED → PROCESSING → SHIPPING
-// → DELIVERED, kèm nhãn nút hành động.
 const NEXT_STEP: Partial<
   Record<OrderStatus, { status: OrderStatus; label: string }>
 > = {
@@ -52,9 +50,6 @@ const NEXT_STEP: Partial<
   SHIPPING: { status: "DELIVERED", label: "Đánh dấu đã giao" },
 };
 
-// Trạng thái admin được phép hủy. Đặc tả chưa nêu quy tắc chuyển trạng
-// thái hợp lệ (mục 8.1 không có trong file) -> cần đối chiếu backend; nếu
-// backend từ chối, thông báo lỗi sẽ hiển thị ra bên dưới.
 const ADMIN_CANCELLABLE: OrderStatus[] = ["PENDING", "CONFIRMED", "PROCESSING"];
 
 const PAYMENT_STATUS_LABEL: Record<PaymentStatus, string> = {
@@ -197,7 +192,7 @@ const AdminOrderDetailPage = () => {
     order.status === "DELIVERED" ||
     order.status === "CANCELLED" ||
     order.status === "RETURNED";
-  // Ưu tiên phương thức từ bản ghi thanh toán, fallback sang đơn hàng.
+
   const paymentMethod = order.paymentMethod;
 
   return (
@@ -238,7 +233,7 @@ const AdminOrderDetailPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 flex flex-col gap-6">
-          {/* Xử lý đơn */}
+
           <div className="border border-gray-200 rounded-lg p-5">
             <h2 className="font-bold text-shop_dark_green mb-1">Xử lý đơn</h2>
             {isFinal ? (
@@ -293,7 +288,6 @@ const AdminOrderDetailPage = () => {
             )}
           </div>
 
-          {/* Sản phẩm */}
           <div className="border border-gray-200 rounded-lg p-5">
             <h2 className="font-bold text-shop_dark_green mb-4">Sản phẩm</h2>
             <div className="flex flex-col divide-y divide-gray-100">
@@ -324,7 +318,6 @@ const AdminOrderDetailPage = () => {
             </div>
           </div>
 
-          {/* Lịch sử trạng thái */}
           {order.statusHistory && order.statusHistory.length > 0 && (
             <div className="border border-gray-200 rounded-lg p-5">
               <h2 className="font-bold text-shop_dark_green mb-4">
@@ -350,7 +343,6 @@ const AdminOrderDetailPage = () => {
           )}
         </div>
 
-        {/* Thông tin nhận hàng + thanh toán */}
         <div className="md:col-span-1">
           <div className="border border-gray-200 rounded-lg p-5 sticky top-24">
             <h2 className="font-bold text-shop_dark_green mb-4">

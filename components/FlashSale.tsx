@@ -10,8 +10,6 @@ import { Product } from "../app/data/types";
 const FETCH_SIZE = 60;
 const FLASH_LIMIT = 10;
 
-// Link tới trang shop: nhảy đúng category (theo SLUG) và bật bộ lọc "đang giảm giá".
-// Slug phải khớp với field `slug` của category trả về từ backend.
 const shopHref = (categorySlug?: string) => {
   const params = new URLSearchParams();
   if (categorySlug) params.set("category", categorySlug);
@@ -19,15 +17,13 @@ const shopHref = (categorySlug?: string) => {
   return `/shop?${params.toString()}`;
 };
 
-// Hai ô xám bên phải (xếp dọc). Nội dung chữ/ảnh là placeholder, sửa theo khuyến mãi thật.
-// reverse = true: chữ bên trái, ảnh bên phải (ô thứ 2 trong mẫu).
 const SIDE_CARDS = [
   {
     eyebrow: "Ưu đãi phụ kiện đang diễn ra",
     headline: "Giảm đến 60%",
     image: "/accessory.webp",
     alt: "Phụ kiện giảm giá",
-    href: shopHref("phu-kien"), // TODO: đổi đúng slug category Phụ kiện
+    href: shopHref("phu-kien"),
     reverse: false,
   },
   {
@@ -35,12 +31,11 @@ const SIDE_CARDS = [
     headline: "Giảm đến 70%",
     image: "/laptop.webp",
     alt: "Laptop giảm giá",
-    href: shopHref("laptop"), // TODO: đổi đúng slug category Laptop
+    href: shopHref("laptop"),
     reverse: true,
   },
 ];
 
-// Field phục vụ deal mà Product type gốc chưa khai báo (API không trả thì bỏ qua).
 type ProductExtras = { flashSaleEndsAt?: string };
 
 const getFlashEnd = (p: Product) => {
@@ -53,14 +48,12 @@ const getDiscountPercent = (p: Product) =>
     ? Math.round(((p.price - p.finalPrice) / p.price) * 100)
     : 0;
 
-// Deal không có hạn riêng thì đếm ngược tới 0h đêm nay (deal theo ngày).
 const endOfToday = () => {
   const d = new Date();
   d.setHours(24, 0, 0, 0);
   return d.getTime();
 };
 
-// Nét cọ dưới tiêu đề; màu truyền qua className (text-white / text-blue-700).
 const BrushStroke = ({
   className = "mx-auto",
 }: {
@@ -83,14 +76,10 @@ const BrushStroke = ({
 );
 
 type FlashSaleProps = {
-  /**
-   * "full"   : bố cục bento đầy đủ (ô xanh cao + 2 ô xám) - dùng ở trang chủ.
-   * "banner" : chỉ ô xanh có đếm ngược, hiển thị nằm ngang - dùng ở trang giỏ hàng.
-   */
+
   variant?: "full" | "banner";
 };
 
-// Khối Flash Sale độc lập. Tự lấy dữ liệu, tự ẩn nếu không có deal nào.
 const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -103,7 +92,7 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
         const result = await getProducts({ size: FETCH_SIZE });
         if (!ignore) setProducts(result);
       } catch {
-        // Lỗi API: ẩn khối thay vì làm hỏng trang.
+
       } finally {
         if (!ignore) setLoading(false);
       }
@@ -141,7 +130,6 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
     };
   }, [products]);
 
-  // Banner: luân phiên "Flash Sale" <-> "Giảm đến X%" mỗi 5 giây (bắt đầu bằng Flash Sale).
   const [showDiscount, setShowDiscount] = useState(false);
   useEffect(() => {
     if (maxDiscount <= 0) {
@@ -154,11 +142,10 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
 
   if (!loading && deals.length === 0) return null;
 
-  /* ---------------- Banner ngang: chỉ ô xanh + đếm ngược ---------------- */
   if (variant === "banner") {
     return (
       <div className="flex flex-col items-center gap-2 rounded-2xl bg-gradient-to-br from-blue-700 to-blue-600 px-4 py-3 text-center sm:flex-row sm:justify-between sm:gap-4 sm:text-left">
-        {/* Trái: tiêu đề + mô tả */}
+
         <div className="min-w-0">
           <h2 className="grid text-xl font-extrabold uppercase leading-tight text-white sm:text-2xl">
             <span
@@ -183,12 +170,10 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
           </p>
         </div>
 
-        {/* Giữa: đếm ngược (thu nhỏ) */}
         <div className="shrink-0 origin-center scale-75">
           <FlashSaleCountdown endsAt={endsAt} />
         </div>
 
-        {/* Phải: nút */}
         <Link
           href={shopHref()}
           className="shrink-0 rounded-full bg-white px-5 py-2 text-[11px] font-bold uppercase text-gray-900 transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -199,11 +184,10 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
     );
   }
 
-  /* ---------------- Bố cục bento đầy đủ (trang chủ) ---------------- */
   return (
     <Container className="my-10 lg:px-0">
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
-        {/* Ô xanh cao bên trái */}
+
         <div className="relative flex flex-col items-center overflow-hidden rounded-3xl bg-gradient-to-br from-blue-700 to-blue-600 px-4 pt-8 text-center md:px-6 md:pt-10 lg:col-span-1">
           <h2 className="text-5xl font-extrabold uppercase leading-[1.05] text-white md:text-6xl">
             {maxDiscount > 0 ? (
@@ -238,7 +222,6 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
             Mua ngay
           </Link>
 
-          {/* Ảnh sản phẩm ở đáy ô, tràn ra mép */}
           <div className="relative mt-4 h-60 w-full md:h-64">
             <div className="absolute -bottom-2 left-0 h-[75%] w-[52%]">
               <Image
@@ -261,7 +244,6 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
           </div>
         </div>
 
-        {/* Cột phải (66%): flex-col, 2 ô xám chia đều chiều cao */}
         <div className="flex flex-col gap-3 lg:col-span-2 lg:gap-4">
           {SIDE_CARDS.map((card) => (
             <Link

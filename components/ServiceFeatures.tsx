@@ -7,7 +7,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-// Ngưỡng miễn phí vận chuyển (VND) - dùng chung cho banner tiện ích và giỏ hàng.
 export const FREE_SHIP_THRESHOLD = 500000;
 
 type ServiceFeatureId = "shipping" | "returns" | "warranty" | "support" | "refund";
@@ -18,7 +17,6 @@ type ServiceFeature = {
   description: string;
 };
 
-// Sửa nội dung tiện ích (vd ngưỡng free ship) ở đây là đổi toàn site.
 const FEATURES: Record<ServiceFeatureId, ServiceFeature> = {
   shipping: {
     icon: Truck,
@@ -48,10 +46,9 @@ const FEATURES: Record<ServiceFeatureId, ServiceFeature> = {
 };
 
 interface ServiceFeaturesProps {
-  // Chọn tiện ích nào hiện, theo thứ tự truyền vào.
+
   items: ServiceFeatureId[];
-  // "row": icon bên trái, chữ bên phải (trang chủ)
-  // "compact": icon trên, chữ giữa, có viền trên/dưới (trang sản phẩm)
+
   variant?: "row" | "compact";
   className?: string;
 }

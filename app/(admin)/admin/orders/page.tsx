@@ -1,6 +1,5 @@
 "use client";
 
-// app/(admin)/admin/orders/page.tsx
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
@@ -29,7 +28,6 @@ import StatusBadge from "@/components/admin/StatusBadge";
 
 const PAGE_SIZE = 10;
 
-// Dữ liệu từ GET /admin/payments/orders/{orderId}
 type AdminPayment = {
   status?: string | null;
   paymentMethod?: string | null;
@@ -43,7 +41,6 @@ const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
   "https://techwiseai-backend.up.railway.app/api/v1";
 
-// Các tên field ảnh có thể có trong 1 dòng sản phẩm của đơn hàng
 const ITEM_IMAGE_KEYS = [
   "thumbnailUrl",
   "productThumbnailUrl",
@@ -52,8 +49,6 @@ const ITEM_IMAGE_KEYS = [
   "image",
   "thumbnail",
 ];
-
-/* ----------------------------- Helpers ----------------------------- */
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
@@ -72,7 +67,6 @@ const formatDateTime = (iso?: string | null) => {
   }
 };
 
-// Backend có thể đặt tên field khác nhau -> thử lần lượt các tên phổ biến.
 const pick = (obj: unknown, keys: string[]): unknown => {
   if (!obj || typeof obj !== "object") return undefined;
   const o = obj as Record<string, unknown>;
@@ -90,18 +84,6 @@ const pickString = (obj: unknown, keys: string[]): string | null => {
 const pickNumber = (obj: unknown, keys: string[]): number | null => {
   const v = pick(obj, keys);
   return typeof v === "number" ? v : null;
-};
-
-const getItemCount = (order: AdminOrderListItem): number | null => {
-  const n = pickNumber(order, [
-    "totalItems",
-    "itemCount",
-    "totalQuantity",
-    "quantity",
-  ]);
-  if (n !== null) return n;
-  const items = pick(order, ["items"]);
-  return Array.isArray(items) ? items.length : null;
 };
 
 const PAYMENT_LABELS: Record<string, string> = {
@@ -124,7 +106,7 @@ const PAYMENT_METHOD_KEYS = [
 const getPaymentLabel = (order: unknown): string | null => {
   let raw = pick(order, PAYMENT_METHOD_KEYS);
   if (!raw) {
-    // Có thể BE lồng trong object "payment" / "paymentInfo" / "payments[0]"
+
     const nested =
       pick(order, ["payment", "paymentInfo", "paymentDetail"]) ??
       (() => {
@@ -170,7 +152,6 @@ const PAYMENT_STATUS_LABELS: Record<PaymentStatus, string> = {
   CANCELLED: "Đã hủy thanh toán",
 };
 
-// Các mốc trong "Tiến trình đơn hàng"
 const PROGRESS_STEPS: { status: OrderStatus; label: string; hint: string }[] = [
   { status: "PENDING", label: "Khách đặt hàng", hint: "Đơn đã được tạo" },
   { status: "CONFIRMED", label: "Cửa hàng xác nhận", hint: "Chờ xác nhận" },
@@ -179,7 +160,6 @@ const PROGRESS_STEPS: { status: OrderStatus; label: string; hint: string }[] = [
   { status: "DELIVERED", label: "Giao thành công", hint: "Chờ giao hàng" },
 ];
 
-// Hành động kế tiếp (nút to bên phải tiêu đề)
 const NEXT_ACTION: Partial<
   Record<OrderStatus, { next: OrderStatus; label: string }>
 > = {
@@ -200,14 +180,12 @@ const getHistoryTime = (
     : null;
 };
 
-// Chỉ hủy được khi đơn ở các trạng thái này (backend không cho hủy từ SHIPPING trở đi).
 const CANCELLABLE_STATUSES: OrderStatus[] = [
   "PENDING",
   "CONFIRMED",
   "PROCESSING",
 ];
 
-// Lý do hủy gợi ý (admin có thể chọn nhanh hoặc tự nhập)
 const CANCEL_REASONS = [
   "Khách yêu cầu hủy đơn",
   "Hết hàng",
@@ -229,11 +207,8 @@ const getHistoryNote = (
     : null;
 };
 
-// Phương thức thanh toán online: bắt buộc PAID mới được xác nhận đơn.
-// COD (và các phương thức khác) có thể xác nhận ngay khi khách đặt.
 const ONLINE_PAYMENT_METHODS = ["VNPAY", "MOMO"];
 
-// Đơn đang chờ xác nhận nhưng chưa thanh toán online -> chưa được xác nhận.
 const isAwaitingPayment = (
   detail: AdminOrderDetail,
   paymentStatus?: string | null
@@ -247,8 +222,6 @@ const isAwaitingPayment = (
     (paymentStatus ?? detail.paymentStatus) !== "PAID"
   );
 };
-
-/* --------------------------- Small pieces --------------------------- */
 
 const Card = ({
   title,
@@ -283,12 +256,9 @@ const InfoRow = ({ label, value }: { label: string; value: React.ReactNode }) =>
   </div>
 );
 
-/* ------------------------------ Page ------------------------------ */
-
 const AdminOrdersPage = () => {
   const router = useRouter();
 
-  // Danh sách (cột trái)
   const [activeTab, setActiveTab] = useState<TabKey>("ALL");
   const [page, setPage] = useState(0);
   const [items, setItems] = useState<AdminOrderListItem[]>([]);
@@ -297,27 +267,25 @@ const AdminOrdersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [keyword, setKeyword] = useState("");
-  // Số đơn của từng tab trạng thái (hiển thị cạnh tên tab)
+
   const [statusCounts, setStatusCounts] = useState<
     Partial<Record<TabKey, number>>
   >({});
 
-  // Chi tiết (cột phải)
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [detail, setDetail] = useState<AdminOrderDetail | null>(null);
-  // Thông tin thanh toán của đơn đang chọn (endpoint riêng cho admin)
+
   const [payment, setPayment] = useState<AdminPayment | null>(null);
-  // Ảnh sản phẩm lấy bù từ /products/{id} khi đơn hàng không kèm ảnh
+
   const [productImages, setProductImages] = useState<Record<string, string>>({});
   const [isDetailLoading, setIsDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
-  // Popup nhập lý do hủy đơn
+
   const [cancelOpen, setCancelOpen] = useState(false);
   const [cancelReason, setCancelReason] = useState("");
   const [cancelError, setCancelError] = useState<string | null>(null);
 
-  // Tiêu đề được đưa lên topbar của layout bằng portal (giống trang Kho hàng)
   const [titleSlot, setTitleSlot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -338,7 +306,6 @@ const AdminOrdersPage = () => {
     [router]
   );
 
-  // Tải số đơn cho từng trạng thái (mỗi tab 1 request nhẹ, size = 1, chỉ lấy totalElements)
   const loadCounts = useCallback(async () => {
     const entries = await Promise.all(
       TABS.map(async (tab) => {
@@ -372,7 +339,6 @@ const AdminOrdersPage = () => {
     loadCounts();
   }, [loadCounts]);
 
-  // Tải danh sách
   useEffect(() => {
     let ignore = false;
 
@@ -387,7 +353,6 @@ const AdminOrdersPage = () => {
         });
         if (ignore) return;
 
-        // Chấp nhận cả DTO { items } lẫn Page mặc định của Spring { content }.
         const raw = result as unknown as Record<string, unknown>;
         const list = (
           Array.isArray(raw.items)
@@ -400,7 +365,7 @@ const AdminOrdersPage = () => {
         setItems(list);
         setTotalPages((raw.totalPages as number) ?? 1);
         setTotalElements((raw.totalElements as number) ?? list.length);
-        // Tự chọn đơn đầu tiên nếu đơn đang chọn không nằm trong trang này
+
         setSelectedId((cur) =>
           cur && list.some((o) => o.id === cur) ? cur : list[0]?.id ?? null
         );
@@ -419,7 +384,6 @@ const AdminOrdersPage = () => {
     };
   }, [activeTab, page, handleError]);
 
-  // Tải chi tiết đơn đang chọn
   useEffect(() => {
     if (!selectedId) {
       setDetail(null);
@@ -432,7 +396,7 @@ const AdminOrdersPage = () => {
       setDetailError(null);
       setPayment(null);
       try {
-        // Đơn COD có thể chưa có bản ghi thanh toán -> bỏ qua lỗi, coi như null
+
         const [result, pay] = await Promise.all([
           getAdminOrderById(selectedId),
           getAdminPaymentByOrderId(selectedId).catch(() => null),
@@ -456,8 +420,6 @@ const AdminOrdersPage = () => {
     };
   }, [selectedId, handleError]);
 
-  // Đơn thanh toán online chưa PAID -> tải lại chi tiết khi admin quay lại tab,
-  // để thấy trạng thái thanh toán mới sau khi VNPay gọi IPN.
   useEffect(() => {
     if (!selectedId || !detail || detail.id !== selectedId) return;
     const method = String(pick(detail, PAYMENT_METHOD_KEYS) ?? "").toUpperCase();
@@ -481,7 +443,7 @@ const AdminOrdersPage = () => {
           setPayment(pay);
         }
       } catch {
-        // im lặng: lần tải đầu đã báo lỗi nếu có
+
       }
     };
     window.addEventListener("focus", refresh);
@@ -493,7 +455,6 @@ const AdminOrdersPage = () => {
     };
   }, [selectedId, detail, payment]);
 
-  // Đơn hàng không trả ảnh -> lấy thumbnailUrl từ chi tiết sản phẩm (API công khai)
   useEffect(() => {
     if (!detail) return;
     const ids = Array.from(
@@ -563,9 +524,9 @@ const AdminOrdersPage = () => {
           o.id === updated.id ? { ...o, status: updated.status } : o
         )
       );
-      // Báo cho layout tải lại số đơn chưa hoàn thành ở menu
+
       window.dispatchEvent(new Event("admin-orders-changed"));
-      // Cập nhật lại số đơn trên các tab
+
       loadCounts();
     } catch (err) {
       const msg = handleError(err, "Không cập nhật được trạng thái đơn hàng.");
@@ -598,7 +559,7 @@ const AdminOrdersPage = () => {
     setCancelError(null);
     setDetailError(null);
     try {
-      // Lý do hủy gửi qua field "note" của UpdateOrderStatusPayload.
+
       const updated = await updateOrderStatus(detail.id, {
         status: "CANCELLED",
         note: reason,
@@ -620,7 +581,6 @@ const AdminOrdersPage = () => {
     }
   };
 
-  // Tìm kiếm trong trang đang hiển thị
   const visibleItems = useMemo(() => {
     const q = keyword.trim().toLowerCase();
     if (!q) return items;
@@ -631,15 +591,13 @@ const AdminOrdersPage = () => {
     );
   }, [items, keyword]);
 
-  /* ------------------------- Cột trái: danh sách ------------------------- */
-
   const listColumn = (
     <aside
       className={`${
         selectedId ? "hidden lg:flex" : "flex"
       } flex-col gap-3 min-w-0 lg:w-[380px] lg:shrink-0`}
     >
-      {/* Ô tìm kiếm */}
+
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input
@@ -651,7 +609,6 @@ const AdminOrdersPage = () => {
         />
       </div>
 
-      {/* Tabs trạng thái: xuống dòng để hiển thị đủ tất cả */}
       <div>
         <div className="flex flex-wrap gap-1.5">
           {TABS.map((tab) => (
@@ -682,7 +639,6 @@ const AdminOrdersPage = () => {
         </div>
       </div>
 
-      {/* Danh sách thẻ đơn hàng */}
       {isLoading ? (
         <p className="py-16 text-center text-base text-gray-400">
           Đang tải danh sách đơn hàng...
@@ -742,7 +698,6 @@ const AdminOrdersPage = () => {
             })}
           </div>
 
-          {/* Tổng + phân trang */}
           <div className="flex items-center justify-between gap-2 text-sm">
             <p className="text-gray-500">{totalElements} đơn</p>
             {totalPages > 1 && (
@@ -775,8 +730,6 @@ const AdminOrdersPage = () => {
       )}
     </aside>
   );
-
-  /* ------------------------ Cột phải: chi tiết ------------------------ */
 
   const renderDetail = () => {
     if (isDetailLoading && !detail) {
@@ -812,8 +765,7 @@ const AdminOrdersPage = () => {
     );
     const cancelled = detail.status === "CANCELLED";
     const itemsList = (detail.items ?? []) as unknown[];
-    // Thông tin thanh toán lấy từ /admin/payments/orders/{orderId}
-    // (/payments/orders/{id} chỉ dành cho chủ đơn nên admin bị 404).
+
     const paymentLabel = getPaymentLabel(detail) ?? null;
     const paymentStatusValue = payment?.status ?? detail.paymentStatus ?? null;
     const paymentStatusLabel = paymentStatusValue
@@ -825,7 +777,7 @@ const AdminOrdersPage = () => {
 
     return (
       <div className={`space-y-4 ${isDetailLoading ? "opacity-60" : ""}`}>
-        {/* Breadcrumb + nút quay lại (mobile) */}
+
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <button
             type="button"
@@ -841,7 +793,6 @@ const AdminOrdersPage = () => {
           </span>
         </div>
 
-        {/* Tiêu đề + nút hành động */}
         <div className="flex flex-wrap items-center justify-self-end gap-3">
           {action && (
             <button
@@ -854,7 +805,7 @@ const AdminOrdersPage = () => {
               {isUpdating ? "Đang cập nhật..." : action.label}
             </button>
           )}
-          {/* Nút hủy đơn: chỉ hiện khi chờ xác nhận / đã xác nhận / đang xử lý */}
+
           {CANCELLABLE_STATUSES.includes(detail.status) && (
             <button
               type="button"
@@ -881,7 +832,7 @@ const AdminOrdersPage = () => {
         )}
 
         <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-4 items-start">
-          {/* Cột giữa: sản phẩm + hóa đơn */}
+
           <div className="space-y-4 min-w-0">
             <Card className="!p-0">
               <div className="divide-y divide-gray-100">
@@ -910,7 +861,7 @@ const AdminOrdersPage = () => {
                       <div key={`${productId ?? "item"}-${idx}`} className="flex items-center gap-3 p-4">
                         <div className="w-16 h-16 shrink-0 rounded-xl border border-gray-200/80 bg-gray-50 flex items-center justify-center overflow-hidden">
                           {image ? (
-                            // eslint-disable-next-line @next/next/no-img-element
+
                             <img src={image} alt={name} className="w-full h-full object-cover" />
                           ) : (
                             <ImageOff className="w-5 h-5 text-gray-300" />
@@ -953,7 +904,6 @@ const AdminOrdersPage = () => {
             </Card>
           </div>
 
-          {/* Cột phải: tiến trình + chi tiết */}
           <div className="space-y-4 min-w-0">
             <Card title="Tiến trình đơn hàng">
               {cancelled ? (
@@ -1042,7 +992,7 @@ const AdminOrdersPage = () => {
 
   return (
     <div className="w-full min-h-[calc(100vh-3.5rem)] bg-gray-50 p-4 sm:p-6 lg:p-8">
-      {/* Topbar (portal): tiêu đề trang */}
+
       {titleSlot &&
         createPortal(
           <div className="leading-tight">
@@ -1062,7 +1012,6 @@ const AdminOrdersPage = () => {
         </section>
       </div>
 
-      {/* Popup nhập lý do hủy đơn */}
       {cancelOpen && detail && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40"

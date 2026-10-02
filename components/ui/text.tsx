@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 const Title=({
-    children, 
+    children,
     className,
 }:{
     children: React.ReactNode;
@@ -11,7 +11,7 @@ const Title=({
 };
 
 const SubTitle=({
-    children, 
+    children,
     className,
 }:{
     children: React.ReactNode;
@@ -20,9 +20,8 @@ const SubTitle=({
     return <h3 className={cn("font-semibold text-gray-900 ", className)}>{children}</h3>;
 };
 
-
 const SubText = ({
-    children, 
+    children,
     className,
 }:{
     children: React.ReactNode;

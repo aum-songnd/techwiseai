@@ -1,6 +1,5 @@
 "use client";
 
-// app/(admin)/admin/categories/page.tsx
 import { useEffect, useState } from "react";
 import { ImageOff } from "lucide-react";
 import { getCategories } from "@/lib/api";
@@ -94,7 +93,6 @@ const AdminCategoriesPage = () => {
         </p>
       </div>
 
-      {/* Form */}
       <form
         onSubmit={handleSubmit}
         className="bg-white rounded-xl border border-gray-200 p-5 mb-6 grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -190,7 +188,6 @@ const AdminCategoriesPage = () => {
         </div>
       </form>
 
-      {/* Bảng */}
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <h2 className="font-semibold text-gray-800">Danh sách danh mục</h2>
@@ -228,7 +225,7 @@ const AdminCategoriesPage = () => {
                       <div className="flex items-center gap-3">
                         <div className="w-11 h-11 rounded-lg bg-gray-100 overflow-hidden flex items-center justify-center shrink-0">
                           {c.imageUrl ? (
-                            // eslint-disable-next-line @next/next/no-img-element
+
                             <img
                               src={c.imageUrl}
                               alt={c.title}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-const TimeBox = ({ value, label }: { value: string; label: string }) => (
+const TimeBox = ({ value }: { value: string }) => (
   <div className="flex flex-col items-center gap-1.5">
     <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-blue-100 text-2xl font-bold tabular-nums text-gray-900 sm:h-16 sm:w-16 sm:text-3xl md:h-[72px] md:w-[72px] md:text-4xl">
       {value}
@@ -11,7 +11,6 @@ const TimeBox = ({ value, label }: { value: string; label: string }) => (
   </div>
 );
 
-// Dấu ":" căn giữa theo chiều cao ô số (nhãn nằm bên dưới nên cần đệm).
 const Colon = () => (
   <span
     className="flex h-14 items-center text-2xl font-bold text-gray-900 sm:h-16 sm:text-3xl md:h-[72px] md:text-4xl"
@@ -21,8 +20,6 @@ const Colon = () => (
   </span>
 );
 
-// Đồng hồ đếm ngược tới `endsAt` (timestamp ms).
-// Chỉ render sau khi mount để tránh lệch SSR/client (hydration mismatch).
 const FlashSaleCountdown = ({ endsAt }: { endsAt: number }) => {
   const [remaining, setRemaining] = useState<number | null>(null);
 
@@ -33,7 +30,6 @@ const FlashSaleCountdown = ({ endsAt }: { endsAt: number }) => {
     return () => clearInterval(timer);
   }, [endsAt]);
 
-  // Giữ chỗ để layout không nhảy khi đồng hồ xuất hiện.
   if (remaining === null) return <div className="h-24 md:h-28" aria-hidden="true" />;
 
   if (remaining === 0) {
@@ -54,15 +50,15 @@ const FlashSaleCountdown = ({ endsAt }: { endsAt: number }) => {
     >
       {days > 0 && (
         <>
-          <TimeBox value={pad(days)} label="Ngày" />
+          <TimeBox value={pad(days)} />
           <Colon />
         </>
       )}
-      <TimeBox value={pad(hours)} label="Giờ" />
+      <TimeBox value={pad(hours)} />
       <Colon />
-      <TimeBox value={pad(minutes)} label="Phút" />
+      <TimeBox value={pad(minutes)} />
       <Colon />
-      <TimeBox value={pad(seconds)} label="Giây" />
+      <TimeBox value={pad(seconds)} />
     </div>
   );
 };

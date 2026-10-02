@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import Container from "@/components/Container";
 import AddToCart from "@/components/AddToCart";
-import { useFavorite, FavoriteProduct } from "@/context/FavoriteContext"; // === ĐỔI Ở ĐÂY === nếu path/tên khác
+import { useFavorite, FavoriteProduct } from "@/context/FavoriteContext";
 import { useAuth } from "@/context/AuthContext";
 
 const formatPrice = (value: number) =>
@@ -17,15 +17,12 @@ const WishlistPage = () => {
   const router = useRouter();
   const { isSignedIn, isLoading: isAuthLoading } = useAuth();
 
-  // Chưa đăng nhập -> điều hướng sang trang đăng nhập, kèm redirect quay
-  // lại /wishlist sau khi đăng nhập xong, giống cách AddToCart.tsx đang làm.
   useEffect(() => {
     if (!isAuthLoading && !isSignedIn) {
       router.push(`/sign-in?redirect=${encodeURIComponent("/wishlist")}`);
     }
   }, [isAuthLoading, isSignedIn, router]);
 
-  // === ĐỔI Ở ĐÂY === nếu tên field trong context của bạn khác
   const {
     favoriteProducts,
     removeFromFavorite,
@@ -40,8 +37,6 @@ const WishlistPage = () => {
 
   const hasItems = favoriteProducts && favoriteProducts.length > 0;
 
-  // Đang kiểm tra đăng nhập hoặc chưa đăng nhập (đang chờ redirect) -> không
-  // render nội dung wishlist để tránh nháy nội dung trước khi chuyển trang.
   if (isAuthLoading || !isSignedIn) {
     return (
       <div className="bg-white">
@@ -79,7 +74,7 @@ const WishlistPage = () => {
           </div>
         ) : (
           <>
-            {/* ===== Bảng desktop ===== */}
+
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
@@ -104,10 +99,7 @@ const WishlistPage = () => {
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => {
-                                // removeFromFavorite giờ gọi API và có thể lỗi
-                                // (vd mất mạng) -> bắt lỗi ở đây để không bị
-                                // unhandled promise rejection; state đã tự
-                                // rollback bên trong FavoriteContext.
+
                                 removeFromFavorite(product.id).catch(() => {});
                               }}
                               aria-label="Bỏ khỏi yêu thích"
@@ -162,7 +154,6 @@ const WishlistPage = () => {
               </table>
             </div>
 
-            {/* ===== Danh sách dạng thẻ cho mobile ===== */}
             <div className="md:hidden flex flex-col gap-4">
               {favoriteProducts.map((product) => {
                 const isOutOfStock = product?.stock === 0;
@@ -224,7 +215,6 @@ const WishlistPage = () => {
               })}
             </div>
 
-            {/* ===== Nút Reset Favorite ===== */}
             <div className="mt-8">
               <button
                 onClick={() => {

@@ -114,7 +114,7 @@ const SearchBar = () => {
               </h2>
 
               <div className="flex h-11 overflow-hidden rounded-md border border-gray-500">
-                {/* Tìm kiếm bằng từ khóa */}
+
                 <input
                   type="text"
                   value={keyword}
@@ -130,7 +130,6 @@ const SearchBar = () => {
                   className="min-w-0 flex-1 px-3 text-sm outline-none"
                 />
 
-                {/* Input chọn ảnh, được ẩn đi */}
                 <input
                   id="image-search-input"
                   type="file"
@@ -138,7 +137,6 @@ const SearchBar = () => {
                   className="hidden"
                 />
 
-                {/* Nút tìm kiếm bằng hình ảnh */}
                 <label
                   htmlFor="image-search-input"
                   title="Tìm kiếm bằng hình ảnh"
@@ -148,7 +146,6 @@ const SearchBar = () => {
                   <span className="sr-only">Tìm kiếm bằng hình ảnh</span>
                 </label>
 
-                {/* Nút tìm kiếm bằng từ khóa */}
                 <button
                   disabled={isLoading}
                   type="button"

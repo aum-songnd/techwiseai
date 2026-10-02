@@ -1,29 +1,13 @@
-// lib/admin-users-api.ts
-//
-// API quản lý tài khoản khách hàng cho trang /admin/users.
-//
-// Backend CHƯA có endpoint user, nên file này có 2 chế độ:
-//  - USE_MOCK_USERS = true : dùng dữ liệu mẫu trong bộ nhớ (chạy được ngay).
-//  - USE_MOCK_USERS = false: gọi API thật theo hợp đồng ở dưới.
-// Khi backend làm xong, đổi cờ sang false và chỉnh path/field nếu khác.
-//
-// HỢP ĐỒNG ĐỀ XUẤT CHO BACKEND (cùng envelope với /admin/products):
-//   GET   /admin/users?page=0&size=10&keyword=abc
-//         -> data: { items: User[], page, size, totalElements, totalPages, first, last }
-//   PATCH /admin/users/{id}/status   body: { "active": true | false }
-//         -> data: User đã cập nhật (hoặc null)
-// User: { id, username, email, fullName, phoneNumber, authorities, active, createdAt }
+
 
 import { getToken } from "./auth";
 
-// === ĐỔI Ở ĐÂY === false khi backend đã có endpoint user.
 export const USE_MOCK_USERS = true;
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
   "https://techwiseai-backend.up.railway.app/api/v1";
 
-// Field theo lib/auth.ts (User) + createdAt.
 export type AdminUser = {
   id: string;
   username: string;
@@ -31,7 +15,7 @@ export type AdminUser = {
   fullName?: string;
   phoneNumber?: string;
   authorities?: string[];
-  // false = đã khóa. undefined -> coi như đang hoạt động.
+
   active?: boolean;
   createdAt?: string;
 };
@@ -43,7 +27,7 @@ export type AdminUsersPage = {
 };
 
 type GetAdminUsersParams = {
-  page?: number; // bắt đầu từ 0
+  page?: number;
   size?: number;
   keyword?: string;
 };
@@ -55,7 +39,6 @@ interface ApiEnvelope<T> {
   errors?: Record<string, unknown>;
 }
 
-// ---------- API thật ----------
 async function fetchAdminEnvelope<T>(
   path: string,
   init?: RequestInit
@@ -92,7 +75,6 @@ async function fetchAdminEnvelope<T>(
   return body.data as T;
 }
 
-// ---------- Dữ liệu mẫu (chỉ dùng khi USE_MOCK_USERS = true) ----------
 const MOCK_NAMES = [
   "Nguyễn Văn An", "Trần Thị Bình", "Lê Hoàng Cường", "Phạm Minh Dũng",
   "Hoàng Thị Em", "Vũ Quang Huy", "Đặng Thu Hà", "Bùi Gia Khánh",
@@ -119,7 +101,7 @@ let mockUsers: AdminUser[] = [
       fullName: MOCK_NAMES[i % MOCK_NAMES.length],
       phoneNumber: `09${String(10000000 + n * 7919).slice(0, 8)}`,
       authorities: ["ROLE_USER"],
-      active: n % 7 !== 0, // vài tài khoản đã bị khóa để xem giao diện
+      active: n % 7 !== 0,
       createdAt: d.toISOString(),
     };
   }),
@@ -154,7 +136,6 @@ async function mockSetActive(id: string, active: boolean) {
   mockUsers = mockUsers.map((u) => (u.id === id ? { ...u, active } : u));
 }
 
-// ---------- Hàm export cho UI ----------
 export async function getAdminUsers(
   params: GetAdminUsersParams = {}
 ): Promise<AdminUsersPage> {

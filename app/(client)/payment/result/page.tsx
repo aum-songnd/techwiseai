@@ -26,7 +26,6 @@ const formatPrice = (value: number) =>
     value
   );
 
-// vnp_PayDate dạng yyyyMMddHHmmss -> dd/MM/yyyy HH:mm:ss
 const formatPayDate = (raw: string | null): string | null => {
   if (!raw) return null;
   if (/^\d{14}$/.test(raw)) {
@@ -39,7 +38,6 @@ const formatPayDate = (raw: string | null): string | null => {
   return Number.isNaN(date.getTime()) ? null : date.toLocaleString("vi-VN");
 };
 
-// vnp_OrderInfo có dạng "Thanh toan don hang <orderId>" -> lấy UUID.
 const extractOrderId = (orderInfo: string | null): string | null => {
   if (!orderInfo) return null;
   const match = orderInfo.match(
@@ -123,15 +121,13 @@ const THEMES: Record<ResultStatus, Theme> = {
   },
 };
 
-/* ---------- UI nhỏ ---------- */
-
 const SealBadge = ({ theme }: { theme: Theme }) => (
   <div
     className={`w-24 h-24 rounded-full flex items-center justify-center ${theme.halo}`}
   >
     <div className="w-[72px] h-[72px] rounded-full bg-white/70 flex items-center justify-center">
       <div className="relative w-14 h-14 flex items-center justify-center">
-        {/* Hai hình vuông bo góc xoay lệch nhau 45° tạo thành huy hiệu nhiều cạnh */}
+
         <span className={`absolute inset-0 rounded-2xl ${theme.badge}`} />
         <span
           className={`absolute inset-0 rounded-2xl rotate-45 ${theme.badge}`}
@@ -177,8 +173,6 @@ const CardShell = ({
   </div>
 );
 
-/* ---------- Nội dung chính ---------- */
-
 const PaymentResultContent = () => {
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<ResultStatus | null>(null);
@@ -186,14 +180,13 @@ const PaymentResultContent = () => {
   const calledRef = useRef(false);
 
   useEffect(() => {
-    // Tránh gọi 2 lần do React Strict Mode (dev).
+
     if (calledRef.current) return;
     calledRef.current = true;
 
     const base = summaryFromParams(searchParams);
     const responseCode = searchParams.get("vnp_ResponseCode");
 
-    // Không có tham số VNPAY -> không có gì để xác minh.
     if (!responseCode) {
       setSummary(base);
       setStatus("ERROR");
@@ -201,7 +194,7 @@ const PaymentResultContent = () => {
     }
 
     const failedStatus: ResultStatus =
-      responseCode === "24" ? "CANCELLED" : "FAILED"; // 24 = người dùng hủy
+      responseCode === "24" ? "CANCELLED" : "FAILED";
 
     const verify = async () => {
       try {
@@ -290,7 +283,6 @@ const PaymentResultContent = () => {
             Tóm tắt đơn hàng
           </h2>
 
-          {/* Đường kẻ kiểu vé với 2 nửa hình tròn ở hai mép */}
           <div className="relative border-t border-gray-200">
             <span className="absolute -left-px -top-1 w-[5px] h-2 rounded-r-full bg-shop_dark_green" />
             <span className="absolute -right-px -top-1 w-[5px] h-2 rounded-l-full bg-shop_dark_green" />
@@ -334,7 +326,6 @@ const PaymentResultContent = () => {
   );
 };
 
-// useSearchParams cần được bọc trong Suspense khi build Next.js (App Router).
 const PaymentResultPage = () => (
   <Suspense
     fallback={

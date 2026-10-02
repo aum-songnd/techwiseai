@@ -1,6 +1,5 @@
 "use client";
 
-// app/(admin)/admin/inventory/page.tsx
 import React, { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
@@ -27,15 +26,13 @@ import { getAllProductsByCategory, getCategories } from "@/lib/api";
 import type { Category, Product } from "@/app/data/types";
 
 const PAGE_SIZE = 12;
-// Sắp hết: tồn kho < 5 (1–4). Còn hàng: tồn kho >= 5.
+
 const LOW_STOCK_THRESHOLD = 5;
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
     value
   );
-
-/* ----------------------------- Types ----------------------------- */
 
 type StockStatus = "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK";
 type CategoryFilter = "ALL" | string;
@@ -66,11 +63,8 @@ type CategoryStock = {
   units: number;
 };
 
-/* ----------------------------- Config ----------------------------- */
-
 type StatusIconProps = { className?: string; strokeWidth?: number };
 
-// Dấu "!" trần (lucide không có sẵn) để đặt trong vòng tròn nền đặc
 const ExclamationIcon = ({ className, strokeWidth = 3 }: StatusIconProps) => (
   <svg
     viewBox="0 0 24 24"
@@ -121,22 +115,17 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: "STOCK_ASC", label: "Tồn kho ít nhất" },
 ];
 
-// Product.status từ lib/api.ts: "new" | "hot" | "sale"
 const BADGE_CONFIG: Record<string, { label: string; className: string }> = {
   new: { label: "Mới", className: "text-shop_dark_green" },
   hot: { label: "Hot", className: "text-red-600" },
   sale: { label: "Giảm giá", className: "text-amber-600" },
 };
 
-/* ----------------------------- Helpers ----------------------------- */
-
 const getStatus = (stock: number): StockStatus => {
   if (stock <= 0) return "OUT_OF_STOCK";
   if (stock < LOW_STOCK_THRESHOLD) return "LOW_STOCK";
   return "IN_STOCK";
 };
-
-/* ----------------------------- Sub components ----------------------------- */
 
 const StatCard = ({
   label,
@@ -175,7 +164,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     <article className="group bg-white rounded-2xl border border-gray-200/80 overflow-hidden transition-all duration-200 hover:border-gray-300 hover:shadow-md">
       <div className="relative aspect-[4/3] bg-[#e9eee8] flex items-center justify-center overflow-hidden">
         {image ? (
-          // eslint-disable-next-line @next/next/no-img-element
+
           <img
             src={image}
             alt={product.name}
@@ -257,8 +246,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
   );
 };
 
-/* ----------------------------- Page ----------------------------- */
-
 const AdminInventory = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -270,7 +257,6 @@ const AdminInventory = () => {
   const [sort, setSort] = useState<SortKey>("DEFAULT");
   const [page, setPage] = useState(0);
 
-  // Tiêu đề + tìm kiếm được đưa lên topbar của layout bằng portal
   const [titleSlot, setTitleSlot] = useState<HTMLElement | null>(null);
   const [actionsSlot, setActionsSlot] = useState<HTMLElement | null>(null);
 
@@ -288,7 +274,7 @@ const AdminInventory = () => {
       try {
         const [productList, categoryList] = await Promise.all([
           getAllProductsByCategory(),
-          // Lỗi danh mục không chặn trang: tab sẽ dựng từ sản phẩm.
+
           getCategories().catch(() => [] as Category[]),
         ]);
         if (ignore) return;
@@ -430,7 +416,7 @@ const AdminInventory = () => {
 
   return (
     <div className="w-full min-h-[calc(100vh-3.5rem)] bg-white p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6">
-      {/* Topbar (portal): tiêu đề trang */}
+
       {titleSlot &&
         createPortal(
           <div className="leading-tight">
@@ -441,7 +427,6 @@ const AdminInventory = () => {
           titleSlot
         )}
 
-      {/* Topbar (portal): ô tìm kiếm, cùng hàng với ngày */}
       {actionsSlot &&
         createPortal(
           <div className="relative w-full">
@@ -458,7 +443,6 @@ const AdminInventory = () => {
           actionsSlot
         )}
 
-      {/* Tìm kiếm cho mobile (topbar ẩn ô tìm kiếm dưới md) */}
       <div className="relative md:hidden">
         <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
         <input
@@ -471,7 +455,6 @@ const AdminInventory = () => {
         />
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         <StatCard
           label="Tổng sản phẩm"
@@ -497,9 +480,9 @@ const AdminInventory = () => {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_320px] gap-x-6 gap-y-4 items-start">
-        {/* Hàng 1 (trái): tab danh mục + sắp xếp + thêm — ngang hàng với "Tổng quan tồn kho" */}
+
         <div className="min-w-0 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 xl:col-start-1 xl:row-start-1">
-          {/* Tabs: tự xuống dòng ở mọi kích thước màn hình */}
+
           <div className="min-w-0">
             <div className="flex flex-wrap gap-2">
               {categoryTabs.map((tab) => (
@@ -548,7 +531,6 @@ const AdminInventory = () => {
             </div>
         </div>
 
-        {/* Hàng 2 (trái): danh sách sản phẩm */}
         <section className="min-w-0 xl:col-start-1 xl:row-start-2">
           {loading ? (
             <div className="bg-white rounded-2xl border border-gray-200/80">
@@ -612,12 +594,10 @@ const AdminInventory = () => {
           )}
         </section>
 
-        {/* Hàng 1 (phải): tiêu đề */}
         <h2 className="text-base font-semibold text-gray-900 xl:col-start-2 xl:row-start-1 xl:self-center">
           Tổng quan tồn kho
         </h2>
 
-        {/* Hàng 2 (phải): các thẻ thống kê */}
         <aside className="flex flex-col gap-4 xl:col-start-2 xl:row-start-2 xl:sticky xl:top-20">
           <section className="bg-white rounded-2xl border border-gray-200/40 p-5">
             <p className="text-xs text-gray-500">Tỷ lệ còn hàng</p>
@@ -728,7 +708,7 @@ const AdminInventory = () => {
                     >
                       <div className="w-10 h-10 rounded-lg bg-[#e9eee8] overflow-hidden flex items-center justify-center shrink-0">
                         {image ? (
-                          // eslint-disable-next-line @next/next/no-img-element
+
                           <img
                             src={image}
                             alt={p.name}

@@ -121,8 +121,7 @@ const CheckoutPage = () => {
     setIsSubmitting(true);
 
     try {
-      // 1) Tạo đơn hàng từ giỏ hàng hiện tại (backend tự chốt giá, trừ
-      //    tồn kho và xóa giỏ trong cùng transaction).
+
       const order = await createOrder({
         recipientName: recipientName.trim(),
         recipientPhone: recipientPhone.trim(),
@@ -131,29 +130,25 @@ const CheckoutPage = () => {
         note: note.trim() || undefined,
       });
 
-      // Giỏ hàng đã được backend xóa trong transaction tạo đơn -> đồng
-      // bộ lại state phía client cho khớp (làm ngay, trước khi tạo thanh toán).
       clearCart();
 
-      // 2) Khởi tạo phiên thanh toán cho đơn vừa tạo.
       let payment;
       try {
         payment = await createPayment({
           orderId: order.id,
           paymentMethod,
         });
-      } catch (payErr) {
+      } catch {
         router.push(`/orders/${order.id}?placed=1`);
         return;
       }
 
       if (payment.paymentUrl) {
-        // VNPAY / MoMo: chuyển hướng sang cổng thanh toán.
+
         window.location.href = payment.paymentUrl;
         return;
       }
 
-      // COD hoặc phương thức không cần redirect: sang trang chi tiết đơn.
       router.push(`/orders/${order.id}?placed=1`);
     } catch (err) {
       if (err instanceof OrderAuthRequiredError) {
@@ -179,7 +174,7 @@ const CheckoutPage = () => {
         onSubmit={handleSubmit}
         className="grid grid-cols-1 lg:grid-cols-3 gap-8"
       >
-        {/* Thông tin nhận hàng + phương thức thanh toán */}
+
         <div className="lg:col-span-2 flex flex-col gap-6">
           <div className="border border-gray-200 rounded-lg p-5">
             <h2 className="font-bold text-shop_dark_green mb-4">
@@ -274,7 +269,6 @@ const CheckoutPage = () => {
           </div>
         </div>
 
-        {/* Tóm tắt đơn hàng */}
         <div className="lg:col-span-1">
           <div className="border border-gray-200 rounded-lg p-5 sticky top-24">
             <h2 className="font-bold text-shop_dark_green mb-4">

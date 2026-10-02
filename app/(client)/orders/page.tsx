@@ -11,10 +11,6 @@ import {
   type OrderStatus,
 } from "../../../lib/orders-api";
 
-// Lấy 1 lần với size lớn rồi lọc theo tab ở client, thay vì gọi lại API
-// mỗi khi đổi tab — vì GET /orders (khách hàng) không có tài liệu hỗ trợ
-// query param `status` như /admin/orders. Nếu sau này backend hỗ trợ lọc
-// server-side cho /orders, có thể đổi lại thành gọi getOrders kèm status.
 const FETCH_SIZE = 100;
 
 const formatPrice = (value: number) =>
@@ -94,7 +90,6 @@ const OrdersHistoryPage = () => {
     };
   }, [router]);
 
-  // Đếm số đơn theo từng trạng thái để hiển thị badge số lượng trên tab.
   const countByStatus = useMemo(() => {
     const counts: Partial<Record<TabKey, number>> = { ALL: allItems.length };
     for (const order of allItems) {
@@ -151,7 +146,6 @@ const OrdersHistoryPage = () => {
         Đơn hàng của tôi
       </h1>
 
-      {/* Tabs lọc theo trạng thái */}
       <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1">
         {TABS.map((tab) => {
           const count = countByStatus[tab.key] ?? 0;
