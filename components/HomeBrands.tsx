@@ -1,38 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Truck, RotateCcw, Headphones, ShieldCheck } from "lucide-react";
+import ServiceFeatures from "./ServiceFeatures";
 import { Title } from "./ui/text";
 import MarqueeRow from "./MarqueeRow";
 import { getAllProductsByCategory } from "../lib/api";
 
-const features = [
-  {
-    icon: Truck,
-    title: "Giao hàng miễn phí",
-    description: "Miễn phí ship cho đơn từ 100$",
-  },
-  {
-    icon: RotateCcw,
-    title: "Đổi trả miễn phí",
-    description: "Miễn phí ship cho đơn từ 100$",
-  },
-  {
-    icon: Headphones,
-    title: "Hỗ trợ khách hàng",
-    description: "Hỗ trợ thân thiện 24/7",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Đảm bảo hoàn tiền",
-    description: "Được kiểm tra chất lượng bởi đội ngũ của chúng tôi",
-  },
-];
 
-// API không có bảng brand riêng kèm logo (chỉ có field `brand` dạng
-// string thô trên mỗi product, giống lib/api.ts và Shop.tsx đang xử lý).
-// Brand có logo thật trong /public thì hiện logo; brand chưa có logo thì
-// hiện tên brand dạng chữ trong thẻ.
 const MAX_BRANDS = 8;
 
 // === ĐỔI Ở ĐÂY === key phải là tên brand viết thường (khớp với `brand` mà
@@ -158,28 +132,8 @@ const HomeBrands = async () => {
         ))}
       </MarqueeRow>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 border-t border-gray-200 pt-6 sm:grid-cols-2 md:grid-cols-4 md:gap-0">
-        {features.map((feature) => {
-          const Icon = feature.icon;
-          return (
-            <div key={feature.title} className="flex items-center gap-3 md:pr-5">
-              <Icon
-                size={26}
-                strokeWidth={1.5}
-                className="shrink-0 text-gray-700"
-              />
-              <div className="flex flex-col">
-                <span className="text-sm font-medium text-gray-900">
-                  {feature.title}
-                </span>
-                <span className="text-xs text-gray-500">
-                  {feature.description}
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <ServiceFeatures className="mt-6" items={["shipping", "returns", "support", "refund"]}
+      />
     </section>
   );
 };

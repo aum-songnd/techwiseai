@@ -10,6 +10,15 @@ import { Product } from "../app/data/types";
 const FETCH_SIZE = 60;
 const FLASH_LIMIT = 10;
 
+// Link tới trang shop: nhảy đúng category (theo SLUG) và bật bộ lọc "đang giảm giá".
+// Slug phải khớp với field `slug` của category trả về từ backend.
+const shopHref = (categorySlug?: string) => {
+  const params = new URLSearchParams();
+  if (categorySlug) params.set("category", categorySlug);
+  params.set("sale", "1");
+  return `/shop?${params.toString()}`;
+};
+
 // Hai ô xám bên phải (xếp dọc). Nội dung chữ/ảnh là placeholder, sửa theo khuyến mãi thật.
 // reverse = true: chữ bên trái, ảnh bên phải (ô thứ 2 trong mẫu).
 const SIDE_CARDS = [
@@ -18,7 +27,7 @@ const SIDE_CARDS = [
     headline: "Giảm đến 60%",
     image: "/accessory.webp",
     alt: "Phụ kiện giảm giá",
-    href: "/shop",
+    href: shopHref("phu-kien"), // TODO: đổi đúng slug category Phụ kiện
     reverse: false,
   },
   {
@@ -26,7 +35,7 @@ const SIDE_CARDS = [
     headline: "Giảm đến 70%",
     image: "/laptop.webp",
     alt: "Laptop giảm giá",
-    href: "/shop",
+    href: shopHref("laptop"), // TODO: đổi đúng slug category Laptop
     reverse: true,
   },
 ];
@@ -155,7 +164,7 @@ const FlashSale = () => {
           </div>
 
           <Link
-            href="/shop"
+            href={shopHref()}
             className="mt-5 rounded-full bg-white px-7 py-2.5 text-xs font-bold uppercase text-gray-900 transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             Mua ngay
