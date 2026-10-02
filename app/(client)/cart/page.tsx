@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
-import { Check, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import { Check, Minus, Plus, Trash2, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { productImages } from "@/images";
 import FlashSale from "@/components/FlashSale";
@@ -55,9 +55,16 @@ const CartPage = () => {
       <div
         className={`font-sans mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-24 text-center`}
       >
-        <ShoppingBag className="h-14 w-14 text-neutral-300" />
+        <Image
+          src="/empty-cart.png"
+          alt="Vui lòng đăng nhập"
+          width={437}
+          height={366}
+          className="h-auto w-64 select-none sm:w-80"
+          priority
+        />
         <h1
-          className={`font-sans text-3xl font-bold uppercase tracking-tight text-neutral-900`}
+          className={`font-sans text-xl font-bold uppercase tracking-tight text-neutral-900`}
         >
           Vui lòng đăng nhập để xem giỏ hàng
         </h1>
@@ -79,9 +86,16 @@ const CartPage = () => {
       <div
         className={`font-sans mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-24 text-center`}
       >
-        <ShoppingBag className="h-14 w-14 text-neutral-300" />
+        <Image
+          src="/empty-cart.png"
+          alt="Giỏ hàng trống"
+          width={437}
+          height={366}
+          className="h-auto w-64 select-none sm:w-80"
+          priority
+        />
         <h1
-          className={`font-sans text-3xl font-bold uppercase tracking-tight text-neutral-900`}
+          className={`font-sans text-xl font-bold uppercase tracking-tight text-neutral-900`}
         >
           Giỏ hàng của bạn đang trống
         </h1>
@@ -89,7 +103,7 @@ const CartPage = () => {
           Hãy khám phá thêm sản phẩm và thêm vào giỏ hàng nhé.
         </p>
         <Link
-          href="/"
+          href="/shop"
           className="mt-2 bg-neutral-900 px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
         >
           Tiếp tục mua sắm
