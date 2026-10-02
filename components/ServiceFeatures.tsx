@@ -7,6 +7,9 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+// Ngưỡng miễn phí vận chuyển (VND) - dùng chung cho banner tiện ích và giỏ hàng.
+export const FREE_SHIP_THRESHOLD = 500000;
+
 type ServiceFeatureId = "shipping" | "returns" | "warranty" | "support" | "refund";
 
 type ServiceFeature = {
@@ -20,7 +23,7 @@ const FEATURES: Record<ServiceFeatureId, ServiceFeature> = {
   shipping: {
     icon: Truck,
     title: "Miễn phí vận chuyển",
-    description: "Đơn từ 500.000đ",
+    description: `Đơn từ ${FREE_SHIP_THRESHOLD.toLocaleString("vi-VN")}đ`,
   },
   returns: {
     icon: RotateCcw,

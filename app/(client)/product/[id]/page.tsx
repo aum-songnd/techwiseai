@@ -166,7 +166,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
       {/* Khối chính: gallery trái, thông tin phải */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
-        <div className="lg:sticky lg:top-24 self-start">
+        <div className=" self-start">
           <ProductGallery
             images={product!.images}
             productName={product!.name}

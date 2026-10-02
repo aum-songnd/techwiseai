@@ -61,11 +61,15 @@ const endOfToday = () => {
 };
 
 // Nét cọ dưới tiêu đề; màu truyền qua className (text-white / text-blue-700).
-const BrushStroke = ({ className = "" }: { className?: string }) => (
+const BrushStroke = ({
+  className = "mx-auto",
+}: {
+  className?: string;
+}) => (
   <svg
     viewBox="0 0 200 10"
     preserveAspectRatio="none"
-    className={`mx-auto h-2 w-36 ${className}`}
+    className={`h-2 w-36 ${className}`}
     aria-hidden="true"
   >
     <path
@@ -78,9 +82,16 @@ const BrushStroke = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
-// Khối Flash Sale độc lập theo bố cục bento: ô xanh cao (1/3) + 2 ô xám xếp dọc (2/3).
-// Tự lấy dữ liệu, tự ẩn nếu không có deal nào.
-const FlashSale = () => {
+type FlashSaleProps = {
+  /**
+   * "full"   : bố cục bento đầy đủ (ô xanh cao + 2 ô xám) - dùng ở trang chủ.
+   * "banner" : chỉ ô xanh có đếm ngược, hiển thị nằm ngang - dùng ở trang giỏ hàng.
+   */
+  variant?: "full" | "banner";
+};
+
+// Khối Flash Sale độc lập. Tự lấy dữ liệu, tự ẩn nếu không có deal nào.
+const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -92,7 +103,7 @@ const FlashSale = () => {
         const result = await getProducts({ size: FETCH_SIZE });
         if (!ignore) setProducts(result);
       } catch {
-        // Lỗi API: ẩn khối thay vì làm hỏng trang chủ.
+        // Lỗi API: ẩn khối thay vì làm hỏng trang.
       } finally {
         if (!ignore) setLoading(false);
       }
@@ -130,8 +141,65 @@ const FlashSale = () => {
     };
   }, [products]);
 
+  // Banner: luân phiên "Flash Sale" <-> "Giảm đến X%" mỗi 5 giây (bắt đầu bằng Flash Sale).
+  const [showDiscount, setShowDiscount] = useState(false);
+  useEffect(() => {
+    if (maxDiscount <= 0) {
+      setShowDiscount(false);
+      return;
+    }
+    const id = setInterval(() => setShowDiscount((v) => !v), 5000);
+    return () => clearInterval(id);
+  }, [maxDiscount]);
+
   if (!loading && deals.length === 0) return null;
 
+  /* ---------------- Banner ngang: chỉ ô xanh + đếm ngược ---------------- */
+  if (variant === "banner") {
+    return (
+      <div className="flex flex-col items-center gap-2 rounded-2xl bg-gradient-to-br from-blue-700 to-blue-600 px-4 py-3 text-center sm:flex-row sm:justify-between sm:gap-4 sm:text-left">
+        {/* Trái: tiêu đề + mô tả */}
+        <div className="min-w-0">
+          <h2 className="grid text-xl font-extrabold uppercase leading-tight text-white sm:text-2xl">
+            <span
+              className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                showDiscount ? "opacity-0" : "opacity-100"
+              }`}
+              aria-hidden={showDiscount}
+            >
+              Flash Sale
+            </span>
+            <span
+              className={`col-start-1 row-start-1 transition-opacity duration-500 ${
+                showDiscount ? "opacity-100" : "opacity-0"
+              }`}
+              aria-hidden={!showDiscount}
+            >
+              Giảm đến {maxDiscount}%
+            </span>
+          </h2>
+          <p className="mt-0.5 text-[10px] uppercase text-white/90">
+            Ưu đãi chớp nhoáng - Số lượng có hạn
+          </p>
+        </div>
+
+        {/* Giữa: đếm ngược (thu nhỏ) */}
+        <div className="shrink-0 origin-center scale-75">
+          <FlashSaleCountdown endsAt={endsAt} />
+        </div>
+
+        {/* Phải: nút */}
+        <Link
+          href={shopHref()}
+          className="shrink-0 rounded-full bg-white px-5 py-2 text-[11px] font-bold uppercase text-gray-900 transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          Mua ngay
+        </Link>
+      </div>
+    );
+  }
+
+  /* ---------------- Bố cục bento đầy đủ (trang chủ) ---------------- */
   return (
     <Container className="my-10 lg:px-0">
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
@@ -153,7 +221,7 @@ const FlashSale = () => {
             )}
           </h2>
 
-          <BrushStroke className="mt-5 text-white" />
+          <BrushStroke className="mx-auto mt-5 text-white" />
 
           <p className="mt-4 max-w-[16rem] text-sm uppercase text-white">
             Ưu đãi chớp nhoáng - Số lượng có hạn
@@ -208,7 +276,7 @@ const FlashSale = () => {
                   src={card.image}
                   alt={card.alt}
                   fill
-                  className="object-contain p-6 mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+                  className="object-contain p-6 mix-blend-multiply transition-transform duration-00 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, 33vw"
                 />
               </div>
@@ -220,7 +288,7 @@ const FlashSale = () => {
                 <p className="mt-2 text-2xl font-extrabold uppercase text-gray-900 md:text-3xl">
                   {card.headline}
                 </p>
-                <BrushStroke className="mt-3 text-blue-700" />
+                <BrushStroke className="mx-auto mt-3 text-blue-700" />
                 <span className="mt-4 rounded-full bg-blue-700 px-6 py-2 text-xs font-bold uppercase text-white transition-colors group-hover:bg-blue-800">
                   Mua ngay
                 </span>
