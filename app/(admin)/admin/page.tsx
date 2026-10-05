@@ -7,25 +7,15 @@ import {
   AlertTriangle,
   ArrowRight,
   Check,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  ImageOff,
-  MoreVertical,
   Package,
-  PackageSearch,
-  Plus,
-  Search,
-  Tag,
   Wallet,
   X,
   XCircle,
   type LucideIcon,
 } from "lucide-react";
-import { getAllProductsByCategory, getCategories } from "@/lib/api";
-import type { Category, Product } from "@/app/data/types";
-
-const PAGE_SIZE = 12;
+import { fetchAllAdminProducts } from "@/lib/admin-products";
+import ProductImage from "@/components/admin/ProductImage";
+import type { Product } from "@/app/data/types";
 
 const LOW_STOCK_THRESHOLD = 5;
 
@@ -35,9 +25,6 @@ const formatPrice = (value: number) =>
   );
 
 type StockStatus = "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK";
-type CategoryFilter = "ALL" | string;
-type SortKey = "DEFAULT" | "PRICE_ASC" | "PRICE_DESC" | "STOCK_ASC";
-
 type InventoryStats = {
   totalProducts: number;
   inventoryValue: number;
@@ -52,10 +39,6 @@ type StatCardProps = {
   icon: LucideIcon;
   iconClass?: string;
   iconBgClass?: string;
-};
-
-type ProductCardProps = {
-  product: Product;
 };
 
 type CategoryStock = {
@@ -108,19 +91,6 @@ const STATUS_CONFIG: Record<
   },
 };
 
-const SORT_OPTIONS: { value: SortKey; label: string }[] = [
-  { value: "DEFAULT", label: "Mặc định" },
-  { value: "PRICE_ASC", label: "Giá tăng dần" },
-  { value: "PRICE_DESC", label: "Giá giảm dần" },
-  { value: "STOCK_ASC", label: "Tồn kho ít nhất" },
-];
-
-const BADGE_CONFIG: Record<string, { label: string; className: string }> = {
-  new: { label: "Mới", className: "text-shop_dark_green" },
-  hot: { label: "Hot", className: "text-red-600" },
-  sale: { label: "Giảm giá", className: "text-amber-600" },
-};
-
 const getStatus = (stock: number): StockStatus => {
   if (stock <= 0) return "OUT_OF_STOCK";
   if (stock < LOW_STOCK_THRESHOLD) return "LOW_STOCK";
@@ -153,116 +123,15 @@ const StatCard = ({
   </div>
 );
 
-const ProductCard = ({ product }: ProductCardProps) => {
-  const status = getStatus(product.stock);
-  const cfg = STATUS_CONFIG[status];
-  const StatusIcon = cfg.icon;
-  const image = product.images?.[0];
-  const badge = product.status ? BADGE_CONFIG[product.status] : undefined;
-
-  return (
-    <article className="group bg-white rounded-2xl border border-gray-200/80 overflow-hidden transition-all duration-200 hover:border-gray-300 hover:shadow-md">
-      <div className="relative aspect-[4/3] bg-[#e9eee8] flex items-center justify-center overflow-hidden">
-        {image ? (
-
-          <img
-            src={image}
-            alt={product.name}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        ) : (
-          <ImageOff className="w-12 h-12 text-gray-300" />
-        )}
-
-        {status === "OUT_OF_STOCK" ? (
-          <span className="absolute top-2.5 left-2.5 text-[11px] font-semibold px-2 py-0.5 rounded-md bg-white/95 text-red-600 shadow-sm">
-            Hết hàng
-          </span>
-        ) : (
-          badge && (
-            <span
-              className={`absolute top-2.5 left-2.5 text-[11px] font-semibold px-2 py-0.5 rounded-md bg-white/95 shadow-sm ${badge.className}`}
-            >
-              {badge.label}
-            </span>
-          )
-        )}
-
-        <button
-          type="button"
-          aria-label={`Tuỳ chọn cho ${product.name}`}
-          className="absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center bg-white/90 text-gray-600 shadow-sm hover:bg-white hover:text-gray-900 transition-colors"
-        >
-          <MoreVertical className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div className="px-3.5 pt-3 pb-3.5">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <h3
-              className="text-sm font-semibold text-gray-900 truncate"
-              title={product.name}
-            >
-              {product.name}
-            </h3>
-            <p className="text-xs text-gray-500 mt-0.5 truncate">
-              {product.categories?.[0] ?? "Chưa phân loại"}
-            </p>
-          </div>
-          <div className="text-right shrink-0">
-            <p className="text-sm font-bold text-gray-900">
-              {formatPrice(product.finalPrice)}
-            </p>
-            {product.discount > 0 && (
-              <p className="text-[11px] text-gray-400 line-through">
-                {formatPrice(product.price)}
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between gap-3 mt-3 text-xs">
-          <span className="inline-flex items-center gap-1.5 font-medium text-gray-700">
-            <span
-              className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${cfg.dotClass}`}
-            >
-              <StatusIcon className="w-2.5 h-2.5 text-white" strokeWidth={3} />
-            </span>
-            {status === "OUT_OF_STOCK"
-              ? cfg.label
-              : `${cfg.label}: ${product.stock}`}
-          </span>
-
-          {product.brand && (
-            <span className="inline-flex items-center gap-1 text-gray-500 min-w-0">
-              <Tag className="w-3.5 h-3.5 shrink-0" />
-              <span className="truncate">{product.brand}</span>
-            </span>
-          )}
-        </div>
-      </div>
-    </article>
-  );
-};
-
 const AdminInventory = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<CategoryFilter>("ALL");
-  const [sort, setSort] = useState<SortKey>("DEFAULT");
-  const [page, setPage] = useState(0);
-
   const [titleSlot, setTitleSlot] = useState<HTMLElement | null>(null);
-  const [actionsSlot, setActionsSlot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     setTitleSlot(document.getElementById("admin-header-title"));
-    setActionsSlot(document.getElementById("admin-header-actions"));
   }, []);
 
   useEffect(() => {
@@ -272,14 +141,9 @@ const AdminInventory = () => {
       setLoading(true);
       setErrorMessage(null);
       try {
-        const [productList, categoryList] = await Promise.all([
-          getAllProductsByCategory(),
-
-          getCategories().catch(() => [] as Category[]),
-        ]);
+        const productList = await fetchAllAdminProducts();
         if (ignore) return;
         setProducts(productList ?? []);
-        setCategories(categoryList ?? []);
       } catch (err) {
         if (!ignore) {
           setErrorMessage(
@@ -299,21 +163,6 @@ const AdminInventory = () => {
     };
   }, []);
 
-  const categoryTabs = useMemo(() => {
-    const titles = categories.length
-      ? [...categories]
-          .sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0))
-          .map((c) => c.title)
-      : Array.from(new Set(products.flatMap((p) => p.categories ?? [])));
-    return [
-      { value: "ALL" as CategoryFilter, label: "Tất cả" },
-      ...titles.map((title) => ({
-        value: title as CategoryFilter,
-        label: title,
-      })),
-    ];
-  }, [categories, products]);
-
   const stats: InventoryStats = useMemo(
     () => ({
       totalProducts: products.length,
@@ -327,37 +176,6 @@ const AdminInventory = () => {
         .length,
     }),
     [products]
-  );
-
-  const filtered = useMemo(() => {
-    const keyword = search.trim().toLowerCase();
-    const list = products.filter((p) => {
-      const matchCategory =
-        category === "ALL" || (p.categories ?? []).includes(category);
-      const matchSearch =
-        !keyword ||
-        p.name.toLowerCase().includes(keyword) ||
-        (p.brand ?? "").toLowerCase().includes(keyword);
-      return matchCategory && matchSearch;
-    });
-
-    switch (sort) {
-      case "PRICE_ASC":
-        return [...list].sort((a, b) => a.finalPrice - b.finalPrice);
-      case "PRICE_DESC":
-        return [...list].sort((a, b) => b.finalPrice - a.finalPrice);
-      case "STOCK_ASC":
-        return [...list].sort((a, b) => a.stock - b.stock);
-      default:
-        return list;
-    }
-  }, [products, search, category, sort]);
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const currentPage = Math.min(page, totalPages - 1);
-  const paged = filtered.slice(
-    currentPage * PAGE_SIZE,
-    (currentPage + 1) * PAGE_SIZE
   );
 
   const needAttention = useMemo(
@@ -399,19 +217,6 @@ const AdminInventory = () => {
 
   const maxCategoryUnits = Math.max(1, ...stockByCategory.map((c) => c.units));
 
-  const changeSearch = (value: string) => {
-    setSearch(value);
-    setPage(0);
-  };
-  const changeCategory = (value: CategoryFilter) => {
-    setCategory(value);
-    setPage(0);
-  };
-  const changeSort = (value: SortKey) => {
-    setSort(value);
-    setPage(0);
-  };
-
   const dash = (value: string) => (loading || errorMessage ? "—" : value);
 
   return (
@@ -426,34 +231,6 @@ const AdminInventory = () => {
           </div>,
           titleSlot
         )}
-
-      {actionsSlot &&
-        createPortal(
-          <div className="relative w-full">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => changeSearch(e.target.value)}
-              placeholder="Tìm theo tên hoặc thương hiệu..."
-              aria-label="Tìm sản phẩm"
-              className="w-full pl-9 pr-3 py-2 text-sm bg-gray-100 rounded-xl border-0 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-shop_light_green/30 transition"
-            />
-          </div>,
-          actionsSlot
-        )}
-
-      <div className="relative md:hidden">
-        <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => changeSearch(e.target.value)}
-          placeholder="Tìm theo tên hoặc thương hiệu..."
-          aria-label="Tìm sản phẩm"
-          className="w-full pl-9 pr-3 py-2.5 text-sm bg-gray-100 rounded-xl border-0 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-shop_light_green/30 transition"
-        />
-      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         <StatCard
@@ -479,127 +256,11 @@ const AdminInventory = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_320px] gap-x-6 gap-y-4 items-start">
-
-        <div className="min-w-0 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 xl:col-start-1 xl:row-start-1">
-
-          <div className="min-w-0">
-            <div className="flex flex-wrap gap-2">
-              {categoryTabs.map((tab) => (
-                <button
-                  key={tab.value}
-                  type="button"
-                  onClick={() => changeCategory(tab.value)}
-                  className={`whitespace-nowrap px-3.5 py-1.5 text-xs font-medium rounded-lg transition-colors ${
-                    category === tab.value
-                      ? "bg-shop_dark_green text-white"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between lg:justify-start gap-2">
-              <div className="relative">
-                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">
-                  Sắp xếp:
-                </span>
-                <select
-                  value={sort}
-                  onChange={(e) => changeSort(e.target.value as SortKey)}
-                  aria-label="Sắp xếp sản phẩm"
-                  className="appearance-none pl-[4.25rem] pr-8 py-1.5 text-xs bg-white rounded-lg border border-gray-200/80 text-gray-700 focus:outline-none focus:border-shop_light_green cursor-pointer"
-                >
-                  {SORT_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
-              </div>
-              <Link
-                href="/admin/products"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-lg bg-shop_dark_green text-white shadow-sm hover:opacity-90 transition-opacity"
-              >
-                <Plus className="w-3.5 h-3.5" />
-                Thêm sản phẩm
-              </Link>
-            </div>
-        </div>
-
-        <section className="min-w-0 xl:col-start-1 xl:row-start-2">
-          {loading ? (
-            <div className="bg-white rounded-2xl border border-gray-200/80">
-              <p className="py-24 text-center text-sm text-gray-400">
-                Đang tải...
-              </p>
-            </div>
-          ) : errorMessage ? (
-            <div className="bg-white rounded-2xl border border-gray-200/80 flex flex-col items-center text-center gap-3 py-24">
-              <PackageSearch className="w-12 h-12 text-gray-300" />
-              <p className="text-sm text-gray-500">{errorMessage}</p>
-            </div>
-          ) : filtered.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-gray-200/80 flex flex-col items-center text-center gap-3 py-24">
-              <PackageSearch className="w-12 h-12 text-gray-300" />
-              <p className="text-sm text-gray-500">
-                {products.length === 0
-                  ? "Chưa có sản phẩm nào."
-                  : "Không tìm thấy sản phẩm nào."}
-              </p>
-            </div>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
-                {paged.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-
-              <div className="flex items-center justify-between gap-4 mt-6 text-sm">
-                <p className="text-gray-500">{filtered.length} sản phẩm</p>
-                {totalPages > 1 && (
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setPage(Math.max(0, currentPage - 1))}
-                      disabled={currentPage === 0}
-                      className="p-2 rounded-lg border border-gray-200 bg-white text-gray-600 hover:border-shop_dark_green/40 disabled:opacity-40 disabled:cursor-not-allowed"
-                      aria-label="Trang trước"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                    </button>
-                    <span className="text-gray-500">
-                      Trang {currentPage + 1} / {totalPages}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setPage(Math.min(totalPages - 1, currentPage + 1))
-                      }
-                      disabled={currentPage >= totalPages - 1}
-                      className="p-2 rounded-lg border border-gray-200 bg-white text-gray-600 hover:border-shop_dark_green/40 disabled:opacity-40 disabled:cursor-not-allowed"
-                      aria-label="Trang sau"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
-            </>
-          )}
-        </section>
-
-        <h2 className="text-base font-semibold text-gray-900 xl:col-start-2 xl:row-start-1 xl:self-center">
-          Tổng quan tồn kho
-        </h2>
-
-        <aside className="flex flex-col gap-4 xl:col-start-2 xl:row-start-2 xl:sticky xl:top-20">
+      <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)]">
           <section className="bg-white rounded-2xl border border-gray-200/40 p-5">
+            <h2 className="mb-4 text-base font-semibold text-gray-900">
+              Tổng quan tồn kho
+            </h2>
             <p className="text-xs text-gray-500">Tỷ lệ còn hàng</p>
             <div className="flex items-baseline gap-2 mt-1 mb-4">
               <p className="text-2xl font-bold tracking-tight text-gray-900">
@@ -684,6 +345,7 @@ const AdminInventory = () => {
             )}
           </section>
 
+          <aside className="flex flex-col gap-4">
           <section className="bg-white rounded-2xl border border-gray-200/40 p-4">
             <h3 className="text-sm font-semibold text-gray-900 mb-2 px-1">
               Cần chú ý
@@ -707,16 +369,12 @@ const AdminInventory = () => {
                       className="flex items-center gap-3 p-1.5 rounded-lg hover:bg-gray-50 transition-colors"
                     >
                       <div className="w-10 h-10 rounded-lg bg-[#e9eee8] overflow-hidden flex items-center justify-center shrink-0">
-                        {image ? (
-
-                          <img
-                            src={image}
-                            alt={p.name}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <ImageOff className="w-5 h-5 text-gray-300" />
-                        )}
+                        <ProductImage
+                          src={image}
+                          alt={p.name}
+                          className="h-full w-full"
+                          fallbackIconClassName="h-5 w-5"
+                        />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p
@@ -745,10 +403,10 @@ const AdminInventory = () => {
             href="/admin/products"
             className="w-full inline-flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl bg-shop_dark_green text-white shadow-sm hover:opacity-90 transition-opacity"
           >
-            Xem tồn kho
+            Quản lý sản phẩm
             <ArrowRight className="w-4 h-4" />
           </Link>
-        </aside>
+          </aside>
       </div>
     </div>
   );

@@ -96,6 +96,12 @@ export async function adminUpdateCategory(
   });
 }
 
+export async function adminDeleteCategory(id: string) {
+  return fetchAdminEnvelope(`/admin/categories/${id}`, {
+    method: "DELETE",
+  });
+}
+
 export interface ProductPayload {
   name: string;
   slug: string;

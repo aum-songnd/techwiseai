@@ -114,6 +114,7 @@ function mapCategory(raw: ApiCategoryRaw): Category {
     id: raw.id,
     slug: raw.slug,
     title: raw.name,
+    description: raw.description,
     imageUrl: raw.imageUrl,
 
     displayOrder: raw.displayOrder,
@@ -160,6 +161,7 @@ export interface GetProductsParams {
   category?: string;
 
   brand?: string;
+  noStore?: boolean;
 }
 
 export interface GetProductsResult {
@@ -188,7 +190,7 @@ async function fetchProductsPage(
   const query = buildProductsQuery(params);
   const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
     `/products?${query}`,
-    { next: { revalidate: 60 } }
+    params.noStore ? { cache: "no-store" } : { next: { revalidate: 60 } }
   );
   return data;
 }
@@ -254,10 +256,12 @@ export async function getProductBySlug(slug: string): Promise<Product> {
   return mapProduct(raw);
 }
 
-export async function getCategories(): Promise<Category[]> {
+export async function getCategories(
+  options: { noStore?: boolean } = {}
+): Promise<Category[]> {
   const data = await fetchEnvelope<ApiCategoryRaw[] | ApiPaginated<ApiCategoryRaw>>(
     "/categories",
-    { next: { revalidate: 300 } }
+    options.noStore ? { cache: "no-store" } : { next: { revalidate: 300 } }
   );
   return normalizeList(data).map(mapCategory);
 }

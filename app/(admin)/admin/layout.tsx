@@ -238,7 +238,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             </button>
 
             <div id="admin-header-title" className="min-w-0" />
-            <h2 className="text-base font-semibold text-gray-800">
+            <h2 className="text-[22px] font-semibold text-gray-800">
               {currentTitle}
             </h2>
           </div>
