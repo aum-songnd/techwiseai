@@ -1,7 +1,7 @@
 import { getProductsPaginated } from "@/lib/api";
 import type { Category, Product } from "@/app/data/types";
 
-const FETCH_SIZE = 100;
+const FETCH_SIZE = 2000;
 const MAX_PAGES = 100;
 
 export const normalizeAdminText = (value: string) =>
