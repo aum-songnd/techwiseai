@@ -21,11 +21,15 @@ import com.university.regulation.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
+import com.university.regulation.dto.products.RecommendedProductResponse;
+import com.university.regulation.service.AiRecommendationService;
+
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
         private final ProductService productService;
+        private final AiRecommendationService aiRecommendationService;
 
         @GetMapping("/{id}")
         public ApiResponse<ProductDetailResponse> getProductDetail(
@@ -92,5 +96,16 @@ public class ProductController {
                 products,
                 request.getRequestURI()
         );
+        }
+
+        @GetMapping("/{id}/recommendations/ai")
+        public ApiResponse<List<RecommendedProductResponse>> getAiRecommendations(
+                        @PathVariable UUID id,
+                        @RequestParam(defaultValue = "8") int limit,
+                        HttpServletRequest request) {
+                return ApiResponse.success(
+                                "Lấy danh sách sản phẩm gợi ý thành công",
+                                aiRecommendationService.getRecommendations(id, limit),
+                                request.getRequestURI());
         }
 }

@@ -57,3 +57,15 @@ app:
     return-url: ${VNPAY_RETURN_URL:http://localhost:8080/api/v1/payments/vnpay/return}
     ipn-url: ${VNPAY_IPN_URL:http://localhost:8080/api/v1/payments/vnpay/ipn}
     expire-minutes: ${VNPAY_EXPIRE_MINUTES:15}
+
+ai:
+  embedding-enabled: true
+  embedding-base-url: http://localhost:8000/v1
+  embedding-model: all-MiniLM-L6-v2
+  embedding-dimensions: 384
+  key-spec-labels:
+    - Loại CPU
+    - Dung lượng RAM
+    - Loại card đồ họa
+    - Kích thước màn hình
+    - Ổ cứng
