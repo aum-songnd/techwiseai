@@ -231,10 +231,15 @@ public class AiRecommendationService {
                     || p.getStockQuantity() <= 0) {
                 continue;
             }
-            ProductResponse response = productService.toResponse(p);
-            double sim = similarity.getOrDefault(p.getId(), 0.0);
-            Map<String, String> keySpecs = specReader.keySpecs(specReader.flatten(p.getSpecifications()));
-            scored.add(new Scored(p.getId(), response, keySpecs, sim, score(response, sim, current.getPrice())));
+            try {
+                ProductResponse response = productService.toResponse(p);
+                double sim = similarity.getOrDefault(p.getId(), 0.0);
+                Map<String, String> keySpecs = specReader.keySpecs(specReader.flatten(p.getSpecifications()));
+                scored.add(new Scored(p.getId(), response, keySpecs, sim, score(response, sim, current.getPrice())));
+            } catch (Exception e) {
+                // Một sản phẩm lỗi dữ liệu không được làm hỏng cả danh sách; in stack trace để biết nguyên nhân.
+                log.warn("Bỏ qua sản phẩm {} khi đề xuất: {}", p.getId(), e.toString(), e);
+            }
         }
 
         scored.sort(Comparator.comparingDouble(Scored::score).reversed());
@@ -261,6 +266,7 @@ public class AiRecommendationService {
         // CHOICE: sản phẩm rẻ nhất trong số còn lại.
         UUID choiceId = ranked.stream()
                 .skip(1)
+                .filter(s -> s.response().price() != null)
                 .min(Comparator.comparing((Scored s) -> s.response().price()))
                 .map(Scored::id)
                 .orElse(null);
@@ -275,6 +281,9 @@ public class AiRecommendationService {
     }
 
     private String priceReason(BigDecimal currentPrice, ProductResponse r) {
+        if (r.price() == null || currentPrice == null) {
+            return null;
+        }
         int cmp = r.price().compareTo(currentPrice);
         NumberFormat money = NumberFormat.getInstance(VI);
 
