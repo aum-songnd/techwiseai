@@ -1,6 +1,7 @@
 package com.university.regulation.service;
 
 import java.math.BigDecimal;
+import java.text.Normalizer;
 import java.text.NumberFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
@@ -56,6 +59,22 @@ public class AiRecommendationService {
 
     /** Chênh lệch giá tối đa (so với giá sản phẩm đang xem) để còn được điểm giá. Khớp bộ lọc 0.7x - 1.3x. */
     private static final double PRICE_TOLERANCE = 0.30;
+
+    // Trọng số từng thông số khi so cấu hình (chỉ tính những thông số cả hai sản phẩm đều có).
+    private static final double WC_CPU = 0.25;
+    private static final double WC_RAM = 0.25;
+    private static final double WC_GPU = 0.20;
+    private static final double WC_STORAGE = 0.15;
+    private static final double WC_SCREEN = 0.15;
+
+    private static final Pattern AMOUNT = Pattern.compile("(\\d+(?:[.,]\\d+)?)\\s*(tb|gb)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern NUMBER = Pattern.compile("(\\d+(?:[.,]\\d+)?)");
+    private static final Pattern CPU_TIER = Pattern.compile(
+            "core\\s*ultra\\s*\\d|core\\s*i\\d|ryzen\\s*(?:ai\\s*)?\\d|snapdragon|apple\\s*m\\d|celeron|pentium",
+            Pattern.CASE_INSENSITIVE);
+    private static final Pattern GPU_DEDICATED = Pattern.compile(
+            "rtx|gtx|geforce|radeon\\s*rx|quadro|arc\\s*[ab]\\d", Pattern.CASE_INSENSITIVE);
+    private static final Pattern GPU_MODEL = Pattern.compile("(\\d{3,4})");
 
     private static final String SYSTEM_PROMPT = """
             Bạn là chuyên viên tư vấn sản phẩm công nghệ cho website thương mại điện tử.
@@ -129,6 +148,18 @@ public class AiRecommendationService {
 
     @Transactional(readOnly = true)
     public List<RecommendedProductResponse> getRecommendations(UUID productId, int limit) {
+        try {
+            return buildRecommendations(productId, limit);
+        } catch (ResponseStatusException e) {
+            throw e;
+        } catch (RuntimeException e) {
+            // In stack trace đầy đủ ra log backend để biết nguyên nhân lỗi 500.
+            log.error("Lỗi tạo đề xuất cho sản phẩm {}", productId, e);
+            throw e;
+        }
+    }
+
+    private List<RecommendedProductResponse> buildRecommendations(UUID productId, int limit) {
         Product current = productRepository.findById(productId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy sản phẩm"));
 
@@ -223,6 +254,8 @@ public class AiRecommendationService {
             return List.of();
         }
 
+        Map<String, String> currentSpecs = specReader.keySpecs(specReader.flatten(current.getSpecifications()));
+
         List<Scored> scored = new ArrayList<>();
         for (Product p : productRepository.findAllById(similarity.keySet())) {
             if (!p.isActive()
@@ -233,9 +266,11 @@ public class AiRecommendationService {
             }
             try {
                 ProductResponse response = productService.toResponse(p);
-                double sim = similarity.getOrDefault(p.getId(), 0.0);
+                double embeddingSim = similarity.getOrDefault(p.getId(), 0.0);
                 Map<String, String> keySpecs = specReader.keySpecs(specReader.flatten(p.getSpecifications()));
-                scored.add(new Scored(p.getId(), response, keySpecs, sim, score(response, sim, current.getPrice())));
+                // So trực tiếp từng thông số; thiếu dữ liệu để so thì dùng độ giống embedding.
+                double config = configSimilarity(currentSpecs, keySpecs, embeddingSim);
+                scored.add(new Scored(p.getId(), response, keySpecs, config, score(response, config, current.getPrice())));
             } catch (Exception e) {
                 // Một sản phẩm lỗi dữ liệu không được làm hỏng cả danh sách; in stack trace để biết nguyên nhân.
                 log.warn("Bỏ qua sản phẩm {} khi đề xuất: {}", p.getId(), e.toString(), e);
@@ -256,6 +291,132 @@ public class AiRecommendationService {
         double priceCloseness = Math.max(0, 1 - diffRatio / PRICE_TOLERANCE);
 
         return W_CONFIG * config + W_PRICE * priceCloseness;
+    }
+
+    // ------------------------------------------------------------------ So cấu hình theo từng thông số
+
+    /** Độ giống cấu hình 0..1 = trung bình có trọng số của CPU, RAM, VGA, ổ cứng, màn hình. */
+    private double configSimilarity(Map<String, String> cur, Map<String, String> cand, double fallback) {
+        double[] acc = new double[2]; // [tổng điểm * trọng số, tổng trọng số]
+
+        addScore(acc, cpuScore(find(cur, "cpu"), find(cand, "cpu")), WC_CPU);
+        addScore(acc, ratio(amountGb(find(cur, "ram")), amountGb(find(cand, "ram"))), WC_RAM);
+        addScore(acc, gpuScore(find(cur, "card", "do hoa", "vga"), find(cand, "card", "do hoa", "vga")), WC_GPU);
+        addScore(acc, ratio(amountGb(find(cur, "o cung")), amountGb(find(cand, "o cung"))), WC_STORAGE);
+        addScore(acc, ratio(firstNumber(find(cur, "man hinh")), firstNumber(find(cand, "man hinh"))), WC_SCREEN);
+
+        return acc[1] == 0 ? fallback : acc[0] / acc[1];
+    }
+
+    private void addScore(double[] acc, Double score, double weight) {
+        if (score == null) {
+            return;
+        }
+        acc[0] += score * weight;
+        acc[1] += weight;
+    }
+
+    private Double ratio(Double a, Double b) {
+        if (a == null || b == null || a <= 0 || b <= 0) {
+            return null;
+        }
+        return Math.min(a, b) / Math.max(a, b);
+    }
+
+    /** CPU: cùng dòng (Core Ultra 5, Ryzen 7...) = 1; cùng hãng khác dòng = 0.6; khác hãng = 0.2. */
+    private Double cpuScore(String a, String b) {
+        String ta = cpuTier(a);
+        String tb = cpuTier(b);
+        if (ta == null || tb == null) {
+            return null;
+        }
+        if (ta.equals(tb)) {
+            return 1.0;
+        }
+        return cpuVendor(ta).equals(cpuVendor(tb)) ? 0.6 : 0.2;
+    }
+
+    private String cpuTier(String value) {
+        if (value == null) {
+            return null;
+        }
+        Matcher m = CPU_TIER.matcher(value);
+        return m.find() ? m.group().toLowerCase(Locale.ROOT).replaceAll("\\s+", "") : null;
+    }
+
+    private String cpuVendor(String tier) {
+        if (tier.startsWith("core") || tier.startsWith("celeron") || tier.startsWith("pentium")) {
+            return "intel";
+        }
+        return tier.startsWith("ryzen") ? "amd" : tier;
+    }
+
+    /** VGA: đồ họa rời và onboard khác nhau = 0; cùng onboard = 1; cùng rời thì so số hiệu (3050 vs 4060). */
+    private Double gpuScore(String a, String b) {
+        if (a == null || b == null) {
+            return null;
+        }
+        boolean da = GPU_DEDICATED.matcher(a).find();
+        boolean db = GPU_DEDICATED.matcher(b).find();
+        if (da != db) {
+            return 0.0;
+        }
+        if (!da) {
+            return 1.0;
+        }
+        Double ratio = ratio(gpuModel(a), gpuModel(b));
+        return ratio == null ? 0.7 : ratio;
+    }
+
+    private Double gpuModel(String value) {
+        Matcher m = GPU_MODEL.matcher(value);
+        return m.find() ? Double.valueOf(m.group(1)) : null;
+    }
+
+    /** Lấy số đầu tiên kèm đơn vị GB/TB, đổi về GB ("512GB SSD ... tối đa 1TB" -> 512). */
+    private Double amountGb(String value) {
+        if (value == null) {
+            return null;
+        }
+        Matcher m = AMOUNT.matcher(value);
+        if (m.find()) {
+            double n = parseNumber(m.group(1));
+            return m.group(2).equalsIgnoreCase("tb") ? n * 1024 : n;
+        }
+        return firstNumber(value);
+    }
+
+    private Double firstNumber(String value) {
+        if (value == null) {
+            return null;
+        }
+        Matcher m = NUMBER.matcher(value);
+        return m.find() ? parseNumber(m.group(1)) : null;
+    }
+
+    private double parseNumber(String text) {
+        return Double.parseDouble(text.replace(',', '.'));
+    }
+
+    /** Tìm giá trị theo tên thông số (không phân biệt hoa/thường, dấu): "ram" khớp "Dung lượng RAM". */
+    private String find(Map<String, String> specs, String... needles) {
+        for (Map.Entry<String, String> e : specs.entrySet()) {
+            String key = ascii(e.getKey());
+            for (String needle : needles) {
+                if (key.contains(needle)) {
+                    return e.getValue();
+                }
+            }
+        }
+        return null;
+    }
+
+    private String ascii(String value) {
+        return Normalizer.normalize(value == null ? "" : value, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "")
+                .replace('đ', 'd')
+                .replace('Đ', 'd')
+                .toLowerCase(Locale.ROOT);
     }
 
     // ------------------------------------------------------------------ Tầng 3a: nhãn theo luật
