@@ -26,6 +26,7 @@ import com.university.regulation.repository.CategoryRepository;
 import com.university.regulation.repository.ProductImageRepository;
 import com.university.regulation.repository.ProductRepository;
 import com.university.regulation.specification.ProductSpecification;
+import org.springframework.data.domain.PageRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -292,6 +293,41 @@ public class ProductService {
                 return trimmedValue.isEmpty()
                                 ? null
                                 : trimmedValue;
+        }
+
+        @Transactional(readOnly = true)
+        public List<ProductResponse> getRecommendations(
+                UUID productId,
+                int limit
+        ) {
+        Product currentProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Không tìm thấy sản phẩm"
+                ));
+
+        if (!currentProduct.isActive()
+                || currentProduct.getCategory() == null
+                || !currentProduct.getCategory().isActive()) {
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Không tìm thấy sản phẩm"
+                );
+        }
+
+        int safeLimit = Math.max(1, Math.min(limit, 20));
+
+        List<Product> candidates =
+                productRepository.findRecommendedCandidates(
+                        currentProduct.getId(),
+                        currentProduct.getCategory().getId(),
+                        currentProduct.getBrand(),
+                        PageRequest.of(0, safeLimit)
+                );
+
+        return candidates.stream()
+                .map(this::toResponse)
+                .toList();
         }
 
         @Transactional(readOnly = true)

@@ -1,6 +1,7 @@
 package com.university.regulation.controller;
 
 import java.util.UUID;
+import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -75,5 +76,21 @@ public class ProductController {
                                 "Tìm kiếm sản phẩm thành công",
                                 products,
                                 request.getRequestURI());
+        }
+
+        @GetMapping("/{id}/recommendations")
+        public ApiResponse<List<ProductResponse>> getRecommendations(
+                @PathVariable UUID id,
+                @RequestParam(defaultValue = "8") int limit,
+                HttpServletRequest request
+        ) {
+        List<ProductResponse> products =
+                productService.getRecommendations(id, limit);
+
+        return ApiResponse.success(
+                "Lấy danh sách sản phẩm gợi ý thành công",
+                products,
+                request.getRequestURI()
+        );
         }
 }

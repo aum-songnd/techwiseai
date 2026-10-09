@@ -2,6 +2,7 @@ package com.university.regulation.repository;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -59,4 +60,35 @@ public interface ProductRepository extends JpaRepository<Product, UUID>,
                         """)
         Optional<Product> findByIdForUpdate(
                         @Param("productId") UUID productId);
+
+        @Query("""
+            SELECT p
+            FROM Product p
+            JOIN p.category c
+            WHERE p.active = true
+            AND c.active = true
+            AND p.id <> :productId
+            AND (
+                c.id = :categoryId
+                OR (
+                    :brand IS NOT NULL
+                    AND LOWER(p.brand) = LOWER(:brand)
+                )
+            )
+            ORDER BY
+            CASE WHEN c.id = :categoryId THEN 0 ELSE 1 END,
+            CASE
+                WHEN :brand IS NOT NULL
+                    AND LOWER(p.brand) = LOWER(:brand)
+                THEN 0 ELSE 1
+            END,
+            p.ratingAverage DESC,
+            p.reviewCount DESC
+            """)
+        List<Product> findRecommendedCandidates(
+            @Param("productId") UUID productId,
+            @Param("categoryId") UUID categoryId,
+            @Param("brand") String brand,
+            Pageable pageable
+        );
 }
