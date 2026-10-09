@@ -3,10 +3,13 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
 import AddToCart from "@/components/AddToCart";
+import AiRecommendedCard from "@/components/AiRecommendedCard";
 import {
   getProductById,
   getProducts,
   getProductRecommendations,
+  getAiRecommendations,
+  type RecommendedProduct,
 } from "@/lib/api";
 import {
   ChevronRight,
@@ -94,13 +97,22 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   const intro = descriptionItems[0];
   const features = descriptionItems.slice(1);
 
+  // Ưu tiên đề xuất AI; lỗi hoặc rỗng thì quay về API gợi ý cũ.
+  let aiRecommendations: RecommendedProduct[] = [];
   let relatedProducts: Awaited<ReturnType<typeof getProducts>> = [];
 
   try {
-    relatedProducts = await getProductRecommendations(product!.id, 8);
+    aiRecommendations = await getAiRecommendations(product!.id, 8);
   } catch (error) {
-    console.error("Không thể tải sản phẩm gợi ý:", error);
-    relatedProducts = [];
+    console.error("Không thể tải đề xuất AI:", error);
+  }
+
+  if (aiRecommendations.length === 0) {
+    try {
+      relatedProducts = await getProductRecommendations(product!.id, 8);
+    } catch (error) {
+      console.error("Không thể tải sản phẩm gợi ý:", error);
+    }
   }
 
   const finalPrice = product!.finalPrice;
@@ -262,6 +274,30 @@ const ProductPage = async ({ params }: ProductPageProps) => {
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {aiRecommendations.length > 0 && (
+        <section className="mt-14 border-t border-gray-200 pt-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-gray-900">
+              Sản phẩm đề xuất
+            </h2>
+            {mainCategory && (
+              <Link
+                href={categoryHref(mainCategory)}
+                className="inline-flex items-center gap-1 text-sm text-shop_dark_green hover:underline"
+              >
+                Xem thêm {mainCategory}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            )}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {aiRecommendations.map((item) => (
+              <AiRecommendedCard key={item.product.id} item={item} />
+            ))}
+          </div>
         </section>
       )}
 

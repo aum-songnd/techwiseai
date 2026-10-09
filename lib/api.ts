@@ -1,4 +1,3 @@
-
 import type { Product, Category, Brand } from "../app/data/types";
 import { getToken } from "./auth";
 
@@ -267,6 +266,43 @@ export async function getProductRecommendations(productId: string,limit = 8): Pr
   return rawProducts.map(mapProduct);
 }
 
+// ---------------------------------------------------------------- Đề xuất AI
+
+export interface RecommendedProduct {
+  product: Product;
+  badge: "BEST" | "HOT" | "CHOICE" | null;
+  reason: string | null;
+  keySpecs: Record<string, string>;
+  score: number;
+}
+
+interface ApiRecommendedRaw {
+  product: ApiProductRaw;
+  badge: "BEST" | "HOT" | "CHOICE" | null;
+  reason: string | null;
+  keySpecs: Record<string, string> | null;
+  score: number;
+}
+
+export async function getAiRecommendations(
+  productId: string,
+  limit = 8
+): Promise<RecommendedProduct[]> {
+  const safeLimit = Math.max(1, Math.min(limit, 12));
+
+  const raw = await fetchEnvelope<ApiRecommendedRaw[]>(
+    `/products/${encodeURIComponent(productId)}/recommendations/ai?limit=${safeLimit}`,
+    { next: { revalidate: 60 } }
+  );
+
+  return (raw ?? []).map((r) => ({
+    product: mapProduct(r.product),
+    badge: r.badge ?? null,
+    reason: r.reason ?? null,
+    keySpecs: r.keySpecs ?? {},
+    score: r.score,
+  }));
+}
 
 export async function getCategories(
   options: { noStore?: boolean } = {}
