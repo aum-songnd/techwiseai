@@ -9,6 +9,7 @@ import {
   getProducts,
   getProductRecommendations,
   getAiRecommendations,
+  getProductSpecs,
   type RecommendedProduct,
 } from "@/lib/api";
 import {
@@ -96,6 +97,13 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   const descriptionItems = parseDescription(product!.description);
   const intro = descriptionItems[0];
   const features = descriptionItems.slice(1);
+
+  let specs: [string, string][] = [];
+  try {
+    specs = Object.entries(await getProductSpecs(product!.id));
+  } catch (error) {
+    console.error("Không thể tải thông số kỹ thuật:", error);
+  }
 
   // Ưu tiên đề xuất AI; lỗi hoặc rỗng thì quay về API gợi ý cũ.
   let aiRecommendations: RecommendedProduct[] = [];
@@ -258,23 +266,56 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         </div>
       </div>
 
-      {features.length > 0 && (
-        <section className="mt-12 border-t border-gray-200 pt-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">
-            Tính năng nổi bật
-          </h2>
-          <ul className="space-y-3 max-w-3xl">
-            {features.map((item, idx) => (
-              <li
-                key={idx}
-                className="flex items-start gap-2.5 text-sm text-gray-600 leading-relaxed"
-              >
-                <Check className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+      {(specs.length > 0 || features.length > 0) && (
+        <div className="mt-12 border-t border-gray-200 pt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
+          {features.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                Tính năng nổi bật
+              </h2>
+              <ul className="space-y-3">
+                {features.map((item, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2.5 text-sm text-gray-600 leading-relaxed"
+                  >
+                    <Check className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {specs.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                Thông số kỹ thuật
+              </h2>
+              <div className="w-full overflow-hidden border border-gray-300">
+                <table className="w-full text-sm">
+                  <tbody>
+                    {specs.map(([label, value], idx) => (
+                      <tr
+                        key={label}
+                        className={idx % 2 === 0 ? "bg-gray-50" : "bg-white"}
+                      >
+                        <th
+                          scope="row"
+                          className="w-1/3 px-4 py-2.5 text-left align-top font-medium text-gray-600"
+                        >
+                          {label}
+                        </th>
+                        <td className="px-4 py-2.5 text-gray-900">{value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
+          
+        </div>
       )}
 
       {aiRecommendations.length > 0 && (

@@ -337,6 +337,72 @@ export async function getProductById(id: string): Promise<Product> {
   return mapProduct(raw);
 }
 
+// ---------------------------------------------------------------- Thông số kỹ thuật
+
+const isScalar = (v: unknown): v is string | number | boolean =>
+  typeof v === "string" || typeof v === "number" || typeof v === "boolean";
+
+/** Chuẩn hóa specifications (object, mảng {name,value} hoặc chuỗi JSON) về Record<nhãn, giá trị>. */
+function flattenSpecs(input: unknown): Record<string, string> {
+  const out: Record<string, string> = {};
+
+  const walk = (node: unknown): void => {
+    if (node == null) return;
+
+    if (Array.isArray(node)) {
+      for (const el of node) {
+        if (el && typeof el === "object" && !Array.isArray(el)) {
+          const obj = el as Record<string, unknown>;
+          const name = [obj.name, obj.label, obj.key].find(
+            (n): n is string => typeof n === "string" && n.trim() !== ""
+          );
+          if (name && isScalar(obj.value)) {
+            out[name] = String(obj.value);
+            continue;
+          }
+        }
+        walk(el);
+      }
+      return;
+    }
+
+    if (typeof node === "object") {
+      for (const [key, value] of Object.entries(node as Record<string, unknown>)) {
+        if (isScalar(value)) {
+          const text = String(value).trim();
+          if (text) out[key] = text;
+        } else if (Array.isArray(value) && value.every(isScalar)) {
+          out[key] = value.map(String).join(", ");
+        } else {
+          walk(value);
+        }
+      }
+    }
+  };
+
+  if (typeof input === "string") {
+    const text = input.trim();
+    if (!text) return out;
+    try {
+      walk(JSON.parse(text));
+    } catch {
+      out["Thông số"] = text;
+    }
+    return out;
+  }
+
+  walk(input);
+  return out;
+}
+
+export async function getProductSpecs(id: string): Promise<Record<string, string>> {
+  const raw = await fetchEnvelope<ApiProductRaw & { specifications?: unknown }>(
+    `/products/${id}`,
+    { next: { revalidate: 60 } }
+  );
+  return flattenSpecs(raw.specifications);
+}
+
 interface ApiFavoriteRaw {
   id: string;
   createdAt: string;
