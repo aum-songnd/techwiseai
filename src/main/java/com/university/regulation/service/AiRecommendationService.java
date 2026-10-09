@@ -22,9 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.university.regulation.ai.AiClient;
@@ -321,7 +321,7 @@ public class AiRecommendationService {
         });
     }
 
-    private String buildPayload(Product current, List<Scored> ranked) throws JsonProcessingException {
+    private String buildPayload(Product current, List<Scored> ranked) throws JacksonException {
         Map<String, Object> currentProduct = new LinkedHashMap<>();
         currentProduct.put("name", current.getName());
         currentProduct.put("brand", current.getBrand());
@@ -345,7 +345,7 @@ public class AiRecommendationService {
                 "candidates", candidates));
     }
 
-    private List<Annotation> parseAnnotations(String json, Set<UUID> validIds) throws JsonProcessingException {
+    private List<Annotation> parseAnnotations(String json, Set<UUID> validIds) throws JacksonException {
         JsonNode items = objectMapper.readTree(json).path("items");
         List<Annotation> result = new ArrayList<>();
         Set<UUID> seen = new HashSet<>();
