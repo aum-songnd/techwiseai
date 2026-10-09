@@ -256,6 +256,18 @@ export async function getProductBySlug(slug: string): Promise<Product> {
   return mapProduct(raw);
 }
 
+export async function getProductRecommendations(productId: string,limit = 8): Promise<Product[]> {
+  const safeLimit = Math.max(1, Math.min(limit, 20));
+
+  const rawProducts = await fetchEnvelope<ApiProductRaw[]>(
+    `/products/${encodeURIComponent(productId)}/recommendations?limit=${safeLimit}`,{ 
+        next: { revalidate: 60 } 
+  });
+
+  return rawProducts.map(mapProduct);
+}
+
+
 export async function getCategories(
   options: { noStore?: boolean } = {}
 ): Promise<Category[]> {

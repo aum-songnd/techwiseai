@@ -3,7 +3,11 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
 import AddToCart from "@/components/AddToCart";
-import { getProductById, getProducts } from "@/lib/api";
+import {
+  getProductById,
+  getProducts,
+  getProductRecommendations,
+} from "@/lib/api";
 import {
   ChevronRight,
   Home,
@@ -91,20 +95,11 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   const features = descriptionItems.slice(1);
 
   let relatedProducts: Awaited<ReturnType<typeof getProducts>> = [];
-  try {
-    const allProducts = await getProducts({
-      size: 5,
-      category: mainCategory ? toSlug(mainCategory) : undefined,
-    });
 
-    relatedProducts = allProducts
-      .filter(
-        (p) =>
-          p.id !== product!.id &&
-          (mainCategory ? p.categories?.includes(mainCategory) : true)
-      )
-      .slice(0, 4);
-  } catch {
+  try {
+    relatedProducts = await getProductRecommendations(product!.id, 8);
+  } catch (error) {
+    console.error("Không thể tải sản phẩm gợi ý:", error);
     relatedProducts = [];
   }
 
