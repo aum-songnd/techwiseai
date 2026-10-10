@@ -41,10 +41,15 @@ document.txt
 # ### Node ###
 node_modules/
 
-# AI dataset generated locally
-ai-data/raw/
+# AI generated data
+ai-data/evaluation/
 ai-data/images/
-ai-data/test-images/
-ai-data/logs/
-
 ai-data/.venv/
+ai-data/test-images/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Hugging Face cache
+.cache/
