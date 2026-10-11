@@ -5,7 +5,7 @@ from sentence_transformers import SentenceTransformer
 app = FastAPI(title="TechWise Embedding Service")
 
 model = SentenceTransformer(
-    "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    "BAAI/bge-m3"
 )
 
 
