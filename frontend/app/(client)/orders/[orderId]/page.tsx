@@ -35,6 +35,7 @@ const STATUS_LABEL: Record<OrderStatus, string> = {
   PROCESSING: "Đang xử lý",
   SHIPPING: "Đang giao hàng",
   DELIVERED: "Đã giao hàng",
+  RETURNED: "Đã hoàn trả",
   CANCELLED: "Đã hủy",
 };
 
@@ -45,6 +46,7 @@ const STATUS_DESCRIPTION: Record<OrderStatus, string> = {
   PROCESSING: "Cửa hàng đang chuẩn bị và đóng gói sản phẩm.",
   SHIPPING: "Đơn hàng đang trên đường giao đến bạn.",
   DELIVERED: "Đơn hàng đã được giao thành công.",
+  RETURNED: "Đã hoàn trả",
   CANCELLED: "Đơn hàng đã bị hủy.",
 };
 
