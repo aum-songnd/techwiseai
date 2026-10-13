@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic-settings
+
+torch
+transformers
+pillow
+numpy
+safetensors
+protobuf
+
+psycopg[binary]
+pgvector
+sentencepiece
