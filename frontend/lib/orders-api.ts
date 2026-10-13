@@ -15,7 +15,7 @@ import { getToken } from "./auth"; // đổi đường dẫn nếu auth.ts khôn
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-backend.up.railway.app/api/v1";
+  "https://techwiseai-prod.up.railway.app/api/v1";
 
 interface ApiEnvelope<T> {
   success: boolean;

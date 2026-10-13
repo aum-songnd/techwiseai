@@ -41,7 +41,7 @@ type AdminPayment = {
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-backend.up.railway.app/api/v1";
+  "https://techwiseai-prod.up.railway.app/api/v1";
 
 // Các tên field ảnh có thể có trong 1 dòng sản phẩm của đơn hàng
 const ITEM_IMAGE_KEYS = [

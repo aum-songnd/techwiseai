@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  "https://techwiseai-backend.up.railway.app/api/v1";
+  "https://techwiseai-prod.up.railway.app/api/v1";
 
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
