@@ -23,6 +23,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import tools.jackson.core.JacksonException;
@@ -108,6 +111,7 @@ public class AiRecommendationService {
     private final ProductService productService;
     private final ProductEmbeddingRepository embeddingRepository;
     private final ProductEmbeddingService embeddingService;
+    private final TransactionTemplate vectorReadTransaction;
     private final ProductSpecReader specReader;
     private final AiClient aiClient;
     private final ObjectMapper objectMapper;
@@ -122,6 +126,7 @@ public class AiRecommendationService {
             ProductService productService,
             ProductEmbeddingRepository embeddingRepository,
             ProductEmbeddingService embeddingService,
+            PlatformTransactionManager transactionManager,
             ProductSpecReader specReader,
             AiClient aiClient,
             AiProperties props,
@@ -131,6 +136,9 @@ public class AiRecommendationService {
         this.productService = productService;
         this.embeddingRepository = embeddingRepository;
         this.embeddingService = embeddingService;
+        this.vectorReadTransaction = new TransactionTemplate(transactionManager);
+        this.vectorReadTransaction.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        this.vectorReadTransaction.setReadOnly(true);
         this.specReader = specReader;
         this.aiClient = aiClient;
         this.objectMapper = objectMapper;
@@ -153,9 +161,17 @@ public class AiRecommendationService {
         } catch (ResponseStatusException e) {
             throw e;
         } catch (RuntimeException e) {
-            // In stack trace đầy đủ ra log backend để biết nguyên nhân lỗi 500.
-            log.error("Lỗi tạo đề xuất cho sản phẩm {}", productId, e);
-            throw e;
+            // Ghi đầy đủ stack trace; không trả 500 chỉ vì tính năng AI phụ trợ lỗi.
+            log.error("AI recommendations lỗi cho sản phẩm {}, dùng gợi ý thông thường", productId, e);
+            try {
+                return productService.getRecommendations(productId, Math.max(1, Math.min(limit, 12)))
+                        .stream()
+                        .map(p -> new RecommendedProductResponse(p, null, null, Map.of(), 0.0))
+                        .toList();
+            } catch (RuntimeException fallbackError) {
+                log.error("Gợi ý dự phòng cũng lỗi cho sản phẩm {}", productId, fallbackError);
+                throw fallbackError;
+            }
         }
     }
 
@@ -223,15 +239,24 @@ public class AiRecommendationService {
 
         if (aiClient.isEmbeddingEnabled()) {
             try {
-                if (embeddingRepository.hasEmbedding(current.getId())) {
+                // pgvector chạy ở transaction độc lập. Nếu thiếu extension/cột embedding
+                // hoặc câu SQL lỗi thì rollback transaction này, không làm hỏng query dự phòng.
+                Boolean exists = vectorReadTransaction.execute(status ->
+                        embeddingRepository.hasEmbedding(current.getId()));
+                if (Boolean.TRUE.equals(exists)) {
                     BigDecimal price = current.getPrice();
-                    embeddingRepository.findSimilar(
-                            current.getId(),
-                            current.getCategory().getId(),
-                            price.multiply(new BigDecimal("0.7")),
-                            price.multiply(new BigDecimal("1.3")),
-                            Math.min(limit * 3, 30))
-                            .forEach(s -> similarity.put(s.id(), s.similarity()));
+                    if (price != null && price.signum() > 0) {
+                        List<ProductEmbeddingRepository.SimilarProduct> matches =
+                                vectorReadTransaction.execute(status -> embeddingRepository.findSimilar(
+                                        current.getId(),
+                                        current.getCategory().getId(),
+                                        price.multiply(new BigDecimal("0.7")),
+                                        price.multiply(new BigDecimal("1.3")),
+                                        Math.min(limit * 3, 30)));
+                        if (matches != null) {
+                            matches.forEach(match -> similarity.put(match.id(), match.similarity()));
+                        }
+                    }
                 } else {
                     embeddingService.reindexAsync(current.getId());
                 }
