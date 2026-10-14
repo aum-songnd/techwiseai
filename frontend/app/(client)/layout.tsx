@@ -38,8 +38,7 @@ export default function RootLayout({
           <CartProvider>
             <FavoriteProvider>
               <TooltipProvider>
-                {/* Admin vào trang khách -> chuyển thẳng sang /admin,
-                    không render Header/Footer/nội dung khách. */}
+
                 <AdminRedirect>
                   <div className="flex flex-col min-h-screen">
                     <Header />

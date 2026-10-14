@@ -19,15 +19,8 @@ const Header = () => {
   const { isSignedIn, isLoading } = useAuth();
   const pathname = usePathname();
 
-  // Ở các trang /admin/* chỉ giữ logo + menu người dùng (avatar); ẩn
-  // menu điều hướng, tìm kiếm, giỏ hàng, yêu thích và link "Quản trị".
   const isAdminPage = pathname?.startsWith('/admin') ?? false;
 
-  // Đọc quyền admin từ localStorage (lib/auth.ts) — tách state riêng vì
-  // AuthContext hiện chỉ expose isSignedIn/isLoading, chưa có field
-  // quyền (authorities). Lắng nghe thêm sự kiện "auth:login"/"auth:logout"
-  // (setToken/clearToken tự bắn ra) để cập nhật ngay khi đăng nhập/đăng
-  // xuất mà không cần load lại trang.
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {

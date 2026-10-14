@@ -1,45 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Truck, RotateCcw, Headphones, ShieldCheck } from "lucide-react";
+import ServiceFeatures from "./ServiceFeatures";
 import { Title } from "./ui/text";
 import MarqueeRow from "./MarqueeRow";
-import { getAllProductsByCategory } from "../lib/api";
+import type { Product } from "@/app/data/types";
 
-const features = [
-  {
-    icon: Truck,
-    title: "Giao hàng miễn phí",
-    description: "Miễn phí ship cho đơn từ 100$",
-  },
-  {
-    icon: RotateCcw,
-    title: "Đổi trả miễn phí",
-    description: "Miễn phí ship cho đơn từ 100$",
-  },
-  {
-    icon: Headphones,
-    title: "Hỗ trợ khách hàng",
-    description: "Hỗ trợ thân thiện 24/7",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Đảm bảo hoàn tiền",
-    description: "Được kiểm tra chất lượng bởi đội ngũ của chúng tôi",
-  },
-];
-
-// API không có bảng brand riêng kèm logo (chỉ có field `brand` dạng
-// string thô trên mỗi product, giống lib/api.ts và Shop.tsx đang xử lý).
-// Brand có logo thật trong /public thì hiện logo; brand chưa có logo thì
-// hiện tên brand dạng chữ trong thẻ.
 const MAX_BRANDS = 8;
 
-// === ĐỔI Ở ĐÂY === key phải là tên brand viết thường (khớp với `brand` mà
-// API trả về, sau khi .toLowerCase()). Value là đường dẫn public tới file
-// logo. Các file logo đang nằm thẳng trong thư mục `public/` (vd
-// public/acer.png) nên đường dẫn chỉ cần "/acer.png". Thêm brand mới có
-// logo thì chỉ cần bổ sung một dòng vào đây, không cần sửa gì khác.
 const BRAND_LOGOS: Record<string, string> = {
   acer: "/acer.png",
   apple: "/apple.png",
@@ -54,19 +22,14 @@ const BRAND_LOGOS: Record<string, string> = {
 type BrandCard = {
   key: string;
   label: string;
-  // Đường dẫn logo (từ BRAND_LOGOS). undefined -> hiện tên brand dạng chữ.
+
   logoUrl?: string;
 };
 
-async function getFeaturedBrands(): Promise<BrandCard[]> {
-  try {
-    // Không truyền category -> lấy toàn bộ sản phẩm để gom brand.
-    const products = await getAllProductsByCategory();
-
+function getFeaturedBrands(products: Product[]): BrandCard[] {
     const seen = new Map<string, BrandCard>();
     for (const product of products) {
-      const raw = (product as unknown as { brand?: string }).brand;
-      const label = raw?.trim();
+      const label = product.brand?.trim();
       if (!label) continue;
 
       const key = label.toLowerCase();
@@ -77,19 +40,13 @@ async function getFeaturedBrands(): Promise<BrandCard[]> {
 
     return Array.from(seen.values())
       .sort((a, b) => {
-        // Ưu tiên brand có logo thật lên trước, tránh trường hợp brand có
-        // logo (vd "Dell") bị các brand không có logo xếp trước bảng chữ
-        // cái đẩy ra ngoài top MAX_BRANDS.
+
         const hasLogoA = !!a.logoUrl;
         const hasLogoB = !!b.logoUrl;
         if (hasLogoA !== hasLogoB) return hasLogoA ? -1 : 1;
         return a.label.localeCompare(b.label);
       })
       .slice(0, MAX_BRANDS);
-  } catch {
-    // Lỗi gọi API -> ẩn section thay vì làm crash trang chủ.
-    return [];
-  }
 }
 
 const ChevronIcon = ({ className = "" }: { className?: string }) => (
@@ -108,7 +65,7 @@ const ChevronIcon = ({ className = "" }: { className?: string }) => (
 );
 
 const BrandItem = ({ brand }: { brand: BrandCard }) => (
-  // mr-4 là khoảng cách giữa các thẻ (marquee không dùng gap).
+
   <Link
     href={`/shop?brand=${encodeURIComponent(brand.label)}`}
     title={brand.label}
@@ -120,7 +77,7 @@ const BrandItem = ({ brand }: { brand: BrandCard }) => (
           src={brand.logoUrl}
           alt={brand.label}
           fill
-          // mix-blend-multiply để nền trắng của file logo hòa vào nền thẻ.
+
           className="object-contain p-5 mix-blend-multiply"
           sizes="(max-width: 768px) 160px, 192px"
         />
@@ -133,8 +90,8 @@ const BrandItem = ({ brand }: { brand: BrandCard }) => (
   </Link>
 );
 
-const HomeBrands = async () => {
-  const brands = await getFeaturedBrands();
+const HomeBrands = ({ products }: { products: Product[] }) => {
+  const brands = getFeaturedBrands(products);
 
   if (brands.length === 0) return null;
 
@@ -151,35 +108,14 @@ const HomeBrands = async () => {
         </Link>
       </div>
 
-      {/* Chạy sang phải, ngược chiều với marquee danh mục. */}
       <MarqueeRow direction="right" speed={35}>
         {brands.map((brand) => (
           <BrandItem key={brand.key} brand={brand} />
         ))}
       </MarqueeRow>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 border-t border-gray-200 pt-6 sm:grid-cols-2 md:grid-cols-4 md:gap-0">
-        {features.map((feature) => {
-          const Icon = feature.icon;
-          return (
-            <div key={feature.title} className="flex items-center gap-3 md:pr-5">
-              <Icon
-                size={26}
-                strokeWidth={1.5}
-                className="shrink-0 text-gray-700"
-              />
-              <div className="flex flex-col">
-                <span className="text-sm font-medium text-gray-900">
-                  {feature.title}
-                </span>
-                <span className="text-xs text-gray-500">
-                  {feature.description}
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <ServiceFeatures className="mt-6" items={["shipping", "returns", "support", "refund"]}
+      />
     </section>
   );
 };

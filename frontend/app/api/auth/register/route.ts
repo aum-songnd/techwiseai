@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
     const data = await res.json().catch(() => ({}));
     return NextResponse.json(data, { status: res.status });
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       { success: false, message: "Proxy error khi gọi register" },
       { status: 502 }

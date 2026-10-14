@@ -1,4 +1,4 @@
-// app/(client)/blog/[slug]/page.tsx
+
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -13,7 +13,6 @@ import {
 
 type Props = { params: Promise<{ slug: string }> };
 
-// Chỉnh lại nếu BlogCategory / Author của bạn dùng tên field khác
 type CategoryFields = { id: string; name?: string; title?: string };
 type AuthorFields = { id: string; name?: string };
 
@@ -94,14 +93,12 @@ const BlogPostPage = async ({ params }: Props) => {
   );
   const paragraphs = blog.body.split("\n").filter(Boolean);
 
-  // Sidebar: số bài viết theo từng danh mục
   const categoryCounts = allCategories.map((c) => ({
     id: c.id,
     name: categoryName(c),
     count: allBlogs.filter((b) => b.blogCategoryIds.includes(c.id)).length,
   }));
 
-  // Sidebar: 5 bài mới nhất (trừ bài đang xem)
   const latestBlogs = allBlogs
     .filter((b) => b.slug !== blog.slug)
     .sort(
@@ -114,10 +111,10 @@ const BlogPostPage = async ({ params }: Props) => {
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-          {/* Bài viết */}
+
           <article>
             {blog.mainImageUrl && (
-              // eslint-disable-next-line @next/next/no-img-element
+
               <img
                 src={blog.mainImageUrl}
                 alt={blog.title}
@@ -163,7 +160,6 @@ const BlogPostPage = async ({ params }: Props) => {
             </div>
           </article>
 
-          {/* Sidebar */}
           <aside className="space-y-8">
             <section className="rounded-md border border-gray-300 p-5">
               <h2 className="text-lg font-bold text-gray-900">Danh mục</h2>
@@ -190,7 +186,7 @@ const BlogPostPage = async ({ params }: Props) => {
                       href={`/blog/${b.slug}`}
                       className="group flex items-center gap-4"
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
+
                       <img
                         src={b.mainImageUrl}
                         alt=""

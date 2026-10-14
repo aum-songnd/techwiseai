@@ -9,8 +9,6 @@ interface ProductGalleryProps {
   productName: string;
 }
 
-// productImages chỉ map các key ảnh local (vd "m1.png"). Với ảnh URL đầy đủ
-// từ API thật thì fallback về chính chuỗi đó, giống cách ProductCard xử lý.
 const resolveImage = (key: string): StaticImageData | string => {
   const localImage = (
     productImages as Record<string, StaticImageData | undefined>
@@ -23,10 +21,12 @@ const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
   const activeImage = images?.[activeIndex];
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="relative aspect-square w-full bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
+    <div className="flex flex-col gap-4">
+
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-gray-200 bg-gray-100">
         {activeImage ? (
           <Image
+            key={activeImage}
             src={resolveImage(activeImage)}
             alt={productName}
             fill
@@ -35,22 +35,25 @@ const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
             priority
           />
         ) : (
-          <span className="text-xs text-gray-400">Không có ảnh</span>
+          <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">
+            Không có ảnh
+          </div>
         )}
       </div>
 
       {images && images.length > 1 && (
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-3">
           {images.map((img, index) => (
             <button
               key={`${img}-${index}`}
               type="button"
               onClick={() => setActiveIndex(index)}
               aria-label={`Xem ảnh ${index + 1}`}
-              className={`relative w-16 h-16 rounded-md overflow-hidden border transition-colors ${
+              aria-current={index === activeIndex}
+              className={`relative h-[72px] w-[72px] overflow-hidden rounded-lg border-2 bg-gray-100 transition-colors ${
                 index === activeIndex
                   ? "border-shop_dark_green"
-                  : "border-gray-200 hover:border-gray-300"
+                  : "border-gray-200 hover:border-gray-400"
               }`}
             >
               <Image
@@ -58,7 +61,7 @@ const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
                 alt={`${productName} ${index + 1}`}
                 fill
                 className="object-cover"
-                sizes="64px"
+                sizes="72px"
               />
             </button>
           ))}

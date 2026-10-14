@@ -3,19 +3,36 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
 import AddToCart from "@/components/AddToCart";
-import { getProductById, getProducts } from "@/lib/api";
-import { Truck, RotateCcw, ShieldCheck } from "lucide-react";
+import AiRecommendedCard from "@/components/AiRecommendedCard";
+import {
+  getProductById,
+  getProducts,
+  getProductRecommendations,
+  getAiRecommendations,
+  getProductSpecs,
+  type RecommendedProduct,
+} from "@/lib/api";
+import {
+  ChevronRight,
+  Home,
+  ArrowRight,
+  Check,
+  X,
+} from "lucide-react";
+import ServiceFeatures from "@/components/ServiceFeatures";
 
 export const revalidate = 60;
 
-// `categories`, `brand`, `description`, `finalPrice` giờ đã là field
-// chính thức trong Product type (xem app/data/types.ts) nên không cần
-// khai báo type mở rộng riêng (ApiProduct) như trước nữa.
-
 const statusLabel: Record<string, string> = {
-  new: "NEW",
-  hot: "HOT",
-  sale: "SALE",
+  new: "New",
+  hot: "Hot",
+  sale: "Sale",
+};
+
+const statusStyle: Record<string, string> = {
+  new: "bg-shop_orange text-white",
+  hot: "bg-red-500 text-white",
+  sale: "bg-red-500 text-white",
 };
 
 const formatPrice = (value: number) =>
@@ -23,8 +40,6 @@ const formatPrice = (value: number) =>
     value
   );
 
-// Mô tả từ API là 1 chuỗi thô, các ý cách nhau bởi dấu "•".
-// Tách thành mảng câu để render thành list thay vì 1 đoạn dính chữ.
 const parseDescription = (raw?: string) => {
   if (!raw) return [];
   return raw
@@ -32,6 +47,24 @@ const parseDescription = (raw?: string) => {
     .map((s) => s.trim())
     .filter(Boolean);
 };
+
+const getShortName = (name: string) => name.split("/")[0].trim() || name;
+
+const toSlug = (name: string) =>
+  name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const categoryHref = (name: string) =>
+  `/shop?category=${encodeURIComponent(toSlug(name))}`;
+
+const brandHref = (name: string) => `/shop?brand=${encodeURIComponent(name)}`;
 
 export async function generateStaticParams() {
   try {
@@ -53,177 +86,278 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   try {
     product = await getProductById(id);
-  } catch (err) {
-    console.error("Lỗi getProductById:", err);
+  } catch {
     notFound();
   }
 
   const categoryNames = product!.categories ?? [];
+  const mainCategory = categoryNames[0];
   const brandTitle = product!.brand;
+
   const descriptionItems = parseDescription(product!.description);
+  const intro = descriptionItems[0];
+  const features = descriptionItems.slice(1);
 
-  // Related products: cùng category đầu tiên, loại trừ chính nó, tối đa 4 sản phẩm
-  let relatedProducts: Awaited<ReturnType<typeof getProducts>> = [];
+  let specs: [string, string][] = [];
   try {
-    const allProducts = await getProducts();
-    const mainCategory = categoryNames[0];
-
-    relatedProducts = allProducts
-      .filter(
-        (p) =>
-          p.id !== product!.id &&
-          (mainCategory ? p.categories?.includes(mainCategory) : true)
-      )
-      .slice(0, 4);
-  } catch {
-    relatedProducts = [];
+    specs = Object.entries(await getProductSpecs(product!.id));
+  } catch (error) {
+    console.error("Không thể tải thông số kỹ thuật:", error);
   }
 
-  // Giá bán thực tế đã được tính sẵn ở tầng mapping (lib/api.ts ->
-  // mapProduct). Không cần tự trừ `price - discount` ở đây nữa, tránh
-  // nhầm lẫn giữa "giá gốc" và "giá bán".
+  // Ưu tiên đề xuất AI; lỗi hoặc rỗng thì quay về API gợi ý cũ.
+  let aiRecommendations: RecommendedProduct[] = [];
+  let relatedProducts: Awaited<ReturnType<typeof getProducts>> = [];
+
+  try {
+    aiRecommendations = await getAiRecommendations(product!.id, 8);
+  } catch (error) {
+    console.error("Không thể tải đề xuất AI:", error);
+  }
+
+  if (aiRecommendations.length === 0) {
+    try {
+      relatedProducts = await getProductRecommendations(product!.id, 8);
+    } catch (error) {
+      console.error("Không thể tải sản phẩm gợi ý:", error);
+    }
+  }
+
   const finalPrice = product!.finalPrice;
   const hasDiscount = product!.discount > 0;
+  const discountPercent =
+    hasDiscount && product!.price > 0
+      ? Math.round(((product!.price - finalPrice) / product!.price) * 100)
+      : 0;
+
+  const inStock = product!.stock > 0;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Breadcrumb */}
-      <nav className="text-sm text-gray-500 mb-6 flex flex-wrap items-center gap-1">
-        <Link href="/" className="hover:text-shop_dark_green">
+    <div className="max-w-6xl mx-auto px-4 py-6 md:py-8">
+
+      <nav
+        aria-label="Breadcrumb"
+        className="text-sm text-gray-500 mb-6 flex flex-wrap items-center gap-1.5"
+      >
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1 hover:text-shop_dark_green transition-colors"
+        >
+          <Home className="w-3.5 h-3.5" />
           Trang chủ
         </Link>
-        <span>/</span>
-        <Link href="/shop" className="hover:text-shop_dark_green">
+        <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+        <Link
+          href="/shop"
+          className="hover:text-shop_dark_green transition-colors"
+        >
           Sản phẩm
         </Link>
-        {categoryNames[0] && (
+        {mainCategory && (
           <>
-            <span>/</span>
-            <span className="text-gray-700">{categoryNames[0]}</span>
+            <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+            <Link
+              href={categoryHref(mainCategory)}
+              className="hover:text-shop_dark_green hover:underline transition-colors"
+            >
+              {mainCategory}
+            </Link>
           </>
         )}
-        <span>/</span>
-        <span className="text-shop_dark_green font-medium line-clamp-1">
-          {product!.name}
+        <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+        <span
+          aria-current="page"
+          title={product!.name}
+          className="text-shop_dark_green font-medium line-clamp-1"
+        >
+          {getShortName(product!.name)}
         </span>
       </nav>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <ProductGallery images={product!.images} productName={product!.name} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
+        <div className=" self-start">
+          <ProductGallery
+            images={product!.images}
+            productName={product!.name}
+          />
+        </div>
 
-        <div className="flex flex-col gap-4">
-          {categoryNames[0] && (
-            <span className="text-[12px] uppercase tracking-wide text-gray-400">
-              {categoryNames[0]}
+        <div className="flex flex-col">
+
+          {product!.status && (
+            <span
+              className={`self-start text-[11px] font-semibold px-2.5 py-1 rounded-2xl mb-3 ${
+                statusStyle[product!.status] ?? "bg-gray-700 text-white"
+              }`}
+            >
+              {statusLabel[product!.status] ?? product!.status}
             </span>
           )}
 
-          <div className="flex items-start justify-between gap-3">
-            <h1 className="text-2xl font-bold text-shop_dark_green">
-              {product!.name}
-            </h1>
-            {product!.status && (
-              <span className="shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full bg-shop_orange/80 text-white">
-                {statusLabel[product!.status] ?? product!.status}
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+            {product!.name}
+          </h1>
+
+          <div className="mt-2 flex flex-wrap items-center gap-x-2 text-sm text-gray-500">
+            {mainCategory && (
+              <Link
+                href={categoryHref(mainCategory)}
+                className="hover:text-shop_dark_green hover:underline"
+              >
+                {mainCategory}
+              </Link>
+            )}
+            {mainCategory && brandTitle && <span>·</span>}
+            {brandTitle && (
+              <span>
+                Thương hiệu:{" "}
+                <Link
+                  href={brandHref(brandTitle)}
+                  className="text-gray-700 font-medium hover:text-shop_dark_green hover:underline"
+                >
+                  {brandTitle}
+                </Link>
               </span>
             )}
           </div>
 
-          {brandTitle && (
-            <p className="text-sm text-gray-500">
-              Thương hiệu:{" "}
-              <span className="text-shop_dark_green font-medium">
-                {brandTitle}
-              </span>
-            </p>
-          )}
-
-          <div className="flex items-center gap-3">
-            <span className="text-2xl font-semibold text-shop_dark_green">
+          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="text-3xl font-bold text-gray-900">
               {formatPrice(finalPrice)}
             </span>
             {hasDiscount && (
-              <span className="text-base text-gray-400 line-through">
-                {formatPrice(product!.price)}
-              </span>
+              <>
+                <span className="text-base text-gray-400 line-through">
+                  {formatPrice(product!.price)}
+                </span>
+                {discountPercent > 0 && (
+                  <span className="text-xs font-semibold text-white bg-shop_dark_green px-2.5 py-1 rounded-full">
+                    Tiết kiệm {discountPercent}%
+                  </span>
+                )}
+              </>
             )}
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <p className="text-sm font-medium">Tình trạng</p>
-            <p
-              className={
-                product!.stock === 0
-                  ? "text-red-600"
-                  : "text-shop_dark_green/80 font-semibold"
-              }
-            >
-              {product!.stock > 0
-                ? `Còn ${product!.stock} sản phẩm`
-                : "Hết hàng"}
-            </p>
-          </div>
+          <p
+            className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium ${
+              inStock ? "text-green-600" : "text-red-600"
+            }`}
+          >
+            {inStock ? (
+              <Check className="w-4 h-4" />
+            ) : (
+              <X className="w-4 h-4" />
+            )}
+            {inStock ? `Còn hàng (${product!.stock} sản phẩm)` : "Hết hàng"}
+          </p>
 
-          <div className="mt-2">
+          {intro && (
+            <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+              {intro}
+            </p>
+          )}
+
+          <div className="mt-6">
             <AddToCart product={product!} />
           </div>
 
-          {/* Cam kết dịch vụ - lấp khoảng trống cột phải */}
-          <div className="mt-3 bg-gray-200 border border-gray-300 rounded-lg divide-y divide-gray-300">
-            <div className="flex items-center gap-3 px-4 py-3">
-              <Truck className="w-5 h-5 text-shop_dark_green shrink-0" />
-              <div className="text-sm">
-                <p className="font-medium text-gray-800">
-                  Miễn phí vận chuyển
-                </p>
-                <p className="text-gray-500">
-                  Cho đơn hàng từ 500.000đ trong nội thành
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 px-4 py-3">
-              <RotateCcw className="w-5 h-5 text-shop_dark_green shrink-0" />
-              <div className="text-sm">
-                <p className="font-medium text-gray-800">
-                  Đổi trả trong 7 ngày
-                </p>
-                <p className="text-gray-500">
-                  Miễn phí đổi trả nếu sản phẩm lỗi do nhà sản xuất
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 px-4 py-3">
-              <ShieldCheck className="w-5 h-5 text-shop_dark_green shrink-0" />
-              <div className="text-sm">
-                <p className="font-medium text-gray-800">
-                  Bảo hành chính hãng
-                </p>
-                <p className="text-gray-500">12 tháng tại trung tâm ủy quyền</p>
-              </div>
-            </div>
-          </div>
+          <ServiceFeatures className="mt-6" variant="compact" items={["shipping", "warranty", "returns"]}/>
         </div>
       </div>
 
-      {/* Mô tả sản phẩm - tách riêng thành section full-width, dễ đọc hơn */}
-      {descriptionItems.length > 0 && (
-        <section className="mt-10 border-t border-gray-200 pt-8">
-          <h2 className="text-lg font-bold text-shop_dark_green mb-4">
-            Mô tả sản phẩm
-          </h2>
-          <ul className="list-disc pl-5 space-y-2 text-sm text-gray-600 leading-relaxed max-w-3xl">
-            {descriptionItems.map((item, idx) => (
-              <li key={idx}>{item}</li>
+      {(specs.length > 0 || features.length > 0) && (
+        <div className="mt-12 border-t border-gray-200 pt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
+          {features.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                Tính năng nổi bật
+              </h2>
+              <ul className="space-y-3">
+                {features.map((item, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2.5 text-sm text-gray-600 leading-relaxed"
+                  >
+                    <Check className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {specs.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                Thông số kỹ thuật
+              </h2>
+              <div className="w-full overflow-hidden border border-gray-300">
+                <table className="w-full text-sm">
+                  <tbody>
+                    {specs.map(([label, value], idx) => (
+                      <tr
+                        key={label}
+                        className={idx % 2 === 0 ? "bg-gray-50" : "bg-white"}
+                      >
+                        <th
+                          scope="row"
+                          className="w-1/3 px-4 py-2.5 text-left align-top font-medium text-gray-600"
+                        >
+                          {label}
+                        </th>
+                        <td className="px-4 py-2.5 text-gray-900">{value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
+
+        </div>
+      )}
+
+      {aiRecommendations.length > 0 && (
+        <section className="mt-14 border-t border-gray-200 pt-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-gray-900">
+              Sản phẩm đề xuất
+            </h2>
+            {mainCategory && (
+              <Link
+                href={categoryHref(mainCategory)}
+                className="inline-flex items-center gap-1 text-sm text-shop_dark_green hover:underline"
+              >
+                Xem thêm {mainCategory}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            )}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {aiRecommendations.map((item) => (
+              <AiRecommendedCard key={item.product.id} item={item} />
             ))}
-          </ul>
+          </div>
         </section>
       )}
 
       {relatedProducts.length > 0 && (
-        <section className="mt-14">
-          <h2 className="text-lg font-bold text-shop_dark_green mb-4">
-            Sản phẩm liên quan
-          </h2>
+        <section className="mt-14 border-t border-gray-200 pt-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-gray-900">
+              Sản phẩm liên quan
+            </h2>
+            {mainCategory && (
+              <Link
+                href={categoryHref(mainCategory)}
+                className="inline-flex items-center gap-1 text-sm text-shop_dark_green hover:underline"
+              >
+                Xem thêm {mainCategory}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            )}
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {relatedProducts.map((related) => (
               <ProductCard key={related.id} product={related} />

@@ -9,12 +9,12 @@ import { Title } from "./ui/text";
 
 export type BannerSlide = {
   id: string;
-  // Mỗi phần tử là một dòng tiêu đề (tự xuống dòng giữa các phần tử).
+
   titleLines: string[];
   buttonLabel: string;
   href: string;
   image: StaticImageData;
-  // Class màu nền của slide (Tailwind), vd "bg-shop_light_pink".
+
   bgClass: string;
 };
 
@@ -38,7 +38,7 @@ const ChevronIcon = ({ direction }: { direction: "left" | "right" }) => (
 );
 
 const BannerCarousel = ({ slides }: BannerCarouselProps) => {
-  // Giữ một instance plugin duy nhất, tránh Embla khởi tạo lại mỗi lần render.
+
   const autoplay = useRef(
     Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
   );
@@ -63,7 +63,6 @@ const BannerCarousel = ({ slides }: BannerCarouselProps) => {
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);
 
-    // Tôn trọng prefers-reduced-motion: tắt tự chạy.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       emblaApi.plugins().autoplay?.stop();
     }

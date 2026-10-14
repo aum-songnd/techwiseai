@@ -1,4 +1,4 @@
-// app/(client)/blog/page.tsx
+
 import React from "react";
 import Blog from "../../../components/Blog";
 import {

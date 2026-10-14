@@ -11,9 +11,6 @@ import AddToCart from "./AddToCart";
 import { useFavorite } from "@/context/FavoriteContext";
 import { useAuth } from "@/context/AuthContext";
 
-// Ảnh có thể là tên file local (map trong productImages) hoặc URL đầy đủ
-// từ API thật (vd "https://placehold.co/..."). Nếu không có trong map local
-// thì dùng thẳng chuỗi đó làm src, giống cách Shop.tsx đang xử lý.
 const resolveProductImage = (
   fileName?: string
 ): StaticImageData | string | null => {
@@ -52,11 +49,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const productImage = resolveProductImage(product.images?.[0]);
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
-    e.preventDefault(); // tránh trigger Link khi bấm heart
+    e.preventDefault();
     e.stopPropagation();
 
-    // Chưa đăng nhập -> điều hướng sang trang đăng nhập, kèm redirect quay
-    // lại trang hiện tại sau khi đăng nhập xong, giống cách AddToCart.tsx làm.
     if (!isSignedIn) {
       const redirectTo =
         typeof window !== "undefined"

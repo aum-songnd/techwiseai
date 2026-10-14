@@ -8,9 +8,7 @@ export const headerData = [
     {
         title: "Blog", href: "/blog"
     },
-    // {
-    //     title: "Contact", href: "/contact"
-    // },
+
     {
         title: "Hot Deals", href: "/deals"
     },
@@ -65,7 +63,7 @@ export const productType = [
     {
         title: "Laptop", value: "laptop"
     },
-    
+
     {
         title: "Earphone", value: "earphone"
     },

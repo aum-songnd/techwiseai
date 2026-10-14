@@ -1,6 +1,5 @@
 "use client";
 
-// app/(admin)/admin/orders/page.tsx
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
@@ -29,7 +28,6 @@ import StatusBadge from "@/components/admin/StatusBadge";
 
 const PAGE_SIZE = 10;
 
-// Dữ liệu từ GET /admin/payments/orders/{orderId}
 type AdminPayment = {
   status?: string | null;
   paymentMethod?: string | null;
@@ -43,7 +41,6 @@ const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
   "https://techwiseai-prod.up.railway.app/api/v1";
 
-// Các tên field ảnh có thể có trong 1 dòng sản phẩm của đơn hàng
 const ITEM_IMAGE_KEYS = [
   "thumbnailUrl",
   "productThumbnailUrl",
@@ -52,8 +49,6 @@ const ITEM_IMAGE_KEYS = [
   "image",
   "thumbnail",
 ];
-
-/* ----------------------------- Helpers ----------------------------- */
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
@@ -72,7 +67,6 @@ const formatDateTime = (iso?: string | null) => {
   }
 };
 
-// Backend có thể đặt tên field khác nhau -> thử lần lượt các tên phổ biến.
 const pick = (obj: unknown, keys: string[]): unknown => {
   if (!obj || typeof obj !== "object") return undefined;
   const o = obj as Record<string, unknown>;
@@ -90,18 +84,6 @@ const pickString = (obj: unknown, keys: string[]): string | null => {
 const pickNumber = (obj: unknown, keys: string[]): number | null => {
   const v = pick(obj, keys);
   return typeof v === "number" ? v : null;
-};
-
-const getItemCount = (order: AdminOrderListItem): number | null => {
-  const n = pickNumber(order, [
-    "totalItems",
-    "itemCount",
-    "totalQuantity",
-    "quantity",
-  ]);
-  if (n !== null) return n;
-  const items = pick(order, ["items"]);
-  return Array.isArray(items) ? items.length : null;
 };
 
 const PAYMENT_LABELS: Record<string, string> = {
@@ -124,7 +106,7 @@ const PAYMENT_METHOD_KEYS = [
 const getPaymentLabel = (order: unknown): string | null => {
   let raw = pick(order, PAYMENT_METHOD_KEYS);
   if (!raw) {
-    // Có thể BE lồng trong object "payment" / "paymentInfo" / "payments[0]"
+
     const nested =
       pick(order, ["payment", "paymentInfo", "paymentDetail"]) ??
       (() => {
@@ -170,7 +152,6 @@ const PAYMENT_STATUS_LABELS: Record<PaymentStatus, string> = {
   CANCELLED: "Đã hủy thanh toán",
 };
 
-// Các mốc trong "Tiến trình đơn hàng"
 const PROGRESS_STEPS: { status: OrderStatus; label: string; hint: string }[] = [
   { status: "PENDING", label: "Khách đặt hàng", hint: "Đơn đã được tạo" },
   { status: "CONFIRMED", label: "Cửa hàng xác nhận", hint: "Chờ xác nhận" },
@@ -179,7 +160,6 @@ const PROGRESS_STEPS: { status: OrderStatus; label: string; hint: string }[] = [
   { status: "DELIVERED", label: "Giao thành công", hint: "Chờ giao hàng" },
 ];
 
-// Hành động kế tiếp (nút to bên phải tiêu đề)
 const NEXT_ACTION: Partial<
   Record<OrderStatus, { next: OrderStatus; label: string }>
 > = {
@@ -200,11 +180,35 @@ const getHistoryTime = (
     : null;
 };
 
-// Phương thức thanh toán online: bắt buộc PAID mới được xác nhận đơn.
-// COD (và các phương thức khác) có thể xác nhận ngay khi khách đặt.
+const CANCELLABLE_STATUSES: OrderStatus[] = [
+  "PENDING",
+  "CONFIRMED",
+  "PROCESSING",
+];
+
+const CANCEL_REASONS = [
+  "Khách yêu cầu hủy đơn",
+  "Hết hàng",
+  "Không liên lạc được với khách",
+  "Thông tin giao hàng không hợp lệ",
+  "Khách chưa thanh toán",
+];
+
+const getHistoryNote = (
+  detail: AdminOrderDetail,
+  status: OrderStatus
+): string | null => {
+  const history = (detail.statusHistory ?? []) as unknown[];
+  const found = history.find(
+    (h) => pickString(h, ["newStatus", "status", "toStatus"]) === status
+  );
+  return found
+    ? pickString(found, ["note", "reason", "cancelReason", "comment"])
+    : null;
+};
+
 const ONLINE_PAYMENT_METHODS = ["VNPAY", "MOMO"];
 
-// Đơn đang chờ xác nhận nhưng chưa thanh toán online -> chưa được xác nhận.
 const isAwaitingPayment = (
   detail: AdminOrderDetail,
   paymentStatus?: string | null
@@ -218,8 +222,6 @@ const isAwaitingPayment = (
     (paymentStatus ?? detail.paymentStatus) !== "PAID"
   );
 };
-
-/* --------------------------- Small pieces --------------------------- */
 
 const Card = ({
   title,
@@ -254,12 +256,9 @@ const InfoRow = ({ label, value }: { label: string; value: React.ReactNode }) =>
   </div>
 );
 
-/* ------------------------------ Page ------------------------------ */
-
 const AdminOrdersPage = () => {
   const router = useRouter();
 
-  // Danh sách (cột trái)
   const [activeTab, setActiveTab] = useState<TabKey>("ALL");
   const [page, setPage] = useState(0);
   const [items, setItems] = useState<AdminOrderListItem[]>([]);
@@ -268,23 +267,25 @@ const AdminOrdersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [keyword, setKeyword] = useState("");
-  // Số đơn của từng tab trạng thái (hiển thị cạnh tên tab)
+
   const [statusCounts, setStatusCounts] = useState<
     Partial<Record<TabKey, number>>
   >({});
 
-  // Chi tiết (cột phải)
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [detail, setDetail] = useState<AdminOrderDetail | null>(null);
-  // Thông tin thanh toán của đơn đang chọn (endpoint riêng cho admin)
+
   const [payment, setPayment] = useState<AdminPayment | null>(null);
-  // Ảnh sản phẩm lấy bù từ /products/{id} khi đơn hàng không kèm ảnh
+
   const [productImages, setProductImages] = useState<Record<string, string>>({});
   const [isDetailLoading, setIsDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  // Tiêu đề được đưa lên topbar của layout bằng portal (giống trang Kho hàng)
+  const [cancelOpen, setCancelOpen] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
+  const [cancelError, setCancelError] = useState<string | null>(null);
+
   const [titleSlot, setTitleSlot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -305,7 +306,6 @@ const AdminOrdersPage = () => {
     [router]
   );
 
-  // Tải số đơn cho từng trạng thái (mỗi tab 1 request nhẹ, size = 1, chỉ lấy totalElements)
   const loadCounts = useCallback(async () => {
     const entries = await Promise.all(
       TABS.map(async (tab) => {
@@ -339,7 +339,6 @@ const AdminOrdersPage = () => {
     loadCounts();
   }, [loadCounts]);
 
-  // Tải danh sách
   useEffect(() => {
     let ignore = false;
 
@@ -354,7 +353,6 @@ const AdminOrdersPage = () => {
         });
         if (ignore) return;
 
-        // Chấp nhận cả DTO { items } lẫn Page mặc định của Spring { content }.
         const raw = result as unknown as Record<string, unknown>;
         const list = (
           Array.isArray(raw.items)
@@ -367,7 +365,7 @@ const AdminOrdersPage = () => {
         setItems(list);
         setTotalPages((raw.totalPages as number) ?? 1);
         setTotalElements((raw.totalElements as number) ?? list.length);
-        // Tự chọn đơn đầu tiên nếu đơn đang chọn không nằm trong trang này
+
         setSelectedId((cur) =>
           cur && list.some((o) => o.id === cur) ? cur : list[0]?.id ?? null
         );
@@ -386,7 +384,6 @@ const AdminOrdersPage = () => {
     };
   }, [activeTab, page, handleError]);
 
-  // Tải chi tiết đơn đang chọn
   useEffect(() => {
     if (!selectedId) {
       setDetail(null);
@@ -399,7 +396,7 @@ const AdminOrdersPage = () => {
       setDetailError(null);
       setPayment(null);
       try {
-        // Đơn COD có thể chưa có bản ghi thanh toán -> bỏ qua lỗi, coi như null
+
         const [result, pay] = await Promise.all([
           getAdminOrderById(selectedId),
           getAdminPaymentByOrderId(selectedId).catch(() => null),
@@ -423,8 +420,6 @@ const AdminOrdersPage = () => {
     };
   }, [selectedId, handleError]);
 
-  // Đơn thanh toán online chưa PAID -> tải lại chi tiết khi admin quay lại tab,
-  // để thấy trạng thái thanh toán mới sau khi VNPay gọi IPN.
   useEffect(() => {
     if (!selectedId || !detail || detail.id !== selectedId) return;
     const method = String(pick(detail, PAYMENT_METHOD_KEYS) ?? "").toUpperCase();
@@ -448,7 +443,7 @@ const AdminOrdersPage = () => {
           setPayment(pay);
         }
       } catch {
-        // im lặng: lần tải đầu đã báo lỗi nếu có
+
       }
     };
     window.addEventListener("focus", refresh);
@@ -460,7 +455,6 @@ const AdminOrdersPage = () => {
     };
   }, [selectedId, detail, payment]);
 
-  // Đơn hàng không trả ảnh -> lấy thumbnailUrl từ chi tiết sản phẩm (API công khai)
   useEffect(() => {
     if (!detail) return;
     const ids = Array.from(
@@ -530,9 +524,9 @@ const AdminOrdersPage = () => {
           o.id === updated.id ? { ...o, status: updated.status } : o
         )
       );
-      // Báo cho layout tải lại số đơn chưa hoàn thành ở menu
+
       window.dispatchEvent(new Event("admin-orders-changed"));
-      // Cập nhật lại số đơn trên các tab
+
       loadCounts();
     } catch (err) {
       const msg = handleError(err, "Không cập nhật được trạng thái đơn hàng.");
@@ -542,7 +536,51 @@ const AdminOrdersPage = () => {
     }
   };
 
-  // Tìm kiếm trong trang đang hiển thị
+  const openCancelDialog = () => {
+    if (!detail || !CANCELLABLE_STATUSES.includes(detail.status)) return;
+    setCancelReason("");
+    setCancelError(null);
+    setCancelOpen(true);
+  };
+
+  const closeCancelDialog = () => {
+    if (isUpdating) return;
+    setCancelOpen(false);
+  };
+
+  const handleConfirmCancel = async () => {
+    if (!detail || !CANCELLABLE_STATUSES.includes(detail.status)) return;
+    const reason = cancelReason.trim();
+    if (!reason) {
+      setCancelError("Vui lòng nhập lý do hủy đơn.");
+      return;
+    }
+    setIsUpdating(true);
+    setCancelError(null);
+    setDetailError(null);
+    try {
+
+      const updated = await updateOrderStatus(detail.id, {
+        status: "CANCELLED",
+        note: reason,
+      });
+      setDetail(updated);
+      setItems((prev) =>
+        prev.map((o) =>
+          o.id === updated.id ? { ...o, status: updated.status } : o
+        )
+      );
+      setCancelOpen(false);
+      window.dispatchEvent(new Event("admin-orders-changed"));
+      loadCounts();
+    } catch (err) {
+      const msg = handleError(err, "Không hủy được đơn hàng.");
+      if (msg) setCancelError(msg);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
   const visibleItems = useMemo(() => {
     const q = keyword.trim().toLowerCase();
     if (!q) return items;
@@ -553,15 +591,13 @@ const AdminOrdersPage = () => {
     );
   }, [items, keyword]);
 
-  /* ------------------------- Cột trái: danh sách ------------------------- */
-
   const listColumn = (
     <aside
       className={`${
         selectedId ? "hidden lg:flex" : "flex"
       } flex-col gap-3 min-w-0 lg:w-[380px] lg:shrink-0`}
     >
-      {/* Ô tìm kiếm */}
+
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input
@@ -573,7 +609,6 @@ const AdminOrdersPage = () => {
         />
       </div>
 
-      {/* Tabs trạng thái: xuống dòng để hiển thị đủ tất cả */}
       <div>
         <div className="flex flex-wrap gap-1.5">
           {TABS.map((tab) => (
@@ -581,7 +616,7 @@ const AdminOrdersPage = () => {
               key={tab.key}
               type="button"
               onClick={() => changeTab(tab.key)}
-              className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 text-[13px] font-medium rounded-lg transition-colors ${
+              className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 text-[13px] font-medium rounded-2xl transition-colors ${
                 activeTab === tab.key
                   ? "bg-shop_dark_green text-white"
                   : "bg-white text-gray-600 border border-gray-200/80 hover:bg-gray-100"
@@ -604,7 +639,6 @@ const AdminOrdersPage = () => {
         </div>
       </div>
 
-      {/* Danh sách thẻ đơn hàng */}
       {isLoading ? (
         <p className="py-16 text-center text-base text-gray-400">
           Đang tải danh sách đơn hàng...
@@ -664,7 +698,6 @@ const AdminOrdersPage = () => {
             })}
           </div>
 
-          {/* Tổng + phân trang */}
           <div className="flex items-center justify-between gap-2 text-sm">
             <p className="text-gray-500">{totalElements} đơn</p>
             {totalPages > 1 && (
@@ -697,8 +730,6 @@ const AdminOrdersPage = () => {
       )}
     </aside>
   );
-
-  /* ------------------------ Cột phải: chi tiết ------------------------ */
 
   const renderDetail = () => {
     if (isDetailLoading && !detail) {
@@ -734,8 +765,7 @@ const AdminOrdersPage = () => {
     );
     const cancelled = detail.status === "CANCELLED";
     const itemsList = (detail.items ?? []) as unknown[];
-    // Thông tin thanh toán lấy từ /admin/payments/orders/{orderId}
-    // (/payments/orders/{id} chỉ dành cho chủ đơn nên admin bị 404).
+
     const paymentLabel = getPaymentLabel(detail) ?? null;
     const paymentStatusValue = payment?.status ?? detail.paymentStatus ?? null;
     const paymentStatusLabel = paymentStatusValue
@@ -747,7 +777,7 @@ const AdminOrdersPage = () => {
 
     return (
       <div className={`space-y-4 ${isDetailLoading ? "opacity-60" : ""}`}>
-        {/* Breadcrumb + nút quay lại (mobile) */}
+
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <button
             type="button"
@@ -763,23 +793,27 @@ const AdminOrdersPage = () => {
           </span>
         </div>
 
-        {/* Tiêu đề + nút hành động */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-3 min-w-0">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 truncate">
-              Mã đơn: {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}
-            </h2>
-            <StatusBadge status={detail.status} />
-          </div>
+        <div className="flex flex-wrap items-center justify-self-end gap-3">
           {action && (
             <button
               type="button"
               onClick={handleAdvanceStatus}
               disabled={isUpdating || awaitingPayment}
               title={awaitingPayment ? "Chờ khách thanh toán xong mới xác nhận được" : undefined}
-              className="px-5 py-2.5 text-base font-semibold text-white rounded-full bg-shop_dark_green hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-5 py-1.5 text-base font-semibold text-[13px] text-white rounded-full bg-shop_dark_green hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isUpdating ? "Đang cập nhật..." : action.label}
+            </button>
+          )}
+
+          {CANCELLABLE_STATUSES.includes(detail.status) && (
+            <button
+              type="button"
+              onClick={openCancelDialog}
+              disabled={isUpdating}
+              className="px-5 py-1.5 text-[13px] font-semibold text-red-600 rounded-full border border-red-200 bg-white hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Hủy đơn hàng
             </button>
           )}
         </div>
@@ -798,7 +832,7 @@ const AdminOrdersPage = () => {
         )}
 
         <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-4 items-start">
-          {/* Cột giữa: sản phẩm + hóa đơn */}
+
           <div className="space-y-4 min-w-0">
             <Card className="!p-0">
               <div className="divide-y divide-gray-100">
@@ -827,7 +861,7 @@ const AdminOrdersPage = () => {
                       <div key={`${productId ?? "item"}-${idx}`} className="flex items-center gap-3 p-4">
                         <div className="w-16 h-16 shrink-0 rounded-xl border border-gray-200/80 bg-gray-50 flex items-center justify-center overflow-hidden">
                           {image ? (
-                            // eslint-disable-next-line @next/next/no-img-element
+
                             <img src={image} alt={name} className="w-full h-full object-cover" />
                           ) : (
                             <ImageOff className="w-5 h-5 text-gray-300" />
@@ -870,16 +904,23 @@ const AdminOrdersPage = () => {
             </Card>
           </div>
 
-          {/* Cột phải: tiến trình + chi tiết */}
           <div className="space-y-4 min-w-0">
             <Card title="Tiến trình đơn hàng">
               {cancelled ? (
-                <p className="text-base text-red-600">
-                  Đơn hàng đã bị hủy
-                  {getHistoryTime(detail, "CANCELLED")
-                    ? ` lúc ${formatDateTime(getHistoryTime(detail, "CANCELLED"))}`
-                    : "."}
-                </p>
+                <div className="space-y-1.5">
+                  <p className="text-base text-red-600">
+                    Đơn hàng đã bị hủy
+                    {getHistoryTime(detail, "CANCELLED")
+                      ? ` lúc ${formatDateTime(getHistoryTime(detail, "CANCELLED"))}`
+                      : "."}
+                  </p>
+                  {getHistoryNote(detail, "CANCELLED") && (
+                    <p className="text-[13px] text-gray-700">
+                      <span className="text-gray-500">Lý do hủy: </span>
+                      {getHistoryNote(detail, "CANCELLED")}
+                    </p>
+                  )}
+                </div>
               ) : (
                 <ol className="relative space-y-2 pl-4">
                   <span className="absolute left-[4px] top-1.5 bottom-1.5 w-px bg-gray-200" />
@@ -951,16 +992,13 @@ const AdminOrdersPage = () => {
 
   return (
     <div className="w-full min-h-[calc(100vh-3.5rem)] bg-gray-50 p-4 sm:p-6 lg:p-8">
-      {/* Topbar (portal): tiêu đề trang */}
+
       {titleSlot &&
         createPortal(
           <div className="leading-tight">
             <h1 className="text-xl font-bold tracking-tight text-gray-900 truncate">
               Đơn hàng
             </h1>
-            <p className="hidden sm:block text-sm text-gray-500 truncate">
-              Chọn đơn ở cột trái để xem chi tiết và xử lý.
-            </p>
           </div>,
           titleSlot
         )}
@@ -973,6 +1011,87 @@ const AdminOrdersPage = () => {
           {renderDetail()}
         </section>
       </div>
+
+      {cancelOpen && detail && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40"
+          onClick={closeCancelDialog}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cancel-dialog-title"
+            className="w-full max-w-md bg-white rounded-2xl shadow-xl p-5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3
+              id="cancel-dialog-title"
+              className="text-lg font-bold text-gray-900"
+            >
+              Hủy đơn hàng
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              Đơn {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}. Vui lòng
+              cho biết lý do hủy đơn.
+            </p>
+
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {CANCEL_REASONS.map((r) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => {
+                    setCancelReason(r);
+                    setCancelError(null);
+                  }}
+                  className={`px-3 py-1.5 text-[13px] rounded-2xl border transition-colors ${
+                    cancelReason === r
+                      ? "bg-shop_dark_green text-white border-shop_dark_green"
+                      : "bg-white text-gray-600 border-gray-200 hover:bg-gray-100"
+                  }`}
+                >
+                  {r}
+                </button>
+              ))}
+            </div>
+
+            <textarea
+              value={cancelReason}
+              onChange={(e) => {
+                setCancelReason(e.target.value);
+                setCancelError(null);
+              }}
+              rows={3}
+              maxLength={500}
+              placeholder="Nhập lý do hủy đơn..."
+              className="mt-3 w-full px-3 py-2 text-sm rounded-xl border border-gray-200 outline-none resize-none placeholder:text-gray-400 focus:border-shop_dark_green/50"
+            />
+
+            {cancelError && (
+              <p className="mt-2 text-sm text-red-600">{cancelError}</p>
+            )}
+
+            <div className="mt-4 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={closeCancelDialog}
+                disabled={isUpdating}
+                className="px-5 py-1.5 text-[13px] font-semibold text-gray-600 rounded-full border border-gray-200 bg-white hover:bg-gray-100 transition-colors disabled:opacity-50"
+              >
+                Đóng
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmCancel}
+                disabled={isUpdating || !cancelReason.trim()}
+                className="px-5 py-1.5 text-[13px] font-semibold text-white rounded-full bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isUpdating ? "Đang hủy..." : "Xác nhận hủy"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

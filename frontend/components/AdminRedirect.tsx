@@ -4,7 +4,6 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { getToken, isAdminUser } from "@/lib/auth";
 
-// Tránh cảnh báo useLayoutEffect khi SSR
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 

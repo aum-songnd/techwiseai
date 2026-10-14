@@ -1,5 +1,5 @@
-// constants/queriesBlogPage.ts
-// Các hàm query cho blog, dùng mock data có sẵn — cùng pattern với getAllProducts/getCategories/getAllBrands
+
+
 import { blogs, blogCategories, authors } from "../app/data/index";
 import type { Blog, BlogCategory, Author } from "../app/data/types";
 
@@ -21,7 +21,6 @@ export const getBlogBySlug = async (
   return blogs.find((blog) => blog.slug === slug);
 };
 
-// Loại slug trùng để generateStaticParams không bị lặp
 export const getAllBlogSlugs = async (): Promise<string[]> => {
   return Array.from(new Set(blogs.map((blog) => blog.slug)));
 };

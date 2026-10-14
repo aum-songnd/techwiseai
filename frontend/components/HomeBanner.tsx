@@ -2,10 +2,6 @@ import React from "react";
 import { banner_1 } from "@/images";
 import BannerCarousel, { type BannerSlide } from "./BannerCarousel";
 
-// === ĐỔI Ở ĐÂY === thêm/sửa/xóa banner bằng cách chỉnh mảng này.
-// Hiện mới có banner_1 trong "@/images" nên cả 3 slide đang dùng chung ảnh
-// đó làm chỗ giữ chỗ. Có ảnh mới thì import thêm (vd banner_2, banner_3)
-// rồi thay vào trường `image`.
 const slides: BannerSlide[] = [
   {
     id: "headphone-sale",

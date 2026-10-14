@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+
   images: {
     remotePatterns: [
       {
@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn2.cellphones.com.vn",
       },
-      // Ảnh cho blog
+
       {
         protocol: "https",
         hostname: "talkingtechandaudio.com",
@@ -62,3 +62,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+//    NEXT_PUBLIC_API_URL=http://localhost:8080/api/v1

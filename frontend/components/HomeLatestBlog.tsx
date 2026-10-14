@@ -17,7 +17,7 @@ const formatDate = (isoDate: string) =>
   }).format(new Date(isoDate));
 
 const HomeLatestBlog = () => {
-  // Dedupe theo id đề phòng nguồn data bị trùng bản ghi
+
   const uniqueBlogs = Array.from(
     new Map(blogs.map((blog) => [blog.id, blog])).values()
   );
@@ -29,7 +29,6 @@ const HomeLatestBlog = () => {
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     );
 
-  
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       align: "start",
@@ -64,7 +63,6 @@ const HomeLatestBlog = () => {
   }, [emblaApi, onSelect]);
 
   if (latestBlogs.length === 0) return null;
-
 
   return (
     <div className="my-10 md:my-10">
@@ -138,7 +136,6 @@ const HomeLatestBlog = () => {
         </div>
       </div>
 
-      {/* pagination dots */}
       <div className="mt-5 flex justify-center gap-2">
         {Array.from({ length: snapCount }).map((_, i) => (
           <button

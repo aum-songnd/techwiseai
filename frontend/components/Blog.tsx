@@ -25,7 +25,7 @@ const Blog = ({ blogs, blogCategories, authors }: Props) => {
 
   return (
     <Container className="py-10">
-      {/* Bộ lọc theo category */}
+
       <div className="flex flex-wrap gap-2 mb-8">
         <button
           onClick={() => setActiveCategory("all")}
@@ -52,7 +52,6 @@ const Blog = ({ blogs, blogCategories, authors }: Props) => {
         ))}
       </div>
 
-      {/* Grid blog */}
       {filteredBlogs.length === 0 ? (
         <p className="text-lightColor text-center py-20">
           Không có bài viết nào trong danh mục này.
@@ -81,7 +80,7 @@ const Blog = ({ blogs, blogCategories, authors }: Props) => {
                       className="object-cover group-hover:scale-105 hoverEffect"
                     />
                   )}
-                  
+
                 </div>
 
                 <div className="p-4 flex flex-col gap-2">

@@ -1,49 +1,34 @@
 import React, { Suspense } from "react";
 import Shop from "../../../components/Shop";
 import {
-  getAllProducts,
+  getAllProductsByCategory,
   getCategories,
-  getAllBrands,
 } from "@/constants/queriesShopPage";
-import type { Product, Category, Brand } from "@/app/data/types";
+import type { Product, Category } from "@/app/data/types";
 
-const ShopPage = async () => {
+type ShopPageProps = {
+  searchParams: Promise<{ category?: string }>;
+};
+
+const ShopPage = async ({ searchParams }: ShopPageProps) => {
+  const { category } = await searchParams;
   let products: Product[] = [];
   let categories: Category[] = [];
-  let brands: Brand[] = [];
   let loadError: string | null = null;
 
-  try {
-    // Promise.allSettled thay vì Promise.all: một API lỗi (vd /brands chưa
-    // có) sẽ không kéo sập luôn cả products/categories đang chạy tốt.
-    const [productsResult, categoriesResult, brandsResult] =
-      await Promise.allSettled([
-        getAllProducts(),
-        getCategories(),
-        getAllBrands(),
-      ]);
+  const [productsResult, categoriesResult] = await Promise.allSettled([
+    getAllProductsByCategory(category),
+    getCategories(),
+  ]);
 
-    if (productsResult.status === "fulfilled") {
-      products = productsResult.value;
-    } else {
-      console.error("[ShopPage] Lỗi lấy products:", productsResult.reason);
-      loadError = "Không tải được danh sách sản phẩm. Vui lòng thử lại sau.";
-    }
+  if (productsResult.status === "fulfilled") {
+    products = productsResult.value;
+  } else {
+    loadError = "Không tải được danh sách sản phẩm. Vui lòng thử lại sau.";
+  }
 
-    if (categoriesResult.status === "fulfilled") {
-      categories = categoriesResult.value;
-    } else {
-      console.error("[ShopPage] Lỗi lấy categories:", categoriesResult.reason);
-    }
-
-    if (brandsResult.status === "fulfilled") {
-      brands = brandsResult.value;
-    } else {
-      console.error("[ShopPage] Lỗi lấy brands:", brandsResult.reason);
-    }
-  } catch (error) {
-    console.error("[ShopPage] Lỗi không xác định:", error);
-    loadError = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
+  if (categoriesResult.status === "fulfilled") {
+    categories = categoriesResult.value;
   }
 
   if (loadError) {
@@ -57,7 +42,10 @@ const ShopPage = async () => {
   return (
     <div className="bg-white">
       <Suspense fallback={null}>
-        <Shop products={products} categories={categories} brands={brands} />
+        <Shop
+          products={products}
+          categories={categories}
+        />
       </Suspense>
     </div>
   );

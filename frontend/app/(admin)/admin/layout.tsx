@@ -1,26 +1,17 @@
 "use client";
 
-// app/(admin)/admin/layout.tsx
-//
-// Layout quản trị kiểu dashboard: sidebar trái cố định + topbar.
-// Được bọc bởi root layout riêng app/(admin)/layout.tsx (có <html>,
-// <body>, AuthProvider) nên KHÔNG có Header/Footer của trang khách.
-// Bảo vệ route: chưa đăng nhập hoặc không phải ADMIN -> về trang chủ.
-// Dùng "use client" vì token nằm ở localStorage nên chỉ check được ở
-// client; trong lúc check chưa render nội dung admin.
-
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   CalendarDays,
-  ExternalLink,
   Layers,
   LayoutDashboard,
   LogOut,
   Menu,
   Package,
   ShoppingCart,
+  Users,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -34,17 +25,13 @@ import {
   isAdminUser,
 } from "@/lib/auth";
 
-// Các trạng thái "chưa hoàn thành" (đơn còn phải xử lý) -> cộng vào badge
-// ở menu Đơn hàng. COMPLETED và CANCELLED không được tính.
 const OPEN_ORDER_STATUSES = [
   "PENDING",
   "CONFIRMED",
   "PROCESSING",
   "SHIPPING",
-  "DELIVERED",
 ] as const;
 
-// Dùng size=1 chỉ để đọc totalElements của từng trạng thái, không tải cả đơn.
 const countOpenOrders = async (): Promise<number> => {
   const counts = await Promise.all(
     OPEN_ORDER_STATUSES.map(async (status) => {
@@ -77,13 +64,13 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/admin/orders", label: "Đơn hàng", icon: ShoppingCart },
   { href: "/admin/categories", label: "Danh mục", icon: Layers },
   { href: "/admin/products", label: "Sản phẩm", icon: Package },
+  { href: "/admin/users", label: "Người dùng", icon: Users },
 ];
 
 type AdminProfile = {
   name: string;
 };
 
-// Đọc user đã lưu lúc đăng nhập (lib/auth: User { username, fullName?, email? })
 const readProfile = (): AdminProfile | null => {
   const user = getStoredUser();
   if (!user) return null;
@@ -108,8 +95,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     setChecked(true);
   }, [router]);
 
-  // Đếm đơn chưa hoàn thành: tải lại khi đổi trang, và khi trang đơn hàng
-  // bắn event "admin-orders-changed" sau khi đổi trạng thái một đơn.
   useEffect(() => {
     if (!checked) return;
     let ignore = false;
@@ -118,7 +103,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         const total = await countOpenOrders();
         if (!ignore) setOpenOrders(total);
       } catch {
-        // Lỗi tải thì giữ nguyên số cũ, không chặn giao diện
+
       }
     };
     refresh();
@@ -127,16 +112,14 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       ignore = true;
       window.removeEventListener("admin-orders-changed", refresh);
     };
-  }, [checked, pathname]);
+  }, [checked]);
 
-  // Đổi trang thì đóng sidebar (mobile)
   useEffect(() => {
     setSidebarOpen(false);
   }, [pathname]);
 
   const handleLogout = () => {
-    // Không dùng useAuth() để layout admin không phụ thuộc AuthProvider.
-    // Xoá token/user rồi tải lại trang để mọi state khởi tạo lại sạch.
+
     clearToken();
     clearStoredUser();
     window.location.href = "/";
@@ -173,7 +156,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         #admin-header-title:not(:empty) ~ h2 { display: none; }
       `}</style>
 
-      {/* Overlay mobile */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/40 lg:hidden"
@@ -181,7 +163,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-56 bg-white border-r border-gray-100 flex flex-col transition-transform duration-200 lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -234,7 +215,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         </nav>
 
         <div className="px-3 py-4  flex flex-col gap-1">
-          
+
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-500 transition-colors text-left"
@@ -245,7 +226,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </aside>
 
-      {/* Phần chính */}
       <div className="lg:pl-56 min-h-screen flex flex-col">
         <header className="h-16 sticky top-0 z-30 bg-white px-4 sm:px-6 flex items-center justify-between gap-4 md:grid md:grid-cols-[auto_minmax(0,1fr)_auto]">
           <div className="flex items-center gap-3 min-w-0">
@@ -256,15 +236,13 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             >
               <Menu className="w-5 h-5" />
             </button>
-            {/* Trang có thể đổ tiêu đề riêng vào đây (portal). Khi slot có nội dung,
-                tiêu đề mặc định bên dưới tự ẩn (xem thẻ <style> cuối file). */}
+
             <div id="admin-header-title" className="min-w-0" />
-            <h2 className="text-base font-semibold text-gray-800">
+            <h2 className="text-[22px] font-semibold text-gray-800">
               {currentTitle}
             </h2>
           </div>
 
-          {/* Cột giữa: slot ô tìm kiếm của từng trang (portal), căn giữa và kéo dài */}
           <div className="hidden md:block min-w-0 px-2">
             <div id="admin-header-actions" className="mx-auto w-full max-w-2xl" />
           </div>

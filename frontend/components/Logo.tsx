@@ -14,10 +14,10 @@ const Logo = ({
   suffix?: string;
 }) => {
   return (
-    <Link href={href} className='inline-flex'> 
+    <Link href={href} className='inline-flex'>
     <h2 className={cn(
         "text-2xl text-shop_dark_green font-black uppercase" ,
-        "tracking-wider hover:text-shop_light_green hoverEffect group font-sans", 
+        "tracking-wider hover:text-shop_light_green hoverEffect group font-sans",
     className
 
     )}>Techwise<span className={cn("text-shop_light_green group-hover:text-shop_dark_green hoverEffect",spanDesign )}>ai</span>

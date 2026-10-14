@@ -16,7 +16,6 @@ const UserProfileModal = ({ onClose }: UserProfileModalProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>("profile");
   const [mounted, setMounted] = useState(false);
 
-  // Chỉ render portal sau khi mount trên client (tránh lỗi document undefined khi SSR)
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -42,7 +41,6 @@ const UserProfileModal = ({ onClose }: UserProfileModalProps) => {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Sidebar */}
         <div className="w-56 bg-gray-50 border-r px-5 py-6 shrink-0">
           <h2 className="text-xl font-semibold">Account</h2>
           <p className="text-sm text-lightColor mt-1 mb-6">
@@ -75,14 +73,13 @@ const UserProfileModal = ({ onClose }: UserProfileModalProps) => {
           </nav>
         </div>
 
-        {/* Content */}
         <div className="flex-1 px-8 py-6 overflow-y-auto">
           {activeTab === "profile" ? (
             <>
               <h3 className="text-lg font-semibold mb-6">Profile details</h3>
 
               <div className="space-y-6">
-                {/* Profile row */}
+
                 <div className="flex items-center justify-between border-b pb-5">
                   <span className="text-sm text-lightColor w-32 shrink-0">
                     Profile
@@ -93,12 +90,9 @@ const UserProfileModal = ({ onClose }: UserProfileModalProps) => {
                     </div>
                     <span className="font-medium">{displayName}</span>
                   </div>
-                  {/* <button className="text-sm text-blue-600 hover:underline whitespace-nowrap">
-                    Update profile
-                  </button> */}
+
                 </div>
 
-                {/* Email row */}
                 {user?.email && (
                   <div className="flex items-center justify-between border-b pb-5">
                     <span className="text-sm text-lightColor w-32 shrink-0">
@@ -113,7 +107,6 @@ const UserProfileModal = ({ onClose }: UserProfileModalProps) => {
                   </div>
                 )}
 
-                {/* Phone row */}
                 {user?.phoneNumber && (
                   <div className="flex items-center justify-between border-b pb-5">
                     <span className="text-sm text-lightColor w-32 shrink-0">
@@ -125,7 +118,6 @@ const UserProfileModal = ({ onClose }: UserProfileModalProps) => {
                   </div>
                 )}
 
-                {/* Username row */}
                 <div className="flex items-center justify-between pb-1">
                   <span className="text-sm text-lightColor w-32 shrink-0">
                     Username
