@@ -43,10 +43,14 @@ const emptyForm: ProductPayload = {
   active: true,
 };
 
+// Retain list data between Next.js client-side page navigations.
+let productSnapshot: { products: Product[]; categories: Category[]; at: number } | null = null;
+const PRODUCT_SNAPSHOT_MS = 5 * 60 * 1000;
+
 const AdminProductsPage = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>(() => productSnapshot?.products ?? []);
+  const [categories, setCategories] = useState<Category[]>(() => productSnapshot?.categories ?? []);
+  const [loading, setLoading] = useState(() => !productSnapshot);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<ProductPayload>(emptyForm);
   const [saving, setSaving] = useState(false);
@@ -108,8 +112,9 @@ const AdminProductsPage = () => {
     listTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const loadData = async () => {
-    setLoading(true);
+  const loadData = async (force = false) => {
+    if (!force && productSnapshot && Date.now() - productSnapshot.at < PRODUCT_SNAPSHOT_MS) return;
+    setLoading(!productSnapshot);
     setError(null);
     try {
       const [allProducts, categoriesResult] = await Promise.all([
@@ -118,6 +123,7 @@ const AdminProductsPage = () => {
       ]);
       setProducts(allProducts);
       setCategories(categoriesResult);
+      productSnapshot = { products: allProducts, categories: categoriesResult, at: Date.now() };
     } catch (err) {
       setError(err instanceof Error ? err.message : "Không tải được dữ liệu");
     } finally {
@@ -188,7 +194,7 @@ const AdminProductsPage = () => {
         await adminCreateProduct(form);
       }
       resetForm();
-      await loadData();
+      await loadData(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Lưu sản phẩm thất bại");
     } finally {
@@ -201,7 +207,7 @@ const AdminProductsPage = () => {
     setError(null);
     try {
       await adminDeleteProduct(id);
-      await loadData();
+      await loadData(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Xóa sản phẩm thất bại");
     }

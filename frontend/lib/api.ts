@@ -1,3 +1,4 @@
+import { cachedRequest } from "./request-cache";
 import type { Product, Category, Brand } from "../app/data/types";
 import { getToken } from "./auth";
 
@@ -88,7 +89,7 @@ interface ApiPaginated<T> {
   last: boolean;
 }
 
-async function fetchEnvelope<T>(
+async function fetchEnvelopeUncached<T>(
   path: string,
   init?: RequestInit
 ): Promise<T> {
@@ -106,6 +107,16 @@ async function fetchEnvelope<T>(
   }
 
   return json.data;
+}
+
+async function fetchEnvelope<T>(path: string, init?: RequestInit): Promise<T> {
+  const isCatalog = /^\/(products|categories|brands)(?:\/|\?|$)/.test(path) &&
+    !path.startsWith("/products/search");
+  const cacheable = isCatalog && (init?.method ?? "GET").toUpperCase() === "GET" &&
+    init?.cache !== "no-store" && !init?.signal;
+  return cacheable
+    ? cachedRequest("catalog:" + path, 45000, () => fetchEnvelopeUncached<T>(path, init))
+    : fetchEnvelopeUncached<T>(path, init);
 }
 
 async function fetchEnvelopeAuthed<T>(

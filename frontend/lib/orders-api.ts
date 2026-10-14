@@ -1,3 +1,4 @@
+import { cachedRequest, clearRequestCache } from "./request-cache";
 
 
 import { getToken } from "./auth";
@@ -35,12 +36,13 @@ function requireAuthHeaders(extra?: HeadersInit): HeadersInit {
   };
 }
 
-async function fetchOrderEnvelope<T>(
+async function fetchOrderEnvelopeUncached<T>(
   path: string,
   init?: RequestInit
 ): Promise<T> {
   const headers = requireAuthHeaders(init?.headers);
 
+  const method = (init?.method ?? "GET").toUpperCase();
   const res = await fetch(`${API_BASE_URL}${path}`, {
     cache: "no-store",
     ...init,
@@ -60,7 +62,20 @@ async function fetchOrderEnvelope<T>(
     throw new Error(json.message || `API đơn hàng báo lỗi tại ${path}`);
   }
 
+  if (method !== "GET") {
+    clearRequestCache("orders:");
+    clearRequestCache("admin-orders:");
+  }
   return json.data;
+}
+
+async function fetchOrderEnvelope<T>(path: string, init?: RequestInit): Promise<T> {
+  const method = (init?.method ?? "GET").toUpperCase();
+  if (method !== "GET") return fetchOrderEnvelopeUncached<T>(path, init);
+  // JSON key includes the auth token, so separate accounts never share data.
+  const token = getToken();
+  return cachedRequest("orders:" + JSON.stringify([token, path]), 12000,
+    () => fetchOrderEnvelopeUncached<T>(path, init));
 }
 
 function normalizePagedOrders<TRaw, TMapped>(

@@ -1,3 +1,5 @@
+import { cachedRequest, clearRequestCache } from "@/lib/request-cache";
+
 
 const API_BASE_URL = "/api";
 
@@ -110,8 +112,20 @@ async function ensureCartMutationSucceeded(
   );
 }
 
+// Cache is scoped to the current login token, never shared between accounts.
+// Concurrent callers reuse one promise instead of sending duplicate GET requests.
+const cartCacheKey = () => `cart:${getAccessToken() ?? "anonymous"}:`;
+
+export function invalidateCartCache(): void {
+  clearRequestCache("cart:");
+}
+
 export async function getCart(): Promise<CartData> {
-  return fetchCartEnvelope<CartData>("/cart");
+  const token = getAccessToken();
+  if (!token) throw new CartAuthRequiredError();
+  return cachedRequest<CartData>(`cart:${token}:GET`, 30_000, () =>
+    fetchCartEnvelope<CartData>("/cart")
+  );
 }
 
 export async function addCartItem(
@@ -119,11 +133,14 @@ export async function addCartItem(
   quantity: number
 ): Promise<CartData> {
   const payload: AddCartItemPayload = { productId, quantity };
-  return fetchCartEnvelope<CartData>("/cart/items", {
+  invalidateCartCache();
+  const result = await fetchCartEnvelope<CartData>("/cart/items", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
+  invalidateCartCache();
+  return result;
 }
 
 export async function updateCartItemQuantity(
@@ -131,14 +148,18 @@ export async function updateCartItemQuantity(
   quantity: number
 ): Promise<CartData> {
   const payload: UpdateCartItemPayload = { quantity };
-  return fetchCartEnvelope<CartData>(`/cart/items/${itemId}`, {
+  invalidateCartCache();
+  const result = await fetchCartEnvelope<CartData>(`/cart/items/${itemId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
+  invalidateCartCache();
+  return result;
 }
 
 export async function removeCartItem(itemId: string): Promise<void> {
+  invalidateCartCache();
   const headers = requireAuthHeaders();
   const response = await fetch(`${API_BASE_URL}/cart/items/${itemId}`, {
     method: "DELETE",
@@ -146,9 +167,11 @@ export async function removeCartItem(itemId: string): Promise<void> {
     headers,
   });
   await ensureCartMutationSucceeded(response, `/cart/items/${itemId}`);
+  invalidateCartCache();
 }
 
 export async function clearCartApi(): Promise<void> {
+  invalidateCartCache();
   const headers = requireAuthHeaders();
   const response = await fetch(`${API_BASE_URL}/cart`, {
     method: "DELETE",
@@ -156,4 +179,5 @@ export async function clearCartApi(): Promise<void> {
     headers,
   });
   await ensureCartMutationSucceeded(response, "/cart");
+  invalidateCartCache();
 }

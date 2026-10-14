@@ -25,6 +25,7 @@ import {
   type PaymentStatus,
 } from "../../../../lib/orders-api";
 import StatusBadge from "@/components/admin/StatusBadge";
+import { getToken } from "@/lib/auth";
 
 const PAGE_SIZE = 10;
 
@@ -256,21 +257,27 @@ const InfoRow = ({ label, value }: { label: string; value: React.ReactNode }) =>
   </div>
 );
 
+type OrdersSnapshot = { items: AdminOrderListItem[]; totalPages: number; totalElements: number; at: number };
+const orderSnapshots = new Map<string, OrdersSnapshot>();
+const ORDER_SNAPSHOT_MS = 60 * 1000;
+const orderKey = (tab: TabKey, page: number) => JSON.stringify([getToken(), tab, page]);
+let countsSnapshot: { token: string | null; counts: Partial<Record<TabKey, number>>; at: number } | null = null;
+
 const AdminOrdersPage = () => {
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState<TabKey>("ALL");
   const [page, setPage] = useState(0);
-  const [items, setItems] = useState<AdminOrderListItem[]>([]);
-  const [totalPages, setTotalPages] = useState(1);
-  const [totalElements, setTotalElements] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [items, setItems] = useState<AdminOrderListItem[]>(() => orderSnapshots.get(orderKey("ALL", 0))?.items ?? []);
+  const [totalPages, setTotalPages] = useState(() => orderSnapshots.get(orderKey("ALL", 0))?.totalPages ?? 1);
+  const [totalElements, setTotalElements] = useState(() => orderSnapshots.get(orderKey("ALL", 0))?.totalElements ?? 0);
+  const [isLoading, setIsLoading] = useState(() => !orderSnapshots.has(orderKey("ALL", 0)));
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [keyword, setKeyword] = useState("");
 
   const [statusCounts, setStatusCounts] = useState<
     Partial<Record<TabKey, number>>
-  >({});
+  >(() => countsSnapshot?.token === getToken() ? countsSnapshot.counts : {});
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [detail, setDetail] = useState<AdminOrderDetail | null>(null);
@@ -307,6 +314,10 @@ const AdminOrdersPage = () => {
   );
 
   const loadCounts = useCallback(async () => {
+    if (countsSnapshot?.token === getToken() && Date.now() - countsSnapshot.at < ORDER_SNAPSHOT_MS) {
+      setStatusCounts(countsSnapshot.counts);
+      return;
+    }
     const entries = await Promise.all(
       TABS.map(async (tab) => {
         try {
@@ -327,12 +338,12 @@ const AdminOrdersPage = () => {
         }
       })
     );
-    setStatusCounts((prev) => ({
-      ...prev,
-      ...Object.fromEntries(
-        entries.filter((e): e is readonly [TabKey, number] => e !== null)
-      ),
-    }));
+    const counts = Object.fromEntries(entries.filter((e): e is readonly [TabKey, number] => e !== null));
+    setStatusCounts((prev) => {
+      const merged = { ...prev, ...counts };
+      countsSnapshot = { token: getToken(), counts: merged, at: Date.now() };
+      return merged;
+    });
   }, []);
 
   useEffect(() => {
@@ -343,7 +354,18 @@ const AdminOrdersPage = () => {
     let ignore = false;
 
     const load = async () => {
-      setIsLoading(true);
+      const key = orderKey(activeTab, page);
+      const snapshot = orderSnapshots.get(key);
+      if (snapshot) {
+        setItems(snapshot.items);
+        setTotalPages(snapshot.totalPages);
+        setTotalElements(snapshot.totalElements);
+        setIsLoading(false);
+        setSelectedId((cur) => cur && snapshot.items.some((o) => o.id === cur) ? cur : snapshot.items[0]?.id ?? null);
+        if (Date.now() - snapshot.at < ORDER_SNAPSHOT_MS) return;
+      } else {
+        setIsLoading(true);
+      }
       setErrorMessage(null);
       try {
         const result = await getAdminOrders({
@@ -365,6 +387,10 @@ const AdminOrdersPage = () => {
         setItems(list);
         setTotalPages((raw.totalPages as number) ?? 1);
         setTotalElements((raw.totalElements as number) ?? list.length);
+        orderSnapshots.set(key, {
+          items: list, totalPages: (raw.totalPages as number) ?? 1,
+          totalElements: (raw.totalElements as number) ?? list.length, at: Date.now(),
+        });
 
         setSelectedId((cur) =>
           cur && list.some((o) => o.id === cur) ? cur : list[0]?.id ?? null
@@ -525,6 +551,8 @@ const AdminOrdersPage = () => {
         )
       );
 
+      orderSnapshots.clear();
+      countsSnapshot = null;
       window.dispatchEvent(new Event("admin-orders-changed"));
 
       loadCounts();
@@ -571,6 +599,8 @@ const AdminOrdersPage = () => {
         )
       );
       setCancelOpen(false);
+      orderSnapshots.clear();
+      countsSnapshot = null;
       window.dispatchEvent(new Event("admin-orders-changed"));
       loadCounts();
     } catch (err) {

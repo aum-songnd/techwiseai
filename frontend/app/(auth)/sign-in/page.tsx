@@ -137,22 +137,6 @@ const SignInForm = () => {
                   </button>
                 </form>
 
-                <div className="divider">Or Login With</div>
-
-                <div className="social-row">
-                  {socialButtons.map((item) => (
-                    <button
-                      key={item.label}
-                      type="button"
-                      title={item.label}
-                      className="social-btn"
-                      style={{ background: item.bg }}
-                    >
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-
                 <p className="register-line">
                   Don&apos;t have an account?{" "}
                   <Link href="/sign-up">Register here</Link>

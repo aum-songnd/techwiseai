@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
@@ -97,31 +98,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   const descriptionItems = parseDescription(product!.description);
   const intro = descriptionItems[0];
   const features = descriptionItems.slice(1);
-
-  let specs: [string, string][] = [];
-  try {
-    specs = Object.entries(await getProductSpecs(product!.id));
-  } catch (error) {
-    console.error("Không thể tải thông số kỹ thuật:", error);
-  }
-
-  // Ưu tiên đề xuất AI; lỗi hoặc rỗng thì quay về API gợi ý cũ.
-  let aiRecommendations: RecommendedProduct[] = [];
-  let relatedProducts: Awaited<ReturnType<typeof getProducts>> = [];
-
-  try {
-    aiRecommendations = await getAiRecommendations(product!.id, 8);
-  } catch (error) {
-    console.error("Không thể tải đề xuất AI:", error);
-  }
-
-  if (aiRecommendations.length === 0) {
-    try {
-      relatedProducts = await getProductRecommendations(product!.id, 8);
-    } catch (error) {
-      console.error("Không thể tải sản phẩm gợi ý:", error);
-    }
-  }
 
   const finalPrice = product!.finalPrice;
   const hasDiscount = product!.discount > 0;
@@ -266,107 +242,91 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         </div>
       </div>
 
-      {(specs.length > 0 || features.length > 0) && (
-        <div className="mt-12 border-t border-gray-200 pt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
-          {features.length > 0 && (
-            <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-4">
-                Tính năng nổi bật
-              </h2>
-              <ul className="space-y-3">
-                {features.map((item, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start gap-2.5 text-sm text-gray-600 leading-relaxed"
-                  >
-                    <Check className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-          {specs.length > 0 && (
-            <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-4">
-                Thông số kỹ thuật
-              </h2>
-              <div className="w-full overflow-hidden border border-gray-300">
-                <table className="w-full text-sm">
-                  <tbody>
-                    {specs.map(([label, value], idx) => (
-                      <tr
-                        key={label}
-                        className={idx % 2 === 0 ? "bg-gray-50" : "bg-white"}
-                      >
-                        <th
-                          scope="row"
-                          className="w-1/3 px-4 py-2.5 text-left align-top font-medium text-gray-600"
-                        >
-                          {label}
-                        </th>
-                        <td className="px-4 py-2.5 text-gray-900">{value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          )}
-
-
+      {(features.length > 0) && (
+        <div className="mt-12 border-t border-gray-200 pt-8">
+          <section>
+            <h2 className="text-lg font-bold text-gray-900 mb-4">Tính năng nổi bật</h2>
+            <ul className="space-y-3">
+              {features.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-2.5 text-sm text-gray-600 leading-relaxed">
+                  <Check className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
         </div>
       )}
-
-      {aiRecommendations.length > 0 && (
-        <section className="mt-14 border-t border-gray-200 pt-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-gray-900">
-              Sản phẩm đề xuất
-            </h2>
-            {mainCategory && (
-              <Link
-                href={categoryHref(mainCategory)}
-                className="inline-flex items-center gap-1 text-sm text-shop_dark_green hover:underline"
-              >
-                Xem thêm {mainCategory}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            )}
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {aiRecommendations.map((item) => (
-              <AiRecommendedCard key={item.product.id} item={item} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {relatedProducts.length > 0 && (
-        <section className="mt-14 border-t border-gray-200 pt-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-gray-900">
-              Sản phẩm liên quan
-            </h2>
-            {mainCategory && (
-              <Link
-                href={categoryHref(mainCategory)}
-                className="inline-flex items-center gap-1 text-sm text-shop_dark_green hover:underline"
-              >
-                Xem thêm {mainCategory}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            )}
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {relatedProducts.map((related) => (
-              <ProductCard key={related.id} product={related} />
-            ))}
-          </div>
-        </section>
-      )}
+      <Suspense fallback={null}>
+        <ProductSpecifications productId={product!.id} />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ProductRecommendations productId={product!.id} mainCategory={mainCategory} />
+      </Suspense>
     </div>
   );
 };
+
+
+// Các phần bổ sung được stream độc lập, không chặn nội dung chính của sản phẩm.
+async function ProductSpecifications({ productId }: { productId: string }) {
+  let specs: [string, string][] = [];
+  try {
+    specs = Object.entries(await getProductSpecs(productId));
+  } catch (error) {
+    console.error("Không thể tải thông số kỹ thuật:", error);
+  }
+  if (!specs.length) return null;
+  return (
+    <section className="mt-12 border-t border-gray-200 pt-8">
+      <h2 className="text-lg font-bold text-gray-900 mb-4">Thông số kỹ thuật</h2>
+      <div className="w-full overflow-hidden border border-gray-300">
+        <table className="w-full text-sm"><tbody>
+          {specs.map(([label, value], idx) => (
+            <tr key={label} className={idx % 2 === 0 ? "bg-gray-50" : "bg-white"}>
+              <th scope="row" className="w-1/3 px-4 py-2.5 text-left align-top font-medium text-gray-600">{label}</th>
+              <td className="px-4 py-2.5 text-gray-900">{value}</td>
+            </tr>
+          ))}
+        </tbody></table>
+      </div>
+    </section>
+  );
+}
+
+async function ProductRecommendations({ productId, mainCategory }: { productId: string; mainCategory?: string }) {
+  let aiRecommendations: RecommendedProduct[] = [];
+  let relatedProducts: Awaited<ReturnType<typeof getProductRecommendations>> = [];
+  try {
+    aiRecommendations = await getAiRecommendations(productId, 8);
+  } catch (error) {
+    console.error("Không thể tải đề xuất AI:", error);
+  }
+  if (!aiRecommendations.length) {
+    try {
+      relatedProducts = await getProductRecommendations(productId, 8);
+    } catch (error) {
+      console.error("Không thể tải sản phẩm gợi ý:", error);
+    }
+  }
+  if (!aiRecommendations.length && !relatedProducts.length) return null;
+  return (
+    <section className="mt-14 border-t border-gray-200 pt-8">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-bold text-gray-900">{aiRecommendations.length ? "Sản phẩm đề xuất" : "Sản phẩm liên quan"}</h2>
+        {mainCategory && (
+          <Link href={categoryHref(mainCategory)} className="inline-flex items-center gap-1 text-sm text-shop_dark_green hover:underline">
+            Xem thêm {mainCategory}<ArrowRight className="w-4 h-4" />
+          </Link>
+        )}
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {aiRecommendations.length
+          ? aiRecommendations.map((item) => <AiRecommendedCard key={item.product.id} item={item} />)
+          : relatedProducts.map((related) => <ProductCard key={related.id} product={related} />)}
+      </div>
+    </section>
+  );
+}
 
 export default ProductPage;

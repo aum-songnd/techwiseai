@@ -1,3 +1,4 @@
+import { cachedRequest, clearRequestCache } from "./request-cache";
 
 
 import { getToken } from "./auth";
@@ -43,12 +44,13 @@ function requireAuthHeaders(extra?: HeadersInit): HeadersInit {
   };
 }
 
-async function fetchAdminOrderEnvelope<T>(
+async function fetchAdminOrderEnvelopeUncached<T>(
   path: string,
   init?: RequestInit
 ): Promise<T> {
   const headers = requireAuthHeaders(init?.headers);
 
+  const method = (init?.method ?? "GET").toUpperCase();
   const res = await fetch(`${API_BASE_URL}${path}`, {
     cache: "no-store",
     ...init,
@@ -72,7 +74,20 @@ async function fetchAdminOrderEnvelope<T>(
     );
   }
 
+  if (method !== "GET") {
+    clearRequestCache("orders:");
+    clearRequestCache("admin-orders:");
+  }
   return json.data;
+}
+
+async function fetchAdminOrderEnvelope<T>(path: string, init?: RequestInit): Promise<T> {
+  const method = (init?.method ?? "GET").toUpperCase();
+  if (method !== "GET") return fetchAdminOrderEnvelopeUncached<T>(path, init);
+  // JSON key includes the auth token, so separate accounts never share data.
+  const token = getToken();
+  return cachedRequest("admin-orders:" + JSON.stringify([token, path]), 15000,
+    () => fetchAdminOrderEnvelopeUncached<T>(path, init));
 }
 
 export interface AdminOrderListItem {

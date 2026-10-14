@@ -10,6 +10,7 @@ import React, {
 } from "react";
 import {
   getCart,
+  invalidateCartCache,
   addCartItem,
   updateCartItemQuantity,
   removeCartItem,
@@ -87,9 +88,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     fetchCartFromServer();
 
     const handleLogin = () => {
+      invalidateCartCache();
       fetchCartFromServer();
     };
     const handleLogout = () => {
+      invalidateCartCache();
       setCart(EMPTY_CART);
       setRequiresLogin(true);
     };
