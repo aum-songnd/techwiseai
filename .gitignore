@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Environment
 .env
 .env.*
@@ -40,3 +41,54 @@ ai-data/backups/
 
 // lệnh
 document.md
+=======
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### env
+.env
+
+# document
+document.txt
+
+# ### Node ###
+node_modules/
+
+# AI dataset generated locally
+ai-data/raw/
+ai-data/images/
+ai-data/test-images/
+ai-data/logs/
+
+>>>>>>> backend-chat
