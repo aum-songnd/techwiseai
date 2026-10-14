@@ -18,7 +18,7 @@ type Summary = {
 
 const API_BASE_URL = (
   process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-backend.up.railway.app"
+  "https://techwiseai-prod.up.railway.app"
 ).replace(/\/$/, "");
 
 const formatPrice = (value: number) =>

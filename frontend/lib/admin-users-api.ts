@@ -6,7 +6,7 @@ export const USE_MOCK_USERS = true;
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-backend.up.railway.app/api/v1";
+  "https://techwiseai-prod.up.railway.app/api/v1";
 
 export type AdminUser = {
   id: string;
