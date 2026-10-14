@@ -17,12 +17,19 @@ import com.university.regulation.common.response.ApiResponse;
 import com.university.regulation.dto.products.ProductDetailResponse;
 import com.university.regulation.dto.products.ProductResponse;
 import com.university.regulation.service.ProductService;
-
+import org.springframework.http.MediaType;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 import com.university.regulation.dto.products.RecommendedProductResponse;
 import com.university.regulation.service.AiRecommendationService;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.university.regulation.dto.ai.AiImageSearchData;
+import com.university.regulation.service.ImageSearchService;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -30,6 +37,7 @@ import com.university.regulation.service.AiRecommendationService;
 public class ProductController {
         private final ProductService productService;
         private final AiRecommendationService aiRecommendationService;
+        private final ImageSearchService imageSearchService;
 
         @GetMapping("/{id}")
         public ApiResponse<ProductDetailResponse> getProductDetail(
@@ -84,18 +92,15 @@ public class ProductController {
 
         @GetMapping("/{id}/recommendations")
         public ApiResponse<List<ProductResponse>> getRecommendations(
-                @PathVariable UUID id,
-                @RequestParam(defaultValue = "8") int limit,
-                HttpServletRequest request
-        ) {
-        List<ProductResponse> products =
-                productService.getRecommendations(id, limit);
+                        @PathVariable UUID id,
+                        @RequestParam(defaultValue = "8") int limit,
+                        HttpServletRequest request) {
+                List<ProductResponse> products = productService.getRecommendations(id, limit);
 
-        return ApiResponse.success(
-                "Lấy danh sách sản phẩm gợi ý thành công",
-                products,
-                request.getRequestURI()
-        );
+                return ApiResponse.success(
+                                "Lấy danh sách sản phẩm gợi ý thành công",
+                                products,
+                                request.getRequestURI());
         }
 
         @GetMapping("/{id}/recommendations/ai")
@@ -106,6 +111,19 @@ public class ProductController {
                 return ApiResponse.success(
                                 "Lấy danh sách sản phẩm gợi ý thành công",
                                 aiRecommendationService.getRecommendations(id, limit),
+                                request.getRequestURI());
+        }
+
+        @PostMapping(value = "/search-by-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+        public ApiResponse<AiImageSearchData> searchProductsByImage(
+                        @RequestPart("file") MultipartFile file,
+                        @RequestParam(defaultValue = "10") int topK,
+                        HttpServletRequest request) {
+                AiImageSearchData result = imageSearchService.searchByImage(file, topK);
+
+                return ApiResponse.success(
+                                "Tìm kiếm sản phẩm bằng hình ảnh thành công",
+                                result,
                                 request.getRequestURI());
         }
 }
