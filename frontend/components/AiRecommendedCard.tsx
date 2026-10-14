@@ -22,10 +22,10 @@ interface AiRecommendedCardProps {
 
 export default function AiRecommendedCard({ item }: AiRecommendedCardProps) {
   const { product, badge, reason, keySpecs } = item;
-  const specs = Object.entries(keySpecs);
+  const specs = Object.entries(keySpecs ?? {}).slice(0, 5);
 
   return (
-    <div className="relative flex flex-col gap-2">
+    <div className="relative flex h-full min-w-0 flex-col gap-2">
       {badge && (
         <span
           className={`absolute top-2 right-2 z-10 text-[11px] font-semibold px-2.5 py-1 rounded-2xl shadow ${
@@ -36,26 +36,26 @@ export default function AiRecommendedCard({ item }: AiRecommendedCardProps) {
         </span>
       )}
 
-      <ProductCard product={product} />
+      {/* Dùng prop để ẩn yêu thích thay vì selector CSS phụ thuộc vào icon. */}
+      <div className="flex flex-1 flex-col [&>*]:h-full">
+        <ProductCard product={product} hideFavorite />
+      </div>
 
-      {reason && (
-        <p className="text-xs text-shop_dark_green font-medium leading-snug px-1">
-          {reason}
-        </p>
-      )}
+      <p className="min-h-8 line-clamp-2 px-1 text-xs font-medium leading-snug text-shop_dark_green">
+        {reason || "\u00a0"}
+      </p>
 
-      {specs.length > 0 && (
-        <ul className="text-xs text-gray-600 space-y-1 px-1">
-          {specs.map(([label, value]) => (
-            <li key={label} className="flex gap-1.5">
-              <span className="text-gray-400 shrink-0">{label}:</span>
-              <span className="truncate" title={value}>
-                {shorten(value)}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
+      {/* Khu thông số có chiều cao cố định dù dữ liệu ít. */}
+      <ul className="h-[112px] overflow-hidden space-y-1 px-1 text-xs text-gray-600">
+        {specs.map(([label, value]) => (
+          <li key={label} className="flex min-w-0 gap-1.5">
+            <span className="shrink-0 text-gray-400">{label}:</span>
+            <span className="truncate" title={value}>
+              {shorten(value)}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

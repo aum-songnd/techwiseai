@@ -25,6 +25,7 @@ const resolveProductImage = (
 
 interface ProductCardProps {
   product: Product;
+  hideFavorite?: boolean;
 }
 
 const statusLabel: Record<string, string> = {
@@ -38,7 +39,7 @@ const formatPrice = (value: number) =>
     value
   );
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, hideFavorite = false }: ProductCardProps) => {
   const { isFavorite, toggleFavorite } = useFavorite();
   const { isSignedIn } = useAuth();
   const router = useRouter();
@@ -88,6 +89,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </span>
           )}
 
+          {!hideFavorite && (
           <button
             onClick={handleToggleFavorite}
             aria-label={isProductFavorite ? "Bỏ yêu thích" : "Thêm vào yêu thích"}
@@ -103,6 +105,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               fill={isProductFavorite ? "currentColor" : "none"}
             />
           </button>
+          )}
 
           {product.stock === 0 && (
             <div className="absolute inset-0 bg-white/70 flex items-center justify-center text-sm font-medium text-gray-600">

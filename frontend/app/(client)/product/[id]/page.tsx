@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
-import ProductCard from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
 import AddToCart from "@/components/AddToCart";
-import AiRecommendedCard from "@/components/AiRecommendedCard";
+import RecommendationCarousel from "@/components/RecommendationCarousel";
 import {
   getProductById,
   getProducts,
@@ -320,11 +319,10 @@ async function ProductRecommendations({ productId, mainCategory }: { productId: 
           </Link>
         )}
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        {aiRecommendations.length
-          ? aiRecommendations.map((item) => <AiRecommendedCard key={item.product.id} item={item} />)
-          : relatedProducts.map((related) => <ProductCard key={related.id} product={related} />)}
-      </div>
+      <RecommendationCarousel
+        aiRecommendations={aiRecommendations}
+        relatedProducts={relatedProducts}
+      />
     </section>
   );
 }
