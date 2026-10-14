@@ -18,6 +18,36 @@ interface ApiEnvelope<T> {
   path?: string;
 }
 
+interface ApiImageSearchResultRaw {
+  rank: number;
+  productId: string;
+  sku?: string;
+  name: string;
+  brand?: string;
+  price: number;
+  originalPrice?: number | null;
+  thumbnailUrl?: string;
+  shortDescription?: string;
+  ratingAverage?: number;
+  reviewCount?: number;
+  stockQuantity: number;
+  category?: ApiCategoryRaw;
+  imageCount: number;
+  imageWeight: number;
+  textWeight: number;
+  imageSimilarity: number;
+  textSimilarity: number;
+  similarity: number;
+}
+
+interface ApiImageSearchDataRaw {
+  queryFileName: string;
+  topK: number;
+  resultCount: number;
+  processingTimeMs: number;
+  results: ApiImageSearchResultRaw[];
+}
+
 interface ApiCategoryRaw {
   id: string;
   name: string;
@@ -280,6 +310,51 @@ export async function searchProducts(keyword: string): Promise<Product[]> {
     { cache: "no-store" }
   );
   return normalizeList(data).map(mapProduct);
+}
+
+export async function searchProductsByImage(
+  file: File,
+  topK = 10
+): Promise<Product[]> {
+  const formData = new FormData();
+
+  formData.append("file", file);
+
+  const query = new URLSearchParams({
+    topK: String(topK),
+  }).toString();
+
+  const data = await fetchEnvelope<ApiImageSearchDataRaw>(
+    `/products/search-by-image?${query}`,
+    {
+      method: "POST",
+      body: formData,
+      cache: "no-store",
+    }
+  );
+
+  return data.results.map((result) =>
+    mapProduct({
+      id: result.productId,
+
+      // API tìm kiếm ảnh chưa trả slug.
+      // Trang chi tiết hiện dùng product ID nên tạm dùng ID làm slug.
+      slug: result.productId,
+
+      sku: result.sku,
+      name: result.name,
+      brand: result.brand,
+      price: result.price,
+      originalPrice: result.originalPrice ?? undefined,
+      thumbnailUrl: result.thumbnailUrl,
+      shortDescription: result.shortDescription,
+      stockQuantity: result.stockQuantity,
+      ratingAverage: result.ratingAverage,
+      reviewCount: result.reviewCount,
+      category: result.category,
+      inStock: result.stockQuantity > 0,
+    })
+  );
 }
 
 export async function getProductBySlug(slug: string): Promise<Product> {

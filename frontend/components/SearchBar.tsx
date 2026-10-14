@@ -1,6 +1,6 @@
 "use client";
 
-import { searchProducts } from "@/lib/api";
+import { searchProducts, searchProductsByImage } from "@/lib/api";
 import { Search, X, Camera } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
@@ -18,6 +18,7 @@ const SearchBar = () => {
 
   const [hasSearched, setHasSearched] = useState(false);
   const [searchedKeyword, setSearchedKeyword] = useState("");
+  const [searchMode, setSearchMode] = useState<"keyword" | "image">("keyword");
 
   useEffect(() => {
     setMounted(true);
@@ -32,6 +33,9 @@ const SearchBar = () => {
   }, [isSearchOpen]);
 
   useEffect(() => {
+    if (searchMode !== "keyword") {
+      return;
+    }
     const searchKeyword = keyword.trim();
 
     if (!searchKeyword) {
@@ -71,7 +75,63 @@ const SearchBar = () => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [keyword]);
+  }, [keyword, searchMode]);
+
+  const handleImageSearch = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const input = event.currentTarget;
+    const file = input.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    if (!allowedTypes.includes(file.type)) {
+      setError("Chỉ hỗ trợ ảnh JPEG, PNG hoặc WEBP.");
+      input.value = "";
+      return;
+    }
+
+    const maxFileSize = 10 * 1024 * 1024;
+
+    if (file.size > maxFileSize) {
+      setError("Dung lượng ảnh không được vượt quá 10 MB.");
+      input.value = "";
+      return;
+    }
+
+    try {
+      setSearchMode("image");
+      setKeyword("");
+      setIsLoading(true);
+      setError("");
+      setHasSearched(false);
+      setSearchResults([]);
+      setSearchedKeyword(file.name);
+
+      const results = await searchProductsByImage(file, 10);
+
+      setSearchResults(results);
+      setHasSearched(true);
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Đã xảy ra lỗi khi tìm kiếm bằng hình ảnh.";
+
+      setError(message);
+      setSearchResults([]);
+      setHasSearched(true);
+    } finally {
+      setIsLoading(false);
+
+      // Cho phép chọn lại cùng một ảnh.
+      input.value = "";
+    }
+  };
 
   const closeSearch = () => {
     setIsSearchOpen(false);
@@ -120,6 +180,7 @@ const SearchBar = () => {
                   type="text"
                   value={keyword}
                   onChange={(event) => {
+                    setSearchMode("keyword");
                     setKeyword(event.target.value);
 
                     if (error) {
@@ -136,6 +197,8 @@ const SearchBar = () => {
                   id="image-search-input"
                   type="file"
                   accept="image/jpeg,image/png,image/webp"
+                  onChange={handleImageSearch}
+                  disabled={isLoading}
                   className="hidden"
                 />
 
@@ -198,11 +261,17 @@ const SearchBar = () => {
                     searchResults.length === 0 && (
                       <div className="flex h-full items-center justify-center text-gray-500">
                         <p>
-                          Nothing matches the keyword{" "}
-                          <strong className="text-gray-800">
-                            “{searchedKeyword}”
-                          </strong>
-                          . Please try something else.
+                          {searchMode === "image" ? (
+                            `Không tìm thấy sản phẩm tương đồng với ảnh “${searchedKeyword}”.`
+                          ) : (
+                            <>
+                              Không tìm thấy sản phẩm phù hợp với từ khóa{" "}
+                              <strong className="text-gray-800">
+                                “{searchedKeyword}”
+                              </strong>
+                              .
+                            </>
+                          )}
                         </p>
                       </div>
                     )}
