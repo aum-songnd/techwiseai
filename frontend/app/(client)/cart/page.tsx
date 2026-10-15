@@ -6,7 +6,6 @@ import Image, { type StaticImageData } from "next/image";
 import { Check, Minus, Plus, Trash2, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { productImages } from "@/images";
-import FlashSale from "@/components/FlashSale";
 import { FREE_SHIP_THRESHOLD } from "@/components/ServiceFeatures";
 
 const formatPrice = (value: number) =>
@@ -304,8 +303,6 @@ const CartPage = () => {
                 })}
               </ul>
             </section>
-
-            <FlashSale variant="banner" />
           </div>
 
           <aside className="lg:col-span-1">
