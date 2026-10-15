@@ -1,7 +1,6 @@
 [
   {
     "name": "Laptop MSI Katana 15 B13VEK-2440VN",
-    "url": "https://cellphones.com.vn/laptop-msi-katana-15-b13vek-2440vn.html",
     "price": {
       "sale": 34990000,
       "original": 35490000
@@ -69,7 +68,6 @@
   },
   {
     "name": "MacBook Air M5 13 inch 2026 10CPU 8GPU 16GB 512GB",
-    "url": "https://cellphones.com.vn/macbook-air-13-m5-10-cpu-8-gpu-16gb-512gb.html",
     "price": {
       "sale": 34990000,
       "original": 35990000
@@ -146,7 +144,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 14IWC11 83RQ002PVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14iwc11-83rq002pvn.html",
     "price": {
       "sale": 18990000,
       "original": 22990000
@@ -213,7 +210,6 @@
   },
   {
     "name": "Laptop Acer Gaming Aspire 7 A715-59G-59RD",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-aspire-7-a715-59g-59rd.html",
     "price": {
       "sale": 25990000,
       "original": 27990000
@@ -287,7 +283,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-52-50VA",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-52-50va.html",
     "price": {
       "sale": 28990000,
       "original": 29990000
@@ -347,7 +342,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook Go 14 E1404FA-EB935W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-go-14-e1404fa-eb935w.html",
     "price": {
       "sale": 20590000,
       "original": 28490000
@@ -425,7 +419,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 14IPH11 83UQ003NVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14iph11-83uq003nvn.html",
     "price": {
       "sale": 23690000,
       "original": 27990000
@@ -488,7 +481,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming A16 FA607NUQ-RL007W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-a16-fa607nuq-rl007w.html",
     "price": {
       "sale": 35990000,
       "original": 44490000
@@ -550,7 +542,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook 14 X1404VA-EB355W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-x1404va-eb355w.html",
     "price": {
       "sale": 21990000,
       "original": 25990000
@@ -611,7 +602,6 @@
   },
   {
     "name": "Laptop HP Omnibook 5 AI 16-AF1048TU BZ7Q9PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-5-ai-16-af1048tu-bz7q9pa.html",
     "price": {
       "sale": 25990000,
       "original": 27190000
@@ -669,7 +659,6 @@
   },
   {
     "name": "Laptop MSI Cyborg 15 A13UC-2082VN",
-    "url": "https://cellphones.com.vn/laptop-msi-cyborg-15-a13uc-2082vn.html",
     "price": {
       "sale": 27990000,
       "original": 30690000
@@ -733,7 +722,6 @@
   },
   {
     "name": "MacBook Neo 13 inch A18 Pro 2026 6CPU 5GPU 8GB 256GB",
-    "url": "https://cellphones.com.vn/macbook-neo-13-a18-pro-6-cpu-5-gpu-8gb-256gb.html",
     "price": {
       "sale": 18290000,
       "original": 19490000
@@ -785,7 +773,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 14 X1407CA-LY008W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-x1407ca-ly008w.html",
     "price": {
       "sale": 22190000,
       "original": 25990000
@@ -851,7 +838,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15ARP10E 83S0007AVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15arp10e-83s0007avn.html",
     "price": {
       "sale": 28490000,
       "original": 30490000
@@ -917,7 +903,6 @@
   },
   {
     "name": "Laptop Dell 14 DC14250 DC4C5386W",
-    "url": "https://cellphones.com.vn/laptop-dell-14-dc14250-dc4c5386w.html",
     "price": {
       "sale": 26990000,
       "original": 30990000
@@ -982,10 +967,9 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 16 GEN 2 AL16-52P-76DU",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-16-gen-2-al16-52p-76du.html",
     "price": {
-      "sale": 19990000,
-      "original": 999500
+      "sale": null,
+      "original": 19990000
     },
     "highlights": [
       "Laptop Acer Aspire Lite 16 GEN 2 AL16-52P-76DU sở hữu màn hình 16 inch Full HD+, RAM 16GB DDR5 tốc độ 4800MHz (hỗ trợ nâng cấp tối đa 64GB). Chiếc laptop Acer Aspire được trang bị Intel Core i7-1355U, card đồ họa Intel Iris Xe, cùng loa Stereo và webcam Full HD. Thiết kế gọn nhẹ 1.7kg, tích hợp đầy đủ cổng kết nối giúp sử dụng linh hoạt.",
@@ -1042,7 +1026,6 @@
   },
   {
     "name": "Laptop Lenovo Legion 5 15IRX10 83LY00HRVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-legion-5-15irx10-83ly00hrvn.html",
     "price": {
       "sale": 44690000,
       "original": 47990000
@@ -1106,7 +1089,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook S14 S3407VA-LY146W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-s14-s3407va-ly146w.html",
     "price": {
       "sale": 21490000,
       "original": 22990000
@@ -1168,7 +1150,6 @@
   },
   {
     "name": "Laptop Dell Pro 15 Essential PV15250 VKVKD - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-pro-15-essential-pv15250-vkvkd.html",
     "price": {
       "sale": 15990000,
       "original": 17990000
@@ -1230,7 +1211,6 @@
   },
   {
     "name": "Laptop ASUS ROG Strix G16 G614PH-S5101W",
-    "url": "https://cellphones.com.vn/laptop-asus-rog-strix-g16-g614ph-s5101w.html",
     "price": {
       "sale": 46590000,
       "original": 47990000
@@ -1293,7 +1273,6 @@
   },
   {
     "name": "Laptop Acer Gaming Aspire 7 A715-59G-57TU",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-aspire-7-a715-59g-57tu.html",
     "price": {
       "sale": 24990000,
       "original": 25990000
@@ -1359,7 +1338,6 @@
   },
   {
     "name": "MacBook Neo 13 inch A18 Pro 2026 6CPU 5GPU 8GB 512GB Touch ID",
-    "url": "https://cellphones.com.vn/macbook-neo-13-a18-pro-6-cpu-5-gpu-8gb-512gb.html",
     "price": {
       "sale": 21290000,
       "original": 21990000
@@ -1417,10 +1395,9 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-41-R7CR",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-41-r7cr.html",
     "price": {
-      "sale": 28990000,
-      "original": 1000000
+      "sale": null,
+      "original": 28990000
     },
     "highlights": [
       "Laptop Acer Gaming Nitro V 15 ProPanel ANV15-41-R7CR sở hữu cấu hình mạnh mẽ với CPU AMD Ryzen 5 7535HS và card đồ họa NVIDIA GeForce RTX 4050 6GB GDDR6. Màn hình 15.6 inch FHD IPS và tần số quét 180Hz đem lại hình ảnh sắc nét. Ổ cứng 512GB PCIe NVMe SSD và RAM 16GB DDR5, với hệ thống tản nhiệt Dual-fan đảm bảo hiệu suất tối ưu.",
@@ -1472,7 +1449,6 @@
   },
   {
     "name": "MacBook Air M5 13 inch 2026 10CPU 8GPU 16GB 512GB Sạc 70W",
-    "url": "https://cellphones.com.vn/macbook-air-13-inch-m5-10-cpu-8-gpu-16gb-512gb-2026-sac-70w.html",
     "price": {
       "sale": 35290000,
       "original": 36590000
@@ -1545,7 +1521,6 @@
   },
   {
     "name": "Laptop HP Victus 15-FA2731TX B85LNPA",
-    "url": "https://cellphones.com.vn/laptop-hp-victus-15-fa2731tx-b85lnpa.html",
     "price": {
       "sale": 27490000,
       "original": 29990000
@@ -1601,10 +1576,9 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-1xvhg.html",
     "price": {
-      "sale": 20490000,
-      "original": 21990000
+      "sale": 21990000,
+      "original": 25990000
     },
     "highlights": [
       "Laptop Dell 15 DC15250 1XVHG gây ấn tượng khi sở hữu bộ vi xử lý Intel Core i5 1334U thế hệ 13 cùng bộ nhớ RAM 16GB cho khả năng đa nhiệm cực mượt mà. Máy có màn hình cảm ứng 15.6 inch sắc nét và SSD 512GB giúp truy xuất nhanh. Cùng với đó, máy còn được trang bị pin 41Wh và khả năng kết nối đa dạng phục vụ trọn vẹn công việc.",
@@ -1665,7 +1639,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 1XVHG V2 - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-1xvhg-v2.html",
     "price": {
       "sale": 23490000,
       "original": 23990000
@@ -1730,7 +1703,6 @@
   },
   {
     "name": "Laptop Gigabyte Gaming A16 GA6H-CMHH2VN893SH",
-    "url": "https://cellphones.com.vn/laptop-gigabyte-gaming-a16-ga6h-cmhh2vn893sh.html",
     "price": {
       "sale": 26990000,
       "original": 30990000
@@ -1793,7 +1765,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15ARP10E 83S000DEVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15arp10e-83s000devn.html",
     "price": {
       "sale": 28990000,
       "original": 34490000
@@ -1860,7 +1831,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming A15 FA506NCG-HN329W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-a15-fa506ncg-hn329w.html",
     "price": {
       "sale": 27490000,
       "original": 37490000
@@ -1926,7 +1896,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 14AKP10 83HX00ABVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-14akp10-83hx00abvn-ryzen-ai-5.html",
     "price": {
       "sale": 27990000,
       "original": 28990000
@@ -1986,7 +1955,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 14 X1404VA-EB609W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-x1404va-eb609w.html",
     "price": {
       "sale": 16490000,
       "original": 17990000
@@ -2053,7 +2021,6 @@
   },
   {
     "name": "Laptop ASUS Gaming V16 V3607VJ-RP071W",
-    "url": "https://cellphones.com.vn/laptop-asus-gaming-v16-v3607vj-rp071w.html",
     "price": {
       "sale": 25990000,
       "original": 29990000
@@ -2118,7 +2085,6 @@
   },
   {
     "name": "Laptop Lenovo ThinkPad E14 Gen 7 21SX005NVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkpad-e14-gen-7-21sx005nvn.html",
     "price": {
       "sale": 32990000,
       "original": 34990000
@@ -2185,7 +2151,6 @@
   },
   {
     "name": "Laptop Lenovo V15 G5 IRL 83HF00BRVA",
-    "url": "https://cellphones.com.vn/laptop-lenovo-v15-g5-irl-83hf00brva.html",
     "price": {
       "sale": 18490000,
       "original": 20190000
@@ -2251,7 +2216,6 @@
   },
   {
     "name": "Laptop ASUS Zenbook A14 UX3407QA-QD299WS",
-    "url": "https://cellphones.com.vn/laptop-asus-zenbook-a14-ux3407qa-qd299ws-copilot-x-plus.html",
     "price": {
       "sale": 28490000,
       "original": 31990000
@@ -2317,7 +2281,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 14IMH10 83V6001HVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-14imh10-83v6001hvn.html",
     "price": {
       "sale": 29990000,
       "original": 30990000
@@ -2383,7 +2346,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 14ARP10 83K600E9VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14arp10-83k600e9vn.html",
     "price": {
       "sale": 20490000,
       "original": 23490000
@@ -2450,7 +2412,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 16 X1607CA-MB980W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-16-x1607ca-mb980w.html",
     "price": {
       "sale": 22190000,
       "original": 25990000
@@ -2514,7 +2475,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15AHP11 83TN0040VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15ahp11-83tn0040vn.html",
     "price": {
       "sale": 41990000,
       "original": 42990000
@@ -2585,7 +2545,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15IRX9 83DV01ALVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15irx9-83dv01alvn.html",
     "price": {
       "sale": 34990000,
       "original": 43990000
@@ -2646,7 +2605,6 @@
   },
   {
     "name": "Laptop ASUS Gaming V16 V3607VU-RP343W",
-    "url": "https://cellphones.com.vn/laptop-asus-gaming-v16-v3607vu-rp343w.html",
     "price": {
       "sale": 25890000,
       "original": 26990000
@@ -2704,7 +2662,6 @@
   },
   {
     "name": "Laptop HP 14-EP0110TU 8C5K9PA",
-    "url": "https://cellphones.com.vn/laptop-hp-14-ep0110tu-8c5k9pa.html",
     "price": {
       "sale": 21990000,
       "original": 22090000
@@ -2792,7 +2749,6 @@
   },
   {
     "name": "Laptop MSI Cyborg 15 A13UC-2088VN",
-    "url": "https://cellphones.com.vn/laptop-msi-cyborg-15-a13uc-2088vn.html",
     "price": {
       "sale": 24490000,
       "original": 27990000
@@ -2894,7 +2850,6 @@
   },
   {
     "name": "Laptop MSI Modern 15 F1MG-1225VN",
-    "url": "https://cellphones.com.vn/laptop-msi-modern-15-f1mg-1225vn.html",
     "price": {
       "sale": 18990000,
       "original": 21990000
@@ -2962,7 +2917,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 KR0N9 - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-kr0n9.html",
     "price": {
       "sale": 17990000,
       "original": 20990000
@@ -3025,10 +2979,9 @@
   },
   {
     "name": "Laptop HP Omnibook X Flip 14-FK0092AU BZ7P5PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-x-flip-14-fk0092au-bz7p5pa-ryzen-ai-5.html",
     "price": {
       "sale": 31290000,
-      "original": 2607500
+      "original": 36990000
     },
     "highlights": [
       "Laptop HP Omnibook X Flip 14-FK0092AU BZ7P5PA Ryzen AI 5 sở hữu bộ vi xử lý AMD Ryzen AI 5 340, đi cùng RAM 16GB giúp vận hành trơn tru mọi nhu cầu. Thiết bị sử dụng GPU AMD Radeon 840M, đáp ứng tốt yêu cầu về đồ họa cơ bản. Laptop HP này còn có hệ thống cổng giao tiếp phong phú linh hoạt trong nhiều tình huống.",
@@ -3087,10 +3040,9 @@
   },
   {
     "name": "Laptop Acer Predator Helios Neo 16S PHN16S-I51-98CX",
-    "url": "https://cellphones.com.vn/laptop-acer-predator-helios-neo-16s-phn16s-i51-98cx.html",
     "price": {
-      "sale": 72990000,
-      "original": 4257800
+      "sale": null,
+      "original": 72990000
     },
     "highlights": [
       "Laptop Acer Predator Helios Neo 16S PHN16S-I51-98CX sở hữu chip Ultra 9 386H mạnh mẽ kết hợp card đồ họa RTX 5060, mang đến hiệu năng AI vượt trội. Màn hình OLED 2K+ 165Hz cùng tản nhiệt kim loại lỏng giúp chơi game mượt mà. Ngoài ra, RAM DDR5 6400MHz và pin 92Wh bền bỉ góp phần tối ưu khả năng đa nhiệm.",
@@ -3155,7 +3107,6 @@
   },
   {
     "name": "Laptop HP Victus 15-FA2451TX D17WPPA",
-    "url": "https://cellphones.com.vn/laptop-hp-victus-15-fa2451tx-d17wppa.html",
     "price": {
       "sale": 29990000,
       "original": 31190000
@@ -3218,10 +3169,9 @@
   },
   {
     "name": "Laptop Acer Predator Helios Neo 16S PHN16S-I51-97T9",
-    "url": "https://cellphones.com.vn/laptop-acer-predator-helios-neo-16s-phn16s-i51-97t9.html",
     "price": {
-      "sale": 75990000,
-      "original": 4432800
+      "sale": null,
+      "original": 75990000
     },
     "highlights": [
       "Laptop Acer Predator Helios Neo 16S PHN16S-I51-97T9 với thiết kế sang trọng cùng màn hình OLED 165Hz sắc nét, mang đến trải nghiệm giải trí đầy cuốn hút. Hiệu năng vượt trội từ vi xử lý Intel Core Ultra 9 386H giúp máy xử lý mượt mà nhiều tác vụ. Dung lượng 16GB RAM DDR5 tốc độ cao tăng khả năng phản hồi đa nhiệm.",
@@ -3289,7 +3239,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming F16 FX607VU-RL045W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-f16-fx607vu-rl045w.html",
     "price": {
       "sale": 28490000,
       "original": 28990000
@@ -3346,7 +3295,6 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 15 AL15-46P-R73C",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-15-al15-46p-r73c.html",
     "price": {
       "sale": 15990000,
       "original": 17990000
@@ -3409,7 +3357,6 @@
   },
   {
     "name": "Laptop Acer Swift Go SFG14-41-R251",
-    "url": "https://cellphones.com.vn/laptop-acer-swift-go-14-sfg14-41-r251.html",
     "price": {
       "sale": 19990000,
       "original": 20990000
@@ -3470,7 +3417,6 @@
   },
   {
     "name": "Laptop HP Victus 15-FB3116AX BX8U4PA",
-    "url": "https://cellphones.com.vn/laptop-hp-victus-15-fb3116ax-bx8u4pa.html",
     "price": {
       "sale": 27490000,
       "original": 29490000
@@ -3530,7 +3476,6 @@
   },
   {
     "name": "Laptop Lenovo Legion 7 16IAX10 83KY001UVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-legion-7-16iax10-83ky001uvn.html",
     "price": {
       "sale": 80290000,
       "original": 80990000
@@ -3594,7 +3539,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro Lite 16 NL16-71G-71UJ",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-lite-16-nl16-71g-71uj.html",
     "price": {
       "sale": 27990000,
       "original": 31590000
@@ -3651,7 +3595,6 @@
   },
   {
     "name": "Laptop Dell 14 DC14250 C3U085W11SLU",
-    "url": "https://cellphones.com.vn/laptop-dell-14-dc14250-c3u085w11slu.html",
     "price": {
       "sale": 18990000,
       "original": 20990000
@@ -3719,7 +3662,6 @@
   },
   {
     "name": "Laptop Acer Aspire Go 15 AG15-72P-54GY",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-go-15-ag15-72p-54gy.html",
     "price": {
       "sale": 19490000,
       "original": 24990000
@@ -3778,10 +3720,9 @@
   },
   {
     "name": "Laptop ASUS Vivobook 15 X1504VA-BQ165W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-15-x1504va-bq165w.html",
     "price": {
-      "sale": 18990000,
-      "original": 949500
+      "sale": null,
+      "original": 18990000
     },
     "highlights": [
       "Laptop Asus Vivobook 15 X1504VA-BQ165W được trang bị vi xử lý Intel Core 5 120U, kết hợp RAM 16GB và SSD 512GB, mang lại hiệu suất ổn định khi sử dụng. Máy có màn hình 15.6 inch Full HD cùng lớp phủ chống chói, giảm mỏi mắt khi làm việc lâu. Laptop ASUS Vivobook này còn hỗ trợ Wi-Fi 6, Bluetooth 5.2 cùng nhiều cổng kết nối thông dụng tiện lợi.",
@@ -3839,7 +3780,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro V 15 ANV15-41-R732",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-anv15-41-r732.html",
     "price": {
       "sale": 27990000,
       "original": 31990000
@@ -3934,7 +3874,6 @@
   },
   {
     "name": "Laptop Acer Gaming Aspire 7 A715-59G-73LB",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-aspire-7-a715-59g-73lb.html",
     "price": {
       "sale": 24990000,
       "original": 27590000
@@ -3991,7 +3930,6 @@
   },
   {
     "name": "Laptop HP 14‑EM0023AU D0BG7PA",
-    "url": "https://cellphones.com.vn/laptop-hp-14-em0023au-d0bg7pa.html",
     "price": {
       "sale": 21290000,
       "original": 23990000
@@ -4052,7 +3990,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 71084746",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-71084746.html",
     "price": {
       "sale": 22490000,
       "original": 22990000
@@ -4116,7 +4053,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 15 M1502NAQ-BQ021W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-15-m1502naq-bq021w.html",
     "price": {
       "sale": 18490000,
       "original": 18590000
@@ -4183,7 +4119,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15255 G8MK9 - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15255-g8mk9.html",
     "price": {
       "sale": 21990000,
       "original": 22990000
@@ -4248,7 +4183,6 @@
   },
   {
     "name": "Laptop HP 250R G10 C3RV3AT",
-    "url": "https://cellphones.com.vn/laptop-hp-250r-g10-c3rv3at.html",
     "price": {
       "sale": 15490000,
       "original": 18990000
@@ -4307,7 +4241,6 @@
   },
   {
     "name": "Laptop HP 15-FD1289TU C2CV8PA",
-    "url": "https://cellphones.com.vn/laptop-hp-15-fd1289tu-c2cv8pa.html",
     "price": {
       "sale": 25990000,
       "original": 27990000
@@ -4368,7 +4301,6 @@
   },
   {
     "name": "Laptop Lenovo ThinkBook 16 G9 IRL 21US008FVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkbook-16-g9-irl-21us008fvn.html",
     "price": {
       "sale": 27490000,
       "original": 29990000
@@ -4434,7 +4366,6 @@
   },
   {
     "name": "Laptop Dell Latitude 3450 L3450-1335U-16512W-UMC",
-    "url": "https://cellphones.com.vn/laptop-dell-latitude-3450-l3450-1335u-16512w-umc.html",
     "price": {
       "sale": 18490000,
       "original": 19590000
@@ -4502,7 +4433,6 @@
   },
   {
     "name": "MacBook Air M5 13 inch 2026 10CPU 10GPU 24GB 512GB Sạc 70W",
-    "url": "https://cellphones.com.vn/macbook-air-13-inch-m5-10-cpu-10-gpu-24gb-512gb-2026-sac-70w.html",
     "price": {
       "sale": 39690000,
       "original": 41490000
@@ -4578,7 +4508,6 @@
   },
   {
     "name": "Laptop Gigabyte Gaming A16 GA6H-CMHI2VN893SH",
-    "url": "https://cellphones.com.vn/laptop-gigabyte-gaming-a16-ga6h-cmhi2vn893sh.html",
     "price": {
       "sale": 29990000,
       "original": 32990000
@@ -4638,7 +4567,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15ARP10E 83S0004FVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15arp10e-83s0004fvn.html",
     "price": {
       "sale": 34990000,
       "original": 40990000
@@ -4708,7 +4636,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 14 A1407QA-LY114W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-a1407qa-ly114w.html",
     "price": {
       "sale": 18990000,
       "original": 22990000
@@ -4774,7 +4701,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook Go 15 E1504FA-BQ4821W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-go-15-e1504fa-bq4821w.html",
     "price": {
       "sale": 18790000,
       "original": 22990000
@@ -4840,7 +4766,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook S14 S3407VA-LY053W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-s14-s3407va-ly053w.html",
     "price": {
       "sale": 23390000,
       "original": 25990000
@@ -4899,7 +4824,6 @@
   },
   {
     "name": "Laptop Dell Inspiron 15 3530 J9XFD - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-inspiron-15-3530-j9xfd.html",
     "price": {
       "sale": 17490000,
       "original": 18990000
@@ -4956,10 +4880,9 @@
   },
   {
     "name": "Laptop Acer Swift Go 14 AI SFG14-75-5264",
-    "url": "https://cellphones.com.vn/laptop-acer-swift-go-14-ai-sfg14-75-5264.html",
     "price": {
-      "sale": 29990000,
-      "original": 2499200
+      "sale": null,
+      "original": 29990000
     },
     "highlights": [
       "Laptop Acer Swift Go 14 AI SFG14-75-5264 được trang bị Intel Core Ultra 5 226V, 16GB RAM LPDDR5X và SSD 512GB PCIe NVMe, đảm bảo hiệu suất mượt mà. Máy có màn hình 14 inch FHD+ OLED, cho hình ảnh hiển thị bắt mắt, rực rỡ. Với viên pin 65Wh, laptop hỗ trợ người dùng làm việc trong suốt một thời gian dài.",
@@ -5018,7 +4941,6 @@
   },
   {
     "name": "Laptop HP 14-EP1178TU C89ZRPA",
-    "url": "https://cellphones.com.vn/laptop-hp-14-ep1178tu-c89zrpa.html",
     "price": {
       "sale": 22990000,
       "original": 29990000
@@ -5086,7 +5008,6 @@
   },
   {
     "name": "MacBook Air M3 13 inch 2024 8GB - 256GB",
-    "url": "https://cellphones.com.vn/macbook-air-m3-13-inch-2024.html",
     "price": {
       "sale": 18990000,
       "original": 27990000
@@ -5128,7 +5049,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 71084747",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-71084747.html",
     "price": {
       "sale": 24990000,
       "original": 26990000
@@ -5191,7 +5111,6 @@
   },
   {
     "name": "MacBook Air M5 15 inch 2026 10CPU 10GPU 16GB 512GB",
-    "url": "https://cellphones.com.vn/macbook-air-15-m5-10-cpu-10-gpu-16gb-512gb.html",
     "price": {
       "sale": 41290000,
       "original": 41990000
@@ -5245,7 +5164,6 @@
   },
   {
     "name": "Laptop Dell Vostro 3530 2H1TPI7",
-    "url": "https://cellphones.com.vn/laptop-dell-vostro-3530-2h1tpi7.html",
     "price": {
       "sale": 22490000,
       "original": 23990000
@@ -5296,7 +5214,6 @@
   },
   {
     "name": "MacBook Air M4 13 inch 2025 10CPU 10GPU 24GB 512GB Sạc 70W",
-    "url": "https://cellphones.com.vn/apple-macbook-air-13-m4-10cpu-10gpu-24gb-512gb-2025-sac-70w.html",
     "price": {
       "sale": 37990000,
       "original": 39990000
@@ -5347,7 +5264,6 @@
   },
   {
     "name": "Laptop Dell 16 Plus DB16250 DB6U5387W1",
-    "url": "https://cellphones.com.vn/laptop-dell-16-plus-db16250-db6u5387w1.html",
     "price": {
       "sale": 35990000,
       "original": 36990000
@@ -5416,7 +5332,6 @@
   },
   {
     "name": "Surface Pro 12 inch",
-    "url": "https://cellphones.com.vn/laptop-surface-pro-12-inch-x-plus-16gb-512gb.html",
     "price": {
       "sale": 37990000,
       "original": 39990000
@@ -5483,7 +5398,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-41-R9M1",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-41-r9m1.html",
     "price": {
       "sale": 24990000,
       "original": 30990000
@@ -5542,7 +5456,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 15Q8X10 83N3002PVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-15q8x10-83n3002pvn.html",
     "price": {
       "sale": 21990000,
       "original": 25990000
@@ -5603,10 +5516,9 @@
   },
   {
     "name": "Laptop Dell 15 DC15255 X9YM41",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15255-x9ym41.html",
     "price": {
-      "sale": 22990000,
-      "original": 1915800
+      "sale": 24990000,
+      "original": 30990000
     },
     "highlights": [
       "Laptop Dell 15 DC15255 X9YM41 sở hữu bộ vi xử lý AMD Ryzen 7 7730U với 8 nhân và 16 luồng, mang lại khả năng xử lý nhanh và ổn định trong nhiều tác vụ. Vi xử lý laptop có tốc độ tối đa 4.50GHz, giúp tăng cường hiệu suất hoạt động của máy. Ổ cứng máy dung lượng 1TB cung cấp không gian lưu trữ thoải mái khi dùng.",
@@ -5664,7 +5576,6 @@
   },
   {
     "name": "Laptop HP Gaming OMEN 16-AM0176TX BX9D3PA",
-    "url": "https://cellphones.com.vn/laptop-hp-gaming-omen-16-am0176tx-bx9d3pa.html",
     "price": {
       "sale": 43890000,
       "original": 45990000
@@ -5725,7 +5636,6 @@
   },
   {
     "name": "Laptop Acer Gaming Predator Helios Neo 16 PHN16-I31-72XE",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-predator-helios-neo-16-phn16-i31-72xe.html",
     "price": {
       "sale": 59990000,
       "original": 69990000
@@ -5796,7 +5706,6 @@
   },
   {
     "name": "Laptop HP Probook 455 G10 878U6PA",
-    "url": "https://cellphones.com.vn/laptop-hp-probook-455-g10-878u6pa.html",
     "price": {
       "sale": 22490000,
       "original": 24390000
@@ -5856,7 +5765,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 16 X1607CA-MB990W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-16-x1607ca-mb990w.html",
     "price": {
       "sale": 24990000,
       "original": 27990000
@@ -5922,7 +5830,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15IAX9 83GS001RVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15iax9-83gs001rvn.html",
     "price": {
       "sale": 20490000,
       "original": 23990000
@@ -5976,7 +5883,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 15 M1502NAQ-BQ031W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-15-m1502naq-bq031w.html",
     "price": {
       "sale": 19490000,
       "original": 19690000
@@ -6041,7 +5947,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 15ARP10 83K700YVVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-15arp10-83k700yvvn.html",
     "price": {
       "sale": 24990000,
       "original": 26990000
@@ -6113,7 +6018,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook 14 M1405NAQ-LY010W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-m1405naq-ly010w.html",
     "price": {
       "sale": 18490000,
       "original": 20590000
@@ -6178,7 +6082,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 DC5I7748W1",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-dc5i7748w1.html",
     "price": {
       "sale": 24490000,
       "original": 26990000
@@ -6242,7 +6145,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming F16 FX608JHI-TU209W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-f16-fx608jhi-tu209w.html",
     "price": {
       "sale": 42990000,
       "original": 50990000
@@ -6306,7 +6208,6 @@
   },
   {
     "name": "Laptop Lenovo ThinkBook 14 G9 AHP 21V0005NVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkbook-14-g9-ahp-21v0005nvn.html",
     "price": {
       "sale": 25990000,
       "original": 26990000
@@ -6377,7 +6278,6 @@
   },
   {
     "name": "Laptop ASUS Gaming V16 V3607VH-RP025W",
-    "url": "https://cellphones.com.vn/laptop-asus-gaming-v16-v3607vh-rp025w.html",
     "price": {
       "sale": 32990000,
       "original": 33990000
@@ -6438,7 +6338,6 @@
   },
   {
     "name": "Laptop Acer Gaming Predator Helios Neo 16 PHN16-I31-50H7",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-predator-helios-neo-16-phn16-i31-50h7.html",
     "price": {
       "sale": 49990000,
       "original": 59990000
@@ -6505,7 +6404,6 @@
   },
   {
     "name": "Laptop ASUS Gaming Vivobook 16X K3605VC-RP431W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-16x-k3605vc-rp431w.html",
     "price": {
       "sale": 20990000,
       "original": 22090000
@@ -6566,7 +6464,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 71073959",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-71073959.html",
     "price": {
       "sale": 24490000,
       "original": 26990000
@@ -6619,7 +6516,6 @@
   },
   {
     "name": "Laptop Acer Gaming Predator Helios Neo 16 AI PHN16-73-757W",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-predator-helios-neo-16-ai-phn16-73-757w.html",
     "price": {
       "sale": 60990000,
       "original": 65990000
@@ -6680,7 +6576,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook Go 14 E1404FA-EB012W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-go-14-e1404fa-eb012w.html",
     "price": {
       "sale": 18690000,
       "original": 22990000
@@ -6744,7 +6639,6 @@
   },
   {
     "name": "Laptop MSI Stealth 16 AI+ B3WG-008VN",
-    "url": "https://cellphones.com.vn/laptop-msi-stealth-16-ai-b3wg-008vn.html",
     "price": {
       "sale": 84590000,
       "original": 85990000
@@ -6812,7 +6706,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15255 DC5R5802W1",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15255-dc5r5802w1.html",
     "price": {
       "sale": 20490000,
       "original": 20990000
@@ -6873,7 +6766,6 @@
   },
   {
     "name": "Laptop HP 250R G9 AX3C7AT",
-    "url": "https://cellphones.com.vn/laptop-hp-250r-g9-ax3c7at.html",
     "price": {
       "sale": 14990000,
       "original": 16990000
@@ -6932,7 +6824,6 @@
   },
   {
     "name": "Laptop Lenovo ThinkBook 14 G9 IRL 21UY008TVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkbook-14-g9-irl-21uy008tvn.html",
     "price": {
       "sale": 27490000,
       "original": 28990000
@@ -6992,7 +6883,6 @@
   },
   {
     "name": "Laptop ASUS Gaming V16 V3607VJ-TK189W",
-    "url": "https://cellphones.com.vn/laptop-asus-gaming-v16-v3607vj-tk189w.html",
     "price": {
       "sale": 25990000,
       "original": 36990000
@@ -7053,7 +6943,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15IRX9 83DV01H3VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15irx9-83dv01h3vn.html",
     "price": {
       "sale": 34990000,
       "original": 35490000
@@ -7149,7 +7038,6 @@
   },
   {
     "name": "Laptop Gigabyte Gaming A16 GA6H-CTHH3VN893SH",
-    "url": "https://cellphones.com.vn/laptop-gigabyte-gaming-a16-ga6h-cthh3vn893sh.html",
     "price": {
       "sale": 32990000,
       "original": 36990000
@@ -7208,7 +7096,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-41-R0Y4",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-41-r0y4.html",
     "price": {
       "sale": 29990000,
       "original": 34990000
@@ -7264,7 +7151,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15IRX10 83JE00PEVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15irx10-83je00pevn.html",
     "price": {
       "sale": 39990000,
       "original": 42990000
@@ -7324,7 +7210,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming A15 FA506NCG-HN184W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-a15-fa506ncg-hn184w.html",
     "price": {
       "sale": 22490000,
       "original": 23690000
@@ -7381,7 +7266,6 @@
   },
   {
     "name": "Laptop Dell Inspiron 14 5440 N5440-C7U165W11IBD2",
-    "url": "https://cellphones.com.vn/laptop-dell-inspiron-14-5440-n5440-c7u165w11ibd2.html",
     "price": {
       "sale": 27490000,
       "original": 29990000
@@ -7447,10 +7331,9 @@
   },
   {
     "name": "Laptop Lenovo Yoga Slim 7 14AGP11 83QS001DVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-yoga-slim-7-14agp11-83qs001dvn-ryzen-ai-7.html",
     "price": {
-      "sale": 37990000,
-      "original": 2216100
+      "sale": null,
+      "original": 37990000
     },
     "highlights": [
       "Laptop Lenovo Yoga Slim 7 14AGP11 83QS001DVN Ryzen AI 7 được trang bị CPU AMD Ryzen AI 7 445 cùng với NPU 50 TOPS, từ đó mang đến hiệu năng mượt mà. Sản phẩm sở hữu độ mỏng chỉ 13.9mm, mang lại cảm giác gọn gàng khi di chuyển. Máy tích hợp pin 70Wh đi kèm hệ thống Dolby Atmos đáp ứng tốt nhu cầu giải trí.",
@@ -7514,7 +7397,6 @@
   },
   {
     "name": "MacBook Air M5 13 inch 2026 10CPU 10GPU 16GB 1TB",
-    "url": "https://cellphones.com.vn/macbook-air-13-m5-10-cpu-10-gpu-16gb-1tb.html",
     "price": {
       "sale": 43390000,
       "original": 44250000
@@ -7588,7 +7470,6 @@
   },
   {
     "name": "Laptop HP 250 G10 B73TQAT",
-    "url": "https://cellphones.com.vn/laptop-hp-250-g10-b73tqat.html",
     "price": {
       "sale": 15990000,
       "original": 17990000
@@ -7650,7 +7531,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook Go 15 E1504FA-BQ340W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-go-15-e1504fa-bq340w.html",
     "price": {
       "sale": 20790000,
       "original": 28490000
@@ -7717,7 +7597,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook 15 X1504MA-BQ632W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-15-x1504ma-bq632w.html",
     "price": {
       "sale": 20090000,
       "original": 26990000
@@ -7784,7 +7663,6 @@
   },
   {
     "name": "Laptop MSI Venture 14 AI A1MG-005VN",
-    "url": "https://cellphones.com.vn/laptop-msi-venture-14-ai-a1mg-005vn.html",
     "price": {
       "sale": 25990000,
       "original": 26990000
@@ -7846,10 +7724,9 @@
   },
   {
     "name": "Laptop HP 250 G10 B3WA7AT",
-    "url": "https://cellphones.com.vn/laptop-hp-250-g10-b3wa7at.html",
     "price": {
       "sale": 18990000,
-      "original": 1582500
+      "original": 22990000
     },
     "highlights": [
       "Laptop HP 250 G10 B3WA7AT được trang bị bộ vi xử lý Intel Core i5‑1334U với 10 nhân và xung nhịp tối đa 4.6GHz, phù hợp cho các nhu cầu sử dụng cơ bản. Máy sở hữu RAM 8GB cùng ổ cứng SSD 512GB, giúp đa nhiệm ổn định. Thiết bị có màn hình 15.6 inch Full HD, WiFi 6, Bluetooth 5.3 và có nhiều cổng kết nối phổ biến.",
@@ -7908,7 +7785,6 @@
   },
   {
     "name": "MacBook Air M5 13 inch 2026 10CPU 10GPU 24GB 1TB",
-    "url": "https://cellphones.com.vn/macbook-air-13-m5-10-cpu-10-gpu-24gb-1tb.html",
     "price": {
       "sale": 47590000,
       "original": 49750000
@@ -7981,7 +7857,6 @@
   },
   {
     "name": "Laptop MSI Cyborg 15 A13VEK-2089VN",
-    "url": "https://cellphones.com.vn/laptop-msi-cyborg-15-a13vek-2089vn.html",
     "price": {
       "sale": 28990000,
       "original": 33990000
@@ -8045,7 +7920,6 @@
   },
   {
     "name": "Laptop MSI Modern 14 F1MG-432VN",
-    "url": "https://cellphones.com.vn/laptop-msi-modern-14-f1mg-432vn.html",
     "price": {
       "sale": 18990000,
       "original": 21990000
@@ -8110,7 +7984,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro Lite 16 NL16-71G-56WQ",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-lite-16-nl16-71g-56wq.html",
     "price": {
       "sale": 25490000,
       "original": 29590000
@@ -8168,7 +8041,6 @@
   },
   {
     "name": "Laptop Lenovo ThinkPad E16 Gen 3 21SR002NVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkpad-e16-gen-3-21sr002nvn.html",
     "price": {
       "sale": 24490000,
       "original": 25390000
@@ -8226,7 +8098,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro Lite 16 NL16-71G-71FN",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-lite-16-nl16-71g-71fn.html",
     "price": {
       "sale": 29990000,
       "original": 33990000
@@ -8289,7 +8160,6 @@
   },
   {
     "name": "Laptop HP OmniBook 7 14-FR0033TU C1MN2PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-7-14-fr0033tu-c1mn2pa.html",
     "price": {
       "sale": 27490000,
       "original": 28490000
@@ -8345,7 +8215,6 @@
   },
   {
     "name": "Laptop Lenovo Legion 5 15AHP11 83Q7001JVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-legion-5-15ahp11-83q7001jvn.html",
     "price": {
       "sale": 54490000,
       "original": 58990000
@@ -8412,7 +8281,6 @@
   },
   {
     "name": "Laptop ASUS ExpertBook P1 P1403CVA-C5H16-63WS",
-    "url": "https://cellphones.com.vn/laptop-asus-expertbook-p1-p1403cva-c5h16-63ws.html",
     "price": {
       "sale": 24290000,
       "original": 26990000
@@ -8479,7 +8347,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ Essential 15ARP10E 83S000DBVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-essential-15arp10e-83s000dbvn.html",
     "price": {
       "sale": 30490000,
       "original": 41490000
@@ -8547,7 +8414,6 @@
   },
   {
     "name": "Laptop HP 14-EP1200TU D0BG9PA",
-    "url": "https://cellphones.com.vn/laptop-hp-14-ep1200tu-d0bg9pa.html",
     "price": {
       "sale": 27490000,
       "original": 29590000
@@ -8609,7 +8475,6 @@
   },
   {
     "name": "Laptop HP 250R G9 C40LHAT",
-    "url": "https://cellphones.com.vn/laptop-hp-250r-g9-c40lhat.html",
     "price": {
       "sale": 15490000,
       "original": 18990000
@@ -8668,7 +8533,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 16IPH11 83US002TVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-16iph11-83us002tvn.html",
     "price": {
       "sale": 28490000,
       "original": 33990000
@@ -8737,7 +8601,6 @@
   },
   {
     "name": "Laptop ASUS ROG Flow Z13 GZ302EA-RU145WS",
-    "url": "https://cellphones.com.vn/laptop-asus-rog-flow-z13-gz302ea-ru145ws.html",
     "price": {
       "sale": 92990000,
       "original": 94990000
@@ -8794,7 +8657,6 @@
   },
   {
     "name": "Laptop MSI Katana 15 B13UDXK-2437VN",
-    "url": "https://cellphones.com.vn/laptop-msi-katana-15-b13udxk-2437vn.html",
     "price": {
       "sale": 27990000,
       "original": 33490000
@@ -8865,7 +8727,6 @@
   },
   {
     "name": "Laptop HP 14-EP1012TU D72CPPA",
-    "url": "https://cellphones.com.vn/laptop-hp-14-ep1012tu-d72cppa.html",
     "price": {
       "sale": 22990000,
       "original": 24390000
@@ -8937,7 +8798,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro Propanel ANV16-72-71T9",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-16-propanel-anv16-72-71t9.html",
     "price": {
       "sale": 43990000,
       "original": 45990000
@@ -9002,7 +8862,6 @@
   },
   {
     "name": "Laptop Lenovo Yoga Slim 7 14IPH11 83QM002EVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-yoga-slim-7-14iph11-83qm002evn.html",
     "price": {
       "sale": 54490000,
       "original": 55990000
@@ -9070,7 +8929,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-51-73UU",
-    "url": "https://cellphones.com.vn/laptop-acer-nitro-v-15-propanel-anv15-51-73uu.html",
     "price": {
       "sale": 27990000,
       "original": 28990000
@@ -9122,7 +8980,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15IRX10 83JE01AGVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15irx10-83je01agvn.html",
     "price": {
       "sale": 37590000,
       "original": 38490000
@@ -9185,7 +9042,6 @@
   },
   {
     "name": "MacBook Air M5 15 inch 2026 10CPU 10GPU 16GB 512GB Sạc 70W",
-    "url": "https://cellphones.com.vn/macbook-air-15-m5-10-cpu-10-gpu-16gb-512gb-sac-70w.html",
     "price": {
       "sale": 41290000,
       "original": 41990000
@@ -9263,7 +9119,6 @@
   },
   {
     "name": "Laptop ASUS ExpertBook P3 PM3406CHA-LY0089W",
-    "url": "https://cellphones.com.vn/laptop-asus-expertbook-p3-pm3406cha-ly0089w.html",
     "price": {
       "sale": 25790000,
       "original": 29990000
@@ -9329,7 +9184,6 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 14 AL14-52M-52UU",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-14-al14-52m-52uu.html",
     "price": {
       "sale": 19490000,
       "original": 19990000
@@ -9397,7 +9251,6 @@
   },
   {
     "name": "Laptop Dell 16 DC16251 DC6C7557W1",
-    "url": "https://cellphones.com.vn/laptop-dell-16-dc16251-dc6c7557w1.html",
     "price": {
       "sale": 33990000,
       "original": 35990000
@@ -9462,7 +9315,6 @@
   },
   {
     "name": "Laptop ASUS Gaming V16 V3607VU-RP216W",
-    "url": "https://cellphones.com.vn/laptop-asus-gaming-v16-v3607vu-rp216w.html",
     "price": {
       "sale": 30990000,
       "original": 31990000
@@ -9527,7 +9379,6 @@
   },
   {
     "name": "Laptop HP EliteBook X G1A 14 AI B9FE4PT",
-    "url": "https://cellphones.com.vn/laptop-hp-elitebook-x-g1a-14-ai-b9fe4pt-ryzen-ai-9.html",
     "price": {
       "sale": 59590000,
       "original": 62290000
@@ -9588,10 +9439,9 @@
   },
   {
     "name": "Laptop Acer Gaming Aspire 7 A715-59G-79XF",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-aspire-7-a715-59g-79xf.html",
     "price": {
-      "sale": 28990000,
-      "original": 2415800
+      "sale": 29990000,
+      "original": 30990000
     },
     "highlights": [
       "Laptop Gaming Acer Aspire 7 A715-59G-79XF trang bị vi xử lý Intel Core 7 240H 10 nhân - 16 luồng, xung nhịp tối đa 5.2GHz cùng với 24MB Smart Cache. Máy có card đồ họa rời NVIDIA GeForce RTX 3050 6GB GDDR6 mạnh mẽ. Laptop sở hữu 16GB DDR4, 512GB PCIe NVMe SSD và màn hình 15.6 inch FHD IPS 144Hz.",
@@ -9654,7 +9504,6 @@
   },
   {
     "name": "Laptop Lenovo ThinkPad E14 Gen 7 21T90025VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkpad-e14-gen-7-21t90025vn.html",
     "price": {
       "sale": 34190000,
       "original": 35500000
@@ -9713,10 +9562,9 @@
   },
   {
     "name": "Laptop Lenovo Yoga 7 2-in-1 14IPH11 83TC002JVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-yoga-7-2-in-1-14iph11-83tc002jvn.html",
     "price": {
-      "sale": 54990000,
-      "original": 3207800
+      "sale": null,
+      "original": 54990000
     },
     "highlights": [
       "Laptop Lenovo Yoga 7 2-in-1 14IPH11 83TC002JVN sở hữu chip Intel Core Ultra 7 355, RAM 32GB, SSD 1TB cùng màn hình OLED 14 inch cảm ứng cực sắc nét. Sản phẩm Lenovo Yoga này có trọng lượng nhẹ chỉ 1.38 kg kết hợp cùng vỏ nhôm sang trọng. Hiệu năng AI mạnh mẽ nhờ NPU 49 TOPS, webcam 5.0MP sắc nét và bút cảm ứng tiện dụng.",
@@ -9785,10 +9633,9 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 16 AI AL16-71P-582Q",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-16-ai-al16-71p-582q.html",
     "price": {
-      "sale": 24990000,
-      "original": 2915500
+      "sale": null,
+      "original": 24990000
     },
     "highlights": [
       "Laptop Acer Aspire Lite 16 AI AL16-71P-582Q có bộ vi xử lý Intel Core Ultra 5 125H mạnh mẽ tích hợp NPU AI 11 TOPS, trang bị RAM 16GB và SSD 512GB. Máy sở hữu màn hình 16 inch FHD+ IPS 120Hz và card đồ họa Intel Arc Graphics. Trọng lượng chỉ khoảng 1.6kg, phù hợp cho nhu cầu học tập, làm việc và giải trí đa nhiệm.",
@@ -9851,7 +9698,6 @@
   },
   {
     "name": "Laptop ASUS Zenbook A14 UX3407NA-QD132WS",
-    "url": "https://cellphones.com.vn/laptop-asus-zenbook-a14-ux3407na-qd132ws.html",
     "price": {
       "sale": 39990000,
       "original": 48990000
@@ -9918,7 +9764,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook S14 S3407CA-LY095WS",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-s14-s3407ca-ly095ws.html",
     "price": {
       "sale": 23490000,
       "original": 27990000
@@ -9981,7 +9826,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 OLED 15ARP10 83J3002SVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-15arp10-83j3002svn.html",
     "price": {
       "sale": 28490000,
       "original": 39990000
@@ -10045,7 +9889,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook Go 15 E1504FA-BQ1150W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-go-15-e1504fa-bq1150w.html",
     "price": {
       "sale": 17490000,
       "original": 17990000
@@ -10105,7 +9948,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 14IPH11 83UQ000JVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14iph11-83uq000jvn.html",
     "price": {
       "sale": 23690000,
       "original": 27990000
@@ -10172,7 +10014,6 @@
   },
   {
     "name": "Laptop HP 250R G9 AX3D4AT",
-    "url": "https://cellphones.com.vn/laptop-hp-250r-g9-ax3d4at.html",
     "price": {
       "sale": 20990000,
       "original": 28590000
@@ -10209,7 +10050,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 14 M1407GA-LY270W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-m1407ga-ly270w.html",
     "price": {
       "sale": 23690000,
       "original": 26990000
@@ -10274,7 +10114,6 @@
   },
   {
     "name": "Laptop HP Omnibook X Flip 14-FM0088TU BZ7Q2PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-x-flip-14-fm0088tu-bz7q2pa.html",
     "price": {
       "sale": 31390000,
       "original": 33990000
@@ -10331,7 +10170,6 @@
   },
   {
     "name": "MacBook Air M5 15 inch 2026 10CPU 10GPU 24GB 1TB",
-    "url": "https://cellphones.com.vn/macbook-air-15-m5-10-cpu-10-gpu-24gb-1tb.html",
     "price": {
       "sale": 54890000,
       "original": 55750000
@@ -10398,7 +10236,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 15ARP10 83J3001DVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-15arp10-83j3001dvn.html",
     "price": {
       "sale": 25490000,
       "original": 30990000
@@ -10459,7 +10296,6 @@
   },
   {
     "name": "Laptop MSI Modern 14 F13MG-466VN",
-    "url": "https://cellphones.com.vn/laptop-msi-modern-14-f13mg-466vn.html",
     "price": {
       "sale": 20990000,
       "original": 21390000
@@ -10518,7 +10354,6 @@
   },
   {
     "name": "Laptop HP Probook 445 G10 878T9PA",
-    "url": "https://cellphones.com.vn/laptop-hp-probook-445-g10-878t9pa.html",
     "price": {
       "sale": 25990000,
       "original": 27990000
@@ -10593,7 +10428,6 @@
   },
   {
     "name": "Laptop Dell Pro 13 Plus PB13250-236V-16512W",
-    "url": "https://cellphones.com.vn/laptop-dell-pro-13-plus-pb13250-236v-16512w.html",
     "price": {
       "sale": 34990000,
       "original": 37990000
@@ -10657,7 +10491,6 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 15 AL15-42P-R08M",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-15-al15-42p-r08m.html",
     "price": {
       "sale": 19990000,
       "original": 21990000
@@ -10719,7 +10552,6 @@
   },
   {
     "name": "Laptop Acer Swift Lite 14 AI SFL14-51M-56HS",
-    "url": "https://cellphones.com.vn/laptop-acer-swift-lite-14-ai-sfl14-51m-56hs.html",
     "price": {
       "sale": 19890000,
       "original": 19990000
@@ -10776,10 +10608,9 @@
   },
   {
     "name": "Laptop Lenovo ThinkPad X9-15 Gen 1 Aura Edition 21Q60050VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkpad-x9-15-gen-1-21q60050vn.html",
     "price": {
-      "sale": 51990000,
-      "original": 1000000
+      "sale": null,
+      "original": 51990000
     },
     "highlights": [
       "Laptop Lenovo Thinkpad X9-15 Gen 1 21Q60050VN được ưu ái trang bị màn hình OLED kích thước 15.3 inch độ phân giải 2.8K cho khả năng hiển thị sắc nét. Máy sử dụng chipset Intel Core Ultra 5 228V với 8 nhân và xung tối đa 4.5GHz. Thiết bị còn sở hữu pin 80Wh giúp duy trì thời gian vận hành lâu dài cho công việc mỗi ngày.",
@@ -10842,7 +10673,6 @@
   },
   {
     "name": "MacBook Pro 14 M4 Pro 14CPU 20GPU 24GB 512GB Nano",
-    "url": "https://cellphones.com.vn/macbook-pro-m4-pro-14-inch-14cpu-20gpu-24gb-512gb-nano.html",
     "price": {
       "sale": 65990000,
       "original": 70990000
@@ -10891,7 +10721,6 @@
   },
   {
     "name": "Laptop Acer Aspire Go 15 AI AG15-52P-52WT",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-go-15-ai-ag15-52p-52wt.html",
     "price": {
       "sale": 22990000,
       "original": 23490000
@@ -10957,7 +10786,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook 14 M1405NAQ-LY011W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-m1405naq-ly011w.html",
     "price": {
       "sale": 19490000,
       "original": 21690000
@@ -11024,7 +10852,6 @@
   },
   {
     "name": "Laptop HP 250R G10 C3SH7AT",
-    "url": "https://cellphones.com.vn/laptop-hp-250r-g10-c3sh7at.html",
     "price": {
       "sale": 22990000,
       "original": 25190000
@@ -11084,7 +10911,6 @@
   },
   {
     "name": "Laptop ASUS ExpertBook P5 P5405CSA-NZ0016W",
-    "url": "https://cellphones.com.vn/laptop-asus-expertbook-p5-p5405csa-nz0016w.html",
     "price": {
       "sale": 29490000,
       "original": 30990000
@@ -11138,7 +10964,6 @@
   },
   {
     "name": "Laptop HP Probook 455 G10 878T8PA",
-    "url": "https://cellphones.com.vn/laptop-hp-probook-455-g10-878t8pa.html",
     "price": {
       "sale": 25990000,
       "original": 27290000
@@ -11204,7 +11029,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 14 X1407AA-LY360W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-x1407aa-ly360w.html",
     "price": {
       "sale": 24290000,
       "original": 26990000
@@ -11267,7 +11091,6 @@
   },
   {
     "name": "Laptop HP EliteBook 6 G1I 13 BQ9M6PT",
-    "url": "https://cellphones.com.vn/laptop-hp-elitebook-6-g1i-13-bq9m6pt.html",
     "price": {
       "sale": 35990000,
       "original": 37590000
@@ -11330,7 +11153,6 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 15 AL15-21P-R91W",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-15-al15-21p-r91w.html",
     "price": {
       "sale": 19990000,
       "original": 21990000
@@ -11397,7 +11219,6 @@
   },
   {
     "name": "Laptop Dell 14 DC14255 71083617",
-    "url": "https://cellphones.com.vn/laptop-dell-14-dc14255-71083617-ryzen-ai-7.html",
     "price": {
       "sale": 30990000,
       "original": 33990000
@@ -11460,7 +11281,6 @@
   },
   {
     "name": "Laptop MSI Crosshair 16 HX AI D2XWGKG-034VN",
-    "url": "https://cellphones.com.vn/laptop-msi-crosshair-16-hx-ai-d2xwgkg-034vn.html",
     "price": {
       "sale": 57990000,
       "original": 59990000
@@ -11521,7 +11341,6 @@
   },
   {
     "name": "Laptop Dell 16 DC16250 71076092",
-    "url": "https://cellphones.com.vn/laptop-dell-16-dc16250-71076092.html",
     "price": {
       "sale": 27490000,
       "original": 30990000
@@ -11584,7 +11403,6 @@
   },
   {
     "name": "Laptop HP Omnibook 5 16-AG1068AU BZ7T0PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-5-16-ag1068au-bz7t0pa-ryzen-ai-5.html",
     "price": {
       "sale": 25990000,
       "original": 28190000
@@ -11644,7 +11462,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook S14 M3407HA-SF480W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-s14-m3407ha-sf480w.html",
     "price": {
       "sale": 22890000,
       "original": 25490000
@@ -11710,7 +11527,6 @@
   },
   {
     "name": "MacBook Air M5 15 inch 2026 10CPU 10GPU 24GB 512GB Sạc 70W",
-    "url": "https://cellphones.com.vn/macbook-air-15-m5-10-cpu-10-gpu-24gb-512gb-sac-70w.html",
     "price": {
       "sale": 45990000,
       "original": 48990000
@@ -11786,7 +11602,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ Essential 15IRX11 83SC003RVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-essential-15irx11-83sc003rvn.html",
     "price": {
       "sale": 38990000,
       "original": 42990000
@@ -11850,7 +11665,6 @@
   },
   {
     "name": "Laptop HP 250 G9 AG4X7AT",
-    "url": "https://cellphones.com.vn/laptop-hp-250-g9-ag4x7at.html",
     "price": {
       "sale": 17990000,
       "original": 20990000
@@ -11908,7 +11722,6 @@
   },
   {
     "name": "Laptop Acer Aspire Go 14 AG14-72P-563L",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-go-14-ag14-72p-563l.html",
     "price": {
       "sale": 19490000,
       "original": 19990000
@@ -11971,7 +11784,6 @@
   },
   {
     "name": "Laptop HP OmniBook 7 14-FR0024TU C1MN0PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-7-14-fr0024tu-c1mn0pa.html",
     "price": {
       "sale": 34990000,
       "original": 38590000
@@ -12027,7 +11839,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-52-72BM",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-52-72bm.html",
     "price": {
       "sale": 35990000,
       "original": 39990000
@@ -12087,7 +11898,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 14IMH10 83V6001GVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-14imh10-83v6001gvn.html",
     "price": {
       "sale": 23690000,
       "original": 24990000
@@ -12156,7 +11966,6 @@
   },
   {
     "name": "Laptop HP 250 G9 AG2K7AT",
-    "url": "https://cellphones.com.vn/laptop-hp-250-g9-ag2k7at.html",
     "price": {
       "sale": 18990000,
       "original": 19190000
@@ -12215,7 +12024,6 @@
   },
   {
     "name": "Laptop HP 250R G9 AX3C8AT",
-    "url": "https://cellphones.com.vn/laptop-hp-250r-g9-ax3c8at.html",
     "price": {
       "sale": 15990000,
       "original": 17990000
@@ -12277,10 +12085,9 @@
   },
   {
     "name": "Laptop Acer Aspire Lite Gen 2 AL14-52M-32KV",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-gen-2-al14-52m-32kv.html",
     "price": {
-      "sale": 13490000,
-      "original": 674500
+      "sale": null,
+      "original": 13490000
     },
     "highlights": [
       "Laptop Acer Aspire Lite Gen 2 AL14-52M-32KV nổi bật với màn hình IPS 14 inches WUXGA, bộ vi xử lý Intel Core i3-1305U, và RAM 8GB cho hiệu năng ổn định. Máy sở hữu SSD 256GB PCIe, kết nối Wi-Fi 6, Bluetooth 5.1, cùng đa dạng cổng giao tiếp như USB Type-C, HDMI 1.4 và đầu đọc thẻ MicroSD. Thiết kế gọn nhẹ 1.5kg cùng bàn phím tiêu chuẩn mang đến sự tiện lợi cho hầu hết công việc.",
@@ -12334,7 +12141,6 @@
   },
   {
     "name": "Laptop ASUS ExpertBook P5 P5405CSA-NZ0017W",
-    "url": "https://cellphones.com.vn/laptop-asus-expertbook-p5-p5405csa-nz0017w.html",
     "price": {
       "sale": 36990000,
       "original": 38990000
@@ -12390,7 +12196,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming F16 FX608JMI‑TU241W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-f16-fx608jmi-tu241w.html",
     "price": {
       "sale": 42490000,
       "original": 44990000
@@ -12457,7 +12262,6 @@
   },
   {
     "name": "Laptop ASUS ROG Zephyrus G14 GU405AW-SY029W",
-    "url": "https://cellphones.com.vn/laptop-asus-rog-zephyrus-g14-gu405aw-sy029w.html",
     "price": {
       "sale": 115990000,
       "original": 119990000
@@ -12521,7 +12325,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-41-R0FE",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-41-r0fe.html",
     "price": {
       "sale": 28990000,
       "original": 32990000
@@ -12579,7 +12382,6 @@
   },
   {
     "name": "Laptop HP Omnibook 7 Aero 13-BG1087AU BZ7S1PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-7-aero-13-bg1087au-bz7s1pa-ryzen-ai-5.html",
     "price": {
       "sale": 28490000,
       "original": 29790000
@@ -12643,7 +12445,6 @@
   },
   {
     "name": "Laptop HP Omnibook X Flip 14-FM0076TU BZ7P6PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-x-flip-14-fm0076tu-bz7p6pa.html",
     "price": {
       "sale": 37990000,
       "original": 40890000
@@ -12707,7 +12508,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 14IPH11 83S5000DVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-14iph11-83s5000dvn.html",
     "price": {
       "sale": 29990000,
       "original": 32990000
@@ -12775,10 +12575,9 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro Propanel ANV16S-71-58WQ",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-16s-propanel-anv16s-71-58wq.html",
     "price": {
-      "sale": 44990000,
-      "original": 2624400
+      "sale": null,
+      "original": 44990000
     },
     "highlights": [
       "Laptop Acer Gaming Nitro V 16S ProPanel ANV16S-71-58WQ sở hữu đồ họa RTX 5050 8GB GDDR7 tân tiến, hỗ trợ xử lý các hình ảnh mượt mà và hiệu quả hơn. Máy tích hợp chip Intel Core 5 210H với hiệu suất AI 440 TOPS, mang lại khả năng vận hành ổn định. Thiết bị có màn hình 16 inch 2K+ 180Hz, tái hiện hình ảnh sắc nét.",
@@ -12842,7 +12641,6 @@
   },
   {
     "name": "MacBook Air M4 13 inch 2025 10CPU 10GPU 24GB 512GB",
-    "url": "https://cellphones.com.vn/apple-macbook-air-13-m4-10cpu-10gpu-24gb-512gb-2025.html",
     "price": {
       "sale": 37990000,
       "original": 39990000
@@ -12880,10 +12678,9 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 15 AL15-36P-30TN",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-15-al15-36p-30tn.html",
     "price": {
       "sale": 16990000,
-      "original": 1415800
+      "original": 19990000
     },
     "highlights": [
       "Laptop Acer Aspire Lite 15 AL15-36P-30TN gây ấn tượng mạnh bởi trọng lượng nhẹ chỉ 1.53 kg cho phép bạn dễ dàng cất vào balo và mang theo ra ngoài. Màn hình 15.6 inch đi kèm công nghệ Acer ComfyView hạn chế mỏi mắt khi nhìn lâu. Thiết bị sở hữu các cổng kết nối như USB Type-C, HDMI, giải quyết tốt nhu cầu của bạn.",
@@ -12944,7 +12741,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 16IRH10 83K20004VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-16irh10-83k20004vn.html",
     "price": {
       "sale": 23390000,
       "original": 24990000
@@ -13003,7 +12799,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-52-50RB",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-propanel-anv15-52-50rb.html",
     "price": {
       "sale": 31990000,
       "original": 37990000
@@ -13071,7 +12866,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 CPH99",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-cph99.html",
     "price": {
       "sale": 21990000,
       "original": 22990000
@@ -13136,7 +12930,6 @@
   },
   {
     "name": "Laptop Lenovo Legion 5 15IPH11 83RW0023VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-legion-5-15iph11-83rw0023vn.html",
     "price": {
       "sale": 60690000,
       "original": 64990000
@@ -13208,7 +13001,6 @@
   },
   {
     "name": "Laptop HP EliteBook X G1A 14 AI BC4N4AT",
-    "url": "https://cellphones.com.vn/laptop-hp-elitebook-x-g1a-14-ai-bc4n4at-ryzen-ai-7-pro.html",
     "price": {
       "sale": 52290000,
       "original": 54590000
@@ -13271,7 +13063,6 @@
   },
   {
     "name": "Laptop Dell Inspiron 14 5440 D0F3W - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-inspiron-14-5440-d0f3w.html",
     "price": {
       "sale": 19990000,
       "original": 20990000
@@ -13330,7 +13121,6 @@
   },
   {
     "name": "Laptop Dell 16 DC16250 C7U161W11BLU",
-    "url": "https://cellphones.com.vn/laptop-dell-16-dc16250-c7u161w11blu.html",
     "price": {
       "sale": 30990000,
       "original": 32990000
@@ -13398,7 +13188,6 @@
   },
   {
     "name": "Laptop Lenovo V14 G5 IRL 83HD0033VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-v14-g5-irl-83hd0033vn.html",
     "price": {
       "sale": 23490000,
       "original": 23990000
@@ -13460,10 +13249,9 @@
   },
   {
     "name": "Laptop Acer Swift Go 14 AI SFG14-I71-70RP",
-    "url": "https://cellphones.com.vn/laptop-acer-swift-go-14-ai-sfg14-i71-70rp.html",
     "price": {
-      "sale": 49990000,
-      "original": 2916100
+      "sale": null,
+      "original": 49990000
     },
     "highlights": [
       "Laptop Acer Swift Go 14 AI SFG14-I71-70RP dù chỉ nặng 1.12kg nhưng vẫn sở hữu màn hình OLED 2.8K 120Hz sắc nét cùng dung lượng pin 71Wh ấn tượng. Thiết bị tích hợp chip Intel Core Ultra cùng AI Boost 50 TOPS, đáp ứng tốt nhu cầu giải trí và làm việc. Mẫu laptop Acer Swift này có thiết kế bản lề mở phẳng 180 độ độc đáo cho phép người dùng sử dụng linh hoạt.",
@@ -13526,7 +13314,6 @@
   },
   {
     "name": "Laptop MSI Vector 16 HX AI A2XWHG-010VN",
-    "url": "https://cellphones.com.vn/laptop-msi-vector-16-hx-ai-a2xwhg-010vn.html",
     "price": {
       "sale": 64990000,
       "original": 67490000
@@ -13586,7 +13373,6 @@
   },
   {
     "name": "Laptop ASUS Gaming V16 V3607VM-RP044W",
-    "url": "https://cellphones.com.vn/laptop-asus-gaming-v16-v3607vm-rp044w.html",
     "price": {
       "sale": 35990000,
       "original": 37990000
@@ -13650,7 +13436,6 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 15 AL15-72P-581V",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-15-al15-72p-581v.html",
     "price": {
       "sale": 18490000,
       "original": 19990000
@@ -13708,7 +13493,6 @@
   },
   {
     "name": "Laptop HP Omnibook 5 AI 16-AF1046TU BZ7Q8PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-5-ai-16-af1046tu-bz7q8pa.html",
     "price": {
       "sale": 26990000,
       "original": 28190000
@@ -13763,10 +13547,9 @@
   },
   {
     "name": "Laptop ASUS Gaming V16 V3607VU-RP290W",
-    "url": "https://cellphones.com.vn/laptop-asus-gaming-v16-v3607vu-rp290w.html",
     "price": {
-      "sale": 26990000,
-      "original": 1000000
+      "sale": null,
+      "original": 26990000
     },
     "highlights": [
       "Laptop ASUS Gaming V16 V3607VU-RP290W trang bị vi xử lý Intel Core 5-210H mạnh mẽ, mang đến khả năng xử lý mượt mà. Máy được trang bị RAM 16GB DDR5 cùng ổ cứng SSD 512GB PCIe Gen 4 tốc độ cao, giúp khởi động nhanh và phản hồi tức thì. Card đồ họa RTX 4050 6GB trên laptop Asus Gaming này mang lại hiệu suất vượt trội khi chơi game và làm việc chuyên sâu.",
@@ -13823,7 +13606,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 DC5I7952W1",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-dc5i7952w1.html",
     "price": {
       "sale": 24990000,
       "original": 26990000
@@ -13888,7 +13670,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook S16 S3607VA-RP056W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-s16-s3607va-rp056w.html",
     "price": {
       "sale": 23590000,
       "original": 25990000
@@ -13949,7 +13730,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook 14 M1407KA-LY849W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-m1407ka-ly849w-ryzen-ai-5.html",
     "price": {
       "sale": 21590000,
       "original": 24990000
@@ -14018,7 +13798,6 @@
   },
   {
     "name": "Laptop MSI Prestige 14 AI+ EVO C2VMG-020VN",
-    "url": "https://cellphones.com.vn/laptop-msi-prestige-14-ai-evo-c2vmg-020vn.html",
     "price": {
       "sale": 33990000,
       "original": 35990000
@@ -14086,7 +13865,6 @@
   },
   {
     "name": "Laptop Lenovo Yoga Pro 7 15IPH11 83SN000BVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-yoga-pro-7-15iph11-83sn000bvn.html",
     "price": {
       "sale": 74990000,
       "original": 77990000
@@ -14153,7 +13931,6 @@
   },
   {
     "name": "Laptop MSI Cyborg 15 B13WFKG-658VN",
-    "url": "https://cellphones.com.vn/laptop-msi-cyborg-15-b13wfkg-658vn.html",
     "price": {
       "sale": 37990000,
       "original": 40490000
@@ -14219,7 +13996,6 @@
   },
   {
     "name": "Laptop HP AI 14-HC0028TU D72BJPA",
-    "url": "https://cellphones.com.vn/laptop-hp-ai-14-hc0028tu-d72bjpa.html",
     "price": {
       "sale": 24190000,
       "original": 25190000
@@ -14279,7 +14055,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming F16 FX608JHR-RV037W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-f16-fx608jhr-rv037w.html",
     "price": {
       "sale": 38290000,
       "original": 38990000
@@ -14333,7 +14108,6 @@
   },
   {
     "name": "MacBook Air M5 15 inch 2026 10CPU 10GPU 24GB 1TB Sạc 70W",
-    "url": "https://cellphones.com.vn/macbook-air-15-m5-10-cpu-10-gpu-24gb-1tb-sac-70w.html",
     "price": {
       "sale": 54890000,
       "original": 55750000
@@ -14410,7 +14184,6 @@
   },
   {
     "name": "Laptop Lenovo V15 G5 IRL 83HF00BYVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-v15-g5-irl-83hf00byvn.html",
     "price": {
       "sale": 24990000,
       "original": 25590000
@@ -14467,7 +14240,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming A16 FA608UM‑RV266W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-a16-fa608um-rv266w.html",
     "price": {
       "sale": 43590000,
       "original": 44990000
@@ -14530,10 +14302,9 @@
   },
   {
     "name": "Laptop Lenovo ThinkPad X9-15 Gen 1 21Q60055VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkpad-x9-15-gen-1-21q60055vn.html",
     "price": {
-      "sale": 62990000,
-      "original": 3674400
+      "sale": null,
+      "original": 62990000
     },
     "highlights": [
       "Laptop Lenovo Thinkpad X9-15 Gen 1 21Q60055VN được trang bị chip xử lý Intel Core Ultra 7 258V, mang lại khả năng xử lý nhanh chóng cho mọi tác vụ. Máy sở hữu bộ nhớ RAM 32GB và ổ cứng 1TB cung cấp truy xuất dữ liệu mượt mà, không gian lưu trữ rộng rãi. Máy còn sở hữu màn hình OLED 2.8K 15.3 inch, đem đến chất lượng hình ảnh rực rỡ, sống động.",
@@ -14593,7 +14364,6 @@
   },
   {
     "name": "Laptop ASUS Zenbook Duo UX8407AA-SN439WS",
-    "url": "https://cellphones.com.vn/laptop-asus-zenbook-duo-ux8407aa-sn439ws.html",
     "price": {
       "sale": 78990000,
       "original": 82990000
@@ -14657,7 +14427,6 @@
   },
   {
     "name": "Laptop MSI Katana 15 HX B14WEK-286VN",
-    "url": "https://cellphones.com.vn/laptop-msi-katana-15-hx-b14wek-286vn.html",
     "price": {
       "sale": 35990000,
       "original": 41990000
@@ -14719,7 +14488,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook 14 X1404MA-EB219W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-x1404ma-eb219w.html",
     "price": {
       "sale": 19990000,
       "original": 26990000
@@ -14789,7 +14557,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook S14 S3407CA-LY096WS",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-s14-s3407ca-ly096ws.html",
     "price": {
       "sale": 27390000,
       "original": 30990000
@@ -14849,7 +14616,6 @@
   },
   {
     "name": "Laptop Dell Inspiron 14 5441 N4O10441W1",
-    "url": "https://cellphones.com.vn/laptop-dell-inspiron-14-5441-n4o10441w1.html",
     "price": {
       "sale": 28490000,
       "original": 30390000
@@ -14908,7 +14674,6 @@
   },
   {
     "name": "MacBook Air M5 13 inch 2026 10CPU 10GPU 16GB 1TB Sạc 70W",
-    "url": "https://cellphones.com.vn/macbook-air-13-m5-10-cpu-10-gpu-16gb-1tb-2026-sac-70w.html",
     "price": {
       "sale": 43390000,
       "original": 44250000
@@ -14963,7 +14728,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming A14 FA401GM-RG013W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-a14-fa401gm-rg013w-ryzen-ai-9.html",
     "price": {
       "sale": 56590000,
       "original": 57990000
@@ -15026,7 +14790,6 @@
   },
   {
     "name": "Laptop Dell 14 DC14255 R7165W11SLU",
-    "url": "https://cellphones.com.vn/laptop-dell-14-dc14255-r7165w11slu.html",
     "price": {
       "sale": 27490000,
       "original": 28990000
@@ -15090,7 +14853,6 @@
   },
   {
     "name": "Laptop Dell 14 DC14255 DC4AI5278W1",
-    "url": "https://cellphones.com.vn/laptop-dell-14-dc14255-dc4ai5278w1-ryzen-ai-5.html",
     "price": {
       "sale": 26990000,
       "original": 30990000
@@ -15154,7 +14916,6 @@
   },
   {
     "name": "Laptop HP 245 G10 BG5U8PT",
-    "url": "https://cellphones.com.vn/laptop-hp-245-g10-bg5u8pt.html",
     "price": {
       "sale": 19590000,
       "original": 19990000
@@ -15206,7 +14967,6 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 14 AL14-44P-R0SP",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-14-al14-44p-r0sp.html",
     "price": {
       "sale": 20490000,
       "original": 21990000
@@ -15285,7 +15045,6 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15IPH11 83SL000LVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15iph11-83sl000lvn.html",
     "price": {
       "sale": 49990000,
       "original": 55990000
@@ -15353,7 +15112,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-52-59AA",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-52-59aa.html",
     "price": {
       "sale": 33990000,
       "original": 37990000
@@ -15408,7 +15166,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 I5U165W11SLU-5",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-i5u165w11slu-5.html",
     "price": {
       "sale": 22490000,
       "original": 22990000
@@ -15474,7 +15231,6 @@
   },
   {
     "name": "Laptop Dell 14 DC14250 C7U161W11SLU",
-    "url": "https://cellphones.com.vn/laptop-dell-14-dc14250-c7u161w11slu.html",
     "price": {
       "sale": 28990000,
       "original": 30990000
@@ -15546,7 +15302,6 @@
   },
   {
     "name": "Laptop MSI Cyborg 15 B2RWEKG-402VN",
-    "url": "https://cellphones.com.vn/laptop-msi-cyborg-15-b2rwekg-402vn.html",
     "price": {
       "sale": 33990000,
       "original": 35990000
@@ -15613,7 +15368,6 @@
   },
   {
     "name": "Laptop HP 14-EP0112TU 8C5L1PA",
-    "url": "https://cellphones.com.vn/laptop-hp-14-ep0112tu-8c5l1pa.html",
     "price": {
       "sale": 18990000,
       "original": 19590000
@@ -15664,7 +15418,6 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 15 AL15-21P-R87W",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-15-al15-21p-r87w.html",
     "price": {
       "sale": 16990000,
       "original": 17990000
@@ -15727,7 +15480,6 @@
   },
   {
     "name": "Laptop Lenovo ThinkPad E14 Gen 7 21T90029VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkpad-e14-gen-7-21t90029vn.html",
     "price": {
       "sale": 43490000,
       "original": 43500000
@@ -15799,7 +15551,6 @@
   },
   {
     "name": "Laptop Acer Gaming Predator Helios Neo 16 PHN16-I31-74MN",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-predator-helios-neo-16-phn16-i31-74mn.html",
     "price": {
       "sale": 54990000,
       "original": 64990000
@@ -15866,7 +15617,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 M0RCP - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-m0rcp.html",
     "price": {
       "sale": 24490000,
       "original": 24990000
@@ -15934,7 +15684,6 @@
   },
   {
     "name": "Laptop MSI Katana 15 B13UDXK-2269VN V2",
-    "url": "https://cellphones.com.vn/laptop-msi-katana-15-b13udxk-2269vn-16gb.html",
     "price": {
       "sale": 23890000,
       "original": 26990000
@@ -15994,7 +15743,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming A14 FA401EA‑RG034W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-a14-fa401ea-rg034w.html",
     "price": {
       "sale": 63590000,
       "original": 64990000
@@ -16054,7 +15802,6 @@
   },
   {
     "name": "Laptop HP 250R G10 C3SH6AT",
-    "url": "https://cellphones.com.vn/laptop-hp-250r-g10-c3sh6at.html",
     "price": {
       "sale": 21490000,
       "original": 28590000
@@ -16117,7 +15864,6 @@
   },
   {
     "name": "MacBook Pro 16 M4 Pro 14CPU 20GPU 24GB 1TB Sạc 140W",
-    "url": "https://cellphones.com.vn/macbook-pro-16-m4-pro-14-cpu-20-gpu-24gb-1tb-2024-sac-140w.html",
     "price": {
       "sale": 75990000,
       "original": 77990000
@@ -16160,7 +15906,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 H5YXJ - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-h5yxj.html",
     "price": {
       "sale": 24490000,
       "original": 24990000
@@ -16224,7 +15969,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook Go 14 E1404FA-EB482W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-go-14-e1404fa-eb482w.html",
     "price": {
       "sale": 15490000,
       "original": 15990000
@@ -16281,10 +16025,9 @@
   },
   {
     "name": "Laptop Lenovo ThinkBook 14 G8 IAL 21SJ00EAVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkbook-14-g8-ial-21sj00eavn.html",
     "price": {
-      "sale": 26990000,
-      "original": 1000000
+      "sale": null,
+      "original": 24990000
     },
     "highlights": [
       "Laptop Lenovo ThinkBook 14 G8 IAL 21SJ00EAVN là mẫu AI PC tiên tiến trang bị bộ vi xử lý Intel Core Ultra 5 135H tích hợp nhân NPU Intel AI Boost 11 TOPS. Với bộ nhớ RAM 16GB DDR5-5600, máy duy trì khả năng đa nhiệm mượt mà. Thiết bị còn đạt độ bền chuẩn quân đội MIL-STD-810H cùng gói bảo hành 2 năm cao cấp.",
@@ -16349,7 +16092,6 @@
   },
   {
     "name": "Laptop HP Dragonfly G4 A9VD6PT",
-    "url": "https://cellphones.com.vn/laptop-hp-dragonfly-g4-a9vd6pt.html",
     "price": {
       "sale": 54990000,
       "original": 57590000
@@ -16403,7 +16145,6 @@
   },
   {
     "name": "Laptop ASUS ROG Strix G16 G614PM-TS147W",
-    "url": "https://cellphones.com.vn/laptop-asus-rog-strix-g16-g614pm-ts147w.html",
     "price": {
       "sale": 54990000,
       "original": 57990000
@@ -16470,10 +16211,9 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 15 AL15-48P-R86Q",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-15-al15-48p-r86q.html",
     "price": {
-      "sale": 18990000,
-      "original": 1582500
+      "sale": 20190000,
+      "original": 22990000
     },
     "highlights": [
       "Laptop Acer Aspire Lite 15 AL15-48P-R86Q được trang bị sức mạnh từ bộ vi xử lý AMD Ryzen 7 5825U giúp người dùng xử lý mượt mà công việc hằng ngày. Ổ cứng SSD 512GB trên máy đáp ứng tốt nhu cầu lưu trữ dữ liệu. Thiết bị cũng tích hợp màn hình 15.6 inch, hỗ trợ hiển thị hình ảnh sắc nét.",
@@ -16538,7 +16278,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15255 HV1N4 - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15255-hv1n4.html",
     "price": {
       "sale": 18490000,
       "original": 20990000
@@ -16634,7 +16373,6 @@
   },
   {
     "name": "Laptop MSI Cyborg 15 B13WEKG-676VN",
-    "url": "https://cellphones.com.vn/laptop-msi-cyborg-15-b13wekg-676vn.html",
     "price": {
       "sale": 33990000,
       "original": 37490000
@@ -16693,7 +16431,6 @@
   },
   {
     "name": "Laptop Lenovo ThinkPad E14 Gen 7 21SX002YVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkpad-e14-gen-7-21sx002yvn.html",
     "price": {
       "sale": 40490000,
       "original": 40500000
@@ -16751,7 +16488,6 @@
   },
   {
     "name": "Laptop Gigabyte Gaming A16 GA6H-CVHI3VN893SH",
-    "url": "https://cellphones.com.vn/laptop-gigabyte-gaming-a16-ga6h-cvhi3vn893sh.html",
     "price": {
       "sale": 36990000,
       "original": 39990000
@@ -16817,7 +16553,6 @@
   },
   {
     "name": "Laptop ASUS ExpertBook P3 PM3606CHA-MB0082W",
-    "url": "https://cellphones.com.vn/laptop-asus-expertbook-p3-pm3606cha-mb0082w.html",
     "price": {
       "sale": 25790000,
       "original": 29990000
@@ -16884,7 +16619,6 @@
   },
   {
     "name": "Laptop HP 15-FD0083TU 8D736PA",
-    "url": "https://cellphones.com.vn/laptop-hp-15-fd0083tu-8d736pa.html",
     "price": {
       "sale": 21990000,
       "original": 22490000
@@ -16942,7 +16676,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad 5 2-in-1 14IPH11 83UG0027VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-5-2-in-1-14iph11-83ug0027vn.html",
     "price": {
       "sale": 35990000,
       "original": 37990000
@@ -17009,7 +16742,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 14IPH11 83UQ002GVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14iph11-83uq002gvn.html",
     "price": {
       "sale": 28990000,
       "original": 32990000
@@ -17078,7 +16810,6 @@
   },
   {
     "name": "Laptop MSI Prestige 14 AI+ D3MG-022VN",
-    "url": "https://cellphones.com.vn/laptop-msi-prestige-14-ai-d3mg-022vn.html",
     "price": {
       "sale": 44590000,
       "original": 48990000
@@ -17147,7 +16878,6 @@
   },
   {
     "name": "MacBook Air M5 13 inch 2026 10CPU 10GPU 24GB 1TB Sạc 70W",
-    "url": "https://cellphones.com.vn/macbook-air-13-inch-m5-10-cpu-10-gpu-24gb-1tb-2026-sac-70w.html",
     "price": {
       "sale": 47590000,
       "original": 49750000
@@ -17225,7 +16955,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 I5U165W11SLU",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-i5u165w11slu.html",
     "price": {
       "sale": 21490000,
       "original": 25990000
@@ -17287,7 +17016,6 @@
   },
   {
     "name": "Laptop HP EliteBook 6 G1I 13 BQ9L8PT",
-    "url": "https://cellphones.com.vn/laptop-hp-elitebook-6-g1i-13-bq9l8pt.html",
     "price": {
       "sale": 31990000,
       "original": 33290000
@@ -17354,7 +17082,6 @@
   },
   {
     "name": "Laptop Lenovo Legion 5 15IRX10 83LY00HQVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-legion-5-15irx10-83ly00hqvn.html",
     "price": {
       "sale": 46690000,
       "original": 50490000
@@ -17416,7 +17143,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 14AGP11 83S1006RVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-14agp11-83s1006rvn-ryzen-ai-7.html",
     "price": {
       "sale": 30490000,
       "original": 32990000
@@ -17483,7 +17209,6 @@
   },
   {
     "name": "Laptop Dell Vostro 3520 F0V0V256 - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-vostro-3520-f0v0v256.html",
     "price": {
       "sale": 10990000,
       "original": 13990000
@@ -17526,7 +17251,6 @@
   },
   {
     "name": "Laptop ASUS ROG Strix G16 G614PP-TS112W",
-    "url": "https://cellphones.com.vn/laptop-asus-rog-strix-g16-g614pp-ts112w.html",
     "price": {
       "sale": 59990000,
       "original": 62990000
@@ -17596,10 +17320,9 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-52-59RR",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-52-59rr.html",
     "price": {
-      "sale": 33990000,
-      "original": 1982800
+      "sale": 38990000,
+      "original": 39990000
     },
     "highlights": [
       "Laptop Acer Gaming Nitro V 15 ProPanel ANV15-52-59RR trang bị chip Intel Core 5 210H, card đồ họa NVIDIA RTX 5050 mang lại hiệu năng mạnh mẽ. RAM 16GB cùng SSD 512GB giúp đa nhiệm và lưu trữ mượt mà. Máy sở hữu màn hình 15.6 inch FHD IPS 180Hz 100% sRGB cùng hệ thống tản nhiệt 2 quạt hiệu quả.",
@@ -17692,7 +17415,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad 5 2-in-1 14IPH11 83UG0026VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-5-2-in-1-14iph11-83ug0026vn.html",
     "price": {
       "sale": 30590000,
       "original": 32990000
@@ -17763,7 +17485,6 @@
   },
   {
     "name": "MacBook Pro M5 Max 14 inch 2026 18CPU 32GPU 36GB 2TB Nano",
-    "url": "https://cellphones.com.vn/macbook-pro-14-inch-m5-max-18cpu-32-gpu-36gb-2tb-2026.html",
     "price": {
       "sale": 118990000,
       "original": 119990000
@@ -17858,7 +17579,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 14AGP11 83S1003GVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-14agp11-83s1003gvn-ryzen-ai-7.html",
     "price": {
       "sale": 38990000,
       "original": 44990000
@@ -17922,7 +17642,6 @@
   },
   {
     "name": "Laptop HP Omnibook 7 Aero 13-BG1083AU BZ7R9PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-7-aero-13-bg1083au-bz7r9pa-ryzen-ai-7.html",
     "price": {
       "sale": 34990000,
       "original": 37190000
@@ -17983,7 +17702,6 @@
   },
   {
     "name": "Laptop HP Omnibook X Flip 14-FK0082AU BZ7N8PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-x-flip-14-fk0082au-bz7n8pa-ryzen-ai-7.html",
     "price": {
       "sale": 39890000,
       "original": 40890000
@@ -18039,7 +17757,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 16IPH11 83US002WVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-16iph11-83us002wvn.html",
     "price": {
       "sale": 28990000,
       "original": 32990000
@@ -18106,7 +17823,6 @@
   },
   {
     "name": "Laptop MSI Katana 15 HX B14WEK-027VN",
-    "url": "https://cellphones.com.vn/laptop-msi-katana-15-hx-b14wek-027vn.html",
     "price": {
       "sale": 45990000,
       "original": 49990000
@@ -18162,7 +17878,6 @@
   },
   {
     "name": "Laptop Gaming Acer Nitro V ANV15-51-72VS",
-    "url": "https://cellphones.com.vn/laptop-gaming-acer-nitro-v-anv15-51-72vs.html",
     "price": {
       "sale": 19990000,
       "original": 25990000
@@ -18215,7 +17930,6 @@
   },
   {
     "name": "Laptop Lenovo Legion 7 16IAX10 83KY001VVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-legion-7-16iax10-83ky001vvn.html",
     "price": {
       "sale": 84990000,
       "original": 85990000
@@ -18278,7 +17992,6 @@
   },
   {
     "name": "Laptop MSI Prestige 13 AI+ A3MG-036VN",
-    "url": "https://cellphones.com.vn/laptop-msi-prestige-13-ai-a3mg-036vn.html",
     "price": {
       "sale": 51990000,
       "original": 53990000
@@ -18349,7 +18062,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming F16 FX607VJB-RL151W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-f16-fx607vjb-rl151w.html",
     "price": {
       "sale": 23490000,
       "original": 24990000
@@ -18448,7 +18160,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV16S-41-R337",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-16s-propanel-anv16s-41-r337.html",
     "price": {
       "sale": 41990000,
       "original": 46990000
@@ -18511,7 +18222,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming F16 FX608JHI-TU210W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-f16-fx608jhi-tu210w.html",
     "price": {
       "sale": 41990000,
       "original": 47990000
@@ -18582,7 +18292,6 @@
   },
   {
     "name": "Laptop HP 250 G10 B1RY5PT",
-    "url": "https://cellphones.com.vn/laptop-hp-250-g10-b1ry5pt.html",
     "price": {
       "sale": 18990000,
       "original": 19290000
@@ -18645,7 +18354,6 @@
   },
   {
     "name": "Laptop Acer Aspire Lite 15 AL15-44P-R4UH",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-lite-15-al15-44p-r4uh.html",
     "price": {
       "sale": 21990000,
       "original": 22990000
@@ -18712,7 +18420,6 @@
   },
   {
     "name": "Laptop ASUS Zenbook 14 UX3405CA-PZ187WS",
-    "url": "https://cellphones.com.vn/laptop-asus-zenbook-14-ux3405ca-pz187ws.html",
     "price": {
       "sale": 30890000,
       "original": 31990000
@@ -18774,7 +18481,6 @@
   },
   {
     "name": "Laptop Gigabyte AERO X16 EG61H-1VH93VNC94AH",
-    "url": "https://cellphones.com.vn/laptop-gigabyte-aero-x16-eg61h-1vh93vnc94ah-ryzen-ai-7.html",
     "price": {
       "sale": 42990000,
       "original": 44990000
@@ -18843,7 +18549,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV16S-61-R0B8",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-16-ai-propanel-anv16s-61-r0b8.html",
     "price": {
       "sale": 42990000,
       "original": 44990000
@@ -18905,7 +18610,6 @@
   },
   {
     "name": "MacBook Pro 16 M4 Pro 14CPU 20GPU 24GB 512GB",
-    "url": "https://cellphones.com.vn/macbook-pro-16-inch-m4-pro-24gb-512gb.html",
     "price": {
       "sale": 62990000,
       "original": 66990000
@@ -18943,7 +18647,6 @@
   },
   {
     "name": "Laptop ASUS ROG Strix G16 G614PH-TS118W",
-    "url": "https://cellphones.com.vn/laptop-asus-rog-strix-g16-g614ph-ts118w.html",
     "price": {
       "sale": 50990000,
       "original": 52990000
@@ -19013,10 +18716,9 @@
   },
   {
     "name": "Laptop ASUS ROG Strix G16 G614PR-TS103W",
-    "url": "https://cellphones.com.vn/laptop-asus-rog-strix-g16-g614pr-ts103w.html",
     "price": {
-      "sale": 68990000,
-      "original": 4024400
+      "sale": 70990000,
+      "original": 71990000
     },
     "highlights": [
       "Laptop ASUS ROG Strix G16 G614PR-TS103W sở hữu AMD Ryzen 9 8940HX cùng RTX 5070 Ti hỗ trợ xử lý gaming và đồ họa mạnh mẽ cho nhu cầu giải trí cao. Sản phẩm trang bị màn hình ROG Nebula Display 16 inch hỗ trợ hiển thị hình ảnh sắc nét. Chuẩn RAM DDR5 giúp thiết bị tối ưu tốc độ phản hồi khi đa nhiệm.",
@@ -19081,7 +18783,6 @@
   },
   {
     "name": "MacBook Air M5 15 inch 2026 10CPU 10GPU 16GB 1TB",
-    "url": "https://cellphones.com.vn/macbook-air-15-m5-10-cpu-10-gpu-16gb-1tb.html",
     "price": {
       "sale": 49490000,
       "original": 50250000
@@ -19149,7 +18850,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel AN16S-61-R193",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-16-ai-propanel-an16s-61-r193.html",
     "price": {
       "sale": 59990000,
       "original": 60990000
@@ -19210,7 +18910,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 14ARP10 83K600EAVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14arp10-83k600eavn.html",
     "price": {
       "sale": 21990000,
       "original": 25490000
@@ -19280,7 +18979,6 @@
   },
   {
     "name": "Laptop HP ProBook 4 G1I 16 BQ5D8PT",
-    "url": "https://cellphones.com.vn/laptop-hp-probook-4-g1i-16-bq5d8pt.html",
     "price": {
       "sale": 32790000,
       "original": 34190000
@@ -19338,7 +19036,6 @@
   },
   {
     "name": "Laptop HP 250R G10 CC9C0PT",
-    "url": "https://cellphones.com.vn/laptop-hp-250r-g10-cc9c0pt.html",
     "price": {
       "sale": 25490000,
       "original": 26390000
@@ -19403,10 +19100,9 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming A14 FA401KM-RG010WS",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-a14-fa401km-rg010ws-ryzen-ai-7.html",
     "price": {
-      "sale": 45190000,
-      "original": 1000000
+      "sale": null,
+      "original": 45190000
     },
     "highlights": [
       "Laptop Asus TUF GAMING A14 FA401KM-RG010WS Ryzen AI 7 được trang bị CPU AMD Ryzen AI 7 350 Processor kết hợp cùng card đồ họa NVIDIA GeForce RTX 5060. Bên cạnh đó, mẫu laptop AI này còn sở hữu viên pin dung lượng 73WHrs, cho thời lượng sử dụng ấn tượng. Màn hình 14 inch với tần số quét 165Hz mang đến trải nghiệm hình ảnh sống động, mượt mà.",
@@ -19461,7 +19157,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 14IRH10R 83J0006CVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-14irh10r-83j0006cvn.html",
     "price": {
       "sale": 26990000,
       "original": 28990000
@@ -19519,7 +19214,6 @@
   },
   {
     "name": "Laptop Asus Vivobook X407UA-BV308T",
-    "url": "https://cellphones.com.vn/laptop-asus-x407ua-bv308t-i5-8250u-vang.html",
     "price": {
       "sale": 11990000,
       "original": 13490000
@@ -19564,7 +19258,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV16S-61-R7KQ",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-16-ai-propanel-anv16s-61-r7kq.html",
     "price": {
       "sale": 43990000,
       "original": 48990000
@@ -19626,7 +19319,6 @@
   },
   {
     "name": "Laptop HP Envy x360 14-FA0093AU AY8U3PA",
-    "url": "https://cellphones.com.vn/laptop-hp-envy-x360-14-fa0093au-ay8u3pa.html",
     "price": {
       "sale": 34790000,
       "original": 35990000
@@ -19725,7 +19417,6 @@
   },
   {
     "name": "MacBook Pro 16 M4 Max 14CPU 32GPU 36GB 1TB",
-    "url": "https://cellphones.com.vn/macbook-pro-16-inch-m4-max-36gb-1tb.html",
     "price": {
       "sale": 87990000,
       "original": 91490000
@@ -19761,7 +19452,6 @@
   },
   {
     "name": "Laptop MSI Cyborg 14 A13UDX-099VN",
-    "url": "https://cellphones.com.vn/laptop-msi-cyborg-14-a13udx-099vn.html",
     "price": {
       "sale": 24990000,
       "original": 25390000
@@ -19819,10 +19509,9 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel AN16S-61-R9CN",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-propanel-an16s-61-r9cn.html",
     "price": {
-      "sale": 57990000,
-      "original": 3382800
+      "sale": null,
+      "original": 57990000
     },
     "highlights": [
       "Laptop Acer Gaming Nitro ProPanel AN16S-61-R9CN sở hữu sức mạnh đột phá từ vi xử lý AMD Ryzen AI 7 350 giúp tối ưu hóa các tác vụ trí tuệ nhân tạo . Màn hình 16 inch 2K+ 180Hz mang đến chất lượng hiển thị sắc nét và mượt mà trong mọi tác vụ. Hệ thống 2 quạt cùng 8 luồng khí giúp tối ưu tản nhiệt, duy trì hiệu năng ổn định.",
@@ -19886,10 +19575,9 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 3G7T0 - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-3g7t0.html",
     "price": {
-      "sale": 21990000,
-      "original": 1000000
+      "sale": null,
+      "original": 21990000
     },
     "highlights": [
       "Laptop Dell 15 DC15250 3G7T0 có kích thước 358.5 x 235.56 x 18.99 mm, màu Platinum Silver thanh lịch, chất liệu nhôm kết hợp nhựa cao cấp, bền chắc. Máy được trang bị CPU Intel i7-1355U, GPU tích hợp Intel Iris Xe, RAM 16GB, 1TB SSD mạnh mẽ. Màn hình 15.6 inches, độ phân giải 1920x1080 cùng tần số 120Hz hiển thị và phản hồi mượt mà, sắc nét.",
@@ -19950,7 +19638,6 @@
   },
   {
     "name": "Laptop MSI Modern 14 F13MG-240VNCP",
-    "url": "https://cellphones.com.vn/laptop-msi-modern-14-f13mg-240vncp.html",
     "price": {
       "sale": 17490000,
       "original": 18990000
@@ -20009,7 +19696,6 @@
   },
   {
     "name": "Laptop Gigabyte Gaming A16 GA65H-5THP3VN893SH",
-    "url": "https://cellphones.com.vn/laptop-gigabyte-gaming-a16-ga65h-5thp3vn893sh.html",
     "price": {
       "sale": 34990000,
       "original": 35990000
@@ -20081,7 +19767,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook 16 A1607QA-MB067WS",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-16-a1607qa-mb067ws-snapdragon.html",
     "price": {
       "sale": 17990000,
       "original": 20990000
@@ -20141,7 +19826,6 @@
   },
   {
     "name": "Laptop HP 250R G9 C40LJAT",
-    "url": "https://cellphones.com.vn/laptop-hp-250r-g9-c40ljat.html",
     "price": {
       "sale": 21490000,
       "original": 28590000
@@ -20204,7 +19888,6 @@
   },
   {
     "name": "Laptop MSI Modern 14 F13MG-466VN V2",
-    "url": "https://cellphones.com.vn/laptop-msi-modern-14-f13mg-466vn-v2.html",
     "price": {
       "sale": 15990000,
       "original": 18990000
@@ -20242,7 +19925,6 @@
   },
   {
     "name": "Laptop Gigabyte AERO X16 EG61H-X161VH93VNC94DH",
-    "url": "https://cellphones.com.vn/laptop-gigabyte-aero-x16-eg61h-x161vh93vnc94dh-ryzen-ai-7.html",
     "price": {
       "sale": 42990000,
       "original": 43990000
@@ -20307,10 +19989,9 @@
   },
   {
     "name": "Laptop Lenovo LOQ 15AHP10 83JG0047VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-loq-15ahp10-83jg0047vn.html",
     "price": {
-      "sale": 36490000,
-      "original": 1000000
+      "sale": null,
+      "original": 36490000
     },
     "highlights": [
       "Laptop Lenovo LOQ 15AHP10 83JG0047VN có kích thước 359.86 x 258.7 x 21.9-23.9 mm, trọng lượng máy khoảng 2.4kg thuận tiện di chuyển, sử dụng ngoài trời. Sản phẩm sở hữu sức mạnh được nâng cấp với con chip AI LA1. Cấu hình laptop Lenovo LOQ này mạnh mẽ từ CPU AMD R7 250, card đồ họa NVIDIA GeForce RTX 5050, 16GB RAM cùng SSD 512GB.",
@@ -20373,10 +20054,9 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-52-74UM",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-52-74um.html",
     "price": {
-      "sale": 31990000,
-      "original": 1866100
+      "sale": 32490000,
+      "original": 36490000
     },
     "highlights": [
       "Laptop Acer Gaming Nitro V 15 ProPanel ANV15-52-74UM được trang bị Intel Core i7 Processor 240H cùng GPU RTX 3050, mang đến hiệu năng xử lý vượt trội. Sản phẩm có RAM 16GB và SSD 512GB, có thể nâng cấp khi cần trong tương lai. Máy sở hữu viên pin Li-ion 57 Wh gồm 4-cell, cung cấp năng lượng ngày dài sử dụng.",
@@ -20471,7 +20151,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV16-72-782F",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-propanel-anv16-72-782f.html",
     "price": {
       "sale": 41990000,
       "original": 45990000
@@ -20539,7 +20218,6 @@
   },
   {
     "name": "Laptop ASUS TUF Gaming F16 FX608JPR-RV044W",
-    "url": "https://cellphones.com.vn/laptop-asus-tuf-gaming-f16-fx608jpr-rv044w.html",
     "price": {
       "sale": 42690000,
       "original": 45190000
@@ -20598,7 +20276,6 @@
   },
   {
     "name": "Laptop ASUS ROG Strix G16 G614PW-TS051W",
-    "url": "https://cellphones.com.vn/laptop-asus-rog-strix-g16-g614pw-ts051w.html",
     "price": {
       "sale": 92990000,
       "original": 94990000
@@ -20670,7 +20347,6 @@
   },
   {
     "name": "Laptop HP ProBook 4 G1I 16 BQ5D9PT",
-    "url": "https://cellphones.com.vn/laptop-hp-probook-4-g1i-16-bq5d9pt.html",
     "price": {
       "sale": 35990000,
       "original": 36890000
@@ -20732,7 +20408,6 @@
   },
   {
     "name": "Laptop MSI Prestige 14 AI Studio C1UDXG-058VN",
-    "url": "https://cellphones.com.vn/laptop-msi-prestige-14-ai-studio-c1udxg-058vn.html",
     "price": {
       "sale": 28990000,
       "original": 30990000
@@ -20791,7 +20466,6 @@
   },
   {
     "name": "Laptop Acer Gaming Nitro ProPanel ANV15-52-73Z8",
-    "url": "https://cellphones.com.vn/laptop-acer-gaming-nitro-v-15-propanel-anv15-52-73z8.html",
     "price": {
       "sale": 33990000,
       "original": 37990000
@@ -20848,7 +20522,6 @@
   },
   {
     "name": "Laptop Lenovo Yoga Slim 7 14IPH11 83QM002FVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-yoga-slim-7-14iph11-83qm002fvn.html",
     "price": {
       "sale": 54490000,
       "original": 55990000
@@ -20916,7 +20589,6 @@
   },
   {
     "name": "Laptop Gigabyte Gaming A16 GA6H-CTHI3VN893SH",
-    "url": "https://cellphones.com.vn/laptop-gigabyte-gaming-a16-ga6h-cthi3vn893sh.html",
     "price": {
       "sale": 34590000,
       "original": 38990000
@@ -20982,7 +20654,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 14ARP10 83K6005VVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14arp10-83k6005vvn.html",
     "price": {
       "sale": 18490000,
       "original": 22990000
@@ -21040,7 +20711,6 @@
   },
   {
     "name": "Laptop ASUS ExpertBook P1 P1503CVA-C5H16-63WS",
-    "url": "https://cellphones.com.vn/laptop-asus-expertbook-p1-p1503cva-c5h16-63ws.html",
     "price": {
       "sale": 24290000,
       "original": 26990000
@@ -21106,10 +20776,9 @@
   },
   {
     "name": "Laptop MSI Katana 15 B13UDXK-2411VN",
-    "url": "https://cellphones.com.vn/laptop-msi-katana-15-b13udxk-2411vn.html",
     "price": {
-      "sale": 24990000,
-      "original": 1000000
+      "sale": null,
+      "original": 24990000
     },
     "highlights": [
       "Laptop MSI Katana 15 B13UDXK 2411VN sở hữu bộ xử lý Intel Core i7-13620H 10 nhân mạnh mẽ và 16GB RAM DDR5 cho khả năng xử lý và chơi game vượt trội. Mẫu laptop MSI Katana 15 này được trang bị card đồ họa NVIDIA GeForce RTX 3050 giúp tái hiện hình ảnh với màu sắc trung thực, rõ ràng. Màn hình IPS Full HD 144Hz hỗ trợ hiển thị mượt, hạn chế giật lag để nâng cao trải nghiệm khi sử dụng.",
@@ -21163,7 +20832,6 @@
   },
   {
     "name": "Laptop Acer Aspire 3 A315-58-53S6 NX.AM0SV.005",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-3-a315-58-53s6.html",
     "price": {
       "sale": 9990000,
       "original": 15990000
@@ -21204,7 +20872,6 @@
   },
   {
     "name": "Laptop Lenovo ThinkPad X9-15 Gen 1 Aura Edition 21Q60052VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-thinkpad-x9-15-gen-1-aura-edition-21q60052vn.html",
     "price": {
       "sale": 55990000,
       "original": 56990000
@@ -21264,7 +20931,6 @@
   },
   {
     "name": "MacBook Air M5 15 inch 2026 10CPU 10GPU 16GB 1TB Sạc 70W",
-    "url": "https://cellphones.com.vn/macbook-air-15-m5-10-cpu-10-gpu-16gb-1tb-sac-70w.html",
     "price": {
       "sale": 49490000,
       "original": 50250000
@@ -21339,7 +21005,6 @@
   },
   {
     "name": "Laptop Dell Inspiron 15 3520 6R6NK V2 - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-inspiron-15-3520-6r6nk-16gb.html",
     "price": {
       "sale": 12490000,
       "original": 14490000
@@ -21393,7 +21058,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 15IRH10 83K1000JVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-15irh10-83k1000jvn.html",
     "price": {
       "sale": 21390000,
       "original": 22990000
@@ -21452,7 +21116,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 14ARP10 83K6005UVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-14arp10-83k6005uvn.html",
     "price": {
       "sale": 20990000,
       "original": 26990000
@@ -21548,7 +21211,6 @@
   },
   {
     "name": "Laptop HP Omnibook 5 16-AG1069AU BZ7T1PA",
-    "url": "https://cellphones.com.vn/laptop-hp-omnibook-5-16-ag1069au-bz7t1pa-ryzen-ai-5.html",
     "price": {
       "sale": 25990000,
       "original": 27690000
@@ -21611,7 +21273,6 @@
   },
   {
     "name": "Laptop ASUS Zenbook 14 UX3405CA-PZ188WS",
-    "url": "https://cellphones.com.vn/laptop-asus-zenbook-14-ux3405ca-pz188ws.html",
     "price": {
       "sale": 36590000,
       "original": 37990000
@@ -21674,7 +21335,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 MCW52 - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-mcw52.html",
     "price": {
       "sale": 21990000,
       "original": 23990000
@@ -21741,7 +21401,6 @@
   },
   {
     "name": "Laptop HP EliteBook X Flip G1I 14 B9FR8PT AI",
-    "url": "https://cellphones.com.vn/laptop-hp-elitebook-x-flip-g1i-14-b9fr8pt-ai.html",
     "price": {
       "sale": 62990000,
       "original": 65290000
@@ -21805,7 +21464,6 @@
   },
   {
     "name": "Laptop Lenovo Yoga Slim 7 14IMH9 83CV00AHVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-yoga-slim-7-14imh9-83cv00ahvn.html",
     "price": {
       "sale": 24490000,
       "original": 25590000
@@ -21867,10 +21525,9 @@
   },
   {
     "name": "Laptop Acer Swift Lite 14 AI SFL14-51M-78XZ",
-    "url": "https://cellphones.com.vn/laptop-acer-swift-lite-14-ai-sfl14-51m-78xz.html",
     "price": {
-      "sale": 22990000,
-      "original": 1915800
+      "sale": null,
+      "original": 22990000
     },
     "highlights": [
       "Laptop Acer Swift Lite 14 AI SFL14-51M-78XZ trang bị CPU Intel Core Ultra 7 processor 155U với 12 lõi, RAM DDR5 16GB và SSD PCIe NVMe dung lượng 512GB. Máy có màn hình 14 inch FHD+ (1920 x 1200), tỉ lệ 16:10, card đồ họa tích hợp Intel Graphics. Laptop có kích thước 314.4 x 221.9 x 17.5mm, pin 58Whr và khối lượng chỉ 2.4 kg.",
@@ -21916,7 +21573,6 @@
   },
   {
     "name": "Laptop MSI Katana 15 HX B14WFK-025VN",
-    "url": "https://cellphones.com.vn/laptop-msi-katana-15-hx-b14wfk-025vn.html",
     "price": {
       "sale": 36990000,
       "original": 45990000
@@ -21979,7 +21635,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook 16 M1607KA-MB091WS",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-16-m1607ka-mb091ws-ryzen-ai-7.html",
     "price": {
       "sale": 20490000,
       "original": 22990000
@@ -22042,7 +21697,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook 14 A1407CA-LY008WS",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-a1407ca-ly008ws.html",
     "price": {
       "sale": 21290000,
       "original": 22490000
@@ -22102,10 +21756,9 @@
   },
   {
     "name": "Laptop HP Gaming OMEN 16-AM0129TX BX9D1PA",
-    "url": "https://cellphones.com.vn/laptop-hp-gaming-omen-16-am0129tx-bx9d1pa.html",
     "price": {
-      "sale": 48890000,
-      "original": 2851900
+      "sale": null,
+      "original": 48890000
     },
     "highlights": [
       "Laptop HP Gaming OMEN 16-AM0129TX BX9D1PA trang bị vi xử lý Intel Core Ultra 7 255H mạnh mẽ cùng card đồ họa rời NVIDIA GeForce RTX 5070 8GB GDDR7. Máy có RAM 32GB DDR5 và ổ cứng SSD 512GB chuẩn PCIe Gen4, giúp xử lý đa nhiệm mượt mà. Màn hình 16 inch 2K, tần số quét 165Hz cho trải nghiệm hình ảnh chân thực, sắc nét.",
@@ -22162,7 +21815,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 H02DF - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-h02df.html",
     "price": {
       "sale": 17990000,
       "original": 18990000
@@ -22221,10 +21873,9 @@
   },
   {
     "name": "Laptop MSI Sword 16 HX B14VEKG-459VN",
-    "url": "https://cellphones.com.vn/laptop-msi-sword-16-hx-b14vekg-459vn.html",
     "price": {
-      "sale": 35990000,
-      "original": 1000000
+      "sale": 38990000,
+      "original": 40990000
     },
     "highlights": [
       "Laptop MSI SWORD 16 HX B14VEKG-459VN có dung lượng RAM 16GB DDR5 5600MHz, giúp tối ưu hóa, giúp máy vận hành mượt mà, hạn chế tình trạng giật lag. Thiết kế laptop là 359 x 266.4 x 21.8-27.7 mm với kích thước nhỏ và nặng 2.3kg sẽ dễ dàng mang đi khi cần. Laptop được trang bị Intel Core i7-14700HX thế hệ mới 14 với tốc độ tối đa lớn đến 5.5GHz, mang lại hiệu suất ổn định.",
@@ -22280,7 +21931,6 @@
   },
   {
     "name": "Laptop Gigabyte Gaming A16 GA6H-CVHI3VNC94SH",
-    "url": "https://cellphones.com.vn/laptop-gigabyte-gaming-a16-ga6h-cvhi3vnc94sh.html",
     "price": {
       "sale": 38990000,
       "original": 39990000
@@ -22345,7 +21995,6 @@
   },
   {
     "name": "Laptop ASUS Zenbook A14 UX3407NA-QD254W",
-    "url": "https://cellphones.com.vn/laptop-asus-zenbook-a14-ux3407na-qd254w.html",
     "price": {
       "sale": 54990000,
       "original": 63990000
@@ -22414,7 +22063,6 @@
   },
   {
     "name": "Laptop MSI Stealth 16 AI+ B3WF-007VN",
-    "url": "https://cellphones.com.vn/laptop-msi-stealth-16-ai-b3wf-007vn.html",
     "price": {
       "sale": 78490000,
       "original": 79990000
@@ -22484,7 +22132,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook S16 S5606CA-RI171WS",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-s16-s5606ca-ri171ws.html",
     "price": {
       "sale": 31390000,
       "original": 31410000
@@ -22544,7 +22191,6 @@
   },
   {
     "name": "Laptop MSI Crosshair 16 HX AI D2XWFKG-035VN",
-    "url": "https://cellphones.com.vn/laptop-msi-crosshair-16-hx-ai-d2xwfkg-035vn.html",
     "price": {
       "sale": 42990000,
       "original": 48090000
@@ -22606,7 +22252,6 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 79N4M - Nhập khẩu chính hãng",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-79n4m.html",
     "price": {
       "sale": 12490000,
       "original": 14490000
@@ -22664,7 +22309,6 @@
   },
   {
     "name": "Laptop Dell Vostro 14 3400 YX51W6",
-    "url": "https://cellphones.com.vn/laptop-dell-vostro-14-3400-yx51w6.html",
     "price": {
       "sale": 15990000,
       "original": 18590000
@@ -22706,7 +22350,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 5 14IPH11 83S5000CVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-5-14iph11-83s5000cvn.html",
     "price": {
       "sale": 36990000,
       "original": 39990000
@@ -22773,7 +22416,6 @@
   },
   {
     "name": "Laptop Dell Vostro 3480 70183778",
-    "url": "https://cellphones.com.vn/laptop-dell-vostro-3480-70183778-i5-8265u-den.html",
     "price": {
       "sale": 12190000,
       "original": 15190000
@@ -22815,7 +22457,6 @@
   },
   {
     "name": "Laptop ASUS Vivobook 15 X1504ZA-NJ582W",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-15-x1504za-nj582w.html",
     "price": {
       "sale": 9990000,
       "original": 12990000
@@ -22858,10 +22499,9 @@
   },
   {
     "name": "Laptop Acer Swift Air 14 SFA14-I31-55NR",
-    "url": "https://cellphones.com.vn/laptop-acer-swift-air-14-sfa14-i31-55nr.html",
     "price": {
-      "sale": 24990000,
-      "original": 1000000
+      "sale": null,
+      "original": 24990000
     },
     "highlights": [
       "Laptop Acer Swift Air 14 SFA14-I31-55NR sử dụng CPU Intel Core 5 processor 320 hiệu suất ấn tượng, đi cùng RAM 12GB và ổ cứng 512GB thoải mái lưu trữ. Chiếc laptop này còn mang đến trải nghiệm thị giác tốt với màn hình 14 inch, phân giải WUXGA sắc nét. Ngoài ra, máy tích hợp pin dung lượng 70Whrs cho thời lượng dài.",
@@ -22922,7 +22562,6 @@
   },
   {
     "name": "Laptop MSI Stealth 14 Studio A13VF-051VN",
-    "url": "https://cellphones.com.vn/laptop-msi-stealth-14-studio-a13vf-051vn.html",
     "price": {
       "sale": 83990000,
       "original": 86990000
@@ -22965,7 +22604,6 @@
   },
   {
     "name": "Laptop Asus Expertbook B3402FEA-EC0960W",
-    "url": "https://cellphones.com.vn/laptop-asus-expertbook-b3402fea-ec0960w.html",
     "price": {
       "sale": 15990000,
       "original": 20790000
@@ -23012,10 +22650,9 @@
   },
   {
     "name": "Laptop Acer Swift Air 14 SFA14-I31-54A2",
-    "url": "https://cellphones.com.vn/laptop-acer-swift-air-14-sfa14-i31-54a2.html",
     "price": {
-      "sale": 24990000,
-      "original": 1000000
+      "sale": null,
+      "original": 24990000
     },
     "highlights": [
       "Laptop Acer Swift Air 14 SFA14-I31-54A2 sở hữu thiết kế mỏng nhẹ 1.19 kg cùng chip Intel Core 5 320, phục vụ linh hoạt cho học tập và làm việc văn phòng. Máy có RAM 12GB LPDDR5X, SSD 512GB PCIe NVMe và NPU 16 TOPS cho tác vụ AI. Màn hình 14 inch WUXGA IPS 120Hz cho góc nhìn rộng và chuyển động mượt mà.",
@@ -23083,7 +22720,6 @@
   },
   {
     "name": "Laptop MSI Modern 14S G3MG-003VN",
-    "url": "https://cellphones.com.vn/laptop-msi-modern-14s-g3mg-003vn.html",
     "price": {
       "sale": 30490000,
       "original": 31490000
@@ -23145,10 +22781,9 @@
   },
   {
     "name": "Laptop ASUS VivoBook 14 A415EA-EB360T",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-a415ea.html",
     "price": {
-      "sale": 18790000,
-      "original": 950000
+      "sale": null,
+      "original": 18790000
     },
     "highlights": [
       "ASUS VivoBook 14 A415EA – Laptop phổ thông cho dân văn phòng và sinh viên",
@@ -23192,10 +22827,9 @@
   },
   {
     "name": "Apple MacBook Pro 15 inch Touch Bar 256GB MLW72",
-    "url": "https://cellphones.com.vn/apple-macbook-pro-15-inch-touch-bar-256-gb-mlw72.html",
     "price": {
-      "sale": 51000000,
-      "original": 950000
+      "sale": null,
+      "original": 51000000
     },
     "highlights": [
       "Apple MacBook Pro 15 inch Touch Bar 256GB MLW72 (2016) hàng nhập khẩu",
@@ -23231,7 +22865,6 @@
   },
   {
     "name": "Laptop MSI Crosshair 16 HX AI D2XWFKG-078VN",
-    "url": "https://cellphones.com.vn/laptop-msi-crosshair-16-hx-d2xwfkg-078vn.html",
     "price": {
       "sale": 40990000,
       "original": 46990000
@@ -23291,7 +22924,6 @@
   },
   {
     "name": "Laptop MSI Crosshair 15 B12UEZ-460VN",
-    "url": "https://cellphones.com.vn/laptop-msi-gaming-crosshair-15-b12uez-460vn.html",
     "price": {
       "sale": 26990000,
       "original": 34990000
@@ -23335,7 +22967,6 @@
   },
   {
     "name": "Laptop MSI Crosshair 16 HX AI D2XWFKG-070VN",
-    "url": "https://cellphones.com.vn/laptop-msi-crosshair-16-hx-d2xwfkg-070vn.html",
     "price": {
       "sale": 40990000,
       "original": 46990000
@@ -23401,7 +23032,6 @@
   },
   {
     "name": "Laptop MSI Crosshair 16 HX AI D2XWGKG-072VN",
-    "url": "https://cellphones.com.vn/laptop-msi-crosshair-16-hx-d2xwgkg-072vn.html",
     "price": {
       "sale": 46490000,
       "original": 52990000
@@ -23466,7 +23096,6 @@
   },
   {
     "name": "Laptop MSI Crosshair 16 HX AI D2XWGKG-071VN",
-    "url": "https://cellphones.com.vn/laptop-msi-crosshair-16-hx-d2xwgkg-071vn.html",
     "price": {
       "sale": 48490000,
       "original": 54990000
@@ -23530,10 +23159,9 @@
   },
   {
     "name": "Laptop Dell 15 DC15250 I5U165W11SLU-2Y - Bảo hành 2 năm",
-    "url": "https://cellphones.com.vn/laptop-dell-15-dc15250-i5u165w11slu-2y.html",
     "price": {
-      "sale": 30590000,
-      "original": 1000000
+      "sale": null,
+      "original": 30590000
     },
     "highlights": [
       "Laptop Dell 15 DC15250 I5U165W11SLU 2Y sở hữu bộ vi xử lý Intel Core i5-1334U vượt trội cùng RAM DDR5 16GB, mang đến khả năng xử lý mạnh mẽ và mượt mà. SSD PCIe Gen4x4 512GB giúp truy xuất dữ liệu nhanh và tối ưu tốc độ vận hành. Màn hình 15.6 inch 120Hz nâng cao khả năng hiển thị với khung hình sắc nét.",
@@ -23601,7 +23229,6 @@
   },
   {
     "name": "Laptop Dell Inspiron 3501 70253897",
-    "url": "https://cellphones.com.vn/laptop-dell-inspiron-3501-70253897.html",
     "price": {
       "sale": 18490000,
       "original": 22490000
@@ -23639,10 +23266,9 @@
   },
   {
     "name": "Apple MacBook Air 13 inch 128GB MQD32",
-    "url": "https://cellphones.com.vn/apple-macbook-air-13-inch-128-gb-mqd32.html",
     "price": {
-      "sale": 20600000,
-      "original": 950000
+      "sale": null,
+      "original": 20600000
     },
     "highlights": [
       "Apple MacBook Air 13 inch 128GB MQD32 (2017, nhập khẩu)",
@@ -23684,10 +23310,9 @@
   },
   {
     "name": "Laptop Acer Aspire 3 A315-42-R4XD NX.HF9SV.008",
-    "url": "https://cellphones.com.vn/laptop-acer-aspire-3-a315-42-r4xd.html",
     "price": {
-      "sale": 18990000,
-      "original": 950000
+      "sale": null,
+      "original": 18990000
     },
     "highlights": [
       "Acer Aspire 3 A315 chiếc laptop thiết kế mỏng nhẹ, tinh tế, cấu hình vượt trội góp phần mang đến những trải nghiệm hoàn hảo cho người dùng. Cùng với bộ nhớ dung lượng cao, laptop mang đến khả năng lưu trữ vượt trội.",
@@ -23711,10 +23336,9 @@
   },
   {
     "name": "Apple MacBook Air 13 inch 128GB MMGF2",
-    "url": "https://cellphones.com.vn/apple-macbook-air-13-inch-128-gb-mmgf2.html",
     "price": {
-      "sale": 18600000,
-      "original": 950000
+      "sale": null,
+      "original": 18600000
     },
     "highlights": [
       "Apple MacBook Air 128GB MMGF2 (2016, nhập khẩu)",
@@ -23755,7 +23379,6 @@
   },
   {
     "name": "Laptop Lenovo Ideapad 3",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-3-81x80055us.html",
     "price": {
       "sale": 7990000,
       "original": 14990000
@@ -23789,7 +23412,6 @@
   },
   {
     "name": "Laptop Lenovo V14 G5 IRL 83HD0035VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-v14-g5-irl-83hd0035vn.html",
     "price": {
       "sale": 28490000,
       "original": 28500000
@@ -23862,7 +23484,6 @@
   },
   {
     "name": "Laptop gaming Acer Nitro 5 AN515-45-R9SC NH.QBRSV.001",
-    "url": "https://cellphones.com.vn/laptop-gaming-acer-nitro-5-an515-45-r9sc.html",
     "price": {
       "sale": 31590000,
       "original": 39990000
@@ -23907,7 +23528,6 @@
   },
   {
     "name": "Laptop Lenovo IdeaPad Slim 3 16IPH11 83US0040VN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-ideapad-slim-3-16iph11-83us0040vn.html",
     "price": {
       "sale": 24490000,
       "original": 27990000
@@ -23977,10 +23597,9 @@
   },
   {
     "name": "Laptop Gaming MSI Stealth 15M A11SDK 060VN",
-    "url": "https://cellphones.com.vn/laptop-msi-stealth-15m-a11sdk-060vn.html",
     "price": {
-      "sale": 34490000,
-      "original": 950000
+      "sale": null,
+      "original": 34490000
     },
     "highlights": [
       "MSI Stealth 15M A11SDK 060VN chính là dòng laptop MSI Gaming được trang bị cấu hình mạnh mẽ giúp người dùng có thể thoải mái, tự tin chiến các tựa game nặng. Bên cạnh đó, chiếc laptop này còn có màn hình rộng, tần số quét cao góp phần mang đến trải nghiệm hiển thị hình ảnh chân thật, sắc nét.",
@@ -24014,10 +23633,9 @@
   },
   {
     "name": "Laptop HP 240 G8 518V8PA",
-    "url": "https://cellphones.com.vn/laptop-hp-240-g8-518v8pa.html",
     "price": {
-      "sale": 18990000,
-      "original": 950000
+      "sale": null,
+      "original": 18990000
     },
     "highlights": [
       "Laptop HP 240 G8 518V8PA mang đến một phong cách thiết kế đơn giản nhưng vô cùng thanh lịch, tinh tế. Cùng với đó chính là cấu hình mạnh mẽ giúp chiếc laptop HP này luôn đáp ứng các tác vụ cơ bản, đảm bảo năng suất làm việc với cường độ cao.",
@@ -24047,10 +23665,9 @@
   },
   {
     "name": "Laptop HP Pavilion x360 14-DW1019TU 2H3N7PA",
-    "url": "https://cellphones.com.vn/laptop-hp-pavilion-x360-14-i7.html",
     "price": {
-      "sale": 20590000,
-      "original": 950000
+      "sale": null,
+      "original": 20590000
     },
     "highlights": [
       "Laptop HP Pavilion x360 14-DW1019TU 2H3N7PA mang đến một phong cách thiết kế vô cùng mạnh mẽ, sắc cạnh. Ngoài ra, chiếc HP Pavilion còn mang lại cấu hình ổn định, hiệu năng giúp cho máy không những đáp ứng được các tác vụ văn phòng một cách tốt nhất mà còn có khả năng chinh phục được các tựa game nặng.",
@@ -24079,7 +23696,6 @@
   },
   {
     "name": "Laptop ASUS VivoBook A415EP-EB116T",
-    "url": "https://cellphones.com.vn/laptop-asus-vivobook-14-a415ep.html",
     "price": {
       "sale": 17790000,
       "original": 18390000
@@ -24107,7 +23723,6 @@
   },
   {
     "name": "Laptop Lenovo Gaming Legion 5P 15IMH05 82AY003FVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-gaming-legion-5p-i7.html",
     "price": {
       "sale": 27490000,
       "original": 31490000
@@ -24134,7 +23749,6 @@
   },
   {
     "name": "Laptop Dell Vostro 3405 70227396",
-    "url": "https://cellphones.com.vn/laptop-dell-vostro-3405.html",
     "price": {
       "sale": 15490000,
       "original": 16290000
@@ -24178,10 +23792,9 @@
   },
   {
     "name": "Surface Pro 7 Core i5 / 16GB / 256GB Chính Hãng",
-    "url": "https://cellphones.com.vn/surface-laptop-pro-7-core-i5-ram-16gb-ssd-256gb-12-3inch.html",
     "price": {
-      "sale": 44990000,
-      "original": 950000
+      "sale": null,
+      "original": 44990000
     },
     "highlights": [
       "Laptop Surface Pro 7 I5/16GB/256GB – Chuyển đổi linh hoạt giữa laptop và tablet",
@@ -24224,10 +23837,9 @@
   },
   {
     "name": "Apple MacBook Pro 13 inch 256GB MLUQ2",
-    "url": "https://cellphones.com.vn/apple-macbook-pro-13-inch-256-gb-mluq2.html",
     "price": {
-      "sale": 30300000,
-      "original": 950000
+      "sale": null,
+      "original": 30300000
     },
     "highlights": [
       "Apple Macbook Pro 13inch 256GB MLUQ2 (Nhập khẩu, 2016)",
@@ -24264,10 +23876,9 @@
   },
   {
     "name": "Apple MacBook Pro 15 inch Touch Bar 256GB MPTR2",
-    "url": "https://cellphones.com.vn/apple-macbook-pro-15-inch-touch-bar-256-gb-mptr2.html",
     "price": {
-      "sale": 51600000,
-      "original": 950000
+      "sale": null,
+      "original": 51600000
     },
     "highlights": [
       "Apple MacBook Pro 15 inch touch bar 256GB MPTR2 (2017, hàng nhập khẩu)",
@@ -24308,7 +23919,6 @@
   },
   {
     "name": "Laptop Lenovo Yoga 7 2-in-1 14IPH11 83TC002KVN",
-    "url": "https://cellphones.com.vn/laptop-lenovo-yoga-7-2-in-1-14iph11-83tc002kvn.html",
     "price": {
       "sale": 38990000,
       "original": 39990000
@@ -24377,7 +23987,6 @@
   },
   {
     "name": "Laptop MSI Modern 14S AI+ G3MG-050VN",
-    "url": "https://cellphones.com.vn/laptop-msi-modern-14s-ai-g3mg-050vn.html",
     "price": {
       "sale": 34990000,
       "original": 36490000
@@ -24451,7 +24060,6 @@
   },
   {
     "name": "Laptop MSI Raider 16 Max HX B2WI-095VN",
-    "url": "https://cellphones.com.vn/laptop-msi-raider-16-max-hx-b2wi-095vn.html",
     "price": {
       "sale": 127990000,
       "original": 130990000
@@ -24518,7 +24126,6 @@
   },
   {
     "name": "Laptop MSI Crosshair 16 HX AI D2XWFKG-036VN",
-    "url": "https://cellphones.com.vn/laptop-msi-crosshair-16-hx-d2xwfkg-036vn.html",
     "price": {
       "sale": 38990000,
       "original": 44990000
@@ -24580,7 +24187,6 @@
   },
   {
     "name": "Laptop MSI Raider 18 HX AI A2XWIG-033VN",
-    "url": "https://cellphones.com.vn/laptop-msi-raider-18-hx-ai-a2xwig-033vn.html",
     "price": {
       "sale": 119990000,
       "original": 127490000
@@ -24642,10 +24248,9 @@
   },
   {
     "name": "Laptop Acer Swift Air 14 SFA14-I31-52BV",
-    "url": "https://cellphones.com.vn/laptop-acer-swift-air-14-sfa14-i31-52bv.html",
     "price": {
-      "sale": 24990000,
-      "original": 1000000
+      "sale": null,
+      "original": 24990000
     },
     "highlights": [
       "Laptop Acer Swift Air 14 SFA14-I31-52BVsở hữu thiết kế 1,19 kg cùng chip Intel Core 5 320, phục vụ linh hoạt cho nhu cầu học tập và làm việc văn phòng. Thiết bị có RAM 12 GB LPDDR5X, SSD 512 GB và NPU 16 TOPS, phù hợp đa nhiệm. Màn hình 14 inch WUXGA IPS 120Hz cho hình ảnh mượt mà, rõ nét.",

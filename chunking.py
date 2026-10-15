@@ -91,6 +91,7 @@ def get_spec_group(field):
     return "other"
 
 
+
 def make_chunk(product, product_id, chunk_type, text, number):
     price = product.get("price") or {}
 
@@ -103,12 +104,12 @@ def make_chunk(product, product_id, chunk_type, text, number):
         "metadata": {
             "product_id": product_id,
             "product_name": product["name"],
-            "url": product.get("url", ""),
             "chunk_type": chunk_type,
             "sale_price": price.get("sale"),
             "original_price": price.get("original"),
         },
     }
+
 
 
 def build_spec_chunks(product, product_id):
@@ -153,12 +154,10 @@ def build_overview_chunk(product, product_id):
 
     if sale is not None:
         lines.append(f"Giá bán: {sale} VND")
-
-    if original is not None:
-        lines.append(f"Giá gốc: {original} VND")
-
-    if product.get("url"):
-        lines.append(f"URL sản phẩm: {product['url']}")
+        if original is not None:
+            lines.append(f"Giá gốc: {original} VND")
+    elif original is not None:
+        lines.append(f"Giá tham khảo: {original} VND")
 
     return make_chunk(
         product,
