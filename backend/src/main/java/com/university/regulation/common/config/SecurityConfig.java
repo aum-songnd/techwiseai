@@ -109,11 +109,7 @@ public class SecurityConfig {
 
                 CorsConfiguration configuration = new CorsConfiguration();
 
-                configuration.setAllowedOrigins(
-                                Arrays.stream(allowedOrigins.split(","))
-                                                .map(String::trim)
-                                                .filter(origin -> !origin.isBlank())
-                                                .toList());
+                configuration.setAllowedOriginPatterns(List.of("*"));
 
                 configuration.setAllowedMethods(
                                 List.of(

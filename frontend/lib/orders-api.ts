@@ -4,8 +4,10 @@ import { cachedRequest, clearRequestCache } from "./request-cache";
 import { getToken } from "./auth";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-prod.up.railway.app/api/v1";
+  typeof window !== "undefined"
+    ? "/api"
+    : process.env.NEXT_PUBLIC_API_URL ??
+      "https://techwiseai-prod.up.railway.app/api/v1";
 
 interface ApiEnvelope<T> {
   success: boolean;
@@ -215,9 +217,12 @@ export interface OrderData {
 
 export interface OrderListItem {
   id: string;
+  orderCode?: string;
   status: OrderStatus;
+  recipientName?: string;
   totalAmount: number;
   totalItems: number;
+  totalQuantity?: number;
   createdAt: string;
 }
 
@@ -246,9 +251,18 @@ export async function getOrders(page = 0, size = 10): Promise<PagedOrders> {
     size: String(size),
   }).toString();
   const raw = await fetchOrderEnvelope<unknown>(`/orders?${query}`);
-  const result = normalizePagedOrders<OrderListItem, OrderListItem>(
+  const result = normalizePagedOrders<Record<string, unknown>, OrderListItem>(
     raw,
-    (item) => item
+    (item) => ({
+      id: String(item.id ?? ""),
+      orderCode: item.orderCode ? String(item.orderCode) : undefined,
+      status: (item.status as OrderStatus) ?? "PENDING",
+      recipientName: item.recipientName ? String(item.recipientName) : undefined,
+      totalAmount: Number(item.totalAmount ?? 0),
+      totalItems: Number(item.totalItems ?? item.totalQuantity ?? 1),
+      totalQuantity: item.totalQuantity ? Number(item.totalQuantity) : undefined,
+      createdAt: String(item.createdAt ?? ""),
+    })
   );
 
   return result;

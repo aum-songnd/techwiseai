@@ -218,6 +218,19 @@ const OrderDetailPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
+      {/* Breadcrumb */}
+      <nav className="flex items-center gap-2 text-xs text-gray-500 mb-6">
+        <Link href="/" className="hover:text-shop_dark_green transition-colors">
+          Trang chủ
+        </Link>
+        <span>/</span>
+        <Link href="/orders" className="hover:text-shop_dark_green transition-colors">
+          Đơn hàng của tôi
+        </Link>
+        <span>/</span>
+        <span className="text-gray-900 font-medium">Chi tiết đơn hàng</span>
+      </nav>
+
       {justPlaced && !isCancelled && (
         <div className="mb-6 flex items-start gap-3 rounded-lg border border-shop_dark_green/20 bg-shop_dark_green/5 p-4">
           <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-shop_dark_green text-white">
@@ -237,8 +250,8 @@ const OrderDetailPage = () => {
 
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-shop_dark_green">
-            Đơn hàng #{order.id.slice(0, 8)}
+          <h1 className="text-2xl font-bold text-shop_dark_green font-mono">
+            {order.orderCode || `ORD-${order.id.slice(0, 8).toUpperCase()}`}
           </h1>
           <p className="text-sm text-gray-500 mt-1">
             Đặt lúc {formatDateTime(order.createdAt)}
