@@ -21,7 +21,7 @@ const shopHref = (categorySlug?: string) => {
 const SIDE_CARDS = [
   {
     eyebrow: "Ưu đãi phụ kiện đang diễn ra",
-    headline: "Giảm đến 60%",
+    headline: "Giảm đến 20%",
     image: "/accessory.webp",
     alt: "Phụ kiện giảm giá",
     href: shopHref("phu-kien"),
@@ -29,7 +29,7 @@ const SIDE_CARDS = [
   },
   {
     eyebrow: "Laptop và thiết bị làm việc mỗi ngày",
-    headline: "Giảm đến 70%",
+    headline: "Giảm đến 50%",
     image: "/laptop.webp",
     alt: "Laptop giảm giá",
     href: shopHref("laptop"),
@@ -156,17 +156,15 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
         <div className="min-w-0">
           <h2 className="grid text-xl font-extrabold uppercase leading-tight text-white sm:text-2xl">
             <span
-              className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                showDiscount ? "opacity-0" : "opacity-100"
-              }`}
+              className={`col-start-1 row-start-1 transition-opacity duration-500 ${showDiscount ? "opacity-0" : "opacity-100"
+                }`}
               aria-hidden={showDiscount}
             >
               Flash Sale
             </span>
             <span
-              className={`col-start-1 row-start-1 transition-opacity duration-500 ${
-                showDiscount ? "opacity-100" : "opacity-0"
-              }`}
+              className={`col-start-1 row-start-1 transition-opacity duration-500 ${showDiscount ? "opacity-100" : "opacity-0"
+                }`}
               aria-hidden={!showDiscount}
             >
               Giảm đến {maxDiscount}%
@@ -256,9 +254,8 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
             <Link
               key={card.headline}
               href={card.href}
-              className={`group flex flex-1 flex-col overflow-hidden rounded-3xl bg-[#f1f1f8] sm:min-h-[220px] sm:items-center ${
-                card.reverse ? "sm:flex-row-reverse" : "sm:flex-row"
-              }`}
+              className={`group flex flex-1 flex-col overflow-hidden rounded-3xl bg-[#f1f1f8] sm:min-h-[220px] sm:items-center ${card.reverse ? "sm:flex-row-reverse" : "sm:flex-row"
+                }`}
             >
               <div className="relative h-44 w-full sm:h-full sm:min-h-[220px] sm:w-1/2">
                 <Image

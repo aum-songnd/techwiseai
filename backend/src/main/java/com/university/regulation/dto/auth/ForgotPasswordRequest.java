@@ -1,0 +1,11 @@
+package com.university.regulation.dto.auth;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+public record ForgotPasswordRequest(
+        @NotBlank(message = "Email không được để trống")
+        @Email(message = "Địa chỉ email không hợp lệ")
+        String email
+) {
+}

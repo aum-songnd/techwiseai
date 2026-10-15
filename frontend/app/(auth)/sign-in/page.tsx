@@ -15,19 +15,13 @@ const SignInForm = () => {
   const searchParams = useSearchParams();
   const justRegistered = searchParams.get("registered") === "1";
   const sessionExpired = searchParams.get("expired") === "1";
+  const justResetPassword = searchParams.get("reset") === "1";
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const socialButtons = [
-    { label: "G", bg: "#ef4d46" },
-    { label: "f", bg: "#3d69d6" },
-    { label: "in", bg: "#1f7de0" },
-    { label: "X", bg: "#1d9bf0" },
-  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,11 +54,17 @@ const SignInForm = () => {
 
                 </div>
 
-                <h2 className="form-title">Sign In To Your Account</h2>
+                <h2 className="form-title">Đăng nhập tài khoản</h2>
 
                 {justRegistered && (
                   <p className="status-box success">
                     Đăng ký thành công. Vui lòng đăng nhập.
+                  </p>
+                )}
+
+                {justResetPassword && (
+                  <p className="status-box success">
+                    Đặt lại mật khẩu thành công. Vui lòng đăng nhập bằng mật khẩu mới.
                   </p>
                 )}
 
@@ -85,7 +85,7 @@ const SignInForm = () => {
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       className="auth-input"
-                      placeholder="Email Address"
+                      placeholder="Email hoặc Tên đăng nhập"
                     />
                   </div>
 
@@ -99,7 +99,7 @@ const SignInForm = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="auth-input"
-                      placeholder="Password"
+                      placeholder="Mật khẩu"
                     />
                     <button
                       type="button"
@@ -118,11 +118,11 @@ const SignInForm = () => {
                   <div className="row-between">
                     <label className="check-row">
                       <input type="checkbox" />
-                      <span>Remember me</span>
+                      <span>Ghi nhớ đăng nhập</span>
                     </label>
 
-                    <Link href="/help" className="forgot-link">
-                      Forgot Password
+                    <Link href="/forgot-password" className="forgot-link">
+                      Quên mật khẩu?
                     </Link>
                   </div>
 
@@ -133,7 +133,7 @@ const SignInForm = () => {
                   )}
 
                   <button type="submit" disabled={isSubmitting} className="login-btn">
-                    {isSubmitting ? "Signing in..." : "Login"}
+                    {isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
                   </button>
                 </form>
 

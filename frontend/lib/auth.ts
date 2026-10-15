@@ -206,3 +206,79 @@ export async function fetchCurrentUser(token: string): Promise<User> {
 
   return user;
 }
+
+export interface ForgotPasswordResponseData {
+  email: string;
+  message: string;
+  devOtp?: string;
+}
+
+export async function changePasswordRequest(
+  currentPassword: string,
+  newPassword: string
+): Promise<void> {
+  const token = getToken();
+  if (!token) {
+    throw new Error("Bạn chưa đăng nhập hoặc phiên làm việc đã hết hạn");
+  }
+
+  const res = await fetch(`/api/auth/change-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ currentPassword, newPassword }),
+  });
+
+  const body: ApiWrapper<null> = await res.json().catch(() => ({}));
+
+  if (!res.ok || body.success === false) {
+    throw new Error(extractErrorMessage(body, "Đổi mật khẩu thất bại"));
+  }
+}
+
+export async function forgotPasswordRequest(
+  email: string
+): Promise<ForgotPasswordResponseData> {
+  const res = await fetch(`/api/auth/forgot-password`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+
+  const body: ApiWrapper<ForgotPasswordResponseData> = await res
+    .json()
+    .catch(() => ({}));
+
+  if (!res.ok || body.success === false) {
+    throw new Error(
+      extractErrorMessage(body, "Yêu cầu mã khôi phục mật khẩu thất bại")
+    );
+  }
+
+  return (
+    body.data || {
+      email,
+      message: body.message || "Đã gửi mã xác thực khôi phục mật khẩu",
+    }
+  );
+}
+
+export async function resetPasswordRequest(payload: {
+  email: string;
+  otp: string;
+  newPassword: string;
+}): Promise<void> {
+  const res = await fetch(`/api/auth/reset-password`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const body: ApiWrapper<null> = await res.json().catch(() => ({}));
+
+  if (!res.ok || body.success === false) {
+    throw new Error(extractErrorMessage(body, "Đặt lại mật khẩu thất bại"));
+  }
+}
