@@ -1,3 +1,7 @@
+import provincesV1Raw from "@/data/provinces-v1.json";
+import districtsV1Raw from "@/data/districts-v1.json";
+import provincesV2Raw from "@/data/provinces-v2.json";
+
 export interface Province {
   code: number;
   name: string;
@@ -16,17 +20,51 @@ export interface Ward {
   province_code?: number;
 }
 
-const CACHE = {
-  v1Provinces: null as Province[] | null,
-  v1Districts: new Map<number, District[]>(),
-  v1Wards: new Map<number, Ward[]>(),
+// In-memory indexed maps for O(1) fast lookup
+let districtMapV1: Map<number, District[]> | null = null;
+let wardMapV1: Map<number, Ward[]> | null = null;
+let wardMapV2: Map<number, Ward[]> | null = null;
 
-  v2Provinces: null as Province[] | null,
-  v2Wards: new Map<number, Ward[]>(),
-};
+function getDistrictMapV1(): Map<number, District[]> {
+  if (!districtMapV1) {
+    districtMapV1 = new Map();
+    for (const d of districtsV1Raw as District[]) {
+      const pCode = Number(d.province_code);
+      const list = districtMapV1.get(pCode) || [];
+      list.push(d);
+      districtMapV1.set(pCode, list);
+    }
+  }
+  return districtMapV1;
+}
 
-const BASE_URL_V1 = "https://provinces.open-api.vn/api/v1";
-const BASE_URL_V2 = "https://provinces.open-api.vn/api/v2";
+async function getWardMapV1(): Promise<Map<number, Ward[]>> {
+  if (!wardMapV1) {
+    const raw = (await import("@/data/wards-v1.json")).default as Ward[];
+    wardMapV1 = new Map();
+    for (const w of raw) {
+      const dCode = Number(w.district_code);
+      const list = wardMapV1.get(dCode) || [];
+      list.push(w);
+      wardMapV1.set(dCode, list);
+    }
+  }
+  return wardMapV1;
+}
+
+async function getWardMapV2(): Promise<Map<number, Ward[]>> {
+  if (!wardMapV2) {
+    const raw = (await import("@/data/wards-v2.json")).default as Ward[];
+    wardMapV2 = new Map();
+    for (const w of raw) {
+      const pCode = Number(w.province_code);
+      const list = wardMapV2.get(pCode) || [];
+      list.push(w);
+      wardMapV2.set(pCode, list);
+    }
+  }
+  return wardMapV2;
+}
 
 // ==========================================
 // V2: Dữ liệu hành chính SAU SÁP NHẬP (Mới nhất)
@@ -34,58 +72,24 @@ const BASE_URL_V2 = "https://provinces.open-api.vn/api/v2";
 // ==========================================
 
 export async function fetchProvincesV2(): Promise<Province[]> {
-  if (CACHE.v2Provinces && CACHE.v2Provinces.length > 0) {
-    return CACHE.v2Provinces;
-  }
-  try {
-    const res = await fetch(`${BASE_URL_V2}/p/`, {
-      next: { revalidate: 86400 },
-    });
-    if (!res.ok) throw new Error("Failed to fetch v2 provinces");
-    const data = (await res.json()) as Province[];
-    CACHE.v2Provinces = data;
-    return data;
-  } catch (error) {
-    console.error("fetchProvincesV2 error:", error);
-    return [];
-  }
+  return provincesV2Raw as Province[];
 }
 
-export async function fetchWardsV2(provinceCode: number): Promise<Ward[]> {
-  if (CACHE.v2Wards.has(provinceCode)) {
-    return CACHE.v2Wards.get(provinceCode)!;
-  }
-  try {
-    const res = await fetch(`${BASE_URL_V2}/p/${provinceCode}?depth=2`, {
-      next: { revalidate: 86400 },
-    });
-    if (!res.ok) throw new Error("Failed to fetch v2 wards");
-    const data = await res.json();
-    const wards = (data.wards ?? []) as Ward[];
-    CACHE.v2Wards.set(provinceCode, wards);
-    return wards;
-  } catch (error) {
-    console.error("fetchWardsV2 error:", error);
-    return [];
-  }
+export async function fetchWardsV2(
+  provinceCode: number | string
+): Promise<Ward[]> {
+  const map = await getWardMapV2();
+  return map.get(Number(provinceCode)) || [];
 }
 
-export async function lookupLegacyWard(legacyName: string): Promise<Ward | null> {
-  try {
-    const res = await fetch(
-      `${BASE_URL_V2}/w/from-legacy/?legacy_name=${encodeURIComponent(
-        legacyName.trim()
-      )}`
-    );
-    if (!res.ok) return null;
-    const data = await res.json();
-    if (Array.isArray(data) && data.length > 0 && data[0].ward) {
-      return data[0].ward as Ward;
-    }
-    return null;
-  } catch {
-    return null;
-  }
+export async function lookupLegacyWard(
+  legacyName: string
+): Promise<Ward | null> {
+  if (!legacyName) return null;
+  const normalized = legacyName.trim().toLowerCase();
+  const raw = (await import("@/data/wards-v2.json")).default as Ward[];
+  const found = raw.find((w) => w.name.toLowerCase().includes(normalized));
+  return found || null;
 }
 
 // ==========================================
@@ -94,59 +98,21 @@ export async function lookupLegacyWard(legacyName: string): Promise<Ward | null>
 // ==========================================
 
 export async function fetchProvincesV1(): Promise<Province[]> {
-  if (CACHE.v1Provinces && CACHE.v1Provinces.length > 0) {
-    return CACHE.v1Provinces;
-  }
-  try {
-    const res = await fetch(`${BASE_URL_V1}/p/`, {
-      next: { revalidate: 86400 },
-    });
-    if (!res.ok) throw new Error("Failed to fetch v1 provinces");
-    const data = (await res.json()) as Province[];
-    CACHE.v1Provinces = data;
-    return data;
-  } catch (error) {
-    console.error("fetchProvincesV1 error:", error);
-    return [];
-  }
+  return provincesV1Raw as Province[];
 }
 
-export async function fetchDistrictsV1(provinceCode: number): Promise<District[]> {
-  if (CACHE.v1Districts.has(provinceCode)) {
-    return CACHE.v1Districts.get(provinceCode)!;
-  }
-  try {
-    const res = await fetch(`${BASE_URL_V1}/p/${provinceCode}?depth=2`, {
-      next: { revalidate: 86400 },
-    });
-    if (!res.ok) throw new Error("Failed to fetch v1 districts");
-    const data = await res.json();
-    const districts = (data.districts ?? []) as District[];
-    CACHE.v1Districts.set(provinceCode, districts);
-    return districts;
-  } catch (error) {
-    console.error("fetchDistrictsV1 error:", error);
-    return [];
-  }
+export async function fetchDistrictsV1(
+  provinceCode: number | string
+): Promise<District[]> {
+  const map = getDistrictMapV1();
+  return map.get(Number(provinceCode)) || [];
 }
 
-export async function fetchWardsV1(districtCode: number): Promise<Ward[]> {
-  if (CACHE.v1Wards.has(districtCode)) {
-    return CACHE.v1Wards.get(districtCode)!;
-  }
-  try {
-    const res = await fetch(`${BASE_URL_V1}/d/${districtCode}?depth=2`, {
-      next: { revalidate: 86400 },
-    });
-    if (!res.ok) throw new Error("Failed to fetch v1 wards");
-    const data = await res.json();
-    const wards = (data.wards ?? []) as Ward[];
-    CACHE.v1Wards.set(districtCode, wards);
-    return wards;
-  } catch (error) {
-    console.error("fetchWardsV1 error:", error);
-    return [];
-  }
+export async function fetchWardsV1(
+  districtCode: number | string
+): Promise<Ward[]> {
+  const map = await getWardMapV1();
+  return map.get(Number(districtCode)) || [];
 }
 
 // Aliases for backwards compatibility
