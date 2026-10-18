@@ -597,11 +597,24 @@ public class OrderService {
                                 .mapToInt(OrderItem::getQuantity)
                                 .sum();
 
+                PaymentMethod paymentMethod = paymentRepository
+                                .findByOrderId(order.getId())
+                                .map(payment -> payment.getPaymentMethod())
+                                .orElse(null);
+
+                List<OrderItemResponse> itemResponses = items.stream()
+                                .map(this::toOrderItemResponse)
+                                .toList();
+
                 return new OrderSummaryResponse(
                                 order.getId(),
                                 order.getOrderCode(),
                                 order.getStatus(),
                                 order.getRecipientName(),
+                                order.getRecipientPhone(),
+                                order.getShippingAddress(),
+                                paymentMethod,
+                                itemResponses,
                                 order.getTotalAmount(),
                                 totalQuantity,
                                 order.getCreatedAt());

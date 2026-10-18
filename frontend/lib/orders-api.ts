@@ -220,6 +220,11 @@ export interface OrderListItem {
   orderCode?: string;
   status: OrderStatus;
   recipientName?: string;
+  recipientPhone?: string;
+  shippingAddress?: string;
+  paymentMethod?: PaymentMethod;
+  paymentStatus?: PaymentStatus;
+  items?: OrderItem[];
   totalAmount: number;
   totalItems: number;
   totalQuantity?: number;
@@ -258,6 +263,11 @@ export async function getOrders(page = 0, size = 10): Promise<PagedOrders> {
       orderCode: item.orderCode ? String(item.orderCode) : undefined,
       status: (item.status as OrderStatus) ?? "PENDING",
       recipientName: item.recipientName ? String(item.recipientName) : undefined,
+      recipientPhone: item.recipientPhone ? String(item.recipientPhone) : undefined,
+      shippingAddress: item.shippingAddress ? String(item.shippingAddress) : undefined,
+      paymentMethod: (item.paymentMethod as PaymentMethod) ?? undefined,
+      paymentStatus: (item.paymentStatus as PaymentStatus) ?? undefined,
+      items: Array.isArray(item.items) ? (item.items as OrderItem[]) : undefined,
       totalAmount: Number(item.totalAmount ?? 0),
       totalItems: Number(item.totalItems ?? item.totalQuantity ?? 1),
       totalQuantity: item.totalQuantity ? Number(item.totalQuantity) : undefined,
