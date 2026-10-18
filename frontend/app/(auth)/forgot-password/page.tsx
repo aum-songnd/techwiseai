@@ -12,10 +12,12 @@ import {
   LockKeyhole,
   Mail,
   RotateCcw,
-  ShieldCheck,
   Loader2,
+  AlertCircle,
+  CheckCircle2,
 } from "lucide-react";
 import Logo from "@/components/Logo";
+import Container from "@/components/Container";
 import { forgotPasswordRequest, resetPasswordRequest } from "@/lib/auth";
 
 type Step = "REQUEST" | "RESET";
@@ -35,7 +37,6 @@ const ForgotPasswordPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [devOtpHint, setDevOtpHint] = useState<string | null>(null);
 
   // Resend OTP countdown timer
   const [countdown, setCountdown] = useState(0);
@@ -52,7 +53,6 @@ const ForgotPasswordPage = () => {
     e.preventDefault();
     setError(null);
     setSuccessMessage(null);
-    setDevOtpHint(null);
 
     const trimmedEmail = email.trim();
     if (!trimmedEmail) {
@@ -61,16 +61,18 @@ const ForgotPasswordPage = () => {
     }
 
     setIsSubmitting(true);
+
     try {
-      const data = await forgotPasswordRequest(trimmedEmail);
-      setSuccessMessage(data.message || "Mã xác thực đã được gửi đến email của bạn.");
-      if (data.devOtp) {
-        setDevOtpHint(data.devOtp);
-      }
+      const res = await forgotPasswordRequest(trimmedEmail);
+      setSuccessMessage(res.message);
       setStep("RESET");
       setCountdown(60);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Gửi yêu cầu thất bại");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Không thể gửi yêu cầu đặt lại mật khẩu"
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -78,20 +80,18 @@ const ForgotPasswordPage = () => {
 
   const handleResendOtp = async () => {
     if (countdown > 0 || isSubmitting) return;
-
     setError(null);
     setSuccessMessage(null);
     setIsSubmitting(true);
 
     try {
-      const data = await forgotPasswordRequest(email.trim());
-      setSuccessMessage("Đã gửi lại mã xác nhận mới!");
-      if (data.devOtp) {
-        setDevOtpHint(data.devOtp);
-      }
+      await forgotPasswordRequest(email.trim());
+      setSuccessMessage("Mã xác nhận mới đã được gửi đến email của bạn!");
       setCountdown(60);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Gửi lại mã thất bại");
+      setError(
+        err instanceof Error ? err.message : "Gửi lại mã xác nhận thất bại"
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -101,27 +101,22 @@ const ForgotPasswordPage = () => {
     e.preventDefault();
     setError(null);
 
-    const trimmedOtp = otp.trim();
-    if (!trimmedOtp) {
-      setError("Vui lòng nhập mã xác thực OTP");
-      return;
-    }
-
     if (newPassword.length < 6) {
       setError("Mật khẩu mới phải có ít nhất 6 ký tự");
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setError("Mật khẩu xác nhận không khớp với mật khẩu mới");
+      setError("Mật khẩu xác nhận không khớp");
       return;
     }
 
     setIsSubmitting(true);
+
     try {
       await resetPasswordRequest({
         email: email.trim(),
-        otp: trimmedOtp,
+        otp: otp.trim(),
         newPassword,
       });
       router.push("/sign-in?reset=1");
@@ -133,76 +128,122 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <main className="auth-shell">
-      <section className="auth-signin-card">
-        <div className="auth-grid">
-          <div className="auth-form-panel">
-            <div className="auth-form-inner">
-              <Link
-                href="/sign-in"
-                aria-label="Quay lại đăng nhập"
-                className="back-btn"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </Link>
+    <div className="font-sans min-h-screen bg-white text-neutral-900">
+      <Container className="py-8 sm:py-10">
+        {/* Breadcrumb Navigation */}
+        <nav className="flex items-center gap-2 text-xs text-neutral-500 mb-6">
+          <Link
+            href="/"
+            className="hover:text-shop_dark_green transition-colors flex items-center gap-1.5"
+          >
+            <ArrowLeft size={13} />
+            <span>Trang chủ</span>
+          </Link>
+          <span>/</span>
+          <Link href="/sign-in" className="hover:text-shop_dark_green transition-colors">
+            Đăng nhập
+          </Link>
+          <span>/</span>
+          <span className="text-neutral-900 font-medium">Quên mật khẩu</span>
+        </nav>
 
-              <div className="brand-row">
+        {/* Header Bar */}
+        <div className="flex flex-col gap-4 border-b border-neutral-200 pb-5 sm:flex-row sm:items-end sm:justify-between mb-8">
+          <div className="flex items-end gap-3">
+            <h1 className="text-xl font-bold uppercase tracking-tight text-neutral-900">
+              Khôi phục mật khẩu
+            </h1>
+            <span className="pb-0.5 text-xs text-neutral-500 font-mono">
+              [ Bảo mật tài khoản ]
+            </span>
+          </div>
+          <p className="text-xs text-neutral-500">
+            Khôi phục quyền truy cập tài khoản TechWise AI nhanh chóng và an toàn.
+          </p>
+        </div>
+
+        {/* Main Content Grid: 12 Columns */}
+        <div className="border border-neutral-200 bg-white grid grid-cols-1 lg:grid-cols-12 shadow-sm overflow-hidden">
+          {/* Left Column: Form Card (7 Cols) */}
+          <div className="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between pb-4 mb-6 border-b border-neutral-200">
                 <Logo />
+                <span className="text-[11px] font-mono uppercase text-neutral-400 bg-neutral-100 px-2.5 py-1">
+                  Xác minh bảo mật Gmail
+                </span>
               </div>
 
+              {error && (
+                <div
+                  role="alert"
+                  className="mb-5 border border-red-200 bg-red-50 p-3.5 text-xs text-red-700 flex items-center gap-2.5"
+                >
+                  <AlertCircle className="h-4 w-4 shrink-0 text-red-600" />
+                  <span>{error}</span>
+                </div>
+              )}
+
+              {successMessage && (
+                <div className="mb-5 border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-center gap-2.5">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
+                  <span>{successMessage}</span>
+                </div>
+              )}
+
               {step === "REQUEST" ? (
-                <>
-                  <h2 className="form-title">Quên mật khẩu</h2>
-                  <p className="text-sm text-gray-500 mb-6">
-                    Nhập địa chỉ email liên kết với tài khoản của bạn để nhận mã xác thực đặt lại mật khẩu.
+                <div>
+                  <p className="text-xs text-neutral-600 mb-5 leading-relaxed">
+                    Nhập địa chỉ email liên kết với tài khoản của bạn để nhận mã xác thực OTP qua Gmail.
                   </p>
 
-                  {error && (
-                    <p role="alert" className="status-box error">
-                      {error}
-                    </p>
-                  )}
-
-                  <form onSubmit={handleRequestOtp} className="auth-form">
-                    <div className="field-wrap">
-                      <Mail className="field-icon" />
-                      <input
-                        id="email"
-                        type="email"
-                        autoComplete="email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="auth-input"
-                        placeholder="Nhập địa chỉ email"
-                      />
+                  <form onSubmit={handleRequestOtp} className="space-y-4">
+                    <div className="space-y-1.5">
+                      <label
+                        htmlFor="email"
+                        className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                      >
+                        Địa chỉ email *
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
+                        <input
+                          id="email"
+                          type="email"
+                          autoComplete="email"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="name@example.com"
+                          className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                        />
+                      </div>
                     </div>
 
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="login-btn"
-                    >
-                      {isSubmitting ? (
-                        <span className="flex items-center justify-center gap-2">
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                          Đang gửi mã...
-                        </span>
-                      ) : (
-                        "Gửi mã xác nhận"
-                      )}
-                    </button>
+                    <div className="pt-2">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        {isSubmitting ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            Đang gửi mã xác nhận...
+                          </span>
+                        ) : (
+                          "Gửi mã xác nhận qua Gmail →"
+                        )}
+                      </button>
+                    </div>
                   </form>
-                </>
+                </div>
               ) : (
-                <>
-                  <div className="flex items-center gap-2 mb-1">
-                    <ShieldCheck className="w-5 h-5 text-teal-600" />
-                    <h2 className="form-title mb-0">Đặt lại mật khẩu</h2>
-                  </div>
-                  <p className="text-sm text-gray-500 mb-4">
-                    Mã xác nhận đã được tạo cho email{" "}
-                    <strong className="text-gray-800">{email}</strong>.{" "}
+                <div>
+                  <div className="flex items-center justify-between text-xs text-neutral-600 mb-4 bg-neutral-50 p-3 border border-neutral-200">
+                    <span>
+                      Mã xác nhận gửi tới: <strong>{email}</strong>
+                    </span>
                     <button
                       type="button"
                       onClick={() => {
@@ -210,156 +251,169 @@ const ForgotPasswordPage = () => {
                         setError(null);
                         setSuccessMessage(null);
                       }}
-                      className="text-teal-600 hover:underline font-medium text-xs ml-1"
+                      className="text-shop_dark_green hover:underline font-semibold"
                     >
                       Đổi email
                     </button>
-                  </p>
+                  </div>
 
-                  {successMessage && (
-                    <p className="status-box success">
-                      {successMessage}
-                    </p>
-                  )}
+                  <div className="mb-4 border border-emerald-200 bg-emerald-50/70 p-3 text-xs text-emerald-800 flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 mt-0.5" />
+                    <span>
+                      Hệ thống đã gửi mã OTP đến Gmail <strong>{email}</strong>. Vui lòng mở hộp thư (hoặc thư mục Spam) và điền mã 6 số vào ô bên dưới.
+                    </span>
+                  </div>
 
-                  {devOtpHint && (
-                    <div className="mb-4 p-3 rounded-xl border border-teal-200 bg-teal-50 text-xs text-teal-900 flex items-center justify-between">
-                      <span>Mã xác thực: <strong>{devOtpHint}</strong></span>
-                      <button
-                        type="button"
-                        onClick={() => setOtp(devOtpHint)}
-                        className="px-2 py-1 bg-teal-600 text-white rounded text-xs hover:bg-teal-700"
+                  <form onSubmit={handleResetPassword} className="space-y-4">
+                    <div className="space-y-1.5">
+                      <label
+                        htmlFor="otp"
+                        className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
                       >
-                        Điền nhanh
-                      </button>
-                    </div>
-                  )}
-
-                  {error && (
-                    <p role="alert" className="status-box error">
-                      {error}
-                    </p>
-                  )}
-
-                  <form onSubmit={handleResetPassword} className="auth-form">
-                    <div className="field-wrap">
-                      <KeyRound className="field-icon" />
-                      <input
-                        id="otp"
-                        type="text"
-                        required
-                        maxLength={10}
-                        value={otp}
-                        onChange={(e) => setOtp(e.target.value)}
-                        className="auth-input font-mono tracking-widest text-center"
-                        placeholder="Mã xác nhận (OTP)"
-                      />
+                        Mã xác nhận từ Gmail (OTP) *
+                      </label>
+                      <div className="relative">
+                        <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
+                        <input
+                          id="otp"
+                          type="text"
+                          required
+                          maxLength={10}
+                          value={otp}
+                          onChange={(e) => setOtp(e.target.value)}
+                          placeholder="Nhập mã 6 chữ số trong Gmail..."
+                          className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white font-mono tracking-widest transition-colors"
+                        />
+                      </div>
                     </div>
 
-                    <div className="field-wrap">
-                      <LockKeyhole className="field-icon" />
-                      <input
-                        id="newPassword"
-                        type={showNewPassword ? "text" : "password"}
-                        required
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        className="auth-input"
-                        placeholder="Mật khẩu mới (tối thiểu 6 ký tự)"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowNewPassword((v) => !v)}
-                        aria-label={showNewPassword ? "Ẩn" : "Hiện"}
-                        className="eye-btn"
+                    <div className="space-y-1.5">
+                      <label
+                        htmlFor="newPassword"
+                        className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
                       >
-                        {showNewPassword ? (
-                          <EyeOff className="h-4.5 w-4.5" />
-                        ) : (
-                          <Eye className="h-4.5 w-4.5" />
-                        )}
-                      </button>
+                        Mật khẩu mới *
+                      </label>
+                      <div className="relative">
+                        <LockKeyhole className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
+                        <input
+                          id="newPassword"
+                          type={showNewPassword ? "text" : "password"}
+                          required
+                          minLength={6}
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          placeholder="Mật khẩu mới (tối thiểu 6 ký tự)"
+                          className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowNewPassword((v) => !v)}
+                          aria-label={showNewPassword ? "Ẩn" : "Hiện"}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 p-1"
+                        >
+                          {showNewPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="field-wrap">
-                      <LockKeyhole className="field-icon" />
-                      <input
-                        id="confirmPassword"
-                        type={showConfirmPassword ? "text" : "password"}
-                        required
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="auth-input"
-                        placeholder="Xác nhận mật khẩu mới"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword((v) => !v)}
-                        aria-label={showConfirmPassword ? "Ẩn" : "Hiện"}
-                        className="eye-btn"
+                    <div className="space-y-1.5">
+                      <label
+                        htmlFor="confirmPassword"
+                        className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
                       >
-                        {showConfirmPassword ? (
-                          <EyeOff className="h-4.5 w-4.5" />
-                        ) : (
-                          <Eye className="h-4.5 w-4.5" />
-                        )}
-                      </button>
+                        Xác nhận mật khẩu mới *
+                      </label>
+                      <div className="relative">
+                        <LockKeyhole className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
+                        <input
+                          id="confirmPassword"
+                          type={showConfirmPassword ? "text" : "password"}
+                          required
+                          minLength={6}
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          placeholder="Nhập lại mật khẩu mới"
+                          className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword((v) => !v)}
+                          aria-label={showConfirmPassword ? "Ẩn" : "Hiện"}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 p-1"
+                        >
+                          {showConfirmPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs text-gray-500 mb-2 px-1">
-                      <span>Chưa nhận được mã?</span>
+                    <div className="flex items-center justify-between text-xs text-neutral-500 pt-1">
+                      <span>Chưa nhận được email?</span>
                       <button
                         type="button"
                         onClick={handleResendOtp}
                         disabled={countdown > 0 || isSubmitting}
-                        className="inline-flex items-center gap-1 text-teal-600 hover:text-teal-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="inline-flex items-center gap-1 text-shop_dark_green hover:underline font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <RotateCcw className="w-3.5 h-3.5" />
-                        {countdown > 0 ? `Gửi lại sau (${countdown}s)` : "Gửi lại mã"}
+                        <RotateCcw className="w-3 h-3" />
+                        {countdown > 0 ? `Gửi lại sau (${countdown}s)` : "Gửi lại mã qua Gmail"}
                       </button>
                     </div>
 
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="login-btn"
-                    >
-                      {isSubmitting ? (
-                        <span className="flex items-center justify-center gap-2">
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                          Đang xử lý...
-                        </span>
-                      ) : (
-                        "Đặt lại mật khẩu"
-                      )}
-                    </button>
+                    <div className="pt-2">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        {isSubmitting ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            Đang lưu mật khẩu mới...
+                          </span>
+                        ) : (
+                          "Lưu mật khẩu mới & Đăng nhập →"
+                        )}
+                      </button>
+                    </div>
                   </form>
-                </>
+                </div>
               )}
+            </div>
 
-              <p className="register-line">
-                Đã nhớ mật khẩu?{" "}
-                <Link href="/sign-in">Đăng nhập tại đây</Link>
-              </p>
+            <div className="mt-8 pt-5 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
+              <span>Đã nhớ lại mật khẩu?</span>
+              <Link
+                href="/sign-in"
+                className="font-bold uppercase tracking-wider text-shop_dark_green hover:underline flex items-center gap-1"
+              >
+                <span>Quay lại đăng nhập</span>
+                <span>→</span>
+              </Link>
             </div>
           </div>
 
-          <div className="auth-visual-panel">
-            <div className="visual-sheen" />
-            <div className="visual-scene">
-              <Image
-                src="/del.webp"
-                alt="Delivery illustration"
-                width={760}
-                height={620}
-                priority
-                className="delivery-art"
-              />
+          {/* Right Column: AI Tech Showcase Image (5 Cols) */}
+          <div className="lg:col-span-5 relative hidden lg:block bg-neutral-950 overflow-hidden min-h-[520px]">
+            <Image
+              src="/auth-showcase.jpg"
+              alt="TechWise AI Ecosystem Showcase"
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 42vw"
+            />
+            {/* Subtle Gradient & Brand Tag */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 p-8 text-white space-y-1.5 z-10">
+              <span className="inline-block bg-shop_dark_green text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 border border-white/20">
+                TechWise AI
+              </span>
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </Container>
+    </div>
   );
 };
 

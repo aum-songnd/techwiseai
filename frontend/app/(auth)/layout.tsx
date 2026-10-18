@@ -24,9 +24,9 @@ export default function AuthRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className="font-poppins">
+    <html lang="vi">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-white text-neutral-900 min-h-screen`}
       >
         <AuthProvider>{children}</AuthProvider>
       </body>

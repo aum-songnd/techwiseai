@@ -165,35 +165,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
     window.addEventListener("storage", handleStorage);
 
-    // 4. Tab refocus check to sync changes made in incognito tabs or external windows
+    // 4. Tab refocus & visibility change with 10s throttle
+    let lastRefreshTime = 0;
+    const throttledRefresh = () => {
+      const now = Date.now();
+      if (now - lastRefreshTime > 10000) {
+        lastRefreshTime = now;
+        refreshUserFromServer();
+      }
+    };
+
     const handleFocus = () => {
       syncUserFromStorage();
-      refreshUserFromServer();
+      throttledRefresh();
     };
     window.addEventListener("focus", handleFocus);
 
-    // 5. Visibility change check (e.g. switching back to tab)
     const handleVisibility = () => {
       if (document.visibilityState === "visible") {
         syncUserFromStorage();
-        refreshUserFromServer();
+        throttledRefresh();
       }
     };
     document.addEventListener("visibilitychange", handleVisibility);
-
-    // 6. Polling interval (every 2.5s when active tab is visible) to auto-sync side-by-side windows
-    const pollInterval = setInterval(() => {
-      if (document.visibilityState === "visible") {
-        refreshUserFromServer();
-      }
-    }, 2500);
 
     return () => {
       unsubscribeSync();
       window.removeEventListener("storage", handleStorage);
       window.removeEventListener("focus", handleFocus);
       document.removeEventListener("visibilitychange", handleVisibility);
-      clearInterval(pollInterval);
     };
   }, [syncUserFromStorage, refreshUserFromServer]);
 
