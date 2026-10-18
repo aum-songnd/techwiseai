@@ -10,6 +10,7 @@ import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ public class AdminUserController {
         this.userRepository = userRepository;
     }
 
+    @Transactional(readOnly = true)
     @GetMapping
     public ApiResponse<Page<AdminUserResponse>> getUsers(
             @RequestParam(required = false) String keyword,
@@ -47,8 +49,10 @@ public class AdminUserController {
             Pageable pageable,
             HttpServletRequest httpRequest
     ) {
-        String trimmed = keyword != null ? keyword.trim() : null;
-        Page<User> users = userRepository.searchUsers(trimmed, pageable);
+        String trimmed = (keyword != null && !keyword.trim().isEmpty()) ? keyword.trim() : null;
+        Page<User> users = (trimmed == null)
+                ? userRepository.findAll(pageable)
+                : userRepository.searchUsers(trimmed, pageable);
         Page<AdminUserResponse> dtos = users.map(this::toDto);
 
         return ApiResponse.success(
@@ -58,6 +62,7 @@ public class AdminUserController {
         );
     }
 
+    @Transactional
     @PatchMapping("/{id}/status")
     public ApiResponse<AdminUserResponse> updateUserStatus(
             @PathVariable UUID id,

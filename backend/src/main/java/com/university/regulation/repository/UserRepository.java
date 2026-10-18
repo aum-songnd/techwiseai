@@ -32,13 +32,18 @@ public interface UserRepository
     @EntityGraph(attributePaths = "roles")
     Optional<User> findWithRolesByUsernameIgnoreCase(String username);
 
-    @EntityGraph(attributePaths = "roles")
-    @Query("SELECT u FROM User u WHERE " +
-           "(:keyword IS NULL OR :keyword = '' OR " +
-           "LOWER(u.username) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-           "LOWER(u.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-           "LOWER(u.email) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-           "(:keyword IS NOT NULL AND u.phone LIKE CONCAT('%', :keyword, '%')))")
+    @Query(
+        value = "SELECT u FROM User u WHERE " +
+                "LOWER(u.username) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+                "LOWER(u.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+                "LOWER(u.email) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+                "u.phone LIKE CONCAT('%', :keyword, '%')",
+        countQuery = "SELECT COUNT(u) FROM User u WHERE " +
+                "LOWER(u.username) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+                "LOWER(u.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+                "LOWER(u.email) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+                "u.phone LIKE CONCAT('%', :keyword, '%')"
+    )
     Page<User> searchUsers(
             @Param("keyword") String keyword,
             Pageable pageable
