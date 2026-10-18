@@ -63,13 +63,13 @@ const ServiceFeatures = ({
   if (variant === "compact") {
     return (
       <div
-        className={`grid grid-cols-3 border-y border-gray-200 py-5 text-center ${className}`}
+        className={`grid grid-cols-3 border-y border-neutral-200 py-5 text-center font-sans ${className}`}
       >
         {features.map(({ id, icon: Icon, title, description }) => (
           <div key={id} className="flex flex-col items-center px-2">
-            <Icon className="h-6 w-6 text-gray-800" strokeWidth={1.5} />
-            <p className="mt-2 text-xs font-medium text-gray-900">{title}</p>
-            <p className="mt-0.5 text-[11px] text-gray-500">{description}</p>
+            <Icon className="h-6 w-6 text-neutral-800" strokeWidth={1.5} />
+            <p className="mt-2 text-xs font-semibold text-neutral-900">{title}</p>
+            <p className="mt-0.5 text-[11px] text-neutral-500">{description}</p>
           </div>
         ))}
       </div>
@@ -78,14 +78,14 @@ const ServiceFeatures = ({
 
   return (
     <div
-      className={`grid grid-cols-1 gap-4 border-t border-gray-200 pt-6 sm:grid-cols-2 md:grid-cols-4 md:gap-0 ${className}`}
+      className={`grid grid-cols-1 gap-4 border-t border-neutral-200 pt-6 sm:grid-cols-2 md:grid-cols-4 md:gap-0 font-sans ${className}`}
     >
       {features.map(({ id, icon: Icon, title, description }) => (
         <div key={id} className="flex items-center gap-3 md:pr-5">
-          <Icon size={26} strokeWidth={1.5} className="shrink-0 text-gray-700" />
+          <Icon size={26} strokeWidth={1.5} className="shrink-0 text-shop_dark_green" />
           <div className="flex flex-col">
-            <span className="text-sm font-medium text-gray-900">{title}</span>
-            <span className="text-xs text-gray-500">{description}</span>
+            <span className="text-sm font-semibold text-neutral-900">{title}</span>
+            <span className="text-xs text-neutral-500">{description}</span>
           </div>
         </div>
       ))}

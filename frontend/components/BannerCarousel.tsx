@@ -75,7 +75,7 @@ const BannerCarousel = ({ slides }: BannerCarouselProps) => {
 
   return (
     <section
-      className="relative"
+      className="relative font-sans"
       aria-roledescription="carousel"
       aria-label="Banner khuyến mãi"
     >
@@ -93,7 +93,7 @@ const BannerCarousel = ({ slides }: BannerCarouselProps) => {
                 className={`flex items-center justify-between px-10 py-16 md:py-0 lg:px-24 ${slide.bgClass}`}
               >
                 <div className="space-y-5">
-                  <Title>
+                  <Title className="font-sans text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl lg:text-4xl">
                     {slide.titleLines.map((line, i) => (
                       <React.Fragment key={i}>
                         {i > 0 && <br />}
@@ -103,7 +103,7 @@ const BannerCarousel = ({ slides }: BannerCarouselProps) => {
                   </Title>
                   <Link
                     href={slide.href}
-                    className="inline-block rounded-md bg-shop_btn_dark_green/90 px-5 py-2 text-sm font-semibold text-white/90 hoverEffect hover:bg-shop_dark_green hover:text-white"
+                    className="inline-block rounded-md bg-shop_btn_dark_green px-6 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-shop_dark_green"
                   >
                     {slide.buttonLabel}
                   </Link>
@@ -128,7 +128,7 @@ const BannerCarousel = ({ slides }: BannerCarouselProps) => {
             type="button"
             onClick={scrollPrev}
             aria-label="Banner trước"
-            className="absolute left-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-700 transition-colors hover:bg-white md:flex"
+            className="absolute left-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-neutral-700 transition-colors hover:bg-white md:flex"
           >
             <ChevronIcon direction="left" />
           </button>
@@ -136,7 +136,7 @@ const BannerCarousel = ({ slides }: BannerCarouselProps) => {
             type="button"
             onClick={scrollNext}
             aria-label="Banner kế tiếp"
-            className="absolute right-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-700 transition-colors hover:bg-white md:flex"
+            className="absolute right-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-neutral-700 transition-colors hover:bg-white md:flex"
           >
             <ChevronIcon direction="right" />
           </button>
@@ -151,8 +151,8 @@ const BannerCarousel = ({ slides }: BannerCarouselProps) => {
                 aria-current={index === selectedIndex}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === selectedIndex
-                    ? "w-6 bg-gray-800"
-                    : "w-2 bg-gray-800/25 hover:bg-gray-800/50"
+                    ? "w-6 bg-neutral-900"
+                    : "w-2 bg-neutral-900/25 hover:bg-neutral-900/50"
                 }`}
               />
             ))}

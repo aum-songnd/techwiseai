@@ -65,11 +65,10 @@ const ChevronIcon = ({ className = "" }: { className?: string }) => (
 );
 
 const BrandItem = ({ brand }: { brand: BrandCard }) => (
-
   <Link
     href={`/shop?brand=${encodeURIComponent(brand.label)}`}
     title={brand.label}
-    className="mr-4 flex h-20 w-40 shrink-0 items-center justify-center rounded-xl bg-gray-50 transition-colors duration-200 hover:bg-gray-100 md:h-24 md:w-48"
+    className="mr-4 flex h-20 w-40 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 font-sans transition-all duration-200 hover:border-neutral-300 hover:bg-white md:h-24 md:w-48"
   >
     {brand.logoUrl ? (
       <div className="relative h-full w-full">
@@ -77,13 +76,12 @@ const BrandItem = ({ brand }: { brand: BrandCard }) => (
           src={brand.logoUrl}
           alt={brand.label}
           fill
-
           className="object-contain p-5 mix-blend-multiply"
           sizes="(max-width: 768px) 160px, 192px"
         />
       </div>
     ) : (
-      <span className="truncate px-3 text-sm font-medium text-gray-700">
+      <span className="truncate px-3 font-sans text-xs font-semibold text-neutral-800">
         {brand.label}
       </span>
     )}
@@ -96,15 +94,17 @@ const HomeBrands = ({ products }: { products: Product[] }) => {
   if (brands.length === 0) return null;
 
   return (
-    <section className="my-8">
+    <section className="my-8 font-sans">
       <div className="mb-4 flex items-center justify-between gap-4">
-        <Title className="text-[22px]">Thương hiệu nổi bật</Title>
+        <Title className="font-sans text-[22px] font-bold text-neutral-900">
+          Thương hiệu nổi bật
+        </Title>
         <Link
           href="/shop"
-          className="inline-flex shrink-0 items-center text-sm text-gray-500 transition-colors hover:text-black"
+          className="inline-flex shrink-0 items-center gap-1 font-sans text-xs font-semibold uppercase tracking-wider text-neutral-500 transition-colors hover:text-shop_dark_green"
         >
           Xem tất cả
-          <ChevronIcon className="h-4 w-4" />
+          <ChevronIcon className="h-3.5 w-3.5" />
         </Link>
       </div>
 
@@ -114,7 +114,9 @@ const HomeBrands = ({ products }: { products: Product[] }) => {
         ))}
       </MarqueeRow>
 
-      <ServiceFeatures className="mt-6" items={["shipping", "returns", "support", "refund"]}
+      <ServiceFeatures
+        className="mt-6"
+        items={["shipping", "returns", "support", "refund"]}
       />
     </section>
   );

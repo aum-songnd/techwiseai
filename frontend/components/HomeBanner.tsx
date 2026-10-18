@@ -17,7 +17,7 @@ const slides: BannerSlide[] = [
     buttonLabel: "Xem ngay",
     href: "/shop",
     image: banner_1,
-    bgClass: "bg-gray-100",
+    bgClass: "bg-neutral-100",
   },
   {
     id: "free-shipping",
@@ -30,7 +30,11 @@ const slides: BannerSlide[] = [
 ];
 
 const HomeBanner = () => {
-  return <BannerCarousel slides={slides} />;
+  return (
+    <div className="font-sans">
+      <BannerCarousel slides={slides} />
+    </div>
+  );
 };
 
 export default HomeBanner;

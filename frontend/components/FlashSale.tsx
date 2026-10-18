@@ -151,10 +151,9 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
 
   if (variant === "banner") {
     return (
-      <div className="flex flex-col items-center gap-2 rounded-2xl bg-gradient-to-br from-blue-700 to-blue-600 px-4 py-3 text-center sm:flex-row sm:justify-between sm:gap-4 sm:text-left">
-
+      <div className="flex flex-col items-center gap-2 rounded-2xl bg-gradient-to-br from-blue-700 to-blue-600 px-4 py-3 text-center font-sans sm:flex-row sm:justify-between sm:gap-4 sm:text-left">
         <div className="min-w-0">
-          <h2 className="grid text-xl font-extrabold uppercase leading-tight text-white sm:text-2xl">
+          <h2 className="grid font-sans text-xl font-bold uppercase tracking-tight leading-tight text-white sm:text-2xl">
             <span
               className={`col-start-1 row-start-1 transition-opacity duration-500 ${showDiscount ? "opacity-0" : "opacity-100"
                 }`}
@@ -170,7 +169,7 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
               Giảm đến {maxDiscount}%
             </span>
           </h2>
-          <p className="mt-0.5 text-[10px] uppercase text-white/90">
+          <p className="mt-0.5 font-sans text-[10px] font-medium uppercase tracking-wider text-white/90">
             Ưu đãi chớp nhoáng - Số lượng có hạn
           </p>
         </div>
@@ -181,7 +180,7 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
 
         <Link
           href={shopHref()}
-          className="shrink-0 rounded-full bg-white px-5 py-2 text-[11px] font-bold uppercase text-gray-900 transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          className="shrink-0 rounded-full bg-white px-5 py-2 font-sans text-xs font-semibold uppercase tracking-wider text-neutral-900 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           Mua ngay
         </Link>
@@ -190,11 +189,10 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
   }
 
   return (
-    <Container className="my-10 lg:px-0">
+    <Container className="my-10 font-sans lg:px-0">
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
-
-        <div className="relative flex flex-col items-center overflow-hidden rounded-3xl bg-gradient-to-br from-blue-700 to-blue-600 px-4 pt-8 text-center md:px-6 md:pt-10 lg:col-span-1">
-          <h2 className="text-5xl font-extrabold uppercase leading-[1.05] text-white md:text-6xl">
+        <div className="relative flex flex-col items-center overflow-hidden rounded-3xl bg-gradient-to-br from-blue-700 to-blue-600 px-4 pt-8 text-center font-sans md:px-6 md:pt-10 lg:col-span-1">
+          <h2 className="font-sans text-5xl font-extrabold uppercase tracking-tight leading-[1.05] text-white md:text-6xl">
             {maxDiscount > 0 ? (
               <>
                 Giảm đến
@@ -212,7 +210,7 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
 
           <BrushStroke className="mx-auto mt-5 text-white" />
 
-          <p className="mt-4 max-w-[16rem] text-sm uppercase text-white">
+          <p className="mt-4 max-w-[16rem] font-sans text-xs font-medium uppercase tracking-wider text-white/90">
             Ưu đãi chớp nhoáng - Số lượng có hạn
           </p>
 
@@ -222,7 +220,7 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
 
           <Link
             href={shopHref()}
-            className="mt-5 rounded-full bg-white px-7 py-2.5 text-xs font-bold uppercase text-gray-900 transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="mt-5 rounded-full bg-white px-7 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-neutral-900 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             Mua ngay
           </Link>
@@ -254,7 +252,7 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
             <Link
               key={card.headline}
               href={card.href}
-              className={`group flex flex-1 flex-col overflow-hidden rounded-3xl bg-[#f1f1f8] sm:min-h-[220px] sm:items-center ${card.reverse ? "sm:flex-row-reverse" : "sm:flex-row"
+              className={`group flex flex-1 flex-col overflow-hidden rounded-3xl bg-[#f1f1f8] font-sans sm:min-h-[220px] sm:items-center ${card.reverse ? "sm:flex-row-reverse" : "sm:flex-row"
                 }`}
             >
               <div className="relative h-44 w-full sm:h-full sm:min-h-[220px] sm:w-1/2">
@@ -262,20 +260,20 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
                   src={card.image}
                   alt={card.alt}
                   fill
-                  className="object-contain p-6 mix-blend-multiply transition-transform duration-00 group-hover:scale-105"
+                  className="object-contain p-6 mix-blend-multiply transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, 33vw"
                 />
               </div>
 
               <div className="flex w-full flex-col items-center px-4 pb-6 text-center sm:w-1/2 sm:pb-0">
-                <p className="max-w-[16rem] text-xs uppercase text-gray-600 md:text-sm">
+                <p className="max-w-[16rem] font-sans text-xs uppercase tracking-wide text-neutral-600 md:text-sm">
                   {card.eyebrow}
                 </p>
-                <p className="mt-2 text-2xl font-extrabold uppercase text-gray-900 md:text-3xl">
+                <p className="mt-2 font-sans text-2xl font-bold uppercase tracking-tight text-neutral-900 md:text-3xl">
                   {card.headline}
                 </p>
                 <BrushStroke className="mx-auto mt-3 text-blue-700" />
-                <span className="mt-4 rounded-full bg-blue-700 px-6 py-2 text-xs font-bold uppercase text-white transition-colors group-hover:bg-blue-800">
+                <span className="mt-4 rounded-full bg-blue-700 px-6 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-white transition-colors group-hover:bg-blue-800">
                   Mua ngay
                 </span>
               </div>

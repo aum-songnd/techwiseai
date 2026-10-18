@@ -7,16 +7,15 @@ import HomeLatestBlog from '@/components/HomeLatestBlog';
 
 const Home = () => {
   return (
-    <div>
+    <div className="font-sans min-h-screen bg-white text-neutral-900">
       <Container>
-         <HomeBanner />
-
-        <HomeCategories/>
+        <HomeBanner />
+        <HomeCategories />
         <HomeProductSections />
-        <HomeLatestBlog/>
+        <HomeLatestBlog />
       </Container>
     </div>
   );
-}
+};
 
 export default Home;

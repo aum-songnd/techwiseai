@@ -86,7 +86,7 @@ const CategoryTile = ({
   return (
     <Link
       href={`/shop?category=${category.slug}`}
-      className={`group relative block h-44 overflow-hidden rounded-2xl bg-[#f1f1f8] md:h-64 ${layout.span}`}
+      className={`group relative block h-44 overflow-hidden rounded-2xl bg-[#f1f1f8] md:h-64 font-sans ${layout.span}`}
     >
       {imageSrc && (
         <div className={`absolute ${layout.image}`}>
@@ -94,7 +94,6 @@ const CategoryTile = ({
             src={imageSrc}
             alt={category.title}
             fill
-
             className="object-contain mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-105"
             style={{ objectPosition: layout.objectPosition }}
             sizes="(max-width: 768px) 50vw, 25vw"
@@ -103,10 +102,10 @@ const CategoryTile = ({
       )}
 
       <div className={`absolute z-10 max-w-[45%] ${layout.text}`}>
-        <h3 className="text-base font-bold leading-tight text-gray-900 md:text-xl">
+        <h3 className="font-sans text-base font-bold leading-tight text-neutral-900 md:text-xl">
           {category.title}
         </h3>
-        <span className="mt-2 inline-block border-b border-gray-800 pb-0.5 text-[11px] uppercase tracking-wide text-gray-600 md:text-xs">
+        <span className="mt-2 inline-block border-b border-neutral-800 pb-0.5 font-sans text-[11px] uppercase tracking-wide text-neutral-600 transition-colors group-hover:border-shop_dark_green group-hover:text-shop_dark_green md:text-xs">
           Xem thêm
         </span>
       </div>
@@ -136,8 +135,10 @@ const HomeCategories = async () => {
   const tiles = categories.slice(0, TILE_LAYOUTS.length);
 
   return (
-    <section className="my-8">
-      <Title className="mb-6 text-[22px]">Danh mục phổ biến</Title>
+    <section className="my-8 font-sans">
+      <Title className="mb-6 font-sans text-[22px] font-bold text-neutral-900">
+        Danh mục phổ biến
+      </Title>
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
         {tiles.map((category, index) => (
