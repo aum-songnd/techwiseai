@@ -17,6 +17,7 @@ import {
 import { useCart } from "@/context/CartContext";
 import { productImages } from "@/images";
 import { FREE_SHIP_THRESHOLD } from "@/components/ServiceFeatures";
+import Loading from "@/app/(client)/loading";
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
@@ -75,13 +76,7 @@ const CartPage = () => {
   const [promoCode, setPromoCode] = useState("");
 
   if (!isLoaded) {
-    return (
-      <div className="font-sans min-h-screen bg-white">
-        <div className="mx-auto w-[90%] py-20 text-center text-xs text-neutral-400">
-          Đang tải giỏ hàng...
-        </div>
-      </div>
-    );
+    return <Loading message="Đang tải giỏ hàng..." />;
   }
 
   if (requiresLogin) {

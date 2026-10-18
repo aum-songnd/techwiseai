@@ -142,6 +142,7 @@ const OrdersHistoryPage = () => {
 
   // Re-order state
   const [reorderingId, setReorderingId] = useState<string | null>(null);
+  const [isNavigatingToCart, setIsNavigatingToCart] = useState(false);
 
   // Toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -320,31 +321,59 @@ const OrdersHistoryPage = () => {
   }, [allItems, activeTab, searchQuery, sortKey, detailsMap]);
 
   // Re-order handler
-  const handleReorder = async (order: OrderListItem) => {
-    setReorderingId(order.id);
-    try {
-      let items = detailsMap[order.id]?.items ?? order.items ?? [];
-      if (items.length === 0) {
-        const fresh = await getOrderById(order.id);
-        setDetailsMap((prev) => ({ ...prev, [order.id]: fresh }));
-        items = fresh.items ?? [];
-      }
-      if (items.length === 0) {
-        showToast("Không tìm thấy sản phẩm của đơn hàng.");
-        return;
-      }
-      for (const it of items) {
-        if (it.productId) {
-          await addToCart(it.productId, it.quantity);
-        }
-      }
-      showToast(`Đã thêm ${items.length} sản phẩm vào giỏ hàng.`);
+  const handleReorder = (order: OrderListItem) => {
+    setIsNavigatingToCart(true);
+    let items = detailsMap[order.id]?.items ?? order.items ?? [];
+    if (items.length === 0) {
+      getOrderById(order.id)
+        .then((fresh) => {
+          if (fresh?.items) {
+            for (const it of fresh.items) {
+              const pId = it.productId || (it as unknown as { id: string }).id;
+              if (!pId) continue;
+              addToCart(String(pId), it.quantity || 1, {
+                id: `temp-${pId}`,
+                productId: String(pId),
+                name: it.productName || "Sản phẩm",
+                sku: it.productSku,
+                thumbnailUrl: it.productThumbnailUrl || it.thumbnailUrl,
+                unitPrice: it.unitPrice,
+                originalPrice: it.unitPrice,
+                quantity: it.quantity || 1,
+                subtotal: it.subtotal || it.unitPrice * (it.quantity || 1),
+                stockQuantity: 999,
+                available: true,
+              }).catch(() => {});
+            }
+          }
+        })
+        .catch(() => {});
       router.push("/cart");
-    } catch {
-      showToast("Có lỗi khi thêm sản phẩm vào giỏ hàng.");
-    } finally {
-      setReorderingId(null);
+      return;
     }
+
+    for (const it of items) {
+      const pId = it.productId || (it as unknown as { id: string }).id;
+      if (!pId) continue;
+
+      addToCart(String(pId), it.quantity || 1, {
+        id: `temp-${pId}`,
+        productId: String(pId),
+        name: it.productName || "Sản phẩm",
+        sku: it.productSku,
+        thumbnailUrl: it.productThumbnailUrl || it.thumbnailUrl,
+        unitPrice: it.unitPrice,
+        originalPrice: it.unitPrice,
+        quantity: it.quantity || 1,
+        subtotal: it.subtotal || it.unitPrice * (it.quantity || 1),
+        stockQuantity: 999,
+        available: true,
+      }).catch((err) => {
+        console.warn("Failed to add item to cart during reorder:", err);
+      });
+    }
+
+    router.push("/cart");
   };
 
   // Cancel order handler
@@ -377,8 +406,16 @@ const OrdersHistoryPage = () => {
     }
   };
 
-  if (isLoading) {
-    return <Loading message="Đang tải lịch sử đơn hàng..." />;
+  if (isLoading || isNavigatingToCart) {
+    return (
+      <Loading
+        message={
+          isNavigatingToCart
+            ? "Đang thêm sản phẩm và chuyển tới giỏ hàng..."
+            : "Đang tải lịch sử đơn hàng..."
+        }
+      />
+    );
   }
 
   if (errorMessage && allItems.length === 0) {

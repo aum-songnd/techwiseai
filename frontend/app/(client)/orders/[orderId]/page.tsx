@@ -149,9 +149,7 @@ const OrderDetailPage = () => {
   const [cancelReason, setCancelReason] = useState("");
   const [cancelDialogError, setCancelDialogError] = useState<string | null>(null);
   const [justPlaced, setJustPlaced] = useState(false);
-
-  // Re-order state
-  const [isReordering, setIsReordering] = useState(false);
+  const [isNavigatingToCart, setIsNavigatingToCart] = useState(false);
 
   // Copy feedback toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -266,26 +264,50 @@ const OrderDetailPage = () => {
   };
 
   // Re-order handler
-  const handleReorder = async () => {
-    if (!order || !order.items || order.items.length === 0) return;
-    setIsReordering(true);
-    try {
-      for (const item of order.items) {
-        if (item.productId) {
-          await addToCart(item.productId, item.quantity);
-        }
-      }
-      showToast(`Đã thêm ${order.items.length} sản phẩm vào giỏ hàng.`);
+  const handleReorder = () => {
+    setIsNavigatingToCart(true);
+
+    if (!order || !order.items || order.items.length === 0) {
       router.push("/cart");
-    } catch {
-      showToast("Có lỗi khi thêm sản phẩm vào giỏ hàng.");
-    } finally {
-      setIsReordering(false);
+      return;
     }
+
+    // 1. Add all items optimistically (CartContext updates local state synchronously in 0ms)
+    for (const item of order.items) {
+      const pId = item.productId || (item as unknown as { id: string }).id;
+      if (!pId) continue;
+
+      addToCart(String(pId), item.quantity || 1, {
+        id: `temp-${pId}`,
+        productId: String(pId),
+        name: item.productName || "Sản phẩm",
+        sku: item.productSku,
+        thumbnailUrl: item.productThumbnailUrl || item.thumbnailUrl,
+        unitPrice: item.unitPrice,
+        originalPrice: item.unitPrice,
+        quantity: item.quantity || 1,
+        subtotal: item.subtotal || item.unitPrice * (item.quantity || 1),
+        stockQuantity: 999,
+        available: true,
+      }).catch((err) => {
+        console.warn("Failed to add item to cart during reorder:", err);
+      });
+    }
+
+    // 2. Immediately jump to cart page (no delay, no 5.6s wait)
+    router.push("/cart");
   };
 
-  if (isLoading) {
-    return <Loading message="Đang tải thông tin đơn hàng..." />;
+  if (isLoading || isNavigatingToCart) {
+    return (
+      <Loading
+        message={
+          isNavigatingToCart
+            ? "Đang thêm sản phẩm và chuyển tới giỏ hàng..."
+            : "Đang tải thông tin đơn hàng..."
+        }
+      />
+    );
   }
 
   if (errorMessage && !order) {
@@ -410,10 +432,9 @@ const OrderDetailPage = () => {
 
             <button
               onClick={handleReorder}
-              disabled={isReordering}
-              className="bg-shop_dark_green text-white hover:bg-shop_dark_green/90 px-3.5 py-1.5 text-xs font-semibold transition-colors disabled:opacity-50"
+              className="bg-shop_dark_green text-white hover:bg-shop_dark_green/90 px-3.5 py-1.5 text-xs font-semibold transition-colors"
             >
-              {isReordering ? "Đang thêm..." : "Mua lại đơn này"}
+              Mua lại đơn này
             </button>
 
             {canCancel && (
