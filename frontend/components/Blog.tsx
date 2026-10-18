@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { Calendar, User, Clock, ArrowRight } from "lucide-react";
 import Container from "@/components/Container";
 import { Blog as BlogType, BlogCategory, Author } from "../app/data/types";
 
@@ -10,9 +11,32 @@ interface Props {
   blogs: BlogType[];
   blogCategories: BlogCategory[];
   authors: Author[];
+  children?: React.ReactNode;
 }
 
-const Blog = ({ blogs, blogCategories, authors }: Props) => {
+const BlogCardImage = ({ src, alt }: { src?: string; alt: string }) => {
+  const [hasError, setHasError] = useState(false);
+
+  if (!src || hasError) {
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-neutral-100 text-neutral-400 font-mono text-xs">
+        [ Techwise AI ]
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      onError={() => setHasError(true)}
+      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+    />
+  );
+};
+
+const Blog = ({ blogs, blogCategories, authors, children }: Props) => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
   const getAuthor = (authorId: string) =>
@@ -24,38 +48,47 @@ const Blog = ({ blogs, blogCategories, authors }: Props) => {
       : blogs.filter((blog) => blog.blogCategoryIds.includes(activeCategory));
 
   return (
-    <Container className="py-10">
+    <Container className="py-8 sm:py-10">
+      {children}
 
-      <div className="flex flex-wrap gap-2 mb-8">
+      {/* Category Filter Pills - Styled like Cart page tags/buttons */}
+      <div className="flex flex-wrap items-center gap-2 mb-8 border-b border-neutral-200 pb-4">
         <button
+          type="button"
           onClick={() => setActiveCategory("all")}
-          className={`px-4 py-1.5 rounded-full text-sm border hoverEffect ${
+          className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${
             activeCategory === "all"
-              ? "bg-shop_dark_green text-white border-shop_dark_green"
-              : "border-lightColor text-lightColor hover:border-shop_dark_green hover:text-shop_dark_green"
+              ? "bg-shop_dark_green text-white shadow-sm"
+              : "bg-white text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 border border-neutral-200"
           }`}
         >
-          Tất cả
+          Tất cả ({blogs.length})
         </button>
-        {blogCategories.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setActiveCategory(cat.id)}
-            className={`px-4 py-1.5 rounded-full text-sm border hoverEffect ${
-              activeCategory === cat.id
-                ? "bg-shop_dark_green text-white border-shop_dark_green"
-                : "border-lightColor text-lightColor hover:border-shop_dark_green hover:text-shop_dark_green"
-            }`}
-          >
-            {cat.title}
-          </button>
-        ))}
+        {blogCategories.map((cat) => {
+          const count = blogs.filter((b) => b.blogCategoryIds.includes(cat.id)).length;
+          return (
+            <button
+              type="button"
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${
+                activeCategory === cat.id
+                  ? "bg-shop_dark_green text-white shadow-sm"
+                  : "bg-white text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 border border-neutral-200"
+              }`}
+            >
+              {cat.title} ({count})
+            </button>
+          );
+        })}
       </div>
 
       {filteredBlogs.length === 0 ? (
-        <p className="text-lightColor text-center py-20">
-          Không có bài viết nào trong danh mục này.
-        </p>
+        <div className="py-20 text-center border border-neutral-200 bg-neutral-50/50 p-8">
+          <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+            Không có bài viết nào trong danh mục này.
+          </p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredBlogs.map((blog) => {
@@ -64,56 +97,81 @@ const Blog = ({ blogs, blogCategories, authors }: Props) => {
               blog.body.length > 120
                 ? blog.body.slice(0, 120).trim() + "..."
                 : blog.body;
+            const readingTime = Math.max(1, Math.ceil(blog.body.split(/\s+/).length / 200));
 
             return (
-              <Link
+              <article
                 key={blog.id}
-                href={`/blog/${blog.slug}`}
-                className="group border border-shop_light_bg rounded-lg overflow-hidden hoverEffect hover:shadow-md bg-white"
+                className="group flex flex-col border border-neutral-200 bg-white transition-all duration-200 hover:border-shop_dark_green/40 hover:shadow-md"
               >
-                <div className="relative w-full h-52 overflow-hidden bg-shop_light_bg">
-                  {blog.mainImageUrl && (
-                    <Image
-                      src={blog.mainImageUrl}
-                      alt={blog.title}
-                      fill
-                      className="object-cover group-hover:scale-105 hoverEffect"
-                    />
-                  )}
+                {/* Card Thumbnail Container */}
+                <Link
+                  href={`/blog/${blog.slug}`}
+                  className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100 border-b border-neutral-200 block"
+                >
+                  <BlogCardImage src={blog.mainImageUrl} alt={blog.title} />
 
-                </div>
-
-                <div className="p-4 flex flex-col gap-2">
-                  <div className="flex flex-wrap gap-1">
+                  <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10 pointer-events-none">
                     {blog.blogCategoryIds.map((catId) => {
                       const cat = blogCategories.find((c) => c.id === catId);
                       return cat ? (
                         <span
                           key={catId}
-                          className="text-xs text-shop_dark_green bg-shop_light_pink px-2 py-0.5 rounded"
+                          className="bg-shop_dark_green text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 shadow-sm"
                         >
                           {cat.title}
                         </span>
                       ) : null;
                     })}
                   </div>
+                </Link>
 
-                  <h3 className="font-medium text-darkColor line-clamp-2 group-hover:text-shop_dark_green hoverEffect">
-                    {blog.title}
-                  </h3>
+                {/* Card Body */}
+                <div className="p-5 flex flex-1 flex-col justify-between gap-4">
+                  <div className="space-y-2.5">
+                    {/* Meta: Date & Read time */}
+                    <div className="flex items-center gap-3 text-xs text-neutral-500 font-mono">
+                      <span className="flex items-center gap-1">
+                        <Calendar size={12} className="text-shop_dark_green" />
+                        {new Date(blog.publishedAt).toLocaleDateString("vi-VN")}
+                      </span>
+                      <span>•</span>
+                      <span className="flex items-center gap-1">
+                        <Clock size={12} className="text-shop_dark_green" />
+                        ~{readingTime} phút đọc
+                      </span>
+                    </div>
 
-                  <p className="text-sm text-lightColor line-clamp-2">
-                    {excerpt}
-                  </p>
+                    {/* Title */}
+                    <h2 className="text-sm sm:text-base font-bold text-neutral-900 group-hover:text-shop_dark_green transition-colors line-clamp-2 leading-snug uppercase tracking-tight">
+                      <Link href={`/blog/${blog.slug}`}>
+                        {blog.title}
+                      </Link>
+                    </h2>
 
-                  <div className="flex items-center justify-between text-xs text-lightColor pt-2 border-t border-shop_light_bg mt-1">
-                    <span>{author?.name ?? "Ẩn danh"}</span>
-                    <span>
-                      {new Date(blog.publishedAt).toLocaleDateString("vi-VN")}
+                    {/* Excerpt */}
+                    <p className="text-xs text-neutral-600 line-clamp-2 leading-relaxed font-sans">
+                      {excerpt}
+                    </p>
+                  </div>
+
+                  {/* Card Footer */}
+                  <div className="flex items-center justify-between pt-3 border-t border-neutral-100 text-xs text-neutral-500 mt-2">
+                    <span className="flex items-center gap-1.5 font-medium text-neutral-700">
+                      <User size={13} className="text-shop_dark_green" />
+                      {author?.name ?? "Techwise AI"}
                     </span>
+
+                    <Link
+                      href={`/blog/${blog.slug}`}
+                      className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-shop_dark_green hover:underline"
+                    >
+                      <span>Xem tiếp</span>
+                      <ArrowRight size={12} />
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </article>
             );
           })}
         </div>
