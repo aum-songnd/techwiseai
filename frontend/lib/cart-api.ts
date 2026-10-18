@@ -146,6 +146,9 @@ export async function updateCartItemQuantity(
   itemId: string,
   quantity: number
 ): Promise<CartData> {
+  if (!itemId || itemId.startsWith("temp-")) {
+    throw new Error(`Không thể cập nhật số lượng cho item tạm thời: ${itemId}`);
+  }
   const payload: UpdateCartItemPayload = { quantity };
   invalidateCartCache();
   const result = await fetchCartEnvelope<CartData>(`/cart/items/${itemId}`, {
@@ -158,6 +161,9 @@ export async function updateCartItemQuantity(
 }
 
 export async function removeCartItem(itemId: string): Promise<void> {
+  if (!itemId || itemId.startsWith("temp-")) {
+    return;
+  }
   invalidateCartCache();
   const headers = requireAuthHeaders();
   const response = await fetch(`${API_BASE_URL}/cart/items/${itemId}`, {

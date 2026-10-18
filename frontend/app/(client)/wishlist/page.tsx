@@ -17,6 +17,7 @@ import { useFavorite, FavoriteProduct } from "@/context/FavoriteContext";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { productImages } from "@/images";
+import Loading from "@/app/(client)/loading";
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
@@ -162,8 +163,13 @@ const WishlistPage = () => {
     }
   };
 
+  // Loading state
+  if (isAuthLoading || (isSignedIn && isLoading)) {
+    return <Loading message="Đang tải danh sách yêu thích..." />;
+  }
+
   // Authentication check state
-  if (isAuthLoading || !isSignedIn) {
+  if (!isSignedIn) {
     return (
       <div className="font-sans min-h-screen bg-white text-neutral-900">
         <div className="mx-auto w-[90%] py-8 sm:py-10">
@@ -196,26 +202,6 @@ const WishlistPage = () => {
             >
               Đăng nhập ngay
             </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Loading state
-  if (isLoading) {
-    return (
-      <div className="font-sans min-h-screen bg-white text-neutral-900">
-        <div className="mx-auto w-[90%] py-8 sm:py-10">
-          <nav className="flex items-center gap-2 text-xs text-neutral-500 mb-6">
-            <Link href="/" className="hover:text-shop_dark_green transition-colors">
-              Trang chủ
-            </Link>
-            <span>/</span>
-            <span className="text-neutral-900 font-medium">Sản phẩm yêu thích</span>
-          </nav>
-          <div className="py-20 text-center text-xs text-neutral-400">
-            Đang tải danh sách sản phẩm yêu thích...
           </div>
         </div>
       </div>

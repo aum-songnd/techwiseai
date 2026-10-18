@@ -10,7 +10,9 @@ import {
   Search,
   ArrowLeft,
   ImageOff,
+  Loader2,
 } from "lucide-react";
+import Loading from "@/app/(client)/loading";
 import {
   getAdminOrders,
   getAdminOrderById,
@@ -624,6 +626,10 @@ const AdminOrdersPage = () => {
     );
   }, [items, keyword]);
 
+  if (isLoading && items.length === 0) {
+    return <Loading message="Đang tải danh sách đơn hàng..." />;
+  }
+
   const listColumn = (
     <aside
       className={`${
@@ -673,9 +679,12 @@ const AdminOrdersPage = () => {
       </div>
 
       {isLoading ? (
-        <p className="py-16 text-center text-base text-gray-400">
-          Đang tải danh sách đơn hàng...
-        </p>
+        <div className="flex flex-col items-center justify-center py-16 gap-2 text-shop_dark_green">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span className="text-sm font-medium text-gray-500">
+            Đang tải danh sách đơn hàng...
+          </span>
+        </div>
       ) : errorMessage ? (
         <div className="flex flex-col items-center text-center gap-3 py-16">
           <PackageSearch className="w-10 h-10 text-gray-300" />
@@ -767,9 +776,12 @@ const AdminOrdersPage = () => {
   const renderDetail = () => {
     if (isDetailLoading && !detail) {
       return (
-        <p className="py-24 text-center text-base text-gray-400">
-          Đang tải chi tiết đơn hàng...
-        </p>
+        <div className="flex flex-col items-center justify-center py-24 gap-2 text-shop_dark_green">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span className="text-sm font-medium text-gray-500">
+            Đang tải chi tiết đơn hàng...
+          </span>
+        </div>
       );
     }
     if (detailError && !detail) {

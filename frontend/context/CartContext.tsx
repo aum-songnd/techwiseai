@@ -83,12 +83,16 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   const inFlightItemIdsRef = useRef<Set<string>>(new Set());
   const pendingDeleteIdsRef = useRef<Set<string>>(new Set());
+  const pendingDeleteProductIdsRef = useRef<Set<string>>(new Set());
   const deleteQueueRef = useRef<string[]>([]);
   const isProcessingDeleteQueueRef = useRef(false);
 
   const fetchCartFromServer = useCallback(async () => {
     // If deletions are actively in flight, don't overwrite with stale server data
-    if (pendingDeleteIdsRef.current.size > 0) {
+    if (
+      pendingDeleteIdsRef.current.size > 0 ||
+      pendingDeleteProductIdsRef.current.size > 0
+    ) {
       return;
     }
 
@@ -97,12 +101,17 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       setCart((currentCart) => {
         // Exclude any items that are currently pending deletion
         const validServerItems = data.items.filter(
-          (item) => !pendingDeleteIdsRef.current.has(item.id)
+          (item) =>
+            !pendingDeleteIdsRef.current.has(item.id) &&
+            !pendingDeleteProductIdsRef.current.has(item.productId)
         );
 
-        // Keep any pending optimistic items not yet present in data
-        const tempItems = currentCart.items.filter((item) =>
-          item.id.startsWith("temp-")
+        // Keep any pending optimistic items not yet present in data, unless deleted
+        const tempItems = currentCart.items.filter(
+          (item) =>
+            item.id.startsWith("temp-") &&
+            !pendingDeleteIdsRef.current.has(item.id) &&
+            !pendingDeleteProductIdsRef.current.has(item.productId)
         );
         if (
           tempItems.length === 0 &&
@@ -156,6 +165,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         // do not overwrite this tab's optimistic state
         if (
           pendingDeleteIdsRef.current.size > 0 ||
+          pendingDeleteProductIdsRef.current.size > 0 ||
           pendingQuantitiesRef.current.size > 0 ||
           inFlightItemIdsRef.current.size > 0
         ) {
@@ -174,6 +184,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       if (
         document.visibilityState === "visible" &&
         pendingDeleteIdsRef.current.size === 0 &&
+        pendingDeleteProductIdsRef.current.size === 0 &&
         deleteQueueRef.current.length === 0
       ) {
         invalidateCartCache();
@@ -301,12 +312,64 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     [fetchCartFromServer]
   );
 
+  const processDeleteQueue = useCallback(async () => {
+    if (isProcessingDeleteQueueRef.current) return;
+    isProcessingDeleteQueueRef.current = true;
+
+    try {
+      while (deleteQueueRef.current.length > 0) {
+        const nextId = deleteQueueRef.current.shift()!;
+        // Defensive check: NEVER send temp-* to server!
+        if (!nextId || nextId.startsWith("temp-")) {
+          pendingDeleteIdsRef.current.delete(nextId);
+          continue;
+        }
+
+        try {
+          await removeCartItem(nextId);
+        } catch (err) {
+          console.error("[Cart] Error removing item from server:", nextId, err);
+          if (err instanceof CartAuthRequiredError) {
+            setRequiresLogin(true);
+            pendingDeleteIdsRef.current.clear();
+            pendingDeleteProductIdsRef.current.clear();
+            deleteQueueRef.current = [];
+            break;
+          }
+          // Failed to delete on server: clear from pending & refetch
+          pendingDeleteIdsRef.current.delete(nextId);
+          fetchCartFromServer();
+        } finally {
+          pendingDeleteIdsRef.current.delete(nextId);
+        }
+      }
+    } finally {
+      isProcessingDeleteQueueRef.current = false;
+      // When all queued deletes are complete, broadcast final cart state
+      if (
+        pendingDeleteIdsRef.current.size === 0 &&
+        pendingDeleteProductIdsRef.current.size === 0
+      ) {
+        broadcastTabEvent({
+          type: "CART_UPDATED",
+          payload: { cart: cartRef.current, timestamp: Date.now() },
+        });
+      }
+    }
+  }, [fetchCartFromServer]);
+
   const addToCart = useCallback(
     async (
       productId: string,
       quantity = 1,
       optimisticItem?: Partial<CartItem>
     ) => {
+      const tempId = optimisticItem?.id ?? `temp-${productId}`;
+
+      // Reset any previous pending deletion for this product if user adds it again
+      pendingDeleteProductIdsRef.current.delete(productId);
+      pendingDeleteIdsRef.current.delete(tempId);
+
       // Optimistically update cart state immediately
       setCart((prev) => {
         const existingIndex = prev.items.findIndex((item) =>
@@ -332,7 +395,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
             optimisticItem?.originalPrice ??
             0;
           const newItem: CartItem = {
-            id: optimisticItem?.id ?? `temp-${productId}`,
+            id: tempId,
             productId,
             name: optimisticItem?.name ?? "Sản phẩm",
             sku: optimisticItem?.sku,
@@ -361,6 +424,45 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const data = await addCartItem(productId, quantity);
 
+        // Check if user clicked delete while addCartItem was in flight
+        const wasDeletedWhileInFlight =
+          pendingDeleteProductIdsRef.current.has(productId) ||
+          pendingDeleteIdsRef.current.has(tempId);
+
+        if (wasDeletedWhileInFlight) {
+          pendingDeleteProductIdsRef.current.delete(productId);
+          pendingDeleteIdsRef.current.delete(tempId);
+
+          const serverItem = data.items.find((it) =>
+            isSameProduct(it.productId, productId)
+          );
+
+          if (serverItem) {
+            pendingDeleteIdsRef.current.add(serverItem.id);
+            if (!deleteQueueRef.current.includes(serverItem.id)) {
+              deleteQueueRef.current.push(serverItem.id);
+            }
+            processDeleteQueue();
+          }
+
+          setCart((currentCart) => {
+            const filtered = currentCart.items.filter(
+              (it) =>
+                !isSameProduct(it.productId, productId) &&
+                (!serverItem || it.id !== serverItem.id)
+            );
+            return {
+              ...currentCart,
+              items: filtered,
+              totalItems: filtered.length,
+              totalQuantity: filtered.reduce((sum, it) => sum + it.quantity, 0),
+              totalAmount: filtered.reduce((sum, it) => sum + it.subtotal, 0),
+            };
+          });
+
+          return;
+        }
+
         setCart((currentCart) => {
           const serverItem = data.items.find((it) =>
             isSameProduct(it.productId, productId)
@@ -373,6 +475,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
               totalQuantity: currentCart.items.reduce((sum, it) => sum + it.quantity, 0),
               totalAmount: currentCart.items.reduce((sum, it) => sum + it.subtotal, 0),
             };
+          }
+
+          if (
+            pendingDeleteIdsRef.current.has(serverItem.id) ||
+            pendingDeleteProductIdsRef.current.has(productId)
+          ) {
+            return currentCart;
           }
 
           // Replace temp item with serverItem, preserving latest local quantity
@@ -402,7 +511,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         });
 
         // Transfer any pending quantity debounce from temp ID to real server ID
-        const tempId = `temp-${productId}`;
         const serverItem = data.items.find((it) =>
           isSameProduct(it.productId, productId)
         );
@@ -428,6 +536,9 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
           payload: { cart: data, timestamp: Date.now() },
         });
       } catch (err) {
+        pendingDeleteProductIdsRef.current.delete(productId);
+        pendingDeleteIdsRef.current.delete(tempId);
+
         // Rollback ONLY this specific product instead of wiping entire cart
         setCart((currentCart) => {
           const filtered = currentCart.items.filter(
@@ -453,44 +564,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         });
       }
     },
-    [commitQuantityUpdate]
+    [commitQuantityUpdate, processDeleteQueue]
   );
-
-  const processDeleteQueue = useCallback(async () => {
-    if (isProcessingDeleteQueueRef.current) return;
-    isProcessingDeleteQueueRef.current = true;
-
-    try {
-      while (deleteQueueRef.current.length > 0) {
-        const nextId = deleteQueueRef.current.shift()!;
-        try {
-          await removeCartItem(nextId);
-        } catch (err) {
-          console.error("[Cart] Error removing item from server:", nextId, err);
-          if (err instanceof CartAuthRequiredError) {
-            setRequiresLogin(true);
-            pendingDeleteIdsRef.current.clear();
-            deleteQueueRef.current = [];
-            break;
-          }
-          // Failed to delete on server: clear from pending & refetch
-          pendingDeleteIdsRef.current.delete(nextId);
-          fetchCartFromServer();
-        } finally {
-          pendingDeleteIdsRef.current.delete(nextId);
-        }
-      }
-    } finally {
-      isProcessingDeleteQueueRef.current = false;
-      // When all queued deletes are complete, broadcast final cart state
-      if (pendingDeleteIdsRef.current.size === 0) {
-        broadcastTabEvent({
-          type: "CART_UPDATED",
-          payload: { cart: cartRef.current, timestamp: Date.now() },
-        });
-      }
-    }
-  }, [fetchCartFromServer]);
 
   const removeFromCart = useCallback(
     async (itemId: string) => {
@@ -502,9 +577,20 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       // Track item as pending deletion so it can never be resurrected by an in-flight GET
       pendingDeleteIdsRef.current.add(itemId);
 
+      // Check if this is an optimistic temporary item
+      let tempProductId: string | null = null;
+      if (itemId.startsWith("temp-")) {
+        tempProductId = itemId.replace("temp-", "");
+        pendingDeleteProductIdsRef.current.add(tempProductId);
+      }
+
       // Optimistically remove from cart immediately
       setCart((prev) => {
-        const items = prev.items.filter((item) => item.id !== itemId);
+        const items = prev.items.filter((item) => {
+          if (item.id === itemId) return false;
+          if (tempProductId && isSameProduct(item.productId, tempProductId)) return false;
+          return true;
+        });
         const updatedCart: CartData = {
           ...prev,
           items,
@@ -520,7 +606,24 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         return updatedCart;
       });
 
-      // Queue for sequential server deletion
+      // If it is a temporary item:
+      if (tempProductId) {
+        // Check if the server item ID is already present in cartRef
+        const realItem = cartRef.current.items.find(
+          (it) => isSameProduct(it.productId, tempProductId) && !it.id.startsWith("temp-")
+        );
+        if (realItem) {
+          pendingDeleteIdsRef.current.add(realItem.id);
+          if (!deleteQueueRef.current.includes(realItem.id)) {
+            deleteQueueRef.current.push(realItem.id);
+          }
+          processDeleteQueue();
+        }
+        // If real item is not yet known, addToCart's in-flight resolution will catch it via pendingDeleteProductIdsRef
+        return;
+      }
+
+      // Normal server item deletion: queue for sequential server deletion
       if (!deleteQueueRef.current.includes(itemId)) {
         deleteQueueRef.current.push(itemId);
       }
@@ -585,6 +688,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     pendingQuantitiesRef.current.clear();
     deleteQueueRef.current = [];
     pendingDeleteIdsRef.current.clear();
+    pendingDeleteProductIdsRef.current.clear();
 
     const emptyCartData: CartData = { ...EMPTY_CART, cartId: cartRef.current.cartId };
     setCart(emptyCartData);
