@@ -24,6 +24,7 @@ import {
   getToken,
   isAdminUser,
 } from "@/lib/auth";
+import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
 
 const OPEN_ORDER_STATUSES = [
   "PENDING",
@@ -107,9 +108,17 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       }
     };
     refresh();
+
+    const unsubscribeSync = subscribeTabSync((event) => {
+      if (event.type === "ADMIN_ORDERS_CHANGED") {
+        refresh();
+      }
+    });
+
     window.addEventListener("admin-orders-changed", refresh);
     return () => {
       ignore = true;
+      unsubscribeSync();
       window.removeEventListener("admin-orders-changed", refresh);
     };
   }, [checked]);
@@ -122,6 +131,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
     clearToken();
     clearStoredUser();
+    broadcastTabEvent({ type: "AUTH_LOGOUT" });
     window.location.href = "/";
   };
 

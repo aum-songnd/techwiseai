@@ -1,3 +1,5 @@
+import { broadcastTabEvent } from "./tab-sync";
+
 const TOKEN_KEY = "access_token";
 const USER_KEY = "auth_user";
 const EXPIRES_KEY = "auth_expires_at";
@@ -194,6 +196,7 @@ export function clearToken() {
   localStorage.removeItem(EXPIRES_KEY);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("auth:logout"));
+    broadcastTabEvent({ type: "AUTH_LOGOUT" });
   }
 }
 

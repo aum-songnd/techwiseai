@@ -19,6 +19,7 @@ import {
   type CartItem,
   type CartData,
 } from "@/lib/cart-api";
+import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
 
 export type { CartItem };
 
@@ -81,18 +82,36 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const pendingQuantitiesRef = useRef<Map<string, number>>(new Map());
 
   const inFlightItemIdsRef = useRef<Set<string>>(new Set());
+  const pendingDeleteIdsRef = useRef<Set<string>>(new Set());
+  const deleteQueueRef = useRef<string[]>([]);
+  const isProcessingDeleteQueueRef = useRef(false);
 
   const fetchCartFromServer = useCallback(async () => {
+    // If deletions are actively in flight, don't overwrite with stale server data
+    if (pendingDeleteIdsRef.current.size > 0) {
+      return;
+    }
+
     try {
       const data = await getCart();
       setCart((currentCart) => {
+        // Exclude any items that are currently pending deletion
+        const validServerItems = data.items.filter(
+          (item) => !pendingDeleteIdsRef.current.has(item.id)
+        );
+
         // Keep any pending optimistic items not yet present in data
         const tempItems = currentCart.items.filter((item) =>
           item.id.startsWith("temp-")
         );
-        if (tempItems.length === 0) return data;
+        if (
+          tempItems.length === 0 &&
+          validServerItems.length === data.items.length
+        ) {
+          return data;
+        }
 
-        const merged = [...data.items];
+        const merged = [...validServerItems];
         for (const temp of tempItems) {
           if (!merged.some((it) => isSameProduct(it.productId, temp.productId))) {
             merged.push(temp);
@@ -111,8 +130,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       if (err instanceof CartAuthRequiredError) {
         setRequiresLogin(true);
         setCart(EMPTY_CART);
-      } else {
-
       }
     } finally {
       setIsLoaded(true);
@@ -132,11 +149,47 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       setRequiresLogin(true);
     };
 
+    const unsubscribeSync = subscribeTabSync((event) => {
+      if (event.type === "CART_UPDATED") {
+        invalidateCartCache();
+        // If this tab is in the middle of active deletions, debounce updates or in-flight mutations,
+        // do not overwrite this tab's optimistic state
+        if (
+          pendingDeleteIdsRef.current.size > 0 ||
+          pendingQuantitiesRef.current.size > 0 ||
+          inFlightItemIdsRef.current.size > 0
+        ) {
+          return;
+        }
+
+        if (event.payload?.cart) {
+          setCart(event.payload.cart);
+        } else {
+          fetchCartFromServer();
+        }
+      }
+    });
+
+    const handleVisibilityChange = () => {
+      if (
+        document.visibilityState === "visible" &&
+        pendingDeleteIdsRef.current.size === 0 &&
+        deleteQueueRef.current.length === 0
+      ) {
+        invalidateCartCache();
+        fetchCartFromServer();
+      }
+    };
+
     window.addEventListener("auth:login", handleLogin);
     window.addEventListener("auth:logout", handleLogout);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
+      unsubscribeSync();
       window.removeEventListener("auth:login", handleLogin);
       window.removeEventListener("auth:logout", handleLogout);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [fetchCartFromServer]);
 
@@ -262,6 +315,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         setRequiresLogin(false);
+        broadcastTabEvent({
+          type: "CART_UPDATED",
+          payload: { cart: data, timestamp: Date.now() },
+        });
       } catch (err) {
         // Rollback ONLY this specific product instead of wiping entire cart
         setCart((currentCart) => {
@@ -362,6 +419,15 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
                 totalAmount: merged.reduce((sum, it) => sum + it.subtotal, 0),
               };
             });
+            broadcastTabEvent({
+              type: "CART_UPDATED",
+              payload: { cart: data, timestamp: Date.now() },
+            });
+          } else {
+            broadcastTabEvent({
+              type: "CART_UPDATED",
+              payload: { timestamp: Date.now() },
+            });
           }
           pendingQuantitiesRef.current.delete(targetId);
           pendingQuantitiesRef.current.delete(itemId);
@@ -390,23 +456,98 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     [fetchCartFromServer]
   );
 
+  const processDeleteQueue = useCallback(async () => {
+    if (isProcessingDeleteQueueRef.current) return;
+    isProcessingDeleteQueueRef.current = true;
+
+    try {
+      while (deleteQueueRef.current.length > 0) {
+        const nextId = deleteQueueRef.current.shift()!;
+        try {
+          await removeCartItem(nextId);
+        } catch (err) {
+          console.error("[Cart] Error removing item from server:", nextId, err);
+          if (err instanceof CartAuthRequiredError) {
+            setRequiresLogin(true);
+            pendingDeleteIdsRef.current.clear();
+            deleteQueueRef.current = [];
+            break;
+          }
+          // Failed to delete on server: clear from pending & refetch
+          pendingDeleteIdsRef.current.delete(nextId);
+          fetchCartFromServer();
+        } finally {
+          pendingDeleteIdsRef.current.delete(nextId);
+        }
+      }
+    } finally {
+      isProcessingDeleteQueueRef.current = false;
+      // When all queued deletes are complete, broadcast final cart state
+      if (pendingDeleteIdsRef.current.size === 0) {
+        broadcastTabEvent({
+          type: "CART_UPDATED",
+          payload: { cart: cartRef.current, timestamp: Date.now() },
+        });
+      }
+    }
+  }, [fetchCartFromServer]);
+
+  const removeFromCart = useCallback(
+    async (itemId: string) => {
+      const existingTimeout = updateTimeoutsRef.current.get(itemId);
+      if (existingTimeout) clearTimeout(existingTimeout);
+      updateTimeoutsRef.current.delete(itemId);
+      pendingQuantitiesRef.current.delete(itemId);
+
+      // Track item as pending deletion so it can never be resurrected by an in-flight GET
+      pendingDeleteIdsRef.current.add(itemId);
+
+      // Optimistically remove from cart immediately
+      setCart((prev) => {
+        const items = prev.items.filter((item) => item.id !== itemId);
+        const updatedCart: CartData = {
+          ...prev,
+          items,
+          totalItems: items.length,
+          totalQuantity: items.reduce((sum, i) => sum + i.quantity, 0),
+          totalAmount: items.reduce((sum, i) => sum + i.subtotal, 0),
+        };
+        // Broadcast immediately to duplicate tabs so they see the deletion instantly
+        broadcastTabEvent({
+          type: "CART_UPDATED",
+          payload: { cart: updatedCart, timestamp: Date.now() },
+        });
+        return updatedCart;
+      });
+
+      // Queue for sequential server deletion
+      if (!deleteQueueRef.current.includes(itemId)) {
+        deleteQueueRef.current.push(itemId);
+      }
+      processDeleteQueue();
+    },
+    [processDeleteQueue]
+  );
+
   const updateQuantity = useCallback(
     async (itemId: string, quantity: number) => {
       const clampedQty = Math.max(0, quantity);
 
+      if (clampedQty <= 0) {
+        removeFromCart(itemId);
+        return;
+      }
+
       setCart((prev) => {
-        const items =
-          clampedQty <= 0
-            ? prev.items.filter((item) => item.id !== itemId)
-            : prev.items.map((item) =>
-                item.id === itemId
-                  ? {
-                      ...item,
-                      quantity: clampedQty,
-                      subtotal: item.unitPrice * clampedQty,
-                    }
-                  : item
-              );
+        const items = prev.items.map((item) =>
+          item.id === itemId
+            ? {
+                ...item,
+                quantity: clampedQty,
+                subtotal: item.unitPrice * clampedQty,
+              }
+            : item
+        );
         return {
           ...prev,
           items,
@@ -426,7 +567,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       }, UPDATE_DEBOUNCE_MS);
       updateTimeoutsRef.current.set(itemId, timeout);
     },
-    [commitQuantityUpdate]
+    [commitQuantityUpdate, removeFromCart]
   );
 
   useEffect(() => {
@@ -437,46 +578,23 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
-  const removeFromCart = useCallback(
-    async (itemId: string) => {
-
-      const existingTimeout = updateTimeoutsRef.current.get(itemId);
-      if (existingTimeout) clearTimeout(existingTimeout);
-      updateTimeoutsRef.current.delete(itemId);
-      pendingQuantitiesRef.current.delete(itemId);
-
-      setCart((prev) => {
-        const items = prev.items.filter((item) => item.id !== itemId);
-        return {
-          ...prev,
-          items,
-          totalItems: items.length,
-          totalQuantity: items.reduce((sum, i) => sum + i.quantity, 0),
-          totalAmount: items.reduce((sum, i) => sum + i.subtotal, 0),
-        };
-      });
-
-      try {
-        await removeCartItem(itemId);
-      } catch (err) {
-        if (err instanceof CartAuthRequiredError) {
-          setRequiresLogin(true);
-        } else {
-
-          fetchCartFromServer();
-        }
-      }
-    },
-    [fetchCartFromServer]
-  );
-
   const clearCart = useCallback(async () => {
 
     updateTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
     updateTimeoutsRef.current.clear();
     pendingQuantitiesRef.current.clear();
+    deleteQueueRef.current = [];
+    pendingDeleteIdsRef.current.clear();
 
-    setCart((prev) => ({ ...EMPTY_CART, cartId: prev.cartId }));
+    const emptyCartData: CartData = { ...EMPTY_CART, cartId: cartRef.current.cartId };
+    setCart(emptyCartData);
+    broadcastTabEvent({
+      type: "CART_UPDATED",
+      payload: {
+        cart: emptyCartData,
+        timestamp: Date.now(),
+      },
+    });
 
     try {
       await clearCartApi();

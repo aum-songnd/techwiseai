@@ -24,6 +24,8 @@ import {
   getSavedUserProfile,
 } from "@/lib/auth";
 
+import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
+
 interface AuthContextValue {
   user: User | null;
   isLoading: boolean;
@@ -39,17 +41,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const logout = useCallback(() => {
-    clearToken();
-    clearStoredUser();
-    setUser(null);
-  }, []);
-
-  useEffect(() => {
+  const syncUserFromStorage = useCallback(() => {
     const token = getToken();
     if (!token) {
-      clearToken();
-      clearStoredUser();
+      setUser((prev) => (prev ? null : prev));
       setIsLoading(false);
       return;
     }
@@ -68,11 +63,66 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
       setUser(fullUser);
     } else {
-      clearToken();
-      setUser(null);
+      setUser((prev) => (prev ? null : prev));
     }
     setIsLoading(false);
   }, []);
+
+  const logout = useCallback(() => {
+    clearToken();
+    clearStoredUser();
+    setUser(null);
+    broadcastTabEvent({ type: "AUTH_LOGOUT" });
+  }, []);
+
+  useEffect(() => {
+    // 1. Initial read from localStorage
+    syncUserFromStorage();
+
+    // 2. Real-time cross-tab synchronization via BroadcastChannel
+    const unsubscribeSync = subscribeTabSync((event) => {
+      if (event.type === "AUTH_LOGIN") {
+        setUser(event.payload.user);
+        setIsLoading(false);
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("auth:login"));
+        }
+      } else if (event.type === "AUTH_LOGOUT") {
+        setUser(null);
+        setIsLoading(false);
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("auth:logout"));
+        }
+      }
+    });
+
+    // 3. Fallback listener for localStorage changes across duplicate tabs
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "access_token" || e.key === "auth_user") {
+        syncUserFromStorage();
+        if (typeof window !== "undefined") {
+          if (e.newValue) {
+            window.dispatchEvent(new Event("auth:login"));
+          } else {
+            window.dispatchEvent(new Event("auth:logout"));
+          }
+        }
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+
+    // 4. Tab refocus check to verify session freshness
+    const handleFocus = () => {
+      syncUserFromStorage();
+    };
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      unsubscribeSync();
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [syncUserFromStorage]);
 
   useEffect(() => {
     if (!user) return;
@@ -123,6 +173,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setStoredUser(fullUser);
     setToken(token);
     setUser(fullUser);
+    broadcastTabEvent({
+      type: "AUTH_LOGIN",
+      payload: { user: fullUser, token },
+    });
   };
 
   const register = async (payload: RegisterPayload) => {

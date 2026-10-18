@@ -16,6 +16,7 @@ import {
   removeFavorite as removeFavoriteApi,
   removeAllFavorites as removeAllFavoritesApi,
 } from "@/lib/api";
+import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
 
 export type FavoriteProduct = Product & {
   categories?: string[];
@@ -43,33 +44,44 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
   const [favoriteProducts, setFavoriteProducts] = useState<FavoriteProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (isAuthLoading) return;
-
+  const fetchFavorites = useCallback(async () => {
     if (!isSignedIn) {
       setFavoriteProducts([]);
       setIsLoading(false);
       return;
     }
+    try {
+      const products = await getFavorites();
+      setFavoriteProducts(products);
+    } catch {
+      setFavoriteProducts([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [isSignedIn]);
 
-    let cancelled = false;
-    setIsLoading(true);
+  useEffect(() => {
+    if (isAuthLoading) return;
+    fetchFavorites();
 
-    getFavorites()
-      .then((products) => {
-        if (!cancelled) setFavoriteProducts(products);
-      })
-      .catch(() => {
-        if (!cancelled) setFavoriteProducts([]);
-      })
-      .finally(() => {
-        if (!cancelled) setIsLoading(false);
-      });
+    const unsubscribeSync = subscribeTabSync((event) => {
+      if (event.type === "FAVORITES_UPDATED") {
+        fetchFavorites();
+      }
+    });
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        fetchFavorites();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      cancelled = true;
+      unsubscribeSync();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [isSignedIn, isAuthLoading]);
+  }, [isAuthLoading, fetchFavorites]);
 
   const isFavorite = useCallback(
     (productId: string) => favoriteProducts.some((p) => p.id === productId),
@@ -87,6 +99,10 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
 
       try {
         await addFavoriteApi(product.id);
+        broadcastTabEvent({
+          type: "FAVORITES_UPDATED",
+          payload: { timestamp: Date.now() },
+        });
       } catch (err) {
         setFavoriteProducts((prev) => prev.filter((p) => p.id !== product.id));
 
@@ -103,6 +119,10 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
 
       try {
         await removeFavoriteApi(productId);
+        broadcastTabEvent({
+          type: "FAVORITES_UPDATED",
+          payload: { timestamp: Date.now() },
+        });
       } catch (err) {
         setFavoriteProducts(prevProducts);
 
@@ -129,6 +149,10 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
 
     try {
       await removeAllFavoritesApi();
+      broadcastTabEvent({
+        type: "FAVORITES_UPDATED",
+        payload: { timestamp: Date.now() },
+      });
     } catch (err) {
       setFavoriteProducts(prevProducts);
 

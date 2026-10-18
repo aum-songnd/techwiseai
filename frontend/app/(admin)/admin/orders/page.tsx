@@ -26,6 +26,7 @@ import {
 } from "../../../../lib/orders-api";
 import StatusBadge from "@/components/admin/StatusBadge";
 import { getToken } from "@/lib/auth";
+import { broadcastTabEvent } from "@/lib/tab-sync";
 
 const PAGE_SIZE = 10;
 
@@ -554,6 +555,7 @@ const AdminOrdersPage = () => {
       orderSnapshots.clear();
       countsSnapshot = null;
       window.dispatchEvent(new Event("admin-orders-changed"));
+      broadcastTabEvent({ type: "ADMIN_ORDERS_CHANGED" });
 
       loadCounts();
     } catch (err) {
@@ -602,6 +604,7 @@ const AdminOrdersPage = () => {
       orderSnapshots.clear();
       countsSnapshot = null;
       window.dispatchEvent(new Event("admin-orders-changed"));
+      broadcastTabEvent({ type: "ADMIN_ORDERS_CHANGED" });
       loadCounts();
     } catch (err) {
       const msg = handleError(err, "Không hủy được đơn hàng.");

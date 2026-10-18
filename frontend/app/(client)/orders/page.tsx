@@ -323,7 +323,7 @@ const OrdersHistoryPage = () => {
   // Re-order handler
   const handleReorder = (order: OrderListItem) => {
     setIsNavigatingToCart(true);
-    let items = detailsMap[order.id]?.items ?? order.items ?? [];
+    const items = detailsMap[order.id]?.items ?? order.items ?? [];
     if (items.length === 0) {
       getOrderById(order.id)
         .then((fresh) => {

@@ -114,7 +114,6 @@ async function ensureCartMutationSucceeded(
 
 // Cache is scoped to the current login token, never shared between accounts.
 // Concurrent callers reuse one promise instead of sending duplicate GET requests.
-const cartCacheKey = () => `cart:${getAccessToken() ?? "anonymous"}:`;
 
 export function invalidateCartCache(): void {
   clearRequestCache("cart:");
