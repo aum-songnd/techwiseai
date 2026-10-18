@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { ShoppingBag, Minus, Plus } from "lucide-react";
 import { Product } from "../app/data/types";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 interface AddToCartProps {
   product: Product;
@@ -17,30 +18,41 @@ const formatPrice = (value: number) =>
   );
 
 const AddToCart = ({ product }: AddToCartProps) => {
-  const { getItemByProductId, addToCart, updateQuantity, requiresLogin, isAddingToCart } =
+  const { getItemByProductId, addToCart, updateQuantity, requiresLogin } =
     useCart();
+  const { isSignedIn } = useAuth();
   const router = useRouter();
 
   const isOutOfStock = product?.stock === 0;
   const itemInCart = getItemByProductId(product.id);
   const quantityInCart = itemInCart?.quantity ?? 0;
-  const isAdding = isAddingToCart(product.id);
 
-  const handleAddToCart = async (e: React.MouseEvent) => {
+  const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isOutOfStock || isAdding) return;
+    if (isOutOfStock) return;
 
-    if (requiresLogin) {
+    if (!isSignedIn || requiresLogin) {
       const redirectTo =
         typeof window !== "undefined"
           ? window.location.pathname + window.location.search
-          : "/";
+          : "/shop";
       router.push(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
       return;
     }
 
-    await addToCart(product.id, 1);
+    addToCart(product.id, 1, {
+      id: `temp-${product.id}`,
+      productId: product.id,
+      name: product.name,
+      unitPrice: product.finalPrice,
+      originalPrice: product.price,
+      quantity: 1,
+      subtotal: product.finalPrice,
+      stockQuantity: product.stock ?? 999,
+      available: (product.stock ?? 1) > 0,
+      thumbnailUrl: product.images?.[0],
+    });
   };
 
   const decreaseQuantity = (e: React.MouseEvent) => {
@@ -61,34 +73,36 @@ const AddToCart = ({ product }: AddToCartProps) => {
     const stockLimit = itemInCart.stockQuantity ?? product.stock ?? Infinity;
 
     return (
-      <div className="flex flex-col justify-center gap-2 w-full h-[72px]">
+      <div className="font-sans flex flex-col justify-center gap-2 w-full h-[72px]">
         <div className="flex items-center justify-between">
-          <p className="text-sm text-gray-500">Số lượng</p>
-          <div className="flex items-center gap-3">
+          <p className="text-xs font-medium text-neutral-500">Số lượng</p>
+          <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={decreaseQuantity}
               aria-label="Giảm số lượng"
-              className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors"
+              className="flex h-6 w-6 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-shop_dark_green transition-colors"
             >
-              <Minus size={12} />
+              <Minus size={11} />
             </button>
-            <span className="text-sm font-medium w-4 text-center">
+            <span className="w-5 text-center text-xs font-semibold tabular-nums text-neutral-900">
               {quantityInCart}
             </span>
             <button
+              type="button"
               onClick={increaseQuantity}
               disabled={quantityInCart >= stockLimit}
               aria-label="Tăng số lượng"
-              className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 disabled:opacity-40 transition-colors"
+              className="flex h-6 w-6 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-shop_dark_green transition-colors disabled:cursor-not-allowed disabled:opacity-30"
             >
-              <Plus size={12} />
+              <Plus size={11} />
             </button>
           </div>
         </div>
 
-        <div className="flex items-center justify-between border-t border-gray-200 pt-2">
-          <p className="text-sm font-bold text-gray-800">Tạm tính</p>
-          <p className="text-sm font-bold text-shop_dark_green">
+        <div className="flex items-center justify-between border-t border-neutral-200 pt-1.5">
+          <p className="text-xs font-semibold text-neutral-900">Tạm tính</p>
+          <p className="text-xs font-bold text-shop_dark_green tabular-nums">
             {formatPrice(itemInCart.subtotal)}
           </p>
         </div>
@@ -97,14 +111,15 @@ const AddToCart = ({ product }: AddToCartProps) => {
   }
 
   return (
-    <div className="w-full h-[72px] flex items-center justify-center">
+    <div className="w-full h-[72px] flex items-center justify-center font-sans">
       <Button
+        type="button"
         onClick={handleAddToCart}
-        disabled={isOutOfStock || isAdding}
-        className="w-full bg-shop_dark_green/90 rounded-2xl px-6 py-4 text-white text-sm hover:bg-shop_dark_green hover:text-white transition-colors duration-300 disabled:opacity-70"
+        disabled={isOutOfStock}
+        className="w-full bg-shop_dark_green/90 rounded-lg px-4 py-2.5 text-white text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green hover:text-white transition-colors duration-300 disabled:opacity-70 gap-2"
       >
-        <ShoppingBag />
-        {isOutOfStock ? "Hết hàng" : isAdding ? "Đang thêm..." : "Thêm vào giỏ"}
+        <ShoppingBag size={14} />
+        {isOutOfStock ? "Hết hàng" : "Thêm vào giỏ"}
       </Button>
     </div>
   );

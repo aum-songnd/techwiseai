@@ -40,7 +40,7 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
   }
 
   return (
-    <div className="bg-white">
+    <div className="font-sans min-h-screen bg-white text-neutral-900">
       <Suspense fallback={null}>
         <Shop
           products={products}

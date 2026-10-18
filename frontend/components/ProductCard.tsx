@@ -66,9 +66,9 @@ const ProductCard = ({ product, hideFavorite = false }: ProductCardProps) => {
   };
 
   return (
-    <div className="group flex h-full flex-col rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow">
+    <div className="group font-sans flex h-full flex-col rounded-lg border border-neutral-200 bg-white overflow-hidden hover:shadow-md transition-shadow">
       <Link href={`/product/${product.id}`} className="flex flex-col">
-        <div className="relative aspect-square w-full bg-gray-100 overflow-hidden flex items-center justify-center">
+        <div className="relative aspect-[4/3] w-full bg-neutral-100 overflow-hidden flex items-center justify-center">
           {productImage ? (
             <Image
               src={productImage}
@@ -78,37 +78,37 @@ const ProductCard = ({ product, hideFavorite = false }: ProductCardProps) => {
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
             />
           ) : (
-            <div className="flex items-center justify-center h-full text-xs text-gray-400">
+            <div className="flex items-center justify-center h-full text-xs text-neutral-400">
               Không có ảnh
             </div>
           )}
 
           {product.status && (
-            <span className="absolute top-2 left-2 text-[11px] font-medium px-2 py-0.5 rounded-full bg-shop_orange/80 text-white">
+            <span className="absolute top-2 left-2 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-shop_orange/90 text-white">
               {statusLabel[product.status] ?? product.status}
             </span>
           )}
 
           {!hideFavorite && (
-          <button
-            onClick={handleToggleFavorite}
-            aria-label={isProductFavorite ? "Bỏ yêu thích" : "Thêm vào yêu thích"}
-            className={`absolute top-2 right-2 z-10 flex items-center justify-center w-7 h-7 rounded-full  transition-colors ${
-              isProductFavorite
-                ? "bg-shop_dark_green border-shop_dark_green"
-                : "bg-gray-100 hover:border-gray-300"
-            }`}
-          >
-            <Heart
-              size={14}
-              className={isProductFavorite ? "text-white" : "text-gray-500"}
-              fill={isProductFavorite ? "currentColor" : "none"}
-            />
-          </button>
+            <button
+              onClick={handleToggleFavorite}
+              aria-label={isProductFavorite ? "Bỏ yêu thích" : "Thêm vào yêu thích"}
+              className={`absolute top-2 right-2 z-10 flex items-center justify-center w-7 h-7 rounded-full transition-colors ${
+                isProductFavorite
+                  ? "bg-shop_dark_green border-shop_dark_green"
+                  : "bg-neutral-100/90 hover:bg-white"
+              }`}
+            >
+              <Heart
+                size={14}
+                className={isProductFavorite ? "text-white" : "text-neutral-500"}
+                fill={isProductFavorite ? "currentColor" : "none"}
+              />
+            </button>
           )}
 
           {product.stock === 0 && (
-            <div className="absolute inset-0 bg-white/70 flex items-center justify-center text-sm font-medium text-gray-600">
+            <div className="absolute inset-0 bg-white/70 flex items-center justify-center text-xs font-medium text-neutral-600">
               Hết hàng
             </div>
           )}
@@ -116,29 +116,33 @@ const ProductCard = ({ product, hideFavorite = false }: ProductCardProps) => {
       </Link>
 
       <div className="flex flex-1 flex-col gap-1 p-3">
-        <span className="text-[12px] uppercase tracking-wide text-gray-400 min-h-[14px]">
+        <span className="text-[12px] uppercase tracking-wide text-neutral-400 min-h-[14px]">
           {product.categories?.[0] ?? "\u00A0"}
         </span>
 
-        <h3 className="text-[17px] leading-snug font-bold text-shop_dark_green line-clamp-2 min-h-[2.9em]">
-          {product.name}
-        </h3>
+        <Link href={`/product/${product.id}`}>
+          <h3 className="text-sm font-semibold text-neutral-900 line-clamp-2 min-h-[2.5em] leading-snug hover:text-shop_dark_green transition-colors">
+            {product.name}
+          </h3>
+        </Link>
 
-        <div className="flex items-center gap-2.5">
-          <p className="text-sm font-medium">In Stock</p>
+        <div className="flex items-center gap-2">
+          <p className="text-xs font-medium text-neutral-600">In Stock</p>
           <p
-            className={`text-[17px] ${product?.stock === 0 ? "text-red-600" : "text-shop_dark_green/80 font-semibold"}`}
+            className={`text-xs font-semibold ${
+              product?.stock === 0 ? "text-red-600" : "text-shop_dark_green"
+            }`}
           >
             {(product?.stock as number) > 0 ? product?.stock : "unavailable"}
           </p>
         </div>
 
-        <div className="flex items-center gap-2 mt-1 min-h-[20px]">
-          <span className="text-sm font-semibold text-shop_dark_green/80">
+        <div className="flex items-center gap-2 mt-0.5 min-h-[20px]">
+          <span className="text-sm font-semibold text-neutral-900">
             {formatPrice(finalPrice)}
           </span>
           {hasDiscount && (
-            <span className="text-sm text-gray-400 line-through">
+            <span className="text-xs text-neutral-400 line-through">
               {formatPrice(product.price)}
             </span>
           )}

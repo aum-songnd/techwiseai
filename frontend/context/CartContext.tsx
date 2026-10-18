@@ -31,7 +31,11 @@ interface CartContextValue {
   isLoaded: boolean;
 
   requiresLogin: boolean;
-  addToCart: (productId: string, quantity?: number) => Promise<void>;
+  addToCart: (
+    productId: string,
+    quantity?: number,
+    optimisticItem?: Partial<CartItem>
+  ) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
   removeFromCart: (itemId: string) => Promise<void>;
   clearCart: () => Promise<void>;
@@ -51,8 +55,19 @@ const EMPTY_CART: CartData = {
   updatedAt: "",
 };
 
+const isSameProduct = (id1?: string, id2?: string) =>
+  !!id1 && !!id2 && id1.trim().toLowerCase() === id2.trim().toLowerCase();
+
+const isSameItem = (id1?: string, id2?: string) =>
+  !!id1 && !!id2 && id1.trim().toLowerCase() === id2.trim().toLowerCase();
+
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<CartData>(EMPTY_CART);
+  const cartRef = useRef<CartData>(EMPTY_CART);
+  useEffect(() => {
+    cartRef.current = cart;
+  }, [cart]);
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [requiresLogin, setRequiresLogin] = useState(false);
   const [pendingProductIds, setPendingProductIds] = useState<Set<string>>(
@@ -70,7 +85,27 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const fetchCartFromServer = useCallback(async () => {
     try {
       const data = await getCart();
-      setCart(data);
+      setCart((currentCart) => {
+        // Keep any pending optimistic items not yet present in data
+        const tempItems = currentCart.items.filter((item) =>
+          item.id.startsWith("temp-")
+        );
+        if (tempItems.length === 0) return data;
+
+        const merged = [...data.items];
+        for (const temp of tempItems) {
+          if (!merged.some((it) => isSameProduct(it.productId, temp.productId))) {
+            merged.push(temp);
+          }
+        }
+        return {
+          ...data,
+          items: merged,
+          totalItems: merged.length,
+          totalQuantity: merged.reduce((s, it) => s + it.quantity, 0),
+          totalAmount: merged.reduce((s, it) => s + it.subtotal, 0),
+        };
+      });
       setRequiresLogin(false);
     } catch (err) {
       if (err instanceof CartAuthRequiredError) {
@@ -105,26 +140,156 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, [fetchCartFromServer]);
 
-  const addToCart = useCallback(async (productId: string, quantity = 1) => {
-    setPendingProductIds((prev) => new Set(prev).add(productId));
-    try {
-      const data = await addCartItem(productId, quantity);
-      setCart(data);
-      setRequiresLogin(false);
-    } catch (err) {
-      if (err instanceof CartAuthRequiredError) {
-        setRequiresLogin(true);
-      } else {
+  const addToCart = useCallback(
+    async (
+      productId: string,
+      quantity = 1,
+      optimisticItem?: Partial<CartItem>
+    ) => {
+      // Optimistically update cart state immediately
+      setCart((prev) => {
+        const existingIndex = prev.items.findIndex((item) =>
+          isSameProduct(item.productId, productId)
+        );
 
-      }
-    } finally {
-      setPendingProductIds((prev) => {
-        const next = new Set(prev);
-        next.delete(productId);
-        return next;
+        let newItems: CartItem[];
+        if (existingIndex >= 0) {
+          newItems = prev.items.map((item, idx) => {
+            if (idx === existingIndex) {
+              const newQty = item.quantity + quantity;
+              return {
+                ...item,
+                quantity: newQty,
+                subtotal: item.unitPrice * newQty,
+              };
+            }
+            return item;
+          });
+        } else {
+          const unitPrice =
+            optimisticItem?.unitPrice ??
+            optimisticItem?.originalPrice ??
+            0;
+          const newItem: CartItem = {
+            id: optimisticItem?.id ?? `temp-${productId}`,
+            productId,
+            name: optimisticItem?.name ?? "Sản phẩm",
+            sku: optimisticItem?.sku,
+            slug: optimisticItem?.slug,
+            thumbnailUrl: optimisticItem?.thumbnailUrl,
+            unitPrice,
+            originalPrice: optimisticItem?.originalPrice,
+            quantity,
+            subtotal: unitPrice * quantity,
+            stockQuantity: optimisticItem?.stockQuantity ?? 999,
+            available: optimisticItem?.available ?? true,
+          };
+          newItems = [...prev.items, newItem];
+        }
+
+        return {
+          ...prev,
+          items: newItems,
+          totalItems: newItems.length,
+          totalQuantity: newItems.reduce((sum, it) => sum + it.quantity, 0),
+          totalAmount: newItems.reduce((sum, it) => sum + it.subtotal, 0),
+        };
       });
-    }
-  }, []);
+
+      setPendingProductIds((prev) => new Set(prev).add(productId));
+      try {
+        const data = await addCartItem(productId, quantity);
+
+        setCart((currentCart) => {
+          const serverItem = data.items.find((it) =>
+            isSameProduct(it.productId, productId)
+          );
+          if (!serverItem) {
+            return {
+              ...data,
+              items: currentCart.items,
+              totalItems: currentCart.items.length,
+              totalQuantity: currentCart.items.reduce((sum, it) => sum + it.quantity, 0),
+              totalAmount: currentCart.items.reduce((sum, it) => sum + it.subtotal, 0),
+            };
+          }
+
+          // Replace temp item with serverItem, preserving latest local quantity
+          const mergedItems = currentCart.items.map((item) => {
+            if (isSameProduct(item.productId, productId)) {
+              const latestQty = item.quantity;
+              return {
+                ...serverItem,
+                quantity: latestQty,
+                subtotal: serverItem.unitPrice * latestQty,
+              };
+            }
+            return item;
+          });
+
+          if (!mergedItems.some((it) => isSameProduct(it.productId, productId))) {
+            mergedItems.push(serverItem);
+          }
+
+          return {
+            ...data,
+            items: mergedItems,
+            totalItems: mergedItems.length,
+            totalQuantity: mergedItems.reduce((sum, it) => sum + it.quantity, 0),
+            totalAmount: mergedItems.reduce((sum, it) => sum + it.subtotal, 0),
+          };
+        });
+
+        // Transfer any pending quantity debounce from temp ID to real server ID
+        const tempId = `temp-${productId}`;
+        const serverItem = data.items.find((it) =>
+          isSameProduct(it.productId, productId)
+        );
+        if (serverItem && pendingQuantitiesRef.current.has(tempId)) {
+          const pendingQty = pendingQuantitiesRef.current.get(tempId)!;
+          pendingQuantitiesRef.current.delete(tempId);
+          pendingQuantitiesRef.current.set(serverItem.id, pendingQty);
+
+          const existingTimeout = updateTimeoutsRef.current.get(tempId);
+          if (existingTimeout) {
+            clearTimeout(existingTimeout);
+            updateTimeoutsRef.current.delete(tempId);
+            const timeout = setTimeout(() => {
+              commitQuantityUpdate(serverItem.id);
+            }, UPDATE_DEBOUNCE_MS);
+            updateTimeoutsRef.current.set(serverItem.id, timeout);
+          }
+        }
+
+        setRequiresLogin(false);
+      } catch (err) {
+        // Rollback ONLY this specific product instead of wiping entire cart
+        setCart((currentCart) => {
+          const filtered = currentCart.items.filter(
+            (it) => !isSameProduct(it.productId, productId)
+          );
+          return {
+            ...currentCart,
+            items: filtered,
+            totalItems: filtered.length,
+            totalQuantity: filtered.reduce((sum, it) => sum + it.quantity, 0),
+            totalAmount: filtered.reduce((sum, it) => sum + it.subtotal, 0),
+          };
+        });
+
+        if (err instanceof CartAuthRequiredError) {
+          setRequiresLogin(true);
+        }
+      } finally {
+        setPendingProductIds((prev) => {
+          const next = new Set(prev);
+          next.delete(productId);
+          return next;
+        });
+      }
+    },
+    []
+  );
 
   const commitQuantityUpdate = useCallback(
     async (itemId: string) => {
@@ -137,33 +302,88 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       const quantity = pendingQuantitiesRef.current.get(itemId);
       if (quantity === undefined) return;
 
-      inFlightItemIdsRef.current.add(itemId);
+      // If itemId is temporary (optimistic item before server response), resolve real item id
+      let targetId = itemId;
+      if (targetId.startsWith("temp-")) {
+        const tempProductId = targetId.replace("temp-", "");
+        const realItem = cartRef.current.items.find(
+          (it) => isSameProduct(it.productId, tempProductId) && !it.id.startsWith("temp-")
+        );
+        if (realItem) {
+          targetId = realItem.id;
+          pendingQuantitiesRef.current.delete(itemId);
+          pendingQuantitiesRef.current.set(targetId, quantity);
+        } else {
+          // If item is no longer in local cart, cancel update
+          if (!cartRef.current.items.some((it) => isSameProduct(it.productId, tempProductId))) {
+            pendingQuantitiesRef.current.delete(itemId);
+            return;
+          }
+          const timeout = setTimeout(() => {
+            commitQuantityUpdate(itemId);
+          }, 150);
+          updateTimeoutsRef.current.set(itemId, timeout);
+          return;
+        }
+      }
+
+      inFlightItemIdsRef.current.add(targetId);
       try {
         let data: CartData | undefined;
         if (quantity <= 0) {
-          await removeCartItem(itemId);
+          await removeCartItem(targetId);
         } else {
-          data = await updateCartItemQuantity(itemId, quantity);
+          data = await updateCartItemQuantity(targetId, quantity);
         }
 
-        const stillLatest = pendingQuantitiesRef.current.get(itemId) === quantity;
+        const stillLatest =
+          pendingQuantitiesRef.current.get(targetId) === quantity ||
+          pendingQuantitiesRef.current.get(itemId) === quantity;
+
         if (stillLatest) {
-          if (data) setCart(data);
+          if (data) {
+            setCart((currentCart) => {
+              const updatedItem = data!.items.find((it) => isSameItem(it.id, targetId));
+              const merged = currentCart.items.map((it) => {
+                if (isSameItem(it.id, targetId) || isSameItem(it.id, itemId)) {
+                  return {
+                    ...(updatedItem ?? it),
+                    quantity,
+                    subtotal: (updatedItem?.unitPrice ?? it.unitPrice) * quantity,
+                  };
+                }
+                return it;
+              });
+              return {
+                ...currentCart,
+                items: merged,
+                totalItems: merged.length,
+                totalQuantity: merged.reduce((sum, it) => sum + it.quantity, 0),
+                totalAmount: merged.reduce((sum, it) => sum + it.subtotal, 0),
+              };
+            });
+          }
+          pendingQuantitiesRef.current.delete(targetId);
           pendingQuantitiesRef.current.delete(itemId);
         }
       } catch (err) {
         if (err instanceof CartAuthRequiredError) {
+          pendingQuantitiesRef.current.delete(targetId);
           pendingQuantitiesRef.current.delete(itemId);
           setRequiresLogin(true);
-        } else if (pendingQuantitiesRef.current.get(itemId) === quantity) {
+        } else {
+          pendingQuantitiesRef.current.delete(targetId);
           pendingQuantitiesRef.current.delete(itemId);
           fetchCartFromServer();
         }
       } finally {
-        inFlightItemIdsRef.current.delete(itemId);
+        inFlightItemIdsRef.current.delete(targetId);
 
-        if (pendingQuantitiesRef.current.has(itemId)) {
-          commitQuantityUpdate(itemId);
+        if (
+          pendingQuantitiesRef.current.has(targetId) ||
+          pendingQuantitiesRef.current.has(itemId)
+        ) {
+          commitQuantityUpdate(targetId);
         }
       }
     },
@@ -271,7 +491,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }, [fetchCartFromServer]);
 
   const getItemByProductId = useCallback(
-    (productId: string) => cart.items.find((item) => item.productId === productId),
+    (productId: string) =>
+      cart.items.find((item) => isSameProduct(item.productId, productId)),
     [cart.items]
   );
 

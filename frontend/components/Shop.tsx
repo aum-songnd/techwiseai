@@ -1,21 +1,18 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
   Check,
   ChevronDown,
-  Heart,
   Search,
   SlidersHorizontal,
-  Star,
   X,
 } from "lucide-react";
 import type { Product, Category } from "../app/data/types";
-import { productImages } from "../images";
 import { getAllProductsByCategory } from "../lib/api";
+import ProductCard from "./ProductCard";
 
 type ShopProps = {
   products: Product[];
@@ -44,18 +41,6 @@ const formatVND = (value: number) =>
     style: "currency",
     currency: "VND",
   }).format(value);
-
-const resolveProductImage = (
-  fileName?: string
-): StaticImageData | string | null => {
-  if (!fileName) return null;
-
-  const localImage = (
-    productImages as Record<string, StaticImageData | undefined>
-  )[fileName];
-
-  return localImage ?? fileName;
-};
 
 const getFinalPrice = (p: Product) => p.price - (p.discount ?? 0);
 
@@ -137,13 +122,13 @@ const FilterTag = ({
   label: string;
   onRemove: () => void;
 }) => (
-  <span className="inline-flex items-center gap-1.5 rounded-full bg-shop_light_bg pl-3 pr-1.5 py-1 text-xs text-darkColor">
+  <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-50 pl-3 pr-1.5 py-1 text-xs text-neutral-800">
     {label}
     <button
       type="button"
       onClick={onRemove}
       aria-label={`Xoá bộ lọc ${label}`}
-      className="flex h-4 w-4 items-center justify-center rounded-full hover:bg-black/10 hoverEffect"
+      className="flex h-4 w-4 items-center justify-center rounded-full hover:bg-neutral-200 hoverEffect"
     >
       <X size={10} />
     </button>
@@ -161,28 +146,26 @@ const AccordionSection = ({
   onToggle: () => void;
   children: React.ReactNode;
 }) => (
-  <section className="border-t border-gray-100 py-5">
+  <section className="border-t border-neutral-200 py-5">
     <button
       type="button"
       onClick={onToggle}
       aria-expanded={open}
       className="flex w-full items-center justify-between text-left"
     >
-      <h3 className="text-base font-semibold text-darkColor">{title}</h3>
-      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200">
+      <h3 className="text-sm font-semibold text-neutral-900">{title}</h3>
+      <span className="flex h-7 w-7 items-center justify-center rounded-full border border-neutral-200 text-neutral-600">
         <ChevronDown
-          size={16}
-          className={`transition-transform duration-200 ${
-            open ? "rotate-180" : ""
-          }`}
+          size={14}
+          className={`transition-transform duration-200 ${open ? "rotate-180" : ""
+            }`}
         />
       </span>
     </button>
 
     <div
-      className={`grid transition-all duration-200 ease-out ${
-        open ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"
-      }`}
+      className={`grid transition-all duration-200 ease-out ${open ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"
+        }`}
     >
       <div className="overflow-hidden">{children}</div>
     </div>
@@ -193,7 +176,6 @@ const Shop = ({
   products: productsProp,
   categories: categoriesProp,
 }: ShopProps) => {
-
   const initialProducts = Array.isArray(productsProp) ? productsProp : [];
   const categories = Array.isArray(categoriesProp) ? categoriesProp : [];
 
@@ -220,7 +202,6 @@ const Shop = ({
   const [openSections, setOpenSections] = useState({ price: true, brand: true });
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
-  const [wishlist, setWishlist] = useState<Set<string | number>>(new Set());
   const sortRef = useRef<HTMLDivElement>(null);
 
   const [page, setPage] = useState(0);
@@ -465,15 +446,6 @@ const Shop = ({
     setPage(0);
   };
 
-  const toggleWishlist = (id: string | number) => {
-    setWishlist((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  };
-
   const toggleSection = (key: "price" | "brand") =>
     setOpenSections((s) => ({ ...s, [key]: !s[key] }));
 
@@ -497,9 +469,8 @@ const Shop = ({
     sortBy !== "default";
 
   const priceTagLabel = hasPriceFilter
-    ? `${priceMin ? formatVND(Number(priceMin)) : "0"} – ${
-        priceMax ? formatVND(Number(priceMax)) : "∞"
-      }`
+    ? `${priceMin ? formatVND(Number(priceMin)) : "0"} – ${priceMax ? formatVND(Number(priceMax)) : "∞"
+    }`
     : "";
 
   const currentSortLabel =
@@ -507,15 +478,14 @@ const Shop = ({
 
   const filterPanel = (
     <div>
-
       <div className="pb-5">
         <button
           type="button"
           onClick={handleResetFilters}
           disabled={!hasAnyFilter}
-          className="inline-flex items-center gap-2 text-sm font-medium text-darkColor hoverEffect hover:text-shop_light_green disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-darkColor"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-neutral-900 hoverEffect hover:text-shop_dark_green disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-neutral-900"
         >
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-shop_light_bg">
+          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-neutral-100 text-neutral-600">
             <X size={12} />
           </span>
           Xoá bộ lọc
@@ -525,29 +495,29 @@ const Shop = ({
           activeBrands.length > 0 ||
           hasPriceFilter ||
           saleOnly) && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {activeCategoryTitle && (
-              <FilterTag
-                label={activeCategoryTitle}
-                onRemove={() => handleSelectCategory(null)}
-              />
-            )}
-            {saleOnly && (
-              <FilterTag label="Đang giảm giá" onRemove={toggleSaleOnly} />
-            )}
-            {activeBrands.map((b) => (
-              <FilterTag key={b} label={b} onRemove={() => removeBrand(b)} />
-            ))}
-            {hasPriceFilter && (
-              <FilterTag label={priceTagLabel} onRemove={clearPrice} />
-            )}
-          </div>
-        )}
+            <div className="mt-4 flex flex-wrap gap-2">
+              {activeCategoryTitle && (
+                <FilterTag
+                  label={activeCategoryTitle}
+                  onRemove={() => handleSelectCategory(null)}
+                />
+              )}
+              {saleOnly && (
+                <FilterTag label="Đang giảm giá" onRemove={toggleSaleOnly} />
+              )}
+              {activeBrands.map((b) => (
+                <FilterTag key={b} label={b} onRemove={() => removeBrand(b)} />
+              ))}
+              {hasPriceFilter && (
+                <FilterTag label={priceTagLabel} onRemove={clearPrice} />
+              )}
+            </div>
+          )}
       </div>
 
-      <section className="border-t border-gray-100 py-5">
+      <section className="border-t border-neutral-200 py-5">
         <label className="flex cursor-pointer items-center justify-between gap-3">
-          <span className="text-base font-semibold text-darkColor">
+          <span className="text-sm font-semibold text-neutral-900">
             Đang giảm giá
           </span>
           <input
@@ -558,14 +528,12 @@ const Shop = ({
             className="peer sr-only"
           />
           <span
-            className={`relative h-6 w-11 shrink-0 rounded-full hoverEffect peer-focus-visible:ring-2 peer-focus-visible:ring-shop_light_green ${
-              saleOnly ? "bg-shop_light_green" : "bg-gray-300"
-            }`}
+            className={`relative h-6 w-11 shrink-0 rounded-full hoverEffect peer-focus-visible:ring-2 peer-focus-visible:ring-shop_dark_green ${saleOnly ? "bg-shop_dark_green" : "bg-neutral-300"
+              }`}
           >
             <span
-              className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ${
-                saleOnly ? "translate-x-5" : "translate-x-0"
-              }`}
+              className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ${saleOnly ? "translate-x-5" : "translate-x-0"
+                }`}
             />
           </span>
         </label>
@@ -588,11 +556,10 @@ const Shop = ({
                   type="button"
                   onClick={() => handleSelectPriceRange(range)}
                   aria-pressed={active}
-                  className={`rounded-full border px-3 py-1.5 text-xs hoverEffect ${
-                    active
-                      ? "border-shop_light_green bg-shop_light_green text-white"
-                      : "border-gray-200 text-darkColor hover:border-shop_light_green"
-                  }`}
+                  className={`rounded-full border px-3 py-1.5 text-xs hoverEffect ${active
+                    ? "border-shop_dark_green bg-shop_dark_green text-white font-medium"
+                    : "border-neutral-200 text-neutral-700 hover:border-shop_dark_green"
+                    }`}
                 >
                   {formatShortVND(range.from)} – {formatShortVND(range.to)}
                 </button>
@@ -609,9 +576,9 @@ const Shop = ({
             onChange={(e) => handlePriceMin(e.target.value)}
             placeholder="Từ"
             aria-label="Giá thấp nhất"
-            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-shop_light_green hoverEffect"
+            className="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-xs text-neutral-900 outline-none focus:border-shop_dark_green hoverEffect"
           />
-          <span className="text-gray-400">–</span>
+          <span className="text-neutral-400">–</span>
           <input
             type="text"
             inputMode="numeric"
@@ -619,7 +586,7 @@ const Shop = ({
             onChange={(e) => handlePriceMax(e.target.value)}
             placeholder="Đến"
             aria-label="Giá cao nhất"
-            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-shop_light_green hoverEffect"
+            className="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-xs text-neutral-900 outline-none focus:border-shop_dark_green hoverEffect"
           />
         </div>
       </AccordionSection>
@@ -632,8 +599,8 @@ const Shop = ({
         <div className="p-0.5">
           <div className="relative">
             <Search
-              size={16}
-              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              size={15}
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
             />
             <input
               type="text"
@@ -641,13 +608,13 @@ const Shop = ({
               onChange={(e) => setBrandSearch(e.target.value)}
               placeholder="Tìm thương hiệu"
               aria-label="Tìm thương hiệu"
-              className="w-full rounded-full bg-shop_light_bg py-2 pl-9 pr-3 text-sm outline-none focus:ring-1 focus:ring-shop_light_green"
+              className="w-full rounded-md border border-neutral-300 bg-white py-1.5 pl-9 pr-3 text-xs text-neutral-900 outline-none focus:border-shop_dark_green"
             />
           </div>
 
           <ul className="mt-4 space-y-3">
             {visibleBrandOptions.length === 0 && (
-              <li className="text-sm text-lightColor">
+              <li className="text-xs text-neutral-500">
                 Không có thương hiệu phù hợp.
               </li>
             )}
@@ -655,7 +622,7 @@ const Shop = ({
               const checked = activeBrandKeys.has(brand.key);
               return (
                 <li key={brand.key}>
-                  <label className="flex cursor-pointer items-center gap-3 text-sm text-darkColor">
+                  <label className="flex cursor-pointer items-center gap-3 text-xs text-neutral-800">
                     <input
                       type="checkbox"
                       checked={checked}
@@ -663,13 +630,12 @@ const Shop = ({
                       className="peer sr-only"
                     />
                     <span
-                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border hoverEffect peer-focus-visible:ring-2 peer-focus-visible:ring-shop_light_green ${
-                        checked
-                          ? "border-shop_light_green bg-shop_light_green text-white"
-                          : "border-gray-300 bg-white"
-                      }`}
+                      className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border hoverEffect peer-focus-visible:ring-2 peer-focus-visible:ring-shop_dark_green ${checked
+                        ? "border-shop_dark_green bg-shop_dark_green text-white"
+                        : "border-neutral-300 bg-white"
+                        }`}
                     >
-                      {checked && <Check size={14} strokeWidth={3} />}
+                      {checked && <Check size={12} strokeWidth={3} />}
                     </span>
                     {brand.label}
                   </label>
@@ -683,353 +649,250 @@ const Shop = ({
   );
 
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-8 lg:py-10">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-x-10">
-
-        <div className="lg:col-span-1 lg:self-start">
-          <nav aria-label="Breadcrumb" className="mt-4 text-xs text-lightColor">
-            <Link href="/" className="hover:text-darkColor hoverEffect">
-              Trang chủ
-            </Link>
-            <span className="mx-2">·</span>
-            <span>Cửa hàng</span>
-          </nav>
-
-          <div className="mt-8 hidden lg:block">{filterPanel}</div>
+    <div className="font-sans min-h-screen bg-white text-neutral-900">
+      <div className="mx-auto max-w-screen-xl px-4 py-8 lg:py-10">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-xs text-neutral-500 mb-6">
+          <Link href="/" className="hover:text-shop_dark_green transition-colors">
+            Trang chủ
+          </Link>
+          <span>/</span>
+          {activeCategoryTitle ? (
+            <>
+              <Link href="/shop" className="hover:text-shop_dark_green transition-colors">
+                Cửa hàng
+              </Link>
+              <span>/</span>
+              <span className="text-neutral-900 font-medium">{activeCategoryTitle}</span>
+            </>
+          ) : (
+            <span className="text-neutral-900 font-medium">Cửa hàng</span>
+          )}
         </div>
 
-        <div className="lg:col-span-3">
-
-          <div className="mb-6 flex items-center justify-between gap-3 lg:pt-2">
-            <div className="flex min-w-0 flex-1 items-center gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {[{ id: "__all", slug: null, title: "Tất cả" }, ...categories.map((c) => ({ id: c.id, slug: c.slug, title: c.title }))].map(
-                (c) => {
-                  const active = activeCategory === c.slug;
-                  return (
-                    <button
-                      key={c.id}
-                      type="button"
-                      onClick={() => handleSelectCategory(c.slug)}
-                      aria-current={active ? "true" : undefined}
-                      className={`relative shrink-0 whitespace-nowrap py-3 text-sm hoverEffect ${
-                        active
-                          ? "font-medium text-shop_light_green"
-                          : "text-lightColor hover:text-darkColor"
-                      }`}
-                    >
-                      {c.title}
-                      <span
-                        className={`absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-shop_light_green transition-transform duration-200 origin-left ${
-                          active ? "scale-x-100" : "scale-x-0"
-                        }`}
-                      />
-                    </button>
-                  );
-                }
-              )}
-            </div>
-
-            <div className="flex shrink-0 items-center gap-2">
-
-              <button
-                type="button"
-                onClick={() => setDrawerOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm text-darkColor hoverEffect hover:border-shop_light_green lg:hidden"
-              >
-                <SlidersHorizontal size={16} />
-                Bộ lọc
-              </button>
-
-              <div ref={sortRef} className="relative">
-                <button
-                  type="button"
-                  onClick={() => setSortOpen((o) => !o)}
-                  aria-haspopup="listbox"
-                  aria-expanded={sortOpen}
-                  className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm text-darkColor hoverEffect hover:border-shop_light_green"
-                >
-                  <SlidersHorizontal size={16} className="hidden sm:block" />
-                  <span className="hidden sm:inline">{currentSortLabel}</span>
-                  <span className="sm:hidden">Sắp xếp</span>
-                  <ChevronDown
-                    size={14}
-                    className={`transition-transform ${
-                      sortOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                {sortOpen && (
-                  <ul
-                    role="listbox"
-                    className="absolute right-0 z-30 mt-2 w-60 overflow-hidden rounded-xl border border-gray-200 bg-white py-1 shadow-lg"
-                  >
-                    {SORT_OPTIONS.map((opt) => (
-                      <li key={opt.value} role="option" aria-selected={sortBy === opt.value}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setSortBy(opt.value);
-                            setSortOpen(false);
-                            setPage(0);
-                          }}
-                          className={`flex w-full items-center justify-between px-4 py-2 text-left text-sm hover:bg-shop_light_bg ${
-                            sortBy === opt.value
-                              ? "font-medium text-shop_light_green"
-                              : "text-darkColor"
-                          }`}
-                        >
-                          {opt.label}
-                          {sortBy === opt.value && <Check size={14} />}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-x-10">
+          <div className="lg:col-span-1 lg:self-start">
+            <div className="hidden lg:block">{filterPanel}</div>
           </div>
 
-          {loadingProducts ? (
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
-              {Array.from({ length: 9 }).map((_, i) => (
-                <div key={i} className="animate-pulse overflow-hidden rounded-2xl border border-gray-200">
-                  <div className="aspect-[5/4] w-full bg-gray-200" />
-                  <div className="space-y-2 px-3 pb-3 pt-3">
-                    <div className="h-3 w-1/3 rounded bg-gray-200" />
-                    <div className="h-4 w-3/4 rounded bg-gray-200" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : productsError ? (
-            <p className="text-sm text-red-600">
-              Không tải được sản phẩm: {productsError}
-            </p>
-          ) : sortedProducts.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-gray-300 py-16 text-center">
-              <p className="text-sm text-lightColor">
-                Không có sản phẩm nào phù hợp với bộ lọc.
-              </p>
-              {hasAnyFilter && (
-                <button
-                  type="button"
-                  onClick={handleResetFilters}
-                  className="mt-3 text-sm font-medium text-shop_light_green underline"
-                >
-                  Xoá bộ lọc
-                </button>
-              )}
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
-              {sortedProducts.map((product) => {
-                const finalPrice = getFinalPrice(product);
-                const extra = product as unknown as {
-                  brand?: string;
-                  categories?: string[];
-                  rating?: number;
-                };
-                const brandLabel = extra.brand ?? extra.categories?.[0];
-                const rating =
-                  typeof extra.rating === "number" ? extra.rating : null;
-                const discountPercent =
-                  product.discount && product.price > 0
-                    ? Math.round((product.discount / product.price) * 100)
-                    : 0;
-                const imageSrc = resolveProductImage(product.images?.[0]);
-                const liked = wishlist.has(product.id);
-
-                return (
-                  <article
-                    key={product.id}
-                    className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white hoverEffect hover:shadow-md"
-                  >
-
-                    <div className="relative aspect-[5/4] w-full overflow-hidden bg-shop_light_bg">
-                      <Link
-                        href={`/product/${product.id}`}
-                        aria-label={product.name}
-                        className="absolute inset-0 block"
-                      >
-                        {imageSrc && (
-                          <Image
-                            src={imageSrc}
-                            alt={product.name}
-                            fill
-                            sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          />
-                        )}
-                      </Link>
-
-                      {discountPercent > 0 ? (
-                        <span className="pointer-events-none absolute left-3 top-3 z-10 rounded-lg bg-shop_light_green px-2.5 py-1 text-xs font-medium text-white">
-                          Sale {discountPercent}%
-                        </span>
-                      ) : product.status ? (
-                        <span className="pointer-events-none absolute left-3 top-3 z-10 rounded-lg bg-darkColor px-2.5 py-1 text-xs font-medium uppercase text-white">
-                          {product.status}
-                        </span>
-                      ) : null}
-
+          <div className="lg:col-span-3">
+            <div className="mb-6 flex items-center justify-between gap-3 lg:pt-2">
+              <div className="flex min-w-0 flex-1 items-center gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {[{ id: "__all", slug: null, title: "Tất cả" }, ...categories.map((c) => ({ id: c.id, slug: c.slug, title: c.title }))].map(
+                  (c) => {
+                    const active = activeCategory === c.slug;
+                    return (
                       <button
+                        key={c.id}
                         type="button"
-                        onClick={() => toggleWishlist(product.id)}
-                        aria-label={
-                          liked ? "Bỏ khỏi yêu thích" : "Thêm vào yêu thích"
-                        }
-                        aria-pressed={liked}
-                        className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white/80 backdrop-blur hoverEffect hover:border-shop_light_green"
+                        onClick={() => handleSelectCategory(c.slug)}
+                        aria-current={active ? "true" : undefined}
+                        className={`relative shrink-0 whitespace-nowrap py-3 text-xs sm:text-sm hoverEffect ${active
+                          ? "font-semibold text-shop_dark_green"
+                          : "text-neutral-500 hover:text-neutral-900"
+                          }`}
                       >
-                        <Heart
-                          size={16}
-                          strokeWidth={1.5}
-                          className={
-                            liked
-                              ? "fill-red-500 text-red-500"
-                              : "text-darkColor"
-                          }
+                        {c.title}
+                        <span
+                          className={`absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-shop_dark_green transition-transform duration-200 origin-left ${active ? "scale-x-100" : "scale-x-0"
+                            }`}
                         />
                       </button>
-                    </div>
+                    );
+                  }
+                )}
+              </div>
 
-                    <Link
-                      href={`/product/${product.id}`}
-                      className="block px-3 pb-3 pt-3"
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="truncate text-xs uppercase tracking-wide text-lightColor">
-                          {brandLabel}
-                        </span>
-                        {rating !== null && (
-                          <span className="flex shrink-0 items-center gap-1 text-xs text-darkColor">
-                            <Star
-                              size={13}
-                              className="fill-yellow-400 text-yellow-400"
-                            />
-                            {rating.toFixed(1)}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="mt-2 flex flex-wrap items-baseline gap-x-2">
-                        <span className="text-base font-semibold text-shop_dark_green">
-                          {formatVND(finalPrice)}
-                        </span>
-                        {!!product.discount && (
-                          <span className="text-xs text-lightColor line-through">
-                            {formatVND(product.price)}
-                          </span>
-                        )}
-                      </div>
-
-                      <h2 className="mt-1 line-clamp-1 text-sm text-darkColor">
-                        {product.name}
-                      </h2>
-                    </Link>
-                  </article>
-                );
-              })}
-            </div>
-          )}
-
-          {!loadingProducts &&
-            !productsError &&
-            sortedProducts.length > 0 &&
-            totalPages > 1 && (
-              <div className="mt-10 flex items-center justify-center gap-1.5">
+              <div className="flex shrink-0 items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => handlePageChange(page - 1)}
-                  disabled={page === 0}
-                  className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm hoverEffect hover:border-shop_light_green disabled:cursor-not-allowed disabled:opacity-40"
+                  onClick={() => setDrawerOpen(true)}
+                  className="inline-flex items-center gap-2 rounded-full border border-neutral-300 px-3.5 py-1.5 text-xs font-medium text-neutral-700 hoverEffect hover:border-shop_dark_green lg:hidden"
                 >
-                  Trước
+                  <SlidersHorizontal size={14} />
+                  Bộ lọc
                 </button>
 
-                {pageNumbers[0] > 0 && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => handlePageChange(0)}
-                      className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm hoverEffect hover:border-shop_light_green"
-                    >
-                      1
-                    </button>
-                    <span className="px-1 text-sm text-lightColor">…</span>
-                  </>
-                )}
-
-                {pageNumbers.map((p) => (
+                <div ref={sortRef} className="relative">
                   <button
-                    key={p}
                     type="button"
-                    onClick={() => handlePageChange(p)}
-                    aria-current={p === page ? "page" : undefined}
-                    className={`rounded-lg border px-3 py-1.5 text-sm hoverEffect ${
-                      p === page
-                        ? "border-shop_light_green bg-shop_light_green text-white"
-                        : "border-gray-200 hover:border-shop_light_green"
-                    }`}
+                    onClick={() => setSortOpen((o) => !o)}
+                    aria-haspopup="listbox"
+                    aria-expanded={sortOpen}
+                    className="inline-flex items-center gap-2 rounded-full border border-neutral-300 px-3.5 py-1.5 text-xs font-medium text-neutral-700 hoverEffect hover:border-shop_dark_green"
                   >
-                    {p + 1}
+                    <SlidersHorizontal size={14} className="hidden sm:block" />
+                    <span className="hidden sm:inline">{currentSortLabel}</span>
+                    <span className="sm:hidden">Sắp xếp</span>
+                    <ChevronDown
+                      size={13}
+                      className={`transition-transform ${sortOpen ? "rotate-180" : ""
+                        }`}
+                    />
                   </button>
-                ))}
 
-                {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
-                  <>
-                    <span className="px-1 text-sm text-lightColor">…</span>
-                    <button
-                      type="button"
-                      onClick={() => handlePageChange(totalPages - 1)}
-                      className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm hoverEffect hover:border-shop_light_green"
+                  {sortOpen && (
+                    <ul
+                      role="listbox"
+                      className="absolute right-0 z-30 mt-2 w-56 overflow-hidden rounded-xl border border-neutral-200 bg-white py-1 shadow-md text-xs"
                     >
-                      {totalPages}
-                    </button>
-                  </>
-                )}
+                      {SORT_OPTIONS.map((opt) => (
+                        <li key={opt.value} role="option" aria-selected={sortBy === opt.value}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSortBy(opt.value);
+                              setSortOpen(false);
+                              setPage(0);
+                            }}
+                            className={`flex w-full items-center justify-between px-3.5 py-2 text-left hover:bg-neutral-50 ${sortBy === opt.value
+                              ? "font-semibold text-shop_dark_green bg-neutral-50"
+                              : "text-neutral-700"
+                              }`}
+                          >
+                            {opt.label}
+                            {sortBy === opt.value && <Check size={13} />}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </div>
 
-                <button
-                  type="button"
-                  onClick={() => handlePageChange(page + 1)}
-                  disabled={page >= totalPages - 1}
-                  className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm hoverEffect hover:border-shop_light_green disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  Sau
-                </button>
+            {loadingProducts ? (
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
+                {Array.from({ length: 9 }).map((_, i) => (
+                  <div key={i} className="animate-pulse overflow-hidden rounded-2xl border border-neutral-200">
+                    <div className="aspect-[4/3] w-full bg-neutral-100" />
+                    <div className="space-y-2 px-3 pb-3 pt-3">
+                      <div className="h-3 w-1/3 rounded bg-neutral-200" />
+                      <div className="h-4 w-3/4 rounded bg-neutral-200" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : productsError ? (
+              <p className="text-xs text-red-600">
+                Không tải được sản phẩm: {productsError}
+              </p>
+            ) : sortedProducts.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-neutral-300 py-16 text-center">
+                <p className="text-xs text-neutral-500">
+                  Không có sản phẩm nào phù hợp với bộ lọc.
+                </p>
+                {hasAnyFilter && (
+                  <button
+                    type="button"
+                    onClick={handleResetFilters}
+                    className="mt-3 text-xs font-semibold text-shop_dark_green underline"
+                  >
+                    Xoá bộ lọc
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
+                {sortedProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
             )}
+
+            {!loadingProducts &&
+              !productsError &&
+              sortedProducts.length > 0 &&
+              totalPages > 1 && (
+                <div className="mt-10 flex items-center justify-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => handlePageChange(page - 1)}
+                    disabled={page === 0}
+                    className="rounded-lg border border-neutral-200 px-3 py-1.5 text-xs text-neutral-700 hoverEffect hover:border-shop_dark_green disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    Trước
+                  </button>
+
+                  {pageNumbers[0] > 0 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => handlePageChange(0)}
+                        className="rounded-lg border border-neutral-200 px-3 py-1.5 text-xs text-neutral-700 hoverEffect hover:border-shop_dark_green"
+                      >
+                        1
+                      </button>
+                      <span className="px-1 text-xs text-neutral-400">…</span>
+                    </>
+                  )}
+
+                  {pageNumbers.map((p) => (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => handlePageChange(p)}
+                      aria-current={p === page ? "page" : undefined}
+                      className={`rounded-lg border px-3 py-1.5 text-xs hoverEffect ${p === page
+                        ? "border-shop_dark_green bg-shop_dark_green text-white font-semibold"
+                        : "border-neutral-200 text-neutral-700 hover:border-shop_dark_green"
+                        }`}
+                    >
+                      {p + 1}
+                    </button>
+                  ))}
+
+                  {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
+                    <>
+                      <span className="px-1 text-xs text-neutral-400">…</span>
+                      <button
+                        type="button"
+                        onClick={() => handlePageChange(totalPages - 1)}
+                        className="rounded-lg border border-neutral-200 px-3 py-1.5 text-xs text-neutral-700 hoverEffect hover:border-shop_dark_green"
+                      >
+                        {totalPages}
+                      </button>
+                    </>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => handlePageChange(page + 1)}
+                    disabled={page >= totalPages - 1}
+                    className="rounded-lg border border-neutral-200 px-3 py-1.5 text-xs text-neutral-700 hoverEffect hover:border-shop_dark_green disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    Sau
+                  </button>
+                </div>
+              )}
+          </div>
         </div>
       </div>
 
       <div
-        className={`fixed inset-0 z-50 lg:hidden ${
-          drawerOpen ? "" : "pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-50 lg:hidden ${drawerOpen ? "" : "pointer-events-none"
+          }`}
         aria-hidden={!drawerOpen}
       >
         <div
           onClick={() => setDrawerOpen(false)}
-          className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
-            drawerOpen ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${drawerOpen ? "opacity-100" : "opacity-0"
+            }`}
         />
         <div
           role="dialog"
           aria-modal="true"
           aria-label="Bộ lọc sản phẩm"
-          className={`absolute inset-y-0 left-0 flex w-[85%] max-w-sm flex-col bg-white shadow-xl transition-transform duration-300 ${
-            drawerOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className={`absolute inset-y-0 left-0 flex w-[85%] max-w-sm flex-col bg-white shadow-xl transition-transform duration-300 ${drawerOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
         >
-          <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4">
-            <h2 className="text-base font-semibold text-darkColor">Bộ lọc</h2>
+          <div className="flex items-center justify-between border-b border-neutral-200 px-5 py-4">
+            <h2 className="text-sm font-bold text-neutral-900">Bộ lọc</h2>
             <button
               type="button"
               onClick={() => setDrawerOpen(false)}
               aria-label="Đóng bộ lọc"
-              className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-shop_light_bg"
+              className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-neutral-100 text-neutral-600"
             >
               <X size={18} />
             </button>
@@ -1037,11 +900,11 @@ const Shop = ({
 
           <div className="flex-1 overflow-y-auto px-5 py-5">{filterPanel}</div>
 
-          <div className="border-t border-gray-200 p-4">
+          <div className="border-t border-neutral-200 p-4">
             <button
               type="button"
               onClick={() => setDrawerOpen(false)}
-              className="w-full rounded-full bg-shop_dark_green py-3 text-sm font-medium text-white hoverEffect hover:opacity-90"
+              className="w-full rounded-full bg-shop_dark_green py-2.5 text-xs font-semibold text-white hoverEffect hover:opacity-90"
             >
               Xem {totalElements} sản phẩm
             </button>
