@@ -5,17 +5,23 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   CalendarDays,
+  ChevronDown,
   Layers,
   LayoutDashboard,
   LogOut,
   Menu,
   Package,
   ShoppingCart,
+  Store,
+  User as UserIcon,
   Users,
   X,
   type LucideIcon,
 } from "lucide-react";
 import Logo from "@/components/Logo";
+import { useAuth } from "@/context/AuthContext";
+import { useOutsideClick } from "@/hooks";
+import UserProfileModal from "@/components/UserProfileModal";
 import { getAdminOrders } from "@/lib/admin-orders-api";
 import {
   clearStoredUser,
@@ -45,8 +51,8 @@ const countOpenOrders = async (): Promise<number> => {
       const list = Array.isArray(res.items)
         ? res.items
         : Array.isArray(res.content)
-        ? res.content
-        : [];
+          ? res.content
+          : [];
       return list.length;
     })
   );
@@ -81,10 +87,15 @@ const readProfile = (): AdminProfile | null => {
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { user, logout } = useAuth();
   const [checked, setChecked] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profile, setProfile] = useState<AdminProfile | null>(null);
   const [openOrders, setOpenOrders] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+
+  const menuRef = useOutsideClick<HTMLDivElement>(() => setIsMenuOpen(false));
 
   useEffect(() => {
     const token = getToken();
@@ -104,7 +115,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         const total = await countOpenOrders();
         if (!ignore) setOpenOrders(total);
       } catch {
-
+        // ignore errors
       }
     };
     refresh();
@@ -128,7 +139,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   }, [pathname]);
 
   const handleLogout = () => {
-
+    setIsMenuOpen(false);
+    logout();
     clearToken();
     clearStoredUser();
     broadcastTabEvent({ type: "AUTH_LOGOUT" });
@@ -143,7 +155,11 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const currentTitle =
     NAV_ITEMS.find((item) => isActive(item))?.label ?? "Quản trị";
 
-  const displayName = profile?.name || "Quản trị viên";
+  const displayName =
+    user?.fullName?.trim() ||
+    user?.username ||
+    profile?.name ||
+    "Quản trị viên";
   const initial = displayName.charAt(0).toUpperCase();
 
   const today = new Intl.DateTimeFormat("vi-VN", {
@@ -174,9 +190,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-56 bg-white border-r border-neutral-200 flex flex-col transition-transform duration-200 lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed inset-y-0 left-0 z-50 w-56 bg-white border-r border-neutral-200 flex flex-col transition-transform duration-200 lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="h-16 px-4 flex items-center justify-between shrink-0 border-b border-neutral-200">
           <div className="flex flex-col min-w-0 leading-none">
@@ -203,21 +218,19 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`flex items-center gap-3 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
-                  active
-                    ? "bg-shop_dark_green text-white shadow-sm"
-                    : "text-neutral-600 hover:bg-neutral-100 hover:text-shop_dark_green"
-                }`}
+                className={`flex items-center gap-3 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors ${active
+                  ? "bg-shop_dark_green text-white shadow-sm"
+                  : "text-neutral-600 hover:bg-neutral-100 hover:text-shop_dark_green"
+                  }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
                 <span>{item.label}</span>
                 {item.href === "/admin/orders" && openOrders > 0 && (
                   <span
-                    className={`ml-auto min-w-[20px] h-5 px-1.5 font-mono text-[11px] font-semibold flex items-center justify-center ${
-                      active
-                        ? "bg-white/20 text-white"
-                        : "bg-shop_dark_green text-white"
-                    }`}
+                    className={`ml-auto min-w-[20px] h-5 px-1.5 font-mono text-[11px] font-semibold flex items-center justify-center ${active
+                      ? "bg-white/20 text-white"
+                      : "bg-shop_dark_green text-white"
+                      }`}
                     title={`${openOrders} đơn chưa hoàn thành`}
                   >
                     {openOrders > 99 ? "99+" : openOrders}
@@ -228,7 +241,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           })}
         </nav>
 
-        <div className="px-3 py-4 border-t border-neutral-200 flex flex-col gap-1">
+        {/* <div className="px-3 py-4 border-t border-neutral-200 flex flex-col gap-1">
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:bg-red-50 hover:text-red-600 transition-colors text-left"
@@ -236,7 +249,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             <LogOut className="w-4 h-4 shrink-0" />
             <span>Đăng xuất</span>
           </button>
-        </div>
+        </div> */}
       </aside>
 
       <div className="lg:pl-56 min-h-screen flex flex-col">
@@ -265,23 +278,94 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
               <CalendarDays className="w-4 h-4 text-neutral-400" />
               <span>{today}</span>
             </div>
-            <div className="flex items-center gap-2.5 sm:pl-3 sm:border-l sm:border-neutral-200">
-              <div
-                title={displayName}
-                aria-label={displayName}
-                className="w-8 h-8 bg-shop_dark_green text-white flex items-center justify-center text-xs font-semibold"
+
+            {/* Admin User Avatar & Dropdown Menu */}
+            <div
+              ref={menuRef}
+              className="relative flex items-center sm:pl-3 sm:border-l sm:border-neutral-200"
+            >
+              <button
+                type="button"
+                onClick={() => setIsMenuOpen((prev) => !prev)}
+                className="flex items-center gap-2 text-left cursor-pointer group focus:outline-none"
+                title={`Tài khoản: ${displayName}`}
+                aria-label="Menu tài khoản quản trị"
+                aria-expanded={isMenuOpen}
               >
-                {initial}
-              </div>
-              <span className="hidden md:inline font-sans text-xs font-semibold text-neutral-800 truncate max-w-[120px]">
-                {displayName}
-              </span>
+                <div className="w-8 h-8 rounded-full bg-shop_dark_green text-white flex items-center justify-center text-xs font-semibold overflow-hidden transition-transform group-hover:scale-105 shadow-sm">
+                  {user?.avatarUrl ? (
+                    <img
+                      src={user.avatarUrl}
+                      alt={displayName}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    initial
+                  )}
+                </div>
+                <div className="hidden md:flex items-center gap-1 min-w-0">
+                  <span className="font-sans text-xs font-semibold text-neutral-800 truncate max-w-[120px] group-hover:text-shop_dark_green transition-colors">
+                    {displayName}
+                  </span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 text-neutral-400 transition-transform duration-200 ${isMenuOpen ? "rotate-180 text-shop_dark_green" : ""
+                      }`}
+                  />
+                </div>
+              </button>
+
+              {isMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-56 border border-neutral-200 bg-white shadow-xl py-1 text-xs z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="px-3.5 py-2.5 border-b border-neutral-100">
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="font-bold text-neutral-900 truncate">
+                        {displayName}
+                      </p>
+                      <span className="px-1.5 py-0.5 text-[9px] font-mono font-semibold uppercase bg-shop_dark_green text-white">
+                        Admin
+                      </span>
+                    </div>
+                    <p className="text-[11px] font-mono text-neutral-400 truncate mt-0.5">
+                      {user?.email || (user?.username ? `@${user.username}` : "admin")}
+                    </p>
+                  </div>
+
+                  <div className="py-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowProfile(true);
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3.5 py-2 text-left font-medium text-neutral-700 hover:bg-neutral-50 hover:text-shop_dark_green transition-colors"
+                    >
+                      <UserIcon className="w-4 h-4 text-neutral-400" />
+                      <span>Quản lý tài khoản</span>
+                    </button>
+                  </div>
+
+                  <div className="border-t border-neutral-100 pt-1">
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-2.5 px-3.5 py-2 text-left font-semibold uppercase tracking-wider text-red-600 hover:bg-red-50 transition-colors"
+                    >
+                      <LogOut className="w-4 h-4 text-red-500" />
+                      <span>Đăng xuất</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </header>
 
         <main className="flex-1">{children}</main>
       </div>
+
+      {showProfile && (
+        <UserProfileModal onClose={() => setShowProfile(false)} />
+      )}
     </div>
   );
 };

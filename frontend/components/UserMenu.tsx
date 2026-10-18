@@ -49,36 +49,53 @@ const UserMenu = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 rounded-lg border bg-white shadow-lg py-1 text-sm z-50">
-          <div className="px-3 py-2 border-b">
-            <p className="font-medium truncate">{user?.fullName || user?.username || "Người dùng"}</p>
-            <p className="text-lightColor truncate text-xs">{user?.email}</p>
+        <div className="absolute right-0 top-full mt-2 w-56 border border-neutral-200 bg-white shadow-xl py-1 text-xs z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+          <div className="px-3.5 py-2.5 border-b border-neutral-100">
+            <div className="flex items-center justify-between gap-2">
+              <p className="font-bold text-neutral-900 truncate">
+                {user?.fullName || user?.username || "Người dùng"}
+              </p>
+              {user?.authorities?.some((a) => a.includes("ADMIN")) && (
+                <span className="px-1.5 py-0.5 text-[9px] font-mono font-semibold uppercase bg-shop_dark_green text-white">
+                  Admin
+                </span>
+              )}
+            </div>
+            <p className="text-[11px] font-mono text-neutral-400 truncate mt-0.5">
+              {user?.email || (user?.username ? `@${user.username}` : "")}
+            </p>
           </div>
 
-          <button
-            onClick={handleOpenProfile}
-            className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50"
-          >
-            <UserIcon className="w-4 h-4" />
-            Quản lý tài khoản
-          </button>
+          <div className="py-1">
+            <button
+              type="button"
+              onClick={handleOpenProfile}
+              className="w-full flex items-center gap-2.5 px-3.5 py-2 text-left font-medium text-neutral-700 hover:bg-neutral-50 hover:text-shop_dark_green transition-colors"
+            >
+              <UserIcon className="w-4 h-4 text-neutral-400" />
+              <span>Quản lý tài khoản</span>
+            </button>
 
-          <Link
-            href="/orders"
-            onClick={() => setIsOpen(false)}
-            className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50"
-          >
-            <Package className="w-4 h-4" />
-            Đơn hàng của tôi
-          </Link>
+            <Link
+              href="/orders"
+              onClick={() => setIsOpen(false)}
+              className="w-full flex items-center gap-2.5 px-3.5 py-2 text-left font-medium text-neutral-700 hover:bg-neutral-50 hover:text-shop_dark_green transition-colors"
+            >
+              <Package className="w-4 h-4 text-neutral-400" />
+              <span>Đơn hàng của tôi</span>
+            </Link>
+          </div>
 
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 text-red-500"
-          >
-            <LogOut className="w-4 h-4" />
-            Đăng xuất
-          </button>
+          <div className="border-t border-neutral-100 pt-1">
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="w-full flex items-center gap-2.5 px-3.5 py-2 text-left font-semibold uppercase tracking-wider text-red-600 hover:bg-red-50 transition-colors"
+            >
+              <LogOut className="w-4 h-4 text-red-500" />
+              <span>Đăng xuất</span>
+            </button>
+          </div>
         </div>
       )}
 
