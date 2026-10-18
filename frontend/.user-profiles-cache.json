@@ -10,15 +10,17 @@
   },
   "songnd11": {
     "username": "songnd11",
-    "updatedAt": 1792341786148,
+    "updatedAt": 1792346785514,
     "fullName": "nokiteen123",
     "email": "nsong1232002@gmail.com",
     "phoneNumber": "0984457242",
-    "phone": "0984457242"
+    "phone": "0984457242",
+    "active": true,
+    "locked": false
   },
   "admin": {
     "username": "admin",
-    "updatedAt": 1792342695086,
+    "updatedAt": 1792346338094,
     "fullName": "System Administrator",
     "email": "admin@regulation.local"
   }

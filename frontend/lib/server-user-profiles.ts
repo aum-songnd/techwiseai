@@ -2,12 +2,17 @@ import fs from "fs";
 import path from "path";
 
 export interface StoredServerProfile {
+  id?: string;
   username: string;
   fullName?: string;
   email?: string;
   phoneNumber?: string;
   phone?: string;
   avatarUrl?: string;
+  authorities?: string[];
+  active?: boolean;
+  locked?: boolean;
+  createdAt?: string;
   updatedAt?: number;
 }
 
@@ -47,6 +52,7 @@ export function saveServerProfile(profile: StoredServerProfile): void {
       updatedAt: Date.now(),
     };
 
+    if (profile.id !== undefined) updated.id = profile.id;
     if (profile.fullName !== undefined) updated.fullName = profile.fullName;
     if (profile.email !== undefined) updated.email = profile.email;
     if (profile.phoneNumber !== undefined) {
@@ -58,6 +64,10 @@ export function saveServerProfile(profile: StoredServerProfile): void {
       updated.phone = profile.phone;
     }
     if (profile.avatarUrl !== undefined) updated.avatarUrl = profile.avatarUrl;
+    if (profile.authorities !== undefined) updated.authorities = profile.authorities;
+    if (profile.active !== undefined) updated.active = profile.active;
+    if (profile.locked !== undefined) updated.locked = profile.locked;
+    if (profile.createdAt !== undefined) updated.createdAt = profile.createdAt;
 
     all[key] = updated;
     memoryCache[key] = updated;
@@ -173,4 +183,83 @@ export function extractUsernameFromJwt(
   } catch {
     return null;
   }
+}
+
+/**
+ * Get all user accounts stored in server profile cache with fallback defaults
+ */
+export function listAllServerProfiles(): StoredServerProfile[] {
+  const all = readServerProfiles();
+  return Object.entries(all).map(([key, p]) => {
+    const username = p.username || key;
+    const isAdmin =
+      username.toLowerCase() === "admin" ||
+      p.authorities?.includes("ADMIN") ||
+      p.authorities?.includes("ROLE_ADMIN");
+
+    return {
+      id: p.id || `user-${username}`,
+      username,
+      fullName: p.fullName || (isAdmin ? "System Administrator" : username),
+      email: p.email || (isAdmin ? "admin@regulation.local" : undefined),
+      phoneNumber: p.phoneNumber || p.phone,
+      phone: p.phoneNumber || p.phone,
+      avatarUrl: p.avatarUrl,
+      authorities: p.authorities || (isAdmin ? ["ROLE_ADMIN"] : ["ROLE_CUSTOMER"]),
+      active: p.active !== false && !p.locked,
+      locked: p.locked === true || p.active === false,
+      createdAt:
+        p.createdAt ||
+        (p.updatedAt ? new Date(p.updatedAt).toISOString() : "2026-01-01T00:00:00.000Z"),
+      updatedAt: p.updatedAt,
+    };
+  });
+}
+
+/**
+ * Toggle active/locked status for a specific user in server profile cache
+ */
+export function updateServerUserActive(
+  idOrUsername: string,
+  active: boolean
+): StoredServerProfile | null {
+  const all = readServerProfiles();
+  const searchKey = idOrUsername.trim().toLowerCase();
+
+  let targetKey: string | null = null;
+  for (const [key, p] of Object.entries(all)) {
+    const uName = (p.username || key).toLowerCase();
+    const uId = (p.id || `user-${uName}`).toLowerCase();
+    if (
+      key.toLowerCase() === searchKey ||
+      uName === searchKey ||
+      uId === searchKey ||
+      `user-${uName}` === searchKey
+    ) {
+      targetKey = key;
+      break;
+    }
+  }
+
+  if (!targetKey) {
+    // If not found, create or return null
+    return null;
+  }
+
+  const existing = all[targetKey];
+  const updated: StoredServerProfile = {
+    ...existing,
+    active,
+    locked: !active,
+    updatedAt: Date.now(),
+  };
+
+  all[targetKey] = updated;
+  memoryCache[targetKey] = updated;
+
+  try {
+    fs.writeFileSync(CACHE_FILE, JSON.stringify(all, null, 2), "utf-8");
+  } catch {}
+
+  return updated;
 }

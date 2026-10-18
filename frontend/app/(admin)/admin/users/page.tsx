@@ -14,7 +14,6 @@ import {
   Users,
 } from "lucide-react";
 import {
-  USE_MOCK_USERS,
   getAdminUsers,
   setAdminUserActive,
   type AdminUser,
@@ -24,9 +23,13 @@ const PAGE_SIZE = 10;
 
 const isActiveUser = (u: AdminUser) => u.active !== false;
 
-const isCustomer = (u: AdminUser) => {
+const isAdmin = (u: AdminUser) => {
   const auth = u.authorities ?? [];
-  return !(auth.includes("ADMIN") || auth.includes("ROLE_ADMIN"));
+  return (
+    auth.includes("ADMIN") ||
+    auth.includes("ROLE_ADMIN") ||
+    u.username.toLowerCase() === "admin"
+  );
 };
 
 const formatDate = (value?: string) => {
@@ -70,7 +73,7 @@ const AdminUsersPage = () => {
     setError("");
     try {
       const res = await getAdminUsers({ page, size: PAGE_SIZE, keyword });
-      setUsers(res.items.filter(isCustomer));
+      setUsers(res.items);
       setTotal(res.total);
       setTotalPages(Math.max(1, res.totalPages));
     } catch (e) {
@@ -85,6 +88,11 @@ const AdminUsersPage = () => {
   }, [load]);
 
   const handleToggle = async (user: AdminUser) => {
+    if (isAdmin(user)) {
+      window.alert("Không thể khóa tài khoản Quản trị viên");
+      return;
+    }
+
     const willActivate = !isActiveUser(user);
     const name = user.fullName?.trim() || user.username;
     const ok = window.confirm(
@@ -156,14 +164,9 @@ const AdminUsersPage = () => {
               <span className="text-xs text-neutral-500 font-mono">
                 [ {total} tài khoản ]
               </span>
-              {USE_MOCK_USERS && (
-                <span className="border border-amber-300 bg-amber-50 px-2 py-0.5 text-[10px] font-mono font-medium text-amber-800">
-                  DỮ LIỆU MẪU
-                </span>
-              )}
             </div>
             <p className="text-xs text-neutral-500">
-              Quản lý danh sách khách hàng, thông tin liên hệ và trạng thái kích hoạt tài khoản
+              Quản lý danh sách người dùng, thông tin liên hệ và trạng thái kích hoạt tài khoản
             </p>
           </div>
 
@@ -183,7 +186,7 @@ const AdminUsersPage = () => {
           <div className="border border-neutral-200 bg-white p-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                Tổng khách hàng
+                Tổng người dùng
               </span>
               <Users className="w-4 h-4 text-neutral-400" />
             </div>
@@ -310,6 +313,7 @@ const AdminUsersPage = () => {
                   !error &&
                   users.map((user) => {
                     const active = isActiveUser(user);
+                    const userIsAdmin = isAdmin(user);
                     const name = user.fullName?.trim() || user.username;
                     const initial = (name.charAt(0) || "U").toUpperCase();
                     return (
@@ -320,8 +324,15 @@ const AdminUsersPage = () => {
                               {initial}
                             </div>
                             <div className="min-w-0">
-                              <div className="font-semibold text-neutral-900 truncate">
-                                {name}
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-semibold text-neutral-900 truncate">
+                                  {name}
+                                </span>
+                                {userIsAdmin && (
+                                  <span className="border border-neutral-300 bg-neutral-100 text-neutral-600 px-1 py-0.2 text-[9px] font-mono uppercase tracking-wider font-semibold">
+                                    Admin
+                                  </span>
+                                )}
                               </div>
                               <div className="text-[11px] text-neutral-400 font-mono truncate">
                                 @{user.username}
@@ -350,23 +361,29 @@ const AdminUsersPage = () => {
                           </span>
                         </td>
                         <td className="px-4 sm:px-6 py-3.5 text-right">
-                          <button
-                            type="button"
-                            onClick={() => handleToggle(user)}
-                            disabled={busyId === user.id}
-                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border transition-colors disabled:opacity-50 ${
-                              active
-                                ? "border-neutral-300 bg-white text-neutral-700 hover:border-red-300 hover:bg-red-50 hover:text-red-700"
-                                : "border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-600 hover:text-white"
-                            }`}
-                          >
-                            {active ? (
-                              <Lock className="w-3.5 h-3.5" />
-                            ) : (
-                              <LockOpen className="w-3.5 h-3.5" />
-                            )}
-                            <span>{active ? "Khóa" : "Mở khóa"}</span>
-                          </button>
+                          {userIsAdmin ? (
+                            <span className="text-[11px] text-neutral-400 font-mono italic pr-2">
+                              Hệ thống
+                            </span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => handleToggle(user)}
+                              disabled={busyId === user.id}
+                              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border transition-colors disabled:opacity-50 ${
+                                active
+                                  ? "border-neutral-300 bg-white text-neutral-700 hover:border-red-300 hover:bg-red-50 hover:text-red-700"
+                                  : "border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-600 hover:text-white"
+                              }`}
+                            >
+                              {active ? (
+                                <Lock className="w-3.5 h-3.5" />
+                              ) : (
+                                <LockOpen className="w-3.5 h-3.5" />
+                              )}
+                              <span>{active ? "Khóa" : "Mở khóa"}</span>
+                            </button>
+                          )}
                         </td>
                       </tr>
                     );
