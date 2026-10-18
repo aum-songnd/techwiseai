@@ -14,6 +14,7 @@ import {
   type OrderStatus,
   type PaymentStatus,
 } from "../../../../../lib/orders-api";
+import Loading from "@/app/(client)/loading";
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
@@ -161,11 +162,7 @@ const AdminOrderDetailPage = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="max-w-5xl mx-auto px-4 py-20 text-center text-gray-400 text-sm">
-        Đang tải thông tin đơn hàng...
-      </div>
-    );
+    return <Loading message="Đang tải thông tin đơn hàng..." />;
   }
 
   if (errorMessage || !order) {

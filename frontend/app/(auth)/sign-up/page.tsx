@@ -14,6 +14,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { saveUserProfile } from "@/lib/auth";
 import Logo from "@/components/Logo";
 
 const SignUpPage = () => {
@@ -43,7 +44,9 @@ const SignUpPage = () => {
     setIsSubmitting(true);
 
     try {
+      saveUserProfile({ username, email, fullName, phoneNumber });
       await register({ username, email, password, fullName, phoneNumber });
+      saveUserProfile({ username, email, fullName, phoneNumber });
       router.push("/sign-in?registered=1");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Đăng ký thất bại");

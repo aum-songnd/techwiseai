@@ -3,6 +3,7 @@ package com.university.regulation.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import com.university.regulation.dto.auth.LoginResponse;
 import com.university.regulation.dto.auth.RegisterRequest;
 import com.university.regulation.dto.auth.RegisterResponse;
 import com.university.regulation.dto.auth.ResetPasswordRequest;
+import com.university.regulation.dto.auth.UserProfileResponse;
 import com.university.regulation.service.auth.AuthService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,6 +62,21 @@ public class AuthController {
                                 "Đăng ký tài khoản thành công",
                                 response,
                                 httpRequest.getRequestURI());
+        }
+
+        @GetMapping("/me")
+        public ResponseEntity<ApiResponse<UserProfileResponse>> getCurrentUser(
+                        Authentication authentication,
+                        HttpServletRequest request) {
+
+                UserProfileResponse response = authService.getCurrentUserProfile(authentication.getName());
+
+                ApiResponse<UserProfileResponse> apiResponse = ApiResponse.success(
+                                "Lấy thông tin tài khoản thành công",
+                                response,
+                                request.getRequestURI());
+
+                return ResponseEntity.ok(apiResponse);
         }
 
         @PostMapping("/change-password")

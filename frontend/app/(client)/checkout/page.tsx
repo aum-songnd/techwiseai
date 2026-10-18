@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
@@ -12,16 +12,35 @@ import {
   CreditCard,
   Banknote,
   Package,
+  MapPin,
+  User as UserIcon,
+  PenLine,
+  Building2,
+  CalendarDays,
 } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { productImages } from "@/images";
 import { FREE_SHIP_THRESHOLD } from "@/components/ServiceFeatures";
+import { getSavedUserProfile, saveUserProfile, setStoredUser } from "@/lib/auth";
 import {
   createOrder,
   createPayment,
+  getOrders,
   OrderAuthRequiredError,
   type PaymentMethod,
 } from "@/lib/orders-api";
+import {
+  fetchProvincesV1,
+  fetchDistrictsV1,
+  fetchWardsV1,
+  fetchProvincesV2,
+  fetchWardsV2,
+  type Province,
+  type District,
+  type Ward,
+} from "@/lib/provinces-api";
+import Loading from "@/app/(client)/loading";
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
@@ -61,24 +80,298 @@ const PAYMENT_OPTIONS: {
 
 const CheckoutPage = () => {
   const router = useRouter();
+  const { user } = useAuth();
   const { items, totalAmount, isLoaded, requiresLogin, clearCart } = useCart();
 
+  // Recipient source state: "account" vs "manual"
+  const [recipientSource, setRecipientSource] = useState<"account" | "manual">(
+    "account"
+  );
   const [recipientName, setRecipientName] = useState("");
   const [recipientPhone, setRecipientPhone] = useState("");
+
+  // Administrative dataset version: "v2" (Sau sáp nhập - Mặc định) vs "v1" (Trước sáp nhập)
+  const [adminVersion, setAdminVersion] = useState<"v2" | "v1">("v2");
+
+  // Delivery time option: "all_week" (full-time) vs "office_hours" (hành chính)
+  const [deliveryTimeOption, setDeliveryTimeOption] = useState<
+    "all_week" | "office_hours"
+  >("all_week");
+
+  // Address inputs state
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const [districts, setDistricts] = useState<District[]>([]);
+  const [wards, setWards] = useState<Ward[]>([]);
+
+  const [selectedProvinceCode, setSelectedProvinceCode] = useState<string>("");
+  const [selectedDistrictCode, setSelectedDistrictCode] = useState<string>("");
+  const [selectedWardCode, setSelectedWardCode] = useState<string>("");
+  const [streetAddress, setStreetAddress] = useState(""); // Số nhà, tên đường
+
+  // Combined shipping address string
   const [shippingAddress, setShippingAddress] = useState("");
   const [note, setNote] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("COD");
 
+  const [loadingProvinces, setLoadingProvinces] = useState(false);
+  const [loadingDistricts, setLoadingDistricts] = useState(false);
+  const [loadingWards, setLoadingWards] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const isFormValid = useMemo(
-    () =>
-      recipientName.trim().length > 0 &&
-      recipientPhone.trim().length > 0 &&
-      shippingAddress.trim().length > 0,
-    [recipientName, recipientPhone, shippingAddress]
-  );
+  // Load provinces whenever adminVersion changes
+  useEffect(() => {
+    setLoadingProvinces(true);
+    setSelectedProvinceCode("");
+    setSelectedDistrictCode("");
+    setSelectedWardCode("");
+    setDistricts([]);
+    setWards([]);
+
+    const loader =
+      adminVersion === "v2" ? fetchProvincesV2() : fetchProvincesV1();
+
+    loader
+      .then((data) => {
+        setProvinces(data);
+      })
+      .finally(() => {
+        setLoadingProvinces(false);
+      });
+  }, [adminVersion]);
+
+  // Autofill recipient name and phone from account (with fallback to saved registration profile and past orders)
+  useEffect(() => {
+    if (user && recipientSource === "account") {
+      const savedProfile = getSavedUserProfile(user.username);
+      const accName =
+        user.fullName ||
+        savedProfile?.fullName ||
+        user.username ||
+        "";
+      if (accName) setRecipientName(accName);
+
+      const rawUser = user as unknown as Record<string, unknown>;
+      const phoneCandidate =
+        user.phoneNumber ||
+        savedProfile?.phoneNumber ||
+        (typeof rawUser.phone === "string" ? rawUser.phone : "") ||
+        (typeof rawUser.phoneNumber === "string" ? rawUser.phoneNumber : "") ||
+        "";
+
+      if (phoneCandidate) {
+        setRecipientPhone(phoneCandidate);
+        if (!user.phoneNumber) {
+          const updated = {
+            ...user,
+            phoneNumber: phoneCandidate,
+            phone: phoneCandidate,
+            fullName: accName,
+          };
+          setStoredUser(updated);
+        }
+      } else {
+        // Fallback: Check past orders to retrieve and update user phone number
+        getOrders(0, 1)
+          .then((res) => {
+            const lastOrder = res.items?.[0];
+            if (lastOrder?.recipientPhone) {
+              setRecipientPhone(lastOrder.recipientPhone);
+              const updated = {
+                ...user,
+                phoneNumber: lastOrder.recipientPhone,
+                phone: lastOrder.recipientPhone,
+                fullName: accName || lastOrder.recipientName,
+              };
+              setStoredUser(updated);
+              saveUserProfile({
+                username: user.username,
+                phoneNumber: lastOrder.recipientPhone,
+                fullName: accName || lastOrder.recipientName,
+              });
+            }
+          })
+          .catch(() => {});
+      }
+    }
+  }, [user, recipientSource]);
+
+  // Sync combined address into shippingAddress
+  const syncCombinedAddress = (
+    street: string,
+    provCode: string,
+    distCode: string,
+    wardCode: string,
+    currentDistricts: District[],
+    currentWards: Ward[],
+    currentVersion: "v2" | "v1"
+  ) => {
+    const prov = provinces.find((p) => String(p.code) === provCode)?.name;
+    const dist = currentDistricts.find((d) => String(d.code) === distCode)?.name;
+    const ward = currentWards.find((w) => String(w.code) === wardCode)?.name;
+
+    const parts = [
+      street.trim(),
+      ward,
+      currentVersion === "v1" ? dist : undefined,
+      prov,
+    ].filter(Boolean);
+
+    const combined = parts.join(", ");
+    setShippingAddress(combined);
+    return combined;
+  };
+
+  const handleProvinceChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const code = e.target.value;
+    setSelectedProvinceCode(code);
+    setSelectedDistrictCode("");
+    setSelectedWardCode("");
+    setDistricts([]);
+    setWards([]);
+
+    if (!code) {
+      syncCombinedAddress(
+        streetAddress,
+        "",
+        "",
+        "",
+        [],
+        [],
+        adminVersion
+      );
+      return;
+    }
+
+    if (adminVersion === "v2") {
+      // In v2: Wards are directly under province
+      setLoadingWards(true);
+      const wList = await fetchWardsV2(Number(code));
+      setWards(wList);
+      setLoadingWards(false);
+      syncCombinedAddress(
+        streetAddress,
+        code,
+        "",
+        "",
+        [],
+        wList,
+        "v2"
+      );
+    } else {
+      // In v1: Districts are under province
+      setLoadingDistricts(true);
+      const dists = await fetchDistrictsV1(Number(code));
+      setDistricts(dists);
+      setLoadingDistricts(false);
+      syncCombinedAddress(
+        streetAddress,
+        code,
+        "",
+        "",
+        dists,
+        [],
+        "v1"
+      );
+    }
+  };
+
+  const handleDistrictChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const code = e.target.value;
+    setSelectedDistrictCode(code);
+    setSelectedWardCode("");
+    setWards([]);
+
+    if (code) {
+      setLoadingWards(true);
+      const wList = await fetchWardsV1(Number(code));
+      setWards(wList);
+      setLoadingWards(false);
+      syncCombinedAddress(
+        streetAddress,
+        selectedProvinceCode,
+        code,
+        "",
+        districts,
+        wList,
+        "v1"
+      );
+    } else {
+      syncCombinedAddress(
+        streetAddress,
+        selectedProvinceCode,
+        "",
+        "",
+        districts,
+        [],
+        "v1"
+      );
+    }
+  };
+
+  const handleWardChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const code = e.target.value;
+    setSelectedWardCode(code);
+
+    syncCombinedAddress(
+      streetAddress,
+      selectedProvinceCode,
+      selectedDistrictCode,
+      code,
+      districts,
+      wards,
+      adminVersion
+    );
+  };
+
+  const handleStreetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setStreetAddress(val);
+    syncCombinedAddress(
+      val,
+      selectedProvinceCode,
+      selectedDistrictCode,
+      selectedWardCode,
+      districts,
+      wards,
+      adminVersion
+    );
+  };
+
+  // Phone validation helper
+  const cleanPhone = recipientPhone.replace(/\s+/g, "");
+  const isPhoneValid = /^(0\d{9}|\+84\d{9})$/.test(cleanPhone);
+
+  const isFormValid = useMemo(() => {
+    const hasName = recipientName.trim().length > 0;
+    const hasValidPhone = isPhoneValid;
+    const hasProvince = selectedProvinceCode !== "";
+    const hasWard = selectedWardCode !== "";
+    const hasDistrict = adminVersion === "v2" || selectedDistrictCode !== "";
+    const hasStreet = streetAddress.trim().length > 0;
+
+    return (
+      hasName &&
+      hasValidPhone &&
+      hasProvince &&
+      hasWard &&
+      hasDistrict &&
+      hasStreet
+    );
+  }, [
+    recipientName,
+    isPhoneValid,
+    adminVersion,
+    selectedProvinceCode,
+    selectedWardCode,
+    selectedDistrictCode,
+    streetAddress,
+  ]);
 
   const originalTotal = items.reduce(
     (sum, item) => sum + (item.originalPrice ?? item.unitPrice) * item.quantity,
@@ -96,13 +389,7 @@ const CheckoutPage = () => {
   );
 
   if (!isLoaded) {
-    return (
-      <div className="font-sans min-h-screen bg-white">
-        <div className="mx-auto w-[90%] py-20 text-center text-xs text-neutral-400">
-          Đang tải thông tin đơn hàng...
-        </div>
-      </div>
-    );
+    return <Loading message="Đang tải thông tin đơn hàng..." />;
   }
 
   if (requiresLogin) {
@@ -191,13 +478,39 @@ const CheckoutPage = () => {
     setIsSubmitting(true);
 
     try {
+      const deliveryTimeLabel =
+        deliveryTimeOption === "office_hours"
+          ? "Giao giờ hành chính (T2 - T6, 8h00 - 18h00)"
+          : "Giao tất cả các ngày trong tuần (Full-time, cả T7 & CN)";
+
+      const noteParts: string[] = [`[Thời gian nhận: ${deliveryTimeLabel}]`];
+      if (note.trim()) {
+        noteParts.push(note.trim());
+      }
+
       const order = await createOrder({
         recipientName: recipientName.trim(),
-        recipientPhone: recipientPhone.trim(),
+        recipientPhone: cleanPhone,
         shippingAddress: shippingAddress.trim(),
         paymentMethod,
-        note: note.trim() || undefined,
+        note: noteParts.join(" - "),
       });
+
+      // Persist phone number into user profile in localStorage and cache
+      if (user && cleanPhone) {
+        saveUserProfile({
+          username: user.username,
+          phoneNumber: cleanPhone,
+          fullName: recipientName.trim(),
+        });
+        const updatedUser = {
+          ...user,
+          phoneNumber: cleanPhone,
+          phone: cleanPhone,
+          fullName: recipientName.trim(),
+        };
+        setStoredUser(updatedUser);
+      }
 
       clearCart();
 
@@ -304,61 +617,447 @@ const CheckoutPage = () => {
         >
           {/* Left Column: Delivery Info & Payment Methods */}
           <div className="flex flex-col gap-6 lg:col-span-2">
-            {/* Section 1: Thông tin nhận hàng */}
-            <div className="border border-neutral-200 p-6 bg-white space-y-5">
+            {/* Section 1: Thông tin người nhận & Địa chỉ */}
+            <div className="border border-neutral-200 p-6 bg-white space-y-6">
               <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
-                  1. Thông tin giao hàng
+                  1. Thông tin người nhận & Địa chỉ
                 </span>
                 <span className="text-[11px] text-neutral-400">
                   * Vui lòng điền chính xác để đảm bảo nhận hàng
                 </span>
               </div>
 
+              {/* 1.1: Nguồn thông tin người nhận (Theo tài khoản vs Điền tay) */}
+              <div className="space-y-2">
+                <label className="block text-xs font-semibold text-neutral-700">
+                  Thông tin người nhận <span className="text-red-500">*</span>
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setRecipientSource("account");
+                      if (user) {
+                        const saved = getSavedUserProfile(user.username);
+                        const n = user.fullName || saved?.fullName || user.username || "";
+                        const p =
+                          user.phoneNumber ||
+                          saved?.phoneNumber ||
+                          ((user as unknown as Record<string, unknown>)?.phone as string) ||
+                          "";
+                        if (n) setRecipientName(n);
+                        if (p) setRecipientPhone(p);
+                      }
+                    }}
+                    className={`flex items-start gap-3 p-3.5 border text-left transition-all ${
+                      recipientSource === "account"
+                        ? "border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900/10"
+                        : "border-neutral-200 hover:border-neutral-300 bg-white"
+                    }`}
+                  >
+                    <div
+                      className={`p-2 rounded-full shrink-0 ${
+                        recipientSource === "account"
+                          ? "bg-neutral-900 text-white"
+                          : "bg-neutral-100 text-neutral-500"
+                      }`}
+                    >
+                      <UserIcon size={14} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-neutral-900">
+                          Sử dụng thông tin tài khoản
+                        </span>
+                        {recipientSource === "account" && (
+                          <Check
+                            size={14}
+                            className="text-neutral-900 shrink-0"
+                            strokeWidth={2.5}
+                          />
+                        )}
+                      </div>
+                      <p className="text-[11px] text-neutral-500 truncate mt-0.5">
+                        {user
+                          ? `${recipientName || user.fullName || user.username || "Tài khoản"}${
+                              recipientPhone || user.phoneNumber
+                                ? ` • ${recipientPhone || user.phoneNumber}`
+                                : " • (Cập nhật SĐT)"
+                            }`
+                          : "Đang tải thông tin tài khoản..."}
+                      </p>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setRecipientSource("manual");
+                    }}
+                    className={`flex items-start gap-3 p-3.5 border text-left transition-all ${
+                      recipientSource === "manual"
+                        ? "border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900/10"
+                        : "border-neutral-200 hover:border-neutral-300 bg-white"
+                    }`}
+                  >
+                    <div
+                      className={`p-2 rounded-full shrink-0 ${
+                        recipientSource === "manual"
+                          ? "bg-neutral-900 text-white"
+                          : "bg-neutral-100 text-neutral-500"
+                      }`}
+                    >
+                      <PenLine size={14} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-neutral-900">
+                          Điền tay người nhận khác
+                        </span>
+                        {recipientSource === "manual" && (
+                          <Check
+                            size={14}
+                            className="text-neutral-900 shrink-0"
+                            strokeWidth={2.5}
+                          />
+                        )}
+                      </div>
+                      <p className="text-[11px] text-neutral-500 truncate mt-0.5">
+                        Tùy ý nhập tên & số điện thoại người nhận mới
+                      </p>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Recipient Name & Phone Inputs (Locked when using account info) */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
-                    Họ và tên người nhận <span className="text-red-500">*</span>
-                  </label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="text-xs font-semibold text-neutral-700">
+                      Họ và tên người nhận <span className="text-red-500">*</span>
+                    </label>
+                    {recipientSource === "account" && (
+                      <span className="text-[11px] text-neutral-400">
+                        (Cố định từ tài khoản)
+                      </span>
+                    )}
+                  </div>
                   <input
                     type="text"
                     value={recipientName}
                     onChange={(e) => setRecipientName(e.target.value)}
+                    disabled={recipientSource === "account"}
                     required
                     placeholder="Ví dụ: Nguyễn Văn A"
-                    className="w-full border border-neutral-300 px-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none transition-colors"
+                    className="w-full border border-neutral-300 px-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none transition-colors disabled:bg-neutral-100 disabled:text-neutral-600 disabled:cursor-not-allowed"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
-                    Số điện thoại liên hệ <span className="text-red-500">*</span>
-                  </label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="text-xs font-semibold text-neutral-700">
+                      Số điện thoại liên hệ <span className="text-red-500">*</span>
+                    </label>
+                    {recipientSource === "account" && (
+                      <span className="text-[11px] text-neutral-400">
+                        {recipientPhone
+                          ? "(Cố định từ tài khoản)"
+                          : "(Nhập để lưu vào tài khoản)"}
+                      </span>
+                    )}
+                  </div>
                   <input
                     type="tel"
                     value={recipientPhone}
                     onChange={(e) => setRecipientPhone(e.target.value)}
+                    disabled={
+                      recipientSource === "account" && Boolean(recipientPhone)
+                    }
                     required
-                    placeholder="Ví dụ: 0912345678"
-                    className="w-full border border-neutral-300 px-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none transition-colors"
+                    placeholder="Ví dụ: 0912345678 (10 chữ số)"
+                    className={`w-full border px-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none transition-colors disabled:bg-neutral-100 disabled:text-neutral-600 disabled:cursor-not-allowed ${
+                      recipientPhone && !isPhoneValid
+                        ? "border-amber-400 bg-amber-50/20"
+                        : "border-neutral-300"
+                    }`}
                   />
+                  {recipientPhone && !isPhoneValid && (
+                    <p className="text-[11px] text-amber-600 mt-1">
+                      Số điện thoại cần có 10 chữ số hợp lệ (ví dụ: 0912345678 hoặc +84912345678).
+                    </p>
+                  )}
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
-                  Địa chỉ giao hàng chi tiết <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={shippingAddress}
-                  onChange={(e) => setShippingAddress(e.target.value)}
-                  required
-                  placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố"
-                  className="w-full border border-neutral-300 px-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none transition-colors"
-                />
+              {/* 1.2: Địa chỉ nhận hàng (Clean, non-flashy, with Hamlet/Thôn input) */}
+              <div className="space-y-3.5 pt-2">
+                <div className="flex items-center justify-between border-b border-neutral-200 pb-2">
+                  <label className="text-xs font-semibold text-neutral-900">
+                    Địa chỉ nhận hàng <span className="text-red-500">*</span>
+                  </label>
+
+                  {/* Clean, standard dataset switcher */}
+                  <div className="flex items-center gap-1.5 text-xs">
+                    <span className="text-[11px] text-neutral-500">Dữ liệu:</span>
+                    <button
+                      type="button"
+                      onClick={() => setAdminVersion("v2")}
+                      className={`px-2.5 py-1 text-[11px] font-medium border transition-colors ${
+                        adminVersion === "v2"
+                          ? "border-neutral-900 bg-neutral-900 text-white"
+                          : "border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300"
+                      }`}
+                    >
+                      Sau sáp nhập (34 Tỉnh)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAdminVersion("v1")}
+                      className={`px-2.5 py-1 text-[11px] font-medium border transition-colors ${
+                        adminVersion === "v1"
+                          ? "border-neutral-900 bg-neutral-900 text-white"
+                          : "border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300"
+                      }`}
+                    >
+                      Trước sáp nhập (63 Tỉnh)
+                    </button>
+                  </div>
+                </div>
+
+                {/* Dropdowns based on adminVersion */}
+                {adminVersion === "v2" ? (
+                  /* V2 (Sau sáp nhập): 2 levels (Tỉnh/Thành -> Phường/Xã) */
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <div>
+                      <label className="block text-[11px] font-medium text-neutral-500 mb-1">
+                        Tỉnh / Thành phố <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        value={selectedProvinceCode}
+                        onChange={handleProvinceChange}
+                        disabled={loadingProvinces}
+                        required
+                        className="w-full border border-neutral-300 bg-white px-3 py-2.5 text-xs text-neutral-900 focus:border-shop_dark_green focus:outline-none transition-colors"
+                      >
+                        <option value="">-- Chọn Tỉnh / Thành phố --</option>
+                        {provinces.map((p) => (
+                          <option key={p.code} value={p.code}>
+                            {p.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-medium text-neutral-500 mb-1">
+                        Phường / Xã trực thuộc <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        value={selectedWardCode}
+                        onChange={handleWardChange}
+                        disabled={!selectedProvinceCode || loadingWards}
+                        required
+                        className="w-full border border-neutral-300 bg-white px-3 py-2.5 text-xs text-neutral-900 focus:border-shop_dark_green focus:outline-none transition-colors disabled:bg-neutral-100 disabled:cursor-not-allowed"
+                      >
+                        <option value="">
+                          {loadingWards
+                            ? "Đang tải phường/xã..."
+                            : "-- Chọn Phường / Xã --"}
+                        </option>
+                        {wards.map((w) => (
+                          <option key={w.code} value={w.code}>
+                            {w.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                ) : (
+                  /* V1 (Trước sáp nhập): 3 levels (Tỉnh -> Huyện -> Xã) */
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                    <div>
+                      <label className="block text-[11px] font-medium text-neutral-500 mb-1">
+                        Tỉnh / Thành phố <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        value={selectedProvinceCode}
+                        onChange={handleProvinceChange}
+                        disabled={loadingProvinces}
+                        required
+                        className="w-full border border-neutral-300 bg-white px-3 py-2.5 text-xs text-neutral-900 focus:border-shop_dark_green focus:outline-none transition-colors"
+                      >
+                        <option value="">-- Chọn Tỉnh / Thành phố --</option>
+                        {provinces.map((p) => (
+                          <option key={p.code} value={p.code}>
+                            {p.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-medium text-neutral-500 mb-1">
+                        Quận / Huyện <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        value={selectedDistrictCode}
+                        onChange={handleDistrictChange}
+                        disabled={!selectedProvinceCode || loadingDistricts}
+                        required
+                        className="w-full border border-neutral-300 bg-white px-3 py-2.5 text-xs text-neutral-900 focus:border-shop_dark_green focus:outline-none transition-colors disabled:bg-neutral-100 disabled:cursor-not-allowed"
+                      >
+                        <option value="">
+                          {loadingDistricts
+                            ? "Đang tải quận/huyện..."
+                            : "-- Chọn Quận / Huyện --"}
+                        </option>
+                        {districts.map((d) => (
+                          <option key={d.code} value={d.code}>
+                            {d.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-medium text-neutral-500 mb-1">
+                        Phường / Xã <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        value={selectedWardCode}
+                        onChange={handleWardChange}
+                        disabled={!selectedDistrictCode || loadingWards}
+                        required
+                        className="w-full border border-neutral-300 bg-white px-3 py-2.5 text-xs text-neutral-900 focus:border-shop_dark_green focus:outline-none transition-colors disabled:bg-neutral-100 disabled:cursor-not-allowed"
+                      >
+                        <option value="">
+                          {loadingWards
+                            ? "Đang tải phường/xã..."
+                            : "-- Chọn Phường / Xã --"}
+                        </option>
+                        {wards.map((w) => (
+                          <option key={w.code} value={w.code}>
+                            {w.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {/* Street & house number */}
+                <div>
+                  <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
+                    Số nhà, tên đường, ngõ xóm chi tiết <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={streetAddress}
+                    onChange={handleStreetChange}
+                    required
+                    placeholder="Ví dụ: Số 25 ngõ 180 Hoàng Quốc Việt"
+                    className="w-full border border-neutral-300 px-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none transition-colors"
+                  />
+                  <p className="text-[11px] text-neutral-400 mt-1">
+                    Điền số nhà, ngõ/ngách/hẻm hoặc tên tòa nhà, số căn hộ.
+                  </p>
+                </div>
+
+                {/* Address Preview (Standard, non-flashy box) */}
+                {shippingAddress ? (
+                  <div className="border border-neutral-200 bg-neutral-50 p-3 text-xs flex items-start gap-2.5">
+                    <MapPin size={15} className="text-neutral-600 shrink-0 mt-0.5" />
+                    <div className="leading-relaxed">
+                      <span className="text-neutral-500">Địa chỉ giao hàng đầy đủ: </span>
+                      <span className="font-semibold text-neutral-900">
+                        {shippingAddress}
+                      </span>
+                    </div>
+                  </div>
+                ) : null}
               </div>
 
+              {/* 1.3: Lựa chọn thời gian giao hàng (Giờ hành chính vs Full time) */}
+              <div className="space-y-2.5 pt-2">
+                <label className="block text-xs font-semibold text-neutral-700">
+                  Thời gian nhận hàng thuận tiện <span className="text-red-500">*</span>
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label
+                    className={`flex items-start gap-3 border p-3.5 cursor-pointer transition-all ${
+                      deliveryTimeOption === "all_week"
+                        ? "border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900/10"
+                        : "border-neutral-200 hover:border-neutral-300 bg-white"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="deliveryTimeOption"
+                      value="all_week"
+                      checked={deliveryTimeOption === "all_week"}
+                      onChange={() => setDeliveryTimeOption("all_week")}
+                      className="mt-0.5 h-4 w-4 text-shop_dark_green accent-shop_dark_green"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5">
+                        <CalendarDays
+                          size={14}
+                          className={
+                            deliveryTimeOption === "all_week"
+                              ? "text-neutral-900"
+                              : "text-neutral-500"
+                          }
+                        />
+                        <span className="text-xs font-bold text-neutral-900">
+                          Tất cả các ngày (Full-time)
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-neutral-500 mt-1 leading-relaxed">
+                        Giao cả Thứ 7 và Chủ Nhật (Phù hợp địa chỉ nhà riêng).
+                      </p>
+                    </div>
+                  </label>
+
+                  <label
+                    className={`flex items-start gap-3 border p-3.5 cursor-pointer transition-all ${
+                      deliveryTimeOption === "office_hours"
+                        ? "border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900/10"
+                        : "border-neutral-200 hover:border-neutral-300 bg-white"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="deliveryTimeOption"
+                      value="office_hours"
+                      checked={deliveryTimeOption === "office_hours"}
+                      onChange={() => setDeliveryTimeOption("office_hours")}
+                      className="mt-0.5 h-4 w-4 text-shop_dark_green accent-shop_dark_green"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5">
+                        <Building2
+                          size={14}
+                          className={
+                            deliveryTimeOption === "office_hours"
+                              ? "text-neutral-900"
+                              : "text-neutral-500"
+                          }
+                        />
+                        <span className="text-xs font-bold text-neutral-900">
+                          Chỉ giờ hành chính (Office hours)
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-neutral-500 mt-1 leading-relaxed">
+                        Thứ 2 đến Thứ 6 (08:00 - 18:00, phù hợp cơ quan, văn phòng).
+                      </p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Order Note */}
               <div>
                 <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
                   Ghi chú đơn hàng (tuỳ chọn)
@@ -367,13 +1066,13 @@ const CheckoutPage = () => {
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
                   rows={2}
-                  placeholder="Ghi chú thêm về thời gian giao hàng, chỉ dẫn địa chỉ cụ thể..."
+                  placeholder="Ghi chú thêm về thời gian giao hàng, chỉ dẫn vị trí nhận kiện hàng..."
                   className="w-full border border-neutral-300 px-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none transition-colors resize-none"
                 />
               </div>
             </div>
 
-            {/* Section 2: Phương thức thanh toán (MoMo removed) */}
+            {/* Section 2: Phương thức thanh toán (MoMo removed & no badges) */}
             <div className="border border-neutral-200 p-6 bg-white space-y-4">
               <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
@@ -391,10 +1090,11 @@ const CheckoutPage = () => {
                   return (
                     <label
                       key={option.value}
-                      className={`flex items-start gap-4 border p-4 cursor-pointer transition-all ${isSelected
-                          ? "border-shop_dark_green bg-neutral-50/80 shadow-xs"
+                      className={`flex items-start gap-4 border p-4 cursor-pointer transition-all ${
+                        isSelected
+                          ? "border-neutral-900 bg-neutral-50 shadow-xs"
                           : "border-neutral-200 hover:border-neutral-300 bg-white"
-                        }`}
+                      }`}
                     >
                       <input
                         type="radio"
@@ -406,7 +1106,13 @@ const CheckoutPage = () => {
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <Icon className={`h-4 w-4 ${isSelected ? "text-shop_dark_green" : "text-neutral-500"}`} />
+                          <Icon
+                            className={`h-4 w-4 ${
+                              isSelected
+                                ? "text-neutral-900"
+                                : "text-neutral-500"
+                            }`}
+                          />
                           <span className="text-xs font-bold text-neutral-900">
                             {option.label}
                           </span>
@@ -435,7 +1141,7 @@ const CheckoutPage = () => {
               </div>
 
               {/* Product Preview List */}
-              <div className="flex flex-col divide-y divide-neutral-100 max-h-72 overflow-y-auto pr-1">
+              <div className="flex flex-col divide-y divide-neutral-100 max-h-64 overflow-y-auto pr-1">
                 {items.map((item) => {
                   const image = resolveProductImage(item.thumbnailUrl);
                   return (
@@ -474,7 +1180,35 @@ const CheckoutPage = () => {
                 })}
               </div>
 
-              {/* Breakdown */}
+              {/* Delivery Details Summary Card */}
+              <div className="space-y-2 border-t border-neutral-200 pt-3 text-xs">
+                <div className="flex items-start justify-between">
+                  <span className="text-neutral-500 shrink-0">Người nhận:</span>
+                  <span className="font-medium text-neutral-800 text-right truncate max-w-[170px]">
+                    {recipientName || "Chưa nhập"} ({recipientPhone || "Chưa nhập"})
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-neutral-500 shrink-0">Thời gian nhận:</span>
+                  <span className="font-medium text-neutral-800 text-right">
+                    {deliveryTimeOption === "office_hours"
+                      ? "Giờ hành chính (T2 - T6)"
+                      : "Full-time (Cả T7 & CN)"}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-neutral-500 shrink-0">Hành chính:</span>
+                  <span className="font-medium text-neutral-800 text-right">
+                    {adminVersion === "v2"
+                      ? "Sau sáp nhập (34 tỉnh)"
+                      : "Trước sáp nhập (63 tỉnh)"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Price Breakdown */}
               <div className="space-y-2.5 text-xs border-t border-neutral-200 pt-3">
                 <div className="flex items-center justify-between">
                   <span className="text-neutral-500">Tạm tính hàng hóa:</span>

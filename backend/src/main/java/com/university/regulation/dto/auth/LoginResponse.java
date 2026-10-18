@@ -12,7 +12,22 @@ public record LoginResponse(
 
         String username,
 
-        List<String> authorities
+        List<String> authorities,
+
+        String fullName,
+
+        String phoneNumber,
+
+        String email
 
 ) {
+        public LoginResponse(
+                String accessToken,
+                String tokenType,
+                long expiresIn,
+                String username,
+                List<String> authorities
+        ) {
+                this(accessToken, tokenType, expiresIn, username, authorities, null, null, null);
+        }
 }

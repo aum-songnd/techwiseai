@@ -26,6 +26,7 @@ import com.university.regulation.dto.auth.LoginResponse;
 import com.university.regulation.dto.auth.RegisterRequest;
 import com.university.regulation.dto.auth.RegisterResponse;
 import com.university.regulation.dto.auth.ResetPasswordRequest;
+import com.university.regulation.dto.auth.UserProfileResponse;
 import com.university.regulation.models.enums.RoleCode;
 import com.university.regulation.models.role.Role;
 import com.university.regulation.models.user.PasswordResetToken;
@@ -143,11 +144,41 @@ public class AuthService {
                                 .filter(authority -> authority.startsWith("ROLE_"))
                                 .toList();
 
+                User user = userRepository.findByUsernameIgnoreCase(authentication.getName()).orElse(null);
+                String fullName = user != null ? user.getFullName() : null;
+                String phoneNumber = user != null ? user.getPhone() : null;
+                String email = user != null ? user.getEmail() : null;
+
                 return new LoginResponse(
                                 accessToken,
                                 "Bearer",
                                 accessTokenExpiration,
                                 authentication.getName(),
+                                authorities,
+                                fullName,
+                                phoneNumber,
+                                email);
+        }
+
+        @Transactional(readOnly = true)
+        public UserProfileResponse getCurrentUserProfile(String username) {
+                User user = userRepository.findByUsernameIgnoreCase(username)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Không tìm thấy tài khoản"));
+
+                List<String> authorities = user.getAuthorities()
+                                .stream()
+                                .map(authority -> authority.getAuthority())
+                                .filter(authority -> authority.startsWith("ROLE_"))
+                                .toList();
+
+                return new UserProfileResponse(
+                                user.getId(),
+                                user.getUsername(),
+                                user.getEmail(),
+                                user.getFullName(),
+                                user.getPhone(),
                                 authorities);
         }
 

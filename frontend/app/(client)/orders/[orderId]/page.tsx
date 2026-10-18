@@ -33,6 +33,7 @@ import {
   type OrderStatus,
   type PaymentMethod,
 } from "../../../../lib/orders-api";
+import Loading from "@/app/(client)/loading";
 import { useCart } from "../../../../context/CartContext";
 
 const formatPrice = (value: number) =>
@@ -284,13 +285,7 @@ const OrderDetailPage = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="font-sans min-h-screen bg-white">
-        <div className="mx-auto w-[90%] py-20 text-center text-sm text-neutral-400">
-          Đang tải thông tin đơn hàng...
-        </div>
-      </div>
-    );
+    return <Loading message="Đang tải thông tin đơn hàng..." />;
   }
 
   if (errorMessage && !order) {

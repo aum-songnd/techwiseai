@@ -16,6 +16,7 @@ import {
   type PaymentMethod,
 } from "../../../lib/orders-api";
 import { useCart } from "../../../context/CartContext";
+import Loading from "../loading";
 
 const FETCH_SIZE = 100;
 
@@ -377,13 +378,7 @@ const OrdersHistoryPage = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="font-sans min-h-screen bg-white">
-        <div className="mx-auto w-[90%] px-4 py-20 text-center text-sm text-neutral-400">
-          Đang tải lịch sử đơn hàng...
-        </div>
-      </div>
-    );
+    return <Loading message="Đang tải lịch sử đơn hàng..." />;
   }
 
   if (errorMessage && allItems.length === 0) {

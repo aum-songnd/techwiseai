@@ -20,6 +20,8 @@ import {
   getSessionExpiry,
   loginRequest,
   registerRequest,
+  saveUserProfile,
+  getSavedUserProfile,
 } from "@/lib/auth";
 
 interface AuthContextValue {
@@ -46,7 +48,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const token = getToken();
     if (!token) {
-
       clearToken();
       clearStoredUser();
       setIsLoading(false);
@@ -55,7 +56,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const storedUser = getStoredUser();
     if (storedUser) {
-      setUser(storedUser);
+      const saved = getSavedUserProfile(storedUser.username);
+      const fullUser: User = {
+        ...storedUser,
+        fullName: storedUser.fullName || saved?.fullName,
+        phoneNumber: storedUser.phoneNumber || saved?.phoneNumber,
+        email: storedUser.email || saved?.email,
+      };
+      if (!storedUser.phoneNumber && saved?.phoneNumber) {
+        setStoredUser(fullUser);
+      }
+      setUser(fullUser);
     } else {
       clearToken();
       setUser(null);
@@ -100,15 +111,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [user, logout]);
 
   const login = async (username: string, password: string) => {
-    const { token, user } = await loginRequest(username, password);
+    const { token, user: loggedUser } = await loginRequest(username, password);
+    const saved = getSavedUserProfile(username);
+    const fullUser: User = {
+      ...loggedUser,
+      fullName: loggedUser.fullName || saved?.fullName,
+      phoneNumber: loggedUser.phoneNumber || saved?.phoneNumber,
+      email: loggedUser.email || saved?.email,
+    };
 
-    setStoredUser(user);
+    setStoredUser(fullUser);
     setToken(token);
-    setUser(user);
+    setUser(fullUser);
   };
 
   const register = async (payload: RegisterPayload) => {
-    await registerRequest(payload);
+    saveUserProfile({
+      username: payload.username,
+      fullName: payload.fullName,
+      phoneNumber: payload.phoneNumber,
+      email: payload.email,
+    });
+    const registeredUser = await registerRequest(payload);
+    saveUserProfile({
+      username: registeredUser.username || payload.username,
+      fullName: registeredUser.fullName || payload.fullName,
+      phoneNumber: registeredUser.phoneNumber || payload.phoneNumber,
+      email: registeredUser.email || payload.email,
+    });
   };
 
   return (

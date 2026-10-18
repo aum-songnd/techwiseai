@@ -1,7 +1,11 @@
 import React from "react";
 import { Loader2 } from "lucide-react";
 
-const Loading = () => {
+interface LoadingProps {
+  message?: string;
+}
+
+const Loading = ({ message = "TechWiseAI is loading..." }: LoadingProps) => {
   return (
     <div className="flex min-h-[70vh] w-full flex-col items-center justify-center gap-3">
       <p className="text-3xl font-extrabold tracking-tight">
@@ -11,7 +15,7 @@ const Loading = () => {
 
       <div className="flex items-center gap-2 text-shop-light-green">
         <Loader2 className="h-5 w-5 animate-spin" strokeWidth={2.5} />
-        <span className="text-sm font-medium">TechWiseAI is loading...</span>
+        <span className="text-sm font-medium">{message}</span>
       </div>
     </div>
   );
