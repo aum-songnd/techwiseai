@@ -1,11 +1,12 @@
-<<<<<<< HEAD
 # Environment
 .env
 .env.*
 !.env.example
+!.env.local.example
 **/.env
 **/.env.*
 !**/.env.example
+!**/.env.local.example
 
 # Frontend
 **/node_modules/
@@ -17,9 +18,13 @@ next-env.d.ts
 
 # Java / Spring Boot
 **/target/
+target/
 *.class
 *.jar
 *.war
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 # Python / AI
 **/.venv/
@@ -28,6 +33,7 @@ next-env.d.ts
 .pytest_cache/
 
 # AI generated data
+ai-data/raw/
 ai-data/images/
 ai-data/test-images/
 ai-data/logs/
@@ -41,12 +47,8 @@ ai-data/backups/
 
 // lệnh
 document.md
-=======
+document.txt
 HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -79,16 +81,5 @@ build/
 ### env
 .env
 
-# document
-document.txt
-
 # ### Node ###
 node_modules/
-
-# AI dataset generated locally
-ai-data/raw/
-ai-data/images/
-ai-data/test-images/
-ai-data/logs/
-
->>>>>>> backend-chat
