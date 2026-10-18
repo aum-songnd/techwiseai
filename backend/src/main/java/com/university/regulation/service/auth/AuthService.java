@@ -26,6 +26,7 @@ import com.university.regulation.dto.auth.LoginResponse;
 import com.university.regulation.dto.auth.RegisterRequest;
 import com.university.regulation.dto.auth.RegisterResponse;
 import com.university.regulation.dto.auth.ResetPasswordRequest;
+import com.university.regulation.dto.auth.UpdateProfileRequest;
 import com.university.regulation.dto.auth.UserProfileResponse;
 import com.university.regulation.models.enums.RoleCode;
 import com.university.regulation.models.role.Role;
@@ -148,6 +149,7 @@ public class AuthService {
                 String fullName = user != null ? user.getFullName() : null;
                 String phoneNumber = user != null ? user.getPhone() : null;
                 String email = user != null ? user.getEmail() : null;
+                String avatarUrl = user != null ? user.getAvatarUrl() : null;
 
                 return new LoginResponse(
                                 accessToken,
@@ -157,12 +159,14 @@ public class AuthService {
                                 authorities,
                                 fullName,
                                 phoneNumber,
-                                email);
+                                email,
+                                avatarUrl);
         }
 
         @Transactional(readOnly = true)
         public UserProfileResponse getCurrentUserProfile(String username) {
-                User user = userRepository.findByUsernameIgnoreCase(username)
+                User user = userRepository.findWithRolesByUsernameIgnoreCase(username)
+                                .or(() -> userRepository.findByUsernameIgnoreCase(username))
                                 .orElseThrow(() -> new ResponseStatusException(
                                                 HttpStatus.NOT_FOUND,
                                                 "Không tìm thấy tài khoản"));
@@ -179,6 +183,63 @@ public class AuthService {
                                 user.getEmail(),
                                 user.getFullName(),
                                 user.getPhone(),
+                                user.getAvatarUrl(),
+                                authorities);
+        }
+
+        @Transactional
+        public UserProfileResponse updateUserProfile(String username, UpdateProfileRequest request) {
+                User user = userRepository.findWithRolesByUsernameIgnoreCase(username)
+                                .or(() -> userRepository.findByUsernameIgnoreCase(username))
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Không tìm thấy tài khoản"));
+
+                if (request.fullName() != null && !request.fullName().isBlank()) {
+                        user.setFullName(request.fullName().trim());
+                }
+
+                if (request.email() != null && !request.email().isBlank()) {
+                        String newEmail = request.email().trim().toLowerCase();
+                        if (!newEmail.equalsIgnoreCase(user.getEmail()) && userRepository.existsByEmailIgnoreCase(newEmail)) {
+                                throw new ResponseStatusException(
+                                                HttpStatus.CONFLICT,
+                                                "Email đã được sử dụng bởi tài khoản khác");
+                        }
+                        user.setEmail(newEmail);
+                }
+
+                if (request.phoneNumber() != null && !request.phoneNumber().isBlank()) {
+                        String newPhone = request.phoneNumber().trim();
+                        if (!newPhone.equals(user.getPhone()) && userRepository.existsByPhone(newPhone)) {
+                                throw new ResponseStatusException(
+                                                HttpStatus.CONFLICT,
+                                                "Số điện thoại đã được sử dụng bởi tài khoản khác");
+                        }
+                        user.setPhone(newPhone);
+                }
+
+                if (request.avatarUrl() != null) {
+                        user.setAvatarUrl(request.avatarUrl().trim());
+                }
+
+                User savedUser = userRepository.save(user);
+
+                List<String> authorities = savedUser.getAuthorities()
+                                .stream()
+                                .map(authority -> authority.getAuthority())
+                                .filter(authority -> authority.startsWith("ROLE_"))
+                                .toList();
+
+                log.info("Người dùng '{}' đã cập nhật thông tin thành công", username);
+
+                return new UserProfileResponse(
+                                savedUser.getId(),
+                                savedUser.getUsername(),
+                                savedUser.getEmail(),
+                                savedUser.getFullName(),
+                                savedUser.getPhone(),
+                                savedUser.getAvatarUrl(),
                                 authorities);
         }
 

@@ -18,7 +18,9 @@ public record LoginResponse(
 
         String phoneNumber,
 
-        String email
+        String email,
+
+        String avatarUrl
 
 ) {
         public LoginResponse(
@@ -28,6 +30,6 @@ public record LoginResponse(
                 String username,
                 List<String> authorities
         ) {
-                this(accessToken, tokenType, expiresIn, username, authorities, null, null, null);
+                this(accessToken, tokenType, expiresIn, username, authorities, null, null, null, null);
         }
 }

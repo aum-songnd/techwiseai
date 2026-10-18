@@ -12,6 +12,8 @@ export interface User {
   email?: string;
   fullName?: string;
   phoneNumber?: string;
+  phone?: string;
+  avatarUrl?: string;
   authorities?: string[];
   active?: boolean;
   [key: string]: unknown;
@@ -48,6 +50,7 @@ export interface SavedProfile {
   fullName?: string;
   phoneNumber?: string;
   email?: string;
+  avatarUrl?: string;
 }
 
 export function saveUserProfile(profile: SavedProfile) {
@@ -120,21 +123,26 @@ function normalizeLoginResponse(raw: unknown): AuthResponse {
     const saved = getSavedUserProfile(user.username);
 
     const resolvedFullName =
-      (typeof user.fullName === "string" && user.fullName) ||
-      (typeof authRecord.fullName === "string" && authRecord.fullName) ||
-      saved?.fullName;
+      saved?.fullName ||
+      (typeof user.fullName === "string" ? user.fullName : undefined) ||
+      (typeof authRecord.fullName === "string" ? (authRecord.fullName as string) : undefined);
 
     const resolvedPhone =
-      (typeof user.phoneNumber === "string" && user.phoneNumber) ||
-      (typeof userRecord.phone === "string" && (userRecord.phone as string)) ||
-      (typeof authRecord.phoneNumber === "string" && (authRecord.phoneNumber as string)) ||
-      (typeof authRecord.phone === "string" && (authRecord.phone as string)) ||
-      saved?.phoneNumber;
+      saved?.phoneNumber ||
+      (typeof user.phoneNumber === "string" ? user.phoneNumber : undefined) ||
+      (typeof userRecord.phone === "string" ? (userRecord.phone as string) : undefined) ||
+      (typeof authRecord.phoneNumber === "string" ? (authRecord.phoneNumber as string) : undefined) ||
+      (typeof authRecord.phone === "string" ? (authRecord.phone as string) : undefined);
 
     const resolvedEmail =
-      (typeof user.email === "string" && user.email) ||
-      (typeof authRecord.email === "string" && authRecord.email) ||
-      saved?.email;
+      saved?.email ||
+      (typeof user.email === "string" ? user.email : undefined) ||
+      (typeof authRecord.email === "string" ? (authRecord.email as string) : undefined);
+
+    const resolvedAvatar =
+      saved?.avatarUrl ||
+      (typeof user.avatarUrl === "string" ? user.avatarUrl : undefined) ||
+      (typeof authRecord.avatarUrl === "string" ? (authRecord.avatarUrl as string) : undefined);
 
     user = {
       ...user,
@@ -142,14 +150,16 @@ function normalizeLoginResponse(raw: unknown): AuthResponse {
       phoneNumber: resolvedPhone,
       phone: resolvedPhone,
       email: resolvedEmail,
+      avatarUrl: resolvedAvatar,
     };
 
-    if (resolvedPhone || resolvedFullName || resolvedEmail) {
+    if (resolvedPhone || resolvedFullName || resolvedEmail || resolvedAvatar) {
       saveUserProfile({
         username: user.username,
         fullName: resolvedFullName,
         phoneNumber: resolvedPhone,
         email: resolvedEmail,
+        avatarUrl: resolvedAvatar,
       });
     }
   }
@@ -290,6 +300,7 @@ export async function fetchCurrentUser(token: string): Promise<User> {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    cache: "no-store",
   });
 
   const body: ApiWrapper<User> = await res.json().catch(() => ({}));
@@ -381,4 +392,102 @@ export async function resetPasswordRequest(payload: {
   if (!res.ok || body.success === false) {
     throw new Error(extractErrorMessage(body, "Đặt lại mật khẩu thất bại"));
   }
+}
+
+export interface UpdateProfilePayload {
+  fullName?: string;
+  email?: string;
+  phoneNumber?: string;
+  avatarUrl?: string;
+}
+
+export async function updateProfileRequest(
+  payload: UpdateProfilePayload
+): Promise<User> {
+  const token = getToken();
+  const currentUser = getStoredUser();
+  if (!token || !currentUser) {
+    throw new Error("Bạn chưa đăng nhập hoặc phiên làm việc đã hết hạn");
+  }
+
+  let allProfiles: Record<string, unknown> | null = null;
+  if (typeof window !== "undefined") {
+    try {
+      const raw = localStorage.getItem("all_user_profiles");
+      if (raw) allProfiles = JSON.parse(raw);
+    } catch {}
+  }
+
+  const res = await fetch(`/api/auth/me`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      username: currentUser.username,
+      fullName: payload.fullName?.trim(),
+      email: payload.email?.trim().toLowerCase(),
+      phoneNumber: payload.phoneNumber?.trim(),
+      avatarUrl: payload.avatarUrl,
+      allProfiles,
+    }),
+  });
+
+  const body: ApiWrapper<User> = await res.json().catch(() => ({}));
+
+  if (!res.ok || body.success === false) {
+    throw new Error(extractErrorMessage(body, "Cập nhật thông tin thất bại"));
+  }
+
+  const serverUser = body.data;
+  const updatedUser: User = {
+    ...currentUser,
+    ...(serverUser || {}),
+    fullName:
+      payload.fullName !== undefined
+        ? payload.fullName.trim()
+        : serverUser?.fullName || currentUser.fullName,
+    email:
+      payload.email !== undefined
+        ? payload.email.trim().toLowerCase()
+        : serverUser?.email || currentUser.email,
+    phoneNumber:
+      payload.phoneNumber !== undefined
+        ? payload.phoneNumber.trim()
+        : serverUser?.phoneNumber ||
+          ((serverUser as Record<string, unknown> | undefined)?.phone as string) ||
+          currentUser.phoneNumber,
+    phone:
+      payload.phoneNumber !== undefined
+        ? payload.phoneNumber.trim()
+        : serverUser?.phoneNumber ||
+          ((serverUser as Record<string, unknown> | undefined)?.phone as string) ||
+          currentUser.phoneNumber,
+    avatarUrl:
+      payload.avatarUrl !== undefined
+        ? payload.avatarUrl
+        : serverUser?.avatarUrl || currentUser.avatarUrl,
+  };
+
+  saveUserProfile({
+    username: currentUser.username,
+    fullName: updatedUser.fullName,
+    phoneNumber: updatedUser.phoneNumber,
+    email: updatedUser.email,
+    avatarUrl: updatedUser.avatarUrl,
+  });
+
+  setStoredUser(updatedUser);
+
+  broadcastTabEvent({
+    type: "AUTH_LOGIN",
+    payload: { user: updatedUser, token },
+  });
+
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("auth:login"));
+  }
+
+  return updatedUser;
 }

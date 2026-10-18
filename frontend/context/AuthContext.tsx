@@ -22,6 +22,9 @@ import {
   registerRequest,
   saveUserProfile,
   getSavedUserProfile,
+  updateProfileRequest,
+  fetchCurrentUser,
+  type UpdateProfilePayload,
 } from "@/lib/auth";
 
 import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
@@ -32,6 +35,7 @@ interface AuthContextValue {
   isSignedIn: boolean;
   login: (username: string, password: string) => Promise<void>;
   register: (payload: RegisterPayload) => Promise<void>;
+  updateUser: (payload: UpdateProfilePayload) => Promise<User>;
   logout: () => void;
 }
 
@@ -57,6 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         fullName: storedUser.fullName || saved?.fullName,
         phoneNumber: storedUser.phoneNumber || saved?.phoneNumber,
         email: storedUser.email || saved?.email,
+        avatarUrl: storedUser.avatarUrl || saved?.avatarUrl,
       };
       if (!storedUser.phoneNumber && saved?.phoneNumber) {
         setStoredUser(fullUser);
@@ -68,6 +73,53 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false);
   }, []);
 
+  const refreshUserFromServer = useCallback(async () => {
+    const token = getToken();
+    if (!token) return;
+
+    try {
+      const serverUser = await fetchCurrentUser(token);
+      if (!serverUser || !serverUser.username) return;
+
+      setUser((currentUser) => {
+        if (!currentUser) return serverUser;
+
+        const currentPhone =
+          currentUser.phoneNumber || (currentUser.phone as string);
+        const serverPhone =
+          serverUser.phoneNumber || (serverUser.phone as string);
+
+        const hasChanges =
+          serverUser.fullName !== currentUser.fullName ||
+          serverUser.email !== currentUser.email ||
+          serverPhone !== currentPhone ||
+          serverUser.avatarUrl !== currentUser.avatarUrl;
+
+        if (hasChanges) {
+          const mergedUser: User = {
+            ...currentUser,
+            ...serverUser,
+            phoneNumber: serverPhone,
+            phone: serverPhone,
+          };
+          setStoredUser(mergedUser);
+          saveUserProfile({
+            username: mergedUser.username,
+            fullName: mergedUser.fullName,
+            phoneNumber: mergedUser.phoneNumber,
+            email: mergedUser.email,
+            avatarUrl: mergedUser.avatarUrl,
+          });
+          return mergedUser;
+        }
+
+        return currentUser;
+      });
+    } catch {
+      // Ignore background refresh errors
+    }
+  }, []);
+
   const logout = useCallback(() => {
     clearToken();
     clearStoredUser();
@@ -76,8 +128,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    // 1. Initial read from localStorage
+    // 1. Initial read from localStorage + background refresh from server
     syncUserFromStorage();
+    refreshUserFromServer();
 
     // 2. Real-time cross-tab synchronization via BroadcastChannel
     const unsubscribeSync = subscribeTabSync((event) => {
@@ -100,6 +153,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const handleStorage = (e: StorageEvent) => {
       if (e.key === "access_token" || e.key === "auth_user") {
         syncUserFromStorage();
+        refreshUserFromServer();
         if (typeof window !== "undefined") {
           if (e.newValue) {
             window.dispatchEvent(new Event("auth:login"));
@@ -111,18 +165,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
     window.addEventListener("storage", handleStorage);
 
-    // 4. Tab refocus check to verify session freshness
+    // 4. Tab refocus check to sync changes made in incognito tabs or external windows
     const handleFocus = () => {
       syncUserFromStorage();
+      refreshUserFromServer();
     };
     window.addEventListener("focus", handleFocus);
+
+    // 5. Visibility change check (e.g. switching back to tab)
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        syncUserFromStorage();
+        refreshUserFromServer();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    // 6. Polling interval (every 2.5s when active tab is visible) to auto-sync side-by-side windows
+    const pollInterval = setInterval(() => {
+      if (document.visibilityState === "visible") {
+        refreshUserFromServer();
+      }
+    }, 2500);
 
     return () => {
       unsubscribeSync();
       window.removeEventListener("storage", handleStorage);
       window.removeEventListener("focus", handleFocus);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      clearInterval(pollInterval);
     };
-  }, [syncUserFromStorage]);
+  }, [syncUserFromStorage, refreshUserFromServer]);
 
   useEffect(() => {
     if (!user) return;
@@ -165,9 +238,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const saved = getSavedUserProfile(username);
     const fullUser: User = {
       ...loggedUser,
-      fullName: loggedUser.fullName || saved?.fullName,
-      phoneNumber: loggedUser.phoneNumber || saved?.phoneNumber,
-      email: loggedUser.email || saved?.email,
+      fullName: saved?.fullName || loggedUser.fullName,
+      phoneNumber: saved?.phoneNumber || loggedUser.phoneNumber,
+      email: saved?.email || loggedUser.email,
+      avatarUrl: saved?.avatarUrl || loggedUser.avatarUrl,
     };
 
     setStoredUser(fullUser);
@@ -195,9 +269,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const updateUser = useCallback(async (payload: UpdateProfilePayload) => {
+    const updated = await updateProfileRequest(payload);
+    setUser(updated);
+    return updated;
+  }, []);
+
   return (
     <AuthContext.Provider
-      value={{ user, isLoading, isSignedIn: !!user, login, register, logout }}
+      value={{
+        user,
+        isLoading,
+        isSignedIn: !!user,
+        login,
+        register,
+        updateUser,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

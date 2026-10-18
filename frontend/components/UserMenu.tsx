@@ -35,9 +35,17 @@ const UserMenu = () => {
     <div ref={menuRef} className="relative">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-semibold hover:opacity-90"
+        className="w-8 h-8 rounded-full bg-shop_dark_green text-white flex items-center justify-center text-sm font-semibold hover:opacity-90 overflow-hidden cursor-pointer"
       >
-        {initial}
+        {user?.avatarUrl ? (
+          <img
+            src={user.avatarUrl}
+            alt={user.fullName || user.username}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          initial
+        )}
       </button>
 
       {isOpen && (

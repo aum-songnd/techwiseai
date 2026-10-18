@@ -9,6 +9,7 @@ public record UserProfileResponse(
         String email,
         String fullName,
         String phoneNumber,
+        String avatarUrl,
         List<String> authorities
 ) {
 }

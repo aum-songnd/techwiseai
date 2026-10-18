@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { saveServerProfile } from "@/lib/server-user-profiles";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||
@@ -15,6 +16,17 @@ export async function POST(req: NextRequest) {
     });
 
     const data = await res.json().catch(() => ({}));
+
+    if (res.ok && body?.username) {
+      saveServerProfile({
+        username: body.username,
+        email: body.email,
+        phoneNumber: body.phoneNumber,
+        phone: body.phoneNumber,
+        fullName: body.fullName,
+      });
+    }
+
     return NextResponse.json(data, { status: res.status });
   } catch {
     return NextResponse.json(

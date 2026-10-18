@@ -52,6 +52,9 @@ public class User implements UserDetails {
     @Column(name = "phone", length = 20, unique = true)
     private String phone;
 
+    @Column(name = "avatar_url", columnDefinition = "TEXT")
+    private String avatarUrl;
+
     @Column(name = "enabled", nullable = false)
     private boolean enabled = true;
 
