@@ -16,11 +16,11 @@ export default function Chat() {
 
       {/* Floating button + message */}
       {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="group fixed bottom-6 right-6 z-50">
           {/* AI message */}
-          <div className="absolute bottom-20 right-0 w-72 rounded-2xl bg-white px-4 py-3 text-sm text-gray-700 shadow-xl ring-1 ring-gray-100 font-sans tracking-tight">
+          <div className="pointer-events-none absolute bottom-20 right-0 w-72 rounded-2xl bg-white px-4 py-3 text-sm text-gray-700 shadow-xl ring-1 ring-gray-100 font-sans tracking-tight opacity-0 translate-y-2 invisible transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible">
             <p>
-              Bạn cần tư vấn sản phẩm? Hãy để trợ lý AI giúp bạn nhé! 🤖
+              Bạn cần tư vấn sản phẩm? Hãy để trợ lý AI giúp bạn nhé!
             </p>
 
             <div className="absolute -bottom-2 right-6 h-4 w-4 rotate-45 bg-white" />

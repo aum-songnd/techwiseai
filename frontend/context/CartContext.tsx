@@ -193,6 +193,114 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, [fetchCartFromServer]);
 
+  const commitQuantityUpdate = useCallback(
+    async (itemId: string) => {
+      updateTimeoutsRef.current.delete(itemId);
+
+      if (inFlightItemIdsRef.current.has(itemId)) {
+        return;
+      }
+
+      const quantity = pendingQuantitiesRef.current.get(itemId);
+      if (quantity === undefined) return;
+
+      // If itemId is temporary (optimistic item before server response), resolve real item id
+      let targetId = itemId;
+      if (targetId.startsWith("temp-")) {
+        const tempProductId = targetId.replace("temp-", "");
+        const realItem = cartRef.current.items.find(
+          (it) => isSameProduct(it.productId, tempProductId) && !it.id.startsWith("temp-")
+        );
+        if (realItem) {
+          targetId = realItem.id;
+          pendingQuantitiesRef.current.delete(itemId);
+          pendingQuantitiesRef.current.set(targetId, quantity);
+        } else {
+          // If item is no longer in local cart, cancel update
+          if (!cartRef.current.items.some((it) => isSameProduct(it.productId, tempProductId))) {
+            pendingQuantitiesRef.current.delete(itemId);
+            return;
+          }
+          const timeout = setTimeout(() => {
+            commitQuantityUpdate(itemId);
+          }, 150);
+          updateTimeoutsRef.current.set(itemId, timeout);
+          return;
+        }
+      }
+
+      inFlightItemIdsRef.current.add(targetId);
+      try {
+        let data: CartData | undefined;
+        if (quantity <= 0) {
+          await removeCartItem(targetId);
+        } else {
+          data = await updateCartItemQuantity(targetId, quantity);
+        }
+
+        const stillLatest =
+          pendingQuantitiesRef.current.get(targetId) === quantity ||
+          pendingQuantitiesRef.current.get(itemId) === quantity;
+
+        if (stillLatest) {
+          if (data) {
+            setCart((currentCart) => {
+              const updatedItem = data!.items.find((it) => isSameItem(it.id, targetId));
+              const merged = currentCart.items.map((it) => {
+                if (isSameItem(it.id, targetId) || isSameItem(it.id, itemId)) {
+                  return {
+                    ...(updatedItem ?? it),
+                    quantity,
+                    subtotal: (updatedItem?.unitPrice ?? it.unitPrice) * quantity,
+                  };
+                }
+                return it;
+              });
+              return {
+                ...currentCart,
+                items: merged,
+                totalItems: merged.length,
+                totalQuantity: merged.reduce((sum, it) => sum + it.quantity, 0),
+                totalAmount: merged.reduce((sum, it) => sum + it.subtotal, 0),
+              };
+            });
+            broadcastTabEvent({
+              type: "CART_UPDATED",
+              payload: { cart: data, timestamp: Date.now() },
+            });
+          } else {
+            broadcastTabEvent({
+              type: "CART_UPDATED",
+              payload: { timestamp: Date.now() },
+            });
+          }
+          pendingQuantitiesRef.current.delete(targetId);
+          pendingQuantitiesRef.current.delete(itemId);
+        }
+      } catch (err) {
+        if (err instanceof CartAuthRequiredError) {
+          pendingQuantitiesRef.current.delete(targetId);
+          pendingQuantitiesRef.current.delete(itemId);
+          setRequiresLogin(true);
+        } else {
+          pendingQuantitiesRef.current.delete(targetId);
+          pendingQuantitiesRef.current.delete(itemId);
+          fetchCartFromServer();
+        }
+      } finally {
+        inFlightItemIdsRef.current.delete(targetId);
+
+        if (
+          pendingQuantitiesRef.current.has(targetId) ||
+          pendingQuantitiesRef.current.has(itemId)
+        ) {
+          commitQuantityUpdate(targetId);
+        }
+      }
+    },
+    [fetchCartFromServer]
+  );
+
   const addToCart = useCallback(
     async (
       productId: string,
@@ -345,115 +453,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         });
       }
     },
-    []
-  );
-
-  const commitQuantityUpdate = useCallback(
-    async (itemId: string) => {
-      updateTimeoutsRef.current.delete(itemId);
-
-      if (inFlightItemIdsRef.current.has(itemId)) {
-        return;
-      }
-
-      const quantity = pendingQuantitiesRef.current.get(itemId);
-      if (quantity === undefined) return;
-
-      // If itemId is temporary (optimistic item before server response), resolve real item id
-      let targetId = itemId;
-      if (targetId.startsWith("temp-")) {
-        const tempProductId = targetId.replace("temp-", "");
-        const realItem = cartRef.current.items.find(
-          (it) => isSameProduct(it.productId, tempProductId) && !it.id.startsWith("temp-")
-        );
-        if (realItem) {
-          targetId = realItem.id;
-          pendingQuantitiesRef.current.delete(itemId);
-          pendingQuantitiesRef.current.set(targetId, quantity);
-        } else {
-          // If item is no longer in local cart, cancel update
-          if (!cartRef.current.items.some((it) => isSameProduct(it.productId, tempProductId))) {
-            pendingQuantitiesRef.current.delete(itemId);
-            return;
-          }
-          const timeout = setTimeout(() => {
-            commitQuantityUpdate(itemId);
-          }, 150);
-          updateTimeoutsRef.current.set(itemId, timeout);
-          return;
-        }
-      }
-
-      inFlightItemIdsRef.current.add(targetId);
-      try {
-        let data: CartData | undefined;
-        if (quantity <= 0) {
-          await removeCartItem(targetId);
-        } else {
-          data = await updateCartItemQuantity(targetId, quantity);
-        }
-
-        const stillLatest =
-          pendingQuantitiesRef.current.get(targetId) === quantity ||
-          pendingQuantitiesRef.current.get(itemId) === quantity;
-
-        if (stillLatest) {
-          if (data) {
-            setCart((currentCart) => {
-              const updatedItem = data!.items.find((it) => isSameItem(it.id, targetId));
-              const merged = currentCart.items.map((it) => {
-                if (isSameItem(it.id, targetId) || isSameItem(it.id, itemId)) {
-                  return {
-                    ...(updatedItem ?? it),
-                    quantity,
-                    subtotal: (updatedItem?.unitPrice ?? it.unitPrice) * quantity,
-                  };
-                }
-                return it;
-              });
-              return {
-                ...currentCart,
-                items: merged,
-                totalItems: merged.length,
-                totalQuantity: merged.reduce((sum, it) => sum + it.quantity, 0),
-                totalAmount: merged.reduce((sum, it) => sum + it.subtotal, 0),
-              };
-            });
-            broadcastTabEvent({
-              type: "CART_UPDATED",
-              payload: { cart: data, timestamp: Date.now() },
-            });
-          } else {
-            broadcastTabEvent({
-              type: "CART_UPDATED",
-              payload: { timestamp: Date.now() },
-            });
-          }
-          pendingQuantitiesRef.current.delete(targetId);
-          pendingQuantitiesRef.current.delete(itemId);
-        }
-      } catch (err) {
-        if (err instanceof CartAuthRequiredError) {
-          pendingQuantitiesRef.current.delete(targetId);
-          pendingQuantitiesRef.current.delete(itemId);
-          setRequiresLogin(true);
-        } else {
-          pendingQuantitiesRef.current.delete(targetId);
-          pendingQuantitiesRef.current.delete(itemId);
-          fetchCartFromServer();
-        }
-      } finally {
-        inFlightItemIdsRef.current.delete(targetId);
-
-        if (
-          pendingQuantitiesRef.current.has(targetId) ||
-          pendingQuantitiesRef.current.has(itemId)
-        ) {
-          commitQuantityUpdate(targetId);
-        }
-      }
-    },
-    [fetchCartFromServer]
+    [commitQuantityUpdate]
   );
 
   const processDeleteQueue = useCallback(async () => {
