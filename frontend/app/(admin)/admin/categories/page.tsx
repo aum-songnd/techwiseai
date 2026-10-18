@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Loading from "@/app/(client)/loading";
 import {
   MoreVertical,
   PencilLine,
@@ -32,7 +33,7 @@ const emptyForm: CategoryPayload = {
 };
 
 const inputClass =
-  "w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-700 shadow-sm outline-none transition focus:border-shop_dark_green focus:ring-4 focus:ring-shop_light_green/15";
+  "w-full border border-neutral-300 bg-white px-3 py-2 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none focus:ring-1 focus:ring-shop_dark_green transition-colors";
 
 const getCategoryImage = (category: Category) => {
   const value = `${category.slug} ${category.title}`
@@ -188,42 +189,44 @@ const AdminCategoriesPage = () => {
   }));
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-5 flex items-center gap-2 text-sm text-gray-500">
-          <Link href="/admin" className="transition-colors hover:text-shop_dark_green">
-            Menu chính
+    <div className="font-sans min-h-[calc(100vh-4rem)] bg-neutral-50 p-4 sm:p-6 lg:p-8 text-neutral-900">
+      <div className="mx-auto max-w-6xl space-y-6">
+        {/* Breadcrumb Navigation */}
+        <nav className="flex items-center gap-2 text-xs text-neutral-500">
+          <Link href="/admin" className="hover:text-shop_dark_green transition-colors">
+            Admin
           </Link>
-          <span>›</span>
-          <Link
-            href="/admin/categories"
-            aria-current="page"
-            className="font-medium  text-gray-700 transition-colors hover:text-shop_dark_green"
-          >
-            Danh mục
-          </Link>
-        </div>
+          <span>/</span>
+          <span className="text-neutral-900 font-medium">Quản lý danh mục</span>
+        </nav>
 
-        <div className="mb-6">
-          <h1 className="text-[22px] font-semibold tracking-tight text-gray-800">
-            Quản lý danh mục
-          </h1>
-          <p className="mt-2 text-sm text-gray-500">
-            Sắp xếp sản phẩm bằng cách tạo danh mục
+        {/* Page Header */}
+        <div className="flex flex-col gap-1 border-b border-neutral-200 pb-5">
+          <div className="flex items-end gap-3">
+            <h1 className="text-xl font-bold uppercase tracking-tight text-neutral-900">
+              Quản lý danh mục
+            </h1>
+            <span className="pb-0.5 text-xs text-neutral-500 font-mono">
+              [ {categories.length} danh mục ]
+            </span>
+          </div>
+          <p className="text-xs text-neutral-500">
+            Sắp xếp, phân loại sản phẩm và tối ưu danh mục hàng hóa trên hệ thống
           </p>
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-[1.9fr_1fr]">
+        {/* Top Cards Grid */}
+        <div className="grid gap-5 xl:grid-cols-[1.9fr_1fr]">
           <div className="grid gap-4 sm:grid-cols-2">
             {stats.map(({ category, title, amount, active }, index) => (
               <div
                 key={`${title}-${index}`}
-                className={`rounded-2xl border bg-white p-4 shadow-[0_10px_25px_rgba(15,23,42,0.04)] transition ${
-                  active ? "border-shop_light_green/50 bg-shop_light_green/5" : "border-gray-200"
+                className={`border bg-white p-4 transition-colors ${
+                  active ? "border-shop_dark_green ring-1 ring-shop_dark_green/30" : "border-neutral-200 hover:border-neutral-300"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="h-14 w-14 overflow-hidden rounded-xl bg-gray-100">
+                  <div className="h-14 w-14 shrink-0 overflow-hidden border border-neutral-200 bg-neutral-50">
                     <img
                       src={getCategoryImage(category)}
                       alt={title}
@@ -234,88 +237,90 @@ const AdminCategoriesPage = () => {
                     <summary
                       aria-label={`Tùy chọn ${title}`}
                       title={`Tùy chọn ${title}`}
-                      className="flex h-8 w-8 cursor-pointer list-none items-center justify-center rounded-md p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 [&::-webkit-details-marker]:hidden"
+                      className="flex h-8 w-8 cursor-pointer list-none items-center justify-center border border-neutral-200 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 transition-colors [&::-webkit-details-marker]:hidden"
                     >
                       <MoreVertical className="h-4 w-4" />
                     </summary>
-                    <div className="absolute right-0 top-full z-20 mt-1 w-48 overflow-hidden rounded-lg border border-gray-200 bg-white py-1 text-sm shadow-lg">
+                    <div className="absolute right-0 top-full z-20 mt-1 w-48 border border-neutral-200 bg-white py-1 text-xs shadow-md">
                       <button
                         type="button"
                         onClick={(event) => {
                           startEdit(category);
                           event.currentTarget.closest("details")?.removeAttribute("open");
                         }}
-                        className="flex w-full items-center gap-2 px-3 py-2 text-left text-gray-700 hover:bg-gray-50"
+                        className="flex w-full items-center gap-2 px-3 py-2 text-left text-neutral-700 hover:bg-neutral-50 font-medium"
                       >
-                        <PencilLine className="h-4 w-4" />
+                        <PencilLine className="h-3.5 w-3.5 text-neutral-500" />
                         Chỉnh sửa danh mục
                       </button>
                       <Link
                         href={`/admin/products?category=${encodeURIComponent(category.slug)}`}
-                        className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-50"
+                        className="flex items-center gap-2 px-3 py-2 text-neutral-700 hover:bg-neutral-50 font-medium"
                       >
-                        <ShoppingBag className="h-4 w-4" />
+                        <ShoppingBag className="h-3.5 w-3.5 text-neutral-500" />
                         Xem sản phẩm
                       </Link>
                     </div>
                   </details>
                 </div>
 
-                <div className="mt-5">
-                  <p className="text-lg font-semibold text-gray-800">{title}</p>
-                  <p className="mt-2 text-3xl font-semibold tracking-tight text-gray-900">
+                <div className="mt-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-neutral-900 truncate">{title}</p>
+                  <p className="mt-1 text-2xl font-bold tracking-tight text-neutral-900 tabular-nums">
                     {amount}
                   </p>
-                  <p className="mt-1 text-xs text-gray-500">Sản phẩm</p>
+                  <p className="text-[11px] font-mono text-neutral-400 uppercase">Sản phẩm hiện có</p>
                 </div>
 
                 <Link
                   href={`/admin/products?category=${encodeURIComponent(category.slug)}`}
-                  className="mt-4 inline-flex items-center gap-2 text-xs font-medium text-gray-500 hover:text-shop_dark_green"
+                  className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-shop_dark_green hover:underline"
                 >
-                  Xem sản phẩm
+                  Xem sản phẩm &rarr;
                 </Link>
               </div>
             ))}
           </div>
 
-          <div className="overflow-hidden rounded-[28px] bg-gradient-to-br from-[#0e88b7] via-[#0b6fa5] to-[#0c5d8d] p-5 text-white shadow-[0_20px_35px_rgba(12,93,141,0.3)]">
-            <div className="mb-8 h-10 w-10 rounded-full border border-white/25 bg-white/10" />
-            <div className="space-y-3">
-              <p className="text-xl font-semibold">Truy cập nhanh</p>
-              <h2 className="max-w-xs text-3xl font-semibold leading-tight">
+          {/* Quick Action Promo Card */}
+          <div className="border border-neutral-200 bg-shop_dark_green p-6 text-white flex flex-col justify-between">
+            <div>
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-300">
+                Truy cập nhanh
+              </span>
+              <h2 className="mt-2 text-xl font-bold uppercase tracking-tight text-white leading-snug">
                 Tăng doanh số với bộ sưu tập luôn được cập nhật!
               </h2>
+              <p className="mt-2 text-xs text-neutral-200 leading-relaxed">
+                Thêm sản phẩm mới vào kho và làm danh mục của bạn trở nên hấp dẫn hơn với khách hàng.
+              </p>
             </div>
-
-            <p className="mt-5 max-w-xs text-sm text-cyan-50/90">
-              Thêm sản phẩm mới vào kho và làm danh mục của bạn hấp dẫn hơn.
-            </p>
 
             <Link
               href="/admin/products"
-              className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl border border-white/40 bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15"
+              className="mt-6 inline-flex items-center justify-center gap-2 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-shop_dark_green hover:bg-neutral-100 transition-colors shadow-sm"
             >
-              <Plus className="h-4 w-4" />
-              Thêm sản phẩm
+              <Plus className="h-3.5 w-3.5 stroke-[2.5]" />
+              Thêm sản phẩm mới
             </Link>
           </div>
         </div>
 
+        {/* Create / Edit Form */}
         {showForm && (
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="mt-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.04)]"
+            className="border border-neutral-200 bg-white p-5 sm:p-6"
           >
-            <div className="mb-4 flex items-center justify-between gap-3">
-              <h2 className="text-lg font-semibold text-gray-800">
-                {editingId ? "Chỉnh sửa danh mục" : "Thêm danh mục"}
+            <div className="mb-4 flex items-center justify-between border-b border-neutral-200 pb-3">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+                {editingId ? "Chỉnh sửa danh mục" : "Tạo danh mục mới"}
               </h2>
               <button
                 type="button"
                 onClick={resetForm}
-                className="text-sm font-medium text-gray-500 hover:text-gray-700"
+                className="text-xs font-semibold uppercase tracking-wider text-neutral-500 hover:text-neutral-900 transition-colors"
               >
                 Đóng
               </button>
@@ -323,36 +328,39 @@ const AdminCategoriesPage = () => {
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">
-                  Tên danh mục
+                <label className="mb-1.5 block text-xs font-semibold text-neutral-700">
+                  Tên danh mục <span className="text-red-500">*</span>
                 </label>
                 <input
                   required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="Ví dụ: Laptop Gaming"
                   className={inputClass}
                 />
               </div>
 
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">
-                  Đường dẫn (slug)
+                <label className="mb-1.5 block text-xs font-semibold text-neutral-700">
+                  Đường dẫn (slug) <span className="text-red-500">*</span>
                 </label>
                 <input
                   required
                   value={form.slug}
                   onChange={(e) => setForm({ ...form, slug: e.target.value })}
+                  placeholder="Ví dụ: laptop-gaming"
                   className={inputClass}
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">
-                  Mô tả
+                <label className="mb-1.5 block text-xs font-semibold text-neutral-700">
+                  Mô tả danh mục
                 </label>
                 <textarea
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
+                  placeholder="Nhập mô tả ngắn gọn về danh mục..."
                   className={inputClass}
                   rows={3}
                 />
@@ -361,18 +369,19 @@ const AdminCategoriesPage = () => {
               {!editingId && (
                 <>
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-gray-700">
-                      Đường dẫn hình ảnh
+                    <label className="mb-1.5 block text-xs font-semibold text-neutral-700">
+                      Đường dẫn hình ảnh (URL)
                     </label>
                     <input
                       value={form.imageUrl}
                       onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
+                      placeholder="https://..."
                       className={inputClass}
                     />
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                    <label className="mb-1.5 block text-xs font-semibold text-neutral-700">
                       Thứ tự hiển thị
                     </label>
                     <input
@@ -389,23 +398,23 @@ const AdminCategoriesPage = () => {
             </div>
 
             {error && (
-              <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-600">
+              <p className="mt-4 border border-red-200 bg-red-50 px-3 py-2 text-xs font-medium text-red-600">
                 {error}
               </p>
             )}
 
-            <div className="mt-5 flex items-center justify-end gap-3">
+            <div className="mt-5 flex items-center justify-end gap-3 border-t border-neutral-200 pt-4">
               <button
                 type="button"
                 onClick={resetForm}
-                className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-50"
+                className="border border-neutral-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-wider text-neutral-700 hover:bg-neutral-50 transition-colors"
               >
                 Hủy
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className="rounded-lg bg-shop_dark_green px-5 py-2.5 text-sm font-medium text-white transition hover:bg-shop_dark_green/90 disabled:opacity-60"
+                className="bg-shop_dark_green px-5 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:opacity-60"
               >
                 {saving
                   ? "Đang lưu..."
@@ -417,70 +426,79 @@ const AdminCategoriesPage = () => {
           </form>
         )}
 
-        <div className="mt-6 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-[0_8px_28px_rgba(15,23,42,0.03)]">
-          <div className="flex items-center justify-between border-b border-gray-100 px-5 py-4">
+        {/* Categories Table View */}
+        <div className="border border-neutral-200 bg-white">
+          <div className="flex items-center justify-between border-b border-neutral-200 px-5 py-3.5">
+            <span className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+              Danh sách danh mục ({categories.length})
+            </span>
             <button
               type="button"
               onClick={openCreateForm}
-              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:border-shop_dark_green hover:text-shop_dark_green"
+              className="inline-flex items-center gap-1.5 bg-shop_dark_green px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white hover:bg-shop_dark_green/90 transition-colors shadow-sm"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-3.5 w-3.5 stroke-[2.5]" />
               Thêm danh mục
             </button>
           </div>
 
           {loading ? (
-            <p className="py-16 text-center text-sm text-gray-400">Đang tải...</p>
+            <div className="py-8">
+              <Loading message="Đang tải danh mục..." className="min-h-[220px]" />
+            </div>
           ) : categories.length === 0 ? (
-            <p className="py-16 text-center text-sm text-gray-500">
+            <p className="py-16 text-center text-xs text-neutral-500">
               Chưa có danh mục nào. Hãy thêm danh mục đầu tiên để bắt đầu.
             </p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[640px] text-left text-sm">
-                <thead className="bg-gray-50 text-xs font-medium uppercase tracking-[0.08em] text-gray-500">
-                  <tr>
-                    <th className="px-5 py-3">
-                      <div className="flex items-center gap-2">
-                        <input type="checkbox" className="h-4 w-4 rounded border-gray-300" />
-                      </div>
-                    </th>
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-neutral-200 bg-neutral-50/60 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                    <th className="px-5 py-3 w-10">#</th>
                     <th className="px-5 py-3">Tên danh mục</th>
+                    <th className="px-5 py-3">Đường dẫn (slug)</th>
                     <th className="px-5 py-3">Mô tả</th>
                     <th className="px-5 py-3 text-right">Thao tác</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {categories.map((category) => (
-                    <tr key={category.id} className="hover:bg-gray-50">
-                      <td className="px-5 py-4">
-                        <input type="checkbox" className="h-4 w-4 rounded border-gray-300" />
+                <tbody className="divide-y divide-neutral-100 text-xs">
+                  {categories.map((category, idx) => (
+                    <tr key={category.id} className="hover:bg-neutral-50/50 transition-colors">
+                      <td className="px-5 py-4 font-mono text-neutral-400">
+                        {String(idx + 1).padStart(2, "0")}
                       </td>
                       <td className="px-5 py-4">
-                        <span className="font-medium  text-gray-800">{category.title}</span>
+                        <span className="font-semibold text-neutral-900 hover:text-shop_dark_green transition-colors">
+                          {category.title}
+                        </span>
                       </td>
-                      <td className="px-5 py-4 text-gray-500">
+                      <td className="px-5 py-4 font-mono text-neutral-500">
+                        {category.slug}
+                      </td>
+                      <td className="px-5 py-4 text-neutral-500 max-w-xs truncate">
                         {category.description?.trim() || "Bộ sưu tập sản phẩm thuộc danh mục này."}
                       </td>
-                      <td className="px-5 py-4">
-                        <div className="flex items-center justify-end gap-2">
+                      <td className="px-5 py-4 text-right">
+                        <div className="flex items-center justify-end gap-1.5">
                           <button
                             type="button"
                             onClick={() => startEdit(category)}
-                            className="rounded-lg border border-gray-200 p-2 text-gray-600 transition hover:border-shop_dark_green hover:text-shop_dark_green"
+                            className="border border-neutral-200 p-1.5 text-neutral-500 hover:border-shop_dark_green hover:text-shop_dark_green transition-colors"
                             aria-label={`Chỉnh sửa ${category.title}`}
+                            title="Chỉnh sửa"
                           >
-                            <PencilLine className="h-4 w-4" />
+                            <PencilLine className="h-3.5 w-3.5" />
                           </button>
                           <button
                             type="button"
                             onClick={() => handleDelete(category)}
                             disabled={deletingId === category.id}
-                            className="rounded-lg border border-gray-200 p-2 text-red-600 transition hover:border-red-300 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="border border-neutral-200 p-1.5 text-neutral-400 hover:border-red-200 hover:bg-red-50 hover:text-red-600 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                             aria-label={`Xóa ${category.title}`}
                             title={deletingId === category.id ? "Đang xóa..." : "Xóa danh mục"}
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-3.5 w-3.5" />
                           </button>
                         </div>
                       </td>
@@ -490,9 +508,9 @@ const AdminCategoriesPage = () => {
               </table>
             </div>
           )}
-          </div>
         </div>
       </div>
+    </div>
   );
 };
 

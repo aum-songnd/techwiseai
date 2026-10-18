@@ -239,11 +239,11 @@ const Card = ({
   className?: string;
 }) => (
   <div
-    className={`bg-white rounded-xl border border-gray-200/80 p-3 sm:p-3.5 ${className}`}
+    className={`bg-white border border-neutral-200 p-4 sm:p-5 ${className}`}
   >
     {(title || action) && (
-      <div className="flex items-center justify-between mb-2">
-        {title && <h3 className="text-[15px] font-bold text-gray-900">{title}</h3>}
+      <div className="flex items-center justify-between border-b border-neutral-200 pb-3 mb-4">
+        {title && <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-900">{title}</h3>}
         {action}
       </div>
     )}
@@ -252,9 +252,9 @@ const Card = ({
 );
 
 const InfoRow = ({ label, value }: { label: string; value: React.ReactNode }) => (
-  <div className="flex items-start justify-between gap-4 py-1 text-[13px] leading-snug">
-    <span className="text-gray-500 shrink-0">{label}</span>
-    <span className="font-medium text-gray-900 text-right break-words min-w-0">
+  <div className="flex items-start justify-between gap-4 py-1.5 text-xs leading-normal">
+    <span className="text-neutral-500 shrink-0">{label}:</span>
+    <span className="font-semibold text-neutral-900 text-right break-words min-w-0">
       {value}
     </span>
   </div>
@@ -422,6 +422,7 @@ const AdminOrdersPage = () => {
 
     const loadDetail = async () => {
       setIsDetailLoading(true);
+      setDetail(null);
       setDetailError(null);
       setPayment(null);
       try {
@@ -634,17 +635,16 @@ const AdminOrdersPage = () => {
     <aside
       className={`${
         selectedId ? "hidden lg:flex" : "flex"
-      } flex-col gap-3 min-w-0 lg:w-[380px] lg:shrink-0`}
+      } flex-col gap-4 min-w-0 lg:w-[380px] lg:shrink-0`}
     >
-
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
         <input
           type="text"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          placeholder="Tìm theo mã đơn hoặc khách hàng"
-          className="w-full h-12 pl-10 pr-3 text-base bg-white rounded-xl border border-gray-200/80 outline-none placeholder:text-gray-400 focus:border-shop_dark_green/50"
+          placeholder="Tìm theo mã đơn hoặc tên khách..."
+          className="w-full h-10 pl-9 pr-3 text-xs bg-white border border-neutral-300 outline-none placeholder:text-neutral-400 focus:border-shop_dark_green focus:ring-1 focus:ring-shop_dark_green transition-colors"
         />
       </div>
 
@@ -655,19 +655,19 @@ const AdminOrdersPage = () => {
               key={tab.key}
               type="button"
               onClick={() => changeTab(tab.key)}
-              className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 text-[13px] font-medium rounded-2xl transition-colors ${
+              className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
                 activeTab === tab.key
-                  ? "bg-shop_dark_green text-white"
-                  : "bg-white text-gray-600 border border-gray-200/80 hover:bg-gray-100"
+                  ? "bg-shop_dark_green text-white shadow-sm border border-shop_dark_green"
+                  : "bg-white text-neutral-600 border border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900"
               }`}
             >
               {tab.label}
               {statusCounts[tab.key] !== undefined && (
                 <span
-                  className={`inline-flex items-center justify-center h-5 min-w-5 px-1 text-[11px] leading-none font-semibold rounded-full ${
+                  className={`inline-flex items-center justify-center h-4 min-w-4 px-1 text-[10px] font-mono font-semibold ${
                     activeTab === tab.key
                       ? "bg-white/20 text-white"
-                      : "bg-gray-100 text-gray-600"
+                      : "bg-neutral-100 text-neutral-700"
                   }`}
                 >
                   {statusCounts[tab.key]}
@@ -681,19 +681,19 @@ const AdminOrdersPage = () => {
       {isLoading ? (
         <div className="flex flex-col items-center justify-center py-16 gap-2 text-shop_dark_green">
           <Loader2 className="h-6 w-6 animate-spin" />
-          <span className="text-sm font-medium text-gray-500">
+          <span className="text-xs font-medium text-neutral-500">
             Đang tải danh sách đơn hàng...
           </span>
         </div>
       ) : errorMessage ? (
-        <div className="flex flex-col items-center text-center gap-3 py-16">
-          <PackageSearch className="w-10 h-10 text-gray-300" />
-          <p className="text-base text-gray-500">{errorMessage}</p>
+        <div className="flex flex-col items-center text-center gap-2 py-16 border border-neutral-200 bg-white p-6">
+          <PackageSearch className="w-8 h-8 text-neutral-300" />
+          <p className="text-xs text-neutral-500">{errorMessage}</p>
         </div>
       ) : visibleItems.length === 0 ? (
-        <div className="flex flex-col items-center text-center gap-3 py-16">
-          <PackageSearch className="w-10 h-10 text-gray-300" />
-          <p className="text-base text-gray-500">Không có đơn hàng phù hợp.</p>
+        <div className="flex flex-col items-center text-center gap-2 py-16 border border-neutral-200 bg-white p-6">
+          <PackageSearch className="w-8 h-8 text-neutral-300" />
+          <p className="text-xs text-neutral-500">Không có đơn hàng phù hợp.</p>
         </div>
       ) : (
         <>
@@ -705,65 +705,58 @@ const AdminOrdersPage = () => {
                   key={order.id}
                   type="button"
                   onClick={() => setSelectedId(order.id)}
-                  className={`text-left bg-white rounded-xl border p-3.5 transition-colors ${
+                  className={`text-left bg-white border p-3.5 transition-colors ${
                     active
-                      ? "border-shop_dark_green ring-1 ring-shop_dark_green/30"
-                      : "border-gray-200/80 hover:border-shop_dark_green/40"
+                      ? "border-shop_dark_green ring-1 ring-shop_dark_green/40 bg-neutral-50/50"
+                      : "border-neutral-200 hover:border-neutral-400"
                   }`}
                 >
-                  <p className="text-base font-semibold text-gray-900 truncate">
-                    Mã đơn: {order.orderCode ?? `#${order.id.slice(0, 8)}`}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-0.5 truncate">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-xs font-bold font-mono uppercase text-neutral-900 truncate">
+                      {order.orderCode ?? `#${order.id.slice(0, 8)}`}
+                    </p>
+                    <StatusBadge status={order.status} />
+                  </div>
+                  <p className="text-xs text-neutral-500 mt-1 truncate">
                     {order.customerName || "Khách vãng lai"}
                   </p>
-                  <div className="mt-2 space-y-1 text-sm">
-                    <div className="flex justify-between gap-3">
-                      <span className="text-gray-500">Ngày đặt</span>
-                      <span className="text-gray-700">
-                        {formatDateTime(order.createdAt)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between gap-3">
-                      <span className="text-gray-500">Tổng tiền</span>
-                      <span className="font-semibold text-gray-900">
-                        {formatPrice(order.totalAmount)}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="text-gray-500">Trạng thái</span>
-                      <StatusBadge status={order.status} />
-                    </div>
+                  <div className="mt-2.5 pt-2 border-t border-neutral-100 flex items-center justify-between text-xs">
+                    <span className="font-mono text-[11px] text-neutral-400">
+                      {formatDateTime(order.createdAt)}
+                    </span>
+                    <span className="font-bold text-sm text-neutral-900 tabular-nums">
+                      {formatPrice(order.totalAmount)}
+                    </span>
                   </div>
                 </button>
               );
             })}
           </div>
 
-          <div className="flex items-center justify-between gap-2 text-sm">
-            <p className="text-gray-500">{totalElements} đơn</p>
+          <div className="flex items-center justify-between gap-2 text-xs text-neutral-500 pt-1">
+            <span className="font-mono">{totalElements} đơn hàng</span>
             {totalPages > 1 && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <button
                   type="button"
                   onClick={() => setPage((p) => Math.max(0, p - 1))}
                   disabled={page === 0}
-                  className="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-600 hover:border-shop_dark_green/40 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="p-1 border border-neutral-300 bg-white text-neutral-600 hover:border-shop_dark_green disabled:opacity-40 disabled:cursor-not-allowed"
                   aria-label="Trang trước"
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  <ChevronLeft className="w-3.5 h-3.5" />
                 </button>
-                <span className="text-gray-500">
+                <span className="font-mono text-xs">
                   {page + 1} / {totalPages}
                 </span>
                 <button
                   type="button"
                   onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
                   disabled={page >= totalPages - 1}
-                  className="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-600 hover:border-shop_dark_green/40 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="p-1 border border-neutral-300 bg-white text-neutral-600 hover:border-shop_dark_green disabled:opacity-40 disabled:cursor-not-allowed"
                   aria-label="Trang sau"
                 >
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             )}
@@ -774,30 +767,27 @@ const AdminOrdersPage = () => {
   );
 
   const renderDetail = () => {
-    if (isDetailLoading && !detail) {
+    if (isDetailLoading || (!detail && selectedId)) {
       return (
-        <div className="flex flex-col items-center justify-center py-24 gap-2 text-shop_dark_green">
-          <Loader2 className="h-6 w-6 animate-spin" />
-          <span className="text-sm font-medium text-gray-500">
-            Đang tải chi tiết đơn hàng...
-          </span>
+        <div className="border border-neutral-200 bg-white p-8">
+          <Loading message="Đang tải chi tiết đơn hàng..." className="min-h-[380px]" />
         </div>
       );
     }
     if (detailError && !detail) {
       return (
-        <div className="flex flex-col items-center text-center gap-3 py-24">
-          <PackageSearch className="w-12 h-12 text-gray-300" />
-          <p className="text-base text-gray-500">{detailError}</p>
+        <div className="flex flex-col items-center text-center gap-2 py-24 border border-neutral-200 bg-white p-6">
+          <PackageSearch className="w-10 h-10 text-neutral-300" />
+          <p className="text-xs text-neutral-500">{detailError}</p>
         </div>
       );
     }
     if (!detail) {
       return (
-        <div className="flex flex-col items-center text-center gap-3 py-24">
-          <PackageSearch className="w-12 h-12 text-gray-300" />
-          <p className="text-base text-gray-500">
-            Chọn một đơn hàng để xem chi tiết.
+        <div className="flex flex-col items-center text-center gap-2 py-24 border border-neutral-200 bg-white p-6">
+          <PackageSearch className="w-10 h-10 text-neutral-300" />
+          <p className="text-xs text-neutral-500">
+            Chọn một đơn hàng từ danh sách để xem chi tiết.
           </p>
         </div>
       );
@@ -821,68 +811,70 @@ const AdminOrdersPage = () => {
       : "Chưa có thông tin";
 
     return (
-      <div className={`space-y-4 ${isDetailLoading ? "opacity-60" : ""}`}>
-
-        <div className="flex items-center gap-2 text-sm text-gray-500">
-          <button
-            type="button"
-            onClick={() => setSelectedId(null)}
-            className="lg:hidden inline-flex items-center gap-1 text-gray-600"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" /> Quay lại
-          </button>
-          <span className="hidden lg:inline">Đơn hàng</span>
-          <ChevronRight className="hidden lg:block w-3 h-3" />
-          <span className="px-2.5 py-1 rounded-full bg-shop_dark_green/10 text-shop_dark_green font-medium">
-            {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}
-          </span>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-self-end gap-3">
-          {action && (
+      <div className={`space-y-5 ${isDetailLoading ? "opacity-60" : ""}`}>
+        {/* Navigation & Header Actions */}
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200 pb-4">
+          <div className="flex items-center gap-2 text-xs text-neutral-500">
             <button
               type="button"
-              onClick={handleAdvanceStatus}
-              disabled={isUpdating || awaitingPayment}
-              title={awaitingPayment ? "Chờ khách thanh toán xong mới xác nhận được" : undefined}
-              className="px-5 py-1.5 text-base font-semibold text-[13px] text-white rounded-full bg-shop_dark_green hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={() => setSelectedId(null)}
+              className="lg:hidden inline-flex items-center gap-1 font-semibold text-neutral-800 hover:text-shop_dark_green"
             >
-              {isUpdating ? "Đang cập nhật..." : action.label}
+              <ArrowLeft className="w-3.5 h-3.5" /> Quay lại
             </button>
-          )}
+            <span className="hidden lg:inline">Đơn hàng</span>
+            <span className="hidden lg:inline">/</span>
+            <span className="font-mono text-xs font-bold text-shop_dark_green bg-shop_dark_green/10 px-2 py-0.5">
+              {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}
+            </span>
+          </div>
 
-          {CANCELLABLE_STATUSES.includes(detail.status) && (
-            <button
-              type="button"
-              onClick={openCancelDialog}
-              disabled={isUpdating}
-              className="px-5 py-1.5 text-[13px] font-semibold text-red-600 rounded-full border border-red-200 bg-white hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Hủy đơn hàng
-            </button>
-          )}
+          <div className="flex flex-wrap items-center gap-2">
+            {action && (
+              <button
+                type="button"
+                onClick={handleAdvanceStatus}
+                disabled={isUpdating || awaitingPayment}
+                title={awaitingPayment ? "Chờ khách thanh toán xong mới xác nhận được" : undefined}
+                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-shop_dark_green hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isUpdating ? "Đang cập nhật..." : action.label}
+              </button>
+            )}
+
+            {CANCELLABLE_STATUSES.includes(detail.status) && (
+              <button
+                type="button"
+                onClick={openCancelDialog}
+                disabled={isUpdating}
+                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-red-600 border border-red-200 bg-white hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Hủy đơn hàng
+              </button>
+            )}
+          </div>
         </div>
 
         {awaitingPayment && (
-          <p className="text-sm text-amber-700 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
+          <div className="border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800 font-medium">
             Đơn thanh toán qua {paymentLabel ?? "online"} — chỉ xác nhận được sau
-            khi khách thanh toán thành công.
-          </p>
+            khi khách hàng thanh toán thành công.
+          </div>
         )}
 
         {detailError && (
-          <p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
+          <div className="border border-red-200 bg-red-50 p-3 text-xs text-red-600 font-medium">
             {detailError}
-          </p>
+          </div>
         )}
 
-        <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-4 items-start">
-
-          <div className="space-y-4 min-w-0">
-            <Card className="!p-0">
-              <div className="divide-y divide-gray-100">
+        <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] gap-5 items-start">
+          {/* Left Column: Items and Invoice */}
+          <div className="space-y-5 min-w-0">
+            <Card title={`Danh sách sản phẩm (${itemsList.length})`}>
+              <div className="divide-y divide-neutral-100 -mx-4 -mb-4 sm:-mx-5 sm:-mb-5">
                 {itemsList.length === 0 ? (
-                  <p className="p-5 text-base text-gray-400">
+                  <p className="p-5 text-xs text-neutral-400">
                     Đơn hàng chưa có sản phẩm.
                   </p>
                 ) : (
@@ -903,25 +895,24 @@ const AdminOrdersPage = () => {
                       (unit !== null ? unit * qty : null);
 
                     return (
-                      <div key={`${productId ?? "item"}-${idx}`} className="flex items-center gap-3 p-4">
-                        <div className="w-16 h-16 shrink-0 rounded-xl border border-gray-200/80 bg-gray-50 flex items-center justify-center overflow-hidden">
+                      <div key={`${productId ?? "item"}-${idx}`} className="flex items-center gap-3 p-4 hover:bg-neutral-50/50 transition-colors">
+                        <div className="w-14 h-14 shrink-0 border border-neutral-200 bg-white flex items-center justify-center overflow-hidden">
                           {image ? (
-
-                            <img src={image} alt={name} className="w-full h-full object-cover" />
+                            <img src={typeof image === "string" ? image : (image as { src: string }).src} alt={name} className="w-full h-full object-cover" />
                           ) : (
-                            <ImageOff className="w-5 h-5 text-gray-300" />
+                            <ImageOff className="w-5 h-5 text-neutral-300" />
                           )}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-base font-semibold text-gray-900 truncate">
+                          <p className="text-xs font-semibold text-neutral-900 hover:text-shop_dark_green truncate transition-colors">
                             {name}
                           </p>
-                          <p className="text-[13px] text-gray-500 mt-0.5 truncate">
-                            {productId ? `Mã SP: ${productId.slice(0, 8)} | ` : ""}
-                            Số lượng: {qty}
+                          <p className="text-[11px] font-mono text-neutral-400 mt-0.5 truncate">
+                            {productId ? `[${productId.slice(0, 8)}] ` : ""}
+                            Đơn giá: {unit !== null ? formatPrice(unit) : "—"} × {qty}
                           </p>
                         </div>
-                        <p className="text-base font-bold text-gray-900 shrink-0">
+                        <p className="text-sm font-bold text-neutral-900 tabular-nums shrink-0">
                           {lineTotal !== null ? formatPrice(lineTotal) : "—"}
                         </p>
                       </div>
@@ -930,45 +921,29 @@ const AdminOrdersPage = () => {
                 )}
               </div>
             </Card>
-
-            <Card title="Hóa đơn">
-              <InfoRow label="Phương thức thanh toán" value={paymentLabel ?? "—"} />
-              <InfoRow label="Trạng thái thanh toán" value={paymentStatusLabel} />
-              <InfoRow label="Số sản phẩm" value={itemsList.length} />
-              <div className="mt-2 pt-3 border-t border-gray-100 flex items-center justify-between">
-                <span className="text-base font-bold text-gray-900">
-                  Tổng thanh toán
-                </span>
-                <span className="text-base font-bold text-gray-900">
-                  {formatPrice(detail.totalAmount)}
-                </span>
-              </div>
-              {detail.note && (
-                <p className="mt-2 text-sm text-gray-500">Ghi chú: {detail.note}</p>
-              )}
-            </Card>
           </div>
 
-          <div className="space-y-4 min-w-0">
+          {/* Right Column: Progress & Customer Info */}
+          <div className="space-y-5 min-w-0">
             <Card title="Tiến trình đơn hàng">
               {cancelled ? (
-                <div className="space-y-1.5">
-                  <p className="text-base text-red-600">
+                <div className="space-y-1.5 p-1">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-red-600">
                     Đơn hàng đã bị hủy
                     {getHistoryTime(detail, "CANCELLED")
                       ? ` lúc ${formatDateTime(getHistoryTime(detail, "CANCELLED"))}`
                       : "."}
                   </p>
                   {getHistoryNote(detail, "CANCELLED") && (
-                    <p className="text-[13px] text-gray-700">
-                      <span className="text-gray-500">Lý do hủy: </span>
+                    <p className="text-xs text-neutral-600 mt-1">
+                      <span className="font-semibold text-neutral-700">Lý do hủy: </span>
                       {getHistoryNote(detail, "CANCELLED")}
                     </p>
                   )}
                 </div>
               ) : (
-                <ol className="relative space-y-2 pl-4">
-                  <span className="absolute left-[4px] top-1.5 bottom-1.5 w-px bg-gray-200" />
+                <ol className="relative space-y-3 pl-4">
+                  <span className="absolute left-[4px] top-1.5 bottom-1.5 w-px bg-neutral-200" />
                   {PROGRESS_STEPS.map((step, idx) => {
                     const reached = idx <= currentIndex;
                     const time =
@@ -978,20 +953,20 @@ const AdminOrdersPage = () => {
                     return (
                       <li key={step.status} className="relative">
                         <span
-                          className={`absolute -left-4 top-1 w-[9px] h-[9px] rounded-full border-[1.5px] ${
+                          className={`absolute -left-4 top-1 w-2.5 h-2.5 rounded-full border ${
                             reached
-                              ? "bg-gray-900 border-gray-900"
-                              : "bg-white border-gray-300"
+                              ? "bg-shop_dark_green border-shop_dark_green"
+                              : "bg-white border-neutral-300"
                           }`}
                         />
                         <p
-                          className={`text-[13px] font-semibold leading-tight ${
-                            reached ? "text-gray-900" : "text-gray-500"
+                          className={`text-xs font-semibold uppercase tracking-wider leading-tight ${
+                            reached ? "text-neutral-900" : "text-neutral-400"
                           }`}
                         >
                           {step.label}
                         </p>
-                        <p className="text-xs text-gray-500 leading-tight">
+                        <p className="text-[11px] font-mono text-neutral-500 leading-tight mt-0.5">
                           {reached && time ? formatDateTime(time) : step.hint}
                         </p>
                       </li>
@@ -1001,17 +976,15 @@ const AdminOrdersPage = () => {
               )}
             </Card>
 
-            <Card title="Thông tin đơn hàng">
-              <InfoRow label="Địa chỉ giao hàng" value={detail.shippingAddress || "—"} />
-              <InfoRow
-                label="Khách hàng"
-                value={detail.customerName || detail.recipientName || "Khách vãng lai"}
-              />
+            <Card title="Thông tin giao hàng & khách hàng">
               <InfoRow label="Người nhận" value={detail.recipientName || "—"} />
               <InfoRow label="Số điện thoại" value={detail.recipientPhone || "—"} />
-              <InfoRow label="Ngày đặt" value={formatDateTime(detail.createdAt)} />
-              <InfoRow label="Phương thức thanh toán" value={paymentLabel ?? "—"} />
-              <InfoRow label="Trạng thái thanh toán" value={paymentStatusLabel} />
+              <InfoRow label="Địa chỉ giao hàng" value={detail.shippingAddress || "—"} />
+              <InfoRow
+                label="Tài khoản khách"
+                value={detail.customerName || detail.recipientName || "Khách vãng lai"}
+              />
+              <InfoRow label="Ngày đặt hàng" value={formatDateTime(detail.createdAt)} />
               {(payment?.providerTransactionId || payment?.transactionCode) && (
                 <InfoRow
                   label="Mã giao dịch"
@@ -1019,15 +992,34 @@ const AdminOrdersPage = () => {
                 />
               )}
               {payment?.paidAt && (
-                <InfoRow label="Thanh toán lúc" value={formatDateTime(payment.paidAt)} />
+                <InfoRow label="Thời gian thanh toán" value={formatDateTime(payment.paidAt)} />
               )}
               {payment?.failureReason && (
                 <InfoRow label="Lý do thất bại" value={payment.failureReason} />
               )}
               <InfoRow
-                label="Trạng thái"
+                label="Trạng thái đơn hàng"
                 value={STATUS_LABELS[detail.status] ?? detail.status}
               />
+            </Card>
+
+            <Card title="Tóm tắt thanh toán">
+              <InfoRow label="Phương thức thanh toán" value={paymentLabel ?? "—"} />
+              <InfoRow label="Trạng thái thanh toán" value={paymentStatusLabel} />
+              <InfoRow label="Số lượng mặt hàng" value={`${itemsList.length} sản phẩm`} />
+              <div className="mt-3 pt-3 border-t border-neutral-200 flex items-center justify-between">
+                <span className="font-bold text-xs uppercase tracking-tight text-neutral-900">
+                  Tổng thanh toán
+                </span>
+                <span className="font-bold text-lg text-neutral-900 tabular-nums">
+                  {formatPrice(detail.totalAmount)}
+                </span>
+              </div>
+              {detail.note && (
+                <div className="mt-3 pt-2 border-t border-neutral-100 text-xs text-neutral-500">
+                  <span className="font-semibold text-neutral-700">Ghi chú của khách:</span> {detail.note}
+                </div>
+              )}
             </Card>
           </div>
         </div>
@@ -1036,19 +1028,18 @@ const AdminOrdersPage = () => {
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-3.5rem)] bg-gray-50 p-4 sm:p-6 lg:p-8">
-
+    <div className="font-sans w-full min-h-[calc(100vh-3.5rem)] bg-neutral-50 p-4 sm:p-6 lg:p-8 text-neutral-900">
       {titleSlot &&
         createPortal(
           <div className="leading-tight">
-            <h1 className="text-xl font-bold tracking-tight text-gray-900 truncate">
-              Đơn hàng
+            <h1 className="text-xl font-bold uppercase tracking-tight text-neutral-900 truncate">
+              Quản lý đơn hàng
             </h1>
           </div>,
           titleSlot
         )}
 
-      <div className="flex flex-col lg:flex-row gap-5 lg:gap-6 items-start">
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
         {listColumn}
         <section
           className={`${selectedId ? "block" : "hidden lg:block"} flex-1 min-w-0 w-full`}
@@ -1066,18 +1057,17 @@ const AdminOrdersPage = () => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="cancel-dialog-title"
-            className="w-full max-w-md bg-white rounded-2xl shadow-xl p-5"
+            className="w-full max-w-md bg-white border border-neutral-200 p-6 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <h3
               id="cancel-dialog-title"
-              className="text-lg font-bold text-gray-900"
+              className="text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-neutral-200 pb-3"
             >
-              Hủy đơn hàng
+              Hủy đơn hàng {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}
             </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              Đơn {detail.orderCode ?? `#${detail.id.slice(0, 8)}`}. Vui lòng
-              cho biết lý do hủy đơn.
+            <p className="mt-2 text-xs text-neutral-500">
+              Vui lòng chọn hoặc nhập lý do hủy đơn hàng này.
             </p>
 
             <div className="mt-3 flex flex-wrap gap-1.5">
@@ -1089,10 +1079,10 @@ const AdminOrdersPage = () => {
                     setCancelReason(r);
                     setCancelError(null);
                   }}
-                  className={`px-3 py-1.5 text-[13px] rounded-2xl border transition-colors ${
+                  className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border transition-colors ${
                     cancelReason === r
                       ? "bg-shop_dark_green text-white border-shop_dark_green"
-                      : "bg-white text-gray-600 border-gray-200 hover:bg-gray-100"
+                      : "bg-white text-neutral-600 border-neutral-300 hover:bg-neutral-50"
                   }`}
                 >
                   {r}
@@ -1108,20 +1098,20 @@ const AdminOrdersPage = () => {
               }}
               rows={3}
               maxLength={500}
-              placeholder="Nhập lý do hủy đơn..."
-              className="mt-3 w-full px-3 py-2 text-sm rounded-xl border border-gray-200 outline-none resize-none placeholder:text-gray-400 focus:border-shop_dark_green/50"
+              placeholder="Nhập lý do hủy đơn cụ thể..."
+              className="mt-3 w-full border border-neutral-300 px-3 py-2 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none focus:ring-1 focus:ring-shop_dark_green resize-none"
             />
 
             {cancelError && (
-              <p className="mt-2 text-sm text-red-600">{cancelError}</p>
+              <p className="mt-2 text-xs text-red-600 font-medium">{cancelError}</p>
             )}
 
-            <div className="mt-4 flex justify-end gap-2">
+            <div className="mt-5 flex justify-end gap-2 border-t border-neutral-200 pt-4">
               <button
                 type="button"
                 onClick={closeCancelDialog}
                 disabled={isUpdating}
-                className="px-5 py-1.5 text-[13px] font-semibold text-gray-600 rounded-full border border-gray-200 bg-white hover:bg-gray-100 transition-colors disabled:opacity-50"
+                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-neutral-700 border border-neutral-300 bg-white hover:bg-neutral-50 transition-colors disabled:opacity-50"
               >
                 Đóng
               </button>
@@ -1129,7 +1119,7 @@ const AdminOrdersPage = () => {
                 type="button"
                 onClick={handleConfirmCancel}
                 disabled={isUpdating || !cancelReason.trim()}
-                className="px-5 py-1.5 text-[13px] font-semibold text-white rounded-full bg-red-600 hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isUpdating ? "Đang hủy..." : "Xác nhận hủy"}
               </button>

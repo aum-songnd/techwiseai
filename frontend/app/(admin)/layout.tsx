@@ -24,9 +24,9 @@ export default function AdminRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className="font-poppins">
+    <html lang="vi">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-neutral-50 text-neutral-900`}
       >
         <AuthProvider>{children}</AuthProvider>
       </body>

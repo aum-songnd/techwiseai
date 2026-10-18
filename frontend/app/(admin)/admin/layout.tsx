@@ -154,14 +154,14 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   if (!checked) {
     return (
-      <div className="min-h-screen bg-shop_light_bg flex items-center justify-center text-sm text-gray-400">
+      <div className="min-h-screen bg-neutral-50 flex items-center justify-center text-xs font-medium uppercase tracking-wider text-neutral-400">
         Đang kiểm tra quyền truy cập...
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-shop_light_bg">
+    <div className="min-h-screen bg-neutral-50 text-neutral-900 font-sans">
       <style>{`
         #admin-header-title:not(:empty) ~ h2 { display: none; }
       `}</style>
@@ -174,20 +174,20 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-56 bg-white border-r border-gray-100 flex flex-col transition-transform duration-200 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-56 bg-white border-r border-neutral-200 flex flex-col transition-transform duration-200 lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="h-16 px-4 flex items-center justify-between shrink-0">
+        <div className="h-16 px-4 flex items-center justify-between shrink-0 border-b border-neutral-200">
           <div className="flex flex-col min-w-0 leading-none">
             <Logo href="/admin" />
-            <span className="mt-0.5 text-sm font-semibold uppercase text-lightColor">
-              Admin
+            <span className="mt-1 text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-500">
+              Admin Portal
             </span>
           </div>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-1.5 rounded-md text-gray-500 hover:bg-gray-100"
+            className="lg:hidden p-1.5 text-neutral-500 hover:bg-neutral-100 transition-colors"
             aria-label="Đóng menu"
           >
             <X className="w-5 h-5" />
@@ -203,17 +203,21 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center gap-3 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
                   active
-                    ? "bg-shop_light_green/10 text-shop_dark_green"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-shop_dark_green"
+                    ? "bg-shop_dark_green text-white shadow-sm"
+                    : "text-neutral-600 hover:bg-neutral-100 hover:text-shop_dark_green"
                 }`}
               >
-                <Icon className="w-[18px] h-[18px] shrink-0" />
-                {item.label}
+                <Icon className="w-4 h-4 shrink-0" />
+                <span>{item.label}</span>
                 {item.href === "/admin/orders" && openOrders > 0 && (
                   <span
-                    className="ml-auto min-w-[20px] h-5 px-1.5 rounded-full bg-shop_dark_green text-white text-[11px] font-semibold flex items-center justify-center"
+                    className={`ml-auto min-w-[20px] h-5 px-1.5 font-mono text-[11px] font-semibold flex items-center justify-center ${
+                      active
+                        ? "bg-white/20 text-white"
+                        : "bg-shop_dark_green text-white"
+                    }`}
                     title={`${openOrders} đơn chưa hoàn thành`}
                   >
                     {openOrders > 99 ? "99+" : openOrders}
@@ -224,31 +228,30 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           })}
         </nav>
 
-        <div className="px-3 py-4  flex flex-col gap-1">
-
+        <div className="px-3 py-4 border-t border-neutral-200 flex flex-col gap-1">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-500 transition-colors text-left"
+            className="flex items-center gap-3 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:bg-red-50 hover:text-red-600 transition-colors text-left"
           >
-            <LogOut className="w-[18px] h-[18px] shrink-0" />
-            Đăng xuất
+            <LogOut className="w-4 h-4 shrink-0" />
+            <span>Đăng xuất</span>
           </button>
         </div>
       </aside>
 
       <div className="lg:pl-56 min-h-screen flex flex-col">
-        <header className="h-16 sticky top-0 z-30 bg-white px-4 sm:px-6 flex items-center justify-between gap-4 md:grid md:grid-cols-[auto_minmax(0,1fr)_auto]">
+        <header className="h-16 sticky top-0 z-30 bg-white border-b border-neutral-200 px-4 sm:px-6 flex items-center justify-between gap-4 md:grid md:grid-cols-[auto_minmax(0,1fr)_auto]">
           <div className="flex items-center gap-3 min-w-0">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 -ml-2 rounded-md text-gray-600 hover:bg-gray-100"
+              className="lg:hidden p-2 -ml-2 text-neutral-600 hover:bg-neutral-100 transition-colors"
               aria-label="Mở menu"
             >
               <Menu className="w-5 h-5" />
             </button>
 
             <div id="admin-header-title" className="min-w-0" />
-            <h2 className="text-[22px] font-semibold text-gray-800">
+            <h2 className="text-xl font-bold uppercase tracking-tight text-neutral-900 truncate">
               {currentTitle}
             </h2>
           </div>
@@ -257,19 +260,22 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             <div id="admin-header-actions" className="mx-auto w-full max-w-2xl" />
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-4 text-sm text-gray-600 shrink-0">
-            <div className="hidden sm:flex items-center gap-2 ">
-              <CalendarDays className="w-4 h-4" />
-              {today}
+          <div className="flex items-center gap-3 sm:gap-4 text-xs font-mono text-neutral-500 shrink-0">
+            <div className="hidden sm:flex items-center gap-2">
+              <CalendarDays className="w-4 h-4 text-neutral-400" />
+              <span>{today}</span>
             </div>
-            <div className="flex items-center gap-2.5 sm:pl-4 ">
+            <div className="flex items-center gap-2.5 sm:pl-3 sm:border-l sm:border-neutral-200">
               <div
                 title={displayName}
                 aria-label={displayName}
-                className="w-9 h-9 rounded-full bg-shop_dark_green text-white flex items-center justify-center text-sm font-semibold"
+                className="w-8 h-8 bg-shop_dark_green text-white flex items-center justify-center text-xs font-semibold"
               >
                 {initial}
               </div>
+              <span className="hidden md:inline font-sans text-xs font-semibold text-neutral-800 truncate max-w-[120px]">
+                {displayName}
+              </span>
             </div>
           </div>
         </header>

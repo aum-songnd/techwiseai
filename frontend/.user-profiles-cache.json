@@ -15,5 +15,11 @@
     "email": "nsong1232002@gmail.com",
     "phoneNumber": "0984457242",
     "phone": "0984457242"
+  },
+  "admin": {
+    "username": "admin",
+    "updatedAt": 1792342695086,
+    "fullName": "System Administrator",
+    "email": "admin@regulation.local"
   }
 }

@@ -162,23 +162,25 @@ const AdminOrderDetailPage = () => {
   };
 
   if (isLoading) {
-    return <Loading message="Đang tải thông tin đơn hàng..." />;
+    return <Loading message="Đang tải chi tiết đơn hàng..." />;
   }
 
   if (errorMessage || !order) {
     return (
-      <div className="max-w-5xl mx-auto px-4 py-20 flex flex-col items-center text-center gap-4">
-        <PackageSearch className="w-14 h-14 text-gray-300" />
-        <h1 className="text-xl font-bold text-shop_dark_green">
-          Không mở được đơn hàng
-        </h1>
-        <p className="text-gray-500 text-sm">{errorMessage}</p>
-        <Link
-          href="/admin/orders"
-          className="mt-2 bg-shop_dark_green/90 rounded-2xl px-6 py-3 text-white text-sm hover:bg-shop_dark_green transition-colors duration-300"
-        >
-          Về danh sách đơn hàng
-        </Link>
+      <div className="font-sans min-h-[calc(100vh-4rem)] bg-neutral-50 p-4 sm:p-6 lg:p-8 flex items-center justify-center">
+        <div className="max-w-md w-full border border-neutral-200 bg-white p-8 text-center flex flex-col items-center gap-4">
+          <PackageSearch className="w-12 h-12 text-neutral-300" />
+          <h1 className="text-xl font-bold uppercase tracking-tight text-neutral-900">
+            Không mở được đơn hàng
+          </h1>
+          <p className="text-neutral-500 text-xs">{errorMessage}</p>
+          <Link
+            href="/admin/orders"
+            className="mt-2 bg-shop_dark_green px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-shop_dark_green/90 shadow-sm"
+          >
+            &larr; Về danh sách đơn hàng
+          </Link>
+        </div>
       </div>
     );
   }
@@ -193,258 +195,268 @@ const AdminOrderDetailPage = () => {
   const paymentMethod = order.paymentMethod;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
-      <Link
-        href="/admin/orders"
-        className="text-sm text-gray-500 hover:text-shop_dark_green"
-      >
-        Quay lại danh sách
-      </Link>
+    <div className="font-sans min-h-[calc(100vh-4rem)] bg-neutral-50 p-4 sm:p-6 lg:p-8 text-neutral-900">
+      <div className="max-w-6xl mx-auto space-y-6">
+        {/* Breadcrumb Navigation */}
+        <nav className="flex items-center gap-2 text-xs text-neutral-500">
+          <Link href="/admin" className="hover:text-shop_dark_green transition-colors">
+            Admin
+          </Link>
+          <span>/</span>
+          <Link href="/admin/orders" className="hover:text-shop_dark_green transition-colors">
+            Đơn hàng
+          </Link>
+          <span>/</span>
+          <span className="text-neutral-900 font-medium">Chi tiết đơn</span>
+        </nav>
 
-      <div className="flex items-center justify-between mt-3 mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-shop_dark_green">
-            Đơn hàng {order.orderCode ?? `#${order.id.slice(0, 8)}`}
-          </h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Đặt lúc {formatDateTime(order.createdAt)}
-            {order.customerName ? ` bởi ${order.customerName}` : ""}
-          </p>
+        {/* Order Header */}
+        <div className="flex flex-col gap-4 border-b border-neutral-200 pb-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex items-end gap-3">
+            <h1 className="text-xl font-bold uppercase tracking-tight text-neutral-900">
+              Đơn hàng {order.orderCode ?? `#${order.id.slice(0, 8)}`}
+            </h1>
+            <span className="pb-0.5 text-xs text-neutral-500 font-mono">
+              [ {formatDateTime(order.createdAt)} ]
+            </span>
+          </div>
+          <span className="border border-neutral-200 bg-white px-3 py-1 text-xs font-mono font-semibold text-neutral-800">
+            {STATUS_LABEL[order.status] ?? order.status}
+          </span>
         </div>
-        <span
-          className={`text-xs font-semibold px-3 py-1.5 rounded-full ${
-            order.status === "CANCELLED"
-              ? "bg-red-50 text-red-500"
-              : order.status === "DELIVERED"
-              ? "bg-green-50 text-green-600"
-              : order.status === "RETURNED"
-              ? "bg-orange-50 text-orange-600"
-              : order.status === "PENDING"
-              ? "bg-amber-50 text-amber-600"
-              : "bg-shop_dark_green/10 text-shop_dark_green"
-          }`}
-        >
-          {STATUS_LABEL[order.status] ?? order.status}
-        </span>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="md:col-span-2 flex flex-col gap-6">
-
-          <div className="border border-gray-200 rounded-lg p-5">
-            <h2 className="font-bold text-shop_dark_green mb-1">Xử lý đơn</h2>
-            {isFinal ? (
-              <p className="text-sm text-gray-500">
-                Đơn hàng đã ở trạng thái cuối, không thể thay đổi thêm.
-              </p>
-            ) : (
-              <>
-                <p className="text-sm text-gray-500 mb-4">
-                  {order.status === "PENDING"
-                    ? "Đơn mới đang chờ bạn xác nhận."
-                    : `Bước tiếp theo: ${STATUS_LABEL[next!.status]}.`}
-                </p>
-                <label className="block text-sm text-gray-600 mb-1">
-                  Ghi chú (không bắt buộc, khách sẽ thấy trong lịch sử)
-                </label>
-                <textarea
-                  value={note}
-                  onChange={(e) => setNote(e.target.value)}
-                  rows={2}
-                  disabled={isUpdating}
-                  className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-shop_dark_green disabled:opacity-60"
-                  placeholder="Ví dụ: Đã liên hệ khách xác nhận địa chỉ"
-                />
-                {actionError && (
-                  <p className="text-sm text-red-500 mt-3">{actionError}</p>
-                )}
-                <div className="flex flex-wrap items-center gap-3 mt-4">
-                  {next && (
-                    <button
-                      onClick={handleAdvance}
-                      disabled={isUpdating}
-                      className="bg-shop_dark_green/90 rounded-2xl px-6 py-3 text-white text-sm hover:bg-shop_dark_green transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isUpdating ? "Đang cập nhật..." : next.label}
-                    </button>
-                  )}
-                  {canCancel && (
-                    <button
-                      onClick={() => {
-                        setActionError(null);
-                        setIsCancelOpen(true);
-                      }}
-                      disabled={isUpdating}
-                      className="border border-red-200 text-red-500 rounded-2xl px-6 py-3 text-sm hover:bg-red-50 transition-colors duration-300 disabled:opacity-50"
-                    >
-                      Hủy đơn
-                    </button>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-
-          <div className="border border-gray-200 rounded-lg p-5">
-            <h2 className="font-bold text-shop_dark_green mb-4">Sản phẩm</h2>
-            <div className="flex flex-col divide-y divide-gray-100">
-              {order.items.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
-                >
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium text-shop_dark_green line-clamp-1">
-                      {item.productName}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {formatPrice(item.unitPrice)} x {item.quantity}
-                    </p>
-                  </div>
-                  <p className="text-sm font-semibold text-shop_dark_green shrink-0">
-                    {formatPrice(item.subtotal)}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="border-t border-gray-200 mt-4 pt-4 flex items-center justify-between">
-              <span className="font-bold text-shop_dark_green">Tổng cộng</span>
-              <span className="font-bold text-lg text-shop_dark_green">
-                {formatPrice(order.totalAmount)}
-              </span>
-            </div>
-          </div>
-
-          {order.statusHistory && order.statusHistory.length > 0 && (
-            <div className="border border-gray-200 rounded-lg p-5">
-              <h2 className="font-bold text-shop_dark_green mb-4">
-                Lịch sử trạng thái
+        {/* 2-Column Content Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          <div className="md:col-span-2 flex flex-col gap-6">
+            {/* Status Workflow Card */}
+            <div className="border border-neutral-200 bg-white p-5">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-neutral-200 pb-3 mb-3">
+                Xử lý đơn hàng
               </h2>
-              <div className="flex flex-col gap-3">
-                {order.statusHistory.map((entry, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-shop_dark_green mt-1.5 shrink-0" />
-                    <div>
-                      <p className="text-sm font-medium text-shop_dark_green">
-                        {STATUS_LABEL[entry.status] ?? entry.status}
+              {isFinal ? (
+                <p className="text-xs text-neutral-500">
+                  Đơn hàng đã ở trạng thái hoàn tất ({STATUS_LABEL[order.status]}), không thể thay đổi thêm.
+                </p>
+              ) : (
+                <>
+                  <p className="text-xs text-neutral-500 mb-3">
+                    {order.status === "PENDING"
+                      ? "Đơn mới đang chờ quản trị viên xác nhận."
+                      : `Bước tiếp theo trong quy trình: ${STATUS_LABEL[next!.status]}.`}
+                  </p>
+                  <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
+                    Ghi chú xử lý (khách hàng sẽ xem được trong lịch sử đơn):
+                  </label>
+                  <textarea
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                    rows={2}
+                    disabled={isUpdating}
+                    className="w-full border border-neutral-300 px-3 py-2 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none focus:ring-1 focus:ring-shop_dark_green disabled:opacity-60 resize-none"
+                    placeholder="Ví dụ: Đã gọi điện xác nhận địa chỉ và số lượng với người nhận"
+                  />
+                  {actionError && (
+                    <p className="text-xs text-red-600 font-medium mt-2">{actionError}</p>
+                  )}
+                  <div className="flex flex-wrap items-center gap-2.5 mt-4 border-t border-neutral-100 pt-3">
+                    {next && (
+                      <button
+                        onClick={handleAdvance}
+                        disabled={isUpdating}
+                        className="bg-shop_dark_green px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isUpdating ? "Đang cập nhật..." : next.label}
+                      </button>
+                    )}
+                    {canCancel && (
+                      <button
+                        onClick={() => {
+                          setActionError(null);
+                          setIsCancelOpen(true);
+                        }}
+                        disabled={isUpdating}
+                        className="border border-red-200 bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+                      >
+                        Hủy đơn hàng
+                      </button>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Products Table Card */}
+            <div className="border border-neutral-200 bg-white p-5">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-neutral-200 pb-3 mb-3">
+                Danh sách sản phẩm trong đơn ({order.items.length})
+              </h2>
+              <div className="flex flex-col divide-y divide-neutral-100">
+                {order.items.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between py-3.5 first:pt-1 last:pb-1"
+                  >
+                    <div className="min-w-0 pr-4">
+                      <p className="text-xs font-semibold text-neutral-900 hover:text-shop_dark_green transition-colors line-clamp-1">
+                        {item.productName}
                       </p>
-                      <p className="text-xs text-gray-500">
-                        {formatDateTime(entry.changedAt)}
-                        {entry.note ? ` — ${entry.note}` : ""}
+                      <p className="text-[11px] font-mono text-neutral-400 mt-0.5">
+                        {formatPrice(item.unitPrice)} × {item.quantity}
                       </p>
                     </div>
+                    <p className="text-sm font-bold text-neutral-900 tabular-nums shrink-0">
+                      {formatPrice(item.subtotal)}
+                    </p>
                   </div>
                 ))}
               </div>
-            </div>
-          )}
-        </div>
-
-        <div className="md:col-span-1">
-          <div className="border border-gray-200 rounded-lg p-5 sticky top-24">
-            <h2 className="font-bold text-shop_dark_green mb-4">
-              Thông tin nhận hàng
-            </h2>
-            <div className="flex flex-col gap-2 text-sm">
-              <p>
-                <span className="text-gray-500">Người nhận: </span>
-                {order.recipientName}
-              </p>
-              <p>
-                <span className="text-gray-500">Điện thoại: </span>
-                {order.recipientPhone}
-              </p>
-              <p>
-                <span className="text-gray-500">Địa chỉ: </span>
-                {order.shippingAddress}
-              </p>
-              {order.note && (
-                <p>
-                  <span className="text-gray-500">Ghi chú của khách: </span>
-                  {order.note}
-                </p>
-              )}
+              <div className="border-t border-neutral-200 mt-4 pt-3 flex items-center justify-between">
+                <span className="font-bold text-xs uppercase tracking-tight text-neutral-900">Tổng cộng</span>
+                <span className="font-bold text-lg text-neutral-900 tabular-nums">
+                  {formatPrice(order.totalAmount)}
+                </span>
+              </div>
             </div>
 
-            <h2 className="font-bold text-shop_dark_green mt-5 mb-3">
-              Thanh toán
-            </h2>
-            <div className="flex flex-col gap-2 text-sm">
-              <p>
-                <span className="text-gray-500">Phương thức: </span>
-                {getMethodLabel(paymentMethod)}
-              </p>
-              <p>
-                <span className="text-gray-500">Trạng thái: </span>
-                {order.paymentStatus
-                  ? PAYMENT_STATUS_LABEL[order.paymentStatus] ?? order.paymentStatus
-                  : paymentMethod === "COD"
-                  ? "Thu tiền khi giao hàng"
-                  : "Chưa có thông tin"}
-              </p>
-              {order.transactionNo && (
-                <p>
-                  <span className="text-gray-500">Mã giao dịch: </span>
-                  {order.transactionNo}
-                </p>
-              )}
-              {order.paidAt && (
-                <p>
-                  <span className="text-gray-500">Thanh toán lúc: </span>
-                  {formatDateTime(order.paidAt)}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {isCancelOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
-          onClick={() => !isUpdating && setIsCancelOpen(false)}
-        >
-          <div
-            className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 className="text-lg font-bold text-shop_dark_green mb-2">
-              Hủy đơn hàng này?
-            </h2>
-            <p className="text-sm text-gray-500 mb-4">
-              Đơn hàng sẽ bị hủy và khách sẽ thấy lý do bên dưới. Hành động này
-              không thể hoàn tác.
-            </p>
-            <textarea
-              value={cancelNote}
-              onChange={(e) => setCancelNote(e.target.value)}
-              rows={3}
-              disabled={isUpdating}
-              className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-shop_dark_green"
-              placeholder="Lý do hủy đơn"
-            />
-            {actionError && (
-              <p className="text-sm text-red-500 mt-3">{actionError}</p>
+            {/* Status History Card */}
+            {order.statusHistory && order.statusHistory.length > 0 && (
+              <div className="border border-neutral-200 bg-white p-5">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-neutral-200 pb-3 mb-4">
+                  Lịch sử trạng thái đơn hàng
+                </h2>
+                <div className="flex flex-col gap-3">
+                  {order.statusHistory.map((entry, idx) => (
+                    <div key={idx} className="flex items-start gap-3 text-xs">
+                      <div className="w-2 h-2 rounded-full bg-shop_dark_green mt-1.5 shrink-0" />
+                      <div>
+                        <p className="font-semibold text-neutral-900">
+                          {STATUS_LABEL[entry.status] ?? entry.status}
+                        </p>
+                        <p className="text-[11px] font-mono text-neutral-400 mt-0.5">
+                          {formatDateTime(entry.changedAt)}
+                          {entry.note ? ` — ${entry.note}` : ""}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
-            <div className="flex items-center justify-end gap-3 mt-5">
-              <button
-                onClick={() => setIsCancelOpen(false)}
-                disabled={isUpdating}
-                className="px-4 py-2 text-sm rounded-xl text-gray-600 hover:bg-gray-100 transition-colors disabled:opacity-50"
-              >
-                Đóng
-              </button>
-              <button
-                onClick={handleCancel}
-                disabled={isUpdating || cancelNote.trim().length === 0}
-                className="px-4 py-2 text-sm rounded-xl bg-red-500 text-white hover:bg-red-600 transition-colors disabled:opacity-50"
-              >
-                {isUpdating ? "Đang hủy..." : "Hủy đơn hàng"}
-              </button>
+          </div>
+
+          {/* Right Column: Customer & Payment Details */}
+          <div className="md:col-span-1">
+            <div className="border border-neutral-200 bg-white p-5 sticky top-24 space-y-5">
+              <div>
+                <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-neutral-200 pb-3 mb-3">
+                  Thông tin giao hàng
+                </h2>
+                <div className="flex flex-col gap-2 text-xs">
+                  <p className="flex justify-between">
+                    <span className="text-neutral-500">Người nhận:</span>
+                    <span className="font-semibold text-neutral-900 text-right">{order.recipientName}</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span className="text-neutral-500">Điện thoại:</span>
+                    <span className="font-semibold text-neutral-900 font-mono text-right">{order.recipientPhone}</span>
+                  </p>
+                  <div className="pt-1">
+                    <span className="text-neutral-500 block mb-0.5">Địa chỉ:</span>
+                    <span className="font-medium text-neutral-800 leading-snug">{order.shippingAddress}</span>
+                  </div>
+                  {order.note && (
+                    <div className="pt-2 border-t border-neutral-100 text-neutral-600">
+                      <span className="text-neutral-500 font-semibold block mb-0.5">Ghi chú của khách:</span>
+                      <span>{order.note}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="border-t border-neutral-200 pt-4">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-neutral-200 pb-3 mb-3">
+                  Tóm tắt thanh toán
+                </h2>
+                <div className="flex flex-col gap-2 text-xs">
+                  <p className="flex justify-between">
+                    <span className="text-neutral-500">Phương thức:</span>
+                    <span className="font-semibold text-neutral-900 text-right">{getMethodLabel(paymentMethod)}</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span className="text-neutral-500">Trạng thái:</span>
+                    <span className="font-semibold text-neutral-900 text-right">
+                      {order.paymentStatus
+                        ? PAYMENT_STATUS_LABEL[order.paymentStatus] ?? order.paymentStatus
+                        : paymentMethod === "COD"
+                        ? "Thu tiền khi giao hàng"
+                        : "Chưa có thông tin"}
+                    </span>
+                  </p>
+                  {order.transactionNo && (
+                    <p className="flex justify-between font-mono">
+                      <span className="text-neutral-500">Mã giao dịch:</span>
+                      <span className="font-semibold text-neutral-900 text-right">{order.transactionNo}</span>
+                    </p>
+                  )}
+                  {order.paidAt && (
+                    <p className="flex justify-between font-mono">
+                      <span className="text-neutral-500">Thời gian:</span>
+                      <span className="font-medium text-neutral-700 text-right">{formatDateTime(order.paidAt)}</span>
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      )}
+
+        {/* Cancel Confirmation Modal */}
+        {isCancelOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
+            onClick={() => !isUpdating && setIsCancelOpen(false)}
+          >
+            <div
+              className="bg-white border border-neutral-200 p-6 shadow-xl w-full max-w-sm"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-900 border-b border-neutral-200 pb-3 mb-2">
+                Hủy đơn hàng này?
+              </h2>
+              <p className="text-xs text-neutral-500 mb-3">
+                Đơn hàng sẽ chuyển sang trạng thái đã hủy và khách hàng sẽ nhận được thông báo.
+              </p>
+              <textarea
+                value={cancelNote}
+                onChange={(e) => setCancelNote(e.target.value)}
+                rows={3}
+                disabled={isUpdating}
+                className="w-full border border-neutral-300 px-3 py-2 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none focus:ring-1 focus:ring-shop_dark_green resize-none"
+                placeholder="Nhập lý do hủy đơn..."
+              />
+              {actionError && (
+                <p className="text-xs text-red-600 font-medium mt-2">{actionError}</p>
+              )}
+              <div className="flex items-center justify-end gap-2.5 mt-5 border-t border-neutral-200 pt-4">
+                <button
+                  onClick={() => setIsCancelOpen(false)}
+                  disabled={isUpdating}
+                  className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-neutral-700 border border-neutral-300 bg-white hover:bg-neutral-50 transition-colors disabled:opacity-50"
+                >
+                  Đóng
+                </button>
+                <button
+                  onClick={handleCancel}
+                  disabled={isUpdating || cancelNote.trim().length === 0}
+                  className="px-5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm disabled:opacity-50"
+                >
+                  {isUpdating ? "Đang hủy..." : "Xác nhận hủy"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
