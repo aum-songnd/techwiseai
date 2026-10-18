@@ -65,10 +65,12 @@ const HomeLatestBlog = () => {
   if (latestBlogs.length === 0) return null;
 
   return (
-    <div className="my-10 md:my-10">
+    <section className="my-10 md:my-10 font-sans text-neutral-900">
       <div className="mb-4 flex items-center justify-between gap-4">
-        <Title className="text-[22px]">Latest Blog</Title>
-        </div>
+        <Title className="font-sans text-xl font-bold uppercase tracking-tight text-shop_dark_green">
+          Latest Blog
+        </Title>
+      </div>
       <div
         className="cursor-grab overflow-hidden px-1 py-1 active:cursor-grabbing"
         ref={emblaRef}
@@ -87,9 +89,9 @@ const HomeLatestBlog = () => {
                 <Link
                   href={`/blog/${blog.slug}`}
                   draggable={false}
-                  className="group flex w-full flex-col overflow-hidden rounded-lg border border-gray-300 bg-white transition-shadow hover:shadow-md"
+                  className="group flex w-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white font-sans transition-all duration-200 hover:border-neutral-300 hover:shadow-md"
                 >
-                  <div className="relative aspect-[11/5] w-full shrink-0 overflow-hidden bg-gray-100">
+                  <div className="relative aspect-[11/5] w-full shrink-0 overflow-hidden bg-neutral-100">
                     {blog.mainImageUrl ? (
                       <Image
                         src={blog.mainImageUrl}
@@ -100,32 +102,32 @@ const HomeLatestBlog = () => {
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       />
                     ) : (
-                      <div className="flex h-full items-center justify-center text-xs text-gray-400">
+                      <div className="flex h-full items-center justify-center font-sans text-xs text-neutral-400">
                         No image
                       </div>
                     )}
                   </div>
 
                   <div className="flex flex-1 flex-col gap-3 p-4">
-                    <div className="flex items-stretch justify-start gap-6">
-                      <div className="flex flex-wrap content-center items-center gap-x-4 gap-y-1 border-b border-gray-300 pb-2">
+                    <div className="flex items-stretch justify-start gap-4">
+                      <div className="flex flex-wrap content-center items-center gap-x-3 gap-y-1 border-b border-neutral-200 pb-2">
                         {categories.map((category) => (
                           <span
                             key={category.id}
-                            className="text-sm font-semibold text-shop_dark_green"
+                            className="font-sans text-xs font-semibold uppercase tracking-wider text-shop_dark_green"
                           >
                             {category.title}
                           </span>
                         ))}
                       </div>
 
-                      <span className="flex items-center gap-1.5 border-b border-gray-300 pb-2 text-sm text-gray-500">
-                        <Calendar className="h-4 w-4 shrink-0" />
+                      <span className="flex items-center gap-1.5 border-b border-neutral-200 pb-2 font-sans text-xs text-neutral-500">
+                        <Calendar className="h-3.5 w-3.5 shrink-0 text-neutral-400" />
                         {formatDate(blog.publishedAt)}
                       </span>
                     </div>
 
-                    <h3 className="line-clamp-2 text-[17px] font-bold leading-snug text-darkColor transition-colors duration-300 group-hover:text-shop_dark_green">
+                    <h3 className="line-clamp-2 font-sans text-sm sm:text-base font-semibold leading-snug text-neutral-900 transition-colors duration-200 group-hover:text-shop_dark_green">
                       {blog.title}
                     </h3>
                   </div>
@@ -146,12 +148,12 @@ const HomeLatestBlog = () => {
             className={`h-2 rounded-full transition-all duration-300 ${
               i === selectedIndex
                 ? "w-6 bg-shop_dark_green"
-                : "w-2 bg-gray-300 hover:bg-gray-400"
+                : "w-2 bg-neutral-200 hover:bg-neutral-300"
             }`}
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

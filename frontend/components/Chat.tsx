@@ -18,7 +18,7 @@ export default function Chat() {
       {!isOpen && (
         <div className="fixed bottom-6 right-6 z-50">
           {/* AI message */}
-          <div className="absolute bottom-20 right-0 w-72 rounded-2xl bg-white px-4 py-3 text-sm text-gray-700 shadow-xl ring-1 ring-gray-100">
+          <div className="absolute bottom-20 right-0 w-72 rounded-2xl bg-white px-4 py-3 text-sm text-gray-700 shadow-xl ring-1 ring-gray-100 font-sans tracking-tight">
             <p>
               Bạn cần tư vấn sản phẩm? Hãy để trợ lý AI giúp bạn nhé! 🤖
             </p>

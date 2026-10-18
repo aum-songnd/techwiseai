@@ -27,26 +27,26 @@ type BrandCard = {
 };
 
 function getFeaturedBrands(products: Product[]): BrandCard[] {
-    const seen = new Map<string, BrandCard>();
-    for (const product of products) {
-      const label = product.brand?.trim();
-      if (!label) continue;
+  const seen = new Map<string, BrandCard>();
+  for (const product of products) {
+    const label = product.brand?.trim();
+    if (!label) continue;
 
-      const key = label.toLowerCase();
-      if (!seen.has(key)) {
-        seen.set(key, { key, label, logoUrl: BRAND_LOGOS[key] });
-      }
+    const key = label.toLowerCase();
+    if (!seen.has(key)) {
+      seen.set(key, { key, label, logoUrl: BRAND_LOGOS[key] });
     }
+  }
 
-    return Array.from(seen.values())
-      .sort((a, b) => {
+  return Array.from(seen.values())
+    .sort((a, b) => {
 
-        const hasLogoA = !!a.logoUrl;
-        const hasLogoB = !!b.logoUrl;
-        if (hasLogoA !== hasLogoB) return hasLogoA ? -1 : 1;
-        return a.label.localeCompare(b.label);
-      })
-      .slice(0, MAX_BRANDS);
+      const hasLogoA = !!a.logoUrl;
+      const hasLogoB = !!b.logoUrl;
+      if (hasLogoA !== hasLogoB) return hasLogoA ? -1 : 1;
+      return a.label.localeCompare(b.label);
+    })
+    .slice(0, MAX_BRANDS);
 }
 
 const ChevronIcon = ({ className = "" }: { className?: string }) => (
@@ -96,7 +96,7 @@ const HomeBrands = ({ products }: { products: Product[] }) => {
   return (
     <section className="my-8 font-sans">
       <div className="mb-4 flex items-center justify-between gap-4">
-        <Title className="font-sans text-[22px] font-bold text-neutral-900">
+        <Title className="font-sans text-xl font-bold uppercase tracking-tight text-shop_dark_green">
           Thương hiệu nổi bật
         </Title>
         <Link

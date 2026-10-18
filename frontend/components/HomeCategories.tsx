@@ -136,7 +136,7 @@ const HomeCategories = async () => {
 
   return (
     <section className="my-8 font-sans">
-      <Title className="mb-6 font-sans text-[22px] font-bold text-neutral-900">
+      <Title className="font-sans text-xl font-bold uppercase tracking-tight text-shop_dark_green">
         Danh mục phổ biến
       </Title>
 
