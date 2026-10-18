@@ -19,18 +19,26 @@ export async function PUT(
 
   const body = await req.json();
 
-  const res = await fetch(`${API_BASE_URL}/cart/items/${itemId}`, {
-    method: "PUT",
-    cache: "no-store",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: authHeader,
-    },
-    body: JSON.stringify(body),
-  });
+  try {
+    const res = await fetch(`${API_BASE_URL}/cart/items/${itemId}`, {
+      method: "PUT",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authHeader,
+      },
+      body: JSON.stringify(body),
+    });
 
-  const data = await res.json().catch(() => ({}));
-  return NextResponse.json(data, { status: res.status });
+    const data = await res.json().catch(() => ({}));
+    return NextResponse.json(data, { status: res.status });
+  } catch (err) {
+    console.error("Cart item PUT error:", err);
+    return NextResponse.json(
+      { success: false, message: "Không thể kết nối đến máy chủ backend" },
+      { status: 503 }
+    );
+  }
 }
 
 export async function DELETE(
@@ -46,12 +54,20 @@ export async function DELETE(
     );
   }
 
-  const res = await fetch(`${API_BASE_URL}/cart/items/${itemId}`, {
-    method: "DELETE",
-    cache: "no-store",
-    headers: { Authorization: authHeader },
-  });
+  try {
+    const res = await fetch(`${API_BASE_URL}/cart/items/${itemId}`, {
+      method: "DELETE",
+      cache: "no-store",
+      headers: { Authorization: authHeader },
+    });
 
-  const data = await res.json().catch(() => ({}));
-  return NextResponse.json(data, { status: res.status });
+    const data = await res.json().catch(() => ({}));
+    return NextResponse.json(data, { status: res.status });
+  } catch (err) {
+    console.error("Cart item DELETE error:", err);
+    return NextResponse.json(
+      { success: false, message: "Không thể kết nối đến máy chủ backend" },
+      { status: 503 }
+    );
+  }
 }

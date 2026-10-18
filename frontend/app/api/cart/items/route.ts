@@ -15,16 +15,24 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
 
-  const res = await fetch(`${API_BASE_URL}/cart/items`, {
-    method: "POST",
-    cache: "no-store",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: authHeader,
-    },
-    body: JSON.stringify(body),
-  });
+  try {
+    const res = await fetch(`${API_BASE_URL}/cart/items`, {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authHeader,
+      },
+      body: JSON.stringify(body),
+    });
 
-  const data = await res.json().catch(() => ({}));
-  return NextResponse.json(data, { status: res.status });
+    const data = await res.json().catch(() => ({}));
+    return NextResponse.json(data, { status: res.status });
+  } catch (err) {
+    console.error("Cart items POST error:", err);
+    return NextResponse.json(
+      { success: false, message: "Không thể kết nối đến máy chủ backend" },
+      { status: 503 }
+    );
+  }
 }
