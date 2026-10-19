@@ -26,9 +26,16 @@ type Props = { params: Promise<{ slug: string }> };
 type CategoryFields = { id: string; name?: string; title?: string };
 type AuthorFields = { id: string; name?: string };
 
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
-  const slugs = await getAllBlogSlugs();
-  return slugs.map((slug) => ({ slug }));
+  try {
+    const slugs = await getAllBlogSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -20,8 +20,9 @@
   },
   "admin": {
     "username": "admin",
-    "updatedAt": 1792346338094,
+    "updatedAt": 1792373490292,
     "fullName": "System Administrator",
-    "email": "admin@regulation.local"
+    "email": "admin@regulation.local",
+    "avatarUrl": null
   }
 }

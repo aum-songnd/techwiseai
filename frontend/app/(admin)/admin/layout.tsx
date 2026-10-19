@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
+  BookOpen,
   CalendarDays,
   ChevronDown,
   Layers,
@@ -70,6 +71,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/admin", label: "Tổng quan", icon: LayoutDashboard, exact: true },
   { href: "/admin/orders", label: "Đơn hàng", icon: ShoppingCart },
   { href: "/admin/categories", label: "Danh mục", icon: Layers },
+  { href: "/admin/blogs", label: "Blog", icon: BookOpen },
   { href: "/admin/products", label: "Sản phẩm", icon: Package },
   { href: "/admin/users", label: "Người dùng", icon: Users },
 ];
