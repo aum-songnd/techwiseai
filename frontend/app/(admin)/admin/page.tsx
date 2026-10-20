@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { fetchAllAdminProducts } from "@/lib/admin-products";
 import ProductImage from "@/components/admin/ProductImage";
+import Loading from "@/app/(client)/loading";
 import type { Product } from "@/app/data/types";
 
 const LOW_STOCK_THRESHOLD = 5;
@@ -396,7 +397,7 @@ const AdminInventory = () => {
                 <span className="text-[11px] font-mono text-neutral-400">Đơn vị: sản phẩm</span>
               </div>
               {loading ? (
-                <p className="py-6 text-center text-xs text-neutral-400">Đang tải...</p>
+                <Loading message="Đang tải..." className="py-8 min-h-0" />
               ) : stockByCategory.length === 0 ? (
                 <p className="py-6 text-center text-xs text-neutral-500">
                   Chưa có dữ liệu tồn kho theo danh mục.
@@ -448,7 +449,7 @@ const AdminInventory = () => {
 
             <div className="divide-y divide-neutral-100 px-4">
               {loading ? (
-                <p className="py-12 text-center text-xs text-neutral-400">Đang tải...</p>
+                <Loading message="Đang tải..." className="py-12 min-h-0" />
               ) : errorMessage ? (
                 <p className="py-12 text-center text-xs text-neutral-500">
                   Không tải được danh sách cảnh báo.

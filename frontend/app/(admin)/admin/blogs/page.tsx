@@ -18,6 +18,7 @@ import {
   Calendar,
   Star,
 } from "lucide-react";
+import Loading from "@/app/(client)/loading";
 import {
   adminGetAllBlogs,
   adminGetBlogCategories,
@@ -399,11 +400,10 @@ const AdminBlogsPage = () => {
                       type="button"
                       key={c.id}
                       onClick={() => handleCategoryToggle(c.id)}
-                      className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border transition-colors ${
-                        active
-                          ? "bg-shop_dark_green text-white border-shop_dark_green"
-                          : "bg-white text-neutral-600 border-neutral-200 hover:border-shop_dark_green hover:text-shop_dark_green"
-                      }`}
+                      className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border transition-colors ${active
+                        ? "bg-shop_dark_green text-white border-shop_dark_green"
+                        : "bg-white text-neutral-600 border-neutral-200 hover:border-shop_dark_green hover:text-shop_dark_green"
+                        }`}
                     >
                       {c.title}
                     </button>
@@ -510,8 +510,8 @@ const AdminBlogsPage = () => {
       {/* Blog List */}
       <div ref={listTopRef}>
         {loading ? (
-          <div className="border border-neutral-200 bg-white px-6 py-16 text-center text-xs text-neutral-400 font-mono uppercase tracking-wider">
-            Đang tải dữ liệu...
+          <div className="border border-neutral-200 bg-white">
+            <Loading message="Đang tải dữ liệu..." className="py-16 min-h-0" />
           </div>
         ) : paginated.length === 0 ? (
           <div className="border border-neutral-200 bg-white px-6 py-16 text-center">
@@ -595,6 +595,7 @@ const AdminBlogsPage = () => {
                   <Link
                     href={`/blog/${blog.slug}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="p-1.5 text-neutral-400 hover:text-shop_dark_green transition-colors"
                     title="Xem bài viết"
                   >
@@ -650,11 +651,10 @@ const AdminBlogsPage = () => {
                   setCurrentPage(p);
                   listTopRef.current?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className={`min-w-[28px] h-7 px-1 border text-xs font-mono transition-colors ${
-                  p === page
-                    ? "bg-shop_dark_green text-white border-shop_dark_green"
-                    : "border-neutral-200 text-neutral-600 hover:bg-neutral-50"
-                }`}
+                className={`min-w-[28px] h-7 px-1 border text-xs font-mono transition-colors ${p === page
+                  ? "bg-shop_dark_green text-white border-shop_dark_green"
+                  : "border-neutral-200 text-neutral-600 hover:bg-neutral-50"
+                  }`}
               >
                 {p}
               </button>

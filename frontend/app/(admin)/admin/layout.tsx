@@ -7,6 +7,7 @@ import {
   BookOpen,
   CalendarDays,
   ChevronDown,
+  Home,
   Layers,
   LayoutDashboard,
   LogOut,
@@ -243,15 +244,16 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           })}
         </nav>
 
-        {/* <div className="px-3 py-4 border-t border-neutral-200 flex flex-col gap-1">
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:bg-red-50 hover:text-red-600 transition-colors text-left"
+        <div className="px-3 py-3 border-t border-neutral-200">
+          <Link
+            href="/"
+            className="flex items-center gap-3 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:bg-neutral-100 hover:text-shop_dark_green transition-colors"
+            title="Về trang chủ TechWise AI"
           >
-            <LogOut className="w-4 h-4 shrink-0" />
-            <span>Đăng xuất</span>
-          </button>
-        </div> */}
+            <Home className="w-4 h-4 shrink-0 text-neutral-500" />
+            <span>Về trang chủ</span>
+          </Link>
+        </div>
       </aside>
 
       <div className="lg:pl-56 min-h-screen flex flex-col">
@@ -276,6 +278,15 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
 
           <div className="flex items-center gap-3 sm:gap-4 text-xs font-mono text-neutral-500 shrink-0">
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium border border-neutral-200 text-neutral-700 hover:bg-neutral-50 hover:text-shop_dark_green transition-colors"
+              title="Về trang chủ TechWise AI"
+            >
+              <Home className="w-3.5 h-3.5 text-shop_dark_green" />
+              <span className="hidden sm:inline">Trang chủ</span>
+            </Link>
+
             <div className="hidden sm:flex items-center gap-2">
               <CalendarDays className="w-4 h-4 text-neutral-400" />
               <span>{today}</span>
@@ -344,6 +355,14 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                       <UserIcon className="w-4 h-4 text-neutral-400" />
                       <span>Quản lý tài khoản</span>
                     </button>
+                    <Link
+                      href="/"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="w-full flex items-center gap-2.5 px-3.5 py-2 text-left font-medium text-neutral-700 hover:bg-neutral-50 hover:text-shop_dark_green transition-colors"
+                    >
+                      <Home className="w-4 h-4 text-neutral-400" />
+                      <span>Về trang chủ</span>
+                    </Link>
                   </div>
 
                   <div className="border-t border-neutral-100 pt-1">
