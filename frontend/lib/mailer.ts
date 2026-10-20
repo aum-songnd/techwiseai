@@ -99,6 +99,105 @@ export async function sendOtpEmail({
     text: `Mã xác nhận đặt lại mật khẩu TechWise AI của bạn là: ${otp}. Mã có hiệu lực trong 15 phút. Tuyệt đối không chia sẻ mã này.`,
   };
 
+  // =========================================================================
+  // PHƯƠNG ÁN 1: GỬI QUA BREVO (SENDINBLUE) HTTP REST API (Cổng 443 HTTPS)
+  // Ưu điểm: Miễn phí 300 email/ngày tới BẤT KỲ email nào, KHÔNG CẦN TÊN MIỀN RIÊNG.
+  // Không bao giờ bị Railway/Vercel chặn vì chạy qua cổng web 443 HTTPS.
+  // =========================================================================
+  const brevoApiKey = (process.env.BREVO_API_KEY || "").trim();
+  if (brevoApiKey) {
+    try {
+      console.log(`[TechWise Mailer] Đang gửi qua Brevo HTTP API đến ${to}...`);
+      const senderEmail = (process.env.BREVO_SENDER_EMAIL || smtpUser).trim();
+      const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "api-key": brevoApiKey,
+          "Content-Type": "application/json",
+          accept: "application/json",
+        },
+        body: JSON.stringify({
+          sender: {
+            name: "TechWise AI Security",
+            email: senderEmail,
+          },
+          to: [{ email: to }],
+          subject: `[TechWise AI] Mã xác nhận đặt lại mật khẩu: ${otp}`,
+          htmlContent: htmlContent,
+          textContent: `Mã xác nhận đặt lại mật khẩu TechWise AI của bạn là: ${otp}. Mã có hiệu lực trong 15 phút. Tuyệt đối không chia sẻ mã này.`,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        console.log(
+          `[TechWise Mailer] ✓ Đã gửi mã OTP thành công qua Brevo API! MessageId:`,
+          data.messageId
+        );
+        return { sent: true };
+      }
+
+      console.warn(`[TechWise Mailer] ⚠ Brevo API trả về lỗi:`, data);
+      return {
+        sent: false,
+        reason: `Brevo API: ${data.message || JSON.stringify(data)}`,
+      };
+    } catch (err) {
+      console.warn(`[TechWise Mailer] ⚠ Lỗi kết nối Brevo API:`, err);
+      return {
+        sent: false,
+        reason: `Lỗi kết nối Brevo API: ${err instanceof Error ? err.message : String(err)}`,
+      };
+    }
+  }
+
+  // =========================================================================
+  // PHƯƠNG ÁN 2: GỬI QUA RESEND HTTP REST API (Cổng 443 HTTPS)
+  // =========================================================================
+  const resendApiKey = (
+    process.env.RESEND_API_KEY ||
+    process.env.RESEND_APT_KEY ||
+    ""
+  ).trim();
+  if (resendApiKey) {
+    try {
+      console.log(`[TechWise Mailer] Đang gửi qua Resend HTTP API đến ${to}...`);
+      const fromEmail = process.env.RESEND_FROM || "TechWise AI <onboarding@resend.dev>";
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${resendApiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: fromEmail,
+          to: [to],
+          subject: `[TechWise AI] Mã xác nhận đặt lại mật khẩu: ${otp}`,
+          html: htmlContent,
+          text: `Mã xác nhận đặt lại mật khẩu TechWise AI của bạn là: ${otp}. Mã có hiệu lực trong 15 phút. Tuyệt đối không chia sẻ mã này.`,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        console.log(`[TechWise Mailer] ✓ Đã gửi mã OTP thành công qua Resend API! ID:`, data.id);
+        return { sent: true };
+      }
+
+      console.warn(`[TechWise Mailer] ⚠ Resend API trả về lỗi:`, data);
+      return {
+        sent: false,
+        reason: `Resend API: ${data.message || "Lỗi gửi mail qua Resend"}`,
+      };
+    } catch (err) {
+      console.warn(`[TechWise Mailer] ⚠ Lỗi kết nối Resend API:`, err);
+      return {
+        sent: false,
+        reason: `Lỗi kết nối Resend API: ${err instanceof Error ? err.message : String(err)}`,
+      };
+    }
+  }
+
   // Cấu hình các phương án kết nối linh hoạt cho môi trường Deploy / Serverless (Vercel, Railway, Docker)
   // Ép IPv4 (family: 4) để tránh IPv6 timeout trên môi trường Cloud
   const connectionConfigs = [
