@@ -1,0 +1,3796 @@
+{
+  "metadata": {
+    "source": "cellphones.com.vn",
+    "category": {
+      "name": "Tai nghe",
+      "slug": "tai-nghe"
+    },
+    "totalCrawled": 47,
+    "rejected": 42,
+    "skuPrefix": "HEAD",
+    "generatedAt": "2026-10-20T15:50:57.308888"
+  },
+  "products": [
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC)",
+      "slug": "tai-nghe-bluetooth-samsung-galaxy-buds-core-anc",
+      "sku": "HEAD-0001",
+      "brand": "Samsung Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Bluetooth Samsung Galaxy Buds Core chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Tai nghe Bluetooth Samsung Galaxy Buds Core tại đây.",
+      "description": "Mua Tai nghe Bluetooth Samsung Galaxy Buds Core chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Tai nghe Bluetooth Samsung Galaxy Buds Core tại đây.",
+      "price": 990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_237_3_5.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 4,
+      "specifications": {
+        "Kích thước": "Tai nghe: 19.2 x 17.1 x 22.2 mm Hộp sạc: 50.0 x 50.0 x 27.7 mm",
+        "Trọng lượng": "Tai nghe: 5.3 g Hộp sạc: 31.2 g",
+        "Công nghệ âm thanh": "Active Noise Cancelling Công nghệ ENC Ambient Sound",
+        "Micro": "3 micro (mỗi tai)",
+        "Cổng kết nối": "Type C",
+        "Thời lượng sử dụng Pin": "Tai nghe: 8.5 giờ (khi tắt ANC) Hộp sạc: 35 giờ",
+        "Phương thức điều khiển": "Cảm ứng chạm",
+        "Tính năng khác": "Kháng nước IP54 3 Micro chống ồn Tự động chuyển đổi kết nối linh hoạt (Auto Switch) Trợ lý ảo Bixby Công nghệ tự điều chỉnh theo hướng giọng nói (Beamforming) Chế độ thất lạc (Lost Mode) Chống ồn chủ động ANC",
+        "Hãng sản xuất": "Samsung Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_237_3_5.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-samsung-galaxy-buds-core-ksp-1.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/_/c_4_2.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/h/3/h3-2.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/2/c2_1_1.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/3/c3_1.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/h/3/h3-3.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Samsung Galaxy Buds 4",
+      "slug": "tai-nghe-samsung-galaxy-buds-4",
+      "sku": "HEAD-0002",
+      "brand": "Samsung Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Tai nghe Samsung Galaxy Buds 4 chính hãng, chất âm cải tiến Hi-Fi cao cấp, tích hợp Galaxy AI. Mua Galaxy Buds4 giá tốt, trả góp 0% tại CellphoneS",
+      "description": "Tai nghe Samsung Galaxy Buds 4 chính hãng, chất âm cải tiến Hi-Fi cao cấp, tích hợp Galaxy AI. Mua Galaxy Buds4 giá tốt, trả góp 0% tại CellphoneS",
+      "price": 3890000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung_buds4_17_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Kích thước": "tai nghe: 18.3x19.3x30.5mm hộp sạc: 51x51x28.3mm",
+        "Trọng lượng": "tai nghe: 4.6g hộp sạc: 45.1g",
+        "Thời lượng sử dụng Pin": "Bật ANC: tai nghe 5h, hộp sạc + tai nghe 24h Tắt ANC: tai nghe 6h, hộp sạc + tai nghe 30h",
+        "Tính năng khác": "Bộ khuếch đại đơn",
+        "Hãng sản xuất": "Samsung Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung_buds4_17_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/b/u/buds4_1200x670_2.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4_1_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4_2_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4_3_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4_4_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless SoundPeats T3 Pro (ANC)",
+      "slug": "tai-nghe-bluetooth-true-wireless-soundpeats-t3-pro-anc",
+      "sku": "HEAD-0003",
+      "brand": "Soundpeats",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua tai nghe SoundPeats T3 Pro ANC chính hãng - Giá tốt, Giảm thêm Smember, bảo hành uy tín, giao hàng toàn quốc. Mua SoundPeats T3 Pro tại đây.",
+      "description": "Mua tai nghe SoundPeats T3 Pro ANC chính hãng - Giá tốt, Giảm thêm Smember, bảo hành uy tín, giao hàng toàn quốc. Mua SoundPeats T3 Pro tại đây.",
+      "price": 280000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_330.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 204,
+      "specifications": {
+        "Kích thước": "Tai nghe: 33.4x22x25mmHộp sạc: 64.7x49.15x32.1mm",
+        "Trọng lượng": "140g",
+        "Công nghệ âm thanh": "Spatial AudioChống ồn chủ động ANC",
+        "Micro": "Có 4 micro",
+        "Thời lượng sử dụng Pin": "Tai nghe: 7 giờ Hộp sạc: 28 giờ",
+        "Phương thức điều khiển": "Cảm ứng chạm",
+        "Tính năng khác": "Chống ồn đàm thoại AI Chống nước IPX4",
+        "Chipset": "BT8932F",
+        "Hãng sản xuất": "Soundpeats"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_330.png",
+          "altText": "Tai nghe Bluetooth True Wireless SoundPeats T3 Pro (ANC) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai_nghe_bluetooth_true_wireless_soundpeats_t3_pro_-_ch_c_t_i_cellphone_s.png",
+          "altText": "Tai nghe Bluetooth True Wireless SoundPeats T3 Pro (ANC) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-soundpeats-t3-pro-new_3_.png",
+          "altText": "Tai nghe Bluetooth True Wireless SoundPeats T3 Pro (ANC) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-soundpeats-t3-pro-new_4_.png",
+          "altText": "Tai nghe Bluetooth True Wireless SoundPeats T3 Pro (ANC) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-soundpeats-t3-pro-new_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless SoundPeats T3 Pro (ANC) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-soundpeats-t3-pro-new_2_.png",
+          "altText": "Tai nghe Bluetooth True Wireless SoundPeats T3 Pro (ANC) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-soundpeats-t3-pro-1.png",
+          "altText": "Tai nghe Bluetooth True Wireless SoundPeats T3 Pro (ANC) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe không dây Anker Soundcore Aeroclip 2",
+      "slug": "tai-nghe-khong-day-anker-soundcore-aeroclip-2",
+      "sku": "HEAD-0004",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe không dây Anker Soundcore Aeroclip 2 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Tai nghe không dây Anker Soundcore Aeroclip 2 tại đây.",
+      "description": "Mua Tai nghe không dây Anker Soundcore Aeroclip 2 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Tai nghe không dây Anker Soundcore Aeroclip 2 tại đây.",
+      "price": 3590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-sleep-a20.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Trọng lượng": "6.2g/1 tai nghe",
+        "Công nghệ âm thanh": "Hi-Res AudioLDAC3D Spatial AudioHearID™ 5.0",
+        "Micro": "MEMS + 2 VPUHỗ trợ AI khử tiếng ồn",
+        "Thời lượng sử dụng Pin": "8 giờ (Tai nghe)32 giờ (Tính cả hộp sạc)",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-sleep-a20.png",
+          "altText": "Tai nghe không dây Anker Soundcore Aeroclip 2 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_2154.png",
+          "altText": "Tai nghe không dây Anker Soundcore Aeroclip 2 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/m/image_1262705654.png",
+          "altText": "Tai nghe không dây Anker Soundcore Aeroclip 2 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/m/image_1262705653.png",
+          "altText": "Tai nghe không dây Anker Soundcore Aeroclip 2 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/m/image_1262705652.png",
+          "altText": "Tai nghe không dây Anker Soundcore Aeroclip 2 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_2155.png",
+          "altText": "Tai nghe không dây Anker Soundcore Aeroclip 2 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/m/image_1262705656.png",
+          "altText": "Tai nghe không dây Anker Soundcore Aeroclip 2 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Sony Linkbuds Open (WF-L910)",
+      "slug": "tai-nghe-bluetooth-true-wireless-sony-linkbuds-open-wf-l910",
+      "sku": "HEAD-0005",
+      "brand": "Sony",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Sony Linkbuds Open WF-L910 chính hãng - Giá tốt, Giảm Smember, bảo hành uy tín, giao hàng toàn quốc. Mua Linkbuds Open tại đây.",
+      "description": "Mua Tai nghe Sony Linkbuds Open WF-L910 chính hãng - Giá tốt, Giảm Smember, bảo hành uy tín, giao hàng toàn quốc. Mua Linkbuds Open tại đây.",
+      "price": 2890000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-sony-linkbuds-open-thumb_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Kích thước": "46 x 46 x 29.4 mm",
+        "Trọng lượng": "Tai nghe: 5,1 gr(x2) Hộp sạc: 30.6 gr",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Thời gian phát nhạc: 8h Thời gian giao tiếp: 4.5h Thời gian chờ 13h",
+        "Tính năng khác": "Chống nước IPX4",
+        "Hãng sản xuất": "Sony"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-sony-linkbuds-open-thumb_1.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony Linkbuds Open (WF-L910) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-sony-linkbuds-open-_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony Linkbuds Open (WF-L910) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-sony-linkbuds-open-.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony Linkbuds Open (WF-L910) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-sony-linkbuds-open_9__1.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony Linkbuds Open (WF-L910) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-sony-linkbuds-open_10__1.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony Linkbuds Open (WF-L910) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-sony-linkbuds-open_4_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony Linkbuds Open (WF-L910) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-sony-linkbuds-open_7__1.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony Linkbuds Open (WF-L910) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Havit LIFE 04T TW888",
+      "slug": "tai-nghe-bluetooth-true-wireless-havit-life-04t-tw888",
+      "sku": "HEAD-0006",
+      "brand": "Havit",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Bluetooth Havit LIFE 04T TW888  chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Tai nghe Bluetooth Havit LIFE 04T TW888  tại đây.",
+      "description": "Mua Tai nghe Bluetooth Havit LIFE 04T TW888  chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Tai nghe Bluetooth Havit LIFE 04T TW888  tại đây.",
+      "price": 235000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-havit-life-04t-tw888_6_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Tai nghe: 5.5 giờHộp sạc: 30 giờ",
+        "Tính năng khác": "Công nghệ Clear CallsĐộ trễ thấp",
+        "Hãng sản xuất": "Havit"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-havit-life-04t-tw888_6_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Havit LIFE 04T TW888 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-havit-life-04t-tw888_7_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Havit LIFE 04T TW888 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-havit-life-04t-tw888_2_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Havit LIFE 04T TW888 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-havit-life-04t-tw888_5_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Havit LIFE 04T TW888 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-havit-life-04t-tw888_3_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Havit LIFE 04T TW888 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-havit-life-04t-tw888_4_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Havit LIFE 04T TW888 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-havit-life-04t-tw888_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Havit LIFE 04T TW888 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt",
+      "slug": "tai-nghe-bluetooth-samsung-galaxy-buds-core-anc-a-kich-hoat",
+      "sku": "HEAD-0007",
+      "brand": "Samsung Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Samsung Galaxy Buds Core (ANC) - Đã kích hoạt tại đây.",
+      "description": "Mua Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Samsung Galaxy Buds Core (ANC) - Đã kích hoạt tại đây.",
+      "price": 700000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_237_3_5_2.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Kích thước": "Tai nghe: 19.2 x 17.1 x 22.2 mm Hộp sạc: 50.0 x 50.0 x 27.7 mm",
+        "Trọng lượng": "Tai nghe: 5.3 g Hộp sạc: 31.2 g",
+        "Công nghệ âm thanh": "Active Noise Cancelling Công nghệ ENC Ambient Sound",
+        "Micro": "3 micro (mỗi tai)",
+        "Cổng kết nối": "Type C",
+        "Thời lượng sử dụng Pin": "Tai nghe: 8.5 giờ (khi tắt ANC) Hộp sạc: 35 giờ",
+        "Phương thức điều khiển": "Cảm ứng chạm",
+        "Tính năng khác": "Kháng nước IP54 3 Micro chống ồn Tự động chuyển đổi kết nối linh hoạt (Auto Switch) Trợ lý ảo Bixby Công nghệ tự điều chỉnh theo hướng giọng nói (Beamforming) Chế độ thất lạc (Lost Mode) Chống ồn chủ động ANC",
+        "Hãng sản xuất": "Samsung Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_237_3_5_2.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-samsung-galaxy-buds-core-ksp-1_2.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/_/c_4_2_2.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/h/3/h3-2_2.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/2/c2_1_1_2.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/3/c3_1_2.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/h/3/h3-3_2.png",
+          "altText": "Tai nghe Bluetooth Samsung Galaxy Buds Core (ANC) - Đã kích hoạt - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Anker Soundcore Liberty 5 Pro",
+      "slug": "tai-nghe-bluetooth-true-wireless-anker-soundcore-liberty-5-pro",
+      "sku": "HEAD-0008",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua tai nghe Bluetooth Anker Soundcore Liberty 5 Pro chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore Liberty 5 Pro tại đây.",
+      "description": "Mua tai nghe Bluetooth Anker Soundcore Liberty 5 Pro chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore Liberty 5 Pro tại đây.",
+      "price": 3295000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-liberty-5-pro-05.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Kích thước": "30 x 22 x 25 mm",
+        "Trọng lượng": "5.5g",
+        "Công nghệ âm thanh": "Driver 9.2 mmDolby AtmosChống ồn cuộc gọi thông minh (ENC AI)Adaptive ANC 4.0Hệ thống 8 micro, cảm biến dẫn truyền qua xươngHearID",
+        "Micro": "Có (8 micro) + 2 VPU + Mô hình AI",
+        "Thời lượng sử dụng Pin": "Tai nghe: Dùng 6.5 giờ (Bật chống ồn) và 12 giờ (Tắt Chống ồn)Hộp sạc: Dùng Khoảng 28 giờ (khi bật ANC) và 50 giờ (khi tắt ANC)",
+        "Phương thức điều khiển": "Chạm cảm ứng",
+        "Tính năng khác": "Kháng nước IP55Màn hình cảm ứng ở hộp sạc",
+        "Chipset": "Chip AI ANKER Thus™ Al",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-liberty-5-pro-05.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore Liberty 5 Pro - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-liberty-5-pro.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore Liberty 5 Pro - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-liberty-5-pro-01.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore Liberty 5 Pro - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-liberty-5-pro-02.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore Liberty 5 Pro - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-liberty-5-pro-03.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore Liberty 5 Pro - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth chụp tai Sony WH-1000XM6",
+      "slug": "tai-nghe-bluetooth-chup-tai-sony-wh-1000xm6",
+      "sku": "HEAD-0009",
+      "brand": "Sony",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua tai nghe chụp tai Sony WH-1000XM6 chính hãng, trả góp 0%. Bảo hành uy tín, tặng gói BHMR 1 đổi 1. Tặng thêm quà giá trị. Giao hàng toàn quốc.",
+      "description": "Mua tai nghe chụp tai Sony WH-1000XM6 chính hãng, trả góp 0%. Bảo hành uy tín, tặng gói BHMR 1 đổi 1. Tặng thêm quà giá trị. Giao hàng toàn quốc.",
+      "price": 9790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-1000xm6-xanh-olive100.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Kích thước": "Dài 20 cm - Rộng 7.83 cm - Cao 25.69 cm",
+        "Trọng lượng": "254g",
+        "Công nghệ âm thanh": "Công nghệ Adaptive NC Optimizer DSEE Extreme (Cơ chế tăng cường âm thanh kỹ thuật số) Hi-Res Audio 360 Reality Audio Equalizer",
+        "Micro": "Có",
+        "Cổng kết nối": "3.5mm",
+        "Thời lượng sử dụng Pin": "Tắt chống ồn: 40 giờBật chống ồn: 30 giờ",
+        "Phương thức điều khiển": "Nút bấm vật lý Cảm ứng",
+        "Tính năng khác": "Chế độ âm thanh xung quanh Fast pair Dual connect Cảm biến tiệm cận Tương thích trợ lý ảo Sạc nhanh Micro chống ồn, lọc gió",
+        "Hãng sản xuất": "Sony"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-1000xm6-xanh-olive100.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-1000XM6 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-1000xm6-1_105.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-1000XM6 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-1000xm6-4_102.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-1000XM6 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-1000xm6-3_103.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-1000XM6 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-1000xm6-2_104.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-1000XM6 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-1000xm6-5_101.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-1000XM6 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-1000xm6-xanh-olive03_1.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-1000XM6 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Bose Quietcomfort Ultra Earbuds 2",
+      "slug": "tai-nghe-bluetooth-true-wireless-bose-quietcomfort-ultra-earbuds-2",
+      "sku": "HEAD-0010",
+      "brand": "Bose",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua tai nghe Bose Quietcomfort Ultra Earbuds 2 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Bose Ultra Earbuds 2 tại đây.",
+      "description": "Mua tai nghe Bose Quietcomfort Ultra Earbuds 2 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Bose Ultra Earbuds 2 tại đây.",
+      "price": 7190000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/u/l/ultra2_3.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Công nghệ âm thanh": "Bose Immersive AudioActiveSense Aware Mode",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Thời lượng 6 giờ",
+        "Tính năng khác": "Quiet ModeCông nghệ CustomTune",
+        "Hãng sản xuất": "Bose"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/u/l/ultra2_3.png",
+          "altText": "Tai nghe Bluetooth True Wireless Bose Quietcomfort Ultra Earbuds 2 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-bose-quietcomfort-ultra-earbuds-2.png",
+          "altText": "Tai nghe Bluetooth True Wireless Bose Quietcomfort Ultra Earbuds 2 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-bose-quietcomfort-ultra-earbuds-2_9_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Bose Quietcomfort Ultra Earbuds 2 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-bose-quietcomfort-ultra-earbuds-2_10_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Bose Quietcomfort Ultra Earbuds 2 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-bose-quietcomfort-ultra-earbuds-2_13_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Bose Quietcomfort Ultra Earbuds 2 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-bose-quietcomfort-ultra-earbuds-2_12_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Bose Quietcomfort Ultra Earbuds 2 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-bose-quietcomfort-ultra-earbuds-2_11_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Bose Quietcomfort Ultra Earbuds 2 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC)",
+      "slug": "tai-nghe-bluetooth-khong-day-xiaomi-buds-6-anc",
+      "sku": "HEAD-0011",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC) chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Xiaomi Buds 6 (ANC) tại đây.",
+      "description": "Mua Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC) chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Xiaomi Buds 6 (ANC) tại đây.",
+      "price": 2860000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-buds-6-anc_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Kích thước": "Tai nghe: 31.77 x 17.17 20.56 mmHộp sạc: 52.34 x 25.57 x 24 mm",
+        "Trọng lượng": "Tai nghe: 4.4 gHộp sạc: 34.5 g",
+        "Công nghệ âm thanh": "Hi-FiChống ồn chủ động ANC",
+        "Micro": "Có (3 micro)",
+        "Thời lượng sử dụng Pin": "Tai nghe: 6 giờHộp sạc: 35 giờ (tắt ANC)",
+        "Tính năng khác": "Ghi âm độc lập bằng tai nghe",
+        "Hãng sản xuất": "Xiaomi"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-buds-6-anc_1_.png",
+          "altText": "Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-buds-6-anc_21_.png",
+          "altText": "Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-buds-6-anc-_1_.png",
+          "altText": "Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-buds-6-anc-_2_.png",
+          "altText": "Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-buds-6-anc-_3_.png",
+          "altText": "Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-buds-6-anc-_4_.png",
+          "altText": "Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-buds-6-anc-_6_.png",
+          "altText": "Tai nghe Bluetooth không dây Xiaomi Buds 6 (ANC) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe chụp tai không dây chống ồn Xiaomi Redmi Neo",
+      "slug": "tai-nghe-chup-tai-khong-day-chong-on-xiaomi-redmi-neo",
+      "sku": "HEAD-0012",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Xiaomi Redmi Neo chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Xiaomi Redmi Neo tại đây.",
+      "description": "Mua Tai nghe Xiaomi Redmi Neo chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Xiaomi Redmi Neo tại đây.",
+      "price": 1630000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-xiaomi-redmi-neo_8_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Kích thước": "202 × 183 × 47 mm",
+        "Trọng lượng": "263 g",
+        "Công nghệ âm thanh": "Hi-Res Audio",
+        "Micro": "Có (3 mic)",
+        "Thời lượng sử dụng Pin": "72 giờ (khi tắt ANC)",
+        "Hãng sản xuất": "Xiaomi"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-xiaomi-redmi-neo_8_.png",
+          "altText": "Tai nghe chụp tai không dây chống ồn Xiaomi Redmi Neo - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-xiaomi-redmi-neo_6_.png",
+          "altText": "Tai nghe chụp tai không dây chống ồn Xiaomi Redmi Neo - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-xiaomi-redmi-neo_1_.png",
+          "altText": "Tai nghe chụp tai không dây chống ồn Xiaomi Redmi Neo - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-xiaomi-redmi-neo_2_.png",
+          "altText": "Tai nghe chụp tai không dây chống ồn Xiaomi Redmi Neo - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-xiaomi-redmi-neo_3_.png",
+          "altText": "Tai nghe chụp tai không dây chống ồn Xiaomi Redmi Neo - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-xiaomi-redmi-neo_5_.png",
+          "altText": "Tai nghe chụp tai không dây chống ồn Xiaomi Redmi Neo - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-xiaomi-redmi-neo_4_.png",
+          "altText": "Tai nghe chụp tai không dây chống ồn Xiaomi Redmi Neo - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 Pro",
+      "slug": "tai-nghe-bluetooth-true-wireless-samsung-galaxy-buds-3-pro",
+      "sku": "HEAD-0013",
+      "brand": "Samsung Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Samsung Galaxy Buds 3 Pro giá tốt 10/2026 - Giảm 30% mua kèm điện thoại, bảo hành 1 năm, giao nhanh. Mua Galaxy Buds 3 Pro ngay",
+      "description": "Mua Tai nghe Samsung Galaxy Buds 3 Pro giá tốt 10/2026 - Giảm 30% mua kèm điện thoại, bảo hành 1 năm, giao nhanh. Mua Galaxy Buds 3 Pro ngay",
+      "price": 3150000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-samsung-galaxy-buds-3-pro-spa_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 24,
+      "specifications": {
+        "Kích thước": "Tai nghe: 18.1 x 19.8 x 33.2mmHộp sạc:58.9 x 48.7 x 24.4mm",
+        "Trọng lượng": "Tai nghe: 5.4gHộp sạc: 46.5g",
+        "Công nghệ âm thanh": "Chống ồn chủ động ANC Âm thanh Hi-Fi 24 bit Âm thanh vòm 360Âm thanh xung quanhHệ thống âm thanh képHệ thống loa 2 chiều",
+        "Micro": "Có 6 micro",
+        "Thời lượng sử dụng Pin": "Tai nghe: 7 giờ (Tắt ANC) / 6 giờ (Bật ANC)Hộp sạc: 30 giờ (Tắt ANC) / 26 giờ (Bật ANC)",
+        "Phương thức điều khiển": "Cảm ứng chạm Nhấn thanh bar",
+        "Tính năng khác": "Tự động chuyển đổi kết nối giữa các thiết bị GalaxyPhiên dịch viên hỗ trợ nghe bản dịch trực tiếpTự động tinh chỉnh ANCThanh ánh sáng Blade Lights",
+        "Hãng sản xuất": "Samsung Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-samsung-galaxy-buds-3-pro-spa_1.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 Pro - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai_nghe_bluetooth_true_wireless_samsung_galaxy_buds_3_pro.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 Pro - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-samsung-galaxy-buds-3-pro_9_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 Pro - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-samsung-galaxy-buds-3-pro_8_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 Pro - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-samsung-galaxy-buds-3-pro_10_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 Pro - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-samsung-galaxy-buds-3-pro_5_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 Pro - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-samsung-galaxy-buds-3-pro_4_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 Pro - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth chụp tai Sony WH-CH520",
+      "slug": "tai-nghe-bluetooth-chup-tai-sony-wh-ch520",
+      "sku": "HEAD-0014",
+      "brand": "Sony",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Sony WH-CH520 chính hãng, giá tốt - Đa dạng màu sắc, bảo hành 12 tháng, giao hàng toàn quốc. Mua ngay WH-CH520 tại đây.",
+      "description": "Mua Tai nghe Sony WH-CH520 chính hãng, giá tốt - Đa dạng màu sắc, bảo hành 12 tháng, giao hàng toàn quốc. Mua ngay WH-CH520 tại đây.",
+      "price": 890000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/o/sony-wh-ch520-21.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.8,
+      "soldCount": 96,
+      "specifications": {
+        "Kích thước": "Dài 22.8 cm - Rộng 17.2 cm - Cao 4.4 cm",
+        "Trọng lượng": "147 gram",
+        "Công nghệ âm thanh": "Âm thanh kỹ thuật số Công nghệ ENC 360 Reality Audio DSEEEqualizer",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "50 giờ",
+        "Phương thức điều khiển": "Nút bấm vật lý",
+        "Tính năng khác": "Sạc nhanhChống ồn đàm thoại",
+        "Hãng sản xuất": "Sony"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/o/sony-wh-ch520-21.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH520 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/l/a/landing_page_whch520_.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH520 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-ch520-_2_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH520 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-ch520-_1_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH520 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-ch520-_4_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH520 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-ch520-_1.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH520 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-sony-wh-ch520-10.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH520 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless JBL Tune Buds 2",
+      "slug": "tai-nghe-bluetooth-true-wireless-jbl-tune-buds-2",
+      "sku": "HEAD-0015",
+      "brand": "JBL",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe bluetooth JBL Tune Buds 2 nhét tai tiện lợi, sản phẩm chính hãng có bảo hành uy tín. Giá rẻ. Hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua Tai nghe bluetooth JBL Tune Buds 2 nhét tai tiện lợi, sản phẩm chính hãng có bảo hành uy tín. Giá rẻ. Hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 1990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-tune-buds-2_3_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 6,
+      "specifications": {
+        "Trọng lượng": "Tai nghe: 5.5 g mỗi chiếc (tổng cộng 11 g) Hộp sạc: 42.6 g",
+        "Công nghệ âm thanh": "JBL Pure BassPersoni-Fi 3.0Ambient AwareJBL Spatial Sound",
+        "Micro": "Có (6 micro)",
+        "Thời lượng sử dụng Pin": "Tai nghe: 12 giờ (Tắt ANC) Hộp sạc: 36 giờ",
+        "Phương thức điều khiển": "Cảm ứng chạm Điều khiển qua ứng dụng",
+        "Tính năng khác": "Kháng nước, bụi: IP54 Kết nối đa điểm",
+        "Hãng sản xuất": "JBL"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-tune-buds-2_3_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Tune Buds 2 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-tune-buds-2_4_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Tune Buds 2 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-tune-buds-2_5_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Tune Buds 2 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-tune-buds-2_12_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Tune Buds 2 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-tune-buds-2_11_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Tune Buds 2 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-tune-buds-2_13_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Tune Buds 2 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-tune-buds-2_10_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Tune Buds 2 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Samsung Galaxy Buds 4 Pro",
+      "slug": "tai-nghe-samsung-galaxy-buds-4-pro",
+      "sku": "HEAD-0016",
+      "brand": "Samsung Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Tai nghe Samsung Galaxy Buds 4 Pro âm thanh Hi-Fi 24-bit, ANC 2.0, thiết kế độc đáo, pin trâu 24h. Mua Galaxy Buds 4 Pro chính hãng, bảo hành VIP",
+      "description": "Tai nghe Samsung Galaxy Buds 4 Pro âm thanh Hi-Fi 24-bit, ANC 2.0, thiết kế độc đáo, pin trâu 24h. Mua Galaxy Buds 4 Pro chính hãng, bảo hành VIP",
+      "price": 5490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung_buds4_pro_20_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 4,
+      "specifications": {
+        "Kích thước": "tai nghe: 18.1x19.6x30.9mm hộp sạc: 51x51x28.3mm",
+        "Trọng lượng": "tai nghe: 5.1g hộp sạc: 44.3g",
+        "Tính năng khác": "Bộ khuếch đại kép",
+        "Hãng sản xuất": "Samsung Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung_buds4_pro_20_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 Pro - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/b/u/buds4_pro_1200x670_2.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 Pro - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4_pro_12_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 Pro - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4_pro_13_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 Pro - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4_pro_14_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 Pro - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4_pro_18_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 Pro - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_buds4_pro_15_.png",
+          "altText": "Tai nghe Samsung Galaxy Buds 4 Pro - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless JBL Wave Buds",
+      "slug": "tai-nghe-bluetooth-true-wireless-jbl-wave-buds",
+      "sku": "HEAD-0017",
+      "brand": "JBL",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Tai nghe bluetooth JBL Wave Buds chính hãng giá tốt, bảo hành uy tín, giao hàng toàn quốc. Mua ngay tai nghe không dây JBL Wave Buds giao nhanh.",
+      "description": "Tai nghe bluetooth JBL Wave Buds chính hãng giá tốt, bảo hành uy tín, giao hàng toàn quốc. Mua ngay tai nghe không dây JBL Wave Buds giao nhanh.",
+      "price": 1150000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-jbl-wave-buds_26_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 18,
+      "specifications": {
+        "Kích thước": "Dài 2.35 cm - Rộng 2.186 cm - Cao 3.099 cm",
+        "Trọng lượng": "Tai nghe: 9g (mỗi bên)Hộp sạc: 34g",
+        "Công nghệ âm thanh": "Smart Ambient",
+        "Micro": "Có (1 mic)",
+        "Thời lượng sử dụng Pin": "Tai nghe: 8 giờ Hộp sạc: 24 giờ Thời gian chơi tối đa: 32 giờ",
+        "Phương thức điều khiển": "Chạm cảm ứng hoặc App",
+        "Tính năng khác": "Chống nước IP54",
+        "Hãng sản xuất": "JBL"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-jbl-wave-buds_26_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Buds - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai_nghe_bluetooth_true_wireless_jbl_wave_buds_-_ch_c_t_i_cellphone_s.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Buds - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-jbl-wave-buds.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Buds - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-jbl-wave-buds_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Buds - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-jbl-wave-buds_4_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Buds - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-jbl-wave-buds_2_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Buds - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-jbl-wave-buds_7_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Buds - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth chụp tai Alpha Works Lite 500",
+      "slug": "tai-nghe-bluetooth-chup-tai-alpha-works-lite-500",
+      "sku": "HEAD-0018",
+      "brand": "Alpha Works",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua tai nghe Alpha Works Lite 500 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Alpha Works Lite 500 tại đây.",
+      "description": "Mua tai nghe Alpha Works Lite 500 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Alpha Works Lite 500 tại đây.",
+      "price": 240000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-alpha-works-lite-500_1_2.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Micro": "1",
+        "Thời lượng sử dụng Pin": "Lên đến 30 giờ",
+        "Tính năng khác": "Có thể gấp gọn Có hỗ trợ cáp AUX",
+        "Hãng sản xuất": "Alpha Works"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-alpha-works-lite-500_1_2.png",
+          "altText": "Tai nghe Bluetooth chụp tai Alpha Works Lite 500 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/l/alpha_works_lite_500_1_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Alpha Works Lite 500 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/l/alpha_works_lite_500_3_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Alpha Works Lite 500 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/l/alpha_works_lite_500_4_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Alpha Works Lite 500 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/l/alpha_works_lite_500_5_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Alpha Works Lite 500 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/l/alpha_works_lite_500.png",
+          "altText": "Tai nghe Bluetooth chụp tai Alpha Works Lite 500 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/l/alpha_works_lite_500_2_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Alpha Works Lite 500 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth Xiaomi Redmi Buds 8 Pro",
+      "slug": "tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro",
+      "sku": "HEAD-0019",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Xiaomi Redmi Buds 8 Pro chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Xiaomi Redmi Buds 8 Pro tại đây.",
+      "description": "Mua Tai nghe Xiaomi Redmi Buds 8 Pro chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Xiaomi Redmi Buds 8 Pro tại đây.",
+      "price": 1795000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_392.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Kích thước": "Tai nghe: 30.6 × 21.4 × 24.52 mmHộp sạc: 61.01 × 25.17 × 48.28 mm",
+        "Trọng lượng": "Khoảng 5.3g (tai nghe), 41.6g (tổng cộng)",
+        "Công nghệ âm thanh": "Hi-Res Audio Wireless",
+        "Cổng kết nối": "Type C",
+        "Thời lượng sử dụng Pin": "Tai nghe: khoảng 8.5 giờ (tắt ANC) Tai nghe + hộp sạc: khoảng 35 giờ (tắt ANC, kèm hộp sạc)",
+        "Hãng sản xuất": "Xiaomi"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_392.png",
+          "altText": "Tai nghe Bluetooth Xiaomi Redmi Buds 8 Pro - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/7/p76_buds_8_pro_ksp_4.5_standard.png",
+          "altText": "Tai nghe Bluetooth Xiaomi Redmi Buds 8 Pro - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_13_.png",
+          "altText": "Tai nghe Bluetooth Xiaomi Redmi Buds 8 Pro - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_4_.png",
+          "altText": "Tai nghe Bluetooth Xiaomi Redmi Buds 8 Pro - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_1_.png",
+          "altText": "Tai nghe Bluetooth Xiaomi Redmi Buds 8 Pro - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_10_.png",
+          "altText": "Tai nghe Bluetooth Xiaomi Redmi Buds 8 Pro - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_16_.png",
+          "altText": "Tai nghe Bluetooth Xiaomi Redmi Buds 8 Pro - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe chụp tai Bose Quietcomfort Ultra Gen 2",
+      "slug": "tai-nghe-chup-tai-bose-quietcomfort-ultra-gen-2",
+      "sku": "HEAD-0020",
+      "brand": "Bose",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Bose Quietcomfort Ultra Gen 2 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Bose Quietcomfort Ultra Gen 2 tại đây.",
+      "description": "Mua Tai nghe Bose Quietcomfort Ultra Gen 2 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Bose Quietcomfort Ultra Gen 2 tại đây.",
+      "price": 9900000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-bose-quietcomfort-ultra-gen-2_21_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Công nghệ âm thanh": "Công nghệ CustomTuneChế độ nghe: Yên Tĩnh, Nhận Biết, Sống Động &amp; Cinema",
+        "Micro": "Có",
+        "Cổng kết nối": "3.5mm",
+        "Thời lượng sử dụng Pin": "30 giờ (23 giờ với Âm thanh sống động)",
+        "Phương thức điều khiển": "Cảm ứng chạm",
+        "Tính năng khác": "Nghe nhạc lossless qua cổng USBCảm biến phát hiện đeo tai nghe và tự tắtLọc tiếng ồn đàm thoại AI",
+        "Hãng sản xuất": "Bose"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-bose-quietcomfort-ultra-gen-2_21_.png",
+          "altText": "Tai nghe chụp tai Bose Quietcomfort Ultra Gen 2 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-bose-quietcomfort-ultra-gen-2_20_.png",
+          "altText": "Tai nghe chụp tai Bose Quietcomfort Ultra Gen 2 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-bose-quietcomfort-ultra-gen-2_26_.png",
+          "altText": "Tai nghe chụp tai Bose Quietcomfort Ultra Gen 2 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-bose-quietcomfort-ultra-gen-2_25_.png",
+          "altText": "Tai nghe chụp tai Bose Quietcomfort Ultra Gen 2 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-bose-quietcomfort-ultra-gen-2_23_.png",
+          "altText": "Tai nghe chụp tai Bose Quietcomfort Ultra Gen 2 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-bose-quietcomfort-ultra-gen-2_24_.png",
+          "altText": "Tai nghe chụp tai Bose Quietcomfort Ultra Gen 2 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-bose-quietcomfort-ultra-gen-2_27_.png",
+          "altText": "Tai nghe chụp tai Bose Quietcomfort Ultra Gen 2 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth chụp tai Marshall Major 5",
+      "slug": "tai-nghe-bluetooth-chup-tai-marshall-major-5",
+      "sku": "HEAD-0021",
+      "brand": "Marshall",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe chụp tai Marshall Major V chính hãng - Giá rẻ, giảm thêm Smembe, bảo hành 1 năm, giao hàng toàn quốc. Mua Marshall Major 5 tại đây",
+      "description": "Mua Tai nghe chụp tai Marshall Major V chính hãng - Giá rẻ, giảm thêm Smembe, bảo hành 1 năm, giao hàng toàn quốc. Mua Marshall Major 5 tại đây",
+      "price": 3590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-marshall-major-5-logo.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.6,
+      "soldCount": 10,
+      "specifications": {
+        "Kích thước": "Dài 7 cm - Rộng 6.6 cm - Cao 4 cm",
+        "Trọng lượng": "186g",
+        "Công nghệ âm thanh": "Âm thanh Marshall",
+        "Micro": "Có",
+        "Cổng kết nối": "3.5mm",
+        "Thời lượng sử dụng Pin": "100 giờ",
+        "Phương thức điều khiển": "Phím nhấn",
+        "Hãng sản xuất": "Marshall"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-chup-tai-marshall-major-5-logo.jpg",
+          "altText": "Tai nghe Bluetooth chụp tai Marshall Major 5 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/major-v-bento-slider.png",
+          "altText": "Tai nghe Bluetooth chụp tai Marshall Major 5 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-marshall-major-5_2_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Marshall Major 5 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-marshall-major-5_6_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Marshall Major 5 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-marshall-major-5_5_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Marshall Major 5 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-marshall-major-5-_9_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Marshall Major 5 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-chup-tai-marshall-major-5-_10_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Marshall Major 5 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3",
+      "slug": "tai-nghe-bluetooth-true-wireless-samsung-galaxy-buds-3",
+      "sku": "HEAD-0022",
+      "brand": "Samsung Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Samsung Galaxy Buds 3 giá rẻ - Tặng Galaxy Gift 500K, Trợ giá lên đời 600K, Giảm thêm khi mua kèm. Mua Galaxy Buds 3 tại đây.",
+      "description": "Mua Tai nghe Samsung Galaxy Buds 3 giá rẻ - Tặng Galaxy Gift 500K, Trợ giá lên đời 600K, Giảm thêm khi mua kèm. Mua Galaxy Buds 3 tại đây.",
+      "price": 3115000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_318.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 14,
+      "specifications": {
+        "Kích thước": "Tai nghe: 18.1 x 20.4 x 31.9mmHộp sạc: 58.9 x 48.7 x 24.4mm",
+        "Trọng lượng": "Tai nghe: 4.7gHộp sạc: 46.5g",
+        "Công nghệ âm thanh": "Chống ồn chủ động ANCÂm thanh Hi-Fi 24 bitÂm thanh vòm 360",
+        "Micro": "Có 6 micro",
+        "Thời lượng sử dụng Pin": "Tai nghe:6 giờ (Tắt ANC) / 5 giờ (Bật ANC)Hộp sạc: 30 giờ (Tắt ANC) / 24 giờ (Bật ANC)",
+        "Phương thức điều khiển": "Cảm ứng chạmNhấn thanh bar",
+        "Tính năng khác": "Tự động chuyển đổi kết nối giữa các thiết bị GalaxyPhiên dịch viên hỗ trợ nghe bản dịch trực tiếpKháng bụi và nước IP57",
+        "Hãng sản xuất": "Samsung Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_318.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai_nghe_bluetooth_true_wireless_samsung_galaxy_buds_3_1.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-buds-3_3_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-buds-3_2_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-buds-3_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-buds-3_5_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-buds-3.png",
+          "altText": "Tai nghe Bluetooth True Wireless Samsung Galaxy Buds 3 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4)",
+      "slug": "tai-nghe-bluetooth-apple-airpods-5-2026-sac-co-day-mkfw4",
+      "sku": "HEAD-0023",
+      "brand": "Apple Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Tai nghe Apple AirPod 5 ra mắt với thiết kế Open-Ear, ANC, chip H2, âm thanh kiến trúc đa cổng, chống nước IP57, pin 20h. Mua ngay tại CellphoneS.",
+      "description": "Tai nghe Apple AirPod 5 ra mắt với thiết kế Open-Ear, ANC, chip H2, âm thanh kiến trúc đa cổng, chống nước IP57, pin 20h. Mua ngay tại CellphoneS.",
+      "price": 3790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-co-day.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Kích thước": "Tai nghe: 30.2 x 18.3 x 18.1 mmHộp sạc: 46.2 x 50.1 x 21.2 mm",
+        "Trọng lượng": "Tai nghe: 4.3gHộp sạc: 34.7g",
+        "Công nghệ âm thanh": "Trình điều khiển &amp; bộ khuếch đại Apple tùy chỉnhChủ Động Khử Tiếng ỒnÂm thanh thích ứng &amp; xuyên âmNhận biết cuộc hội thoại &amp; tách lời nóiCá nhân hóa âm thanhEQ Thích ỨngGhi âm chuẩn studioHệ thống thông hơi cân bằng áp suất",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Thời lượng pin tai nghe: thời gian lên đến 4 giờ với một lần sạc khi bật Chủ Động Khử Tiếng ỒnThời lượng pin với hộp sạc: thời gian đàm thoại lên đến 20 giờ khi bật Chủ Động Khử Tiếng Ồn",
+        "Phương thức điều khiển": "Cảm biến lực",
+        "Chipset": "Chip tai nghe H2",
+        "Hãng sản xuất": "Apple Chính hãng",
+        "Tiện ích": "Hỗ trợ Siri AIDịch Trực Tiếp (Live Translation)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-co-day.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-1.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-2.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-4-type-c.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-5.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-6.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-7.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth Apple AirPods 4 | Chính hãng Apple Việt Nam",
+      "slug": "tai-nghe-bluetooth-apple-airpods-4-chinh-hang-apple-viet-nam",
+      "sku": "HEAD-0024",
+      "brand": "Apple Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Apple AirPods 4 chính hãng - Giá tốt, Trả góp 0%, 0đ Trả trước, 0đ Phụ phí, Giảm 3% Smember, giao hàng nhanh. Mua ngay AirPod 4 tại đây.",
+      "description": "Mua Apple AirPods 4 chính hãng - Giá tốt, Trả góp 0%, 0đ Trả trước, 0đ Phụ phí, Giảm 3% Smember, giao hàng nhanh. Mua ngay AirPod 4 tại đây.",
+      "price": 3090000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-4-thumb.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 114,
+      "specifications": {
+        "Kích thước": "Tai nghe: 30.2 x 18.3 x 18.1 mmHộp sạc: 46.2 x 50.1 x 21.2 mm",
+        "Trọng lượng": "Tai nghe: 4.3gHộp sạc: 32.3g",
+        "Công nghệ âm thanh": "Trình điều khiển Apple với độ lệch tương phản cao có thể tùy chỉnh Bộ khuếch đại với độ lệch tương phản cao có thể tùy chỉnh Tách Lời Nói Chế độ Âm Thanh Không Gian Cá Nhân Hóa với tính năng theo dõi chuyển động đầu chủ động EQ Thích Ứng H",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Thời gian nghe lên đến 5 giờ với một lần sạc Thời gian đàm thoại lên đến 4,5 giờ với một lần sạc",
+        "Phương thức điều khiển": "Cảm biến lực",
+        "Chipset": "Chip tai nghe H2",
+        "Hãng sản xuất": "Apple Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-4-thumb.png",
+          "altText": "Tai nghe Bluetooth Apple AirPods 4 | Chính hãng Apple Việt Nam - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods-4-1.png",
+          "altText": "Tai nghe Bluetooth Apple AirPods 4 | Chính hãng Apple Việt Nam - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods-4-2.png",
+          "altText": "Tai nghe Bluetooth Apple AirPods 4 | Chính hãng Apple Việt Nam - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods-4-3.png",
+          "altText": "Tai nghe Bluetooth Apple AirPods 4 | Chính hãng Apple Việt Nam - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods-4-3-1.png",
+          "altText": "Tai nghe Bluetooth Apple AirPods 4 | Chính hãng Apple Việt Nam - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods-4-3-2.png",
+          "altText": "Tai nghe Bluetooth Apple AirPods 4 | Chính hãng Apple Việt Nam - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods-4-3-3.png",
+          "altText": "Tai nghe Bluetooth Apple AirPods 4 | Chính hãng Apple Việt Nam - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Không Dây (MKFT4)",
+      "slug": "tai-nghe-bluetooth-apple-airpods-5-2026-sac-khong-day-mkft4",
+      "sku": "HEAD-0025",
+      "brand": "Apple Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua AirPods 5 sạc không dây chính hãng Apple. Nổi bật với chống ồn ANC, chip H2, pin 30h, hộp sạc MagSafe có loa Find My. Đặt cọc nhận ưu đãi ngay.",
+      "description": "Mua AirPods 5 sạc không dây chính hãng Apple. Nổi bật với chống ồn ANC, chip H2, pin 30h, hộp sạc MagSafe có loa Find My. Đặt cọc nhận ưu đãi ngay.",
+      "price": 4290000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-khong-day.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 6,
+      "specifications": {
+        "Kích thước": "Tai nghe: 30.2 x 18.3 x 18.1 mmHộp sạc: 46.2 x 50.1 x 21.2 mm",
+        "Trọng lượng": "Tai nghe: 4.3gHộp sạc: 34.7g",
+        "Công nghệ âm thanh": "Trình điều khiển &amp; bộ khuếch đại Apple tùy chỉnhChủ Động Khử Tiếng ỒnÂm thanh thích ứng &amp; xuyên âmNhận biết cuộc hội thoại &amp; tách lời nóiCá nhân hóa âm thanhEQ Thích ỨngGhi âm chuẩn studioHệ thống thông hơi cân bằng áp suất",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Thời lượng pin tai nghe: thời gian lên đến 5 giờ với một lần sạc khi bật Chủ Động Khử Tiếng ỒnThời lượng pin với hộp sạc: thời gian đàm thoại lên đến 22 giờ khi bật Chủ Động Khử Tiếng Ồn",
+        "Phương thức điều khiển": "Cảm biến lực",
+        "Chipset": "Chip tai nghe H2",
+        "Hãng sản xuất": "Apple Chính hãng",
+        "Tiện ích": "Hỗ trợ Siri AIDịch Trực Tiếp (Live Translation)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-khong-day.png",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Không Dây (MKFT4) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-1_1.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Không Dây (MKFT4) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-2_1.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Không Dây (MKFT4) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-3-wireless.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Không Dây (MKFT4) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-5_1.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Không Dây (MKFT4) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-6_1.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Không Dây (MKFT4) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-7_1.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Không Dây (MKFT4) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Anker Soundcore R60i NC",
+      "slug": "tai-nghe-bluetooth-true-wireless-anker-soundcore-r60i-nc",
+      "sku": "HEAD-0026",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua tai nghe Anker Soundcore R60i NC chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore R60i NC tại đây.",
+      "description": "Mua tai nghe Anker Soundcore R60i NC chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore R60i NC tại đây.",
+      "price": 680000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_343_2__1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 26,
+      "specifications": {
+        "Công nghệ âm thanh": "Adaptive ANCHi-Res Audio &amp; LDACHiệu ứng âm thanh 3D Spatial",
+        "Micro": "Có (6 micro AI)",
+        "Thời lượng sử dụng Pin": "Tai nghe: 10 giờ Hộp sạc: 50 giờ (Tắt ANC)Tai nghe: 8 giờ Hộp sạc: 40 giờ (Bật ANC)",
+        "Phương thức điều khiển": "Cảm ứng",
+        "Tính năng khác": "Kháng nước, bụi IP55",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_343_2__1.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R60i NC - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r60i-nc-a3959_2_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R60i NC - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r60i-nc-a3959-xanh_2_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R60i NC - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r60i-nc-a3959-xanh_3_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R60i NC - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r60i-nc-a3959-xanh_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R60i NC - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r60i-nc-a3959-xanh_4_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R60i NC - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r60i-nc-a3959-xanh_5_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R60i NC - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless JBL Wave Beam",
+      "slug": "tai-nghe-bluetooth-true-wireless-jbl-wave-beam",
+      "sku": "HEAD-0027",
+      "brand": "JBL",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe JBL Wave Beam chính hãng - Giá rẻ, Giảm thêm smember, bảo hành 12 tháng, giao hàng toàn quốc. Mua ngay JBL Wave Beam tại đây.",
+      "description": "Mua Tai nghe JBL Wave Beam chính hãng - Giá rẻ, Giảm thêm smember, bảo hành 12 tháng, giao hàng toàn quốc. Mua ngay JBL Wave Beam tại đây.",
+      "price": 1490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam-0000.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 64,
+      "specifications": {
+        "Kích thước": "Dài 2.35 cm - Rộng 2.186 cm - Cao 3.099 cm",
+        "Trọng lượng": "Tai nghe: 8.8g (mỗi bên)Hộp sạc: 39.5g",
+        "Công nghệ âm thanh": "JBL Deep Bass Sound",
+        "Micro": "Có (1 mic)",
+        "Thời lượng sử dụng Pin": "Tai nghe: 8 giờ Hộp sạc: 24 giờ",
+        "Phương thức điều khiển": "Chạm cảm ứng hoặc App",
+        "Tính năng khác": "Chống nước IP54",
+        "Hãng sản xuất": "JBL"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam-0000.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Beam - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam-ksp-1.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Beam - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam_4_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Beam - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam_3_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Beam - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam_5_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Beam - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam_8_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Beam - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless JBL Wave Beam - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe bluetooth Bose Quietcomfort Earbuds",
+      "slug": "tai-nghe-bluetooth-bose-quietcomfort-earbuds",
+      "sku": "HEAD-0028",
+      "brand": "Bose",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Bose Quietcomfort Earbuds - Giá tốt, Giảm ngay 200K, bảo hành 12 tháng, giao hàng nhanh. Mua Bose Quietcomfort Earbuds tại đây.",
+      "description": "Mua Tai nghe Bose Quietcomfort Earbuds - Giá tốt, Giảm ngay 200K, bảo hành 12 tháng, giao hàng nhanh. Mua Bose Quietcomfort Earbuds tại đây.",
+      "price": 3990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bose-quietcomfort-earbuds-spa.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Kích thước": "Earbuds: 2.9 x 2.7 x 2.1 cm Hộp đựng: 3.2 x 8.9 x 5.1 cm",
+        "Trọng lượng": "Earbuds: (8.5 g) Hộp đựng (47.2 g)",
+        "Công nghệ âm thanh": "Khử tiếng ồn",
+        "Micro": "6 micrô (3 micrô mỗi bên tai nghe)",
+        "Thời lượng sử dụng Pin": "Lên đến 8,5 giờ sạc liên tục có nghĩa là âm nhạc của bạn sẽ tiếp thêm năng lượng cho bạn suốt cả ngày Hộp sạc không dây cũng chứa 2,5 lần sạc cho thời gian nghe lên đến 31,5 giờ",
+        "Tính năng khác": "Kháng nước chuẩn IPX4",
+        "Hãng sản xuất": "Bose"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bose-quietcomfort-earbuds-spa.png",
+          "altText": "Tai nghe bluetooth Bose Quietcomfort Earbuds - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bose-quietcomfort-earbuds_14_.png",
+          "altText": "Tai nghe bluetooth Bose Quietcomfort Earbuds - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bose-quietcomfort-earbuds_1_.png",
+          "altText": "Tai nghe bluetooth Bose Quietcomfort Earbuds - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bose-quietcomfort-earbuds_2_.png",
+          "altText": "Tai nghe bluetooth Bose Quietcomfort Earbuds - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bose-quietcomfort-earbuds_3_.png",
+          "altText": "Tai nghe bluetooth Bose Quietcomfort Earbuds - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bose-quietcomfort-earbuds_15_.png",
+          "altText": "Tai nghe bluetooth Bose Quietcomfort Earbuds - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bose-quietcomfort-earbuds_9_.png",
+          "altText": "Tai nghe bluetooth Bose Quietcomfort Earbuds - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth Apple AirPods Pro 2 2023 USB-C | Chính hãng Apple Việt Nam",
+      "slug": "tai-nghe-bluetooth-apple-airpods-pro-2-2023-usb-c-chinh-hang-apple-viet-nam",
+      "sku": "HEAD-0029",
+      "brand": "Apple Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Apple Airpod Pro 2023 USB-C chính hãng, giá rẻ 10/2026 - Góp 0%, Không phụ phí - trả trước, giao nhanh 2h. Mua Airpod Pro 2 USB-C tại đây.",
+      "description": "Mua Apple Airpod Pro 2023 USB-C chính hãng, giá rẻ 10/2026 - Góp 0%, Không phụ phí - trả trước, giao nhanh 2h. Mua Airpod Pro 2 USB-C tại đây.",
+      "price": 4990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-pro-2-usb-c_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 100,
+      "specifications": {
+        "Công nghệ âm thanh": "Active Noise CancellationChip Apple H2Adaptive EQ",
+        "Micro": "Có",
+        "Phương thức điều khiển": "Cảm ứng chạm",
+        "Hãng sản xuất": "Apple Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-pro-2-usb-c_1_.png",
+          "altText": "Tai nghe Bluetooth Apple AirPods Pro 2 2023 USB-C | Chính hãng Apple Việt Nam - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods_pro_2_sep24_pdp_image_position_1__vn-vi.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods Pro 2 2023 USB-C | Chính hãng Apple Việt Nam - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods_pro_2_sep24_pdp_image_position_2__vn-vi.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods Pro 2 2023 USB-C | Chính hãng Apple Việt Nam - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods_pro_2_sep24_pdp_image_position_3__vn-vi.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods Pro 2 2023 USB-C | Chính hãng Apple Việt Nam - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods_pro_2_sep24_pdp_image_position_4__vn-vi.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods Pro 2 2023 USB-C | Chính hãng Apple Việt Nam - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods_pro_2_sep24_pdp_image_position_5__vn-vi.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods Pro 2 2023 USB-C | Chính hãng Apple Việt Nam - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/i/airpods_pro_2_sep24_pdp_image_position_6__vn-vi.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods Pro 2 2023 USB-C | Chính hãng Apple Việt Nam - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Anker Soundcore K20i - A3994",
+      "slug": "tai-nghe-bluetooth-true-wireless-anker-soundcore-k20i-a3994",
+      "sku": "HEAD-0030",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Anker Soundcore K20i - A3994 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore K20i - A3994 tại đây.",
+      "description": "Mua Tai nghe Anker Soundcore K20i - A3994 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore K20i - A3994 tại đây.",
+      "price": 285000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_348_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 24,
+      "specifications": {
+        "Kích thước": "Dài 1.6 cm - Rộng 1.6 cm - Cao 3.3 cm",
+        "Trọng lượng": "3.3 g",
+        "Công nghệ âm thanh": "EQ Sound Bassup",
+        "Micro": "2 Micro chống ồn",
+        "Thời lượng sử dụng Pin": "Tai nghe: 6 giờHộp sạc: 36 giờ",
+        "Phương thức điều khiển": "Cảm ứng chạm",
+        "Tính năng khác": "Chống ồn đàm thoại ENCChống nước IPX5 Game Mode",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_348_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore K20i - A3994 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-k20i-a3994_2_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore K20i - A3994 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-k20i-a3994_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore K20i - A3994 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-k20i-a3994_1__4.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore K20i - A3994 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-k20i-a3994_8_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore K20i - A3994 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-k20i-a3994_7_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore K20i - A3994 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-k20i-a3994_2__3.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore K20i - A3994 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Baseus Bass BS2 Lite",
+      "slug": "tai-nghe-bluetooth-true-wireless-baseus-bass-bs2-lite",
+      "sku": "HEAD-0031",
+      "brand": "Baseus",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Baseus Bass BS 2 Lite chính hãng - Giá tốt, bảo hành uy tín, giao hàng toàn quốc. Mua ngay Baseus Bass BS 2 Lite tại đây.",
+      "description": "Mua Tai nghe Baseus Bass BS 2 Lite chính hãng - Giá tốt, bảo hành uy tín, giao hàng toàn quốc. Mua ngay Baseus Bass BS 2 Lite tại đây.",
+      "price": 290000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-baseus-bass-bs-2-lite-_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 4,
+      "specifications": {
+        "Công nghệ âm thanh": "Chống ồn môi trường ENC",
+        "Micro": "Có (1 + 1 micro)",
+        "Thời lượng sử dụng Pin": "Tai nghe: 6 giờHộp sạc: 40 giờ",
+        "Phương thức điều khiển": "Cảm ứng chạmĐiều khiển qua ứng dụng",
+        "Tính năng khác": "Chống nước: IPX5",
+        "Hãng sản xuất": "Baseus"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-baseus-bass-bs-2-lite-_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Baseus Bass BS2 Lite - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-baseus-bass-bs-2-lite-_2_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Baseus Bass BS2 Lite - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-baseus-bass-bs-2-lite-_15_.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Baseus Bass BS2 Lite - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-baseus-bass-bs-2-lite-_14_.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Baseus Bass BS2 Lite - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-baseus-bass-bs-2-lite-_16_.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Baseus Bass BS2 Lite - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-baseus-bass-bs-2-lite-_17_.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Baseus Bass BS2 Lite - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-baseus-bass-bs-2-lite-_18_.jpg",
+          "altText": "Tai nghe Bluetooth True Wireless Baseus Bass BS2 Lite - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949",
+      "slug": "tai-nghe-bluetooth-true-wireless-anker-soundcore-r50i-a3949",
+      "sku": "HEAD-0032",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua tai nghe Anker Soundcore R50i A3949 chính hãng - Giá rẻ 10/2026, bảo hành uy tín, giao hàng toàn quốc. Mua Soundcore R50i tại đây.",
+      "description": "Mua tai nghe Anker Soundcore R50i A3949 chính hãng - Giá rẻ 10/2026, bảo hành uy tín, giao hàng toàn quốc. Mua Soundcore R50i tại đây.",
+      "price": 295000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_345_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 178,
+      "specifications": {
+        "Trọng lượng": "45.36g",
+        "Micro": "Có2 micro",
+        "Thời lượng sử dụng Pin": "Tai nghe: Dùng 10 giờHộp sạc: 30 giờ",
+        "Tính năng khác": "Chống nước IPX5",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_345_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-a3949-ksp.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-a3949_3_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-a3949_6_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-a3949_7_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-a3949_5_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-a3949_8_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth thể thao Anker Soundcore C50i",
+      "slug": "tai-nghe-bluetooth-the-thao-anker-soundcore-c50i",
+      "sku": "HEAD-0033",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua tai nghe Anker Soundcore C50i chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore C50i tại đây.",
+      "description": "Mua tai nghe Anker Soundcore C50i chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore C50i tại đây.",
+      "price": 1090000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-anker-soundcore-c50i-spa.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Trọng lượng": "Tai nghe: 5.5 g",
+        "Micro": "Có (2 micro AI)",
+        "Thời lượng sử dụng Pin": "Tai nghe: 7 giờ Hộp sạc: 28 giờ",
+        "Tính năng khác": "Kháng nước, bụi IP55",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-anker-soundcore-c50i-spa.png",
+          "altText": "Tai nghe Bluetooth thể thao Anker Soundcore C50i - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-anker-soundcore-c50i_7_.png",
+          "altText": "Tai nghe Bluetooth thể thao Anker Soundcore C50i - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-anker-soundcore-c50i.png",
+          "altText": "Tai nghe Bluetooth thể thao Anker Soundcore C50i - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-anker-soundcore-c50i_2__1.png",
+          "altText": "Tai nghe Bluetooth thể thao Anker Soundcore C50i - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-anker-soundcore-c50i_2.png",
+          "altText": "Tai nghe Bluetooth thể thao Anker Soundcore C50i - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-anker-soundcore-c50i-tim.png",
+          "altText": "Tai nghe Bluetooth thể thao Anker Soundcore C50i - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-anker-soundcore-c50i_3_.png",
+          "altText": "Tai nghe Bluetooth thể thao Anker Soundcore C50i - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Anker Soundcore R50I NC",
+      "slug": "tai-nghe-bluetooth-true-wireless-anker-soundcore-r50i-nc",
+      "sku": "HEAD-0034",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Anker Soundcore R50I NC chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore R50I NC tại đây.",
+      "description": "Mua Tai nghe Anker Soundcore R50I NC chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Anker Soundcore R50I NC tại đây.",
+      "price": 390000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_344_1__1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 78,
+      "specifications": {
+        "Công suất": "6W",
+        "Thời lượng pin": "10 giờ",
+        "Trọng lượng": "Tai nghe: 5g Hộp sạc: 40g",
+        "Công nghệ âm thanh": "Chống ồn chủ động (ANC)",
+        "Micro": "Có (4 micro AI)",
+        "Thời lượng sử dụng Pin": "Tai nghe: 10 giờHộp sạc: 45 giờ",
+        "Phương thức điều khiển": "Cảm ứng chạm",
+        "Tính năng khác": "Sạc nhanhChống ồn đàm thoại Chống nước IP54",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_344_1__1.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50I NC - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-nc-9.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50I NC - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-nc-1.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50I NC - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-nc-4.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50I NC - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-nc-5.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50I NC - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-nc-3.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50I NC - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-anker-soundcore-r50i-nc-6.png",
+          "altText": "Tai nghe Bluetooth True Wireless Anker Soundcore R50I NC - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe không dây JBL Wave Buds 2",
+      "slug": "tai-nghe-khong-day-jbl-wave-buds-2",
+      "sku": "HEAD-0035",
+      "brand": "JBL",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Tai nghe không dây JBL Wave Buds 2 chính hãng - Giá rẻ, hỗ trợ trả góp, Giảm thêm Smember, bảo hành 1 năm, giao toàn quốc. Mua Wave Buds 2 tại đây.",
+      "description": "Tai nghe không dây JBL Wave Buds 2 chính hãng - Giá rẻ, hỗ trợ trả góp, Giảm thêm Smember, bảo hành 1 năm, giao toàn quốc. Mua Wave Buds 2 tại đây.",
+      "price": 1390000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-buds-2-_14_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 12,
+      "specifications": {
+        "Kích thước": "Tai nghe: 21.6 x 15.8 x 20.4mmHộp sạc: 68.9 x 26.7 x 37mm",
+        "Trọng lượng": "Tai nghe: 4,5 g (mỗi bên) Hộp sạc: 35g",
+        "Công nghệ âm thanh": "JBL Pure Bass Sound",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Thời gian phát lại lên đến 40 giờ Tận hưởng 10 giờ phát nhạc, cộng thêm ba lần sạc đầy 30 giờ trong hộp sạc",
+        "Tính năng khác": "Chống nước và bụi IP54",
+        "Hãng sản xuất": "JBL"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-buds-2-_14_.png",
+          "altText": "Tai nghe không dây JBL Wave Buds 2 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-buds-2-spa.png",
+          "altText": "Tai nghe không dây JBL Wave Buds 2 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-buds-2-_23_.png",
+          "altText": "Tai nghe không dây JBL Wave Buds 2 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-buds-2-_30_.png",
+          "altText": "Tai nghe không dây JBL Wave Buds 2 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-buds-2-_29_.png",
+          "altText": "Tai nghe không dây JBL Wave Buds 2 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-buds-2-_27_.png",
+          "altText": "Tai nghe không dây JBL Wave Buds 2 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-buds-2-_28_.png",
+          "altText": "Tai nghe không dây JBL Wave Buds 2 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth chụp tai Sony WH-CH720N",
+      "slug": "tai-nghe-bluetooth-chup-tai-sony-wh-ch720n",
+      "sku": "HEAD-0036",
+      "brand": "Sony",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe chụp tai Sony WH-CH720N chính hãng - Giá tốt, đảm bảo chất lượng, bảo hành uy tín, giao hàng toàn quốc. Mua WH-CH720N tại đây.",
+      "description": "Mua Tai nghe chụp tai Sony WH-CH720N chính hãng - Giá tốt, đảm bảo chất lượng, bảo hành uy tín, giao hàng toàn quốc. Mua WH-CH720N tại đây.",
+      "price": 2080000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_379_1_7.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 18,
+      "specifications": {
+        "Kích thước": "Dài 26 cm - Rộng 20.8 cm - Cao 5.5 cm",
+        "Trọng lượng": "192g",
+        "Công nghệ âm thanh": "Bộ xử lý tích hợp V1 codec SBC Chống ồn kỹ thuật số Công nghệ ENC Công nghệ lọc tiếng ồn Ambient Sound codec AAC 360 Reality Audio DSEE Adaptive Sound Control Equalizer",
+        "Micro": "Có",
+        "Cổng kết nối": "3.5mm",
+        "Thời lượng sử dụng Pin": "Bật ANC: 35 giờTắt ANC: 50 giờ",
+        "Phương thức điều khiển": "Nút bấm vật lý",
+        "Tính năng khác": "Tương thích trợ lý ảo",
+        "Hãng sản xuất": "Sony"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_379_1_7.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH720N - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/0/1/01_3_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH720N - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/0/2/02_5_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH720N - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/o/sony_wh-ch720n_2_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH720N - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/o/sony_wh-ch720n_3_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH720N - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/o/sony_wh-ch720n_4_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH720N - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/o/sony_wh-ch720n_1_.png",
+          "altText": "Tai nghe Bluetooth chụp tai Sony WH-CH720N - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Sony WF-C510",
+      "slug": "tai-nghe-bluetooth-true-wireless-sony-wf-c510",
+      "sku": "HEAD-0037",
+      "brand": "Sony",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Sony WF-C510 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Sony WF-C510 tại đây.",
+      "description": "Mua Tai nghe Sony WF-C510 chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Sony WF-C510 tại đây.",
+      "price": 890000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-sony-wf-c510-spa.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 22,
+      "specifications": {
+        "Kích thước": "Dài 2.5 cm - Rộng 1.7 cm - Cao 2.3 cm",
+        "Trọng lượng": "4.6 g",
+        "Công nghệ âm thanh": "360 Reality Audio DSEE Equalizer",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Tai nghe: 11 giờHộp sạc: 11 giờ",
+        "Phương thức điều khiển": "Nút bấm vật lý",
+        "Tính năng khác": "Xuyên âmDual ConnectFast PairMicro giảm ồn Chống nước IPX4",
+        "Hãng sản xuất": "Sony"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-sony-wf-c510-spa.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony WF-C510 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/w/h/wh-c510_relayout.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony WF-C510 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-sony-wf-c510-.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony WF-C510 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-sony-wf-c510_12_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony WF-C510 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-sony-wf-c510_11_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony WF-C510 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-sony-wf-c510_10_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony WF-C510 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-sony-wf-c510_14_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Sony WF-C510 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Tai nghe Bluetooth True Wireless Huawei Freebuds SE 4 (ANC)",
+      "slug": "tai-nghe-bluetooth-true-wireless-huawei-freebuds-se-4-anc",
+      "sku": "HEAD-0038",
+      "brand": "Huawei",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Tai nghe Huawei Freebuds SE 4 chính hãng - Giá rẻ, trả góp tốt, bảo hành uy tín, giao hàng nhanh toàn quốc. Mua Huawei Freebuds SE 4 tại đây.",
+      "description": "Mua Tai nghe Huawei Freebuds SE 4 chính hãng - Giá rẻ, trả góp tốt, bảo hành uy tín, giao hàng nhanh toàn quốc. Mua Huawei Freebuds SE 4 tại đây.",
+      "price": 790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-huawei-freebuds-se-4-spa.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Trọng lượng": "Tai nghe: 4.3g",
+        "Công nghệ âm thanh": "Chống ồn chủ động ANC",
+        "Micro": "Có (3 micro mỗi tai)",
+        "Thời lượng sử dụng Pin": "Tai nghe: 10 giờHộp sạc: 50 giờ",
+        "Phương thức điều khiển": "Cảm ứng chạm",
+        "Hãng sản xuất": "Huawei"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-huawei-freebuds-se-4-spa.png",
+          "altText": "Tai nghe Bluetooth True Wireless Huawei Freebuds SE 4 (ANC) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-huawei-freebuds-se-4-ksp.png",
+          "altText": "Tai nghe Bluetooth True Wireless Huawei Freebuds SE 4 (ANC) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-huawei-freebuds-se-4_12_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Huawei Freebuds SE 4 (ANC) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-huawei-freebuds-se-4_13_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Huawei Freebuds SE 4 (ANC) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-huawei-freebuds-se-4_1_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Huawei Freebuds SE 4 (ANC) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-huawei-freebuds-se-4_15_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Huawei Freebuds SE 4 (ANC) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-huawei-freebuds-se-4_14_.png",
+          "altText": "Tai nghe Bluetooth True Wireless Huawei Freebuds SE 4 (ANC) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "iPhone 18 Pro 256GB",
+      "slug": "iphone-18-pro-256gb",
+      "sku": "HEAD-0039",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 Pro chính hãng giá 38.99 triệu tại CellphoneS, màn hình 6,3 inch, Chip A20 Pro, đủ màu, thu cũ giảm 5tr | Mua IP 18 pro tại CellphoneS",
+      "description": "iPhone 18 Pro chính hãng giá 38.99 triệu tại CellphoneS, màn hình 6,3 inch, Chip A20 Pro, đủ màu, thu cũ giảm 5tr | Mua IP 18 pro tại CellphoneS",
+      "price": 38690000.0,
+      "originalPrice": 38990000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 8,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "A20 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.3 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2622 x 1206 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stagef/1,9 Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "iPhone 18 Pro Max 256GB",
+      "slug": "iphone-18-pro-max-256gb",
+      "sku": "HEAD-0040",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 ProMax chính hãng giá 41,99 triệu tại CellphoneS, nâng cấp nổi bật chip A20 Pro, camera khẩu độ linh hoạt, trả góp 0% 18T - Mua ngay",
+      "description": "iPhone 18 ProMax chính hãng giá 41,99 triệu tại CellphoneS, nâng cấp nổi bật chip A20 Pro, camera khẩu độ linh hoạt, trả góp 0% 18T - Mua ngay",
+      "price": 41990000.0,
+      "originalPrice": 80999000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 10,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "Apple A20 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stage, f/1,9Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "iPhone 17 Pro Max 256GB | Chính hãng",
+      "slug": "iphone-17-pro-max-256gb-chinh-hang",
+      "sku": "HEAD-0041",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 17 Pro Max chính hãng đủ dung lượng từ 256GB - 2TB, giá tốt tháng 10/2026 - mua Apple iP 17 Promax trả góp 0% 12 tháng tại CellphoneS",
+      "description": "iPhone 17 Pro Max chính hãng đủ dung lượng từ 256GB - 2TB, giá tốt tháng 10/2026 - mua Apple iP 17 Promax trả góp 0% 12 tháng tại CellphoneS",
+      "price": 34990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 82,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 26",
+        "Chipset": "Chip A19 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 lõi hiệu năng và 4 lõi tiết kiệm điện",
+        "GPU": "GPU 6 lõi với Neural Accelerator",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Màn hình Luôn Bật, ProMotion 120Hz, HDR, True Tone, Dải màu rộng (P3), Haptic Touch, Tỷ lệ tương phản 2.000.000:1, Độ sáng 1000 nit (tiêu chuẩn), 1600 nit (HDR), 3000 nit (ngoài trời) / tối thiểu 1 nit, Lớp phủ kháng dầu, Chống phản chiếu, Hỗ trợ đa ngôn",
+        "Camera sau": "Chính: 48MP khẩu độ ƒ/1.6 OIS hỗ trợ chụp 24MP hoặc 48MPGóc Siêu Rộng: 48MP khẩu độ ƒ/2.2 góc nhìn 120°Telephoto: 48MP khẩu độ ƒ/2.8 OIS zoom quang học lên đến 8x",
+        "Camera trước": "Camera 18MP Center Stage Khẩu độ ƒ/1.9",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Sim kép (nano-Sim và e-Sim) - Hỗ trợ 2 e-Sim",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max_1_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-1_4.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-2_1_1.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-4.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "OPPO Find X9s 12GB 256GB",
+      "slug": "oppo-find-x9s-12gb-256gb",
+      "sku": "HEAD-0042",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Điện thoại OPPO Find X9s 12GB/256GB chính hãng giá 22.840.000đ, giảm đến 8.15tr, góp 0%, có thu cũ, quà 12tr, lỗi 1 đổi 1, BH 24T. Mua ngay!",
+      "description": "Điện thoại OPPO Find X9s 12GB/256GB chính hãng giá 22.840.000đ, giảm đến 8.15tr, góp 0%, có thu cũ, quà 12tr, lỗi 1 đổi 1, BH 24T. Mua ngay!",
+      "price": 24990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 8,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16.0",
+        "Chipset": "MediaTek Dimensity 9500s",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "ARM Immortalis G925 MC12",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1256 x 2760 pixels",
+        "Tính năng màn hình": "Độ sáng tối đa 1800 nitsTần số lấy mẫu cảm ứng tối đa 240Hz1.07 tỷ màu460 PPI100% DCI-P3",
+        "Camera sau": "Góc siêu rộng 50 MP, f/2.0Góc rộng 50 MP, f/1.8Telephoto 50 MP, f/2.6",
+        "Camera trước": "32 MP, f/2.4",
+        "Pin": "7025 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Dual nano-SIM hoặc 1 nano-SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-1.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-2.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-3.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-4.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "OPPO Find X9 Ultra 12GB 512GB",
+      "slug": "oppo-find-x9-ultra-12gb-512gb",
+      "sku": "HEAD-0043",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "OPPO Find X9 Ultra 12GB/512GB màn hình 6.82&quot; 2K+ 144Hz, chip Snapdragon 8 Elite Gen 5, camera 200MP. Giảm 4tr, thu cũ trợ giá 6tr. Mua ngay",
+      "description": "OPPO Find X9 Ultra 12GB/512GB màn hình 6.82&quot; 2K+ 144Hz, chip Snapdragon 8 Elite Gen 5, camera 200MP. Giảm 4tr, thu cũ trợ giá 6tr. Mua ngay",
+      "price": 45990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 6,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16 Android 16",
+        "Chipset": "Snapdragon 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Adreno 840",
+        "Kích thước màn hình": "6.82 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "3168 x 1440 pixel",
+        "Tính năng màn hình": "Độ sáng tối đa 3600 nitsTần số lấy mẫu cảm ứng tối đa 300Hz1.07 tỷ màu510 PPI100% DCI-P3",
+        "Camera sau": "Góc siêu rộng 50 MP, f/2.0Góc rộng 200 MP, f/1.5Tele 200 MP, f/2.2Tele siêu xa 50 MP, f/3.5Đơn sắc 3.2 MP, f/2.4",
+        "Camera trước": "50 MP, f/2.4",
+        "Pin": "7050 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 2 eSIM hoặc 1 Nano SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-1.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-2.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-3.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-4.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Samsung Galaxy Z Flip8 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-flip8-5g-12gb-256gb",
+      "sku": "HEAD-0044",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Flip 8 256GB giá lên đời từ 21.215tr, trợ giá 6tr, tặng Google AI Pro 6 tháng và hậu mãi đặc quyền. Mua Z Flip 8 tại CellphoneS.",
+      "description": "Samsung Galaxy Z Flip 8 256GB giá lên đời từ 21.215tr, trợ giá 6tr, tặng Google AI Pro 6 tháng và hậu mãi đặc quyền. Mua Z Flip 8 tại CellphoneS.",
+      "price": 27790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-flip-8-pink-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Exynos 2600",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "10 nhân, tốc độ 3.8 GHz, 3.25 GHz và 2.75 GHz",
+        "Kích thước màn hình": "Chính 6.9 inches, Phụ 4.1 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels",
+        "Tính năng màn hình": "Tần số quét 120HzĐộ sáng tối đa 2600 nitsKính Corning Gorilla Glass Ceramic 316 triệu màu",
+        "Camera sau": "Góc rộng 50 MP, f/1.8Góc siêu rộng 12 MP, f/2.2",
+        "Camera trước": "10 MP, f/2.2",
+        "Pin": "4300 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-flip-8-pink-01.jpg",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-1.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-2.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-5.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-4.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-3.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-6.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Samsung Galaxy Z Fold8 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-fold8-5g-12gb-256gb",
+      "sku": "HEAD-0045",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Fold 8 256GB giá lên đời từ 34.58tr, trợ giá đến 6tr, giảm ngay 6tr, tặng hậu mãi Z Care. Mua Z Fold 8 tại CellphoneS.",
+      "description": "Samsung Galaxy Z Fold 8 256GB giá lên đời từ 34.58tr, trợ giá đến 6tr, giảm ngay 6tr, tặng hậu mãi Z Care. Mua Z Fold 8 tại CellphoneS.",
+      "price": 40490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-lavender-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Snapdragon® 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "8 nhân: 2 nhân 4.74 GHz và 6 nhân 3.62 GHz",
+        "Kích thước màn hình": "Chính 7.6 inches, Phụ 5.5 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 2448 x 1848 pixels (QXGA+) - Phụ: 1972 x 1248 pixels (FHD+)",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nitsKính Corning Gorilla Glass Ceramic 3",
+        "Camera sau": "Góc rộng 50 MP, f/1.9Góc siêu rộng 50 MP, f/1.8",
+        "Camera trước": "10 MP, f/2.210 MP",
+        "Pin": "4800 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-lavender-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-01.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-02.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-04.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-05.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-03.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-06.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-fold8-ultra-5g-12gb-256gb",
+      "sku": "HEAD-0046",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Fold 8 Ultra giá từ 41.51tr, lên đời trợ đến 6tr, hoàn 1tr với MoMo ví trả sau, kèm Galaxy Z Care. Mua Z Fold 8 Ultra tại CellphoneS.",
+      "description": "Samsung Galaxy Z Fold 8 Ultra giá từ 41.51tr, lên đời trợ đến 6tr, hoàn 1tr với MoMo ví trả sau, kèm Galaxy Z Care. Mua Z Fold 8 Ultra tại CellphoneS.",
+      "price": 48990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Snapdragon® 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "8 nhân - 2 nhân 4.74 GHz và 6 nhân 3.62 GHz",
+        "Kích thước màn hình": "Chính 8.0 inches, Phụ 6.5 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 2184 x 1968 Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels (QXGA+) - Phụ: 2520 x 1080 Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels (FHD+)",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nitsMặt kính Corning Gorilla Glass Ceramic 316 triệu màu",
+        "Camera sau": "Góc rộng 200 MP, f/1.7Góc siêu rộng 50 MP, f/2.2Tele 10 MP, f/2.4",
+        "Camera trước": "10 MP, f/2.210 MP",
+        "Pin": "5000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-1.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-2.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-3.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-4.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-6.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "tai-nghe",
+      "name": "Xiaomi 17T 5G 12GB 512GB",
+      "slug": "xiaomi-17t-5g-12gb-512gb",
+      "sku": "HEAD-0047",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Xiaomi 17T 5G (12GB/512GB) giá chỉ từ 17.690Tr, Trợ giá lên đời đến 5 triệu, Bảo hành 2 năm và 6 tháng rơi vỡ màn. Pin 6500 mAh, Chip Dimesity 8500. Mua ngay.",
+      "description": "Mua Xiaomi 17T 5G (12GB/512GB) giá chỉ từ 17.690Tr, Trợ giá lên đời đến 5 triệu, Bảo hành 2 năm và 6 tháng rơi vỡ màn. Pin 6500 mAh, Chip Dimesity 8500. Mua ngay.",
+      "price": 17590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Xiaomi HyperOS 3",
+        "Chipset": "MediaTek Dimensity 8500-Ultra",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Mali-G720 MC8",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "2756 x 1268 pixels",
+        "Tính năng màn hình": "Độ sáng tối đa 3500 nits460 PPI100% DCI-P312bit, 68 tỉ màuDolby VisionHDR10+",
+        "Camera sau": "Chính 50 MP, f/1.7Tele 0 MP, f/3.0Góc siêu rộng 12 MP, f/2.2",
+        "Camera trước": "32 MP, f/2.2",
+        "Pin": "6500 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 2 eSIM hoặc 1 Nano SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-1.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-3.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-4.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3975 @@
+{
+  "metadata": {
+    "source": "cellphones.com.vn",
+    "category": {
+      "name": "Phụ kiện",
+      "slug": "phu-kien"
+    },
+    "totalCrawled": 50,
+    "rejected": 83,
+    "skuPrefix": "ACC",
+    "generatedAt": "2026-10-20T15:58:11.933271"
+  },
+  "products": [
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng StarGO Star X1 Lite 10000mAh 10.5W",
+      "slug": "pin-sac-du-phong-stargo-star-x1-lite-10000mah-105w",
+      "sku": "ACC-0001",
+      "brand": "StarGO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng StarGO Star X1 Lite 10000mAh 10.5W chính hãng, nhiều ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi. Mua ngay.",
+      "description": "Mua pin sạc dự phòng StarGO Star X1 Lite 10000mAh 10.5W chính hãng, nhiều ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi. Mua ngay.",
+      "price": 190000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-stargo-star-x1-lite-10000mah-10w.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Dung lượng pin": "10.000 mAh",
+        "Công suất sạc": "10.5W",
+        "Cổng sạc ra": "2 x USB-A",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Sạc nhiều thiết bị cùng lúc Chứng nhận CCC (tùy sản phẩm)",
+        "Lõi pin": "2 viên pin Lithium-Polymer",
+        "Kích thước": "14.6 x 6.8 x 1.6 cm",
+        "Hãng sản xuất": "StarGO"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-stargo-star-x1-lite-10000mah-10w.png",
+          "altText": "Pin sạc dự phòng StarGO Star X1 Lite 10000mAh 10.5W - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-stargo-star-x1-lite-10000mah-10w.jpg",
+          "altText": "Pin sạc dự phòng StarGO Star X1 Lite 10000mAh 10.5W - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_-_2025-07-28t095905.381.png",
+          "altText": "Pin sạc dự phòng StarGO Star X1 Lite 10000mAh 10.5W - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_-_2025-07-28t095918.875.png",
+          "altText": "Pin sạc dự phòng StarGO Star X1 Lite 10000mAh 10.5W - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W",
+      "slug": "pin-sac-du-phong-baseus-enercore-cr11-kem-cap-rut-gon-20000mah-67w",
+      "sku": "ACC-0002",
+      "brand": "Baseus",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "price": 590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-du-phong-baseus-enercore-cr11-kem-cap-rut-gon-20000mah-67w.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "20000mAh",
+        "Công suất sạc": "67W",
+        "Cổng sạc ra": "1 x Cáp Type-C, 1 x USB-C",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Tuổi thọ trung bình: 300 - 500 lầnSạc được cho laptopSạc nhanhMàn hình hiển thị dạng LEDSạc cùng lúc được nhiều thiết bị Bảo vệ quá dòng, quá áp, quá nhiệt, ngắn mạchHệ thống tản nhiệt ba lớpCáp co rút chống rối",
+        "Hiệu suất sạc": "75%",
+        "Lõi pin": "Lithium polymer",
+        "Kích thước": "14.5 x 6.9 x 2.5 cm (Dài x rộng x dày)",
+        "Trọng lượng": "390g",
+        "Chiều dài dây": "70 cm",
+        "Hãng sản xuất": "Baseus"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-du-phong-baseus-enercore-cr11-kem-cap-rut-gon-20000mah-67w.png",
+          "altText": "Pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_aug_13_2026_09_58_19_am.png",
+          "altText": "Pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-baseus-enercore-cr11-kem-cap-rut-gon-20000mah-67w_1_.png",
+          "altText": "Pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-baseus-enercore-cr11-kem-cap-rut-gon-20000mah-67w_3_.png",
+          "altText": "Pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-baseus-enercore-cr11-kem-cap-rut-gon-20000mah-67w_2_.png",
+          "altText": "Pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-baseus-enercore-cr11-kem-cap-rut-gon-20000mah-67w_5_.png",
+          "altText": "Pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-baseus-enercore-cr11-kem-cap-rut-gon-20000mah-67w_4_.png",
+          "altText": "Pin sạc dự phòng Baseus Enercore CR11 kèm cáp rút gọn 20000mAh 67W - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C",
+      "slug": "pin-sac-du-phong-anker-zolo-a110l-10000mah-35w-tich-hop-2-cap-usb-c",
+      "sku": "ACC-0003",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "price": 800000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110l-10000mah-35w_2.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "10.000mAh",
+        "Công suất sạc": "35W",
+        "Cổng sạc ra": "2 x Cáp USB-C tích hợp1 x USB-C1 x USB-A",
+        "Cổng sạc vào": "USB-C",
+        "Tiện ích": "Sạc nhanhCáp tích hợp chống rốiCáp chịu được 10000 lần uốn cong",
+        "Kích thước": "11 × 6.6 × 2.5 cm",
+        "Trọng lượng": "220g",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110l-10000mah-35w_2.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110l-10000mah-35w_1_.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/8/-/8-chinh-hang-silicone-kem-von-den_20__1.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/8/-/8-chinh-hang-silicone-kem-von-den_21__1.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110l-10000mah-35w_2_.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110l-10000mah-35w_4_.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110l-10000mah-35w_3_.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110L 10000mAh 35W tích hợp 2 cáp USB-C - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W",
+      "slug": "pin-sac-du-phong-cuktech-tich-hop-quat-cam-tay-cp-modular-fan-plus-10000mah-33w",
+      "sku": "ACC-0004",
+      "brand": "Cuktech",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 1090000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_524_6.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "10000mAh (36Wh)Hoạt động lên đến 37 giờ",
+        "Công suất sạc": "33W",
+        "Cổng sạc ra": "USB-C",
+        "Cổng sạc vào": "USB-C",
+        "Tiện ích": "Sạc nhanh Tính năng pass-through charging: Có thể vừa chạy quạt vừa sạc thiết bị cùng lúc Tốc độ gió lên đến 11m/s Tua bin 9 cánh quạt Quạt 3 cấp độ gió Thiết kế tháo lắp phần đầu dễ dàng",
+        "Kích thước": "7.4 × 4.4 × 5.76 cm",
+        "Trọng lượng": "225g",
+        "Hãng sản xuất": "Cuktech"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_524_6.png",
+          "altText": "Pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-tich-hop-quat-cam-tay-cuktech-cp-modular-fan-plus-10000mah-33w.jpg",
+          "altText": "Pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/r/e/redmi-note-15.png",
+          "altText": "Pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/r/e/redmi-note-15_1_.png",
+          "altText": "Pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/r/e/redmi-note-15_2_.png",
+          "altText": "Pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_427320285_2.png",
+          "altText": "Pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_427320285_1__2.png",
+          "altText": "Pin sạc dự phòng Cuktech tích hợp quạt cầm tay CP Modular Fan Plus 10000mAh 33W - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Anker Zolo A110J 10000mAh 30W 2C1A",
+      "slug": "pin-sac-du-phong-anker-zolo-a110j-10000mah-30w-2c1a",
+      "sku": "ACC-0005",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Anker Zolo  A110J 10000mAh 30W 2C1A chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng Anker Zolo  A110J 10000mAh 30W 2C1A chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "price": 835000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110j-10000mah-30w-2c1a_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "10.000mAh",
+        "Công suất sạc": "30W",
+        "Cổng sạc ra": "2 x USB-C1 x USB-A",
+        "Cổng sạc vào": "USB-C",
+        "Tiện ích": "Sạc nhanhMàn hình hiển thị thông số sạc",
+        "Lõi pin": "Cell pin LiFePO4",
+        "Kích thước": "10 x 6.15 x 3.3 cm",
+        "Trọng lượng": "275g",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110j-10000mah-30w-2c1a_1.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110J 10000mAh 30W 2C1A - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110j-10000mah-30w-2c1a_5_.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110J 10000mAh 30W 2C1A - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110j-10000mah-30w-2c1a_2_.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110J 10000mAh 30W 2C1A - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110j-10000mah-30w-2c1a_3_.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110J 10000mAh 30W 2C1A - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-anker-zolo-a110j-10000mah-30w-2c1a_4_.png",
+          "altText": "Pin sạc dự phòng Anker Zolo A110J 10000mAh 30W 2C1A - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W",
+      "slug": "pin-sac-du-phong-cuktech-10-mini-pb1055-10000mah-55w",
+      "sku": "ACC-0006",
+      "brand": "Cuktech",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 650000.0,
+      "originalPrice": 790000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-cuktech-10-mini-10000mah-55w-pb1055.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Dung lượng pin": "10000mAh",
+        "Công suất sạc": "55W",
+        "Cổng sạc ra": "2 x USB-C1 x USB-A",
+        "Cổng sạc vào": "2 x USB-C",
+        "Tiện ích": "Sạc nhanhHiển thị thông số sạc Hỗ trợ sạc nhanh đa thương hiệu chuẩn ADC2.0 Có thể mang lên máy bayChứng nhận CCC",
+        "Hiệu suất sạc": "5600mAh (5V = 3A)",
+        "Kích thước": "9.03 x 5 x 3.3 cm",
+        "Hãng sản xuất": "Cuktech"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-cuktech-10-mini-10000mah-55w-pb1055.png",
+          "altText": "Pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-cuktech-10-mini-10000mah-55w-pb1055.jpg",
+          "altText": "Pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/8/-/8-chinh-hang-silicone-kem-von-den_-_2026-08-26t162919.931.png",
+          "altText": "Pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_10_2_3.png",
+          "altText": "Pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_2_41_.png",
+          "altText": "Pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_-_2025-08-11t145306.887.png",
+          "altText": "Pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_-_2025-08-11t145258.350.png",
+          "altText": "Pin sạc dự phòng Cuktech 10 Mini PB1055 10000mAh 55W - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin dự phòng Aukey PB-Y61 Spark Sling Neo 10000mAh 30W kèm cáp USB-C",
+      "slug": "pin-du-phong-aukey-pb-y61-spark-sling-neo-10000mah-30w-kem-cap-usb-c",
+      "sku": "ACC-0007",
+      "brand": "Aukey",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin dự phòng Aukey PB-Y61 Spark Sling Neo 10000mAh 30W kèm cáp USB-C chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc",
+      "description": "Mua pin dự phòng Aukey PB-Y61 Spark Sling Neo 10000mAh 30W kèm cáp USB-C chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc",
+      "price": 490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-aukey-pb-y61-spark-sling-neo-10000mah-30w_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "10000mAh",
+        "Công suất sạc": "30W",
+        "Cổng sạc ra": "1 x USB-C1 x cáp USB-C",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Đèn LED thông báo thời lượng pinSạc nhiều thiết bị cùng lúc",
+        "Hãng sản xuất": "Aukey"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-aukey-pb-y61-spark-sling-neo-10000mah-30w_1_.png",
+          "altText": "Pin dự phòng Aukey PB-Y61 Spark Sling Neo 10000mAh 30W kèm cáp USB-C - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-aukey-pb-y61-spark-sling-neo-10000mah-30w_3_.png",
+          "altText": "Pin dự phòng Aukey PB-Y61 Spark Sling Neo 10000mAh 30W kèm cáp USB-C - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-aukey-pb-y61-spark-sling-neo-10000mah-30w_2_.png",
+          "altText": "Pin dự phòng Aukey PB-Y61 Spark Sling Neo 10000mAh 30W kèm cáp USB-C - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-aukey-pb-y61-spark-sling-neo-10000mah-30w-tich-hop-cap-usb-c-tim.png",
+          "altText": "Pin dự phòng Aukey PB-Y61 Spark Sling Neo 10000mAh 30W kèm cáp USB-C - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57",
+      "slug": "pin-sac-du-phong-aukey-spark-mini-1a1c-20000mah-20w-pb-y57",
+      "sku": "ACC-0008",
+      "brand": "Aukey",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc",
+      "description": "Mua Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc",
+      "price": 450000.0,
+      "originalPrice": 690000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-aukey-spark-mini-pb-y57-20w-20000mah.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "20000mAh",
+        "Công suất sạc": "20W",
+        "Cổng sạc ra": "1 x USB-C1 x USB-A",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Đèn LED hiển thị dung lượng pinSạc nhiều thiết bị cùng lúc",
+        "Kích thước": "11.2 x 7.4 x 2.6 cm",
+        "Trọng lượng": "322 g",
+        "Hãng sản xuất": "Aukey"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-aukey-spark-mini-pb-y57-20w-20000mah.png",
+          "altText": "Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_89_.png",
+          "altText": "Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_88_.png",
+          "altText": "Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/8/-/8-chinh-hang-silicone-kem-von-den_-_2026-08-26t155737.483.png",
+          "altText": "Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/8/-/8-chinh-hang-silicone-kem-von-den_-_2026-08-26t155747.952.png",
+          "altText": "Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_90_.png",
+          "altText": "Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_91_.png",
+          "altText": "Pin sạc dự phòng Aukey Spark Mini 1A1C 20.000mAh 20W PB-Y57 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED",
+      "slug": "pin-sac-du-phong-anker-prime-a110a-26000mah-300w-co-man-hinh-led",
+      "sku": "ACC-0009",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 2500000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-anker-prime-26000mah-300w-a110a.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "26000mAh",
+        "Công suất sạc": "Sạc 1 cổng tối đa 140W, 2 cổng: 250W Max, 3 cổng: 300W Max",
+        "Cổng sạc ra": "1 x USB-C1 x USB-ATích hợp cáp USB-C",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Sạc nhanh Kiểm soát hoàn toàn thông qua ứng dụng Điều chỉnh phân phối điện năng Được mang theo khi bay Có thể thay đổi màn hình Kết nối qua Bluetooth Thiết lập tùy chọn sạc của bạn",
+        "Kích thước": "15.99 × 3.8 × 6.27 cm",
+        "Trọng lượng": "600g",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-anker-prime-26000mah-300w-a110a.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-anker-prime-26000mah-300w-a110a.jpg",
+          "altText": "Pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_3_1__2_7.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_561_8__5.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_561_9__5.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_561_10__6.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_561_12__7.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110A 26000mAh 300W có màn hình LED - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED",
+      "slug": "pin-sac-du-phong-anker-prime-a110b-20000mah-220w-co-man-hinh-led",
+      "sku": "ACC-0010",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 2150000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-anker-prime-20000mah-220w-a110b.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "20000mAh",
+        "Công suất sạc": "Tối đa 220W",
+        "Cổng sạc ra": "2 x USB-C1 x USB-A",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Sạc nhanh Kiểm soát hoàn toàn thông qua ứng dụng Điều chỉnh phân phối điện năng Được mang theo khi bay Có thể thay đổi màn hình Kết nối qua Bluetooth Thiết lập tùy chọn sạc của bạn",
+        "Kích thước": "14.72 x 4.45 x 5.05 cm",
+        "Trọng lượng": "472g",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-anker-prime-20000mah-220w-a110b.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-anker-prime-20000mah-220w-a110b.jpg",
+          "altText": "Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_427320285_1_.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_427320285_2_.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_427320285_3_.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_427320285_4_.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_427320285_5_.png",
+          "altText": "Pin sạc dự phòng Anker Prime A110B 20000mAh 220W có màn hình LED - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer",
+      "slug": "pin-sac-du-phong-energizer-qm5000bk-5000mah-37v-li-polymer",
+      "sku": "ACC-0011",
+      "brand": "Energizer",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "price": 350000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-energizer-5000mah-3-7v-li-polymer-qm5000bk.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "5000mAh",
+        "Công suất sạc": "15W",
+        "Cổng sạc ra": "USB-C x 1Sạc không dây x 1",
+        "Cổng sạc vào": "USB-C x 1",
+        "Tiện ích": "Hỗ trợ sạc không dây/MagsafeChuẩn sạc không dây QiSạc nhanhĐèn LED hiển thị tình trạng sạc PINPowerSafe Management: Đảm bảo chống đoản mạch, quá dòng, quá tải cho sạc dự phòng và thiết bịThiết kế nam châm từ tính tích hợp giúp bám chặt thiết bị",
+        "Lõi pin": "Lithium Polymer",
+        "Kích thước": "9.4 x 6.4 x 1.8 cm",
+        "Trọng lượng": "126 ± 10g",
+        "Hãng sản xuất": "Energizer"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-energizer-5000mah-3-7v-li-polymer-qm5000bk.png",
+          "altText": "Pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-energizer-5000mah-3-7v-li-polymer-qm5000bk_2_.png",
+          "altText": "Pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-energizer-5000mah-3-7v-li-polymer-qm5000bk_3_.png",
+          "altText": "Pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-energizer-5000mah-3-7v-li-polymer-qm5000bk_1_.png",
+          "altText": "Pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-energizer-5000mah-3-7v-li-polymer-qm5000bk_4_.png",
+          "altText": "Pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-energizer-5000mah-3-7v-li-polymer-qm5000bk_5_.png",
+          "altText": "Pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-energizer-5000mah-3-7v-li-polymer-qm5000bk_6_.png",
+          "altText": "Pin sạc dự phòng Energizer QM5000BK 5000mAh /3.7V Li-Polymer - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn",
+      "slug": "pin-sac-du-phong-anker-a1695-25000mah-165w-tich-hop-cap-rut-gon",
+      "sku": "ACC-0012",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 1450000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-anker-a1695-25000mah-165w-kem-cap-rut-gon.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 16,
+      "specifications": {
+        "Dung lượng pin": "25000 mAh",
+        "Công suất sạc": "165W",
+        "Cổng sạc ra": "1 x USB-C1 x USB-A2 dây cáp USB-C",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Sạc nhanh Chống cháy nổ, chập điện Hiển thị thông số sạc",
+        "Kích thước": "15.7 × 5.4 × 4.9 cm",
+        "Trọng lượng": "595g",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-anker-a1695-25000mah-165w-kem-cap-rut-gon.png",
+          "altText": "Pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-anker-a1695-25000mah-165w-kem-cap-rut-gon_1.jpg",
+          "altText": "Pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_45__3.png",
+          "altText": "Pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_44__3.png",
+          "altText": "Pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_46__3.png",
+          "altText": "Pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_47__3.png",
+          "altText": "Pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_48__3.png",
+          "altText": "Pin sạc dự phòng Anker A1695 25.000mAh 165W tích hợp cáp rút gọn - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W",
+      "slug": "pin-sac-du-phong-ugreen-khong-day-magnetic-pb561-10000mah-20w",
+      "sku": "ACC-0013",
+      "brand": "Ugreen",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 690000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-ugreen-magnetic-pb561-10-000mah-20w.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Dung lượng pin": "10.000 mAh",
+        "Công suất sạc": "Có dây: 20WKhông dây: 15W",
+        "Cổng sạc ra": "1 x USB-C1 x Magsafe",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Tích hợp đèn LED trắng hiển thị lượng pinSạc cùng lúc tối đa 2 thiết bị",
+        "Lõi pin": "Lithium Polymer",
+        "Kích thước": "105.8 x 68.7 x 19.3mm",
+        "Trọng lượng": "221 g",
+        "Hãng sản xuất": "Ugreen"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-ugreen-magnetic-pb561-10-000mah-20w.png",
+          "altText": "Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-ugreen-magnetic-pb561-10-000mah-20w.jpg",
+          "altText": "Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-ugreen-magnetic-pb561-10-000mah-20w_2_.png",
+          "altText": "Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-ugreen-magnetic-pb561-10-000mah-20w_4_.png",
+          "altText": "Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-07-14t134805.064.png",
+          "altText": "Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-ugreen-magnetic-pb561-10-000mah-20w.png",
+          "altText": "Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-ugreen-magnetic-pb561-10-000mah-20w_1_.png",
+          "altText": "Pin sạc dự phòng Ugreen không dây Magnetic PB561 10000mAh 20W - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh",
+      "slug": "pin-sac-du-phong-anker-nano-maggo-ultra-slim-a1665-qi2-5000mah",
+      "sku": "ACC-0014",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 1290000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-anker-nano-maggo-ultra-slim-qi2-5000mah-a1665.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "5000 mAh",
+        "Công suất sạc": "Có dây: 20WKhông dây: 15W",
+        "Cổng sạc ra": "1 x USB-C1 x Magsafe",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Đèn LED hiển thị dung lượng pinSạc nhiều thiết bị cùng lúc",
+        "Hiệu suất sạc": "50%",
+        "Lõi pin": "Polymer",
+        "Kích thước": "122 g",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-anker-nano-maggo-ultra-slim-qi2-5000mah-a1665.png",
+          "altText": "Pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-anker-nano-maggo-ultra-slim-qi2-5000mah-a1665.jpg",
+          "altText": "Pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-anker-nano-maggo-ultra-slim-qi2-5000mah-a1665_8_.png",
+          "altText": "Pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-anker-nano-maggo-ultra-slim-qi2-5000mah-a1665_6_.png",
+          "altText": "Pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_785.png",
+          "altText": "Pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_647_48__3.png",
+          "altText": "Pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-anker-nano-maggo-ultra-slim-qi2-5000mah-a1665_4_.png",
+          "altText": "Pin sạc dự phòng Anker Nano Maggo Ultra Slim A1665 Qi2 5000mAh - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng",
+      "slug": "pin-sac-du-phong-mophie-essentials-snap-10000mah-co-chan-ung",
+      "sku": "ACC-0015",
+      "brand": "Mophie",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "price": 1290000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-mophie-essentials-snap-10000mah-co-chan-dung.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "10000mAh",
+        "Công suất sạc": "Có dây: 20WKhông dây: 15W",
+        "Cổng sạc ra": "USB-C PD 20WWireless Charging 15W",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Sạc nhanh Tương thích: Smartphone hỗ trợ sạc không dây Qi, AirPods Pro Gen 2/3, AirPods Gen 3 Chân đế nhôm mở/ gập tiện lợi Trang bị magnets tương thích với Apple MagSafe Đạt tiêu chuẩn CCC Thiết kế từ tính hít chặt thiết bị khi sạcSạc được qua ốp mỏng nhẹ, các ốp lưng có tích hợp MagSafe",
+        "Kích thước": "7 x 10.54 x 1.96 cm",
+        "Trọng lượng": "202.6g",
+        "Hãng sản xuất": "Mophie"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-mophie-essentials-snap-10000mah-co-chan-dung.png",
+          "altText": "Pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-mophie-essentials-snap-10000mah-co-chan-dung.jpg",
+          "altText": "Pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_3_22__2.png",
+          "altText": "Pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_3_23__3.png",
+          "altText": "Pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_3_24__2.png",
+          "altText": "Pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_3_29__2.png",
+          "altText": "Pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_3_26__2.png",
+          "altText": "Pin sạc dự phòng Mophie Essentials Snap+ 10000mAh có chân đứng - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning",
+      "slug": "pin-sac-du-phong-baseus-enerfill-fc11-20000mah-225w-man-hinh-kem-cap-type-c-lightning",
+      "sku": "ACC-0016",
+      "brand": "Baseus",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 690000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_647_-_2025-09-16t162241.374.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Dung lượng pin": "20.000mAh",
+        "Công suất sạc": "22.5W",
+        "Cổng sạc ra": "1 x USB-C1 x USB-AKèm 1 cáp sạc Type C - 1 cáp sạc lightning",
+        "Cổng sạc vào": "USB-C",
+        "Tiện ích": "Sạc nhanh Màn hình LED Chip AI giám sát nhiệt độ 18.000 lần mỗi giờ Bảo vệ quá sạc Bảo vệ đoản mạch Bảo vệ quá áp Bảo vệ nhiệt độ cao/thấp Bảo vệ quá dòng Bảo vệ xả quá mức An toàn trên máy bay",
+        "Kích thước": "16.3 x 11.1 x 3.7 cm",
+        "Trọng lượng": "398g",
+        "Hãng sản xuất": "Baseus"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_647_-_2025-09-16t162241.374.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-fc11-20000mah-22-5w-kem-cap-type-c.jpg",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-09-16t162303.936.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-09-16t162315.880.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-09-16t162322.765.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-09-16t162309.814.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-09-16t162400.704.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 20.000mAh 22.5W màn hình kèm cáp Type-C - Lightning - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Robot RT180S 10000mAh 12W",
+      "slug": "pin-sac-du-phong-robot-rt180s-10000mah-12w",
+      "sku": "ACC-0017",
+      "brand": "Robot",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Robot RT180S 10000mAh 12W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng Robot RT180S 10000mAh 12W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 185000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_524_4.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Dung lượng pin": "10.000 mAh",
+        "Công suất sạc": "12W",
+        "Cổng sạc ra": "1 x USB-A2 x USB-C",
+        "Cổng sạc vào": "1 x USB-C1 x USB-Micro",
+        "Tiện ích": "Chống quá nhiệt Chống đoản mạch Chế độ Reset Chống quá áp sạc đầu vào Chống quá dòng, quá áp sạc ra, chống chập Chống quá dòng đoản mạch",
+        "Lõi pin": "Lõi Pin Li Po",
+        "Trọng lượng": "225 gram",
+        "Hãng sản xuất": "Robot"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_524_4.png",
+          "altText": "Pin sạc dự phòng Robot RT180S 10000mAh 12W - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-robot-10000mah-12w-rt180s.jpg",
+          "altText": "Pin sạc dự phòng Robot RT180S 10000mAh 12W - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_3_6__5.png",
+          "altText": "Pin sạc dự phòng Robot RT180S 10000mAh 12W - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_3_7__1_2.png",
+          "altText": "Pin sạc dự phòng Robot RT180S 10000mAh 12W - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_561_39__6.png",
+          "altText": "Pin sạc dự phòng Robot RT180S 10000mAh 12W - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_561_40__6.png",
+          "altText": "Pin sạc dự phòng Robot RT180S 10000mAh 12W - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_561_41__7.png",
+          "altText": "Pin sạc dự phòng Robot RT180S 10000mAh 12W - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C",
+      "slug": "pin-sac-du-phong-xiaomi-10000mah-225w-tich-hop-cap-type-c",
+      "sku": "ACC-0018",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "price": 390000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/sac-pin-du-phong-xiaomi-10000mah-22-5w.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 10,
+      "specifications": {
+        "Dung lượng pin": "10000mAh",
+        "Công suất sạc": "22.5W",
+        "Cổng sạc ra": "1 x USB-C1 x USB-A1 x cáp USB-C",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Đèn LED hiển thị dung lượng pinSạc nhiều thiết bị cùng lúc",
+        "Lõi pin": "Lithium-ion",
+        "Kích thước": "105.2 x 26.9 x 65.2mm",
+        "Hãng sản xuất": "Xiaomi"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/sac-pin-du-phong-xiaomi-10000mah-22-5w.png",
+          "altText": "Pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/sac-pin-du-phong-xiaomi-10000mah-22-5w.jpg",
+          "altText": "Pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/_/s_c-pin-du-phong-xiaomi-10000mah-22-5w_4_.png",
+          "altText": "Pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/_/s_c-pin-du-phong-xiaomi-10000mah-22-5w_3_.png",
+          "altText": "Pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/_/s_c-pin-du-phong-xiaomi-10000mah-22-5w.png",
+          "altText": "Pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/_/s_c-pin-du-phong-xiaomi-10000mah-22-5w_1_.png",
+          "altText": "Pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/_/s_c-pin-du-phong-xiaomi-10000mah-22-5w_2_.png",
+          "altText": "Pin sạc dự phòng Xiaomi 10000mAh 22.5W tích hợp cáp Type-C - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W",
+      "slug": "pin-sac-du-phong-stargo-star-x2-lite-20000mah-225w",
+      "sku": "ACC-0019",
+      "brand": "StarGO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W chính hãng, nhiều ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi. Mua ngay.",
+      "description": "Mua pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W chính hãng, nhiều ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi. Mua ngay.",
+      "price": 390000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-stargo-star-x2-lite-20000mah-22-5w.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.7,
+      "soldCount": 18,
+      "specifications": {
+        "Dung lượng pin": "20.000 mAh",
+        "Công suất sạc": "22.5W",
+        "Cổng sạc ra": "2 x USB-A1 x USB-C",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Tích hợp màn hình LED hiển thị lượng pinSạc nhiều thiết bị cùng lúcCó chứng nhận CCC (Tùy phiên bản)",
+        "Lõi pin": "Polymer",
+        "Kích thước": "14.6 x 6.8 x 2.8 cm",
+        "Hãng sản xuất": "StarGO"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-stargo-star-x2-lite-20000mah-22-5w.png",
+          "altText": "Pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-stargo-star-x2-lite-20000mah-22-5w.jpg",
+          "altText": "Pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_75__2.png",
+          "altText": "Pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_76__3.png",
+          "altText": "Pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_77__3.png",
+          "altText": "Pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_79__2.png",
+          "altText": "Pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_78__3.png",
+          "altText": "Pin sạc dự phòng StarGO Star X2 Lite 20000mAh 22.5W - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L",
+      "slug": "pin-sac-du-phong-baseus-enerfill-fc11-10000mah-225w-man-hinh-tich-hop-cap-cl",
+      "sku": "ACC-0020",
+      "brand": "Baseus",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-fc11-10000mah-22-5w_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "10.000mAh",
+        "Công suất sạc": "22.5W",
+        "Cổng sạc ra": "1 x USB-C1 x USB-AKèm 1 cáp sạc Type C - 1 cáp sạc lightning",
+        "Cổng sạc vào": "USB-C",
+        "Tiện ích": "Sạc nhanhMàn hình LEDChip AI giám sát nhiệt độ 18.000 lần mỗi giờBảo vệ quá sạcBảo vệ đoản mạchBảo vệ quá ápBảo vệ nhiệt độ cao/thấpBảo vệ quá dòngBảo vệ xả quá mứcAn toàn trên máy bay",
+        "Kích thước": "11.1 x 6.82 x 3.2 cm",
+        "Trọng lượng": "340g",
+        "Hãng sản xuất": "Baseus"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-fc11-10000mah-22-5w_1_.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-fc11-10000mah-22-5w.jpg",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-fc11-10000mah-22-5w_10_.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-fc11-10000mah-22-5w_6_.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-fc11-10000mah-22-5w_3_.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-fc11-10000mah-22-5w_4_.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-fc11-10000mah-22-5w_5_.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill FC11 10.000mAh 22.5W màn hình tích hợp cáp C+L - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25)",
+      "slug": "pin-sac-du-phong-cuktech-pb200n-1c1a-20000mah-55w-tich-hop-cap-type-c-cp25",
+      "sku": "ACC-0021",
+      "brand": "Cuktech",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25) chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25) chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 649000.0,
+      "originalPrice": 729000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-cuktech-1c1a-20000mah-55w-pb200n.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 6,
+      "specifications": {
+        "Dung lượng pin": "20000mAh",
+        "Công suất sạc": "55W",
+        "Cổng sạc ra": "1 x USB-C1 x USB-A1 cáp Type-C",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Sạc nhanh Đáp ứng các chứng nhận an toàn như UL, CE, CB và FCC Dùng được khi bay Bảo vệ nhiệt độ, ngắn mạch, quá dòng đầu vào và ra, Bảo vệ quá sạc và xả quá mứcChứng nhận CCC",
+        "Hiệu suất sạc": "12000mAh (5V/4A)",
+        "Lõi pin": "Pin lithium ion",
+        "Kích thước": "15.2 x 4.45 x 5.71 cm",
+        "Hãng sản xuất": "Cuktech"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-cuktech-1c1a-20000mah-55w-pb200n.png",
+          "altText": "Pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-cuktech-1c1a-20000mah-55w-pb200n.jpg",
+          "altText": "Pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_3_30__1.png",
+          "altText": "Pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-10-27t151502.279.png",
+          "altText": "Pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-10-27t151520.196.png",
+          "altText": "Pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-10-27t151454.394.png",
+          "altText": "Pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-10-27t151732.804.png",
+          "altText": "Pin sạc dự phòng Cuktech PB200N 1C1A 20000mAh 55W tích hợp cáp Type-C (CP25) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Apple iPhone Air Magsafe MGPG4VN/A chính hãng",
+      "slug": "pin-sac-du-phong-apple-iphone-air-magsafe-mgpg4vna-chinh-hang",
+      "sku": "ACC-0022",
+      "brand": "Apple Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua ngay pin sạc dự phòng Apple iPhone Air Magsafe MGPG4VN/A chính hãng, giá rẻ nhất, bảo hành 12 tháng, miễn phí giao hàng tận nơi",
+      "description": "Mua ngay pin sạc dự phòng Apple iPhone Air Magsafe MGPG4VN/A chính hãng, giá rẻ nhất, bảo hành 12 tháng, miễn phí giao hàng tận nơi",
+      "price": 2750000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/e/text_ng_n_-_2025-09-19t113527.785.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "Sạc thêm tới 65% cho iPhone Air",
+        "Công suất sạc": "Sạc nhanh không dây lên đến 12W",
+        "Cổng sạc ra": "Sạc Magsafe",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Thiết kế mỏng và nhẹ Tự động chọn thời điểm sạc phù hợp nhất Gắn Pin MagSafe và kết nối nó với bộ chuyển đổi nguồn 20W để sạc nhanh",
+        "Hãng sản xuất": "Apple Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/e/text_ng_n_-_2025-09-19t113527.785.png",
+          "altText": "Pin sạc dự phòng Apple iPhone Air Magsafe MGPG4VN/A chính hãng - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-09-19t113527.785.png",
+          "altText": "Pin sạc dự phòng Apple iPhone Air Magsafe MGPG4VN/A chính hãng - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-09-19t113538.593.png",
+          "altText": "Pin sạc dự phòng Apple iPhone Air Magsafe MGPG4VN/A chính hãng - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-09-19t113550.599.png",
+          "altText": "Pin sạc dự phòng Apple iPhone Air Magsafe MGPG4VN/A chính hãng - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-09-19t113603.126.png",
+          "altText": "Pin sạc dự phòng Apple iPhone Air Magsafe MGPG4VN/A chính hãng - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin",
+      "slug": "pin-sac-du-phong-stargo-power-60000mah-225w-nhieu-cong-ket-noi-co-en-pin",
+      "sku": "ACC-0023",
+      "brand": "StarGO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin chính hãng, nhiều ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi. Mua ngay.",
+      "description": "Mua pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin chính hãng, nhiều ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi. Mua ngay.",
+      "price": 890000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-du-phong-stargo-power-60000mah-22-5w-nhieu-cong-co-den_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Dung lượng pin": "60.000 mAh",
+        "Công suất sạc": "22.5W",
+        "Cổng sạc ra": "3 x USB-A1 x USB-C",
+        "Cổng sạc vào": "1 x USB-C1 x Micro-USB",
+        "Tiện ích": "Sạc nhiều thiết bị cùng lúcTích hợp đèn pin chiếu sáng trên thân pin dự phòng",
+        "Lõi pin": "6 x pin Lithium-Polymer",
+        "Kích thước": "156 x 83 x 65 mm",
+        "Hãng sản xuất": "StarGO"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-du-phong-stargo-power-60000mah-22-5w-nhieu-cong-co-den_1_.png",
+          "altText": "Pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-stargo-power-60000mah-22-5w-nhieu-cong-co-den.jpg",
+          "altText": "Pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-stargo-power-60000mah-22-5w-nhieu-cong-co-den_7_.png",
+          "altText": "Pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-stargo-power-60000mah-22-5w-nhieu-cong-co-den_2_.png",
+          "altText": "Pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-stargo-power-60000mah-22-5w-nhieu-cong-co-den_3_.png",
+          "altText": "Pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-stargo-power-60000mah-22-5w-nhieu-cong-co-den_4_.png",
+          "altText": "Pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-du-phong-stargo-power-60000mah-22-5w-nhieu-cong-co-den_5_.png",
+          "altText": "Pin sạc dự phòng StarGO Power 60000mAh 22.5W nhiều cổng kết nối có đèn pin - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W",
+      "slug": "pin-sac-du-phong-magsafe-ugreen-magflow-65958-10000mah-25w",
+      "sku": "ACC-0024",
+      "brand": "Ugreen",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 1490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_c_o_r_u_30_52__1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "10000 mAh",
+        "Công suất sạc": "Có dây: 30WKhông dây: 25W",
+        "Cổng sạc ra": "1 x USB-C1 x cáp USB-C1 x Magsafe",
+        "Cổng sạc vào": "1 x USB-C1 x cáp USB-C",
+        "Tiện ích": "Tích hợp màn hình LED trắng hiển thị lượng pinSạc nhiều thiết bị cùng một lúc",
+        "Lõi pin": "Lithium Polymer",
+        "Kích thước": "110.8 x 70 x 21 mm",
+        "Trọng lượng": "254 g",
+        "Hãng sản xuất": "Ugreen"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_c_o_r_u_30_52__1.png",
+          "altText": "Pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-magsafe-ugreen-magflow-10000mah-25w-65958.jpg",
+          "altText": "Pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-magsafe-ugreen-magflow-10000mah-25w-65958_10_.png",
+          "altText": "Pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/_/m_y_c_o_r_u_29_17_.png",
+          "altText": "Pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/_/m_y_c_o_r_u_29_18_.png",
+          "altText": "Pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/_/m_y_c_o_r_u_29_16_.png",
+          "altText": "Pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-magsafe-ugreen-magflow-10000mah-25w-65958_6_.png",
+          "altText": "Pin sạc dự phòng Magsafe Ugreen MagFlow 65958 10000mAh 25W - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp",
+      "slug": "pin-sac-du-phong-baseus-enerfill-bipow-2-pro-20000mah-225w-man-hinh-so-kem-cap",
+      "sku": "ACC-0025",
+      "brand": "Baseus",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_511_7_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.7,
+      "soldCount": 6,
+      "specifications": {
+        "Dung lượng pin": "20.000mAh",
+        "Công suất sạc": "22.5W",
+        "Cổng sạc ra": "1 x USB-C1 x USB-AKèm 1 cáp sạc Type C dài 22cm",
+        "Cổng sạc vào": "1 x USB-C",
+        "Kích thước": "12.2 x 6.9 x 3.2 cm",
+        "Trọng lượng": "356g",
+        "Hãng sản xuất": "Baseus"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_511_7_.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-baseus-enerfill-bipow2-pro-20000mah-22-5w-kem-cap.jpg",
+          "altText": "Pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_1_50__2.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_1_51__1_3.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_1_52__1_3.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_1_54__4.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_1_53__1_3.png",
+          "altText": "Pin sạc dự phòng Baseus Enerfill Bipow 2 Pro 20.000mAh 22.5W màn hình số kèm cáp - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W",
+      "slug": "pin-sac-du-phong-khong-day-anker-maggo-2-pro-a110r-10000mah-qi2-25w-type-c-pd-45w",
+      "sku": "ACC-0026",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "description": "Mua pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "price": 2850000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-anker-maggo-2-pro-a110r-10000mah-qi2-25w-type-c-pd-45w_11_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "10000 mAh",
+        "Công suất sạc": "Không dây: 25W MaxType-C: 45W",
+        "Cổng sạc ra": "Không dâyType-C",
+        "Cổng sạc vào": "Type C",
+        "Tiện ích": "Nhiệt độ mặt lưng khi sạc nhỏ hơn 36°C (96.8°F) trong suốt quá trình sạc Hệ thống tản nhiệt Graphene 3 lớp Sạc không dây chuẩn Qi2",
+        "Kích thước": "10.4 x 7.1 x 1.8 cm (Dài x rộng x cao)",
+        "Trọng lượng": "220g",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-anker-maggo-2-pro-a110r-10000mah-qi2-25w-type-c-pd-45w_11_.png",
+          "altText": "Pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-anker-maggo-2-pro-a110r-10000mah-qi2-25w-type-c-pd-45w.jpg",
+          "altText": "Pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-anker-maggo-2-pro-a110r-10000mah-qi2-25w-type-c-pd-45w_5_.png",
+          "altText": "Pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-anker-maggo-2-pro-a110r-10000mah-qi2-25w-type-c-pd-45w_4_.png",
+          "altText": "Pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-anker-maggo-2-pro-a110r-10000mah-qi2-25w-type-c-pd-45w_7_.png",
+          "altText": "Pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-anker-maggo-2-pro-a110r-10000mah-qi2-25w-type-c-pd-45w_9_.png",
+          "altText": "Pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-khong-day-anker-maggo-2-pro-a110r-10000mah-qi2-25w-type-c-pd-45w_1_.png",
+          "altText": "Pin sạc dự phòng không dây Anker Maggo 2 Pro A110R 10000mAh Qi2 25W Type-C PD 45W - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A",
+      "slug": "pin-sac-du-phong-stargo-hypercharge-gem-1-10000mah-55w-2c1a",
+      "sku": "ACC-0027",
+      "brand": "StarGO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A chính hãng, nhiều ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A chính hãng, nhiều ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 650000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-stargo-hypercharge-gem-1-10000mah-55w-2c1a_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "10000 mAh",
+        "Công suất sạc": "55W",
+        "Cổng sạc ra": "2 x USB-C1 x USB-A",
+        "Cổng sạc vào": "2 x USB-C",
+        "Tiện ích": "Tích hợp màn hình LED trạng thái sạcSạc nhiều thiết bị cùng lúcTích hợp chức năng cảnh báo quá nhiệt",
+        "Lõi pin": "Li-ion",
+        "Hãng sản xuất": "StarGO"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-stargo-hypercharge-gem-1-10000mah-55w-2c1a_1_.png",
+          "altText": "Pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-stargo-hypercharge-gem-1-10000mah-55w-2c1a.jpg",
+          "altText": "Pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-stargo-hypercharge-gem-1-10000mah-55w-2c1a_10_.png",
+          "altText": "Pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-stargo-hypercharge-gem-1-10000mah-55w-2c1a_2_.png",
+          "altText": "Pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-stargo-hypercharge-gem-1-10000mah-55w-2c1a_5_.png",
+          "altText": "Pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-stargo-hypercharge-gem-1-10000mah-55w-2c1a_7_.png",
+          "altText": "Pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-stargo-hypercharge-gem-1-10000mah-55w-2c1a_9_.png",
+          "altText": "Pin sạc dự phòng StarGO HyperCharge Gem 1 10000mAh 55W 2C1A - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều",
+      "slug": "pin-sac-du-phong-ugreen-pb312-25683-20000mah-20w-sac-nhanh-hai-chieu",
+      "sku": "ACC-0028",
+      "brand": "Ugreen",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-ugreen-2-chieu-pb312-25683-20000mah-20w_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Dung lượng pin": "20000 mAh",
+        "Công suất sạc": "20W",
+        "Cổng sạc ra": "2 x USB-A1 x USB-C",
+        "Cổng sạc vào": "1 x USB-C",
+        "Tiện ích": "Màn hình LED trắng hiển thị lượng pin",
+        "Lõi pin": "Li-iOn",
+        "Kích thước": "147 × 72 × 27 mm",
+        "Hãng sản xuất": "Ugreen"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/p/i/pin-sac-du-phong-ugreen-2-chieu-pb312-25683-20000mah-20w_1_.png",
+          "altText": "Pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-ugreen-2-chieu-pb312-25683-20000mah-20w.jpg",
+          "altText": "Pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-ugreen-2-chieu-pb312-25683-20000mah-20w_6_.png",
+          "altText": "Pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-ugreen-2-chieu-pb312-25683-20000mah-20w_2_.png",
+          "altText": "Pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-ugreen-2-chieu-pb312-25683-20000mah-20w_3_.png",
+          "altText": "Pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-ugreen-2-chieu-pb312-25683-20000mah-20w_5_.png",
+          "altText": "Pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/i/pin-sac-du-phong-ugreen-2-chieu-pb312-25683-20000mah-20w_8_.png",
+          "altText": "Pin sạc dự phòng Ugreen PB312 25683 20000mAh 20W sạc nhanh hai chiều - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "iPhone 18 Pro 256GB",
+      "slug": "iphone-18-pro-256gb",
+      "sku": "ACC-0029",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 Pro chính hãng giá 38.99 triệu tại CellphoneS, màn hình 6,3 inch, Chip A20 Pro, đủ màu, thu cũ giảm 5tr | Mua IP 18 pro tại CellphoneS",
+      "description": "iPhone 18 Pro chính hãng giá 38.99 triệu tại CellphoneS, màn hình 6,3 inch, Chip A20 Pro, đủ màu, thu cũ giảm 5tr | Mua IP 18 pro tại CellphoneS",
+      "price": 38690000.0,
+      "originalPrice": 38990000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 8,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "A20 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.3 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2622 x 1206 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stagef/1,9 Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "iPhone 18 Pro Max 256GB",
+      "slug": "iphone-18-pro-max-256gb",
+      "sku": "ACC-0030",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 ProMax chính hãng giá 41,99 triệu tại CellphoneS, nâng cấp nổi bật chip A20 Pro, camera khẩu độ linh hoạt, trả góp 0% 18T - Mua ngay",
+      "description": "iPhone 18 ProMax chính hãng giá 41,99 triệu tại CellphoneS, nâng cấp nổi bật chip A20 Pro, camera khẩu độ linh hoạt, trả góp 0% 18T - Mua ngay",
+      "price": 41990000.0,
+      "originalPrice": 80999000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 10,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "Apple A20 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stage, f/1,9Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "iPhone 17 Pro Max 256GB | Chính hãng",
+      "slug": "iphone-17-pro-max-256gb-chinh-hang",
+      "sku": "ACC-0031",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 17 Pro Max chính hãng đủ dung lượng từ 256GB - 2TB, giá tốt tháng 10/2026 - mua Apple iP 17 Promax trả góp 0% 12 tháng tại CellphoneS",
+      "description": "iPhone 17 Pro Max chính hãng đủ dung lượng từ 256GB - 2TB, giá tốt tháng 10/2026 - mua Apple iP 17 Promax trả góp 0% 12 tháng tại CellphoneS",
+      "price": 34990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 82,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 26",
+        "Chipset": "Chip A19 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 lõi hiệu năng và 4 lõi tiết kiệm điện",
+        "GPU": "GPU 6 lõi với Neural Accelerator",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Màn hình Luôn Bật, ProMotion 120Hz, HDR, True Tone, Dải màu rộng (P3), Haptic Touch, Tỷ lệ tương phản 2.000.000:1, Độ sáng 1000 nit (tiêu chuẩn), 1600 nit (HDR), 3000 nit (ngoài trời) / tối thiểu 1 nit, Lớp phủ kháng dầu, Chống phản chiếu, Hỗ trợ đa ngôn",
+        "Camera sau": "Chính: 48MP khẩu độ ƒ/1.6 OIS hỗ trợ chụp 24MP hoặc 48MPGóc Siêu Rộng: 48MP khẩu độ ƒ/2.2 góc nhìn 120°Telephoto: 48MP khẩu độ ƒ/2.8 OIS zoom quang học lên đến 8x",
+        "Camera trước": "Camera 18MP Center Stage Khẩu độ ƒ/1.9",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Sim kép (nano-Sim và e-Sim) - Hỗ trợ 2 e-Sim",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max_1_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-1_4.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-2_1_1.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-4.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "OPPO Find X9s 12GB 256GB",
+      "slug": "oppo-find-x9s-12gb-256gb",
+      "sku": "ACC-0032",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Điện thoại OPPO Find X9s 12GB/256GB chính hãng giá 22.840.000đ, giảm đến 8.15tr, góp 0%, có thu cũ, quà 12tr, lỗi 1 đổi 1, BH 24T. Mua ngay!",
+      "description": "Điện thoại OPPO Find X9s 12GB/256GB chính hãng giá 22.840.000đ, giảm đến 8.15tr, góp 0%, có thu cũ, quà 12tr, lỗi 1 đổi 1, BH 24T. Mua ngay!",
+      "price": 24990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 8,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16.0",
+        "Chipset": "MediaTek Dimensity 9500s",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "ARM Immortalis G925 MC12",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1256 x 2760 pixels",
+        "Tính năng màn hình": "Độ sáng tối đa 1800 nitsTần số lấy mẫu cảm ứng tối đa 240Hz1.07 tỷ màu460 PPI100% DCI-P3",
+        "Camera sau": "Góc siêu rộng 50 MP, f/2.0Góc rộng 50 MP, f/1.8Telephoto 50 MP, f/2.6",
+        "Camera trước": "32 MP, f/2.4",
+        "Pin": "7025 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Dual nano-SIM hoặc 1 nano-SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-1.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-2.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-3.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-4.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "OPPO Find X9 Ultra 12GB 512GB",
+      "slug": "oppo-find-x9-ultra-12gb-512gb",
+      "sku": "ACC-0033",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "OPPO Find X9 Ultra 12GB/512GB màn hình 6.82&quot; 2K+ 144Hz, chip Snapdragon 8 Elite Gen 5, camera 200MP. Giảm 4tr, thu cũ trợ giá 6tr. Mua ngay",
+      "description": "OPPO Find X9 Ultra 12GB/512GB màn hình 6.82&quot; 2K+ 144Hz, chip Snapdragon 8 Elite Gen 5, camera 200MP. Giảm 4tr, thu cũ trợ giá 6tr. Mua ngay",
+      "price": 45990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 6,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16 Android 16",
+        "Chipset": "Snapdragon 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Adreno 840",
+        "Kích thước màn hình": "6.82 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "3168 x 1440 pixel",
+        "Tính năng màn hình": "Độ sáng tối đa 3600 nitsTần số lấy mẫu cảm ứng tối đa 300Hz1.07 tỷ màu510 PPI100% DCI-P3",
+        "Camera sau": "Góc siêu rộng 50 MP, f/2.0Góc rộng 200 MP, f/1.5Tele 200 MP, f/2.2Tele siêu xa 50 MP, f/3.5Đơn sắc 3.2 MP, f/2.4",
+        "Camera trước": "50 MP, f/2.4",
+        "Pin": "7050 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 2 eSIM hoặc 1 Nano SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-1.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-2.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-3.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-4.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Samsung Galaxy Z Flip8 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-flip8-5g-12gb-256gb",
+      "sku": "ACC-0034",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Flip 8 256GB giá lên đời từ 21.215tr, trợ giá 6tr, tặng Google AI Pro 6 tháng và hậu mãi đặc quyền. Mua Z Flip 8 tại CellphoneS.",
+      "description": "Samsung Galaxy Z Flip 8 256GB giá lên đời từ 21.215tr, trợ giá 6tr, tặng Google AI Pro 6 tháng và hậu mãi đặc quyền. Mua Z Flip 8 tại CellphoneS.",
+      "price": 27790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-flip-8-pink-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Exynos 2600",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "10 nhân, tốc độ 3.8 GHz, 3.25 GHz và 2.75 GHz",
+        "Kích thước màn hình": "Chính 6.9 inches, Phụ 4.1 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels",
+        "Tính năng màn hình": "Tần số quét 120HzĐộ sáng tối đa 2600 nitsKính Corning Gorilla Glass Ceramic 316 triệu màu",
+        "Camera sau": "Góc rộng 50 MP, f/1.8Góc siêu rộng 12 MP, f/2.2",
+        "Camera trước": "10 MP, f/2.2",
+        "Pin": "4300 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-flip-8-pink-01.jpg",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-1.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-2.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-5.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-4.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-3.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-6.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Samsung Galaxy Z Fold8 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-fold8-5g-12gb-256gb",
+      "sku": "ACC-0035",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Fold 8 256GB giá lên đời từ 34.58tr, trợ giá đến 6tr, giảm ngay 6tr, tặng hậu mãi Z Care. Mua Z Fold 8 tại CellphoneS.",
+      "description": "Samsung Galaxy Z Fold 8 256GB giá lên đời từ 34.58tr, trợ giá đến 6tr, giảm ngay 6tr, tặng hậu mãi Z Care. Mua Z Fold 8 tại CellphoneS.",
+      "price": 40490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-lavender-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Snapdragon® 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "8 nhân: 2 nhân 4.74 GHz và 6 nhân 3.62 GHz",
+        "Kích thước màn hình": "Chính 7.6 inches, Phụ 5.5 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 2448 x 1848 pixels (QXGA+) - Phụ: 1972 x 1248 pixels (FHD+)",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nitsKính Corning Gorilla Glass Ceramic 3",
+        "Camera sau": "Góc rộng 50 MP, f/1.9Góc siêu rộng 50 MP, f/1.8",
+        "Camera trước": "10 MP, f/2.210 MP",
+        "Pin": "4800 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-lavender-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-01.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-02.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-04.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-05.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-03.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-06.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-fold8-ultra-5g-12gb-256gb",
+      "sku": "ACC-0036",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Fold 8 Ultra giá từ 41.51tr, lên đời trợ đến 6tr, hoàn 1tr với MoMo ví trả sau, kèm Galaxy Z Care. Mua Z Fold 8 Ultra tại CellphoneS.",
+      "description": "Samsung Galaxy Z Fold 8 Ultra giá từ 41.51tr, lên đời trợ đến 6tr, hoàn 1tr với MoMo ví trả sau, kèm Galaxy Z Care. Mua Z Fold 8 Ultra tại CellphoneS.",
+      "price": 48990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Snapdragon® 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "8 nhân - 2 nhân 4.74 GHz và 6 nhân 3.62 GHz",
+        "Kích thước màn hình": "Chính 8.0 inches, Phụ 6.5 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 2184 x 1968 Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels (QXGA+) - Phụ: 2520 x 1080 Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels (FHD+)",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nitsMặt kính Corning Gorilla Glass Ceramic 316 triệu màu",
+        "Camera sau": "Góc rộng 200 MP, f/1.7Góc siêu rộng 50 MP, f/2.2Tele 10 MP, f/2.4",
+        "Camera trước": "10 MP, f/2.210 MP",
+        "Pin": "5000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-1.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-2.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-3.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-4.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-6.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4)",
+      "slug": "tai-nghe-bluetooth-apple-airpods-5-2026-sac-co-day-mkfw4",
+      "sku": "ACC-0037",
+      "brand": "Apple Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Tai nghe Apple AirPod 5 ra mắt với thiết kế Open-Ear, ANC, chip H2, âm thanh kiến trúc đa cổng, chống nước IP57, pin 20h. Mua ngay tại CellphoneS.",
+      "description": "Tai nghe Apple AirPod 5 ra mắt với thiết kế Open-Ear, ANC, chip H2, âm thanh kiến trúc đa cổng, chống nước IP57, pin 20h. Mua ngay tại CellphoneS.",
+      "price": 3790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-co-day.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Kích thước": "Tai nghe: 30.2 x 18.3 x 18.1 mmHộp sạc: 46.2 x 50.1 x 21.2 mm",
+        "Trọng lượng": "Tai nghe: 4.3gHộp sạc: 34.7g",
+        "Công nghệ âm thanh": "Trình điều khiển &amp; bộ khuếch đại Apple tùy chỉnhChủ Động Khử Tiếng ỒnÂm thanh thích ứng &amp; xuyên âmNhận biết cuộc hội thoại &amp; tách lời nóiCá nhân hóa âm thanhEQ Thích ỨngGhi âm chuẩn studioHệ thống thông hơi cân bằng áp suất",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Thời lượng pin tai nghe: thời gian lên đến 4 giờ với một lần sạc khi bật Chủ Động Khử Tiếng ỒnThời lượng pin với hộp sạc: thời gian đàm thoại lên đến 20 giờ khi bật Chủ Động Khử Tiếng Ồn",
+        "Phương thức điều khiển": "Cảm biến lực",
+        "Chipset": "Chip tai nghe H2",
+        "Hãng sản xuất": "Apple Chính hãng",
+        "Tiện ích": "Hỗ trợ Siri AIDịch Trực Tiếp (Live Translation)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-co-day.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-1.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-2.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-4-type-c.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-5.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-6.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-7.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Xiaomi 17T 5G 12GB 512GB",
+      "slug": "xiaomi-17t-5g-12gb-512gb",
+      "sku": "ACC-0038",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Xiaomi 17T 5G (12GB/512GB) giá chỉ từ 17.690Tr, Trợ giá lên đời đến 5 triệu, Bảo hành 2 năm và 6 tháng rơi vỡ màn. Pin 6500 mAh, Chip Dimesity 8500. Mua ngay.",
+      "description": "Mua Xiaomi 17T 5G (12GB/512GB) giá chỉ từ 17.690Tr, Trợ giá lên đời đến 5 triệu, Bảo hành 2 năm và 6 tháng rơi vỡ màn. Pin 6500 mAh, Chip Dimesity 8500. Mua ngay.",
+      "price": 17590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Xiaomi HyperOS 3",
+        "Chipset": "MediaTek Dimensity 8500-Ultra",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Mali-G720 MC8",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "2756 x 1268 pixels",
+        "Tính năng màn hình": "Độ sáng tối đa 3500 nits460 PPI100% DCI-P312bit, 68 tỉ màuDolby VisionHDR10+",
+        "Camera sau": "Chính 50 MP, f/1.7Tele 0 MP, f/3.0Góc siêu rộng 12 MP, f/2.2",
+        "Camera trước": "32 MP, f/2.2",
+        "Pin": "6500 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 2 eSIM hoặc 1 Nano SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-1.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-3.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-4.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Sạc Cuktech GaN 2C1A 120W (CN) AD1003",
+      "slug": "sac-cuktech-gan-2c1a-120w-cn-ad1003",
+      "sku": "ACC-0039",
+      "brand": "Cuktech",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua sạc Cuktech GaN 2C1A 120W (CN) AD1003 chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua sạc Cuktech GaN 2C1A 120W (CN) AD1003 chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 520000.0,
+      "originalPrice": 620000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_522_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Công suất sạc": "120W MAX",
+        "Sử dụng tối đa": "Sạc đồng thời 3 thiết bị",
+        "Đầu vào": "2 x USB-C1 x USB-A",
+        "Tiện ích": "Sạc siêu nhanh Thiết kế gấp gọn Bảo vệ quá áp Bảo vệ quá dòng đầu vào Bảo vệ quá dòng đầu ra Độ gợn sóng thấp Bảo vệ ngắn mạch Bảo vệ quá nhiệt Nhiễu điện từ thấp Chống tĩnh điện (15KV)",
+        "Công nghệ/Đạt chứng nhận": "Công nghệ GaN Tương thích phổ biến: Với PD3.1, PPS2.0, QC4.0+",
+        "Hãng sản xuất": "Cuktech"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_522_1.png",
+          "altText": "Sạc Cuktech GaN 2C1A 120W (CN) AD1003 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_2_10__5.png",
+          "altText": "Sạc Cuktech GaN 2C1A 120W (CN) AD1003 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_-_2025-09-07t160438.283.png",
+          "altText": "Sạc Cuktech GaN 2C1A 120W (CN) AD1003 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_-_2025-09-07t160447.269.png",
+          "altText": "Sạc Cuktech GaN 2C1A 120W (CN) AD1003 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_-_2025-09-07t160456.086.png",
+          "altText": "Sạc Cuktech GaN 2C1A 120W (CN) AD1003 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_-_2025-09-07t160510.039.png",
+          "altText": "Sạc Cuktech GaN 2C1A 120W (CN) AD1003 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_563_-_2025-09-07t160517.890.png",
+          "altText": "Sạc Cuktech GaN 2C1A 120W (CN) AD1003 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Sạc Mophie Essentials 1C GaN 45W - 978",
+      "slug": "sac-mophie-essentials-1c-gan-45w-978",
+      "sku": "ACC-0040",
+      "brand": "Mophie",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Sạc Mophie Essentials 1C GaN 45W - 978 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua Sạc Mophie Essentials 1C GaN 45W - 978 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 390000.0,
+      "originalPrice": 590000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-mophie-essentials-1c-gan-45w_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Công suất sạc": "45W",
+        "Sử dụng tối đa": "1 thiết bị",
+        "Đầu ra": "1 x USB-C",
+        "Tiện ích": "Thiết kế chân gập tiện lợi",
+        "Công nghệ/Đạt chứng nhận": "Power DeliveryCông nghệ GaN (Gallium Nitride)Công nghệ PPS (Programmable Power Supply) Công nghệ sạc AVS (tùy model)",
+        "Hãng sản xuất": "Mophie"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-mophie-essentials-1c-gan-45w_1_.png",
+          "altText": "Sạc Mophie Essentials 1C GaN 45W - 978 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-mophie-essentials-1c-gan-45w.jpg",
+          "altText": "Sạc Mophie Essentials 1C GaN 45W - 978 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-mophie-essentials-1c-gan-45w_2_.png",
+          "altText": "Sạc Mophie Essentials 1C GaN 45W - 978 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-mophie-essentials-1c-gan-45w_7_.png",
+          "altText": "Sạc Mophie Essentials 1C GaN 45W - 978 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-mophie-essentials-1c-gan-45w_3_.png",
+          "altText": "Sạc Mophie Essentials 1C GaN 45W - 978 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-mophie-essentials-1c-gan-45w_4_.png",
+          "altText": "Sạc Mophie Essentials 1C GaN 45W - 978 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-mophie-essentials-1c-gan-45w_5_.png",
+          "altText": "Sạc Mophie Essentials 1C GaN 45W - 978 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger",
+      "slug": "sac-nhanh-belkin-50w-2-cong-usb-c-pdpps-cubic-wall-charger",
+      "sku": "ACC-0041",
+      "brand": "Belkin",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/e/text_ng_n_-_2025-12-04t105534.549.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Công suất sạc": "50W",
+        "Sử dụng tối đa": "2 thiết bị",
+        "Đầu ra": "2 x USB-C",
+        "Tiện ích": "Sạc nhanhCó chân gập",
+        "Công nghệ/Đạt chứng nhận": "Công nghệ GaN",
+        "Hãng sản xuất": "Belkin"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/e/text_ng_n_-_2025-12-04t105534.549.png",
+          "altText": "Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_-_2025-12-04t105547.703.png",
+          "altText": "Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-belkin-type-c-50w-pd-pps-cubic-wall-charger_2_.png",
+          "altText": "Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-belkin-type-c-50w-pd-pps-cubic-wall-charger_3_.png",
+          "altText": "Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-belkin-type-c-50w-pd-pps-cubic-wall-charger_4_.png",
+          "altText": "Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/0/20251204-105926.jpg",
+          "altText": "Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-belkin-type-c-50w-pd-pps-cubic-wall-charger_5_.png",
+          "altText": "Sạc nhanh Belkin 50W 2 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Cáp Belkin Thunderbolt 3 USB-C 100W UHD 5K 0.8m F2CD084",
+      "slug": "cap-belkin-thunderbolt-3-usb-c-100w-uhd-5k-08m-f2cd084",
+      "sku": "ACC-0042",
+      "brand": "Belkin",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Cáp Belkin Thunderbolt 3 USB-C 100W UHD 5K 0.8m F2CD084 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua Cáp Belkin Thunderbolt 3 USB-C 100W UHD 5K 0.8m F2CD084 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 850000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/a/cap-belkin-thunderbolt-3-type-c-100w-uhd-5k-0-8m-f2cd084_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Công suất sạc": "100W",
+        "Sử dụng tối đa": "1 thiết bị",
+        "Đầu vào": "USB-C",
+        "Đầu ra": "USB-C",
+        "Tiện ích": "Truyền dữ liệu giữa các thiết bị với tốc độ lên đến 40 GbpsHỗ trợ xuất hình ảnh ra màn hình Ultra HD 4K / 5KĐạt chứng chỉ Thunderbolt do Intel chứng nhận",
+        "Công nghệ/Đạt chứng nhận": "Power Delivery",
+        "Chiều dài dây": "0.8 mét",
+        "Hãng sản xuất": "Belkin"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/a/cap-belkin-thunderbolt-3-type-c-100w-uhd-5k-0-8m-f2cd084_1_.png",
+          "altText": "Cáp Belkin Thunderbolt 3 USB-C 100W UHD 5K 0.8m F2CD084 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-belkin-thunderbolt-3-type-c-100w-uhd-5k-0-8m-f2cd084_2_.png",
+          "altText": "Cáp Belkin Thunderbolt 3 USB-C 100W UHD 5K 0.8m F2CD084 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-belkin-thunderbolt-3-type-c-100w-uhd-5k-0-8m-f2cd084_3_.png",
+          "altText": "Cáp Belkin Thunderbolt 3 USB-C 100W UHD 5K 0.8m F2CD084 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-belkin-thunderbolt-3-type-c-100w-uhd-5k-0-8m-f2cd084_4_.png",
+          "altText": "Cáp Belkin Thunderbolt 3 USB-C 100W UHD 5K 0.8m F2CD084 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-belkin-thunderbolt-3-type-c-100w-uhd-5k-0-8m-f2cd084_5_.png",
+          "altText": "Cáp Belkin Thunderbolt 3 USB-C 100W UHD 5K 0.8m F2CD084 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-belkin-thunderbolt-3-type-c-100w-uhd-5k-0-8m-f2cd084_6_.png",
+          "altText": "Cáp Belkin Thunderbolt 3 USB-C 100W UHD 5K 0.8m F2CD084 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Sạc 9fit Slim PD 65W 2C GAN",
+      "slug": "sac-9fit-slim-pd-65w-2c-gan",
+      "sku": "ACC-0043",
+      "brand": "9Fit",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Sạc 9fit Slim PD 65W 2C GAN chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua Sạc 9fit Slim PD 65W 2C GAN chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 300000.0,
+      "originalPrice": 390000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-9fit-slim-pd-65w-2c-gan.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Công suất sạc": "65W",
+        "Sử dụng tối đa": "2 thiết bị",
+        "Đầu ra": "USB-C",
+        "Tiện ích": "Sạc nhanhCông nghệ GaN tăng hiệu quả và tốc độ sạc, tản nhiệt tốtChân sạc gập tiện lợi cho việc di chuyển và cất giữ",
+        "Công nghệ/Đạt chứng nhận": "Công nghệ PD &amp; PPSChứng nhận RoHS, CE/FCC/ETL",
+        "Hãng sản xuất": "9Fit"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-9fit-slim-pd-65w-2c-gan.png",
+          "altText": "Sạc 9fit Slim PD 65W 2C GAN - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-9fit-slim-pd-65w-2c-gan.jpg",
+          "altText": "Sạc 9fit Slim PD 65W 2C GAN - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_470_7__2.png",
+          "altText": "Sạc 9fit Slim PD 65W 2C GAN - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_470_9__2.png",
+          "altText": "Sạc 9fit Slim PD 65W 2C GAN - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_470_8__2.png",
+          "altText": "Sạc 9fit Slim PD 65W 2C GAN - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_470_10__2.png",
+          "altText": "Sạc 9fit Slim PD 65W 2C GAN - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/r/frame_470_11__2.png",
+          "altText": "Sạc 9fit Slim PD 65W 2C GAN - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Sạc Anker 4 cổng 3C1A GAN 70W A121C",
+      "slug": "sac-anker-4-cong-3c1a-gan-70w-a121c",
+      "sku": "ACC-0044",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua ngay sạc Anker 4 cổng 3C1A GAN 70W A121C chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua ngay sạc Anker 4 cổng 3C1A GAN 70W A121C chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 420000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-anker-4-cong-3c1a-gan-70w-a121c.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 4,
+      "specifications": {
+        "Công suất sạc": "70W",
+        "Sử dụng tối đa": "4 thiết bị",
+        "Đầu ra": "3 x USB-C1 x USB-A",
+        "Tiện ích": "Sạc nhanh 2 vi xử lý độc lập Chuẩn sạc hỗ trợ: PD 3.0, PPS, QC 3.0, SCP, FCP",
+        "Công nghệ/Đạt chứng nhận": "Công nghệ GaN IICông nghệ lõi kép MegacoreCông nghệ kiểm soát nhiệt độ ActiveShield 2.0Công nghệ ActiveShield Ultra",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-anker-4-cong-3c1a-gan-70w-a121c.png",
+          "altText": "Sạc Anker 4 cổng 3C1A GAN 70W A121C - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-anker-4-cong-3c1a-gan-70w-a121c.jpg",
+          "altText": "Sạc Anker 4 cổng 3C1A GAN 70W A121C - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_561_37__7.png",
+          "altText": "Sạc Anker 4 cổng 3C1A GAN 70W A121C - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/g/r/group_561_38__7.png",
+          "altText": "Sạc Anker 4 cổng 3C1A GAN 70W A121C - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Sạc Anker 2A2C 50W A121E",
+      "slug": "sac-anker-2a2c-50w-a121e",
+      "sku": "ACC-0045",
+      "brand": "Anker",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua sạc Anker 2A2C 50W A121E chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "description": "Mua sạc Anker 2A2C 50W A121E chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "price": 350000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/sac-anker-2a2c-50w-a121e_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Công suất sạc": "50W",
+        "Sử dụng tối đa": "4 thiết bị",
+        "Đầu ra": "2 x USB-C2 x USB-A",
+        "Tiện ích": "Sạc nhanhPhích cắm gập tích hợpLuôn được bảo vệ với ActiveShield 4.0",
+        "Công nghệ/Đạt chứng nhận": "PD 3.0, QC 3.0, Appel, PPS, BC 1.2, FCP, SCP, AFC",
+        "Hãng sản xuất": "Anker"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/sac-anker-2a2c-50w-a121e_1.png",
+          "altText": "Sạc Anker 2A2C 50W A121E - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/sac-anker-2a2c-50w-a121e_1.jpg",
+          "altText": "Sạc Anker 2A2C 50W A121E - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/sac-anker-2a2c-50w-a121e_2_.png",
+          "altText": "Sạc Anker 2A2C 50W A121E - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/sac-anker-2a2c-50w-a121e_1_.png",
+          "altText": "Sạc Anker 2A2C 50W A121E - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/sac-anker-2a2c-50w-a121e_3_.png",
+          "altText": "Sạc Anker 2A2C 50W A121E - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/sac-anker-2a2c-50w-a121e_4_.png",
+          "altText": "Sạc Anker 2A2C 50W A121E - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/sac-anker-2a2c-50w-a121e_5_.png",
+          "altText": "Sạc Anker 2A2C 50W A121E - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Củ sạc Aukey Type-C PD 20W PA-F1S",
+      "slug": "cu-sac-aukey-type-c-pd-20w-pa-f1s",
+      "sku": "ACC-0046",
+      "brand": "Aukey",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Củ sạc Aukey Type-C PD 20W PA-F1S chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua Củ sạc Aukey Type-C PD 20W PA-F1S chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 290000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_49_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.5,
+      "soldCount": 4,
+      "specifications": {
+        "Công suất sạc": "20W",
+        "Sử dụng tối đa": "1 thiết bị",
+        "Đầu ra": "USB-C",
+        "Tiện ích": "Sạc nhanhPhích cắm có thể gập 90 độBảo vệ quá mạch, quá dòng, quá nhiệt",
+        "Công nghệ/Đạt chứng nhận": "Công nghệ PD",
+        "Hãng sản xuất": "Aukey"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/r/frame_49_1.png",
+          "altText": "Củ sạc Aukey Type-C PD 20W PA-F1S - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-nhanh-aukey-pa-f1s-20w-pd_1.jpg",
+          "altText": "Củ sạc Aukey Type-C PD 20W PA-F1S - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/6/26.png",
+          "altText": "Củ sạc Aukey Type-C PD 20W PA-F1S - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/2/22_4.png",
+          "altText": "Củ sạc Aukey Type-C PD 20W PA-F1S - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/3/23.png",
+          "altText": "Củ sạc Aukey Type-C PD 20W PA-F1S - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/5/25.png",
+          "altText": "Củ sạc Aukey Type-C PD 20W PA-F1S - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/4/24_2.png",
+          "altText": "Củ sạc Aukey Type-C PD 20W PA-F1S - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Sạc Samsung 60W không kèm cáp EP-T6010N",
+      "slug": "sac-samsung-60w-khong-kem-cap-ep-t6010n",
+      "sku": "ACC-0047",
+      "brand": "Samsung Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua sạc Samsung 60W không kèm cáp EP-T6010N chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "description": "Mua sạc Samsung 60W không kèm cáp EP-T6010N chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, bảo hành uy tín, giao hàng tận nơi toàn quốc.",
+      "price": 690000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-samsung-60w-ep-t6010n.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Công suất sạc": "60W",
+        "Sử dụng tối đa": "1 thiết bị",
+        "Đầu ra": "USB-C",
+        "Tiện ích": "Sạc siêu nhanh 2.0Tiêu thụ điện năng ở chế độ chờ thấpBảo vệ thiết bị khỏi quá dòng, đoản mạch và nhiệt độ cao",
+        "Công nghệ/Đạt chứng nhận": "Công nghệ PD 3.1Công nghệ PDO/PPS",
+        "Hãng sản xuất": "Samsung Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-samsung-60w-ep-t6010n.png",
+          "altText": "Sạc Samsung 60W không kèm cáp EP-T6010N - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-samsung-60w-ep-t6010n.jpg",
+          "altText": "Sạc Samsung 60W không kèm cáp EP-T6010N - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-samsung-60w-ep-t6010n_1_.png",
+          "altText": "Sạc Samsung 60W không kèm cáp EP-T6010N - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-samsung-60w-ep-t6010n_2_.png",
+          "altText": "Sạc Samsung 60W không kèm cáp EP-T6010N - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-samsung-60w-ep-t6010n_3_.png",
+          "altText": "Sạc Samsung 60W không kèm cáp EP-T6010N - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-samsung-60w-ep-t6010n_4_.png",
+          "altText": "Sạc Samsung 60W không kèm cáp EP-T6010N - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-samsung-60w-ep-t6010n_5_.png",
+          "altText": "Sạc Samsung 60W không kèm cáp EP-T6010N - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Sạc nhanh Apple 20w USB-C chính hãng Apple Việt Nam",
+      "slug": "sac-nhanh-apple-20w-usb-c-chinh-hang-apple-viet-nam",
+      "sku": "ACC-0048",
+      "brand": "Apple Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua củ sạc nhanh Apple 20W cho iPhone chính hãng Apple Việt Nam - Giá rẻ, bảo hành 12 tháng, giao toàn quốc. mua sạc Apple 20w tại đây.",
+      "description": "Mua củ sạc nhanh Apple 20W cho iPhone chính hãng Apple Việt Nam - Giá rẻ, bảo hành 12 tháng, giao toàn quốc. mua sạc Apple 20w tại đây.",
+      "price": 440000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_117_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 106,
+      "specifications": {
+        "Công suất sạc": "20W",
+        "Sử dụng tối đa": "1 thiết bị",
+        "Đầu ra": "USB-C",
+        "Tiện ích": "Sạc nhanhBảo vệ sản phẩm tránh quá dòng, quá điện áp hay hiện tượng mạch điện bị chập và quá nhiệt trong quá trình sạc",
+        "Công nghệ/Đạt chứng nhận": "Công nghệ Power Delivery (PD)Chứng nhận ROSH, CE, FCC",
+        "Hãng sản xuất": "Apple Chính hãng"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_117_1.png",
+          "altText": "Sạc nhanh Apple 20w USB-C chính hãng Apple Việt Nam - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/d/adapter-20w-apple-5_1_1.jpg",
+          "altText": "Sạc nhanh Apple 20w USB-C chính hãng Apple Việt Nam - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-nhanh-iphone-20w-pd-type-c_1.jpg",
+          "altText": "Sạc nhanh Apple 20w USB-C chính hãng Apple Việt Nam - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-nhanh-iphone-20w-pd-type-c_1.png",
+          "altText": "Sạc nhanh Apple 20w USB-C chính hãng Apple Việt Nam - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/6/3/637387863045632122_pk-apple-00720432-3.jpg",
+          "altText": "Sạc nhanh Apple 20w USB-C chính hãng Apple Việt Nam - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/d/adapter-20w-apple-1_1.jpg",
+          "altText": "Sạc nhanh Apple 20w USB-C chính hãng Apple Việt Nam - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/d/adapter-20w-apple-5_1.jpg",
+          "altText": "Sạc nhanh Apple 20w USB-C chính hãng Apple Việt Nam - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger",
+      "slug": "sac-nhanh-belkin-30w-1-cong-usb-c-pdpps-cubic-wall-charger",
+      "sku": "ACC-0049",
+      "brand": "Belkin",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "description": "Mua Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger chính hãng, giá ưu đãi, bảo hành chính hãng, miễn phí giao hàng tận nơi.",
+      "price": 300000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-nhanh-belkin-30w-type-c-pd-pps-cubic-wall-charger_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Công suất sạc": "30W",
+        "Sử dụng tối đa": "1 thiết bị",
+        "Đầu vào": "1 x AC",
+        "Đầu ra": "1 x USB-C",
+        "Tiện ích": "Sạc nhanhCó chân gập",
+        "Công nghệ/Đạt chứng nhận": "Power Delivery 3.1",
+        "Hãng sản xuất": "Belkin"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/u/cu-sac-nhanh-belkin-30w-type-c-pd-pps-cubic-wall-charger_1_.png",
+          "altText": "Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-nhanh-belkin-30w-type-c-pd-pps-cubic-wall-charger.jpg",
+          "altText": "Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-nhanh-belkin-30w-type-c-pd-pps-cubic-wall-charger_2_.png",
+          "altText": "Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-nhanh-belkin-30w-type-c-pd-pps-cubic-wall-charger_3_.png",
+          "altText": "Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-nhanh-belkin-30w-type-c-pd-pps-cubic-wall-charger_4_.png",
+          "altText": "Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-nhanh-belkin-30w-type-c-pd-pps-cubic-wall-charger_5_.png",
+          "altText": "Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/u/cu-sac-nhanh-belkin-30w-type-c-pd-pps-cubic-wall-charger_6_.png",
+          "altText": "Sạc nhanh Belkin 30W 1 cổng USB-C PD/PPS Cubic Wall Charger - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "phu-kien",
+      "name": "Cáp Mophie USB-C to USB-C 100W 3m",
+      "slug": "cap-mophie-usb-c-to-usb-c-100w-3m",
+      "sku": "ACC-0050",
+      "brand": "Mophie",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Cáp Mophie USB-C to USB-C 100W 3m chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua Cáp Mophie USB-C to USB-C 100W 3m chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/a/cap-type-c-to-type-c-mophie-100w-3m_1_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 6,
+      "specifications": {
+        "Công suất sạc": "100W",
+        "Sử dụng tối đa": "1 thiết bị",
+        "Đầu vào": "USB-C",
+        "Đầu ra": "USB-C",
+        "Tiện ích": "Hỗ trợ sạc nhanhChống rối",
+        "Chiều dài dây": "3 mét",
+        "Hãng sản xuất": "Mophie"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/c/a/cap-type-c-to-type-c-mophie-100w-3m_1_.png",
+          "altText": "Cáp Mophie USB-C to USB-C 100W 3m - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-type-c-to-type-c-mophie-100w-3m_2_.png",
+          "altText": "Cáp Mophie USB-C to USB-C 100W 3m - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-type-c-to-type-c-mophie-100w-3m_3_.png",
+          "altText": "Cáp Mophie USB-C to USB-C 100W 3m - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-type-c-to-type-c-mophie-100w-3m_4_.png",
+          "altText": "Cáp Mophie USB-C to USB-C 100W 3m - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-type-c-to-type-c-mophie-100w-3m_5_.png",
+          "altText": "Cáp Mophie USB-C to USB-C 100W 3m - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-type-c-to-type-c-mophie-100w-3m.png",
+          "altText": "Cáp Mophie USB-C to USB-C 100W 3m - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/a/cap-type-c-to-type-c-mophie-100w-3m_1__2.png",
+          "altText": "Cáp Mophie USB-C to USB-C 100W 3m - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    }
+  ]
+}

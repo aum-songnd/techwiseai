@@ -1,0 +1,3312 @@
+{
+  "metadata": {
+    "source": "cellphones.com.vn",
+    "category": {
+      "name": "Máy ảnh",
+      "slug": "may-anh"
+    },
+    "totalCrawled": 42,
+    "rejected": 52,
+    "skuPrefix": "CAM",
+    "generatedAt": "2026-10-20T15:53:14.685053"
+  },
+  "products": [
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Fujifilm Instax Mini 12 chụp ảnh lấy liền",
+      "slug": "may-anh-fujifilm-instax-mini-12-chup-anh-lay-lien",
+      "sku": "CAM-0001",
+      "brand": "Fujifilm",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Instax Mini 12 chính hãng, giá tốt, nhiều cải tiến tốc độ chụp nhanh, chụp ban đêm. Mua ngay máy ảnh chụp lấy liền Fujifilm Instax Mini 12, trả góp 0% tại đây!",
+      "description": "Instax Mini 12 chính hãng, giá tốt, nhiều cải tiến tốc độ chụp nhanh, chụp ban đêm. Mua ngay máy ảnh chụp lấy liền Fujifilm Instax Mini 12, trả góp 0% tại đây!",
+      "price": 1990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-fujifilm-instax-camera-mini-12-ksp.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 14,
+      "specifications": {
+        "Hãng sản xuất": "Fujifilm",
+        "Loại máy ảnh": "Chụp in liền",
+        "Loại ống kính": "Kính ngắm quang học",
+        "Tiêu cự": "f = 60 mm",
+        "Chế độ lấy nét": "Fixed Focus",
+        "Màn trập": "Màn trập điện tử được lập trình 1/2 đến 1/250 giâyĐồng bộ chậm khi ánh sáng yếu"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-fujifilm-instax-camera-mini-12-ksp.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini 12 chụp ảnh lấy liền - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_4__9_79.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini 12 chụp ảnh lấy liền - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_5__11_64.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini 12 chụp ảnh lấy liền - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/may-anh-fujifilm-instax-camera-mini-12_4__1.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini 12 chụp ảnh lấy liền - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/may-anh-fujifilm-instax-camera-mini-12_3__1.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini 12 chụp ảnh lấy liền - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/may-anh-fujifilm-instax-camera-mini-12_2__1.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini 12 chụp ảnh lấy liền - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/may-anh-fujifilm-instax-camera-mini-12_7__1.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini 12 chụp ảnh lấy liền - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Vlog Compact Sony ZV-E10",
+      "slug": "may-anh-vlog-compact-sony-zv-e10",
+      "sku": "CAM-0002",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Sony ZV-E10 - Máy ảnh Vlog chuyên nghiệp, thay 60 ống kính linh hoạt, quay 4K mượt mà, lấy nét mắt Real-time. Giá rẻ, thu cũ giảm thêm 500k, góp 0%",
+      "description": "Sony ZV-E10 - Máy ảnh Vlog chuyên nghiệp, thay 60 ống kính linh hoạt, quay 4K mượt mà, lấy nét mắt Real-time. Giá rẻ, thu cũ giảm thêm 500k, góp 0%",
+      "price": 13590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_939_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 6,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Exmor CMOS (ASP-C) 23.5 x 15.6mm",
+        "Loại ống kính": "-",
+        "Khẩu độ": "-",
+        "Tiêu cự": "-",
+        "Chế độ lấy nét": "Automatic (A), Continuous-Servo AF (C), Direct Manual Focus (DMF), Manual Focus (M), Single-Servo AF (S)",
+        "Kích thước ảnh": "Lến đến 6000 x 4000",
+        "Màn trập": "Màn trập cơ / Màn trập điện tử Tốc độ màn trập: [Ảnh tĩnh] 1/4000 đến 30 giây, Chế độ phơi sáng Bulb, [Phim] 1/4000 đến 1/4 (1/3 bước), tối đa 1/60 ở chế độ TỰ ĐỘNG (tối đa 1/30 ở chế độ Tốc độ trập chậm tự động)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_939_1.png",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/1/2/1234x652_1.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/1/_/1_370_6.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/_/2_355_6.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/3/_/3_340_5.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/4/_/4_296_7.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/5/_/5_249_8.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 50mm F1.8",
+      "slug": "bo-kit-livestreamvlog-sony-zv-e10k-lens-50mm-f18",
+      "sku": "CAM-0003",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 50mm F1.8 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 50mm F1.8 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 19590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_114.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến Exmor CMOS, loại APS-C (23,5 x 15,6 mm)",
+        "Loại ống kính": "Sony E 50MM F1.8 Góc ngắm (APS-C) 32°",
+        "Khẩu độ": "F1.8 - F22",
+        "Cấu trúc quang học": "Khẩu độ tròn 7 lá đem lại các hiệu ứng làm mờ đẹp mắt",
+        "Tiêu cự": "50 mm",
+        "Chế độ lấy nét": "AF-A, AF-S, AF-C, DMF, Manual Focus",
+        "Kích thước ảnh": "6000 x 4000 (L), 4240 x 2832 (M), 3008 x 2000 (S)",
+        "Màn trập": "Cơ / Điện tử, tốc độ 1/4000 – 30 giây, Bulb"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_114.png",
+          "altText": "Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 50mm F1.8 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/u/fuji_1__1_8.png",
+          "altText": "Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 50mm F1.8 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/u/fuji_1_10.png",
+          "altText": "Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 50mm F1.8 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Film Kodak I60",
+      "slug": "may-anh-film-kodak-i60",
+      "sku": "CAM-0004",
+      "brand": "Kodak",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Máy ảnh film Kodak I60 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Máy ảnh film Kodak I60 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 1521500.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_11_56.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Kodak",
+        "Loại máy ảnh": "Máy ảnh phim",
+        "Loại ống kính": "Tiêu cự cố định 31mm Kính ngắm quang học",
+        "Khẩu độ": "f/10 (cố định)",
+        "Màn trập": "Khoảng 1/120s – 1/125s (cố định)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_11_56.png",
+          "altText": "Máy ảnh Film Kodak I60 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/ma_1__35.png",
+          "altText": "Máy ảnh Film Kodak I60 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/ma_3__21.png",
+          "altText": "Máy ảnh Film Kodak I60 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/ma_2__26.png",
+          "altText": "Máy ảnh Film Kodak I60 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/ma_16__3.png",
+          "altText": "Máy ảnh Film Kodak I60 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/ma_46.png",
+          "altText": "Máy ảnh Film Kodak I60 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/ma_7__12.png",
+          "altText": "Máy ảnh Film Kodak I60 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Fujifilm Instax Mini Evo",
+      "slug": "may-anh-fujifilm-instax-mini-evo",
+      "sku": "CAM-0005",
+      "brand": "Fujifilm",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Instax Mini Evo chính hãng, giá tốt, trả góp 0%, tặng film, bảo hành 2 năm, giao nhanh toàn quốc. Mua ngay máy ảnh Fujifilm Instax Mini Evo tại CellphoneS",
+      "description": "Instax Mini Evo chính hãng, giá tốt, trả góp 0%, tặng film, bảo hành 2 năm, giao nhanh toàn quốc. Mua ngay máy ảnh Fujifilm Instax Mini Evo tại CellphoneS",
+      "price": 5490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-fujifilm-instax-mini-evo-0.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 12,
+      "specifications": {
+        "Hãng sản xuất": "Fujifilm",
+        "Loại máy ảnh": "Chụp in liền",
+        "Loại cảm biến": "CMOS 1/5 inch",
+        "Khẩu độ": "f/2",
+        "Tiêu cự": "28mm",
+        "Kích thước ảnh": "Film Instax Mini 62 x 46 mm",
+        "Màn trập": "1/4 - 1/8000 giây"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-fujifilm-instax-mini-evo-0.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini Evo - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_15_15_46_16_thg_7_2026_1_.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini Evo - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_15_15_46_16_thg_7_2026_2_.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini Evo - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_15_15_47_16_thg_7_2026_3_.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini Evo - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_15_15_49_16_thg_7_2026_5_.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini Evo - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_15_15_48_16_thg_7_2026_4_.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini Evo - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_15_15_49_16_thg_7_2026_6_.png",
+          "altText": "Máy ảnh Fujifilm Instax Mini Evo - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Canon EOS R10 (Body)",
+      "slug": "may-anh-canon-eos-r10-body",
+      "sku": "CAM-0006",
+      "brand": "Canon",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Máy ảnh Canon R10 chính hãng - Giá tốt, giảm 14%, nhiều hàng, giao nhanh toàn quốc, hỗ trợ trả góp 0%. Mua ngay Canon EOS R10 tại đây.",
+      "description": "Máy ảnh Canon R10 chính hãng - Giá tốt, giảm 14%, nhiều hàng, giao nhanh toàn quốc, hỗ trợ trả góp 0%. Mua ngay Canon EOS R10 tại đây.",
+      "price": 19990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_4_3.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Canon",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến CMOS APS-C 24.2MP",
+        "Chế độ lấy nét": "Continuous-Servo AF, Manual Focus, Single-Servo AF",
+        "Loại kính ngắm": "Kính ngắm điện tử OLED 2.36 triệu điểm Ngàm shoe đa chức năng",
+        "Màn trập": "Màn trập điện tử, Màn trập cơ học theo mặt phẳng tiêu cự Tốc độ màn trập: Màn trập cơ 1/4000 đến 30 giây Màn trập điện tử 1/4000 đến 30 giây"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_4_3.png",
+          "altText": "Máy ảnh Canon EOS R10 (Body) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_17_13_42_23_thg_7_2026_1_.png",
+          "altText": "Máy ảnh Canon EOS R10 (Body) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_17_13_42_23_thg_7_2026_2_.png",
+          "altText": "Máy ảnh Canon EOS R10 (Body) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_17_13_43_23_thg_7_2026_3_.png",
+          "altText": "Máy ảnh Canon EOS R10 (Body) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_17_13_44_23_thg_7_2026_4_.png",
+          "altText": "Máy ảnh Canon EOS R10 (Body) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_2__6_51.png",
+          "altText": "Máy ảnh Canon EOS R10 (Body) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_3__5_51.png",
+          "altText": "Máy ảnh Canon EOS R10 (Body) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Bộ Kit LiveStream/Vlog Sony ZV-E10 + Lens 18-105mm F4 G",
+      "slug": "bo-kit-livestreamvlog-sony-zv-e10-lens-18-105mm-f4-g",
+      "sku": "CAM-0007",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Bộ Kit LiveStream/Vlog Sony ZV-E10 + Lens 18-105mm F4 G giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Bộ Kit LiveStream/Vlog Sony ZV-E10 + Lens 18-105mm F4 G giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 21900000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_116.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Exmor CMOS (ASP-C) 23.5 x 15.6mm",
+        "Loại ống kính": "Lens 18-105mm F4 G APS-C Góc ngắm (APS-C) 76°-15° Hiệu ứng bokeh tuyệt đẹp của Ống kính G",
+        "Khẩu độ": "F4 - F22",
+        "Cấu trúc quang học": "12 nhóm 16 phần tửKhẩu độ tròn 7 lá khẩuThấu kính ED (tán sắc cực thấp) làm giảm hiệu quả các quang sai đơn sắc",
+        "Tiêu cự": "18 - 105 mm",
+        "Chế độ lấy nét": "Automatic (A), Continuous-Servo AF (C), Direct Manual Focus (DMF), Manual Focus (M), Single-Servo AF (S)",
+        "Kích thước ảnh": "Lến đến 6000 x 4000",
+        "Màn trập": "Màn trập cơ / Màn trập điện tử Tốc độ màn trập: [Ảnh tĩnh] 1/4000 đến 30 giây, Chế độ phơi sáng Bulb, [Phim] 1/4000 đến 1/4 (1/3 bước), tối đa 1/60 ở chế độ TỰ ĐỘNG (tối đa 1/30 ở chế độ Tốc độ trập chậm tự động)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_116.png",
+          "altText": "Bộ Kit LiveStream/Vlog Sony ZV-E10 + Lens 18-105mm F4 G - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/u/fuji_1_14.png",
+          "altText": "Bộ Kit LiveStream/Vlog Sony ZV-E10 + Lens 18-105mm F4 G - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Compact Sony a6700 (A6700)",
+      "slug": "may-anh-compact-sony-a6700-a6700",
+      "sku": "CAM-0008",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Máy ảnh Sony Alpha a6700 với cảm biến Exmor R 26MP, chip BIONZ XR, quay 4K 120fps và chụp 11fps. Chính hãng, tặng thẻ nhớ, giảm thêm 3tr, góp 0%",
+      "description": "Máy ảnh Sony Alpha a6700 với cảm biến Exmor R 26MP, chip BIONZ XR, quay 4K 120fps và chụp 11fps. Chính hãng, tặng thẻ nhớ, giảm thêm 3tr, góp 0%",
+      "price": 33719000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_939_3.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến Exmor R CMOS loại APS-C (23,3 x 15,5 mm)",
+        "Loại ống kính": "E-mount",
+        "Chế độ lấy nét": "Người, Động vật, Chim, Côn trùng, Xe hơi, Tàu hỏa, Máy bay",
+        "Kích thước ảnh": "APS-C L: 6192 x 4128 (26M), M: 4384 x 2920 (13M), S: 3104 x 2064 (6.4M)",
+        "Loại kính ngắm": "Khung ngắm điện tử 0,39&quot; XGA OLED (EVF) Độ phân giải 2,36 triệu điểm ảnh Độ phóng đại ~1,07x (tương đương ~0,70x full-frame, 50mm) Đi-ốp: -4,0 đến +3,0 m⁻¹ Điểm mắt ~22 mm Tốc độ khung hình: 60/120 fps (NTSC) hoặc 50/100 fps (PAL)",
+        "Màn trập": "Cơ/Điện tử: 1/4000-30s (cơ), 1/8000-30s (điện tử)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_939_3.png",
+          "altText": "Máy ảnh Compact Sony a6700 (A6700) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/1/2/1234x652_3.jpg",
+          "altText": "Máy ảnh Compact Sony a6700 (A6700) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/1/_/1_370_8.jpg",
+          "altText": "Máy ảnh Compact Sony a6700 (A6700) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/_/2_355_8.jpg",
+          "altText": "Máy ảnh Compact Sony a6700 (A6700) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/3/_/3_340_7.jpg",
+          "altText": "Máy ảnh Compact Sony a6700 (A6700) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/4/_/4_296_9.jpg",
+          "altText": "Máy ảnh Compact Sony a6700 (A6700) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/5/_/5_249_10.jpg",
+          "altText": "Máy ảnh Compact Sony a6700 (A6700) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh kỹ thuật số SJCAM ZV200",
+      "slug": "may-anh-ky-thuat-so-sjcam-zv200",
+      "sku": "CAM-0009",
+      "brand": "SJCAM",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Máy ảnh kỹ thuật số SJCAM ZV200 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Máy ảnh kỹ thuật số SJCAM ZV200 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 2390000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_241.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "SJCAM",
+        "Loại máy ảnh": "Compact (pns)",
+        "Loại cảm biến": "Sony CMOS",
+        "Loại ống kính": "Ống kính liền thân",
+        "Khẩu độ": "f/1.8",
+        "Tiêu cự": "3.95 mm",
+        "Chế độ lấy nét": "Auto Focus"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_241.png",
+          "altText": "Máy ảnh kỹ thuật số SJCAM ZV200 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_2__14_5.png",
+          "altText": "Máy ảnh kỹ thuật số SJCAM ZV200 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_3__10_101.png",
+          "altText": "Máy ảnh kỹ thuật số SJCAM ZV200 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_4__10_83.png",
+          "altText": "Máy ảnh kỹ thuật số SJCAM ZV200 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_5__12_71.png",
+          "altText": "Máy ảnh kỹ thuật số SJCAM ZV200 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_6__7_58.png",
+          "altText": "Máy ảnh kỹ thuật số SJCAM ZV200 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_7__7_43.png",
+          "altText": "Máy ảnh kỹ thuật số SJCAM ZV200 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Compact Sony a6400 (A6400)",
+      "slug": "may-anh-compact-sony-a6400-a6400",
+      "sku": "CAM-0010",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Sony a6400 lấy nét 0.02s nhanh như chớp, cảm biến APS-C 24.2MP, quay 4K. Mua máy ảnh Sony Alpha 6400 giá tốt, ưu đãi Smember tại CellphoneS",
+      "description": "Sony a6400 lấy nét 0.02s nhanh như chớp, cảm biến APS-C 24.2MP, quay 4K. Mua máy ảnh Sony Alpha 6400 giá tốt, ưu đãi Smember tại CellphoneS",
+      "price": 16430000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_939_2.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến Exmor CMOS, loại APS-C (23,5 x 15,6 mm)",
+        "Loại ống kính": "Ống kính E-mount của Sony",
+        "Khẩu độ": "Tùy thuộc vào ống kính",
+        "Tiêu cự": "Tùy thuộc vào ống kính được gắn",
+        "Chế độ lấy nét": "AF-A, AF-S, AF-C, DMF, MF",
+        "Kích thước ảnh": "6000 x 4000 (tối đa)",
+        "Loại kính ngắm": "Khung ngắm điện tử 0,39 inch (EVF) Độ phân giải 2,36 triệu điểm Độ phủ 100% Độ phóng đại ~1,07x Điều chỉnh đi-ốp -4 đến +3 m⁻¹ Điểm mắt ~23 mm",
+        "Màn trập": "1/4000 - 30 giây"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_939_2.png",
+          "altText": "Máy ảnh Compact Sony a6400 (A6400) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/1/2/1234x652_2.jpg",
+          "altText": "Máy ảnh Compact Sony a6400 (A6400) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/1/_/1_370_7.jpg",
+          "altText": "Máy ảnh Compact Sony a6400 (A6400) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/_/2_355_7.jpg",
+          "altText": "Máy ảnh Compact Sony a6400 (A6400) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/3/_/3_340_6.jpg",
+          "altText": "Máy ảnh Compact Sony a6400 (A6400) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/4/_/4_296_8.jpg",
+          "altText": "Máy ảnh Compact Sony a6400 (A6400) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/5/_/5_249_9.jpg",
+          "altText": "Máy ảnh Compact Sony a6400 (A6400) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Đèn Flash chụp ảnh Ulanzi F32",
+      "slug": "en-flash-chup-anh-ulanzi-f32",
+      "sku": "CAM-0011",
+      "brand": "Ulanzi",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua Đèn Flash chụp ảnh Ulanzi F32 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua Đèn Flash chụp ảnh Ulanzi F32 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 890000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/e/text_ng_n_3__7_53.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Ulanzi"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/e/text_ng_n_3__7_53.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi F32 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_2__9_43.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi F32 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_6__4_29.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi F32 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_5__9_31.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi F32 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_9__9_25.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi F32 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_7__4_25.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi F32 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_4__7_109.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi F32 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm)",
+      "slug": "may-anh-sony-zv-e10-ii-zv-e10m2-kem-lens-power-zoom-16-50mm",
+      "sku": "CAM-0012",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm) chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ trả góp 0%, giao hàng miễn phí toàn quốc.",
+      "description": "Mua Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm) chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ trả góp 0%, giao hàng miễn phí toàn quốc.",
+      "price": 26400500.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_4_8.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Tính năng khác": "Phát trực tuyến RTMP, RTMPS và SRT được hỗ trợ cũng như các tiêu chuẩn UVC, cho phép bạn sử dụng máy ảnh như một webcam",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến CMOS Exmor R APS-C 26MP Bộ xử lý BIONZ XR",
+        "Chế độ lấy nét": "Phát hiện pha 759 điểm lai nhanh và bộ xử lý AI"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_4_8.png",
+          "altText": "Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_10_52_03_am-1.png",
+          "altText": "Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_10_52_04_am-2.png",
+          "altText": "Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_10_52_05_am-3.png",
+          "altText": "Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_10_52_07_am-4.png",
+          "altText": "Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_10_52_09_am-5.png",
+          "altText": "Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_13__6_68.png",
+          "altText": "Máy ảnh Sony ZV-E10 II / ZV-E10M2 (Kèm Lens Power Zoom 16-50mm) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh kỹ thuật số Sony ZV-E10K",
+      "slug": "may-anh-ky-thuat-so-sony-zv-e10k",
+      "sku": "CAM-0013",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Máy ảnh kỹ thuật số Sony ZV-E10K giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Máy ảnh kỹ thuật số Sony ZV-E10K giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 15190000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_59.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến Exmor CMOS, loại APS-C (23,5 x 15,6 mm)",
+        "Loại ống kính": "E PZ 16–50mm F3.5–5.6 OSS II",
+        "Khẩu độ": "F3.5–5.6 (Tối đa)",
+        "Tiêu cự": "16–50mm (Tương đương 24–75mm trên định dạng 35mm)",
+        "Chế độ lấy nét": "AF-A, AF-S, AF-C, DMF, Manual Focus",
+        "Kích thước ảnh": "6000 x 4000 (L), 4240 x 2832 (M), 3008 x 2000 (S)",
+        "Màn trập": "Cơ / Điện tử, tốc độ 1/4000 – 30 giây, Bulb",
+        "Tốc độ in": "Tương thích: Cài đặt in Exif, Print Image Matching III, DPOF"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_59.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-E10K - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_41_27_pm-1.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-E10K - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_41_28_pm-2.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-E10K - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_41_29_pm-3.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-E10K - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_41_31_pm-4.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-E10K - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_41_33_pm-5.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-E10K - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/u/fuji_5__17.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-E10K - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Vlog Compact Sony ZV-E10 II (ZVE10M2)",
+      "slug": "may-anh-vlog-compact-sony-zv-e10-ii-zve10m2",
+      "sku": "CAM-0014",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua Sony ZVE10 II / ZVE10 Mark II chính hãng - Giá rẻ, tặng thẻ nhớ/pin sạc/túi đeo chất lượng, độ bền cao, góp 0%, giao nhanh miễn phí",
+      "description": "Mua Sony ZVE10 II / ZVE10 Mark II chính hãng - Giá rẻ, tặng thẻ nhớ/pin sạc/túi đeo chất lượng, độ bền cao, góp 0%, giao nhanh miễn phí",
+      "price": 23090000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_939.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Tính năng khác": "Phát trực tuyến RTMP, RTMPS và SRT được hỗ trợ cũng như các tiêu chuẩn UVC, cho phép bạn sử dụng máy ảnh như một webcam",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến CMOS Exmor R APS-C 26MP Bộ xử lý BIONZ XR",
+        "Loại ống kính": "Ống kính rời Ngàm Sony E-mount",
+        "Chế độ lấy nét": "AF-S, AF-C, MF",
+        "Kích thước ảnh": "Tối đa 6192 x 4128 (26MP)",
+        "Màn trập": "Màn trập điện tử"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/g/r/group_939.png",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 II (ZVE10M2) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/1/2/1234x652.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 II (ZVE10M2) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/1/_/1_370_5.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 II (ZVE10M2) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/2/_/2_355_5.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 II (ZVE10M2) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/3/_/3_340_4.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 II (ZVE10M2) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/4/_/4_296_6.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 II (ZVE10M2) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/5/_/5_249_7.jpg",
+          "altText": "Máy ảnh Vlog Compact Sony ZV-E10 II (ZVE10M2) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II",
+      "slug": "may-anh-ky-thuat-so-sony-ilce-6400k-ong-kinh-power-zoom-16-50mm-ii",
+      "sku": "CAM-0015",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 17690000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_8_7.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 4,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến Exmor CMOS, loại APS-C (23,5 x 15,6 mm)",
+        "Loại ống kính": "E-mount của Sony",
+        "Tiêu cự": "16-50mm",
+        "Chế độ lấy nét": "AF-A, AF-S, AF-C, DMF, Manual Focus",
+        "Kích thước ảnh": "L: 6000 x 4000 (24M), M: 4240 x 2832 (12M), S: 3008 x 2000 (6.0M)",
+        "Màn trập": "1/4000 - 30 giây + Bulb"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_8_7.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_03_55_15_pm-1.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_03_55_17_pm-2.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_03_55_19_pm-3.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_03_55_22_pm-4.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/o/sony_6400_real-time_eye_tracking_ad.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_1__9_30.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400K + Ống kính Power Zoom 16-50MM II - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 35mm F1.8",
+      "slug": "bo-kit-livestreamvlog-sony-zv-e10k-lens-35mm-f18",
+      "sku": "CAM-0016",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 35mm F1.8 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 35mm F1.8 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 20500000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_115.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến Exmor CMOS, loại APS-C (23,5 x 15,6 mm)",
+        "Loại ống kính": "Sony E 35MM F1.8 Góc ngắm (APS-C) 44°",
+        "Khẩu độ": "F1.8 - F22",
+        "Cấu trúc quang học": "Khẩu độ tròn 7 lá",
+        "Tiêu cự": "35 mm",
+        "Chế độ lấy nét": "AF-A, AF-S, AF-C, DMF, Manual Focus",
+        "Kích thước ảnh": "6000 x 4000 (L), 4240 x 2832 (M), 3008 x 2000 (S)",
+        "Màn trập": "Cơ / Điện tử, tốc độ 1/4000 – 30 giây, Bulb"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_115.png",
+          "altText": "Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 35mm F1.8 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/u/fuji_1__1_10.png",
+          "altText": "Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 35mm F1.8 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/u/fuji_1_12.png",
+          "altText": "Bộ Kit LiveStream/Vlog Sony ZV-E10K + Lens 35mm F1.8 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM",
+      "slug": "may-anh-ky-thuat-so-sony-ilce-6400m-ong-kinh-zoom-18-135mm",
+      "sku": "CAM-0017",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 24219000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_1__13.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "APS-C (Crop 1.5x)",
+        "Loại ống kính": "Sony E-mount",
+        "Khẩu độ": "F3.5-5.6 (max), F22-36 (min)",
+        "Tiêu cự": "18-135mm (27-202.5mm ở định dạng 35mm)",
+        "Chế độ lấy nét": "Auto, AF-S, AF-C, DMF, MF",
+        "Kích thước ảnh": "6000x4000 (3:2), 6000x3376 (16:9), 4000x4000 (1:1)",
+        "Màn trập": "Điện tử, 1/4000 đến 30 giây"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_1__13.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_11_25_14_am-1.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_11_25_16_am-2.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_11_25_18_am-3.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_11_25_20_am-4.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_11_25_21_am-5.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_8__5_17.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ILCE-6400M + Ống kính Zoom 18-135MM - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh kỹ thuật số Sony Alpha ILCE-6700MBQAP2 (Kèm ống kính ZOOM 18-135mm)",
+      "slug": "may-anh-ky-thuat-so-sony-alpha-ilce-6700mbqap2-kem-ong-kinh-zoom-18-135mm",
+      "sku": "CAM-0018",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Sony Alpha A6700 (Kèm lens ZOOM 18-135mm) giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Sony Alpha A6700 (Kèm lens ZOOM 18-135mm) giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 42890000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_24.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Exmor R CMOS, APS-C (23,3 x 15,5 mm)",
+        "Loại ống kính": "Ngàm E-mount, kèm ống kính ZOOM 18-135 mm",
+        "Khẩu độ": "F3.5–5.6 (với ống SEL18135)",
+        "Tiêu cự": "Theo ống SEL18135: 18–135mm (tương đương 27–202.5mm full-frame)",
+        "Chế độ lấy nét": "AF-S, AF-C, AF-A, DMF, MF",
+        "Kích thước ảnh": "L: 6192×4128 (26MP), M: 4384×2920 (13MP), S: 3104×2064 (6.4MP)",
+        "Màn trập": "Cơ và điện tử, 1/8000s–30s, Bulb"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_24.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-6700MBQAP2 (Kèm ống kính ZOOM 18-135mm) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_1_2026_11_34_35_am-1.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-6700MBQAP2 (Kèm ống kính ZOOM 18-135mm) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_1_2026_11_34_36_am-2.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-6700MBQAP2 (Kèm ống kính ZOOM 18-135mm) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_1_2026_11_34_38_am-3.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-6700MBQAP2 (Kèm ống kính ZOOM 18-135mm) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_1_2026_11_34_39_am-4.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-6700MBQAP2 (Kèm ống kính ZOOM 18-135mm) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_1_2026_11_34_41_am-5.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-6700MBQAP2 (Kèm ống kính ZOOM 18-135mm) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_2__10_178.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-6700MBQAP2 (Kèm ống kính ZOOM 18-135mm) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy in ảnh lấy liền Fujifilm Instax Mini Link 3",
+      "slug": "may-in-anh-lay-lien-fujifilm-instax-mini-link-3",
+      "sku": "CAM-0019",
+      "brand": "Fujifilm",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Máy in ảnh lấy liền Fujifilm Instax Mini Link 3 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Máy in ảnh lấy liền Fujifilm Instax Mini Link 3 giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 2690000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_3.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Fujifilm",
+        "Kích thước ảnh": "62 mm × 46 mm",
+        "Tốc độ in": "Khoảng 15 giây/ảnh"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_3.png",
+          "altText": "Máy in ảnh lấy liền Fujifilm Instax Mini Link 3 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/_/m_y_in_nh_l_y_li_n_fujifilm_instax_mini_link_3_-_1.png",
+          "altText": "Máy in ảnh lấy liền Fujifilm Instax Mini Link 3 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/_/m_y_in_nh_l_y_li_n_fujifilm_instax_mini_link_3_-_2.png",
+          "altText": "Máy in ảnh lấy liền Fujifilm Instax Mini Link 3 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/_/m_y_in_nh_l_y_li_n_fujifilm_instax_mini_link_3_-_3.png",
+          "altText": "Máy in ảnh lấy liền Fujifilm Instax Mini Link 3 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_14__8_30.png",
+          "altText": "Máy in ảnh lấy liền Fujifilm Instax Mini Link 3 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_15__7_176.png",
+          "altText": "Máy in ảnh lấy liền Fujifilm Instax Mini Link 3 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_13__7_30.png",
+          "altText": "Máy in ảnh lấy liền Fujifilm Instax Mini Link 3 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Bộ Kit Vlog/Du Lịch Sony A6400 + Lens 18-105mm F4 G",
+      "slug": "bo-kit-vlogdu-lich-sony-a6400-lens-18-105mm-f4-g",
+      "sku": "CAM-0020",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Bộ Kit Vlog/Du Lịch Sony A6400 + Lens 18-105mm F4 G giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Bộ Kit Vlog/Du Lịch Sony A6400 + Lens 18-105mm F4 G giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 25190000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_117.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Cảm biến Exmor CMOS, loại APS-C (23,5 x 15,6 mm)",
+        "Loại ống kính": "Ống kính E-mount của SonyAPS-CGóc ngắm (APS-C) 76°-15°",
+        "Khẩu độ": "F4 - F22",
+        "Cấu trúc quang học": "7 lá khẩu12 nhóm ống kính / 16 Phần tửThấu kính ED (tán sắc cực thấp) làm giảm hiệu quả các quang sai đơn sắc",
+        "Tiêu cự": "18-105mm",
+        "Chế độ lấy nét": "AF-A, AF-S, AF-C, DMF, MF",
+        "Kích thước ảnh": "6000 x 4000 (tối đa)",
+        "Loại kính ngắm": "Khung ngắm điện tử 0,39 inch (EVF) Độ phân giải 2,36 triệu điểm Độ phủ 100% Độ phóng đại ~1,07x Điều chỉnh đi-ốp -4 đến +3 m⁻¹ Điểm mắt ~23 mm",
+        "Màn trập": "1/4000 - 30 giây"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_117.png",
+          "altText": "Bộ Kit Vlog/Du Lịch Sony A6400 + Lens 18-105mm F4 G - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/u/fuji_1_16.png",
+          "altText": "Bộ Kit Vlog/Du Lịch Sony A6400 + Lens 18-105mm F4 G - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền",
+      "slug": "may-anh-instax-mini-liplay-plus-chup-anh-lay-lien",
+      "sku": "CAM-0021",
+      "brand": "Fujifilm",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 5490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_324.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Fujifilm",
+        "Loại máy ảnh": "Chụp in liền",
+        "Loại cảm biến": "CMOS, bộ lọc màu chính",
+        "Khẩu độ": "Camera chính: F2.0; Camera selfie: F2.2",
+        "Tiêu cự": "Camera chính: 28 mm; Camera selfie: 23 mm (tương đương phim 35 mm)",
+        "Chế độ lấy nét": "Single AF (Camera chính)",
+        "Kích thước ảnh": "2560 x 1920 pixel",
+        "Loại kính ngắm": "Không hỗ trợ kính ngắm",
+        "Màn trập": "1/4 giây đến 1/8000 giây, tự động chuyển đổi",
+        "Tương thích": "Hỗ trợ ứng dụng iOS/Android",
+        "Tốc độ in": "Kích thước film: 86 x 54 mm Kích thước ảnh: 62 x 46 mm Độ phân giải: 800 x 600 điểm, 318 dpi Thời gian in: Khoảng 13 giây Định dạng: JPEG, PNG, HEIF Số ảnh in: Khoảng 100 ảnh/lần sạc Thời gian sạc: Khoảng 2–3 giờ"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_324.png",
+          "altText": "Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_29_2026_04_34_01_pm-1.png",
+          "altText": "Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_29_2026_04_34_02_pm-2.png",
+          "altText": "Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_29_2026_04_34_03_pm-3.png",
+          "altText": "Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_29_2026_04_34_04_pm-4.png",
+          "altText": "Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_29_2026_04_34_06_pm-5.png",
+          "altText": "Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/r/product-38.png",
+          "altText": "Máy ảnh Instax Mini LiPlay Plus chụp ảnh lấy liền - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Đèn Flash chụp ảnh Ulanzi Mini F12",
+      "slug": "en-flash-chup-anh-ulanzi-mini-f12",
+      "sku": "CAM-0022",
+      "brand": "Ulanzi",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua Đèn Flash chụp ảnh Ulanzi Mini F12 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua Đèn Flash chụp ảnh Ulanzi Mini F12 chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 550000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/e/text_ng_n_5__9_32_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Ulanzi"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/t/e/text_ng_n_5__9_32_1.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi Mini F12 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_6__4_30_1.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi Mini F12 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/u/fuji_1_35.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi Mini F12 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_14__8_45_1.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi Mini F12 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_15__7_187_1.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi Mini F12 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_13__7_48_1.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi Mini F12 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_9__9_26_1.png",
+          "altText": "Đèn Flash chụp ảnh Ulanzi Mini F12 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Canon EOS R50 (RF-S18-45mm f/4.5-6.3 IS STM)",
+      "slug": "may-anh-canon-eos-r50-rf-s18-45mm-f45-63-is-stm",
+      "sku": "CAM-0023",
+      "brand": "Canon",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Canon EOS R50 máy ảnh mirrorless APS-C 24.2MP quay 4K30p, Dual Pixel AF II, chụp 15fps, thiết kế nhỏ gọn. Mua Canon R50 giá tốt tại CellphoneS",
+      "description": "Canon EOS R50 máy ảnh mirrorless APS-C 24.2MP quay 4K30p, Dual Pixel AF II, chụp 15fps, thiết kế nhỏ gọn. Mua Canon R50 giá tốt tại CellphoneS",
+      "price": 17490000.0,
+      "originalPrice": 17990000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-canon-eos-r50_5_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 16,
+      "specifications": {
+        "Hãng sản xuất": "Canon",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "APS-C CMOS",
+        "Khẩu độ": "f/4.5-6.3",
+        "Tiêu cự": "RF-S18-45mm",
+        "Chế độ lấy nét": "Continuous-Servo AF, Manual Focus, Single-Servo AF",
+        "Màn trập": "Màn trập điện tử1/8000 đến 30 giâyMàn trập điện tử phía trước1/4000 đến 30 giây"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-canon-eos-r50_5_.png",
+          "altText": "Máy ảnh Canon EOS R50 (RF-S18-45mm f/4.5-6.3 IS STM) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_13_44_42_24_thg_7_2026_1_.png",
+          "altText": "Máy ảnh Canon EOS R50 (RF-S18-45mm f/4.5-6.3 IS STM) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_13_44_43_24_thg_7_2026_2_.png",
+          "altText": "Máy ảnh Canon EOS R50 (RF-S18-45mm f/4.5-6.3 IS STM) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_13_44_43_24_thg_7_2026_3_.png",
+          "altText": "Máy ảnh Canon EOS R50 (RF-S18-45mm f/4.5-6.3 IS STM) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_13_44_43_24_thg_7_2026_4_.png",
+          "altText": "Máy ảnh Canon EOS R50 (RF-S18-45mm f/4.5-6.3 IS STM) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_13_44_43_24_thg_7_2026_5_.png",
+          "altText": "Máy ảnh Canon EOS R50 (RF-S18-45mm f/4.5-6.3 IS STM) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/may-anh-canon-eos-r50_4_.png",
+          "altText": "Máy ảnh Canon EOS R50 (RF-S18-45mm f/4.5-6.3 IS STM) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Canon EOS R6 Mark III (Body)",
+      "slug": "may-anh-canon-eos-r6-mark-iii-body",
+      "sku": "CAM-0024",
+      "brand": "Canon",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Máy ảnh Canon EOS R6 Mark III (Body) giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Máy ảnh Canon EOS R6 Mark III (Body) giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 60500000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_62.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Canon",
+        "Loại máy ảnh": "Full-frame",
+        "Loại cảm biến": "Full-Frame",
+        "Loại ống kính": "Canon RF",
+        "Khẩu độ": "-",
+        "Tiêu cự": "-",
+        "Chế độ lấy nét": "Continuous-Servo AF, Manual Focus, Single-Servo AF",
+        "Kích thước ảnh": "6000 × 4000",
+        "Màn trập": "Màn trập cơ: 1/8000 → 30 giây Màn trập điện tử: 1/16000 → 30 giây"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_62.png",
+          "altText": "Máy ảnh Canon EOS R6 Mark III (Body) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_04_58_29_thg_7_2026_1_.png",
+          "altText": "Máy ảnh Canon EOS R6 Mark III (Body) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_04_58_29_thg_7_2026_2_.png",
+          "altText": "Máy ảnh Canon EOS R6 Mark III (Body) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_04_59_29_thg_7_2026_3_.png",
+          "altText": "Máy ảnh Canon EOS R6 Mark III (Body) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_05_01_29_thg_7_2026_4_.png",
+          "altText": "Máy ảnh Canon EOS R6 Mark III (Body) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_05_01_29_thg_7_2026_5_.png",
+          "altText": "Máy ảnh Canon EOS R6 Mark III (Body) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_2__12_9.png",
+          "altText": "Máy ảnh Canon EOS R6 Mark III (Body) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Canon EOS R100",
+      "slug": "may-anh-canon-eos-r100",
+      "sku": "CAM-0025",
+      "brand": "Canon",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Canon R100 giá rẻ - chụp nét, lấy nét nhanh - trả trước 0đ, góp 0%, bảo hành 2 năm, giao nhanh 2h. Mua máy ảnh ống kính rời Canon EOS R100 tại đây!",
+      "description": "Canon R100 giá rẻ - chụp nét, lấy nét nhanh - trả trước 0đ, góp 0%, bảo hành 2 năm, giao nhanh 2h. Mua máy ảnh ống kính rời Canon EOS R100 tại đây!",
+      "price": 13190000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-canon-eos-r100_4_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Canon",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "APS-C CMOS",
+        "Khẩu độ": "f/4.5-6.3",
+        "Tiêu cự": "RF-S18-45mm",
+        "Chế độ lấy nét": "Continuous-Servo AF, Manual Focus, Single-Servo AF",
+        "Màn trập": "Màn trập điện tử1/4000 lên đến 30 giây ở Chế độ Bulb1/4000 lên đến 1 giây ở Chế độ Manual"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-canon-eos-r100_4_.png",
+          "altText": "Máy ảnh Canon EOS R100 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_12_10_3_thg_8_2026_1_.png",
+          "altText": "Máy ảnh Canon EOS R100 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_12_10_3_thg_8_2026_2_.png",
+          "altText": "Máy ảnh Canon EOS R100 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_12_11_3_thg_8_2026_3_.png",
+          "altText": "Máy ảnh Canon EOS R100 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_12_11_3_thg_8_2026_4_.png",
+          "altText": "Máy ảnh Canon EOS R100 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_12_11_3_thg_8_2026_5_.png",
+          "altText": "Máy ảnh Canon EOS R100 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/may-anh-canon-eos-r100_8_.png",
+          "altText": "Máy ảnh Canon EOS R100 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Canon EOS RP (Body Only)",
+      "slug": "may-anh-canon-eos-rp-body-only",
+      "sku": "CAM-0026",
+      "brand": "Canon",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua Máy ảnh Canon EOS RP (Body Only) chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Canon EOS RP tại đây.",
+      "description": "Mua Máy ảnh Canon EOS RP (Body Only) chính hãng - Giá tốt, bảo hành uy tín, giao hàng tận nơi toàn quốc. Mua ngay Canon EOS RP tại đây.",
+      "price": 15490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_16.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Canon",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Full-Frame CMOS",
+        "Loại ống kính": "Canon RF",
+        "Chế độ lấy nét": "Eye Detection AF, Focus Bracketing",
+        "Kích thước ảnh": "6240 × 4160 (L), 4160 × 2768 (M), 3120 × 2080 (S1), 2400 × 1600 (S2)",
+        "Màn trập": "30 - 1/4000 giây, Bulb"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_16.png",
+          "altText": "Máy ảnh Canon EOS RP (Body Only) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_14_43_26_3_thg_8_2026_1_.png",
+          "altText": "Máy ảnh Canon EOS RP (Body Only) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_14_43_27_3_thg_8_2026_2_.png",
+          "altText": "Máy ảnh Canon EOS RP (Body Only) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_14_43_27_3_thg_8_2026_3_.png",
+          "altText": "Máy ảnh Canon EOS RP (Body Only) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_14_43_27_3_thg_8_2026_4_.png",
+          "altText": "Máy ảnh Canon EOS RP (Body Only) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_14_43_27_3_thg_8_2026_5_.png",
+          "altText": "Máy ảnh Canon EOS RP (Body Only) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_5__10_45_1.png",
+          "altText": "Máy ảnh Canon EOS RP (Body Only) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Canon EOS R50 V (RF-S14-30mm f/4-6.3 IS STM PZ)",
+      "slug": "may-anh-canon-eos-r50-v-rf-s14-30mm-f4-63-is-stm-pz",
+      "sku": "CAM-0027",
+      "brand": "Canon",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Canon R50V cải tiến với 10-bit 4K 60p, hệ màu Log 3 và thiết kế Flat-top, quay Vlog đỉnh nhất 2026 đã có mặt tại CellphoneS. Giá tốt - Trade-in cực hời!",
+      "description": "Canon R50V cải tiến với 10-bit 4K 60p, hệ màu Log 3 và thiết kế Flat-top, quay Vlog đỉnh nhất 2026 đã có mặt tại CellphoneS. Giá tốt - Trade-in cực hời!",
+      "price": 18990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_57.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Canon",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "APS-C CMOS",
+        "Loại ống kính": "RF-S14-30mm f/4-6.3 IS STM PZ",
+        "Khẩu độ": "f/4-6.3",
+        "Tiêu cự": "14-30mm (tương đương 35mm: ~22-48mm)",
+        "Chế độ lấy nét": "Single AF, Continuous AF (Servo), Manual Focus",
+        "Kích thước ảnh": "Lên đến 24,2 MP (6000 x 4000)",
+        "Màn trập": "Điện tử: 1/8000s – 30s Điện tử trước: 1/4000s – 30s"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_57.png",
+          "altText": "Máy ảnh Canon EOS R50 V (RF-S14-30mm f/4-6.3 IS STM PZ) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_25_31_pm-1.png",
+          "altText": "Máy ảnh Canon EOS R50 V (RF-S14-30mm f/4-6.3 IS STM PZ) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_25_32_pm-2.png",
+          "altText": "Máy ảnh Canon EOS R50 V (RF-S14-30mm f/4-6.3 IS STM PZ) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_25_33_pm-3.png",
+          "altText": "Máy ảnh Canon EOS R50 V (RF-S14-30mm f/4-6.3 IS STM PZ) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_25_34_pm-4.png",
+          "altText": "Máy ảnh Canon EOS R50 V (RF-S14-30mm f/4-6.3 IS STM PZ) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_02_25_36_pm-5.png",
+          "altText": "Máy ảnh Canon EOS R50 V (RF-S14-30mm f/4-6.3 IS STM PZ) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/f/u/fuji_24.png",
+          "altText": "Máy ảnh Canon EOS R50 V (RF-S14-30mm f/4-6.3 IS STM PZ) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh kỹ thuật số Sony ZV1 II",
+      "slug": "may-anh-ky-thuat-so-sony-zv1-ii",
+      "sku": "CAM-0028",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Sony ZV1 II chính hãng - Giá tốt tháng 8/2024, bảo hành 24 tháng, giao nhanh, trả gop 0%. Mua ngay máy ảnh kỹ thuật số Sony ZV 1 II tại đây",
+      "description": "Sony ZV1 II chính hãng - Giá tốt tháng 8/2024, bảo hành 24 tháng, giao nhanh, trả gop 0%. Mua ngay máy ảnh kỹ thuật số Sony ZV 1 II tại đây",
+      "price": 19390000.0,
+      "originalPrice": 19590000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-sony-zv-1-ii-0.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Mirrorless (không gương lật)",
+        "Loại cảm biến": "Exmor RS CMOS 1.0",
+        "Loại ống kính": "ZEISS Vario-Sonnar T",
+        "Khẩu độ": "F1.8 - F4.0",
+        "Tiêu cự": "f = 6,9 - 17,6 mm",
+        "Chế độ lấy nét": "Lấy nét tự động theo pha / Lấy nét tự động theo nhận diện tương phản",
+        "Kích thước ảnh": "Đến 5472 x 3648"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-sony-zv-1-ii-0.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV1 II - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_03_07_42_pm-1.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV1 II - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_03_07_44_pm-2.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV1 II - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_03_07_46_pm-3.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV1 II - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_03_07_48_pm-4.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV1 II - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_03_07_50_pm-5.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV1 II - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/may-anh-sony-zv-1-ii-1.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV1 II - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh Instax Mini 13 chụp ảnh lấy liền",
+      "slug": "may-anh-instax-mini-13-chup-anh-lay-lien",
+      "sku": "CAM-0029",
+      "brand": "Fujifilm",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua Máy ảnh Instax Mini 13 chụp ảnh lấy liền chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "description": "Mua Máy ảnh Instax Mini 13 chụp ảnh lấy liền chính hãng - Giá rẻ, đảm bảo chất lượng, độ bền cao, hỗ trợ giao hàng tận nơi toàn quốc.",
+      "price": 2390000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_86.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Fujifilm",
+        "Loại máy ảnh": "Chụp in liền",
+        "Khẩu độ": "f/12.7",
+        "Cấu trúc quang học": "2 thành phần, 2 phần tử, f = 60 mm, 1:12.7",
+        "Tiêu cự": "60mm",
+        "Kích thước ảnh": "62 mm × 46 mm",
+        "Loại kính ngắm": "Kính ngắm ảnh thật, độ phóng đại 0,37×, có điểm ngắm. Tích hợp chức năng hiệu chỉnh thị sai cho chế độ chụp cận cảnh.",
+        "Màn trập": "Màn trập điện tử lập trình từ 1/2 đến 1/250 giây Đồng bộ chậm cho điều kiện thiếu sáng",
+        "Tốc độ in": "Khoảng 90 giây (thời gian có thể thay đổi tùy thuộc vào nhiệt độ môi trường xung quanh)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_13_86.png",
+          "altText": "Máy ảnh Instax Mini 13 chụp ảnh lấy liền - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_03_21_16_pm-1.png",
+          "altText": "Máy ảnh Instax Mini 13 chụp ảnh lấy liền - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_03_21_18_pm-2.png",
+          "altText": "Máy ảnh Instax Mini 13 chụp ảnh lấy liền - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_03_21_20_pm-3.png",
+          "altText": "Máy ảnh Instax Mini 13 chụp ảnh lấy liền - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_03_21_23_pm-5.png",
+          "altText": "Máy ảnh Instax Mini 13 chụp ảnh lấy liền - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_sep_30_2026_03_21_22_pm-4.png",
+          "altText": "Máy ảnh Instax Mini 13 chụp ảnh lấy liền - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/s/as011_11.png",
+          "altText": "Máy ảnh Instax Mini 13 chụp ảnh lấy liền - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only)",
+      "slug": "may-anh-ky-thuat-so-sony-alpha-ilce-7m4bq-ap2-body-only",
+      "sku": "CAM-0030",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only) chính hãng - Giá tốt, bảo hành 24 tháng, giao hàng tận nơi toàn quốc. Mua ngay máy ảnh Sony Alpha tại đây.",
+      "description": "Mua Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only) chính hãng - Giá tốt, bảo hành 24 tháng, giao hàng tận nơi toàn quốc. Mua ngay máy ảnh Sony Alpha tại đây.",
+      "price": 53500000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_20.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Full-frame",
+        "Loại cảm biến": "Full-frame 35 mm (35,9 x 23,9 mm), cảm biến Exmor R CMOS",
+        "Loại ống kính": "Ngàm E-mount",
+        "Chế độ lấy nét": "AF-A, AF-S, AF-C, DMF, MF",
+        "Màn trập": "Cơ / Điện tử, 1/8000s – 30s, Bulb",
+        "Tốc độ in": "Exif Print, Print Image Matching III"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_9_20.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_02_17_26_pm-1.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_02_17_28_pm-2.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_02_17_29_pm-3.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_02_17_31_pm-4.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_2_2026_02_17_33_pm-5.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/t/e/text_ng_n_2__10_170.png",
+          "altText": "Máy ảnh kỹ thuật số Sony Alpha ILCE-7M4/BQ AP2 (Body Only) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh kỹ thuật số Fujifilm X100VI",
+      "slug": "may-anh-ky-thuat-so-fujifilm-x100vi",
+      "sku": "CAM-0031",
+      "brand": "Fujifilm",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua ngay Máy ảnh kỹ thuật số Fujifilm X100VI giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Mua ngay Máy ảnh kỹ thuật số Fujifilm X100VI giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 52500000.0,
+      "originalPrice": 54500000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_1__22.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Hãng sản xuất": "Fujifilm",
+        "Loại máy ảnh": "Compact (pns)",
+        "Loại cảm biến": "APS-C",
+        "Loại ống kính": "FUJINON Single focal length lens 23mm F2.0",
+        "Khẩu độ": "F2–F16",
+        "Tiêu cự": "23mm (tương đương 35mm: 35mm)",
+        "Chế độ lấy nét": "Lấy nét theo gương mặt và mắt/Nhận diện chủ thể với AI",
+        "Kích thước ảnh": "7728 × 5152",
+        "Màn trập": "Cơ: 1/4000–15 phút (tùy chế độ), bulb đến 60 phút Điện tử: 1/180000–15 phút"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/_/m_y_nh_1__22.png",
+          "altText": "Máy ảnh kỹ thuật số Fujifilm X100VI - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_13_12_23_thg_7_2026_1_.png",
+          "altText": "Máy ảnh kỹ thuật số Fujifilm X100VI - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_13_12_23_thg_7_2026_2_.png",
+          "altText": "Máy ảnh kỹ thuật số Fujifilm X100VI - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_13_13_23_thg_7_2026_3_.png",
+          "altText": "Máy ảnh kỹ thuật số Fujifilm X100VI - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_13_13_23_thg_7_2026_4_.png",
+          "altText": "Máy ảnh kỹ thuật số Fujifilm X100VI - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_16_13_16_23_thg_7_2026_5_.png",
+          "altText": "Máy ảnh kỹ thuật số Fujifilm X100VI - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/s/ssss_1_37.png",
+          "altText": "Máy ảnh kỹ thuật số Fujifilm X100VI - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Máy ảnh kỹ thuật số Sony ZV-1",
+      "slug": "may-anh-ky-thuat-so-sony-zv-1",
+      "sku": "CAM-0032",
+      "brand": "Sony",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Máy ảnh Sony ZV-1 chính hãng - giá tốt, tặng thẻ nhớ, giao nhanh 2h tận nơi, trả góp 0%. Mua ngay máy ảnh kỹ thuật số Sony ZV 1 tại CellphoneS",
+      "description": "Máy ảnh Sony ZV-1 chính hãng - giá tốt, tặng thẻ nhớ, giao nhanh 2h tận nơi, trả góp 0%. Mua ngay máy ảnh kỹ thuật số Sony ZV 1 tại CellphoneS",
+      "price": 15490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-sony-zv-1-0.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 4,
+      "specifications": {
+        "Hãng sản xuất": "Sony",
+        "Loại máy ảnh": "Compact (pns)",
+        "Loại cảm biến": "Exmor RS CMOS 1.0",
+        "Loại ống kính": "Zeiss Vario-Sonnar T10 thấu kính xếp thành 9 nhóm",
+        "Khẩu độ": "Tối đa f/1.8Tối thiểu f/2.8",
+        "Tiêu cự": "F= 9.4 - 25.7 mm",
+        "Chế độ lấy nét": "Single-shot AF, Automatic AF, Continuous AF, DMF, Manual Focus",
+        "Kích thước ảnh": "5472 x 3648"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/a/may-anh-sony-zv-1-0.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-1 - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_5_2026_11_07_21_am-1.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-1 - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_5_2026_11_07_24_am-2.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-1 - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_5_2026_11_07_28_am-3.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-1 - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_5_2026_11_07_31_am-4.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-1 - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/c/h/chatgpt_image_oct_5_2026_11_07_35_am-5.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-1 - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/may-anh-sony-zv-1_11.png",
+          "altText": "Máy ảnh kỹ thuật số Sony ZV-1 - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "iPhone 18 Pro 256GB",
+      "slug": "iphone-18-pro-256gb",
+      "sku": "CAM-0033",
+      "brand": "Apple",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "iPhone 18 Pro chính hãng giá 38.99 triệu tại CellphoneS, màn hình 6,3 inch, Chip A20 Pro, đủ màu, thu cũ giảm 5tr | Mua IP 18 pro tại CellphoneS",
+      "description": "iPhone 18 Pro chính hãng giá 38.99 triệu tại CellphoneS, màn hình 6,3 inch, Chip A20 Pro, đủ màu, thu cũ giảm 5tr | Mua IP 18 pro tại CellphoneS",
+      "price": 38690000.0,
+      "originalPrice": 38990000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 8,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "A20 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.3 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2622 x 1206 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stagef/1,9 Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "iPhone 18 Pro Max 256GB",
+      "slug": "iphone-18-pro-max-256gb",
+      "sku": "CAM-0034",
+      "brand": "Apple",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "iPhone 18 ProMax chính hãng giá 41,99 triệu tại CellphoneS, nâng cấp nổi bật chip A20 Pro, camera khẩu độ linh hoạt, trả góp 0% 18T - Mua ngay",
+      "description": "iPhone 18 ProMax chính hãng giá 41,99 triệu tại CellphoneS, nâng cấp nổi bật chip A20 Pro, camera khẩu độ linh hoạt, trả góp 0% 18T - Mua ngay",
+      "price": 41990000.0,
+      "originalPrice": 80999000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 10,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "Apple A20 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stage, f/1,9Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "iPhone 17 Pro Max 256GB | Chính hãng",
+      "slug": "iphone-17-pro-max-256gb-chinh-hang",
+      "sku": "CAM-0035",
+      "brand": "Apple",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "iPhone 17 Pro Max chính hãng đủ dung lượng từ 256GB - 2TB, giá tốt tháng 10/2026 - mua Apple iP 17 Promax trả góp 0% 12 tháng tại CellphoneS",
+      "description": "iPhone 17 Pro Max chính hãng đủ dung lượng từ 256GB - 2TB, giá tốt tháng 10/2026 - mua Apple iP 17 Promax trả góp 0% 12 tháng tại CellphoneS",
+      "price": 34990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 82,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 26",
+        "Chipset": "Chip A19 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 lõi hiệu năng và 4 lõi tiết kiệm điện",
+        "GPU": "GPU 6 lõi với Neural Accelerator",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Màn hình Luôn Bật, ProMotion 120Hz, HDR, True Tone, Dải màu rộng (P3), Haptic Touch, Tỷ lệ tương phản 2.000.000:1, Độ sáng 1000 nit (tiêu chuẩn), 1600 nit (HDR), 3000 nit (ngoài trời) / tối thiểu 1 nit, Lớp phủ kháng dầu, Chống phản chiếu, Hỗ trợ đa ngôn",
+        "Camera sau": "Chính: 48MP khẩu độ ƒ/1.6 OIS hỗ trợ chụp 24MP hoặc 48MPGóc Siêu Rộng: 48MP khẩu độ ƒ/2.2 góc nhìn 120°Telephoto: 48MP khẩu độ ƒ/2.8 OIS zoom quang học lên đến 8x",
+        "Camera trước": "Camera 18MP Center Stage Khẩu độ ƒ/1.9",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Sim kép (nano-Sim và e-Sim) - Hỗ trợ 2 e-Sim",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max_1_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-1_4.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-2_1_1.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-4.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "OPPO Find X9s 12GB 256GB",
+      "slug": "oppo-find-x9s-12gb-256gb",
+      "sku": "CAM-0036",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Điện thoại OPPO Find X9s 12GB/256GB chính hãng giá 22.840.000đ, giảm đến 8.15tr, góp 0%, có thu cũ, quà 12tr, lỗi 1 đổi 1, BH 24T. Mua ngay!",
+      "description": "Điện thoại OPPO Find X9s 12GB/256GB chính hãng giá 22.840.000đ, giảm đến 8.15tr, góp 0%, có thu cũ, quà 12tr, lỗi 1 đổi 1, BH 24T. Mua ngay!",
+      "price": 24990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 8,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16.0",
+        "Chipset": "MediaTek Dimensity 9500s",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "ARM Immortalis G925 MC12",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1256 x 2760 pixels",
+        "Tính năng màn hình": "Độ sáng tối đa 1800 nitsTần số lấy mẫu cảm ứng tối đa 240Hz1.07 tỷ màu460 PPI100% DCI-P3",
+        "Camera sau": "Góc siêu rộng 50 MP, f/2.0Góc rộng 50 MP, f/1.8Telephoto 50 MP, f/2.6",
+        "Camera trước": "32 MP, f/2.4",
+        "Pin": "7025 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Dual nano-SIM hoặc 1 nano-SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-1.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-2.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-3.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-4.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "OPPO Find X9 Ultra 12GB 512GB",
+      "slug": "oppo-find-x9-ultra-12gb-512gb",
+      "sku": "CAM-0037",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "OPPO Find X9 Ultra 12GB/512GB màn hình 6.82&quot; 2K+ 144Hz, chip Snapdragon 8 Elite Gen 5, camera 200MP. Giảm 4tr, thu cũ trợ giá 6tr. Mua ngay",
+      "description": "OPPO Find X9 Ultra 12GB/512GB màn hình 6.82&quot; 2K+ 144Hz, chip Snapdragon 8 Elite Gen 5, camera 200MP. Giảm 4tr, thu cũ trợ giá 6tr. Mua ngay",
+      "price": 45990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 6,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16 Android 16",
+        "Chipset": "Snapdragon 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Adreno 840",
+        "Kích thước màn hình": "6.82 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "3168 x 1440 pixel",
+        "Tính năng màn hình": "Độ sáng tối đa 3600 nitsTần số lấy mẫu cảm ứng tối đa 300Hz1.07 tỷ màu510 PPI100% DCI-P3",
+        "Camera sau": "Góc siêu rộng 50 MP, f/2.0Góc rộng 200 MP, f/1.5Tele 200 MP, f/2.2Tele siêu xa 50 MP, f/3.5Đơn sắc 3.2 MP, f/2.4",
+        "Camera trước": "50 MP, f/2.4",
+        "Pin": "7050 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 2 eSIM hoặc 1 Nano SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-1.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-2.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-3.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-4.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Samsung Galaxy Z Flip8 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-flip8-5g-12gb-256gb",
+      "sku": "CAM-0038",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Flip 8 256GB giá lên đời từ 21.215tr, trợ giá 6tr, tặng Google AI Pro 6 tháng và hậu mãi đặc quyền. Mua Z Flip 8 tại CellphoneS.",
+      "description": "Samsung Galaxy Z Flip 8 256GB giá lên đời từ 21.215tr, trợ giá 6tr, tặng Google AI Pro 6 tháng và hậu mãi đặc quyền. Mua Z Flip 8 tại CellphoneS.",
+      "price": 27790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-flip-8-pink-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Exynos 2600",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "10 nhân, tốc độ 3.8 GHz, 3.25 GHz và 2.75 GHz",
+        "Kích thước màn hình": "Chính 6.9 inches, Phụ 4.1 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels",
+        "Tính năng màn hình": "Tần số quét 120HzĐộ sáng tối đa 2600 nitsKính Corning Gorilla Glass Ceramic 316 triệu màu",
+        "Camera sau": "Góc rộng 50 MP, f/1.8Góc siêu rộng 12 MP, f/2.2",
+        "Camera trước": "10 MP, f/2.2",
+        "Pin": "4300 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-flip-8-pink-01.jpg",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-1.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-2.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-5.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-4.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-3.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-6.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Samsung Galaxy Z Fold8 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-fold8-5g-12gb-256gb",
+      "sku": "CAM-0039",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Fold 8 256GB giá lên đời từ 34.58tr, trợ giá đến 6tr, giảm ngay 6tr, tặng hậu mãi Z Care. Mua Z Fold 8 tại CellphoneS.",
+      "description": "Samsung Galaxy Z Fold 8 256GB giá lên đời từ 34.58tr, trợ giá đến 6tr, giảm ngay 6tr, tặng hậu mãi Z Care. Mua Z Fold 8 tại CellphoneS.",
+      "price": 40490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-lavender-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Snapdragon® 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "8 nhân: 2 nhân 4.74 GHz và 6 nhân 3.62 GHz",
+        "Kích thước màn hình": "Chính 7.6 inches, Phụ 5.5 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 2448 x 1848 pixels (QXGA+) - Phụ: 1972 x 1248 pixels (FHD+)",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nitsKính Corning Gorilla Glass Ceramic 3",
+        "Camera sau": "Góc rộng 50 MP, f/1.9Góc siêu rộng 50 MP, f/1.8",
+        "Camera trước": "10 MP, f/2.210 MP",
+        "Pin": "4800 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-lavender-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-01.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-02.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-04.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-05.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-03.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-06.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-fold8-ultra-5g-12gb-256gb",
+      "sku": "CAM-0040",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Fold 8 Ultra giá từ 41.51tr, lên đời trợ đến 6tr, hoàn 1tr với MoMo ví trả sau, kèm Galaxy Z Care. Mua Z Fold 8 Ultra tại CellphoneS.",
+      "description": "Samsung Galaxy Z Fold 8 Ultra giá từ 41.51tr, lên đời trợ đến 6tr, hoàn 1tr với MoMo ví trả sau, kèm Galaxy Z Care. Mua Z Fold 8 Ultra tại CellphoneS.",
+      "price": 48990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Snapdragon® 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "8 nhân - 2 nhân 4.74 GHz và 6 nhân 3.62 GHz",
+        "Kích thước màn hình": "Chính 8.0 inches, Phụ 6.5 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 2184 x 1968 Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels (QXGA+) - Phụ: 2520 x 1080 Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels (FHD+)",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nitsMặt kính Corning Gorilla Glass Ceramic 316 triệu màu",
+        "Camera sau": "Góc rộng 200 MP, f/1.7Góc siêu rộng 50 MP, f/2.2Tele 10 MP, f/2.4",
+        "Camera trước": "10 MP, f/2.210 MP",
+        "Pin": "5000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-1.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-2.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-3.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-4.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-6.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4)",
+      "slug": "tai-nghe-bluetooth-apple-airpods-5-2026-sac-co-day-mkfw4",
+      "sku": "CAM-0041",
+      "brand": "Apple Chính hãng",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Tai nghe Apple AirPod 5 ra mắt với thiết kế Open-Ear, ANC, chip H2, âm thanh kiến trúc đa cổng, chống nước IP57, pin 20h. Mua ngay tại CellphoneS.",
+      "description": "Tai nghe Apple AirPod 5 ra mắt với thiết kế Open-Ear, ANC, chip H2, âm thanh kiến trúc đa cổng, chống nước IP57, pin 20h. Mua ngay tại CellphoneS.",
+      "price": 3790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-co-day.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Kích thước": "Tai nghe: 30.2 x 18.3 x 18.1 mmHộp sạc: 46.2 x 50.1 x 21.2 mm",
+        "Trọng lượng": "Tai nghe: 4.3gHộp sạc: 34.7g",
+        "Công nghệ âm thanh": "Trình điều khiển &amp; bộ khuếch đại Apple tùy chỉnhChủ Động Khử Tiếng ỒnÂm thanh thích ứng &amp; xuyên âmNhận biết cuộc hội thoại &amp; tách lời nóiCá nhân hóa âm thanhEQ Thích ỨngGhi âm chuẩn studioHệ thống thông hơi cân bằng áp suất",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Thời lượng pin tai nghe: thời gian lên đến 4 giờ với một lần sạc khi bật Chủ Động Khử Tiếng ỒnThời lượng pin với hộp sạc: thời gian đàm thoại lên đến 20 giờ khi bật Chủ Động Khử Tiếng Ồn",
+        "Phương thức điều khiển": "Cảm biến lực",
+        "Chipset": "Chip tai nghe H2",
+        "Hãng sản xuất": "Apple Chính hãng",
+        "Tiện ích": "Hỗ trợ Siri AIDịch Trực Tiếp (Live Translation)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-co-day.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-1.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-2.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-4-type-c.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-5.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-6.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-7.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "may-anh",
+      "name": "Xiaomi 17T 5G 12GB 512GB",
+      "slug": "xiaomi-17t-5g-12gb-512gb",
+      "sku": "CAM-0042",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 24 tháng chính hãng",
+      "shortDescription": "Mua Xiaomi 17T 5G (12GB/512GB) giá chỉ từ 17.690Tr, Trợ giá lên đời đến 5 triệu, Bảo hành 2 năm và 6 tháng rơi vỡ màn. Pin 6500 mAh, Chip Dimesity 8500. Mua ngay.",
+      "description": "Mua Xiaomi 17T 5G (12GB/512GB) giá chỉ từ 17.690Tr, Trợ giá lên đời đến 5 triệu, Bảo hành 2 năm và 6 tháng rơi vỡ màn. Pin 6500 mAh, Chip Dimesity 8500. Mua ngay.",
+      "price": 17590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Xiaomi HyperOS 3",
+        "Chipset": "MediaTek Dimensity 8500-Ultra",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Mali-G720 MC8",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "2756 x 1268 pixels",
+        "Tính năng màn hình": "Độ sáng tối đa 3500 nits460 PPI100% DCI-P312bit, 68 tỉ màuDolby VisionHDR10+",
+        "Camera sau": "Chính 50 MP, f/1.7Tele 0 MP, f/3.0Góc siêu rộng 12 MP, f/2.2",
+        "Camera trước": "32 MP, f/2.2",
+        "Pin": "6500 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 2 eSIM hoặc 1 Nano SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-1.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-3.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-4.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    }
+  ]
+}

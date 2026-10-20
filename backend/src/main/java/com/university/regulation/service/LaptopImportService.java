@@ -34,6 +34,15 @@ public class LaptopImportService {
     private static final String DATA_FILE =
             "data/laptops_cleaned_for_import.json";
 
+    private static final List<String> ALL_DATA_FILES = List.of(
+            "data/laptops_cleaned_for_import.json",
+            "data/dien-thoai_cleaned_for_import.json",
+            "data/tai-nghe_cleaned_for_import.json",
+            "data/may-anh_cleaned_for_import.json",
+            "data/linh-kien_cleaned_for_import.json",
+            "data/phu-kien_cleaned_for_import.json"
+    );
+
     private final ObjectMapper objectMapper;
 
     private final CategoryRepository categoryRepository;
@@ -44,8 +53,41 @@ public class LaptopImportService {
 
     @Transactional
     public LaptopImportResult importLaptops(int maxProducts) {
+        return importAllCategories(maxProducts);
+    }
 
-        LaptopImportFile importFile = readImportFile();
+    @Transactional
+    public LaptopImportResult importAllCategories(int maxProducts) {
+        int totalLimit = 0;
+        int totalCreated = 0;
+        int totalSkipped = 0;
+        int totalImages = 0;
+
+        for (String filePath : ALL_DATA_FILES) {
+            ClassPathResource resource = new ClassPathResource(filePath);
+            if (!resource.exists()) {
+                continue;
+            }
+            log.info("Đang import dữ liệu từ file: {}", filePath);
+            LaptopImportResult result = importFromFile(filePath, maxProducts);
+            totalLimit += result.totalRead();
+            totalCreated += result.productsCreated();
+            totalSkipped += result.productsSkipped();
+            totalImages += result.imagesCreated();
+        }
+
+        return new LaptopImportResult(
+                totalLimit,
+                totalCreated,
+                totalSkipped,
+                totalImages
+        );
+    }
+
+    @Transactional
+    public LaptopImportResult importFromFile(String filePath, int maxProducts) {
+
+        LaptopImportFile importFile = readImportFile(filePath);
 
         List<LaptopImportItem> items =
                 importFile.products() == null
@@ -129,10 +171,10 @@ public class LaptopImportService {
         );
     }
 
-    private LaptopImportFile readImportFile() {
+    private LaptopImportFile readImportFile(String dataFile) {
 
         ClassPathResource resource =
-                new ClassPathResource(DATA_FILE);
+                new ClassPathResource(dataFile);
 
         try (InputStream inputStream =
                      resource.getInputStream()) {
@@ -145,7 +187,7 @@ public class LaptopImportService {
         } catch (IOException exception) {
 
             throw new IllegalStateException(
-                    "Không thể đọc file " + DATA_FILE,
+                    "Không thể đọc file " + dataFile,
                     exception
             );
         }

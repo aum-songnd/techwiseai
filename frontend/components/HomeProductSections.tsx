@@ -7,19 +7,25 @@ import type { Product } from "@/app/data/types";
 
 const HomeProductSections = async () => {
   let products: Product[] = [];
+  let laptops: Product[] = [];
 
   try {
-    products = await getProducts({ size: 60 });
+    const [allResult, laptopResult] = await Promise.allSettled([
+      getProducts({ size: 60 }),
+      getProducts({ category: "laptop", size: 60 }),
+    ]);
+
+    products = allResult.status === "fulfilled" ? allResult.value : [];
+    laptops = laptopResult.status === "fulfilled" ? laptopResult.value : [];
   } catch {
     products = [];
+    laptops = [];
   }
 
   return (
     <>
       <HomeProductFeed products={products}>
-        <div className="py-5">
-          <ProductGrid />
-        </div>
+        <ProductGrid initialLaptops={laptops} />
         <FlashSale />
       </HomeProductFeed>
       <HomeBrands products={products} />
