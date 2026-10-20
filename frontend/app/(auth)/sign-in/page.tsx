@@ -48,65 +48,59 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="font-sans min-h-screen bg-white text-neutral-900">
+    <div className="font-sans min-h-screen text-white">
       <Container className="py-8 sm:py-10">
-        {/* Breadcrumb Navigation - Matching Cart & Blog style */}
-        <nav className="flex items-center gap-2 text-xs text-neutral-500 mb-6">
+        {/* Breadcrumb Navigation */}
+        <nav className="flex items-center gap-2 text-xs text-neutral-300 mb-6">
           <Link
             href="/"
-            className="hover:text-shop_dark_green transition-colors flex items-center gap-1.5"
+            className="hover:text-emerald-400 transition-colors flex items-center gap-1.5 text-neutral-300"
           >
             <ArrowLeft size={13} />
             <span>Trang chủ</span>
           </Link>
-          <span>/</span>
-          <span className="text-neutral-900 font-medium">Đăng nhập tài khoản</span>
+          <span className="text-neutral-500">/</span>
+          <span className="text-white font-medium">Đăng nhập tài khoản</span>
         </nav>
 
-        {/* Header Bar - Matching Cart, Blog & Deals style */}
-        <div className="flex flex-col gap-4 border-b border-neutral-200 pb-5 sm:flex-row sm:items-end sm:justify-between mb-8">
+        {/* Header Bar */}
+        <div className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between mb-8">
           <div className="flex items-end gap-3">
-            <h1 className="text-xl font-bold uppercase tracking-tight text-neutral-900">
+            <h1 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white drop-shadow-sm font-sans">
               Đăng nhập tài khoản
             </h1>
-            <span className="pb-0.5 text-xs text-neutral-500 font-mono">
-              [ TechWise AI ID ]
-            </span>
           </div>
-          <p className="text-xs text-neutral-500">
+          <p className="text-xs text-neutral-300 font-sans">
             Đăng nhập để đồng bộ đơn hàng, giỏ hàng và quản lý tài khoản của bạn.
           </p>
         </div>
 
         {/* Main Split Card: Form on Left, Showcase Image on Right */}
-        <div className="border border-neutral-200 bg-white grid grid-cols-1 lg:grid-cols-12 shadow-sm overflow-hidden">
+        <div className="border border-white/15 bg-white/95 backdrop-blur-xl grid grid-cols-1 lg:grid-cols-12 shadow-2xl rounded-2xl overflow-hidden">
           {/* Left Column: Form Card (7 Cols) */}
-          <div className="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between">
+          <div className="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between text-neutral-900 bg-white">
             <div>
               <div className="flex items-center justify-between pb-4 mb-6 border-b border-neutral-200">
                 <Logo />
-                <span className="text-[11px] font-mono uppercase text-neutral-400 bg-neutral-100 px-2.5 py-1">
-                  Cổng đăng nhập an toàn
-                </span>
               </div>
 
               {/* Notification Alerts */}
               {justRegistered && (
-                <div className="mb-5 border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-center gap-2.5">
+                <div className="mb-5 border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-center gap-2.5 rounded-lg font-sans">
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
                   <span>Đăng ký thành công! Vui lòng đăng nhập để bắt đầu trải nghiệm.</span>
                 </div>
               )}
 
               {justResetPassword && (
-                <div className="mb-5 border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-center gap-2.5">
+                <div className="mb-5 border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-center gap-2.5 rounded-lg font-sans">
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
                   <span>Đặt lại mật khẩu thành công. Vui lòng đăng nhập bằng mật khẩu mới.</span>
                 </div>
               )}
 
               {sessionExpired && (
-                <div className="mb-5 border border-amber-200 bg-amber-50 p-3.5 text-xs text-amber-800 flex items-center gap-2.5">
+                <div className="mb-5 border border-amber-200 bg-amber-50 p-3.5 text-xs text-amber-800 flex items-center gap-2.5 rounded-lg font-sans">
                   <AlertCircle className="h-4 w-4 shrink-0 text-amber-600" />
                   <span>Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại để tiếp tục.</span>
                 </div>
@@ -115,7 +109,7 @@ const SignInForm = () => {
               {error && (
                 <div
                   role="alert"
-                  className="mb-5 border border-red-200 bg-red-50 p-3.5 text-xs text-red-700 flex items-center gap-2.5"
+                  className="mb-5 border border-red-200 bg-red-50 p-3.5 text-xs text-red-700 flex items-center gap-2.5 rounded-lg font-sans"
                 >
                   <AlertCircle className="h-4 w-4 shrink-0 text-red-600" />
                   <span>{error}</span>
@@ -127,7 +121,7 @@ const SignInForm = () => {
                 <div className="space-y-1.5">
                   <label
                     htmlFor="username"
-                    className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                    className="text-xs font-bold uppercase tracking-wider text-neutral-700 block font-sans"
                   >
                     Email hoặc Tên đăng nhập *
                   </label>
@@ -141,7 +135,7 @@ const SignInForm = () => {
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       placeholder="Nhập email hoặc tên tài khoản của bạn..."
-                      className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                      className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white font-sans transition-colors rounded-lg"
                     />
                   </div>
                 </div>
@@ -149,7 +143,7 @@ const SignInForm = () => {
                 <div className="space-y-1.5">
                   <label
                     htmlFor="password"
-                    className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                    className="text-xs font-bold uppercase tracking-wider text-neutral-700 block font-sans"
                   >
                     Mật khẩu *
                   </label>
@@ -163,7 +157,7 @@ const SignInForm = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Nhập mật khẩu..."
-                      className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                      className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white font-sans transition-colors rounded-lg"
                     />
                     <button
                       type="button"
@@ -176,7 +170,7 @@ const SignInForm = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-1">
+                <div className="flex items-center justify-between pt-1 font-sans">
                   <label className="flex items-center gap-2 cursor-pointer select-none">
                     <input
                       type="checkbox"
@@ -197,7 +191,7 @@ const SignInForm = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50 rounded-lg font-sans"
                   >
                     {isSubmitting ? "Đang xác thực thông tin..." : "Đăng nhập ngay →"}
                   </button>
@@ -205,7 +199,7 @@ const SignInForm = () => {
               </form>
             </div>
 
-            <div className="mt-8 pt-5 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
+            <div className="mt-8 pt-5 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500 font-sans">
               <span>Chưa có tài khoản TechWise AI?</span>
               <Link
                 href="/sign-up"
@@ -230,7 +224,7 @@ const SignInForm = () => {
             {/* Subtle Gradient & Brand Tag */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-8 text-white space-y-1.5 z-10">
-              <span className="inline-block bg-shop_dark_green text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 border border-white/20">
+              <span className="inline-block bg-shop_dark_green text-white text-xs font-medium px-2.5 py-1 border border-white/20 rounded">
                 TechWise AI
               </span>
             </div>

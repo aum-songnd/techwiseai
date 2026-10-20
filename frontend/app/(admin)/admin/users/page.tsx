@@ -18,6 +18,7 @@ import {
   setAdminUserActive,
   type AdminUser,
 } from "@/lib/admin-users-api";
+import Loading from "@/app/(client)/loading";
 
 const PAGE_SIZE = 10;
 
@@ -268,14 +269,11 @@ const AdminUsersPage = () => {
               <tbody className="divide-y divide-neutral-100">
                 {loading && (
                   <tr>
-                    <td
-                      colSpan={6}
-                      className="px-6 py-12 text-center text-neutral-400 font-mono text-xs"
-                    >
-                      <div className="flex flex-col items-center justify-center gap-2">
-                        <RefreshCw className="w-5 h-5 animate-spin text-shop_dark_green" />
-                        <span>Đang tải danh sách người dùng...</span>
-                      </div>
+                    <td colSpan={6} className="p-0">
+                      <Loading
+                        message="Đang tải danh sách người dùng..."
+                        className="py-16 min-h-0"
+                      />
                     </td>
                   </tr>
                 )}

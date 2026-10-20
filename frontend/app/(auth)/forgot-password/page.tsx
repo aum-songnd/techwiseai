@@ -65,6 +65,9 @@ const ForgotPasswordPage = () => {
     try {
       const res = await forgotPasswordRequest(trimmedEmail);
       setSuccessMessage(res.message);
+      setOtp("");
+      setNewPassword("");
+      setConfirmPassword("");
       setStep("RESET");
       setCountdown(60);
     } catch (err) {
@@ -128,64 +131,55 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className="font-sans min-h-screen bg-white text-neutral-900">
+    <div className="font-sans min-h-screen text-white">
       <Container className="py-8 sm:py-10">
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs text-neutral-500 mb-6">
+        <nav className="flex items-center gap-2 text-xs text-neutral-300 mb-6">
           <Link
             href="/"
-            className="hover:text-shop_dark_green transition-colors flex items-center gap-1.5"
+            className="hover:text-emerald-400 transition-colors flex items-center gap-1.5 text-neutral-300"
           >
             <ArrowLeft size={13} />
             <span>Trang chủ</span>
           </Link>
-          <span>/</span>
-          <Link href="/sign-in" className="hover:text-shop_dark_green transition-colors">
+          <span className="text-neutral-500">/</span>
+          <Link href="/sign-in" className="hover:text-emerald-400 transition-colors text-neutral-300">
             Đăng nhập
           </Link>
-          <span>/</span>
-          <span className="text-neutral-900 font-medium">Quên mật khẩu</span>
+          <span className="text-neutral-500">/</span>
+          <span className="text-white font-medium">Quên mật khẩu</span>
         </nav>
 
         {/* Header Bar */}
-        <div className="flex flex-col gap-4 border-b border-neutral-200 pb-5 sm:flex-row sm:items-end sm:justify-between mb-8">
+        <div className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between mb-8">
           <div className="flex items-end gap-3">
-            <h1 className="text-xl font-bold uppercase tracking-tight text-neutral-900">
+            <h1 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white drop-shadow-sm font-sans">
               Khôi phục mật khẩu
             </h1>
-            <span className="pb-0.5 text-xs text-neutral-500 font-mono">
-              [ Bảo mật tài khoản ]
-            </span>
           </div>
-          <p className="text-xs text-neutral-500">
-            Khôi phục quyền truy cập tài khoản TechWise AI nhanh chóng và an toàn.
-          </p>
         </div>
 
         {/* Main Content Grid: 12 Columns */}
-        <div className="border border-neutral-200 bg-white grid grid-cols-1 lg:grid-cols-12 shadow-sm overflow-hidden">
+        <div className="border border-white/15 bg-white/95 backdrop-blur-xl grid grid-cols-1 lg:grid-cols-12 shadow-2xl rounded-2xl overflow-hidden">
           {/* Left Column: Form Card (7 Cols) */}
-          <div className="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between">
+          <div className="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between text-neutral-900 bg-white">
             <div>
               <div className="flex items-center justify-between pb-4 mb-6 border-b border-neutral-200">
                 <Logo />
-                <span className="text-[11px] font-mono uppercase text-neutral-400 bg-neutral-100 px-2.5 py-1">
-                  Xác minh bảo mật Gmail
-                </span>
               </div>
 
               {error && (
                 <div
                   role="alert"
-                  className="mb-5 border border-red-200 bg-red-50 p-3.5 text-xs text-red-700 flex items-center gap-2.5"
+                  className="mb-5 border border-red-200 bg-red-50 p-3.5 text-xs text-red-700 flex items-center gap-2.5 rounded-lg"
                 >
                   <AlertCircle className="h-4 w-4 shrink-0 text-red-600" />
                   <span>{error}</span>
                 </div>
               )}
 
-              {successMessage && (
-                <div className="mb-5 border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-center gap-2.5">
+              {successMessage && step === "REQUEST" && (
+                <div className="mb-5 border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-center gap-2.5 rounded-lg">
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
                   <span>{successMessage}</span>
                 </div>
@@ -193,7 +187,7 @@ const ForgotPasswordPage = () => {
 
               {step === "REQUEST" ? (
                 <div>
-                  <p className="text-xs text-neutral-600 mb-5 leading-relaxed">
+                  <p className="text-xs text-neutral-600 mb-5 leading-relaxed font-sans">
                     Nhập địa chỉ email liên kết với tài khoản của bạn để nhận mã xác thực OTP qua Gmail.
                   </p>
 
@@ -201,7 +195,7 @@ const ForgotPasswordPage = () => {
                     <div className="space-y-1.5">
                       <label
                         htmlFor="email"
-                        className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                        className="text-xs font-bold uppercase tracking-wider text-neutral-700 block font-sans"
                       >
                         Địa chỉ email *
                       </label>
@@ -209,13 +203,14 @@ const ForgotPasswordPage = () => {
                         <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
                         <input
                           id="email"
+                          name="email"
                           type="email"
                           autoComplete="email"
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="name@example.com"
-                          className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                          className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white font-sans transition-colors rounded-lg"
                         />
                       </div>
                     </div>
@@ -224,7 +219,7 @@ const ForgotPasswordPage = () => {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+                        className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50 rounded-lg font-sans"
                       >
                         {isSubmitting ? (
                           <span className="flex items-center justify-center gap-2">
@@ -240,14 +235,17 @@ const ForgotPasswordPage = () => {
                 </div>
               ) : (
                 <div>
-                  <div className="flex items-center justify-between text-xs text-neutral-600 mb-4 bg-neutral-50 p-3 border border-neutral-200">
+                  <div className="flex items-center justify-between text-xs text-neutral-600 mb-3 bg-neutral-50 px-3.5 py-2.5 border border-neutral-200 rounded-lg font-sans">
                     <span>
-                      Mã xác nhận gửi tới: <strong>{email}</strong>
+                      Email nhận mã: <strong>{email}</strong>
                     </span>
                     <button
                       type="button"
                       onClick={() => {
                         setStep("REQUEST");
+                        setOtp("");
+                        setNewPassword("");
+                        setConfirmPassword("");
                         setError(null);
                         setSuccessMessage(null);
                       }}
@@ -257,18 +255,42 @@ const ForgotPasswordPage = () => {
                     </button>
                   </div>
 
-                  <div className="mb-4 border border-emerald-200 bg-emerald-50/70 p-3 text-xs text-emerald-800 flex items-start gap-2">
+                  <div className="mb-5 border border-emerald-200 bg-emerald-50 p-3.5 text-xs text-emerald-800 flex items-start gap-2.5 rounded-lg font-sans">
                     <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 mt-0.5" />
-                    <span>
-                      Hệ thống đã gửi mã OTP đến Gmail <strong>{email}</strong>. Vui lòng mở hộp thư (hoặc thư mục Spam) và điền mã 6 số vào ô bên dưới.
+                    <span className="leading-relaxed">
+                      Mã xác thực OTP đã được gửi đến email <strong>{email}</strong> (hiệu lực trong 15 phút). Vui lòng kiểm tra hộp thư đến (hoặc thư mục Spam) và điền mã 6 số vào ô bên dưới.
                     </span>
                   </div>
 
-                  <form onSubmit={handleResetPassword} className="space-y-4">
+                  <form
+                    onSubmit={handleResetPassword}
+                    autoComplete="off"
+                    className="space-y-4"
+                  >
+                    {/* Hidden decoys to completely neutralize browser credential autofill */}
+                    <input
+                      type="text"
+                      name="chrome_fake_user"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      autoComplete="off"
+                      className="sr-only hidden"
+                      style={{ display: "none" }}
+                    />
+                    <input
+                      type="password"
+                      name="chrome_fake_pass"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      autoComplete="off"
+                      className="sr-only hidden"
+                      style={{ display: "none" }}
+                    />
+
                     <div className="space-y-1.5">
                       <label
                         htmlFor="otp"
-                        className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                        className="text-xs font-bold uppercase tracking-wider text-neutral-700 block font-sans"
                       >
                         Mã xác nhận từ Gmail (OTP) *
                       </label>
@@ -276,13 +298,16 @@ const ForgotPasswordPage = () => {
                         <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
                         <input
                           id="otp"
+                          name="otp"
                           type="text"
+                          inputMode="numeric"
+                          autoComplete="one-time-code"
                           required
                           maxLength={10}
                           value={otp}
                           onChange={(e) => setOtp(e.target.value)}
-                          placeholder="Nhập mã 6 chữ số trong Gmail..."
-                          className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white font-mono tracking-widest transition-colors"
+                          placeholder="Nhập mã 6 chữ số..."
+                          className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white font-sans transition-colors rounded-lg"
                         />
                       </div>
                     </div>
@@ -290,7 +315,7 @@ const ForgotPasswordPage = () => {
                     <div className="space-y-1.5">
                       <label
                         htmlFor="newPassword"
-                        className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                        className="text-xs font-bold uppercase tracking-wider text-neutral-700 block font-sans"
                       >
                         Mật khẩu mới *
                       </label>
@@ -298,13 +323,15 @@ const ForgotPasswordPage = () => {
                         <LockKeyhole className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
                         <input
                           id="newPassword"
+                          name="newPassword"
                           type={showNewPassword ? "text" : "password"}
+                          autoComplete="new-password"
                           required
                           minLength={6}
                           value={newPassword}
                           onChange={(e) => setNewPassword(e.target.value)}
                           placeholder="Mật khẩu mới (tối thiểu 6 ký tự)"
-                          className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                          className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white font-sans transition-colors rounded-lg"
                         />
                         <button
                           type="button"
@@ -320,7 +347,7 @@ const ForgotPasswordPage = () => {
                     <div className="space-y-1.5">
                       <label
                         htmlFor="confirmPassword"
-                        className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                        className="text-xs font-bold uppercase tracking-wider text-neutral-700 block font-sans"
                       >
                         Xác nhận mật khẩu mới *
                       </label>
@@ -328,13 +355,15 @@ const ForgotPasswordPage = () => {
                         <LockKeyhole className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 pointer-events-none" />
                         <input
                           id="confirmPassword"
+                          name="confirmPassword"
                           type={showConfirmPassword ? "text" : "password"}
+                          autoComplete="new-password"
                           required
                           minLength={6}
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           placeholder="Nhập lại mật khẩu mới"
-                          className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                          className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white font-sans transition-colors rounded-lg"
                         />
                         <button
                           type="button"
@@ -347,7 +376,7 @@ const ForgotPasswordPage = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs text-neutral-500 pt-1">
+                    <div className="flex items-center justify-between text-xs text-neutral-500 pt-1 font-sans">
                       <span>Chưa nhận được email?</span>
                       <button
                         type="button"
@@ -364,7 +393,7 @@ const ForgotPasswordPage = () => {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+                        className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50 rounded-lg font-sans"
                       >
                         {isSubmitting ? (
                           <span className="flex items-center justify-center gap-2">
@@ -381,7 +410,7 @@ const ForgotPasswordPage = () => {
               )}
             </div>
 
-            <div className="mt-8 pt-5 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
+            <div className="mt-8 pt-5 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500 font-sans">
               <span>Đã nhớ lại mật khẩu?</span>
               <Link
                 href="/sign-in"
@@ -406,7 +435,7 @@ const ForgotPasswordPage = () => {
             {/* Subtle Gradient & Brand Tag */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-8 text-white space-y-1.5 z-10">
-              <span className="inline-block bg-shop_dark_green text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 border border-white/20">
+              <span className="inline-block bg-shop_dark_green text-white text-xs font-medium px-2.5 py-1 border border-white/20 rounded">
                 TechWise AI
               </span>
             </div>

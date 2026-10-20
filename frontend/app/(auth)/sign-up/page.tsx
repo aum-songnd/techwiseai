@@ -58,52 +58,44 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="font-sans min-h-screen bg-white text-neutral-900">
+    <div className="font-sans min-h-screen text-white">
       <Container className="py-8 sm:py-10">
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs text-neutral-500 mb-6">
+        <nav className="flex items-center gap-2 text-xs text-neutral-300 mb-6">
           <Link
             href="/"
-            className="hover:text-shop_dark_green transition-colors flex items-center gap-1.5"
+            className="hover:text-emerald-400 transition-colors flex items-center gap-1.5 text-neutral-300"
           >
             <ArrowLeft size={13} />
             <span>Trang chủ</span>
           </Link>
-          <span>/</span>
-          <span className="text-neutral-900 font-medium">Tạo tài khoản mới</span>
+          <span className="text-neutral-500">/</span>
+          <span className="text-white font-medium">Tạo tài khoản mới</span>
         </nav>
 
         {/* Header Bar */}
-        <div className="flex flex-col gap-4 border-b border-neutral-200 pb-5 sm:flex-row sm:items-end sm:justify-between mb-8">
+        <div className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between mb-8">
           <div className="flex items-end gap-3">
-            <h1 className="text-xl font-bold uppercase tracking-tight text-neutral-900">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white drop-shadow-sm">
               Đăng ký tài khoản
             </h1>
-            <span className="pb-0.5 text-xs text-neutral-500 font-mono">
-              [ TechWise AI ID ]
-            </span>
           </div>
-          <p className="text-xs text-neutral-500">
-            Trở thành thành viên TechWise AI để nhận trọn bộ voucher độc quyền và bảo hành điện tử 24/7.
-          </p>
         </div>
 
         {/* Main Content Grid: 12 Columns */}
-        <div className="border border-neutral-200 bg-white grid grid-cols-1 lg:grid-cols-12 shadow-sm overflow-hidden">
+        <div className="border border-white/15 bg-white/95 backdrop-blur-xl grid grid-cols-1 lg:grid-cols-12 shadow-2xl rounded-2xl overflow-hidden">
           {/* Left Column: Form Card (7 Cols) */}
-          <div className="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between">
+          <div className="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-between text-neutral-900 bg-white">
             <div>
               <div className="flex items-center justify-between pb-4 mb-6 border-b border-neutral-200">
                 <Logo />
-                <span className="text-[11px] font-mono uppercase text-neutral-400 bg-neutral-100 px-2.5 py-1">
-                  Đăng ký an toàn
-                </span>
+
               </div>
 
               {error && (
                 <div
                   role="alert"
-                  className="mb-5 border border-red-200 bg-red-50 p-3.5 text-xs text-red-700 flex items-center gap-2.5"
+                  className="mb-5 border border-red-200 bg-red-50 p-3.5 text-xs text-red-700 flex items-center gap-2.5 rounded-lg"
                 >
                   <AlertCircle className="h-4 w-4 shrink-0 text-red-600" />
                   <span>{error}</span>
@@ -116,7 +108,7 @@ const SignUpPage = () => {
                   <div className="space-y-1.5">
                     <label
                       htmlFor="fullName"
-                      className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                      className="text-xs font-semibold text-neutral-700 block"
                     >
                       Họ và tên *
                     </label>
@@ -129,7 +121,7 @@ const SignUpPage = () => {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Nguyễn Văn A"
-                        className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                        className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors rounded-lg"
                       />
                     </div>
                   </div>
@@ -137,7 +129,7 @@ const SignUpPage = () => {
                   <div className="space-y-1.5">
                     <label
                       htmlFor="email"
-                      className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                      className="text-xs font-semibold text-neutral-700 block"
                     >
                       Địa chỉ email *
                     </label>
@@ -150,7 +142,7 @@ const SignUpPage = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="name@example.com"
-                        className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                        className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors rounded-lg"
                       />
                     </div>
                   </div>
@@ -160,7 +152,7 @@ const SignUpPage = () => {
                   <div className="space-y-1.5">
                     <label
                       htmlFor="username"
-                      className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                      className="text-xs font-semibold text-neutral-700 block"
                     >
                       Tên đăng nhập *
                     </label>
@@ -173,7 +165,7 @@ const SignUpPage = () => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="username123"
-                        className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                        className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors rounded-lg"
                       />
                     </div>
                   </div>
@@ -181,7 +173,7 @@ const SignUpPage = () => {
                   <div className="space-y-1.5">
                     <label
                       htmlFor="phoneNumber"
-                      className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                      className="text-xs font-semibold text-neutral-700 block"
                     >
                       Số điện thoại *
                     </label>
@@ -194,7 +186,7 @@ const SignUpPage = () => {
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         placeholder="0912 345 678"
-                        className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                        className="w-full border border-neutral-300 pl-10 pr-3.5 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors rounded-lg"
                       />
                     </div>
                   </div>
@@ -204,7 +196,7 @@ const SignUpPage = () => {
                   <div className="space-y-1.5">
                     <label
                       htmlFor="password"
-                      className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                      className="text-xs font-semibold text-neutral-700 block"
                     >
                       Mật khẩu *
                     </label>
@@ -218,7 +210,7 @@ const SignUpPage = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Tối thiểu 6 ký tự"
-                        className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                        className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors rounded-lg"
                       />
                       <button
                         type="button"
@@ -234,7 +226,7 @@ const SignUpPage = () => {
                   <div className="space-y-1.5">
                     <label
                       htmlFor="confirmPassword"
-                      className="text-xs font-semibold uppercase tracking-wider text-neutral-700 block"
+                      className="text-xs font-semibold text-neutral-700 block"
                     >
                       Xác nhận mật khẩu *
                     </label>
@@ -248,7 +240,7 @@ const SignUpPage = () => {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="Nhập lại mật khẩu"
-                        className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors"
+                        className="w-full border border-neutral-300 pl-10 pr-10 py-2.5 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none bg-white transition-colors rounded-lg"
                       />
                       <button
                         type="button"
@@ -270,7 +262,7 @@ const SignUpPage = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full bg-shop_dark_green text-white text-center py-3 text-xs font-semibold hover:bg-shop_dark_green/90 transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50 rounded-lg"
                   >
                     {isSubmitting ? "Đang tạo tài khoản..." : "Hoàn tất đăng ký →"}
                   </button>
@@ -282,7 +274,7 @@ const SignUpPage = () => {
               <span>Đã có tài khoản TechWise AI?</span>
               <Link
                 href="/sign-in"
-                className="font-bold uppercase tracking-wider text-shop_dark_green hover:underline flex items-center gap-1"
+                className="font-bold text-shop_dark_green hover:underline flex items-center gap-1"
               >
                 <span>Đăng nhập ngay</span>
                 <span>→</span>
@@ -293,7 +285,7 @@ const SignUpPage = () => {
           {/* Right Column: AI Tech Showcase Image (5 Cols) */}
           <div className="lg:col-span-5 relative hidden lg:block bg-neutral-950 overflow-hidden min-h-[560px]">
             <Image
-              src="/auth-showcase.jpg"
+              src="/votay.gif"
               alt="TechWise AI Ecosystem Showcase"
               fill
               priority
@@ -303,7 +295,7 @@ const SignUpPage = () => {
             {/* Subtle Gradient & Brand Tag */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-8 text-white space-y-1.5 z-10">
-              <span className="inline-block bg-shop_dark_green text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 border border-white/20">
+              <span className="inline-block bg-shop_dark_green text-white text-xs font-medium px-2.5 py-1 border border-white/20 rounded">
                 TechWise AI
               </span>
             </div>

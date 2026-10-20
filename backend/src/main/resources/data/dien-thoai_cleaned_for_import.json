@@ -1,0 +1,4307 @@
+{
+  "metadata": {
+    "source": "cellphones.com.vn",
+    "category": {
+      "name": "Điện thoại",
+      "slug": "dien-thoai"
+    },
+    "totalCrawled": 49,
+    "rejected": 56,
+    "skuPrefix": "PHONE",
+    "generatedAt": "2026-10-20T15:49:06.402179"
+  },
+  "products": [
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Samsung Galaxy S26 Ultra 5G 12GB 256GB",
+      "slug": "samsung-galaxy-s26-ultra-5g-12gb-256gb",
+      "sku": "PHONE-0001",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy S26 Ultra pin 5000mAh, hỗ trợ S Pen và màn hình chống nhìn trộm, lên đời trợ giá đến 5tr. Mua S26 Ultra góp 0% tại CellphoneS.",
+      "description": "Samsung Galaxy S26 Ultra pin 5000mAh, hỗ trợ S Pen và màn hình chống nhìn trộm, lên đời trợ giá đến 5tr. Mua S26 Ultra góp 0% tại CellphoneS.",
+      "price": 29490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-s26-ultra-1.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 50,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 16",
+        "Chipset": "Snapdragon 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Adreno 840",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "3120 x 1440 pixels (Quad HD+)",
+        "Tính năng màn hình": "Độ sáng tối đa 2600 nits",
+        "Camera sau": "Góc rộng 200 MP, f/1.4Góc siêu rộng 50 MP, f/1.9Tele 50 MP, f/2.9Tele 10 MP, f/2.4",
+        "Camera trước": "12 MP, f/2.2",
+        "Pin": "5000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 2 eSIM hoặc 1 Nano SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "02/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-s26-ultra-1.jpg",
+          "altText": "Samsung Galaxy S26 Ultra 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-s26-ultra_1.jpg",
+          "altText": "Samsung Galaxy S26 Ultra 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-s26-ultra-2_1.jpg",
+          "altText": "Samsung Galaxy S26 Ultra 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-s26-ultra-1_1.jpg",
+          "altText": "Samsung Galaxy S26 Ultra 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-s26-plus_2.jpg",
+          "altText": "Samsung Galaxy S26 Ultra 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-s26-ultra-11.jpg",
+          "altText": "Samsung Galaxy S26 Ultra 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-s26-ultra-12.jpg",
+          "altText": "Samsung Galaxy S26 Ultra 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 16 128GB | Chính hãng VN/A",
+      "slug": "iphone-16-128gb-chinh-hang-vna",
+      "sku": "PHONE-0002",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 16 thường 128gb giá tốt (16tr99), chính hãng, đủ màu trắng, xanh, hồng,... trả góp 0% - giảm 5% khi mua iPhone 16 128gb online tại CellphoneS",
+      "description": "iPhone 16 thường 128gb giá tốt (16tr99), chính hãng, đủ màu trắng, xanh, hồng,... trả góp 0% - giảm 5% khi mua iPhone 16 128gb online tại CellphoneS",
+      "price": 22990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-16-1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 86,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 18",
+        "Chipset": "Apple A18",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "128 GB",
+        "Loại CPU": "CPU 6 lõi mới với 2 lõi hiệu năng và 4 lõi tiết kiệm điện",
+        "GPU": "GPU 5 lõi mới",
+        "Kích thước màn hình": "6.1 inches",
+        "Công nghệ màn hình": "Super Retina XDR OLED",
+        "Độ phân giải màn hình": "2556 x 1179 pixels",
+        "Tính năng màn hình": "Dynamic IslandMàn hình HDRTrue ToneDải màu rộng (P3)Haptic TouchTỷ lệ tương phản 2.000.000:1Độ sáng tối đa 1000 nit460 ppiLớp phủ kháng dầu chống in dấu vân tayHỗ trợ hiển thị đồng thời nhiều ngôn ngữ và ký tự",
+        "Camera sau": "Camera chính: 48MP, f/1.6, 26mm, Focus Pixels 100%, hỗ trợ ảnh có độ phân giải siêu cao Camera góc siêu rộng: 12MP, ƒ/2.2, 13 mm, Focus Pixels 100%, Độ phóng đại quang học 2x, độ thu nhỏ quang học 2x; phạm vi thu phóng quang học 4x Độ thu phóng kỹ thu",
+        "Camera trước": "12MP, ƒ/1.9, Tự động lấy nét theo pha Focus Pixels",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Sim kép (nano-Sim và e-Sim) - Hỗ trợ 2 e-Sim",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2024"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-16-1.png",
+          "altText": "iPhone 16 128GB | Chính hãng VN/A - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-1.png",
+          "altText": "iPhone 16 128GB | Chính hãng VN/A - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-2.png",
+          "altText": "iPhone 16 128GB | Chính hãng VN/A - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-3.png",
+          "altText": "iPhone 16 128GB | Chính hãng VN/A - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-4.png",
+          "altText": "iPhone 16 128GB | Chính hãng VN/A - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-5.png",
+          "altText": "iPhone 16 128GB | Chính hãng VN/A - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-6.png",
+          "altText": "iPhone 16 128GB | Chính hãng VN/A - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Xiaomi 17T 5G 12GB 512GB",
+      "slug": "xiaomi-17t-5g-12gb-512gb",
+      "sku": "PHONE-0003",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Xiaomi 17T 5G (12GB/512GB) giá chỉ từ 17.690Tr, Trợ giá lên đời đến 5 triệu, Bảo hành 2 năm và 6 tháng rơi vỡ màn. Pin 6500 mAh, Chip Dimesity 8500. Mua ngay.",
+      "description": "Mua Xiaomi 17T 5G (12GB/512GB) giá chỉ từ 17.690Tr, Trợ giá lên đời đến 5 triệu, Bảo hành 2 năm và 6 tháng rơi vỡ màn. Pin 6500 mAh, Chip Dimesity 8500. Mua ngay.",
+      "price": 17590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Xiaomi HyperOS 3",
+        "Chipset": "MediaTek Dimensity 8500-Ultra",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Mali-G720 MC8",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "2756 x 1268 pixels",
+        "Tính năng màn hình": "Độ sáng tối đa 3500 nits460 PPI100% DCI-P312bit, 68 tỉ màuDolby VisionHDR10+",
+        "Camera sau": "Chính 50 MP, f/1.7Tele 0 MP, f/3.0Góc siêu rộng 12 MP, f/2.2",
+        "Camera trước": "32 MP, f/2.2",
+        "Pin": "6500 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 2 eSIM hoặc 1 Nano SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-1.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-3.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-5g-4.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-17t_2.jpg",
+          "altText": "Xiaomi 17T 5G 12GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "HONOR 600 5G 8GB 256GB",
+      "slug": "honor-600-5g-8gb-256gb",
+      "sku": "PHONE-0004",
+      "brand": "HONOR",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "HONOR 600 5G hỗ trợ eSIM, kháng nước bụi IP69K, camera 200MP. Giảm 8.15tr, có thu cũ, trả góp 0%, đổi mới 100 ngày, BH 24 tháng. Mua ngay!",
+      "description": "HONOR 600 5G hỗ trợ eSIM, kháng nước bụi IP69K, camera 200MP. Giảm 8.15tr, có thu cũ, trả góp 0%, đổi mới 100 ngày, BH 24 tháng. Mua ngay!",
+      "price": 14490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-honor-600-cam.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "MagicOS 10, dựa trên Android 16",
+        "Chipset": "Snapdragon 7 Gen 4",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Adreno 722",
+        "Kích thước màn hình": "6.57 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "2728 x 1264 pixels",
+        "Tính năng màn hình": "Tần số quét 120Hz1,07 tỷ màuĐộ sáng 8000 nitsAI HDR 2.0458 PPIDải màu rộng DCI-P3",
+        "Camera sau": "200 MP, f/1.9",
+        "Camera trước": "50 MP, f/2.0",
+        "Pin": "7000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 1 Nano + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "06/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-honor-600-cam.jpg",
+          "altText": "HONOR 600 5G 8GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/h/o/honor600.jpg",
+          "altText": "HONOR 600 5G 8GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/h/o/honor600-1.jpg",
+          "altText": "HONOR 600 5G 8GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-600-5g.jpg",
+          "altText": "HONOR 600 5G 8GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-600-5g-1.jpg",
+          "altText": "HONOR 600 5G 8GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-600-5g-2.jpg",
+          "altText": "HONOR 600 5G 8GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-600-5g-3.jpg",
+          "altText": "HONOR 600 5G 8GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "OPPO Find X8 16GB 512GB",
+      "slug": "oppo-find-x8-16gb-512gb",
+      "sku": "PHONE-0005",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "OPPO Find X8 16GB 512GB chip Dimensity 9400, màn hình 6.59 inch, thiết kế mỏng. Giảm 4.5tr, góp 0%, thu cũ trợ giá 3tr, BH 24 tháng. Mua ngay",
+      "description": "OPPO Find X8 16GB 512GB chip Dimensity 9400, màn hình 6.59 inch, thiết kế mỏng. Giảm 4.5tr, góp 0%, thu cũ trợ giá 3tr, BH 24 tháng. Mua ngay",
+      "price": 18490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x8-xam-1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 68,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 15, nền tảng Android 15",
+        "Chipset": "MediaTek Dimensity 9400",
+        "Dung lượng RAM": "16 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Immortalis G925 MC12",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1256 x 2760 pixels",
+        "Tính năng màn hình": "Tần số quét: 120Hz, Kính cường lực GG 7i Độ sáng tối đa: 1600 nits Màu sắc hiển thị: 1 tỷ màu",
+        "Camera sau": "50MP OIS (Chính) + 50MP (Chân dung Tele) + 50MP (Góc rộng)",
+        "Camera trước": "32MP, khẩu độ F/2.4",
+        "Pin": "5630 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Dual nano-SIM hoặc 1 nano-SIM + 1 eSIM",
+        "Công nghệ NFC": "Có"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x8-xam-1.png",
+          "altText": "OPPO Find X8 16GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x8.jpg",
+          "altText": "OPPO Find X8 16GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x8-2.jpg",
+          "altText": "OPPO Find X8 16GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x8-1.jpg",
+          "altText": "OPPO Find X8 16GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x8-3.jpg",
+          "altText": "OPPO Find X8 16GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x8-4.jpg",
+          "altText": "OPPO Find X8 16GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-oppo-find-x8-xam-1.png",
+          "altText": "OPPO Find X8 16GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Nubia Neo 5 GT Special Edition 12GB 256GB",
+      "slug": "nubia-neo-5-gt-special-edition-12gb-256gb",
+      "sku": "PHONE-0006",
+      "brand": "Nubia",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua điện thoại Nubia Neo 5 GT Special Edition chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay Nubia Neo 5 GT Special Edition tại đây.",
+      "description": "Mua điện thoại Nubia Neo 5 GT Special Edition chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay Nubia Neo 5 GT Special Edition tại đây.",
+      "price": 12990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-nubia-neo-5-gt-special-edition.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "MyOS 16 (dựa trên Android 16)",
+        "Chipset": "MediaTek D7400",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân, tốc độ tối đa 2,6 GHz",
+        "Kích thước màn hình": "6.8 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1224 × 2720 pixels",
+        "Tính năng màn hình": "Tần số quét 144 HzĐộ sáng tối đa 4500 nitsĐộ tương phản 1.000.000:1Tần số cảm ứng tức thì 3049 HzMagic Touch 3.0Bảo vệ mắt",
+        "Camera sau": "Chính 50 MPCamera chiều sâu 2 MP",
+        "Camera trước": "16 MP",
+        "Pin": "6210 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "07/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-nubia-neo-5-gt-special-edition.jpg",
+          "altText": "Nubia Neo 5 GT Special Edition 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-nubia-neo-5-gt-special-edition.jpg",
+          "altText": "Nubia Neo 5 GT Special Edition 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-nubia-neo-5-gt-special-edition-2.jpg",
+          "altText": "Nubia Neo 5 GT Special Edition 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-nubia-neo-5-gt-special-edition-3.jpg",
+          "altText": "Nubia Neo 5 GT Special Edition 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-nubia-neo-5-gt-special-edition-4.jpg",
+          "altText": "Nubia Neo 5 GT Special Edition 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-nubia-neo-5-gt-special-edition-5.jpg",
+          "altText": "Nubia Neo 5 GT Special Edition 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-nubia-neo-5-gt-special-edition-6.jpg",
+          "altText": "Nubia Neo 5 GT Special Edition 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 17 256GB | Chính hãng",
+      "slug": "iphone-17-256gb-chinh-hang",
+      "sku": "PHONE-0007",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Giá bán iPhone 17 thường 256GB chính hãng tại Việt Nam là 24.990.000đ, đủ màu trắng, xanh. tím - mua online ip17 thường giảm 5% tại CellphoneS",
+      "description": "Giá bán iPhone 17 thường 256GB chính hãng tại Việt Nam là 24.990.000đ, đủ màu trắng, xanh. tím - mua online ip17 thường giảm 5% tại CellphoneS",
+      "price": 26990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone_17_256gb-3_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 34,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 26",
+        "Chipset": "Apple A19",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "6 lõi (2 hiệu năng + 4 tiết kiệm điện)",
+        "GPU": "GPU 5 lõi với Neural Accelerator",
+        "Kích thước màn hình": "6.3 inches",
+        "Công nghệ màn hình": "Super Retina XDR OLED",
+        "Độ phân giải màn hình": "2622 x 1206 pixels",
+        "Tính năng màn hình": "Dynamic IslandMàn hình luôn bậtHDR460 ppiTrue ToneDải màu rộng (P3)Haptic TouchTỷ lệ tương phản 2.000.000:1Độ sáng 1000 nit (typ)Đỉnh 1600 nit (HDR)Đỉnh 3000 nit (ngoài trời)Lớp phủ chống vân tay, chống phản chi",
+        "Camera sau": "48MP Fusion Main f/1.6 OIS12MP Tele 2x f/1.6 OIS48MP Ultra Wide f/2.2 120°",
+        "Camera trước": "18MP Center Stage, f/1.9, PDAF",
+        "Pin": "Xem video: 30 giờXem video trực tuyến: 27 giờ",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Sim kép (nano-Sim và e-Sim) - Hỗ trợ 2 e-Sim",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone_17_256gb-3_2.jpg",
+          "altText": "iPhone 17 256GB | Chính hãng - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_17_256gb-3_2.jpg",
+          "altText": "iPhone 17 256GB | Chính hãng - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-256gb.jpg",
+          "altText": "iPhone 17 256GB | Chính hãng - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-256gb-1.jpg",
+          "altText": "iPhone 17 256GB | Chính hãng - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-256gb-2.jpg",
+          "altText": "iPhone 17 256GB | Chính hãng - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-256gb-3.jpg",
+          "altText": "iPhone 17 256GB | Chính hãng - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-256gb-4.jpg",
+          "altText": "iPhone 17 256GB | Chính hãng - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Samsung Galaxy A57 5G 8GB 128GB",
+      "slug": "samsung-galaxy-a57-5g-8gb-128gb",
+      "sku": "PHONE-0008",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Samsung Galaxy A57 5G giảm 12%, online giảm thêm 5%, lên đời trợ giá đến 2tr tại CellphoneS. A57 mỏng bậc nhất A series chỉ 6.9mm, 182g.",
+      "description": "Mua Samsung Galaxy A57 5G giảm 12%, online giảm thêm 5%, lên đời trợ giá đến 2tr tại CellphoneS. A57 mỏng bậc nhất A series chỉ 6.9mm, 182g.",
+      "price": 10490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-a57-2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 16",
+        "Chipset": "Exynos 1680",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "128 GB",
+        "Loại CPU": "1 nhân 2.9 GHz, 3 nhân 2.6 GHz &amp; 4 nhân 1.95 GHz",
+        "GPU": "Xclipse 550",
+        "Kích thước màn hình": "6.7 inches",
+        "Công nghệ màn hình": "Super AMOLED Plus",
+        "Độ phân giải màn hình": "1080 x 2340 pixels (FullHD+)",
+        "Tính năng màn hình": "Tần số quét: 120Hz16 triệu màu1900 nits",
+        "Camera sau": "Camera chính: 50MPGóc siêu rộng 12MPMacro 5MP",
+        "Camera trước": "12MP",
+        "Pin": "5000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "03/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-a57-2.jpg",
+          "altText": "Samsung Galaxy A57 5G 8GB 128GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a57-8gb-128gb.jpg",
+          "altText": "Samsung Galaxy A57 5G 8GB 128GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a57-8gb-128gb-2.jpg",
+          "altText": "Samsung Galaxy A57 5G 8GB 128GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a57-8gb-128gb-1.jpg",
+          "altText": "Samsung Galaxy A57 5G 8GB 128GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a57-8gb-128gb-3.jpg",
+          "altText": "Samsung Galaxy A57 5G 8GB 128GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a57-8gb-128gb-4.jpg",
+          "altText": "Samsung Galaxy A57 5G 8GB 128GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-a57-tim.jpg",
+          "altText": "Samsung Galaxy A57 5G 8GB 128GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Samsung Galaxy S25 Ultra 12GB 256GB",
+      "slug": "samsung-galaxy-s25-ultra-12gb-256gb",
+      "sku": "PHONE-0009",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy S25 Ultra giảm đến 21%, lên đời trợ thêm 3tr, S-Edu giảm thêm đến 500k, góp 0%. Mua S25 Ultra giá tốt 10/2026 tại CellphoneS.",
+      "description": "Samsung Galaxy S25 Ultra giảm đến 21%, lên đời trợ thêm 3tr, S-Edu giảm thêm đến 500k, góp 0%. Mua S25 Ultra giá tốt 10/2026 tại CellphoneS.",
+      "price": 24190000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-s25-ultra_3__3.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.7,
+      "soldCount": 90,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 15",
+        "Chipset": "Snapdragon 8 Elite dành cho Galaxy (3nm)",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "3120 x 1440 pixels (Quad HD+)",
+        "Tính năng màn hình": "120Hz2600 nitsCorning® Gorilla® Armor 2",
+        "Camera sau": "Camera siêu rộng 50MPCamera góc rộng 200 MPCamera Tele (5x) 50MPCamera Tele (3x) 10MP&quot;",
+        "Camera trước": "12 MP",
+        "Pin": "5000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "02-2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-s25-ultra_3__3.png",
+          "altText": "Samsung Galaxy S25 Ultra 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_ultra_-_1.png",
+          "altText": "Samsung Galaxy S25 Ultra 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_ultra_-_2.png",
+          "altText": "Samsung Galaxy S25 Ultra 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_ultra_-_4.png",
+          "altText": "Samsung Galaxy S25 Ultra 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_ultra_-_5.png",
+          "altText": "Samsung Galaxy S25 Ultra 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_ultra_-_3.png",
+          "altText": "Samsung Galaxy S25 Ultra 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-s25-ultra_1__3.png",
+          "altText": "Samsung Galaxy S25 Ultra 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Xiaomi POCO F9 Ultra 5G 12GB 256GB",
+      "slug": "xiaomi-poco-f9-ultra-5g-12gb-256gb",
+      "sku": "PHONE-0010",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Xiaomi POCO F9 Ultra 5G sở hữu Pin 8050mAh, chip Snapdragon 8 Elite Gen 5 manh mẽ - Tặng 2 năm bảo hành và 6Th rơi vỡ màn, trợ giá lên đời hấp dẫn.",
+      "description": "Xiaomi POCO F9 Ultra 5G sở hữu Pin 8050mAh, chip Snapdragon 8 Elite Gen 5 manh mẽ - Tặng 2 năm bảo hành và 6Th rơi vỡ màn, trợ giá lên đời hấp dẫn.",
+      "price": 22790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-red.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Xiaomi HyperOS 3",
+        "Chipset": "Snapdragon 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Adreno",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Tính năng màn hình": "Tần số quét 185 HzTỷ lệ tương phản 5.000.000:168 tỷ màuDC dimmingHDR10+Dolby Vision",
+        "Camera sau": "Chính 200 MP, f/1.68, OISTele tiềm vọng 50 MP, f/3.0Góc siêu rộng 50 MP, f/2.4",
+        "Camera trước": "32 MP",
+        "Pin": "8050 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano SIM hoặc eSIM",
+        "Thời điểm ra mắt": "8/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-red.jpg",
+          "altText": "Xiaomi POCO F9 Ultra 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-poco-f9-ultra-01.png",
+          "altText": "Xiaomi POCO F9 Ultra 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-poco-f9-ultra-02.png",
+          "altText": "Xiaomi POCO F9 Ultra 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-poco-f9-ultra-04.png",
+          "altText": "Xiaomi POCO F9 Ultra 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-poco-f9-ultra-03.png",
+          "altText": "Xiaomi POCO F9 Ultra 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-poco-f9-ultra-05.png",
+          "altText": "Xiaomi POCO F9 Ultra 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-poco-f9-ultra-06.png",
+          "altText": "Xiaomi POCO F9 Ultra 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 16e 128GB | Chính hãng VN/A",
+      "slug": "iphone-16e-128gb-chinh-hang-vna",
+      "sku": "PHONE-0011",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Điện thoại Apple iPhone 16e 128G/256gb/512gb giá tốt tháng 10/2026 chính hãng, đủ màu - Mua iPhone 16 e tại CellphoneS trả góp 0% 12 tháng",
+      "description": "Điện thoại Apple iPhone 16e 128G/256gb/512gb giá tốt tháng 10/2026 chính hãng, đủ màu - Mua iPhone 16 e tại CellphoneS trả góp 0% 12 tháng",
+      "price": 13690000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-16e-128gb.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 98,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 18",
+        "Chipset": "Chip A18",
+        "Bộ nhớ trong": "128 GB",
+        "Loại CPU": "CPU 6 lõi mới với 2 lõi hiệu năng và 4 lõi tiết kiệm điện",
+        "GPU": "GPU 4 lõi mớiNeural Engine 16 lõi mới",
+        "Kích thước màn hình": "6.1 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2532 x 1170 pixels",
+        "Tính năng màn hình": "Màn hình HDR True Tone Dải màu rộng (P3) Haptic Touch Tỷ lệ tương phản 2.000.000:1 (tiêu chuẩn) Độ sáng tối đa 800 nit (tiêu chuẩn); độ sáng đỉnh 1200 nit (HDR) Lớp phủ kháng dầu chống in dấu vân tay Thu Phóng Màn Hình",
+        "Camera sau": "Hệ thống camera 2 trong 1Fusion 48MP: 26 mm, khẩu độ ƒ/1.6, chống rung quang học, Hybrid Focus Pixels, ảnh có độ phân giải siêu cao (24MP và 48MP)Đồng thời hỗ trợ Telephoto 2x 12MP: 52 mm, khẩu độ ƒ/1.6, chống rung quang học, Hybrid Focus Pixels",
+        "Camera trước": "Camera 12MP Khẩu độ ƒ/1.9 Camera TrueDepth hỗ trợ nhận diện khuôn mặt",
+        "Pin": "Thời gian xem video Lên đến 26 giờ Thời gian xem video (trực tuyến) Lên đến 21 giờThời gian nghe nhạc Lên đến 90 giờ",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Sim kép (nano-Sim và e-Sim) - Hỗ trợ 2 e-Sim",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "02/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-16e-128gb.png",
+          "altText": "iPhone 16e 128GB | Chính hãng VN/A - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16e-128gb.png",
+          "altText": "iPhone 16e 128GB | Chính hãng VN/A - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16e-128gb_1_.png",
+          "altText": "iPhone 16e 128GB | Chính hãng VN/A - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16e-128gb_2_.png",
+          "altText": "iPhone 16e 128GB | Chính hãng VN/A - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16e-128gb_3_.png",
+          "altText": "iPhone 16e 128GB | Chính hãng VN/A - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16e-128gb_4_.png",
+          "altText": "iPhone 16e 128GB | Chính hãng VN/A - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16e-128gb_5_.png",
+          "altText": "iPhone 16e 128GB | Chính hãng VN/A - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Xiaomi Redmi Note 17 Pro Max 5G 8GB 512GB",
+      "slug": "xiaomi-redmi-note-17-pro-max-5g-8gb-512gb",
+      "sku": "PHONE-0012",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Xiaomi Redmi Note 17 Pro Max 5G chính hãng tại CellphoneS: pin 10.000 mAh, sạc 100W, Snapdragon 6 Gen 5, kháng nước IP69K. Thu cũ lên đời, trả góp 0%.",
+      "description": "Mua Xiaomi Redmi Note 17 Pro Max 5G chính hãng tại CellphoneS: pin 10.000 mAh, sạc 100W, Snapdragon 6 Gen 5, kháng nước IP69K. Thu cũ lên đời, trả góp 0%.",
+      "price": 13990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-redmi-note-17-pro-max-5g-white.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Xiaomi HyperOS 3",
+        "Chipset": "Snapdragon 6 Gen 5 5G 8 nhân",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân, 4 nhân 2.6 GHz &amp; 4 nhân 2.0 GHz",
+        "GPU": "Adreno 810",
+        "Kích thước màn hình": "6.83 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Tính năng màn hình": "Độ phân giải màn hình: 1.5K (1280 x 2772 Pixels)Tần số quét 120 HzĐộ sáng tối đa 3500 nitsKính cường lực Corning Gorilla Glass Victus 2",
+        "Camera sau": "Camera chính: 50 MPCamera phụ: 8 MP",
+        "Camera trước": "32 MP",
+        "Pin": "10000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-redmi-note-17-pro-max-5g-white.jpg",
+          "altText": "Xiaomi Redmi Note 17 Pro Max 5G 8GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-redmi-note-17-pro-max-5g-black.jpg",
+          "altText": "Xiaomi Redmi Note 17 Pro Max 5G 8GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-redmi-note-17-pro-max-5g-purple.jpg",
+          "altText": "Xiaomi Redmi Note 17 Pro Max 5G 8GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-redmi-note-17-pro-max-5g-white.jpg",
+          "altText": "Xiaomi Redmi Note 17 Pro Max 5G 8GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-redmi-note-17-pro-max-5g-white-01.jpg",
+          "altText": "Xiaomi Redmi Note 17 Pro Max 5G 8GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-redmi-note-17-pro-max-5g-white-02.jpg",
+          "altText": "Xiaomi Redmi Note 17 Pro Max 5G 8GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-redmi-note-17-pro-max-5g-white-03.jpg",
+          "altText": "Xiaomi Redmi Note 17 Pro Max 5G 8GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 13 128GB | Chính hãng VN/A",
+      "slug": "iphone-13-128gb-chinh-hang-vna",
+      "sku": "PHONE-0013",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua iPhone 13 (128GB) chính hãng VN/A giá rẻ giảm sâu tháng 10/2026 - trợ giá lên đời, trả góp 0% lãi suất, không cần trả trước, giao nhanh toàn quốc.",
+      "description": "Mua iPhone 13 (128GB) chính hãng VN/A giá rẻ giảm sâu tháng 10/2026 - trợ giá lên đời, trả góp 0% lãi suất, không cần trả trước, giao nhanh toàn quốc.",
+      "price": 14290000.0,
+      "originalPrice": 15290000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-13_2_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 674,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 15",
+        "Chipset": "Apple A15",
+        "Dung lượng RAM": "4 GB",
+        "Bộ nhớ trong": "128 GB",
+        "Loại CPU": "3.22 GHz",
+        "GPU": "Apple GPU 4 nhân",
+        "Kích thước màn hình": "6.1 inches",
+        "Công nghệ màn hình": "Super Retina XDR OLED",
+        "Độ phân giải màn hình": "2532 x 1170 pixels",
+        "Tính năng màn hình": "Màn hình super Retina XDR, OLED, 460 ppi, HDR display, công nghệ True Tone Wide color (P3), Haptic Touch, Lớp phủ oleophobic chống bám vân tay",
+        "Camera sau": "Camera góc rộng: 12MP, f/1.6 Camera góc siêu rộng: 12MP, ƒ/2.4",
+        "Camera trước": "12MP, f/2.2",
+        "Pin": "3240mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 SIM (nano‑SIM và eSIM)",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2021"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-13_2_2.jpg",
+          "altText": "iPhone 13 128GB | Chính hãng VN/A - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-13_2_2.jpg",
+          "altText": "iPhone 13 128GB | Chính hãng VN/A - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_13_pdp_position-1b_color_midnight__vn.png",
+          "altText": "iPhone 13 128GB | Chính hãng VN/A - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_13_pdp_position-2_size_comparison__vn.png",
+          "altText": "iPhone 13 128GB | Chính hãng VN/A - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_13_pdp_position-3_camera__vn.png",
+          "altText": "iPhone 13 128GB | Chính hãng VN/A - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_13_pdp_position-4_design__vn.png",
+          "altText": "iPhone 13 128GB | Chính hãng VN/A - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone_13_pdp_position-5_colors__vn.png",
+          "altText": "iPhone 13 128GB | Chính hãng VN/A - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Samsung Galaxy S25 Plus 256GB",
+      "slug": "samsung-galaxy-s25-plus-256gb",
+      "sku": "PHONE-0014",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy S25 Plus chính hãng,  thu cũ trợ giá 3 triệu, ưu đãi HSSV đến 500K, thêm voucher 5%,  góp 0%.  Mua S25+ (Plus) tại CellphoneS.",
+      "description": "Samsung Galaxy S25 Plus chính hãng,  thu cũ trợ giá 3 triệu, ưu đãi HSSV đến 500K, thêm voucher 5%,  góp 0%.  Mua S25+ (Plus) tại CellphoneS.",
+      "price": 19350000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-s25-plus_3_.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 16,
+      "specifications": {
+        "Chipset": "Snapdragon 8 Elite dành cho Galaxy (3nm)",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "Tốc độ CPU: 4.47GHz, 3.5GHz 8 nhân",
+        "Kích thước màn hình": "6.7 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "3120 x 1440 pixels (Quad HD+)",
+        "Tính năng màn hình": "120Hz2600 nitsCorning® Gorilla® Armor 2",
+        "Camera sau": "Camera siêu rộng 12MP Camera góc rộng 50MPCamera Tele 10MP",
+        "Camera trước": "12MP",
+        "Pin": "4900 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "02-2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-s25-plus_3_.png",
+          "altText": "Samsung Galaxy S25 Plus 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_plus_-_1.png",
+          "altText": "Samsung Galaxy S25 Plus 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_plus_-_2.png",
+          "altText": "Samsung Galaxy S25 Plus 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_plus_-_4.png",
+          "altText": "Samsung Galaxy S25 Plus 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_plus_-_5.png",
+          "altText": "Samsung Galaxy S25 Plus 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung_galaxy_s25_plus_-_3.png",
+          "altText": "Samsung Galaxy S25 Plus 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-s25-plus_3_.png",
+          "altText": "Samsung Galaxy S25 Plus 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Xiaomi Redmi Note 14 Pro Plus 5G 8GB 256GB",
+      "slug": "xiaomi-redmi-note-14-pro-plus-5g-8gb-256gb",
+      "sku": "PHONE-0015",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Xiaomi Redmi Note 14 Pro+ 5G màn 6.67 inch 120Hz, camera 200MP, pin 5110mAh, sạc 120W. Mua Note 14 Pro Plus 5G giảm 26% tại CellphoneS.",
+      "description": "Xiaomi Redmi Note 14 Pro+ 5G màn 6.67 inch 120Hz, camera 200MP, pin 5110mAh, sạc 120W. Mua Note 14 Pro Plus 5G giảm 26% tại CellphoneS.",
+      "price": 7650000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-redmi-note-14-pro-plus.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 176,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 14",
+        "Chipset": "Snapdragon® 7s Gen 3",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân, xung nhịp 2.5Ghz",
+        "GPU": "Qualcomm® Adreno™ GPU",
+        "Kích thước màn hình": "6.67 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "2712 x 1220 pixels",
+        "Tính năng màn hình": "Tần số quét: Lên đến 120Hz Độ sáng: 3000 nits Độ sâu màu: 12-bit Tỷ lệ tương phản: 5,000,000:1",
+        "Camera sau": "Chính 200MP, OIS - f/1.65 Góc siêu rộng 8MP - f/2.2 Macro 2MP - f/2.4",
+        "Camera trước": "Camera trước - f/2.2",
+        "Pin": "5110 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM",
+        "Công nghệ NFC": "Có"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-redmi-note-14-pro-plus.jpg",
+          "altText": "Xiaomi Redmi Note 14 Pro Plus 5G 8GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi_redmi_note_14_pro_plus_5g_8gb_256gb_-_1.png",
+          "altText": "Xiaomi Redmi Note 14 Pro Plus 5G 8GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi_redmi_note_14_pro_plus_5g_8gb_256gb_-_2.png",
+          "altText": "Xiaomi Redmi Note 14 Pro Plus 5G 8GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi_redmi_note_14_pro_plus_5g_8gb_256gb_-_4.png",
+          "altText": "Xiaomi Redmi Note 14 Pro Plus 5G 8GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi_redmi_note_14_pro_plus_5g_8gb_256gb_-_3.png",
+          "altText": "Xiaomi Redmi Note 14 Pro Plus 5G 8GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi_redmi_note_14_pro_plus_5g_8gb_256gb_-_5.png",
+          "altText": "Xiaomi Redmi Note 14 Pro Plus 5G 8GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-xiaomi-redmi-note-14-pro-plus-den.png",
+          "altText": "Xiaomi Redmi Note 14 Pro Plus 5G 8GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Xiaomi 17T Pro 5G 12GB 512GB",
+      "slug": "xiaomi-17t-pro-5g-12gb-512gb",
+      "sku": "PHONE-0016",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Xiaomi 17T Pro 5G 12GB512GB giảm giá ngay 3Tr, trợ giá lên đời 50%, tặng gói bảo hành rơi vỡ, giao toàn quốc. Mua Mi 17T Pro ngay",
+      "description": "Mua Xiaomi 17T Pro 5G 12GB512GB giảm giá ngay 3Tr, trợ giá lên đời 50%, tặng gói bảo hành rơi vỡ, giao toàn quốc. Mua Mi 17T Pro ngay",
+      "price": 22290000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t-pro-1_4.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 4,
+      "specifications": {
+        "Chipset": "MediaTek Dimensity 9500",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Kích thước màn hình": "6.83 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Tính năng màn hình": "Độ sáng tối đa 3500 nits, tối thiểu 1 nit; 68 tỷ màu; dải màu điện ảnh DCI-P3; DC dimming; HDR10+; Dolby Vision; chứng nhận TÜV Rheinland Low Blue Light (Hardware Solution), Flicker Free, Circadian Friendly, Intelligent Eye Care",
+        "Camera sau": "Camera chính Leica 50MP f/1.67 OISCamera tele Leica 5X 50MP f/3.0 OISCamera góc siêu rộng Leica 12MP f/2.2",
+        "Camera trước": "32MP f/2.2, 90°, tiêu cự 21mm",
+        "Pin": "7000mAh",
+        "Hỗ trợ mạng": "5G"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-17t-pro-1_4.jpg",
+          "altText": "Xiaomi 17T Pro 5G 12GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-pro-5g.jpg",
+          "altText": "Xiaomi 17T Pro 5G 12GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-pro-5g-1.jpg",
+          "altText": "Xiaomi 17T Pro 5G 12GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-pro-5g-2.jpg",
+          "altText": "Xiaomi 17T Pro 5G 12GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-pro-5g-3.jpg",
+          "altText": "Xiaomi 17T Pro 5G 12GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-xiaomi-17t-pro-5g-4.jpg",
+          "altText": "Xiaomi 17T Pro 5G 12GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-17t-pro-1_4.jpg",
+          "altText": "Xiaomi 17T Pro 5G 12GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Samsung Galaxy A07 5G 4GB 128GB",
+      "slug": "samsung-galaxy-a07-5g-4gb-128gb",
+      "sku": "PHONE-0017",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy A07 5G 4GB 128GB chính hãng giá rẻ - Thu cũ đổi mới, Quà tặng hấp dẫn, bảo hành 12 tháng, trả góp 0%. Mua Samsung A07 5G tại đây.",
+      "description": "Samsung Galaxy A07 5G 4GB 128GB chính hãng giá rẻ - Thu cũ đổi mới, Quà tặng hấp dẫn, bảo hành 12 tháng, trả góp 0%. Mua Samsung A07 5G tại đây.",
+      "price": 4490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-a07-5g-2_3.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android",
+        "Chipset": "MediaTek Dimensity 6300 5G",
+        "Dung lượng RAM": "4 GB",
+        "Bộ nhớ trong": "128 GB",
+        "Loại CPU": "8 nhân, 2.4GHz, 2GHz",
+        "GPU": "Mali-G57",
+        "Kích thước màn hình": "6.7 inches",
+        "Công nghệ màn hình": "PLS LCD",
+        "Độ phân giải màn hình": "720 x 1600 pixel",
+        "Tính năng màn hình": "Tần số quét: 120HzĐộ sâu màu sắc:16M",
+        "Camera sau": "50 MP, F1.8 + 2 MP, F2.4",
+        "Camera trước": "8 MP, F2.0",
+        "Pin": "6000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM",
+        "Thời điểm ra mắt": "01/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-a07-5g-2_3.jpg",
+          "altText": "Samsung Galaxy A07 5G 4GB 128GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a07-5g-4gb-128gb_2_4.jpg",
+          "altText": "Samsung Galaxy A07 5G 4GB 128GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a07-5g-4gb-128gb-6.jpg",
+          "altText": "Samsung Galaxy A07 5G 4GB 128GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a07-5g-4gb-128gb-2.jpg",
+          "altText": "Samsung Galaxy A07 5G 4GB 128GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a07-5g-4gb-128gb-3.jpg",
+          "altText": "Samsung Galaxy A07 5G 4GB 128GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a07-5g-4gb-128gb-4_4.jpg",
+          "altText": "Samsung Galaxy A07 5G 4GB 128GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-a07-5g-1_3.jpg",
+          "altText": "Samsung Galaxy A07 5G 4GB 128GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "OPPO Reno15 5G 12GB 256GB",
+      "slug": "oppo-reno15-5g-12gb-256gb",
+      "sku": "PHONE-0018",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "OPPO Reno15 5G màn hình 6.59 inch 1.5K+ 120Hz, camera AI 50MP, pin 6500mAh. Giảm 2tr, trả góp 0%, thu cũ giảm 5tr, BH 12 tháng. Mua ngay!",
+      "description": "OPPO Reno15 5G màn hình 6.59 inch 1.5K+ 120Hz, camera AI 50MP, pin 6500mAh. Giảm 2tr, trả góp 0%, thu cũ giảm 5tr, BH 12 tháng. Mua ngay!",
+      "price": 13990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-reno15-01_15.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16.0",
+        "Chipset": "Qualcomm Snapdragon 7 Gen4 5G",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Adreno 722",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1256 x 2760 pixels",
+        "Tính năng màn hình": "Cảm ứng 240Hz, 100% DCI-P3, 10-bit (1.07 tỷ màu), Độ sáng tối đa 1200 nits",
+        "Camera sau": "Chính 50MP f/1.8 (OIS) + Telephoto 50MP f/2.8 (OIS) + Góc siêu rộng 8MP f/2.2",
+        "Camera trước": "50MP f/2.0",
+        "Pin": "6500 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Dual nano-SIM hoặc 1 nano-SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "01/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-reno15-01_15.jpg",
+          "altText": "OPPO Reno15 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-reno15-5g-12gb.jpg",
+          "altText": "OPPO Reno15 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-reno15-5g.jpg",
+          "altText": "OPPO Reno15 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-reno15-5g-1.jpg",
+          "altText": "OPPO Reno15 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-reno15-5g-4.jpg",
+          "altText": "OPPO Reno15 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-reno15-5g-2.jpg",
+          "altText": "OPPO Reno15 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo-reno15-01_15.jpg",
+          "altText": "OPPO Reno15 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Điện thoại Meizu Mblu Note 21 Pro NFC 8GB 256GB",
+      "slug": "ien-thoai-meizu-mblu-note-21-pro-nfc-8gb-256gb",
+      "sku": "PHONE-0019",
+      "brand": "Meizu",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Điện thoại Meizu Mblu Note 21 Pro 8GB 256GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Giao 2h",
+      "description": "Điện thoại Meizu Mblu Note 21 Pro 8GB 256GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Giao 2h",
+      "price": 4540000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/e/meizu-mblu-note-21-pro.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 14, Flyme AIOS",
+        "Chipset": "Mediatek Helio G99 (6 nm)",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân (2 x 2.2 GHz Cortex-A76 và 6 x 2.0 GHz Cortex-A55)",
+        "GPU": "GPU Mali-G57 MC2",
+        "Kích thước màn hình": "6.78 inches",
+        "Công nghệ màn hình": "IPS LCD",
+        "Độ phân giải màn hình": "1080 x 2400 pixels (FullHD+)",
+        "Tính năng màn hình": "Mật độ điểm ảnh 388ppi, tần số quét 120Hz, độ sáng tối đa 550 nits",
+        "Camera sau": "64 MP + 2 MP",
+        "Camera trước": "13 MP",
+        "Pin": "5000mAh",
+        "Hỗ trợ mạng": "4G",
+        "Thẻ SIM": "2 Nano-SIM",
+        "Công nghệ NFC": "Có"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/m/e/meizu-mblu-note-21-pro.jpg",
+          "altText": "Điện thoại Meizu Mblu Note 21 Pro NFC 8GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider.jpg",
+          "altText": "Điện thoại Meizu Mblu Note 21 Pro NFC 8GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-mblu-21-pro-8gb-256gb-1.jpg",
+          "altText": "Điện thoại Meizu Mblu Note 21 Pro NFC 8GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-31.jpg",
+          "altText": "Điện thoại Meizu Mblu Note 21 Pro NFC 8GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-mblu-21-pro-8gb-256gb-3.jpg",
+          "altText": "Điện thoại Meizu Mblu Note 21 Pro NFC 8GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-2.jpg",
+          "altText": "Điện thoại Meizu Mblu Note 21 Pro NFC 8GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/m/e/meizu-mblu-note-21-pro.jpg",
+          "altText": "Điện thoại Meizu Mblu Note 21 Pro NFC 8GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "HONOR X7d 8GB 128GB",
+      "slug": "honor-x7d-8gb-128gb",
+      "sku": "PHONE-0020",
+      "brand": "HONOR",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua điện thoại HONOR X7d 8GB 128GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay HONOR X7d 8GB 128G tại đây.",
+      "description": "Mua điện thoại HONOR X7d 8GB 128GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay HONOR X7d 8GB 128G tại đây.",
+      "price": 5690000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-honor-x7d-12_3.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 15, MagicOS 9.0",
+        "Chipset": "Qualcomm Snapdragon 685",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "128 GB",
+        "Loại CPU": "8 nhân: 4 × Cortex-A73 (2,8 GHz) + 4 × Cortex-A53 (1,9 GHz)",
+        "GPU": "Adreno 610",
+        "Kích thước màn hình": "6.77 inches",
+        "Công nghệ màn hình": "TFT LCD",
+        "Tính năng màn hình": "Độ phân giải HD+ (720 × 1.610 px), 120 Hz, 850 nits",
+        "Camera sau": "108 MP, f/1.8 + 2MP",
+        "Camera trước": "8MP, f/2.0",
+        "Pin": "6500 mAh",
+        "Hỗ trợ mạng": "4G",
+        "Thẻ SIM": "2 Nano-SIM",
+        "Thời điểm ra mắt": "10/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-honor-x7d-12_3.jpg",
+          "altText": "HONOR X7d 8GB 128GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-8gb-128gb.jpg",
+          "altText": "HONOR X7d 8GB 128GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-8gb-128gb-1.jpg",
+          "altText": "HONOR X7d 8GB 128GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-8gb-128gb-2.jpg",
+          "altText": "HONOR X7d 8GB 128GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-8gb-128gb-3.jpg",
+          "altText": "HONOR X7d 8GB 128GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-8gb-128gb-4.jpg",
+          "altText": "HONOR X7d 8GB 128GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-honor-x7d-12_3.jpg",
+          "altText": "HONOR X7d 8GB 128GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Meizu Lucky 08 5G 12GB 256GB",
+      "slug": "meizu-lucky-08-5g-12gb-256gb",
+      "sku": "PHONE-0021",
+      "brand": "Meizu",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua điện thoại Meizu Lucky 08 5G 12GB 256GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay Meizu Lucky 08 5G 12GB 256GB tại đây.",
+      "description": "Mua điện thoại Meizu Lucky 08 5G 12GB 256GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay Meizu Lucky 08 5G 12GB 256GB tại đây.",
+      "price": 5975000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-meizu-lucky-08_1.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 42,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 14",
+        "Chipset": "Snapdragon 7s Gen 2",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "Tốc độ xung nhịp lên đến 2.4GHz",
+        "GPU": "Adreno™ 710",
+        "Kích thước màn hình": "6.78 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "2780 × 1264 pixel",
+        "Tính năng màn hình": "Tần số lên đến 144Hz, Tỷ lệ tương phản 8000000:1, 450 PPI, 5000nits, 100% DCI-P3",
+        "Camera sau": "108MP, ƒ/1.67 + 2MP, ƒ/2.4",
+        "Camera trước": "8MP, ƒ/2.0",
+        "Pin": "6000mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-meizu-lucky-08_1.png",
+          "altText": "Meizu Lucky 08 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08_2.jpg",
+          "altText": "Meizu Lucky 08 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08-1.jpg",
+          "altText": "Meizu Lucky 08 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08-2.jpg",
+          "altText": "Meizu Lucky 08 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08-1_1.jpg",
+          "altText": "Meizu Lucky 08 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08-4.jpg",
+          "altText": "Meizu Lucky 08 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-meizu-lucky-08_1.png",
+          "altText": "Meizu Lucky 08 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Điện thoại Itel P55 Plus NFC 8GB 256GB",
+      "slug": "ien-thoai-itel-p55-plus-nfc-8gb-256gb",
+      "sku": "PHONE-0022",
+      "brand": "Itel",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Điện thoại Itel P55 Plus NFC 8GB 256GB giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "description": "Điện thoại Itel P55 Plus NFC 8GB 256GB giá rẻ - Hỗ trợ trả góp 0%, đổi mới 30 ngày, bảo hành chính hãng, giao hàng tận nơi miễn phí.",
+      "price": 3409000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-itel-p55-plus-8gb-256gb_1__2.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 12,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 13",
+        "Chipset": "Unisoc T606",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "Octa-core Processor",
+        "Kích thước màn hình": "6.6 inches",
+        "Tính năng màn hình": "Tần số quét 90Hz",
+        "Camera sau": "Camera góc rộng: 50 MP",
+        "Camera trước": "8 MP",
+        "Pin": "5000mAh",
+        "Hỗ trợ mạng": "4G",
+        "Công nghệ NFC": "Có"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-itel-p55-plus-8gb-256gb_1__2.png",
+          "altText": "Điện thoại Itel P55 Plus NFC 8GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-itel-p55-plus-nfc.jpg",
+          "altText": "Điện thoại Itel P55 Plus NFC 8GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-itel-p55-plus-nfc-1.jpg",
+          "altText": "Điện thoại Itel P55 Plus NFC 8GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-itel-p55-plus-nfc-2.jpg",
+          "altText": "Điện thoại Itel P55 Plus NFC 8GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-itel-p55-plus-nfc-3.jpg",
+          "altText": "Điện thoại Itel P55 Plus NFC 8GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-itel-p55-plus-nfc-4.jpg",
+          "altText": "Điện thoại Itel P55 Plus NFC 8GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-itel-p55-plus-8gb-256gb_2__2.png",
+          "altText": "Điện thoại Itel P55 Plus NFC 8GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Xiaomi POCO F9 Ultra 5G 16GB 512GB",
+      "slug": "xiaomi-poco-f9-ultra-5g-16gb-512gb",
+      "sku": "PHONE-0023",
+      "brand": "Xiaomi",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mở bán Xiaomi POCO F9 Ultra 5G 512GB giá tốt, Giảm 4 triệu, trợ giá lên đời 5 triệu, Gói bảo hành cao cấp với 6th rơi vỡ màn. Mua POCO F9 Ultra tại đây.",
+      "description": "Mở bán Xiaomi POCO F9 Ultra 5G 512GB giá tốt, Giảm 4 triệu, trợ giá lên đời 5 triệu, Gói bảo hành cao cấp với 6th rơi vỡ màn. Mua POCO F9 Ultra tại đây.",
+      "price": 24690000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-red_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Xiaomi HyperOS 3",
+        "Chipset": "Snapdragon 8 Elite Gen 5",
+        "Dung lượng RAM": "16 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Adreno",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Tính năng màn hình": "Tần số quét 185 HzTỷ lệ tương phản 5.000.000:168 tỷ màuDC dimmingHDR10+Dolby Vision",
+        "Camera sau": "Chính 200 MP, f/1.68, OISTele tiềm vọng 50 MP, f/3.0Góc siêu rộng 50 MP, f/2.4",
+        "Camera trước": "32 MP",
+        "Pin": "8050 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano SIM hoặc eSIM",
+        "Thời điểm ra mắt": "8/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-red_2.jpg",
+          "altText": "Xiaomi POCO F9 Ultra 5G 16GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-red_2.jpg",
+          "altText": "Xiaomi POCO F9 Ultra 5G 16GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-black_2.jpg",
+          "altText": "Xiaomi POCO F9 Ultra 5G 16GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-red-03_2.jpg",
+          "altText": "Xiaomi POCO F9 Ultra 5G 16GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-red-02_2.jpg",
+          "altText": "Xiaomi POCO F9 Ultra 5G 16GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-red-01_2.jpg",
+          "altText": "Xiaomi POCO F9 Ultra 5G 16GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/x/i/xiaomi-poco-f9-ultra-red-04_2.jpg",
+          "altText": "Xiaomi POCO F9 Ultra 5G 16GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "OPPO Reno10 Pro+ 5G 12GB 256GB",
+      "slug": "oppo-reno10-pro-5g-12gb-256gb",
+      "sku": "PHONE-0024",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "OPPO Reno10 Pro Plus 5G màn hình 6.74 inch, chip Snapdragon 898 Plus, Android 13. BH 12 tháng, giảm đến 5.5tr, góp 0%, có thu cũ. Mua ngay",
+      "description": "OPPO Reno10 Pro Plus 5G màn hình 6.74 inch, chip Snapdragon 898 Plus, Android 13. BH 12 tháng, giảm đến 5.5tr, góp 0%, có thu cũ. Mua ngay",
+      "price": 9890000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-reno10-pro-plus-tim.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 34,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 13",
+        "Chipset": "Snapdragon 8 plus Gen 1 8 nhân",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "1x3.0 GHz Cortex-X2 &amp; 3x2.75 GHz Cortex-A710 &amp; 4x2.0 GHz Cortex-A510",
+        "GPU": "Adreno 730",
+        "Kích thước màn hình": "6.74 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1240 x 2772 pixels",
+        "Tính năng màn hình": "1 tỷ màu, tần số quét 120Hz, HDR10+, 1100 nits, Kính cường lực AGC DT-Star2",
+        "Camera sau": "Camera góc rộng: 50 MPKính tiềm vọng: 64 MP, PDAF, 5x optical zoomCamera góc siêu rộng: 8 MP, f/2.2",
+        "Camera trước": "Camera góc rộng: 32 MP, f/2.4",
+        "Pin": "4700 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 SIM (Nano-SIM)",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2023"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-reno10-pro-plus-tim.png",
+          "altText": "OPPO Reno10 Pro+ 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_reno10_pro_plus_-_1.png",
+          "altText": "OPPO Reno10 Pro+ 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_reno10_pro_plus_-_2.png",
+          "altText": "OPPO Reno10 Pro+ 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_reno10_pro_plus_-_3.png",
+          "altText": "OPPO Reno10 Pro+ 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_reno10_pro_plus_-_4.png",
+          "altText": "OPPO Reno10 Pro+ 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_reno10_pro_plus_-_5.png",
+          "altText": "OPPO Reno10 Pro+ 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo-reno10-pro-plus-tim.png",
+          "altText": "OPPO Reno10 Pro+ 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Meizu Lucky 08 5G 8GB 256GB",
+      "slug": "meizu-lucky-08-5g-8gb-256gb",
+      "sku": "PHONE-0025",
+      "brand": "Meizu",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua điện thoại Meizu Lucky 08 5G 8GB 256GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay Meizu Lucky 08 5G 12GB 256GB tại đây.",
+      "description": "Mua điện thoại Meizu Lucky 08 5G 8GB 256GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay Meizu Lucky 08 5G 12GB 256GB tại đây.",
+      "price": 5500000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-meizu-lucky-08_1_2.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 14",
+        "Chipset": "Snapdragon 7s Gen 2",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "Tốc độ xung nhịp lên đến 2.4GHz",
+        "GPU": "Adreno™ 710",
+        "Kích thước màn hình": "6.78 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "2780 × 1264 pixel",
+        "Tính năng màn hình": "Tần số lên đến 144Hz, Tỷ lệ tương phản 8000000:1, 450 PPI, 5000nits, 100% DCI-P3",
+        "Camera sau": "108MP, ƒ/1.67 + 2MP, ƒ/2.4",
+        "Camera trước": "8MP, ƒ/2.0",
+        "Pin": "6000mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-meizu-lucky-08_1_2.png",
+          "altText": "Meizu Lucky 08 5G 8GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08_2_1.jpg",
+          "altText": "Meizu Lucky 08 5G 8GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08-1_2.jpg",
+          "altText": "Meizu Lucky 08 5G 8GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08-2_1.jpg",
+          "altText": "Meizu Lucky 08 5G 8GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08-1_1_1.jpg",
+          "altText": "Meizu Lucky 08 5G 8GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-lucky-08-4_1.jpg",
+          "altText": "Meizu Lucky 08 5G 8GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-meizu-lucky-08_1_2.png",
+          "altText": "Meizu Lucky 08 5G 8GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "HONOR X7d 5G 8GB 256GB",
+      "slug": "honor-x7d-5g-8gb-256gb",
+      "sku": "PHONE-0026",
+      "brand": "HONOR",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua điện thoại HONOR X7d 5G 8GB 256GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay HONOR X7d 5G 8GB 256GB tại đây.",
+      "description": "Mua điện thoại HONOR X7d 5G 8GB 256GB chính hãng giá rẻ - Thu cũ đổi mới, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay HONOR X7d 5G 8GB 256GB tại đây.",
+      "price": 6890000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-honor-x7d-5g-8gb-256gb.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "MagicOS 9.0 (Dựa trên Android 15)",
+        "Chipset": "Qualcomm Snapdragon 6s Gen 3",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân: 2xA78@2.3GHz, 6xA55@2.0GHz",
+        "GPU": "Adreno GPU A619",
+        "Kích thước màn hình": "6.77 inches",
+        "Công nghệ màn hình": "TFT LCD",
+        "Độ phân giải màn hình": "1612 × 720 pixel",
+        "Tính năng màn hình": "Độ sáng: 850 nit (HBM), 700 nit (Typical)Màu sắc: 16,7 triệu màu, 85% NTSCChế độ bảo vệ mắt/Dynamic Dimming",
+        "Camera sau": "Camera chính 50MP (f/1.8)Camera độ sâu 2MP (f/2.4)",
+        "Camera trước": "5 MP (khẩu độ f/2.2)",
+        "Pin": "6500 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "10/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-honor-x7d-5g-8gb-256gb.jpg",
+          "altText": "HONOR X7d 5G 8GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-5g-8gb-256gb.1.jpg",
+          "altText": "HONOR X7d 5G 8GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-5g-8gb-256gb-1.jpg",
+          "altText": "HONOR X7d 5G 8GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-5g-8gb-256gb-2.jpg",
+          "altText": "HONOR X7d 5G 8GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-5g-8gb-256gb-3.jpg",
+          "altText": "HONOR X7d 5G 8GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-honor-x7d-5g-8gb-256gb-4.jpg",
+          "altText": "HONOR X7d 5G 8GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-honor-x7d-5g-8gb-256gb.jpg",
+          "altText": "HONOR X7d 5G 8GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "OPPO Find N3 16GB 512GB",
+      "slug": "oppo-find-n3-16gb-512gb",
+      "sku": "PHONE-0027",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "OPPO Find N3 5G - Điện thoại gập màn hình 7.82&quot;, chip Snapdragon 8 Gen 2, 3 camera Tele. Giảm 19.5tr, trả góp 0%. Mua ngay tại CellphoneS!",
+      "description": "OPPO Find N3 5G - Điện thoại gập màn hình 7.82&quot;, chip Snapdragon 8 Gen 2, 3 camera Tele. Giảm 19.5tr, trả góp 0%. Mua ngay tại CellphoneS!",
+      "price": 25590000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/i/find_n3_-_combo_product_-_gold.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 8,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 13",
+        "Chipset": "Snapdragon 8 Gen 2 8 nhân",
+        "Dung lượng RAM": "16 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "1x3.2 GHz Cortex-X3 &amp; 2x2.8 GHz Cortex-A715 &amp; 2x2.8 GHz Cortex-A710 &amp; 3x2.0 GHz Cortex-A510",
+        "GPU": "Adreno 740",
+        "Kích thước màn hình": "7.82 inches",
+        "Công nghệ màn hình": "OLED",
+        "Độ phân giải màn hình": "2268 x 2440 pixels",
+        "Tính năng màn hình": "Màn hình chính: 7.82 inches, 2K+ (2268 x 2440 Pixels), OLED, 120Hz, 2800 nit, 1 tỷ màu, Kính UTGMàn hình phụ: 6.31 inches, FHD+ (1116 x 2484 Pixels), 120Hz, Kính siêu mỏng Nanocrystal",
+        "Camera sau": "Camera chính: 48MP, f/1.7, OISCamera góc rộng: 48MP, f/2.2Camera Tele: 64MP, f/2.6",
+        "Camera trước": "Màn hình chính: 20MP, f/2.2 Màn hình ngoài: 32MP, f/2.4",
+        "Pin": "4805 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "10/2023"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/f/i/find_n3_-_combo_product_-_gold.png",
+          "altText": "OPPO Find N3 16GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_n3_fold_-_1.png",
+          "altText": "OPPO Find N3 16GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_n3_fold_-_2.png",
+          "altText": "OPPO Find N3 16GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_n3_fold_-_3.png",
+          "altText": "OPPO Find N3 16GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_n3_fold_-_4.png",
+          "altText": "OPPO Find N3 16GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_n3_fold_-_8.png",
+          "altText": "OPPO Find N3 16GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_n3_fold_-_7.png",
+          "altText": "OPPO Find N3 16GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "OPPO Find X5 Pro 5G 12GB 256GB",
+      "slug": "oppo-find-x5-pro-5g-12gb-256gb",
+      "sku": "PHONE-0028",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "OPPO Find X5 Pro 5G dùng chip Snapdragon 8 Gen 1, RAM 12 GB, ROM 256 GB. Giảm 3tr, trả góp 0%, thu cũ trợ giá 3tr, lỗi 1 đổi 1. Mua ngay!",
+      "description": "OPPO Find X5 Pro 5G dùng chip Snapdragon 8 Gen 1, RAM 12 GB, ROM 256 GB. Giảm 3tr, trả góp 0%, thu cũ trợ giá 3tr, lỗi 1 đổi 1. Mua ngay!",
+      "price": 12290000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/o/download_1__6_6.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.7,
+      "soldCount": 12,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 12.1 dựa trên Android 12",
+        "Chipset": "Qualcomm Snapdragon 8 Gen 1",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "MariSilicon X Imaging NPU",
+        "GPU": "Adreno 730 @818MHz",
+        "Kích thước màn hình": "6.7 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1440 x 3216 pixels (QHD+)",
+        "Tính năng màn hình": "Tần số quét 120 Hz (Dynamic) 1.07 tỉ màu Corning Gorilla Glass VictusGam màu: Chế độ sống động: 97% NTSC/100% DCI-P3 (Tiêu chuẩn) Chế độ dịu nhẹ: 71% NTSC/100% sRGB (Tiêu chuẩn)Độ sáng tối đa 1300 nits",
+        "Camera sau": "Camera chính: 50MP, f/1.7 Camera góc rộng: 50MP, f/2.2; FOV 112°Camera tele: 13MP, f/2.4",
+        "Camera trước": "Camera chính 32MP: f/2.4; FOV 90°, ống kính: 5P, lấy nét cố định",
+        "Pin": "5.000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 SIM (Nano-SIM)",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "05/2022"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/o/download_1__6_6.png",
+          "altText": "OPPO Find X5 Pro 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_x5_pro_12gb_256gb_-_1.png",
+          "altText": "OPPO Find X5 Pro 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_x5_pro_12gb_256gb_-_2.png",
+          "altText": "OPPO Find X5 Pro 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_x5_pro_12gb_256gb_-_3.png",
+          "altText": "OPPO Find X5 Pro 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_x5_pro_12gb_256gb_-_4.png",
+          "altText": "OPPO Find X5 Pro 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo_find_x5_pro_12gb_256gb_-_5.png",
+          "altText": "OPPO Find X5 Pro 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/o/download_1__6_6.png",
+          "altText": "OPPO Find X5 Pro 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Điện thoại Meizu Mblu 22 Pro NFC 4GB 128GB",
+      "slug": "ien-thoai-meizu-mblu-22-pro-nfc-4gb-128gb",
+      "sku": "PHONE-0029",
+      "brand": "Meizu",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Điện thoại Meizu Mblu 22 Pro 4GB 128GB chính hãng, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay Meizu Mblu 22 giao nhanh.",
+      "description": "Điện thoại Meizu Mblu 22 Pro 4GB 128GB chính hãng, bảo hành 12 tháng, đổi mới 30 ngày, trả góp 0%. Mua ngay Meizu Mblu 22 giao nhanh.",
+      "price": 3315000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/_/i/_i_n_tho_i_meizu_mblu_22_pro_nfc_4gb_128gb_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 15",
+        "Chipset": "MediaTek Helio G81",
+        "Dung lượng RAM": "4 GB",
+        "Bộ nhớ trong": "128 GB",
+        "Loại CPU": "Octa-core",
+        "GPU": "Mali-G52 MP2",
+        "Kích thước màn hình": "6.79 inches",
+        "Công nghệ màn hình": "TFT LCD",
+        "Độ phân giải màn hình": "720 x 1640 pixels",
+        "Camera sau": "50 MP, AF f/1.8Camera macro: 2 MP, f/2.4",
+        "Camera trước": "8 MP, f/2.0",
+        "Pin": "5000 mAh",
+        "Hỗ trợ mạng": "4G",
+        "Thẻ SIM": "2 Nano-SIM",
+        "Công nghệ NFC": "Có"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/_/i/_i_n_tho_i_meizu_mblu_22_pro_nfc_4gb_128gb_2.jpg",
+          "altText": "Điện thoại Meizu Mblu 22 Pro NFC 4GB 128GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-mblu-22-pro-4gb-128gb.jpg",
+          "altText": "Điện thoại Meizu Mblu 22 Pro NFC 4GB 128GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-mblu-22-pro-4gb-128gb-1.jpg",
+          "altText": "Điện thoại Meizu Mblu 22 Pro NFC 4GB 128GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-mblu-22-pro-4gb-128gb-2.jpg",
+          "altText": "Điện thoại Meizu Mblu 22 Pro NFC 4GB 128GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-mblu-22-pro-4gb-128gb-3.jpg",
+          "altText": "Điện thoại Meizu Mblu 22 Pro NFC 4GB 128GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-meizu-mblu-22-pro-4gb-128gb-4.jpg",
+          "altText": "Điện thoại Meizu Mblu 22 Pro NFC 4GB 128GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/_/i/_i_n_tho_i_meizu_mblu_22_pro_nfc_4gb_128gb_2.jpg",
+          "altText": "Điện thoại Meizu Mblu 22 Pro NFC 4GB 128GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 18 Pro 256GB",
+      "slug": "iphone-18-pro-256gb",
+      "sku": "PHONE-0030",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 Pro chính hãng giá 38.99 triệu tại CellphoneS, màn hình 6,3 inch, Chip A20 Pro, đủ màu, thu cũ giảm 5tr | Mua IP 18 pro tại CellphoneS",
+      "description": "iPhone 18 Pro chính hãng giá 38.99 triệu tại CellphoneS, màn hình 6,3 inch, Chip A20 Pro, đủ màu, thu cũ giảm 5tr | Mua IP 18 pro tại CellphoneS",
+      "price": 38690000.0,
+      "originalPrice": 38990000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 8,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "A20 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.3 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2622 x 1206 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stagef/1,9 Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06.jpg",
+          "altText": "iPhone 18 Pro 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 18 Pro Max 256GB",
+      "slug": "iphone-18-pro-max-256gb",
+      "sku": "PHONE-0031",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 ProMax chính hãng giá 41,99 triệu tại CellphoneS, nâng cấp nổi bật chip A20 Pro, camera khẩu độ linh hoạt, trả góp 0% 18T - Mua ngay",
+      "description": "iPhone 18 ProMax chính hãng giá 41,99 triệu tại CellphoneS, nâng cấp nổi bật chip A20 Pro, camera khẩu độ linh hoạt, trả góp 0% 18T - Mua ngay",
+      "price": 41990000.0,
+      "originalPrice": 80999000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 10,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "Apple A20 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stage, f/1,9Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_2.jpg",
+          "altText": "iPhone 18 Pro Max 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 17 Pro 256GB | Chính hãng",
+      "slug": "iphone-17-pro-256gb-chinh-hang",
+      "sku": "PHONE-0032",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Giá iPhone 17 Pro (256GB/512GB/1TB) từ 28tr - đủ màu đẹp, Kích thước màn hình 6.3 inches,  A19 Pro cực mạnh, trả góp 0% 12 tháng tại CellphoneS",
+      "description": "Giá iPhone 17 Pro (256GB/512GB/1TB) từ 28tr - đủ màu đẹp, Kích thước màn hình 6.3 inches,  A19 Pro cực mạnh, trả góp 0% 12 tháng tại CellphoneS",
+      "price": 31990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-256-gb.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 76,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 26",
+        "Chipset": "Chip A19 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 lõi hiệu năng và 4 lõi tiết kiệm điện",
+        "GPU": "GPU 6 lõi với Neural Accelerator",
+        "Kích thước màn hình": "6.3 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2622 x 1206 pixels",
+        "Tính năng màn hình": "Màn hình Luôn Bật, ProMotion 120Hz, HDR, True Tone, Dải màu rộng (P3), Haptic Touch, Tỷ lệ tương phản 2.000.000:1, Độ sáng 1000 nit (tiêu chuẩn), 1600 nit (HDR), 3000 nit (ngoài trời) / tối thiểu 1 nit, Lớp phủ kháng dầu, Chống phản chiếu, Hỗ trợ đa ngôn",
+        "Camera sau": "Chính: 48MP khẩu độ ƒ/1.6 OIS hỗ trợ chụp 24MP hoặc 48MPGóc Siêu Rộng: 48MP khẩu độ ƒ/2.2 góc nhìn 120°Telephoto: 48MP khẩu độ ƒ/2.8 OIS zoom quang học lên đến 8x",
+        "Camera trước": "Camera 18MP Center Stage Khẩu độ ƒ/1.9",
+        "Thẻ SIM": "Sim kép (nano-Sim và e-Sim) - Hỗ trợ 2 e-Sim",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-256-gb.png",
+          "altText": "iPhone 17 Pro 256GB | Chính hãng - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-256-gb.png",
+          "altText": "iPhone 17 Pro 256GB | Chính hãng - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro_1.jpg",
+          "altText": "iPhone 17 Pro 256GB | Chính hãng - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-1_1.jpg",
+          "altText": "iPhone 17 Pro 256GB | Chính hãng - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-2_1_1.jpg",
+          "altText": "iPhone 17 Pro 256GB | Chính hãng - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-3_1_1.jpg",
+          "altText": "iPhone 17 Pro 256GB | Chính hãng - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-4_1.jpg",
+          "altText": "iPhone 17 Pro 256GB | Chính hãng - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 17 Pro Max 256GB | Chính hãng",
+      "slug": "iphone-17-pro-max-256gb-chinh-hang",
+      "sku": "PHONE-0033",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 17 Pro Max chính hãng đủ dung lượng từ 256GB - 2TB, giá tốt tháng 10/2026 - mua Apple iP 17 Promax trả góp 0% 12 tháng tại CellphoneS",
+      "description": "iPhone 17 Pro Max chính hãng đủ dung lượng từ 256GB - 2TB, giá tốt tháng 10/2026 - mua Apple iP 17 Promax trả góp 0% 12 tháng tại CellphoneS",
+      "price": 34990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 82,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 26",
+        "Chipset": "Chip A19 Pro",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi với 2 lõi hiệu năng và 4 lõi tiết kiệm điện",
+        "GPU": "GPU 6 lõi với Neural Accelerator",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Màn hình Luôn Bật, ProMotion 120Hz, HDR, True Tone, Dải màu rộng (P3), Haptic Touch, Tỷ lệ tương phản 2.000.000:1, Độ sáng 1000 nit (tiêu chuẩn), 1600 nit (HDR), 3000 nit (ngoài trời) / tối thiểu 1 nit, Lớp phủ kháng dầu, Chống phản chiếu, Hỗ trợ đa ngôn",
+        "Camera sau": "Chính: 48MP khẩu độ ƒ/1.6 OIS hỗ trợ chụp 24MP hoặc 48MPGóc Siêu Rộng: 48MP khẩu độ ƒ/2.2 góc nhìn 120°Telephoto: 48MP khẩu độ ƒ/2.8 OIS zoom quang học lên đến 8x",
+        "Camera trước": "Camera 18MP Center Stage Khẩu độ ƒ/1.9",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Sim kép (nano-Sim và e-Sim) - Hỗ trợ 2 e-Sim",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max_1_3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-1_4.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-2_1_1.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-3.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-4.jpg",
+          "altText": "iPhone 17 Pro Max 256GB | Chính hãng - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 18 Pro Max 512GB",
+      "slug": "iphone-18-pro-max-512gb",
+      "sku": "PHONE-0034",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Giá iPhone 18 Pro Max 512GB chính hãng tại CellphoneS là 48,49tr, đủ màu đỏ Burgundy mới, thu cũ giảm đến 5tr, S-buy-back cam kết thu lại đến 65% giá trị máy",
+      "description": "Giá iPhone 18 Pro Max 512GB chính hãng tại CellphoneS là 48,49tr, đủ màu đỏ Burgundy mới, thu cũ giảm đến 5tr, S-buy-back cam kết thu lại đến 65% giá trị máy",
+      "price": 48490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2_1.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "Chip A20 Pro",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stage, f/1,9Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2_1.jpg",
+          "altText": "iPhone 18 Pro Max 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_2_1.jpg",
+          "altText": "iPhone 18 Pro Max 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_2_1.jpg",
+          "altText": "iPhone 18 Pro Max 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_2_1.jpg",
+          "altText": "iPhone 18 Pro Max 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_2_1.jpg",
+          "altText": "iPhone 18 Pro Max 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_2_1.jpg",
+          "altText": "iPhone 18 Pro Max 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_2_1.jpg",
+          "altText": "iPhone 18 Pro Max 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-fold8-ultra-5g-12gb-256gb",
+      "sku": "PHONE-0035",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Fold 8 Ultra giá từ 41.51tr, lên đời trợ đến 6tr, hoàn 1tr với MoMo ví trả sau, kèm Galaxy Z Care. Mua Z Fold 8 Ultra tại CellphoneS.",
+      "description": "Samsung Galaxy Z Fold 8 Ultra giá từ 41.51tr, lên đời trợ đến 6tr, hoàn 1tr với MoMo ví trả sau, kèm Galaxy Z Care. Mua Z Fold 8 Ultra tại CellphoneS.",
+      "price": 48990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Snapdragon® 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "8 nhân - 2 nhân 4.74 GHz và 6 nhân 3.62 GHz",
+        "Kích thước màn hình": "Chính 8.0 inches, Phụ 6.5 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 2184 x 1968 Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels (QXGA+) - Phụ: 2520 x 1080 Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels (FHD+)",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nitsMặt kính Corning Gorilla Glass Ceramic 316 triệu màu",
+        "Camera sau": "Góc rộng 200 MP, f/1.7Góc siêu rộng 50 MP, f/2.2Tele 10 MP, f/2.4",
+        "Camera trước": "10 MP, f/2.210 MP",
+        "Pin": "5000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-1.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-2.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-3.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-4.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-ultra-6.png",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-violet-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 Ultra 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Samsung Galaxy A37 5G 8GB 128GB",
+      "slug": "samsung-galaxy-a37-5g-8gb-128gb",
+      "sku": "PHONE-0036",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Mua Samsung Galaxy A37 chính hãng, giá rẻ tại CellphoneS - Lên đời trợ giá tốt, bảo hành 12 tháng, trả góp 0%. Mua Samsung A37 tại đây.",
+      "description": "Mua Samsung Galaxy A37 chính hãng, giá rẻ tại CellphoneS - Lên đời trợ giá tốt, bảo hành 12 tháng, trả góp 0%. Mua Samsung A37 tại đây.",
+      "price": 9990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-a37-2_2.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 16",
+        "Chipset": "Exynos 1480",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "128 GB",
+        "Loại CPU": "4 nhân 2.75 GHz &amp; 4 nhân 2 GHz",
+        "GPU": "Xclipse 530",
+        "Kích thước màn hình": "6.7 inches",
+        "Công nghệ màn hình": "Super AMOLED",
+        "Độ phân giải màn hình": "1080 x 2340 pixels (FullHD+)",
+        "Tính năng màn hình": "Tần số quét: 120Hz1900 nits",
+        "Camera sau": "Camera chính: 50MPGóc siêu rộng 12MPMacro 5MP",
+        "Camera trước": "12MP",
+        "Pin": "5000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "03/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-a37-2_2.jpg",
+          "altText": "Samsung Galaxy A37 5G 8GB 128GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a37-8gb-128gb.jpg",
+          "altText": "Samsung Galaxy A37 5G 8GB 128GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a37-8gb-128gb-2.jpg",
+          "altText": "Samsung Galaxy A37 5G 8GB 128GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a37-8gb-128gb-1.jpg",
+          "altText": "Samsung Galaxy A37 5G 8GB 128GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a37-8gb-128gb-3.jpg",
+          "altText": "Samsung Galaxy A37 5G 8GB 128GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-a37-8gb-128gb-4.jpg",
+          "altText": "Samsung Galaxy A37 5G 8GB 128GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-samsung-galaxy-a37-1.jpg",
+          "altText": "Samsung Galaxy A37 5G 8GB 128GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Điện thoại iPhone 16 Pro Max 256GB",
+      "slug": "ien-thoai-iphone-16-pro-max-256gb",
+      "sku": "PHONE-0037",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Giá iphone 16 promax 256GB mới, ưu đãi trả góp 0%, trả trước 0 đồng, chính hãng, đủ màu, Màn hình Super Retina XDR - Mua Apple iPhone 16 Pro Max ngay",
+      "description": "Giá iphone 16 promax 256GB mới, ưu đãi trả góp 0%, trả trước 0 đồng, chính hãng, đủ màu, Màn hình Super Retina XDR - Mua Apple iPhone 16 Pro Max ngay",
+      "price": 30990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-16-pro-max.png",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 4.9,
+      "soldCount": 736,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 18",
+        "Chipset": "Apple A18 Pro",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "CPU 6 lõi mới với 2 lõi hiệu năng và 4 lõi hiệu suất",
+        "GPU": "GPU 6 lõi mới",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR OLED",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Dynamic IslandMàn hình Luôn Bật Công nghệ ProMotion với tốc độ làm mới thích ứng lên đến 120Hz Màn hình HDR True Tone Dải màu rộng (P3) Haptic Touch Tỷ lệ tương phản 2.000.000:1",
+        "Camera sau": "Camera chính: 48MP, f/1.78, 24mm, 2µm, chống rung quang học dịch chuyển cảm biến thế hệ thứ hai, Focus Pixels 100%Telephoto 2x 12MP: 52 mm, ƒ/1.6 Camera góc siêu rộng: 48MP, 13 mm,ƒ/2.2 và trường ảnh 120°, Hybrid Focus Pixels, ảnh có độ phân giải",
+        "Camera trước": "12MP, ƒ/1.9, Tự động lấy nét theo pha Focus Pixels",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Sim kép (nano-Sim và e-Sim) - Hỗ trợ 2 e-Sim",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2024"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-16-pro-max.png",
+          "altText": "Điện thoại iPhone 16 Pro Max 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-pro-max.png",
+          "altText": "Điện thoại iPhone 16 Pro Max 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-pro-max-2.png",
+          "altText": "Điện thoại iPhone 16 Pro Max 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-pro-max-3.png",
+          "altText": "Điện thoại iPhone 16 Pro Max 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-pro-max-4.png",
+          "altText": "Điện thoại iPhone 16 Pro Max 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-pro-max-5.png",
+          "altText": "Điện thoại iPhone 16 Pro Max 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-pro-max-6.png",
+          "altText": "Điện thoại iPhone 16 Pro Max 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 17 Pro Max 512GB | Chính hãng",
+      "slug": "iphone-17-pro-max-512gb-chinh-hang",
+      "sku": "PHONE-0038",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Điện thoại iPhone 17 Pro Max 512gb chính hãng, giá chỉ từ 42790tr - đủ màu trắng, cam vũ trụ, xanh, đen,... trả góp 0% 12 tháng, giảm 5% khi mua online",
+      "description": "Điện thoại iPhone 17 Pro Max 512gb chính hãng, giá chỉ từ 42790tr - đủ màu trắng, cam vũ trụ, xanh, đen,... trả góp 0% 12 tháng, giảm 5% khi mua online",
+      "price": 41390000.0,
+      "originalPrice": 44490000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-cam_3.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 4,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 26",
+        "Chipset": "Chip A19 Pro",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "CPU 6 lõi với 2 lõi hiệu năng và 4 lõi tiết kiệm điện",
+        "GPU": "GPU 6 lõi với Neural Accelerator",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Màn hình Luôn Bật, ProMotion 120Hz, HDR, True Tone, Dải màu rộng (P3), Haptic Touch, Tỷ lệ tương phản 2.000.000:1, Độ sáng 1000 nit (tiêu chuẩn), 1600 nit (HDR), 3000 nit (ngoài trời) / tối thiểu 1 nit, Lớp phủ kháng dầu, Chống phản chiếu, Hỗ trợ đa ngôn",
+        "Camera sau": "Chính: 48MP khẩu độ ƒ/1.6 OIS hỗ trợ chụp 24MP hoặc 48MPGóc Siêu Rộng: 48MP khẩu độ ƒ/2.2 góc nhìn 120°Telephoto: 48MP khẩu độ ƒ/2.8 OIS zoom quang học lên đến 8x",
+        "Camera trước": "Camera 18MP Center Stage Khẩu độ ƒ/1.9",
+        "Hỗ trợ mạng": "5G",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2025"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-17-pro-cam_3.jpg",
+          "altText": "iPhone 17 Pro Max 512GB | Chính hãng - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-cam_3.jpg",
+          "altText": "iPhone 17 Pro Max 512GB | Chính hãng - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max_1_4.jpg",
+          "altText": "iPhone 17 Pro Max 512GB | Chính hãng - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-1_5.jpg",
+          "altText": "iPhone 17 Pro Max 512GB | Chính hãng - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-2_1_2.jpg",
+          "altText": "iPhone 17 Pro Max 512GB | Chính hãng - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-3_1.jpg",
+          "altText": "iPhone 17 Pro Max 512GB | Chính hãng - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro-max-4_1.jpg",
+          "altText": "iPhone 17 Pro Max 512GB | Chính hãng - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "OPPO Reno16 F 5G 8GB 256GB",
+      "slug": "oppo-reno16-f-5g-8gb-256gb",
+      "sku": "PHONE-0039",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "OPPO Reno16 F 5G 8GB/256GB chính hãng pin 7000mAh, sạc nhanh 80W, tele 50MP. Thu cũ giảm 6tr, góp 0%, giảm 1tr mua kèm OPPO Bubble.",
+      "description": "OPPO Reno16 F 5G 8GB/256GB chính hãng pin 7000mAh, sạc nhanh 80W, tele 50MP. Thu cũ giảm 6tr, góp 0%, giảm 1tr mua kèm OPPO Bubble.",
+      "price": 14990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-reno16-f-02_5.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16, nền tảng Android 16",
+        "Chipset": "Dimensity 7300-Energy 5G",
+        "Dung lượng RAM": "8 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "Arm Mali-G615@1.047GHz",
+        "Kích thước màn hình": "6.57 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1080 x 2372 pixels (FullHD+)",
+        "Tính năng màn hình": "Tần số quét 120HzĐộ sáng tối đa 1400 nitsKính cường lực AGC DT Star D+1 tỷ màu",
+        "Camera sau": "50MP OIS, f/1.88MP góc rộng, f/2.250MP OIS Tele, f/2.8",
+        "Camera trước": "50MP, f/2.0",
+        "Pin": "7000 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Dual nano-SIM hoặc 1 nano-SIM + 1 thẻ nhớ",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "06/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-reno16-f-02_5.jpg",
+          "altText": "OPPO Reno16 F 5G 8GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-reno16-f-9.png",
+          "altText": "OPPO Reno16 F 5G 8GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-reno16-f-3.jpg",
+          "altText": "OPPO Reno16 F 5G 8GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-reno16-f-2.jpg",
+          "altText": "OPPO Reno16 F 5G 8GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-reno16-f-4.jpg",
+          "altText": "OPPO Reno16 F 5G 8GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-reno16-f-1.jpg",
+          "altText": "OPPO Reno16 F 5G 8GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo-reno16f-pop-white.jpg",
+          "altText": "OPPO Reno16 F 5G 8GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 18 Pro 2TB",
+      "slug": "iphone-18-pro-2tb",
+      "sku": "PHONE-0040",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 Pro 2TB giảm 6 triệu, S-Buyback cam kết giá thu từ 65% sau 1 năm, trả góp 0% 18 tháng, đủ màu. Mua ngay iPhone 18 Pro 2TB giá tốt!",
+      "description": "iPhone 18 Pro 2TB giảm 6 triệu, S-Buyback cam kết giá thu từ 65% sau 1 năm, trả góp 0% 18 tháng, đủ màu. Mua ngay iPhone 18 Pro 2TB giá tốt!",
+      "price": 77490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_1_1_1.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "A20 Pro",
+        "Bộ nhớ trong": "2 TB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.3 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2622 x 1206 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stagef/1,9 Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_1_1_1.jpg",
+          "altText": "iPhone 18 Pro 2TB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_1_1_1.jpg",
+          "altText": "iPhone 18 Pro 2TB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_1_1_1.jpg",
+          "altText": "iPhone 18 Pro 2TB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_1_1_1.jpg",
+          "altText": "iPhone 18 Pro 2TB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_1_1_1.jpg",
+          "altText": "iPhone 18 Pro 2TB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_1_1_1.jpg",
+          "altText": "iPhone 18 Pro 2TB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_1_1_1.jpg",
+          "altText": "iPhone 18 Pro 2TB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 18 Pro Max 2TB",
+      "slug": "iphone-18-pro-max-2tb",
+      "sku": "PHONE-0041",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 Pro Max 2TB chính hãng từ 80.99tr tại CellphoneS tháng 10/2026, ưu đãi đến 5tr, góp 0%, S-Buyback từ 65% giá trị - đủ màu",
+      "description": "iPhone 18 Pro Max 2TB chính hãng từ 80.99tr tại CellphoneS tháng 10/2026, ưu đãi đến 5tr, góp 0%, S-Buyback từ 65% giá trị - đủ màu",
+      "price": 80990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2_1_1_1.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "Chip A20 Pro",
+        "Bộ nhớ trong": "2 TB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Công nghệ ProMotion 120Hz, Màn hình HDR, Tỷ lệ tương phản 2.000.000:1, Màu rộng (P3), Độ sáng tối đa 1000 nits (điển hình), Độ sáng đỉnh 1600 nits (HDR), Độ sáng đỉnh 3000 nits (ngoài trời), Độ sáng tối thiểu 1 nit",
+        "Camera sau": "Chính (Fusion Main) 48MPGóc siêu rộng (Fusion Ultra Wide) 48MPTelephoto (Fusion Telephoto) 48MPZoom quang học 8x, zoom quang học 2x, dải zoom quang học 16x, zoom kỹ thuật số lên đến 40x",
+        "Camera trước": "18MP Center Stage, ƒ/1.9",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2_1_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 2TB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_2_1_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 2TB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_2_1_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 2TB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_2_1_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 2TB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_2_1_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 2TB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_2_1_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 2TB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_2_1_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 2TB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 18 Pro Max 1TB",
+      "slug": "iphone-18-pro-max-1tb",
+      "sku": "PHONE-0042",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Giá iPhone 18 Pro Max 1TB chính hãng tại CellphoneS từ 61.49Tr tháng 10/2026 - Ưu đãi giảm 5 triệu, góp 0% 18 tháng, Apple A20 Pro, camera linh hoạt",
+      "description": "Giá iPhone 18 Pro Max 1TB chính hãng tại CellphoneS từ 61.49Tr tháng 10/2026 - Ưu đãi giảm 5 triệu, góp 0% 18 tháng, Apple A20 Pro, camera linh hoạt",
+      "price": 61490000.0,
+      "originalPrice": 61499000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2_1_1.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "Chip A20 Pro",
+        "Bộ nhớ trong": "1 TB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.9 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2868 x 1320 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stage, f/1,9Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_2_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 1TB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_2_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 1TB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_2_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 1TB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_2_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 1TB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_2_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 1TB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_2_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 1TB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_2_1_1.jpg",
+          "altText": "iPhone 18 Pro Max 1TB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 18 Pro 512GB",
+      "slug": "iphone-18-pro-512gb",
+      "sku": "PHONE-0043",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 Pro 512GB chính hãng, trả góp 0% 18 tháng, giá từ  44,99tr - Nổi bật với bộ ba camera 48MP có khẩu độ tuỳ chỉnh, zoom quang học 4x và 8x rõ nét",
+      "description": "iPhone 18 Pro 512GB chính hãng, trả góp 0% 18 tháng, giá từ  44,99tr - Nổi bật với bộ ba camera 48MP có khẩu độ tuỳ chỉnh, zoom quang học 4x và 8x rõ nét",
+      "price": 45490000.0,
+      "originalPrice": 45499000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_1.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "A20 Pro",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.3 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2622 x 1206 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stagef/1,9 Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_1.jpg",
+          "altText": "iPhone 18 Pro 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_1.jpg",
+          "altText": "iPhone 18 Pro 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_1.jpg",
+          "altText": "iPhone 18 Pro 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_1.jpg",
+          "altText": "iPhone 18 Pro 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_1.jpg",
+          "altText": "iPhone 18 Pro 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_1.jpg",
+          "altText": "iPhone 18 Pro 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_1.jpg",
+          "altText": "iPhone 18 Pro 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "iPhone 18 Pro 1TB",
+      "slug": "iphone-18-pro-1tb",
+      "sku": "PHONE-0044",
+      "brand": "Apple",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "iPhone 18 Pro 1TB trả góp 0% 18 tháng, trợ giá lên đời 5 Triệu, đủ màu, bảo hành chính hãng. Mua ngay 18 Pro 1TB chính hãng, giá tốt tại đây!",
+      "description": "iPhone 18 Pro 1TB trả góp 0% 18 tháng, trợ giá lên đời 5 Triệu, đủ màu, bảo hành chính hãng. Mua ngay 18 Pro 1TB chính hãng, giá tốt tại đây!",
+      "price": 57990000.0,
+      "originalPrice": 58490000.0,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_1_1.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "iOS 27",
+        "Chipset": "A20 Pro",
+        "Bộ nhớ trong": "1 TB",
+        "Loại CPU": "CPU 6 lõi với 2 siêu lõi và 4 lõi hiệu suất",
+        "GPU": "GPU 7 lõi",
+        "Kích thước màn hình": "6.3 inches",
+        "Công nghệ màn hình": "Super Retina XDR",
+        "Độ phân giải màn hình": "2622 x 1206 pixels",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nits ngoài trờiĐộ sáng 1000 nit tiêu chuẩnĐộ sáng đỉnh 1600 nit HDRĐộ sáng tối thiểu 1 nitDynamic IslandMàn hình Luôn BậtProMotionHDRTrue ToneDải màu rộng P3Haptic Touch",
+        "Camera sau": "48 MP Fusion Main, f/1,48 / f/1,8 / f/2,8 / f/4,048 MP Fusion Ultra Wide, f/2,248 MP Fusion Telephoto, f/2,8Telephoto 2x chất lượng quang học 12 MPTelephoto 8x chất lượng quang học 12 MP, f/2,8",
+        "Camera trước": "18 MP Center Stagef/1,9 Tự động lấy nét theo pha Focus Pixels",
+        "Pin": "Pin lithium-ion tích hợp",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "09/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/i/p/iphone-18-pro-01_1_1.jpg",
+          "altText": "iPhone 18 Pro 1TB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-01_1_1.jpg",
+          "altText": "iPhone 18 Pro 1TB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-02_1_1.jpg",
+          "altText": "iPhone 18 Pro 1TB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-03_1_1.jpg",
+          "altText": "iPhone 18 Pro 1TB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-04_1_1.jpg",
+          "altText": "iPhone 18 Pro 1TB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-05_1_1.jpg",
+          "altText": "iPhone 18 Pro 1TB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-18-pro-06_1_1.jpg",
+          "altText": "iPhone 18 Pro 1TB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Samsung Galaxy Z Fold8 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-fold8-5g-12gb-256gb",
+      "sku": "PHONE-0045",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Fold 8 256GB giá lên đời từ 34.58tr, trợ giá đến 6tr, giảm ngay 6tr, tặng hậu mãi Z Care. Mua Z Fold 8 tại CellphoneS.",
+      "description": "Samsung Galaxy Z Fold 8 256GB giá lên đời từ 34.58tr, trợ giá đến 6tr, giảm ngay 6tr, tặng hậu mãi Z Care. Mua Z Fold 8 tại CellphoneS.",
+      "price": 40490000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-lavender-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Snapdragon® 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "8 nhân: 2 nhân 4.74 GHz và 6 nhân 3.62 GHz",
+        "Kích thước màn hình": "Chính 7.6 inches, Phụ 5.5 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 2448 x 1848 pixels (QXGA+) - Phụ: 1972 x 1248 pixels (FHD+)",
+        "Tính năng màn hình": "Tần số quét 120 HzĐộ sáng tối đa 3000 nitsKính Corning Gorilla Glass Ceramic 3",
+        "Camera sau": "Góc rộng 50 MP, f/1.9Góc siêu rộng 50 MP, f/1.8",
+        "Camera trước": "10 MP, f/2.210 MP",
+        "Pin": "4800 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-fold-8-lavender-01.jpg",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-01.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-02.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-04.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-05.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-03.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-fold-8-06.png",
+          "altText": "Samsung Galaxy Z Fold8 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Samsung Galaxy Z Flip8 5G 12GB 256GB",
+      "slug": "samsung-galaxy-z-flip8-5g-12gb-256gb",
+      "sku": "PHONE-0046",
+      "brand": "Samsung",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Samsung Galaxy Z Flip 8 256GB giá lên đời từ 21.215tr, trợ giá 6tr, tặng Google AI Pro 6 tháng và hậu mãi đặc quyền. Mua Z Flip 8 tại CellphoneS.",
+      "description": "Samsung Galaxy Z Flip 8 256GB giá lên đời từ 21.215tr, trợ giá 6tr, tặng Google AI Pro 6 tháng và hậu mãi đặc quyền. Mua Z Flip 8 tại CellphoneS.",
+      "price": 27790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-flip-8-pink-01.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 0,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "Android 17, One UI 9",
+        "Chipset": "Exynos 2600",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "GPU": "10 nhân, tốc độ 3.8 GHz, 3.25 GHz và 2.75 GHz",
+        "Kích thước màn hình": "Chính 6.9 inches, Phụ 4.1 inches",
+        "Công nghệ màn hình": "Dynamic AMOLED 2X",
+        "Độ phân giải màn hình": "Chính: 1080 × 2520 pixels (FHD+) - Phụ: 1048 × 948 pixels",
+        "Tính năng màn hình": "Tần số quét 120HzĐộ sáng tối đa 2600 nitsKính Corning Gorilla Glass Ceramic 316 triệu màu",
+        "Camera sau": "Góc rộng 50 MP, f/1.8Góc siêu rộng 12 MP, f/2.2",
+        "Camera trước": "10 MP, f/2.2",
+        "Pin": "4300 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Nano-SIM + eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "08/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/s/a/samsung-galaxy-z-flip-8-pink-01.jpg",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-1.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-2.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-5.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-4.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-3.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-samsung-galaxy-z-flip-8-6.png",
+          "altText": "Samsung Galaxy Z Flip8 5G 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "OPPO Find X9s 12GB 256GB",
+      "slug": "oppo-find-x9s-12gb-256gb",
+      "sku": "PHONE-0047",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Điện thoại OPPO Find X9s 12GB/256GB chính hãng giá 22.840.000đ, giảm đến 8.15tr, góp 0%, có thu cũ, quà 12tr, lỗi 1 đổi 1, BH 24T. Mua ngay!",
+      "description": "Điện thoại OPPO Find X9s 12GB/256GB chính hãng giá 22.840.000đ, giảm đến 8.15tr, góp 0%, có thu cũ, quà 12tr, lỗi 1 đổi 1, BH 24T. Mua ngay!",
+      "price": 24990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 8,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16.0",
+        "Chipset": "MediaTek Dimensity 9500s",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "256 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "ARM Immortalis G925 MC12",
+        "Kích thước màn hình": "6.59 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "1256 x 2760 pixels",
+        "Tính năng màn hình": "Độ sáng tối đa 1800 nitsTần số lấy mẫu cảm ứng tối đa 240Hz1.07 tỷ màu460 PPI100% DCI-P3",
+        "Camera sau": "Góc siêu rộng 50 MP, f/2.0Góc rộng 50 MP, f/1.8Telephoto 50 MP, f/2.6",
+        "Camera trước": "32 MP, f/2.4",
+        "Pin": "7025 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "Dual nano-SIM hoặc 1 nano-SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-1.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-2.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-3.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9s-12gb-256gb-4.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/o/p/oppo-find-x9s-25.jpg",
+          "altText": "OPPO Find X9s 12GB 256GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "OPPO Find X9 Ultra 12GB 512GB",
+      "slug": "oppo-find-x9-ultra-12gb-512gb",
+      "sku": "PHONE-0048",
+      "brand": "OPPO",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "OPPO Find X9 Ultra 12GB/512GB màn hình 6.82&quot; 2K+ 144Hz, chip Snapdragon 8 Elite Gen 5, camera 200MP. Giảm 4tr, thu cũ trợ giá 6tr. Mua ngay",
+      "description": "OPPO Find X9 Ultra 12GB/512GB màn hình 6.82&quot; 2K+ 144Hz, chip Snapdragon 8 Elite Gen 5, camera 200MP. Giảm 4tr, thu cũ trợ giá 6tr. Mua ngay",
+      "price": 45990000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 6,
+      "specifications": {
+        "Hệ điều hành khi ra mắt": "ColorOS 16 Android 16",
+        "Chipset": "Snapdragon 8 Elite Gen 5",
+        "Dung lượng RAM": "12 GB",
+        "Bộ nhớ trong": "512 GB",
+        "Loại CPU": "8 nhân",
+        "GPU": "Adreno 840",
+        "Kích thước màn hình": "6.82 inches",
+        "Công nghệ màn hình": "AMOLED",
+        "Độ phân giải màn hình": "3168 x 1440 pixel",
+        "Tính năng màn hình": "Độ sáng tối đa 3600 nitsTần số lấy mẫu cảm ứng tối đa 300Hz1.07 tỷ màu510 PPI100% DCI-P3",
+        "Camera sau": "Góc siêu rộng 50 MP, f/2.0Góc rộng 200 MP, f/1.5Tele 200 MP, f/2.2Tele siêu xa 50 MP, f/3.5Đơn sắc 3.2 MP, f/2.4",
+        "Camera trước": "50 MP, f/2.4",
+        "Pin": "7050 mAh",
+        "Hỗ trợ mạng": "5G",
+        "Thẻ SIM": "2 Nano SIM hoặc 2 eSIM hoặc 1 Nano SIM + 1 eSIM",
+        "Công nghệ NFC": "Có",
+        "Thời điểm ra mắt": "5/2026"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-1.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-2.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-3.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/l/slider-oppo-find-x9-ultra-4.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/d/i/dien-thoai-oppo-find-x9-ultra-cam-8.jpg",
+          "altText": "OPPO Find X9 Ultra 12GB 512GB - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    },
+    {
+      "categorySlug": "dien-thoai",
+      "name": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4)",
+      "slug": "tai-nghe-bluetooth-apple-airpods-5-2026-sac-co-day-mkfw4",
+      "sku": "PHONE-0049",
+      "brand": "Apple Chính hãng",
+      "warranty": "Bảo hành 12 tháng chính hãng",
+      "shortDescription": "Tai nghe Apple AirPod 5 ra mắt với thiết kế Open-Ear, ANC, chip H2, âm thanh kiến trúc đa cổng, chống nước IP57, pin 20h. Mua ngay tại CellphoneS.",
+      "description": "Tai nghe Apple AirPod 5 ra mắt với thiết kế Open-Ear, ANC, chip H2, âm thanh kiến trúc đa cổng, chống nước IP57, pin 20h. Mua ngay tại CellphoneS.",
+      "price": 3790000.0,
+      "originalPrice": null,
+      "stockQuantity": 15,
+      "thumbnailUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-co-day.jpg",
+      "active": true,
+      "featured": false,
+      "hot": false,
+      "ratingAverage": 5.0,
+      "soldCount": 2,
+      "specifications": {
+        "Kích thước": "Tai nghe: 30.2 x 18.3 x 18.1 mmHộp sạc: 46.2 x 50.1 x 21.2 mm",
+        "Trọng lượng": "Tai nghe: 4.3gHộp sạc: 34.7g",
+        "Công nghệ âm thanh": "Trình điều khiển &amp; bộ khuếch đại Apple tùy chỉnhChủ Động Khử Tiếng ỒnÂm thanh thích ứng &amp; xuyên âmNhận biết cuộc hội thoại &amp; tách lời nóiCá nhân hóa âm thanhEQ Thích ỨngGhi âm chuẩn studioHệ thống thông hơi cân bằng áp suất",
+        "Micro": "Có",
+        "Thời lượng sử dụng Pin": "Thời lượng pin tai nghe: thời gian lên đến 4 giờ với một lần sạc khi bật Chủ Động Khử Tiếng ỒnThời lượng pin với hộp sạc: thời gian đàm thoại lên đến 20 giờ khi bật Chủ Động Khử Tiếng Ồn",
+        "Phương thức điều khiển": "Cảm biến lực",
+        "Chipset": "Chip tai nghe H2",
+        "Hãng sản xuất": "Apple Chính hãng",
+        "Tiện ích": "Hỗ trợ Siri AIDịch Trực Tiếp (Live Translation)"
+      },
+      "images": [
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/200x/media/catalog/product/a/p/apple-airpods-5-sac-co-day.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 1",
+          "displayOrder": 0,
+          "primaryImage": true,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-1.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 2",
+          "displayOrder": 1,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-2.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 3",
+          "displayOrder": 2,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-4-type-c.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 4",
+          "displayOrder": 3,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-5.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 5",
+          "displayOrder": 4,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-6.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 6",
+          "displayOrder": 5,
+          "primaryImage": false,
+          "publicId": null
+        },
+        {
+          "imageUrl": "https://cdn2.cellphones.com.vn/x/media/catalog/product/a/p/apple-airpods-5-7.jpg",
+          "altText": "Tai nghe Bluetooth Apple AirPods 5 2026 Sạc Có Dây (MKFW4) - ảnh 7",
+          "displayOrder": 6,
+          "primaryImage": false,
+          "publicId": null
+        }
+      ]
+    }
+  ]
+}

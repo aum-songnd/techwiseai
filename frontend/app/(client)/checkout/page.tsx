@@ -80,7 +80,7 @@ const PAYMENT_OPTIONS: {
 
 const CheckoutPage = () => {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, isSignedIn, isLoading: isAuthLoading } = useAuth();
   const { items, totalAmount, isLoaded, requiresLogin, clearCart } = useCart();
 
   // Recipient source state: "account" vs "manual"
@@ -388,11 +388,11 @@ const CheckoutPage = () => {
     Math.max(0, (totalAmount / FREE_SHIP_THRESHOLD) * 100)
   );
 
-  if (!isLoaded) {
+  if (!isLoaded || isAuthLoading) {
     return <Loading message="Đang tải thông tin đơn hàng..." />;
   }
 
-  if (requiresLogin) {
+  if (!isSignedIn || requiresLogin) {
     return (
       <div className="font-sans min-h-screen bg-white text-neutral-900">
         <div className="mx-auto w-[90%] py-8 sm:py-10">

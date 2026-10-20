@@ -9,7 +9,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Tổng đài hỗ trợ",
-    detail: "1900 1234",
+    detail: "0985 915 804",
     note: "8:00 - 21:00, tất cả các ngày trong tuần",
   },
   {
@@ -21,7 +21,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Showroom trải nghiệm",
-    detail: "123 Nguyễn Văn Linh, Quận 7, TP. HCM",
+    detail: "123 Trần Vỹ, Cầu Diễn, Hà Nội",
     note: "8:30 - 20:00, mở cửa hàng ngày",
   },
 ];
@@ -222,7 +222,7 @@ const ContactPage = () => {
                 </div>
                 <div className="flex justify-between py-1">
                   <span className="text-neutral-500">Trợ lý AI Chat:</span>
-                  <span className="font-mono text-emerald-700 font-semibold">24/7 Không nghỉ</span>
+                  <span className="font-mono text-emerald-700 font-semibold">24/7</span>
                 </div>
               </div>
             </div>

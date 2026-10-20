@@ -96,11 +96,7 @@ const WishlistPage = () => {
     }, 2500);
   }, []);
 
-  useEffect(() => {
-    if (!isAuthLoading && !isSignedIn) {
-      router.push(`/sign-in?redirect=${encodeURIComponent("/wishlist")}`);
-    }
-  }, [isAuthLoading, isSignedIn, router]);
+
 
   const hasItems = favoriteProducts && favoriteProducts.length > 0;
 
