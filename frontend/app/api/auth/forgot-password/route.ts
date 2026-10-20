@@ -44,7 +44,17 @@ export async function POST(req: NextRequest) {
     const otp = data.data?.devOtp;
     if (otp && email) {
       // Send real email with OTP to the user's Gmail
-      await sendOtpEmail({ to: email, otp });
+      const mailRes = await sendOtpEmail({ to: email, otp });
+      if (!mailRes.sent) {
+        console.error(`[ForgotPassword API] Gửi email thất bại: ${mailRes.reason}`);
+        return NextResponse.json(
+          {
+            success: false,
+            message: `Không thể gửi mã OTP tới email ${email}. Lỗi: ${mailRes.reason || "Lỗi SMTP"}. Vui lòng thử lại sau.`,
+          },
+          { status: 500 }
+        );
+      }
     }
 
     // Sanitize response: NEVER expose OTP to the frontend
