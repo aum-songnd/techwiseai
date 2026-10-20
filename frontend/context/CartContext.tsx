@@ -20,6 +20,8 @@ import {
   type CartData,
 } from "@/lib/cart-api";
 import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
+import { useAuth } from "@/context/AuthContext";
+import { getToken } from "@/lib/auth";
 
 export type { CartItem };
 
@@ -30,7 +32,6 @@ interface CartContextValue {
   totalQuantity: number;
   totalAmount: number;
   isLoaded: boolean;
-
   requiresLogin: boolean;
   addToCart: (
     productId: string,
@@ -41,7 +42,6 @@ interface CartContextValue {
   removeFromCart: (itemId: string) => Promise<void>;
   clearCart: () => Promise<void>;
   getItemByProductId: (productId: string) => CartItem | undefined;
-
   isAddingToCart: (productId: string) => boolean;
 }
 
@@ -63,6 +63,7 @@ const isSameItem = (id1?: string, id2?: string) =>
   !!id1 && !!id2 && id1.trim().toLowerCase() === id2.trim().toLowerCase();
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  const { isSignedIn, isLoading: isAuthLoading } = useAuth();
   const [cart, setCart] = useState<CartData>(EMPTY_CART);
   const cartRef = useRef<CartData>(EMPTY_CART);
   useEffect(() => {
@@ -88,6 +89,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const isProcessingDeleteQueueRef = useRef(false);
 
   const fetchCartFromServer = useCallback(async () => {
+    if (!getToken()) {
+      setCart(EMPTY_CART);
+      setRequiresLogin(true);
+      setIsLoaded(true);
+      return;
+    }
+
     // If deletions are actively in flight, don't overwrite with stale server data
     if (
       pendingDeleteIdsRef.current.size > 0 ||
@@ -146,8 +154,29 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    fetchCartFromServer();
+    if (isAuthLoading) return;
 
+    if (!isSignedIn) {
+      invalidateCartCache();
+      setCart(EMPTY_CART);
+      setRequiresLogin(true);
+      setIsLoaded(true);
+
+      updateTimeoutsRef.current.forEach((t) => clearTimeout(t));
+      updateTimeoutsRef.current.clear();
+      pendingQuantitiesRef.current.clear();
+      inFlightItemIdsRef.current.clear();
+      pendingDeleteIdsRef.current.clear();
+      pendingDeleteProductIdsRef.current.clear();
+      deleteQueueRef.current = [];
+      return;
+    }
+
+    setRequiresLogin(false);
+    fetchCartFromServer();
+  }, [isSignedIn, isAuthLoading, fetchCartFromServer]);
+
+  useEffect(() => {
     const handleLogin = () => {
       invalidateCartCache();
       fetchCartFromServer();
@@ -160,6 +189,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     const unsubscribeSync = subscribeTabSync((event) => {
       if (event.type === "CART_UPDATED") {
+        if (!isSignedIn) return;
         invalidateCartCache();
         // If this tab is in the middle of active deletions, debounce updates or in-flight mutations,
         // do not overwrite this tab's optimistic state
@@ -182,6 +212,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     const handleVisibilityChange = () => {
       if (
+        isSignedIn &&
         document.visibilityState === "visible" &&
         pendingDeleteIdsRef.current.size === 0 &&
         pendingDeleteProductIdsRef.current.size === 0 &&
@@ -202,7 +233,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       window.removeEventListener("auth:logout", handleLogout);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [fetchCartFromServer]);
+  }, [isSignedIn, fetchCartFromServer]);
 
   const commitQuantityUpdate = useCallback(
     async (itemId: string) => {
@@ -364,6 +395,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       quantity = 1,
       optimisticItem?: Partial<CartItem>
     ) => {
+      if (!isSignedIn) {
+        setRequiresLogin(true);
+        return;
+      }
+
       const tempId = optimisticItem?.id ?? `temp-${productId}`;
 
       // Reset any previous pending deletion for this product if user adds it again
@@ -564,11 +600,16 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         });
       }
     },
-    [commitQuantityUpdate, processDeleteQueue]
+    [isSignedIn, commitQuantityUpdate, processDeleteQueue]
   );
 
   const removeFromCart = useCallback(
     async (itemId: string) => {
+      if (!isSignedIn) {
+        setRequiresLogin(true);
+        return;
+      }
+
       const existingTimeout = updateTimeoutsRef.current.get(itemId);
       if (existingTimeout) clearTimeout(existingTimeout);
       updateTimeoutsRef.current.delete(itemId);
@@ -629,11 +670,16 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       }
       processDeleteQueue();
     },
-    [processDeleteQueue]
+    [isSignedIn, processDeleteQueue]
   );
 
   const updateQuantity = useCallback(
     async (itemId: string, quantity: number) => {
+      if (!isSignedIn) {
+        setRequiresLogin(true);
+        return;
+      }
+
       const clampedQty = Math.max(0, quantity);
 
       if (clampedQty <= 0) {
@@ -670,7 +716,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       }, UPDATE_DEBOUNCE_MS);
       updateTimeoutsRef.current.set(itemId, timeout);
     },
-    [commitQuantityUpdate, removeFromCart]
+    [isSignedIn, commitQuantityUpdate, removeFromCart]
   );
 
   useEffect(() => {
@@ -682,6 +728,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const clearCart = useCallback(async () => {
+    if (!isSignedIn) {
+      setRequiresLogin(true);
+      return;
+    }
 
     updateTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
     updateTimeoutsRef.current.clear();
@@ -706,16 +756,17 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       if (err instanceof CartAuthRequiredError) {
         setRequiresLogin(true);
       } else {
-
         fetchCartFromServer();
       }
     }
-  }, [fetchCartFromServer]);
+  }, [isSignedIn, fetchCartFromServer]);
 
   const getItemByProductId = useCallback(
-    (productId: string) =>
-      cart.items.find((item) => isSameProduct(item.productId, productId)),
-    [cart.items]
+    (productId: string) => {
+      if (!isSignedIn) return undefined;
+      return cart.items.find((item) => isSameProduct(item.productId, productId));
+    },
+    [isSignedIn, cart.items]
   );
 
   const isAddingToCart = useCallback(
@@ -724,13 +775,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   const value: CartContextValue = {
-    items: cart.items,
-    cartId: cart.cartId,
-    totalItems: cart.totalItems,
-    totalQuantity: cart.totalQuantity,
-    totalAmount: cart.totalAmount,
-    isLoaded,
-    requiresLogin,
+    items: isSignedIn ? cart.items : [],
+    cartId: isSignedIn ? cart.cartId : "",
+    totalItems: isSignedIn ? cart.totalItems : 0,
+    totalQuantity: isSignedIn ? cart.totalQuantity : 0,
+    totalAmount: isSignedIn ? cart.totalAmount : 0,
+    isLoaded: isLoaded && !isAuthLoading,
+    requiresLogin: !isSignedIn || requiresLogin,
     addToCart,
     updateQuantity,
     removeFromCart,

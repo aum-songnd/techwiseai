@@ -186,7 +186,11 @@ export function getToken(): string | null {
   if (!token) return null;
 
   const expiresAt = getSessionExpiry();
-  if (expiresAt !== null && Date.now() >= expiresAt) return null;
+  if (expiresAt !== null && Date.now() >= expiresAt) {
+    clearToken();
+    clearStoredUser();
+    return null;
+  }
 
   return token;
 }

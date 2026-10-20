@@ -15,6 +15,7 @@ import {
   Truck,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 import { productImages } from "@/images";
 import { FREE_SHIP_THRESHOLD } from "@/components/ServiceFeatures";
 import Loading from "@/app/(client)/loading";
@@ -72,14 +73,15 @@ const CartPage = () => {
     isLoaded,
     requiresLogin,
   } = useCart();
+  const { isSignedIn, isLoading: isAuthLoading } = useAuth();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [promoCode, setPromoCode] = useState("");
 
-  if (!isLoaded) {
+  if (!isLoaded || isAuthLoading) {
     return <Loading message="Đang tải giỏ hàng..." />;
   }
 
-  if (requiresLogin) {
+  if (!isSignedIn || requiresLogin) {
     return (
       <div className="font-sans min-h-screen bg-white text-neutral-900">
         <div className="mx-auto w-[90%] py-8 sm:py-10">
@@ -107,7 +109,7 @@ const CartPage = () => {
               Đăng nhập để đồng bộ giỏ hàng của bạn trên mọi thiết bị và thanh toán nhanh chóng.
             </p>
             <Link
-              href="/sign-in"
+              href="/sign-in?redirect=/cart"
               className="mt-2 bg-shop_dark_green px-8 py-3 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-shop_dark_green/90"
             >
               Đăng nhập ngay

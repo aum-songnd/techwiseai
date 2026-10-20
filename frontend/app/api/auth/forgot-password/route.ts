@@ -61,11 +61,9 @@ export async function POST(req: NextRequest) {
     const sanitizedResponse = {
       success: true,
       message:
-        "Mã xác thực đã được gửi đến địa chỉ email của bạn. Vui lòng kiểm tra hộp thư đến (hoặc thư mục Spam).",
+        "Mã xác thực OTP đã được gửi đến email của bạn (hiệu lực trong 15 phút).",
       data: {
         email,
-        message:
-          "Mã xác thực đã được gửi đến email của bạn. Mã có hiệu lực trong 15 phút.",
       },
     };
 

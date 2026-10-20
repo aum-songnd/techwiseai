@@ -1,9 +1,7 @@
 import { cachedRequest, clearRequestCache } from "@/lib/request-cache";
-
+import { getToken, clearToken, clearStoredUser } from "@/lib/auth";
 
 const API_BASE_URL = "/api";
-
-const ACCESS_TOKEN_KEY = "access_token";
 
 interface ApiEnvelope<T> {
   success: boolean;
@@ -57,8 +55,7 @@ export class CartAuthRequiredError extends Error {
 }
 
 function getAccessToken(): string | null {
-  if (typeof window === "undefined") return null;
-  return window.localStorage.getItem(ACCESS_TOKEN_KEY);
+  return getToken();
 }
 
 function requireAuthHeaders(extra?: HeadersInit): HeadersInit {
@@ -85,6 +82,11 @@ async function fetchCartEnvelope<T>(
   });
 
   if (!res.ok) {
+    if (res.status === 401) {
+      clearToken();
+      clearStoredUser();
+      throw new CartAuthRequiredError();
+    }
     const text = await res.text().catch(() => "");
     throw new Error(
       `API giỏ hàng lỗi (${res.status}) tại ${path}: ${text || res.statusText}`
@@ -105,6 +107,12 @@ async function ensureCartMutationSucceeded(
   path: string
 ): Promise<void> {
   if (response.ok) return;
+
+  if (response.status === 401) {
+    clearToken();
+    clearStoredUser();
+    throw new CartAuthRequiredError();
+  }
 
   const text = await response.text().catch(() => "");
   throw new Error(
