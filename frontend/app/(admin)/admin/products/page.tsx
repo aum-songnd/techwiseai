@@ -6,6 +6,8 @@ import {
   ChevronLeft,
   ChevronRight,
   EllipsisVertical,
+  Eye,
+  EyeOff,
   PackageOpen,
   Pencil,
   Plus,
@@ -20,6 +22,8 @@ import {
   adminCreateProduct,
   adminUpdateProduct,
   adminDeleteProduct,
+  adminHardDeleteProduct,
+  adminToggleProductStatus,
   ProductPayload,
 } from "@/lib/admin-api";
 import type { Category, Product } from "@/app/data/types";
@@ -60,6 +64,7 @@ const AdminProductsPage = () => {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [brandFilter, setBrandFilter] = useState("");
   const [popularFilter, setPopularFilter] = useState(false);
+  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "inactive">("all");
   const [showForm, setShowForm] = useState(false);
   const [newBrandMode, setNewBrandMode] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -75,17 +80,23 @@ const AdminProductsPage = () => {
   }, [products]);
 
   const filteredProducts = useMemo(() => {
+    const statusProducts =
+      statusFilter === "active"
+        ? products.filter((p) => p.active !== false)
+        : statusFilter === "inactive"
+        ? products.filter((p) => p.active === false)
+        : products;
     const selectedCategory = categories.find(
       (category) => category.slug === categoryFilter
     );
     const categoryProducts = categoryFilter
-      ? products.filter((product) =>
+      ? statusProducts.filter((product) =>
           selectedCategory &&
           product.categories?.some(
             (category) => normalizeAdminText(category) === normalizeAdminText(selectedCategory.title)
           )
         )
-      : products;
+      : statusProducts;
     const brandProducts = brandFilter
       ? categoryProducts.filter((product) => product.brand === brandFilter)
       : categoryProducts;
@@ -101,7 +112,7 @@ const AdminProductsPage = () => {
 
       return tokens.every((t) => haystack.includes(t));
     });
-  }, [brandFilter, categories, categoryFilter, popularFilter, products, search]);
+  }, [brandFilter, categories, categoryFilter, popularFilter, products, search, statusFilter]);
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PAGE_SIZE));
   const safePage = Math.min(currentPage, totalPages);
@@ -179,7 +190,7 @@ const AdminProductsPage = () => {
       featured: product.isFeatured,
       hot: product.status === "hot",
       onSale: product.status === "sale",
-      active: true,
+      active: product.active ?? true,
     });
     setShowForm(true);
   };
@@ -204,13 +215,44 @@ const AdminProductsPage = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Xóa (mềm) sản phẩm này?")) return;
+    if (!confirm("Ẩn sản phẩm này khỏi website? (Sản phẩm sẽ ngừng kinh doanh trên web nhưng dữ liệu vẫn được lưu lại trong DB)")) return;
     setError(null);
     try {
       await adminDeleteProduct(id);
+      productSnapshot = null;
+      setProducts((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, active: false } : p))
+      );
       await loadData(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Xóa sản phẩm thất bại");
+      setError(err instanceof Error ? err.message : "Ẩn sản phẩm thất bại");
+    }
+  };
+
+  const handleToggleStatus = async (id: string, active: boolean) => {
+    setError(null);
+    try {
+      await adminToggleProductStatus(id, active);
+      productSnapshot = null;
+      setProducts((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, active } : p))
+      );
+      await loadData(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Cập nhật trạng thái thất bại");
+    }
+  };
+
+  const handleHardDelete = async (id: string) => {
+    if (!confirm("CẢNH BÁO: Bạn có chắc chắn muốn xóa vĩnh viễn sản phẩm này khỏi cơ sở dữ liệu?")) return;
+    setError(null);
+    try {
+      await adminHardDeleteProduct(id);
+      productSnapshot = null;
+      setProducts((prev) => prev.filter((p) => p.id !== id));
+      await loadData(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Xóa vĩnh viễn thất bại");
     }
   };
 
@@ -248,6 +290,21 @@ const AdminProductsPage = () => {
             Thêm sản phẩm mới
           </button>
         </div>
+
+        {/* Error notification banner */}
+        {!showForm && error && (
+          <div className="flex items-center justify-between border border-red-200 bg-red-50 p-4 text-xs text-red-600 font-medium">
+            <span>{error}</span>
+            <button
+              type="button"
+              onClick={() => setError(null)}
+              className="text-neutral-500 hover:text-neutral-900 transition-colors ml-4 font-bold"
+              aria-label="Đóng thông báo lỗi"
+            >
+              ✕
+            </button>
+          </div>
+        )}
 
         {/* Product Create / Edit Form */}
         {showForm && (
@@ -436,6 +493,15 @@ const AdminProductsPage = () => {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
+                    checked={form.active ?? true}
+                    onChange={(e) => setForm({ ...form, active: e.target.checked })}
+                    className="accent-shop_dark_green"
+                  />
+                  Đang kinh doanh (Hiển thị trên web)
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
                     checked={form.featured}
                     onChange={(e) => setForm({ ...form, featured: e.target.checked })}
                     className="accent-shop_dark_green"
@@ -558,6 +624,19 @@ const AdminProductsPage = () => {
               <option value="all">Tất cả sản phẩm</option>
               <option value="popular">Sản phẩm nổi bật</option>
             </select>
+            <select
+              value={statusFilter}
+              onChange={(e) => {
+                setStatusFilter(e.target.value as "all" | "active" | "inactive");
+                setCurrentPage(1);
+              }}
+              className="border border-neutral-300 bg-white px-3 py-1.5 text-xs text-neutral-700 outline-none focus:border-shop_dark_green transition-colors"
+              aria-label="Lọc theo trạng thái kinh doanh"
+            >
+              <option value="all">Tất cả trạng thái</option>
+              <option value="active">Đang kinh doanh</option>
+              <option value="inactive">Đã ẩn / Ngưng bán</option>
+            </select>
           </div>
         </div>
 
@@ -600,7 +679,7 @@ const AdminProductsPage = () => {
                       >
                         <EllipsisVertical className="h-3.5 w-3.5" />
                       </summary>
-                      <div className="absolute right-0 top-full z-20 mt-1 w-36 border border-neutral-200 bg-white py-1 text-xs shadow-md">
+                      <div className="absolute right-0 top-full z-20 mt-1 w-44 border border-neutral-200 bg-white py-1 text-xs shadow-md">
                         <button
                           type="button"
                           onClick={() => startEdit(product)}
@@ -608,19 +687,44 @@ const AdminProductsPage = () => {
                         >
                           <Pencil className="h-3.5 w-3.5 text-neutral-500" /> Sửa sản phẩm
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(product.id)}
-                          className="flex w-full items-center gap-2 px-3 py-2 text-left text-red-600 hover:bg-red-50 font-medium"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" /> Xóa sản phẩm
-                        </button>
+                        {product.active === false ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => handleToggleStatus(product.id, true)}
+                              className="flex w-full items-center gap-2 px-3 py-2 text-left text-shop_dark_green hover:bg-emerald-50 font-medium"
+                            >
+                              <Eye className="h-3.5 w-3.5 text-shop_dark_green" /> Mở bán lại (Bật)
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleHardDelete(product.id)}
+                              className="flex w-full items-center gap-2 px-3 py-2 text-left text-red-600 hover:bg-red-50 font-medium border-t border-neutral-100"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" /> Xóa vĩnh viễn khỏi DB
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(product.id)}
+                            className="flex w-full items-center gap-2 px-3 py-2 text-left text-amber-700 hover:bg-amber-50 font-medium"
+                          >
+                            <EyeOff className="h-3.5 w-3.5 text-amber-700" /> Ẩn khỏi web (Ngưng bán)
+                          </button>
+                        )}
                       </div>
                     </details>
-                    {(product.isFeatured || product.status === "hot") && (
-                      <span className="absolute bottom-3 left-3 border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-mono font-semibold text-amber-800">
-                        Nổi bật
+                    {product.active === false ? (
+                      <span className="absolute top-3 left-3 border border-red-200 bg-red-50 px-2 py-0.5 text-[10px] font-mono font-semibold text-red-700">
+                        Đã ẩn / Ngưng bán
                       </span>
+                    ) : (
+                      (product.isFeatured || product.status === "hot") && (
+                        <span className="absolute bottom-3 left-3 border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-mono font-semibold text-amber-800">
+                          Nổi bật
+                        </span>
+                      )
                     )}
                   </div>
 

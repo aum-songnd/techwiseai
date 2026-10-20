@@ -6,6 +6,9 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.university.regulation.models.cart.CartItem;
 
@@ -36,4 +39,8 @@ public interface CartItemRepository
     long countByCartId(UUID cartId);
 
     void deleteAllByCartId(UUID cartId);
+
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query("DELETE FROM CartItem ci WHERE ci.product.id = :productId")
+    void deleteAllByProductId(@Param("productId") UUID productId);
 }

@@ -1,5 +1,10 @@
-import { getProductsPaginated } from "@/lib/api";
+import { getProductsPaginated, mapProduct } from "@/lib/api";
+import { getToken } from "@/lib/auth";
 import type { Category, Product } from "@/app/data/types";
+
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ??
+  "https://techwiseai-prod.up.railway.app/api/v1";
 
 const FETCH_SIZE = 2000;
 const MAX_PAGES = 100;
@@ -14,6 +19,28 @@ export const normalizeAdminText = (value: string) =>
     .trim();
 
 export const fetchAllAdminProducts = async (): Promise<Product[]> => {
+  const token = getToken();
+
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/admin/products?size=2000`, {
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        const body = await res.json();
+        if (body.success && Array.isArray(body.data?.items)) {
+          return body.data.items.map(mapProduct);
+        }
+      }
+    } catch {
+      // Fallback to client endpoint below
+    }
+  }
+
   const products: Product[] = [];
   const seenIds = new Set<string>();
 

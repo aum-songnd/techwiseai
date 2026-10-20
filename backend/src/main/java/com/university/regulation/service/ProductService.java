@@ -23,20 +23,28 @@ import com.university.regulation.models.category.Category;
 import com.university.regulation.models.product.Product;
 import com.university.regulation.models.product.ProductImage;
 import com.university.regulation.repository.CategoryRepository;
+import com.university.regulation.repository.CartItemRepository;
+import com.university.regulation.repository.OrderItemRepository;
 import com.university.regulation.repository.ProductImageRepository;
 import com.university.regulation.repository.ProductRepository;
+import com.university.regulation.service.storage.ImageStorageService;
 import com.university.regulation.specification.ProductSpecification;
 import org.springframework.data.domain.PageRequest;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProductService {
 
         private final ProductRepository productRepository;
         private final CategoryRepository categoryRepository;
         private final ProductImageRepository productImageRepository;
+        private final CartItemRepository cartItemRepository;
+        private final OrderItemRepository orderItemRepository;
+        private final ImageStorageService imageStorageService;
 
         @Transactional(readOnly = true)
         public ProductResponse getProductById(UUID id) {
@@ -115,7 +123,8 @@ public class ProductService {
                                 product.isFeatured(),
                                 product.isHot(),
                                 onSale,
-                                inStock);
+                                inStock,
+                                product.isActive());
         }
 
         private boolean isOnSale(Product product) {
@@ -376,6 +385,7 @@ public class ProductService {
                                 baseResponse.hot(),
                                 baseResponse.onSale(),
                                 baseResponse.inStock(),
+                                baseResponse.active(),
                                 product.getSpecifications(),
                                 images);
         }
@@ -392,19 +402,83 @@ public class ProductService {
                                 image.isPrimaryImage());
         }
 
+        @Transactional(readOnly = true)
+        public PageResponse<ProductResponse> getAdminProducts(
+                        String category,
+                        Boolean active,
+                        Pageable pageable) {
+                Page<Product> productPage;
+
+                if (category != null && !category.isBlank() && active != null) {
+                        productPage = productRepository.findAllByActiveAndCategorySlug(active, category, pageable);
+                } else if (category != null && !category.isBlank()) {
+                        productPage = productRepository.findAllByCategorySlug(category, pageable);
+                } else if (active != null) {
+                        productPage = productRepository.findAllByActive(active, pageable);
+                } else {
+                        productPage = productRepository.findAll(pageable);
+                }
+
+                return PageResponse.from(productPage.map(this::toResponse));
+        }
+
         @Transactional
-        public void deleteProduct(UUID productId) {
+        public ProductResponse toggleProductStatus(UUID productId, boolean active) {
                 Product product = productRepository.findById(productId)
                                 .orElseThrow(() -> new ResponseStatusException(
                                                 HttpStatus.NOT_FOUND,
                                                 "Không tìm thấy sản phẩm"));
 
-                if (!product.isActive()) {
+                product.setActive(active);
+                Product savedProduct = productRepository.save(product);
+                return toResponse(savedProduct);
+        }
+
+        @Transactional
+        public void deleteProduct(UUID productId) {
+                deleteProduct(productId, false);
+        }
+
+        @Transactional
+        public void deleteProduct(UUID productId, boolean hardDelete) {
+                Product product = productRepository.findById(productId)
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                "Không tìm thấy sản phẩm"));
+
+                if (!hardDelete) {
+                        // Xóa mềm: ẩn sản phẩm khỏi web, không hiển thị cho khách hàng nhưng giữ lại trong DB
+                        product.setActive(false);
+                        productRepository.save(product);
                         return;
                 }
 
-                product.setActive(false);
-                productRepository.save(product);
+                // Xóa vĩnh viễn (Hard delete): kiểm tra lịch sử đơn hàng
+                if (orderItemRepository.existsByProductId(productId)) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.BAD_REQUEST,
+                                        "Không thể xóa vĩnh viễn sản phẩm đã có trong đơn hàng của khách. Đã tự động chuyển sản phẩm sang trạng thái ngưng bán.");
+                }
+
+                // 1. Xóa các mục trong giỏ hàng có chứa sản phẩm này (tránh lỗi khóa ngoại ON DELETE RESTRICT)
+                cartItemRepository.deleteAllByProductId(productId);
+
+                // 2. Dọn dẹp ảnh trên Cloudinary và bảng product_images
+                List<ProductImage> images = productImageRepository
+                                .findAllByProductIdOrderByDisplayOrderAscCreatedAtAsc(productId);
+                for (ProductImage image : images) {
+                        if (image.getPublicId() != null && !image.getPublicId().isBlank()) {
+                                try {
+                                        imageStorageService.delete(image.getPublicId());
+                                } catch (Exception e) {
+                                        log.warn("Lỗi khi xóa ảnh Cloudinary cho sản phẩm {}: publicId={}", productId, image.getPublicId(), e);
+                                }
+                        }
+                }
+                productImageRepository.deleteAll(images);
+
+                // 3. Thực sự xóa sản phẩm khỏi cơ sở dữ liệu
+                productRepository.delete(product);
         }
 
         @Transactional(readOnly = true)
