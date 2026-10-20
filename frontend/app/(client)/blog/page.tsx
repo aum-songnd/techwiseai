@@ -7,6 +7,8 @@ import {
   getAuthors,
 } from "../../../constants/queriesBlogPage";
 
+export const dynamic = "force-dynamic";
+
 const BlogPage = async () => {
   const [blogs, blogCategories, authors] = await Promise.all([
     getAllBlogs(),

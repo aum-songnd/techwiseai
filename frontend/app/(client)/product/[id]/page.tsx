@@ -67,12 +67,7 @@ const categoryHref = (name: string) =>
 const brandHref = (name: string) => `/shop?brand=${encodeURIComponent(name)}`;
 
 export async function generateStaticParams() {
-  try {
-    const products = await getProducts();
-    return products.map((p) => ({ id: p.id }));
-  } catch {
-    return [];
-  }
+  return [];
 }
 
 interface ProductPageProps {
