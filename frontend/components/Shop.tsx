@@ -6,6 +6,8 @@ import { useSearchParams } from "next/navigation";
 import {
   Check,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Search,
   SlidersHorizontal,
   X,
@@ -804,65 +806,73 @@ const Shop = ({
               !productsError &&
               sortedProducts.length > 0 &&
               totalPages > 1 && (
-                <div className="mt-10 flex items-center justify-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={() => handlePageChange(page - 1)}
-                    disabled={page === 0}
-                    className="rounded-lg border border-neutral-200 px-3 py-1.5 text-xs text-neutral-700 hoverEffect hover:border-shop_dark_green disabled:cursor-not-allowed disabled:opacity-40"
-                  >
-                    Trước
-                  </button>
-
-                  {pageNumbers[0] > 0 && (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => handlePageChange(0)}
-                        className="rounded-lg border border-neutral-200 px-3 py-1.5 text-xs text-neutral-700 hoverEffect hover:border-shop_dark_green"
-                      >
-                        1
-                      </button>
-                      <span className="px-1 text-xs text-neutral-400">…</span>
-                    </>
-                  )}
-
-                  {pageNumbers.map((p) => (
+                <div className="mt-10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-neutral-500">
+                  <span>
+                    Trang {page + 1}/{totalPages} — {totalElements} sản phẩm
+                  </span>
+                  <div className="flex items-center gap-1">
                     <button
-                      key={p}
                       type="button"
-                      onClick={() => handlePageChange(p)}
-                      aria-current={p === page ? "page" : undefined}
-                      className={`rounded-lg border px-3 py-1.5 text-xs hoverEffect ${p === page
-                        ? "border-shop_dark_green bg-shop_dark_green text-white font-semibold"
-                        : "border-neutral-200 text-neutral-700 hover:border-shop_dark_green"
-                        }`}
+                      onClick={() => handlePageChange(page - 1)}
+                      disabled={page === 0}
+                      aria-label="Trang trước"
+                      className="p-1.5 border border-neutral-200 text-neutral-600 hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                     >
-                      {p + 1}
+                      <ChevronLeft className="w-3.5 h-3.5" />
                     </button>
-                  ))}
 
-                  {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
-                    <>
-                      <span className="px-1 text-xs text-neutral-400">…</span>
+                    {pageNumbers[0] > 0 && (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => handlePageChange(0)}
+                          className="min-w-[28px] h-7 px-1 border border-neutral-200 text-xs font-mono text-neutral-600 hover:bg-neutral-50 transition-colors"
+                        >
+                          1
+                        </button>
+                        <span className="px-1 text-xs font-mono text-neutral-400">…</span>
+                      </>
+                    )}
+
+                    {pageNumbers.map((p) => (
                       <button
+                        key={p}
                         type="button"
-                        onClick={() => handlePageChange(totalPages - 1)}
-                        className="rounded-lg border border-neutral-200 px-3 py-1.5 text-xs text-neutral-700 hoverEffect hover:border-shop_dark_green"
+                        onClick={() => handlePageChange(p)}
+                        aria-current={p === page ? "page" : undefined}
+                        className={`min-w-[28px] h-7 px-1 border text-xs font-mono transition-colors ${
+                          p === page
+                            ? "bg-shop_dark_green text-white border-shop_dark_green"
+                            : "border-neutral-200 text-neutral-600 hover:bg-neutral-50"
+                        }`}
                       >
-                        {totalPages}
+                        {p + 1}
                       </button>
-                    </>
-                  )}
+                    ))}
 
-                  <button
-                    type="button"
-                    onClick={() => handlePageChange(page + 1)}
-                    disabled={page >= totalPages - 1}
-                    className="rounded-lg border border-neutral-200 px-3 py-1.5 text-xs text-neutral-700 hoverEffect hover:border-shop_dark_green disabled:cursor-not-allowed disabled:opacity-40"
-                  >
-                    Sau
-                  </button>
+                    {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
+                      <>
+                        <span className="px-1 text-xs font-mono text-neutral-400">…</span>
+                        <button
+                          type="button"
+                          onClick={() => handlePageChange(totalPages - 1)}
+                          className="min-w-[28px] h-7 px-1 border border-neutral-200 text-xs font-mono text-neutral-600 hover:bg-neutral-50 transition-colors"
+                        >
+                          {totalPages}
+                        </button>
+                      </>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={() => handlePageChange(page + 1)}
+                      disabled={page >= totalPages - 1}
+                      aria-label="Trang sau"
+                      className="p-1.5 border border-neutral-200 text-neutral-600 hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    >
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               )}
           </div>
