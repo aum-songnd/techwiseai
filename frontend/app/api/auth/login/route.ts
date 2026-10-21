@@ -63,11 +63,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(data, { status: res.status });
   } catch (error) {
+    const isFetchFailed = error instanceof Error && error.message.toLowerCase().includes("fetch failed");
     return NextResponse.json(
       {
         success: false,
-        message:
-          error instanceof Error ? error.message : "Đăng nhập thất bại",
+        message: isFetchFailed
+          ? `Không thể kết nối đến máy chủ Backend (${API_BASE_URL}). Vui lòng kiểm tra máy chủ Backend đã được khởi động chưa.`
+          : error instanceof Error ? error.message : "Đăng nhập thất bại",
       },
       { status: 500 }
     );

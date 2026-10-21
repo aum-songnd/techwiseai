@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
+  Check,
   ChevronLeft,
   ChevronRight,
   EllipsisVertical,
@@ -16,7 +17,13 @@ import {
   X,
 } from "lucide-react";
 import { getCategories } from "@/lib/api";
-import { fetchAllAdminProducts, normalizeAdminText } from "@/lib/admin-products";
+import {
+  fetchAllAdminProducts,
+  normalizeAdminText,
+  saveHiddenProduct,
+  removeHiddenProduct,
+} from "@/lib/admin-products";
+import { clearRequestCache } from "@/lib/request-cache";
 import ProductImage from "@/components/admin/ProductImage";
 import {
   adminCreateProduct,
@@ -60,6 +67,25 @@ const AdminProductsPage = () => {
   const [form, setForm] = useState<ProductPayload>(emptyForm);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toastUndoAction, setToastUndoAction] = useState<(() => void) | null>(null);
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const showToast = useCallback((msg: string, undo?: () => void) => {
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    setToastMessage(msg);
+    setToastUndoAction(undo ? () => undo : null);
+    toastTimeoutRef.current = setTimeout(() => {
+      setToastMessage(null);
+      setToastUndoAction(null);
+    }, 4500);
+  }, []);
+
+  const closeActionMenu = (e: React.MouseEvent) => {
+    const details = e.currentTarget.closest("details");
+    if (details) details.removeAttribute("open");
+  };
+
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [brandFilter, setBrandFilter] = useState("");
@@ -214,46 +240,140 @@ const AdminProductsPage = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Ẩn sản phẩm này khỏi website? (Sản phẩm sẽ ngừng kinh doanh trên web nhưng dữ liệu vẫn được lưu lại trong DB)")) return;
+  const handleDelete = (id: string) => {
     setError(null);
-    try {
-      await adminDeleteProduct(id);
-      productSnapshot = null;
+    const targetProduct = products.find((p) => p.id === id);
+    if (targetProduct) {
+      saveHiddenProduct(targetProduct);
+    }
+
+    // 1. Cập nhật UI ngay lập tức (Optimistic Update)
+    setProducts((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, active: false } : p))
+    );
+    if (productSnapshot) {
+      productSnapshot = {
+        ...productSnapshot,
+        products: productSnapshot.products.map((p) =>
+          p.id === id ? { ...p, active: false } : p
+        ),
+        at: Date.now(),
+      };
+    }
+    clearRequestCache("catalog:");
+    showToast("Đã ẩn sản phẩm khỏi website.", () => handleToggleStatus(id, true));
+
+    // 2. Chạy ngầm BE không reload lại danh sách
+    adminDeleteProduct(id).catch((err) => {
+      // Rollback nếu BE lỗi
+      removeHiddenProduct(id);
       setProducts((prev) =>
-        prev.map((p) => (p.id === id ? { ...p, active: false } : p))
+        prev.map((p) => (p.id === id ? { ...p, active: true } : p))
       );
-      await loadData(true);
-    } catch (err) {
+      if (productSnapshot) {
+        productSnapshot = {
+          ...productSnapshot,
+          products: productSnapshot.products.map((p) =>
+            p.id === id ? { ...p, active: true } : p
+          ),
+          at: Date.now(),
+        };
+      }
+      clearRequestCache("catalog:");
       setError(err instanceof Error ? err.message : "Ẩn sản phẩm thất bại");
-    }
+      showToast("Ẩn sản phẩm thất bại. Đã khôi phục trạng thái.");
+    });
   };
 
-  const handleToggleStatus = async (id: string, active: boolean) => {
+  const handleToggleStatus = (id: string, active: boolean) => {
     setError(null);
-    try {
-      await adminToggleProductStatus(id, active);
-      productSnapshot = null;
-      setProducts((prev) =>
-        prev.map((p) => (p.id === id ? { ...p, active } : p))
-      );
-      await loadData(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Cập nhật trạng thái thất bại");
+    if (active) {
+      removeHiddenProduct(id);
+    } else {
+      const targetProduct = products.find((p) => p.id === id);
+      if (targetProduct) saveHiddenProduct(targetProduct);
     }
+
+    // 1. Cập nhật UI ngay lập tức
+    setProducts((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, active } : p))
+    );
+    if (productSnapshot) {
+      productSnapshot = {
+        ...productSnapshot,
+        products: productSnapshot.products.map((p) =>
+          p.id === id ? { ...p, active } : p
+        ),
+        at: Date.now(),
+      };
+    }
+    clearRequestCache("catalog:");
+    showToast(active ? "Đã mở bán lại sản phẩm trên web." : "Đã ẩn sản phẩm khỏi website.");
+
+    // 2. Chạy ngầm BE
+    adminToggleProductStatus(id, active).catch((err) => {
+      if (active) {
+        const targetProduct = products.find((p) => p.id === id);
+        if (targetProduct) saveHiddenProduct(targetProduct);
+      } else {
+        removeHiddenProduct(id);
+      }
+      setProducts((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, active: !active } : p))
+      );
+      if (productSnapshot) {
+        productSnapshot = {
+          ...productSnapshot,
+          products: productSnapshot.products.map((p) =>
+            p.id === id ? { ...p, active: !active } : p
+          ),
+          at: Date.now(),
+        };
+      }
+      clearRequestCache("catalog:");
+      setError(err instanceof Error ? err.message : "Cập nhật trạng thái thất bại");
+      showToast("Cập nhật trạng thái thất bại. Đã khôi phục.");
+    });
   };
 
-  const handleHardDelete = async (id: string) => {
+  const handleHardDelete = (id: string) => {
     if (!confirm("CẢNH BÁO: Bạn có chắc chắn muốn xóa vĩnh viễn sản phẩm này khỏi cơ sở dữ liệu?")) return;
     setError(null);
-    try {
-      await adminHardDeleteProduct(id);
-      productSnapshot = null;
-      setProducts((prev) => prev.filter((p) => p.id !== id));
-      await loadData(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Xóa vĩnh viễn thất bại");
+    removeHiddenProduct(id);
+
+    const deletedProduct = products.find((p) => p.id === id);
+    // 1. Xóa ngay trên giao diện
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+    if (productSnapshot) {
+      productSnapshot = {
+        ...productSnapshot,
+        products: productSnapshot.products.filter((p) => p.id !== id),
+        at: Date.now(),
+      };
     }
+    clearRequestCache("catalog:");
+    showToast("Đang xóa vĩnh viễn sản phẩm...");
+
+    // 2. Chạy ngầm BE
+    adminHardDeleteProduct(id)
+      .then(() => {
+        showToast("Đã xóa vĩnh viễn sản phẩm khỏi hệ thống.");
+      })
+      .catch((err) => {
+        if (deletedProduct) {
+          setProducts((prev) => [deletedProduct, ...prev]);
+          if (productSnapshot) {
+            productSnapshot = {
+              ...productSnapshot,
+              products: [deletedProduct, ...productSnapshot.products],
+              at: Date.now(),
+            };
+          }
+        }
+        clearRequestCache("catalog:");
+        setError(err instanceof Error ? err.message : "Xóa vĩnh viễn thất bại");
+        showToast("Xóa sản phẩm thất bại.");
+      });
   };
 
   const inputClass =
@@ -682,7 +802,10 @@ const AdminProductsPage = () => {
                       <div className="absolute right-0 top-full z-20 mt-1 w-44 border border-neutral-200 bg-white py-1 text-xs shadow-md">
                         <button
                           type="button"
-                          onClick={() => startEdit(product)}
+                          onClick={(e) => {
+                            closeActionMenu(e);
+                            startEdit(product);
+                          }}
                           className="flex w-full items-center gap-2 px-3 py-2 text-left text-neutral-700 hover:bg-neutral-50 font-medium"
                         >
                           <Pencil className="h-3.5 w-3.5 text-neutral-500" /> Sửa sản phẩm
@@ -691,14 +814,20 @@ const AdminProductsPage = () => {
                           <>
                             <button
                               type="button"
-                              onClick={() => handleToggleStatus(product.id, true)}
+                              onClick={(e) => {
+                                closeActionMenu(e);
+                                handleToggleStatus(product.id, true);
+                              }}
                               className="flex w-full items-center gap-2 px-3 py-2 text-left text-shop_dark_green hover:bg-emerald-50 font-medium"
                             >
                               <Eye className="h-3.5 w-3.5 text-shop_dark_green" /> Mở bán lại (Bật)
                             </button>
                             <button
                               type="button"
-                              onClick={() => handleHardDelete(product.id)}
+                              onClick={(e) => {
+                                closeActionMenu(e);
+                                handleHardDelete(product.id);
+                              }}
                               className="flex w-full items-center gap-2 px-3 py-2 text-left text-red-600 hover:bg-red-50 font-medium border-t border-neutral-100"
                             >
                               <Trash2 className="h-3.5 w-3.5" /> Xóa vĩnh viễn khỏi DB
@@ -707,7 +836,10 @@ const AdminProductsPage = () => {
                         ) : (
                           <button
                             type="button"
-                            onClick={() => handleDelete(product.id)}
+                            onClick={(e) => {
+                              closeActionMenu(e);
+                              handleDelete(product.id);
+                            }}
                             className="flex w-full items-center gap-2 px-3 py-2 text-left text-amber-700 hover:bg-amber-50 font-medium"
                           >
                             <EyeOff className="h-3.5 w-3.5 text-amber-700" /> Ẩn khỏi web (Ngưng bán)
@@ -798,6 +930,30 @@ const AdminProductsPage = () => {
               )}
             </div>
           </>
+        )}
+        {/* Toast Notification */}
+        {toastMessage && (
+          <aside
+            role="status"
+            aria-live="polite"
+            className="fixed bottom-6 right-6 z-50 flex items-center gap-3 border border-neutral-800 bg-neutral-900 px-4 py-3 text-xs font-medium text-white shadow-2xl"
+          >
+            <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+            <span>{toastMessage}</span>
+            {toastUndoAction && (
+              <button
+                type="button"
+                onClick={() => {
+                  toastUndoAction();
+                  setToastMessage(null);
+                  setToastUndoAction(null);
+                }}
+                className="ml-2 font-bold text-emerald-400 hover:text-emerald-300 underline transition-colors"
+              >
+                Hoàn tác
+              </button>
+            )}
+          </aside>
         )}
       </div>
     </div>

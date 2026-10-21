@@ -18,6 +18,36 @@ export const normalizeAdminText = (value: string) =>
     .toLowerCase()
     .trim();
 
+const HIDDEN_PRODUCTS_KEY = "admin_hidden_products_map";
+
+export function getHiddenProductsMap(): Record<string, Product> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(HIDDEN_PRODUCTS_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+export function saveHiddenProduct(product: Product) {
+  if (typeof window === "undefined" || !product?.id) return;
+  try {
+    const map = getHiddenProductsMap();
+    map[product.id] = { ...product, active: false };
+    localStorage.setItem(HIDDEN_PRODUCTS_KEY, JSON.stringify(map));
+  } catch {}
+}
+
+export function removeHiddenProduct(productId: string) {
+  if (typeof window === "undefined" || !productId) return;
+  try {
+    const map = getHiddenProductsMap();
+    delete map[productId];
+    localStorage.setItem(HIDDEN_PRODUCTS_KEY, JSON.stringify(map));
+  } catch {}
+}
+
 export const fetchAllAdminProducts = async (): Promise<Product[]> => {
   const token = getToken();
 
@@ -58,6 +88,20 @@ export const fetchAllAdminProducts = async (): Promise<Product[]> => {
     }
 
     if (page + 1 >= result.totalPages || result.items.length === 0) break;
+  }
+
+  // Fallback: nếu Backend chưa có GET /admin/products và chỉ trả về sản phẩm active từ /products,
+  // khôi phục các sản phẩm đã bị ẩn từ cache cục bộ để hiển thị đầy đủ trong tab Đã ẩn / Ngưng bán
+  const hiddenMap = getHiddenProductsMap();
+  for (const product of products) {
+    if (hiddenMap[product.id]) {
+      product.active = false;
+    }
+  }
+  for (const [id, hiddenProd] of Object.entries(hiddenMap)) {
+    if (!seenIds.has(id)) {
+      products.push({ ...hiddenProd, active: false });
+    }
   }
 
   return products;
