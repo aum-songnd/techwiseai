@@ -146,6 +146,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (typeof window !== "undefined") {
           window.dispatchEvent(new Event("auth:logout"));
         }
+      } else if (event.type === "USER_STATUS_CHANGED") {
+        const stored = getStoredUser();
+        if (
+          stored &&
+          (stored.id === event.payload?.id ||
+            stored.username?.toLowerCase() === (event.payload?.username || "").toLowerCase())
+        ) {
+          if (event.payload?.active === false) {
+            clearToken();
+            clearStoredUser();
+            setUser(null);
+            setIsLoading(false);
+            if (typeof window !== "undefined") {
+              window.dispatchEvent(new Event("auth:logout"));
+              alert("Tài khoản của bạn đã bị khóa bởi Quản trị viên.");
+              window.location.href = "/sign-in";
+            }
+          }
+        }
       }
     });
 

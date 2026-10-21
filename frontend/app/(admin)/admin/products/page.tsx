@@ -29,10 +29,10 @@ import {
   adminCreateProduct,
   adminUpdateProduct,
   adminDeleteProduct,
-  adminHardDeleteProduct,
   adminToggleProductStatus,
   ProductPayload,
 } from "@/lib/admin-api";
+import Loading from "@/app/(client)/loading";
 import type { Category, Product } from "@/app/data/types";
 
 const PAGE_SIZE = 25;
@@ -62,7 +62,7 @@ const PRODUCT_SNAPSHOT_MS = 5 * 60 * 1000;
 const AdminProductsPage = () => {
   const [products, setProducts] = useState<Product[]>(() => productSnapshot?.products ?? []);
   const [categories, setCategories] = useState<Category[]>(() => productSnapshot?.categories ?? []);
-  const [loading, setLoading] = useState(() => !productSnapshot);
+  const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<ProductPayload>(emptyForm);
   const [saving, setSaving] = useState(false);
@@ -127,7 +127,7 @@ const AdminProductsPage = () => {
       ? categoryProducts.filter((product) => product.brand === brandFilter)
       : categoryProducts;
     const popularProducts = popularFilter
-      ? brandProducts.filter((product) => product.isFeatured || product.status === "hot")
+      ? brandProducts.filter((product) => Boolean(product.isFeatured))
       : brandProducts;
     const tokens = normalizeAdminText(search).split(/\s+/).filter(Boolean);
     if (tokens.length === 0) return popularProducts;
@@ -151,8 +151,11 @@ const AdminProductsPage = () => {
   };
 
   const loadData = async (force = false) => {
-    if (!force && productSnapshot && Date.now() - productSnapshot.at < PRODUCT_SNAPSHOT_MS) return;
-    setLoading(!productSnapshot);
+    if (!force && productSnapshot && Date.now() - productSnapshot.at < PRODUCT_SNAPSHOT_MS) {
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
     setError(null);
     try {
       const [allProducts, categoriesResult] = await Promise.all([
@@ -201,19 +204,25 @@ const AdminProductsPage = () => {
   const startEdit = (product: Product) => {
     setEditingId(product.id);
     setNewBrandMode(false);
+
+    const matchedCategory =
+      categories.find((c) => c.id === product.categoryId) ||
+      categories.find((c) => product.categories?.includes(c.title)) ||
+      categories.find((c) => product.categories?.includes(c.slug));
+
     setForm({
       name: product.name,
       slug: product.slug,
-      sku: "",
-      categoryId: "",
+      sku: product.sku || `SKU-${product.id.slice(0, 8).toUpperCase()}`,
+      categoryId: matchedCategory?.id ?? product.categoryId ?? "",
       brand: product.brand ?? "",
-      shortDescription: "",
+      shortDescription: product.shortDescription ?? "",
       description: product.description ?? "",
       thumbnailUrl: product.images?.[0] ?? "",
       price: product.finalPrice,
       originalPrice: product.price,
       stockQuantity: product.stock,
-      featured: product.isFeatured,
+      featured: Boolean(product.isFeatured),
       hot: product.status === "hot",
       onSale: product.status === "sale",
       active: product.active ?? true,
@@ -228,10 +237,33 @@ const AdminProductsPage = () => {
     try {
       if (editingId) {
         await adminUpdateProduct(editingId, form);
+        setProducts((prev) =>
+          prev.map((p) =>
+            p.id === editingId
+              ? {
+                  ...p,
+                  name: form.name,
+                  slug: form.slug,
+                  sku: form.sku,
+                  brand: form.brand,
+                  price: form.originalPrice || form.price,
+                  finalPrice: form.price,
+                  stock: form.stockQuantity,
+                  isFeatured: Boolean(form.featured),
+                  status: form.hot ? "hot" : form.onSale ? "sale" : form.featured ? "new" : undefined,
+                  active: form.active ?? true,
+                  images: form.thumbnailUrl ? [form.thumbnailUrl] : p.images,
+                }
+              : p
+          )
+        );
       } else {
         await adminCreateProduct(form);
       }
+      clearRequestCache("catalog:");
+      productSnapshot = null;
       resetForm();
+      showToast(editingId ? "Cập nhật sản phẩm thành công!" : "Tạo sản phẩm mới thành công!");
       await loadData(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Lưu sản phẩm thất bại");
@@ -310,8 +342,44 @@ const AdminProductsPage = () => {
     clearRequestCache("catalog:");
     showToast(active ? "Đã mở bán lại sản phẩm trên web." : "Đã ẩn sản phẩm khỏi website.");
 
-    // 2. Chạy ngầm BE
-    adminToggleProductStatus(id, active).catch((err) => {
+    // 2. Chạy ngầm BE với fallback đảm bảo kích hoạt thành công trên DB
+    const sendToggle = async () => {
+      if (!active) {
+        await adminDeleteProduct(id);
+      } else {
+        try {
+          await adminToggleProductStatus(id, true);
+        } catch {
+          const target = products.find((p) => p.id === id);
+          if (target) {
+            const matchedCategory =
+              categories.find((c) => c.id === target.categoryId) ||
+              categories.find((c) => target.categories?.includes(c.title)) ||
+              categories.find((c) => target.categories?.includes(c.slug));
+
+            await adminUpdateProduct(id, {
+              name: target.name,
+              slug: target.slug,
+              sku: target.sku || `SKU-${target.id.slice(0, 8).toUpperCase()}`,
+              categoryId: matchedCategory?.id ?? target.categoryId ?? categories[0]?.id ?? "",
+              brand: target.brand ?? "",
+              shortDescription: target.shortDescription ?? "",
+              description: target.description ?? "",
+              thumbnailUrl: target.images?.[0] ?? "",
+              price: target.finalPrice,
+              originalPrice: target.price,
+              stockQuantity: target.stock,
+              featured: Boolean(target.isFeatured),
+              hot: target.status === "hot",
+              onSale: target.status === "sale",
+              active: true,
+            });
+          }
+        }
+      }
+    };
+
+    sendToggle().catch((err) => {
       if (active) {
         const targetProduct = products.find((p) => p.id === id);
         if (targetProduct) saveHiddenProduct(targetProduct);
@@ -336,48 +404,12 @@ const AdminProductsPage = () => {
     });
   };
 
-  const handleHardDelete = (id: string) => {
-    if (!confirm("CẢNH BÁO: Bạn có chắc chắn muốn xóa vĩnh viễn sản phẩm này khỏi cơ sở dữ liệu?")) return;
-    setError(null);
-    removeHiddenProduct(id);
-
-    const deletedProduct = products.find((p) => p.id === id);
-    // 1. Xóa ngay trên giao diện
-    setProducts((prev) => prev.filter((p) => p.id !== id));
-    if (productSnapshot) {
-      productSnapshot = {
-        ...productSnapshot,
-        products: productSnapshot.products.filter((p) => p.id !== id),
-        at: Date.now(),
-      };
-    }
-    clearRequestCache("catalog:");
-    showToast("Đang xóa vĩnh viễn sản phẩm...");
-
-    // 2. Chạy ngầm BE
-    adminHardDeleteProduct(id)
-      .then(() => {
-        showToast("Đã xóa vĩnh viễn sản phẩm khỏi hệ thống.");
-      })
-      .catch((err) => {
-        if (deletedProduct) {
-          setProducts((prev) => [deletedProduct, ...prev]);
-          if (productSnapshot) {
-            productSnapshot = {
-              ...productSnapshot,
-              products: [deletedProduct, ...productSnapshot.products],
-              at: Date.now(),
-            };
-          }
-        }
-        clearRequestCache("catalog:");
-        setError(err instanceof Error ? err.message : "Xóa vĩnh viễn thất bại");
-        showToast("Xóa sản phẩm thất bại.");
-      });
-  };
-
   const inputClass =
     "w-full border border-neutral-300 bg-white px-3 py-2 text-xs text-neutral-900 placeholder:text-neutral-400 focus:border-shop_dark_green focus:outline-none focus:ring-1 focus:ring-shop_dark_green transition-colors";
+
+  if (loading && products.length === 0) {
+    return <Loading message="Đang tải danh sách sản phẩm..." />;
+  }
 
   return (
     <div className="font-sans min-h-[calc(100vh-4rem)] bg-neutral-50 p-4 sm:p-6 lg:p-8 text-neutral-900">
@@ -617,7 +649,7 @@ const AdminProductsPage = () => {
                     onChange={(e) => setForm({ ...form, active: e.target.checked })}
                     className="accent-shop_dark_green"
                   />
-                  Đang kinh doanh (Hiển thị trên web)
+                  Đang hiển thị
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -635,7 +667,7 @@ const AdminProductsPage = () => {
                     onChange={(e) => setForm({ ...form, hot: e.target.checked })}
                     className="accent-shop_dark_green"
                   />
-                  Sản phẩm Hot
+                  Hot
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -644,7 +676,7 @@ const AdminProductsPage = () => {
                     onChange={(e) => setForm({ ...form, onSale: e.target.checked })}
                     className="accent-shop_dark_green"
                   />
-                  Đang giảm giá
+                  Giảm giá
                 </label>
               </div>
 
@@ -742,7 +774,7 @@ const AdminProductsPage = () => {
               aria-label="Lọc sản phẩm nổi bật"
             >
               <option value="all">Tất cả sản phẩm</option>
-              <option value="popular">Sản phẩm nổi bật</option>
+              <option value="popular">Nổi bật</option>
             </select>
             <select
               value={statusFilter}
@@ -751,21 +783,19 @@ const AdminProductsPage = () => {
                 setCurrentPage(1);
               }}
               className="border border-neutral-300 bg-white px-3 py-1.5 text-xs text-neutral-700 outline-none focus:border-shop_dark_green transition-colors"
-              aria-label="Lọc theo trạng thái kinh doanh"
+              aria-label="Lọc theo trạng thái"
             >
               <option value="all">Tất cả trạng thái</option>
-              <option value="active">Đang kinh doanh</option>
-              <option value="inactive">Đã ẩn / Ngưng bán</option>
+              <option value="active">Đang hiển thị</option>
+              <option value="inactive">Đã ẩn</option>
             </select>
           </div>
         </div>
 
         {/* Products Grid Display */}
         {loading ? (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {Array.from({ length: 8 }, (_, index) => (
-              <div key={index} className="h-[340px] animate-pulse border border-neutral-200 bg-white" />
-            ))}
+          <div className="border border-neutral-200 bg-white">
+            <Loading message="Đang tải danh sách sản phẩm..." className="py-20 min-h-0" />
           </div>
         ) : products.length === 0 ? (
           <div className="border border-neutral-200 bg-white py-16 text-center text-xs text-neutral-500">
@@ -811,28 +841,16 @@ const AdminProductsPage = () => {
                           <Pencil className="h-3.5 w-3.5 text-neutral-500" /> Sửa sản phẩm
                         </button>
                         {product.active === false ? (
-                          <>
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                closeActionMenu(e);
-                                handleToggleStatus(product.id, true);
-                              }}
-                              className="flex w-full items-center gap-2 px-3 py-2 text-left text-shop_dark_green hover:bg-emerald-50 font-medium"
-                            >
-                              <Eye className="h-3.5 w-3.5 text-shop_dark_green" /> Mở bán lại (Bật)
-                            </button>
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                closeActionMenu(e);
-                                handleHardDelete(product.id);
-                              }}
-                              className="flex w-full items-center gap-2 px-3 py-2 text-left text-red-600 hover:bg-red-50 font-medium border-t border-neutral-100"
-                            >
-                              <Trash2 className="h-3.5 w-3.5" /> Xóa vĩnh viễn khỏi DB
-                            </button>
-                          </>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              closeActionMenu(e);
+                              handleToggleStatus(product.id, true);
+                            }}
+                            className="flex w-full items-center gap-2 px-3 py-2 text-left text-shop_dark_green hover:bg-emerald-50 font-medium"
+                          >
+                            <Eye className="h-3.5 w-3.5 text-shop_dark_green" /> Mở hiển thị
+                          </button>
                         ) : (
                           <button
                             type="button"
@@ -842,21 +860,20 @@ const AdminProductsPage = () => {
                             }}
                             className="flex w-full items-center gap-2 px-3 py-2 text-left text-amber-700 hover:bg-amber-50 font-medium"
                           >
-                            <EyeOff className="h-3.5 w-3.5 text-amber-700" /> Ẩn khỏi web (Ngưng bán)
+                            <EyeOff className="h-3.5 w-3.5 text-amber-700" /> Tạm ẩn
                           </button>
                         )}
                       </div>
                     </details>
-                    {product.active === false ? (
-                      <span className="absolute top-3 left-3 border border-red-200 bg-red-50 px-2 py-0.5 text-[10px] font-mono font-semibold text-red-700">
-                        Đã ẩn / Ngưng bán
+                    {product.active === false && (
+                      <span className="absolute top-2.5 left-2.5 border border-neutral-300 bg-neutral-100/95 px-1.5 py-0.5 text-[10px] font-mono text-neutral-600 shadow-sm">
+                        Đã ẩn
                       </span>
-                    ) : (
-                      (product.isFeatured || product.status === "hot") && (
-                        <span className="absolute bottom-3 left-3 border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-mono font-semibold text-amber-800">
-                          Nổi bật
-                        </span>
-                      )
+                    )}
+                    {Boolean(product.isFeatured) && (
+                      <span className="absolute bottom-2.5 left-2.5 border border-amber-300 bg-amber-50/95 px-1.5 py-0.5 text-[10px] font-mono font-semibold text-amber-800 shadow-sm">
+                        ★ Nổi bật
+                      </span>
                     )}
                   </div>
 

@@ -8,6 +8,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { blogs, blogCategories } from "../app/data";
 import { Title } from "./ui/text";
+import { getHiddenBlogsMap } from "../lib/admin-blog-api";
+import { subscribeTabSync } from "../lib/tab-sync";
 
 const formatDate = (isoDate: string) =>
   new Intl.DateTimeFormat("en-US", {
@@ -17,13 +19,26 @@ const formatDate = (isoDate: string) =>
   }).format(new Date(isoDate));
 
 const HomeLatestBlog = () => {
+  const [hiddenMap, setHiddenMap] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    setHiddenMap(getHiddenBlogsMap());
+    const unsubscribe = subscribeTabSync((event) => {
+      if (event.type === "BLOGS_STATUS_CHANGED") {
+        setHiddenMap(getHiddenBlogsMap());
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const uniqueBlogs = Array.from(
     new Map(blogs.map((blog) => [blog.id, blog])).values()
   );
 
   const latestBlogs = uniqueBlogs
-    .filter((blog) => blog.isLatest)
+    .filter((blog) => blog.isLatest && blog.active !== false && !hiddenMap[blog.id])
     .sort(
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()

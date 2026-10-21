@@ -43,6 +43,49 @@ export type TabSyncEvent =
       };
       senderTabId: string;
       timestamp: number;
+    }
+  | {
+      type: "BLOGS_STATUS_CHANGED";
+      payload?: {
+        blogId?: string;
+        active?: boolean;
+        timestamp?: number;
+      };
+      senderTabId: string;
+      timestamp: number;
+    }
+  | {
+      type: "USER_STATUS_CHANGED";
+      payload?: {
+        id?: string;
+        username?: string;
+        active?: boolean;
+        timestamp?: number;
+      };
+      senderTabId: string;
+      timestamp: number;
+    }
+  | {
+      type: "TAB_PING";
+      payload?: Record<string, never>;
+      senderTabId: string;
+      timestamp: number;
+    }
+  | {
+      type: "TAB_PONG";
+      payload: {
+        activeTabId: string;
+      };
+      senderTabId: string;
+      timestamp: number;
+    }
+  | {
+      type: "TAB_CLAIM";
+      payload: {
+        newActiveTabId: string;
+      };
+      senderTabId: string;
+      timestamp: number;
     };
 
 const CHANNEL_NAME = "techwiseai_tab_sync";
@@ -114,6 +157,11 @@ export function broadcastTabEvent(
     | { type: "CART_UPDATED"; payload?: { cart?: CartData; timestamp?: number } }
     | { type: "FAVORITES_UPDATED"; payload?: { timestamp?: number } }
     | { type: "ADMIN_ORDERS_CHANGED"; payload?: { timestamp?: number } }
+    | { type: "BLOGS_STATUS_CHANGED"; payload?: { blogId?: string; active?: boolean; timestamp?: number } }
+    | { type: "USER_STATUS_CHANGED"; payload?: { id?: string; username?: string; active?: boolean; timestamp?: number } }
+    | { type: "TAB_PING"; payload?: Record<string, never> }
+    | { type: "TAB_PONG"; payload: { activeTabId: string } }
+    | { type: "TAB_CLAIM"; payload: { newActiveTabId: string } }
 ): void {
   if (typeof window === "undefined") return;
 

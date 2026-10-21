@@ -7,6 +7,23 @@ const API_BASE_URL =
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
+  const checkUsername = body?.username;
+
+  if (checkUsername) {
+    const cached = getServerProfile(checkUsername);
+    if (cached && (cached.locked === true || cached.active === false)) {
+      return NextResponse.json(
+        {
+          success: false,
+          status: 403,
+          code: "ACCOUNT_LOCKED",
+          message:
+            "Tài khoản của bạn đã bị khóa bởi Quản trị viên. Vui lòng liên hệ hỗ trợ.",
+        },
+        { status: 403 }
+      );
+    }
+  }
 
   try {
     const res = await fetch(`${API_BASE_URL}/auth/login`, {

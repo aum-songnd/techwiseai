@@ -40,8 +40,16 @@ async function apiFetch<T>(backendPath: string, localPath: string, fallback: T):
   return fallback;
 }
 
+import { getHiddenBlogsMap } from "../lib/admin-blog-api";
+import { getServerHiddenBlogsMap } from "../lib/server-blog-status";
+
 export const getAllBlogs = async (): Promise<Blog[]> => {
-  return apiFetch<Blog[]>("/blogs", "/api/blogs", defaultBlogs);
+  const blogs = await apiFetch<Blog[]>("/blogs", "/api/blogs", defaultBlogs);
+  const hiddenMap =
+    typeof window !== "undefined"
+      ? getHiddenBlogsMap()
+      : getServerHiddenBlogsMap();
+  return blogs.filter((b) => b.active !== false && !hiddenMap[b.id]);
 };
 
 export const getBlogCategories = async (): Promise<BlogCategory[]> => {
@@ -56,7 +64,14 @@ export const getBlogBySlug = async (slug: string): Promise<Blog | undefined> => 
   const fallback = defaultBlogs.find((b) => b.slug === slug);
   try {
     const blog = await apiFetch<Blog>(`/blogs/${slug}`, `/api/blogs/${slug}`, fallback as Blog);
-    return blog ?? fallback;
+    const candidate = blog ?? fallback;
+    if (candidate) {
+      const hiddenMap = getHiddenBlogsMap();
+      if (candidate.active === false || hiddenMap[candidate.id]) {
+        return undefined;
+      }
+    }
+    return candidate;
   } catch {
     return fallback;
   }

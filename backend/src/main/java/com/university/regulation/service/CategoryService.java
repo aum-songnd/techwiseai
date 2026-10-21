@@ -77,7 +77,10 @@ public class CategoryService {
                 request.displayOrder() == null
                         ? 0
                         : request.displayOrder());
-        category.setActive(true);
+        category.setActive(
+                request.active() == null
+                        ? true
+                        : request.active());
 
         Category savedCategory = categoryRepository.save(category);
 
@@ -140,9 +143,32 @@ public class CategoryService {
                 request.displayOrder() == null
                         ? 0
                         : request.displayOrder());
+        if (request.active() != null) {
+            category.setActive(request.active());
+        }
 
         Category savedCategory = categoryRepository.save(category);
 
         return toResponse(savedCategory);
+    }
+
+    @Transactional
+    public void deleteCategory(UUID id) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Danh mục không tồn tại"));
+        category.setActive(false);
+        categoryRepository.save(category);
+    }
+
+    @Transactional
+    public void toggleCategoryStatus(UUID id, boolean active) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Danh mục không tồn tại"));
+        category.setActive(active);
+        categoryRepository.save(category);
     }
 }

@@ -205,7 +205,66 @@ export function setToken(token: string) {
   }
 }
 
+const SESSION_ID_KEY = "auth_session_id";
+
+export function getAuthSessionId(): string {
+  if (typeof window === "undefined") return "";
+  let id = localStorage.getItem(SESSION_ID_KEY);
+  if (!id) {
+    id = `sess_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+    localStorage.setItem(SESSION_ID_KEY, id);
+  }
+  return id;
+}
+
+export function setAuthSessionId(id: string) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(SESSION_ID_KEY, id);
+}
+
+export function clearAuthSessionId() {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(SESSION_ID_KEY);
+}
+
+export async function registerBrowserSession(username: string): Promise<string> {
+  const sessionId = `sess_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+  setAuthSessionId(sessionId);
+  try {
+    await fetch("/api/auth/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, sessionId }),
+    });
+  } catch {}
+  return sessionId;
+}
+
+export async function verifyBrowserSession(username: string): Promise<{ valid: boolean; reason?: string }> {
+  const sessionId = getAuthSessionId();
+  if (!username || !sessionId) return { valid: true };
+  try {
+    const res = await fetch(
+      `/api/auth/session?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`,
+      { cache: "no-store" }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      return { valid: data.valid !== false, reason: data.reason };
+    }
+  } catch {}
+  return { valid: true };
+}
+
 export function clearToken() {
+  const user = getStoredUser();
+  const sessionId = typeof window !== "undefined" ? localStorage.getItem(SESSION_ID_KEY) : null;
+  if (user?.username && sessionId) {
+    fetch(`/api/auth/session?username=${encodeURIComponent(user.username)}&sessionId=${encodeURIComponent(sessionId)}`, {
+      method: "DELETE",
+    }).catch(() => {});
+  }
+  clearAuthSessionId();
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(EXPIRES_KEY);
   if (typeof window !== "undefined") {
@@ -250,6 +309,9 @@ export async function loginRequest(username: string, password: string): Promise<
   if (!res.ok || body.success === false) {
     throw new Error(extractErrorMessage(body, "Đăng nhập thất bại"));
   }
+
+  // Register single active browser session for this username
+  await registerBrowserSession(username);
 
   return normalizeLoginResponse(body);
 }

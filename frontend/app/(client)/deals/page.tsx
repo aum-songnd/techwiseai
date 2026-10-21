@@ -4,6 +4,9 @@ import { Flame } from "lucide-react";
 import Deals from "@/components/Deals";
 import { getHotProducts } from "@/constants/queriesDealsPage";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata = {
   title: "Ưu đãi Hot | TechWise AI",
   description: "Tổng hợp các sản phẩm công nghệ đang được ưu đãi và săn đón nhiều nhất tại TechWise AI.",

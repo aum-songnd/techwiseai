@@ -70,6 +70,8 @@ async function fetchAdminEnvelope<T>(
   return body.data as T;
 }
 
+import { broadcastTabEvent } from "./tab-sync";
+
 export async function getAdminUsers(
   params: GetAdminUsersParams = {}
 ): Promise<AdminUsersPage> {
@@ -77,7 +79,11 @@ export async function getAdminUsers(
   const qs = new URLSearchParams({ page: String(page), size: String(size) });
   if (keyword.trim()) qs.set("keyword", keyword.trim());
 
-  const data = await fetchAdminEnvelope<
+  const token = getToken();
+  const headers: Record<string, string> = {};
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+
+  let data:
     | AdminUser[]
     | {
         content?: AdminUser[];
@@ -86,7 +92,31 @@ export async function getAdminUsers(
         total?: number;
         totalPages?: number;
       }
-  >(`/admin/users?${qs.toString()}`);
+    | null = null;
+
+  try {
+    const localRes = await fetch(`/api/admin/users?${qs.toString()}`, {
+      cache: "no-store",
+      headers,
+    });
+    if (localRes.ok) {
+      const json = await localRes.json();
+      data = json.data;
+    }
+  } catch {}
+
+  if (!data) {
+    data = await fetchAdminEnvelope<
+      | AdminUser[]
+      | {
+          content?: AdminUser[];
+          items?: AdminUser[];
+          totalElements?: number;
+          total?: number;
+          totalPages?: number;
+        }
+    >(`/admin/users?${qs.toString()}`);
+  }
 
   let items: AdminUser[] = [];
   let total = 0;
@@ -123,10 +153,42 @@ export async function getAdminUsers(
 
 export async function setAdminUserActive(
   id: string,
-  active: boolean
+  active: boolean,
+  username?: string
 ): Promise<void> {
-  await fetchAdminEnvelope<unknown>(`/admin/users/${id}/status`, {
-    method: "PATCH",
-    body: JSON.stringify({ active }),
+  const token = getToken();
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+
+  let localOk = false;
+  try {
+    const res = await fetch(`/api/admin/users/${id}/status`, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify({ active, username }),
+    });
+    if (res.ok) {
+      localOk = true;
+    }
+  } catch {}
+
+  if (!localOk) {
+    try {
+      await fetchAdminEnvelope<unknown>(`/admin/users/${id}/status`, {
+        method: "PATCH",
+        body: JSON.stringify({ active }),
+      });
+    } catch {
+      await fetchAdminEnvelope<unknown>(`/admin/users/${id}/status?active=${active}`, {
+        method: "PATCH",
+      });
+    }
+  }
+
+  broadcastTabEvent({
+    type: "USER_STATUS_CHANGED",
+    payload: { id, username, active, timestamp: Date.now() },
   });
 }
