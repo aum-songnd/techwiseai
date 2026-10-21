@@ -90,24 +90,71 @@ interface ApiPaginated<T> {
   last: boolean;
 }
 
+function getApiErrorMessage(
+  status: number,
+  response?: Partial<ApiEnvelope<unknown>>,
+): string {
+  if (
+    status === 503 ||
+    response?.code === "AI_SERVICE_UNAVAILABLE"
+  ) {
+    return "Dịch vụ tìm kiếm hình ảnh tạm thời không khả dụng.";
+  }
+
+  if (
+    status === 504 ||
+    response?.code === "AI_SERVICE_TIMEOUT"
+  ) {
+    return "Hệ thống xử lý quá lâu, vui lòng thử lại.";
+  }
+
+  if (status >= 500) {
+    return "Hệ thống xảy ra lỗi, vui lòng thử lại.";
+  }
+
+  return response?.message || "Yêu cầu không thể thực hiện.";
+}
+
 async function fetchEnvelopeUncached<T>(
   path: string,
-  init?: RequestInit
+  init?: RequestInit,
 ): Promise<T> {
-  const res = await fetch(`${API_BASE_URL}${path}`, init);
+  let response: Response;
 
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`API lỗi (${res.status}) tại ${path}: ${text || res.statusText}`);
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, init);
+  } catch {
+    throw new Error(
+      "Không thể kết nối đến hệ thống, vui lòng thử lại.",
+    );
   }
 
-  const json = (await res.json()) as ApiEnvelope<T>;
+  const body = (await response
+    .json()
+    .catch(() => null)) as ApiEnvelope<T> | null;
 
-  if (json.success === false) {
-    throw new Error(json.message || `API báo lỗi tại ${path}`);
+  if (!response.ok) {
+    throw new Error(
+      getApiErrorMessage(
+        response.status,
+        body ?? undefined,
+      ),
+    );
   }
 
-  return json.data;
+  if (!body) {
+    throw new Error(
+      "Phản hồi từ hệ thống không hợp lệ.",
+    );
+  }
+
+  if (body.success === false) {
+    throw new Error(
+      getApiErrorMessage(body.status, body),
+    );
+  }
+
+  return body.data;
 }
 
 async function fetchEnvelope<T>(path: string, init?: RequestInit): Promise<T> {
@@ -343,12 +390,12 @@ export async function getProductBySlug(slug: string): Promise<Product> {
   return mapProduct(raw);
 }
 
-export async function getProductRecommendations(productId: string,limit = 8): Promise<Product[]> {
+export async function getProductRecommendations(productId: string, limit = 8): Promise<Product[]> {
   const safeLimit = Math.max(1, Math.min(limit, 20));
 
   const rawProducts = await fetchEnvelope<ApiProductRaw[]>(
-    `/products/${encodeURIComponent(productId)}/recommendations?limit=${safeLimit}`,{
-        next: { revalidate: 60 }
+    `/products/${encodeURIComponent(productId)}/recommendations?limit=${safeLimit}`, {
+    next: { revalidate: 60 }
   });
 
   return rawProducts.map(mapProduct);

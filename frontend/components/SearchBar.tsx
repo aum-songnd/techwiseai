@@ -39,11 +39,11 @@ const POPULAR_SEARCHES = [
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-    value
+    value,
   );
 
 const resolveProductImage = (
-  fileName?: string
+  fileName?: string,
 ): StaticImageData | string | null => {
   if (!fileName) return null;
   const localImage = (
@@ -193,7 +193,7 @@ const SearchBar = () => {
   }, [keyword, searchMode, saveToHistory]);
 
   const handleImageSearch = async (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const input = event.currentTarget;
     const file = input.files?.[0];
@@ -241,11 +241,11 @@ const SearchBar = () => {
 
       setSearchResults(results);
       setHasSearched(true);
-    } catch (err: unknown) {
+    } catch (error: unknown) {
       const message =
-        err instanceof Error
-          ? err.message
-          : "Đã xảy ra lỗi khi tìm kiếm bằng hình ảnh.";
+        error instanceof Error
+          ? error.message
+          : "Hệ thống xảy ra lỗi, vui lòng thử lại.";
 
       setError(message);
       setSearchResults([]);
@@ -300,7 +300,7 @@ const SearchBar = () => {
 
   const handleDecreaseQuantity = (
     item: { id: string; quantity: number },
-    e: React.MouseEvent
+    e: React.MouseEvent,
   ) => {
     e.preventDefault();
     e.stopPropagation();
@@ -310,7 +310,7 @@ const SearchBar = () => {
   const handleIncreaseQuantity = (
     item: { id: string; quantity: number },
     stockLimit: number,
-    e: React.MouseEvent
+    e: React.MouseEvent,
   ) => {
     e.preventDefault();
     e.stopPropagation();
@@ -570,7 +570,8 @@ const SearchBar = () => {
                             <strong className="text-neutral-900 font-semibold">
                               {searchedKeyword}
                             </strong>
-                            &rdquo;. Hãy thử kiểm tra lỗi chính tả hoặc tìm kiếm bằng từ khóa khác.
+                            &rdquo;. Hãy thử kiểm tra lỗi chính tả hoặc tìm kiếm
+                            bằng từ khóa khác.
                           </>
                         )}
                       </p>
@@ -652,7 +653,7 @@ const SearchBar = () => {
                                 <div className="mt-1 flex items-baseline gap-2">
                                   <span className="text-sm sm:text-base font-bold text-shop_dark_green">
                                     {formatPrice(
-                                      product.finalPrice || product.price
+                                      product.finalPrice || product.price,
                                     )}
                                   </span>
                                   {hasDiscount && (
@@ -685,7 +686,7 @@ const SearchBar = () => {
                                         handleIncreaseQuantity(
                                           itemInCart,
                                           stockLimit,
-                                          e
+                                          e,
                                         )
                                       }
                                       disabled={quantityInCart >= stockLimit}
@@ -726,7 +727,7 @@ const SearchBar = () => {
               </div>
             </div>
           </div>,
-          document.body
+          document.body,
         )}
     </>
   );
