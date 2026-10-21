@@ -139,7 +139,29 @@ export async function adminUpdateProduct(
 }
 
 export async function adminDeleteProduct(id: string) {
-  return fetchAdminEnvelope(`/admin/products/${id}`, {
+  try {
+    return await fetchAdminEnvelope(`/admin/products/${id}`, {
+      method: "DELETE",
+    });
+  } catch (err) {
+    try {
+      return await fetchAdminEnvelope(`/admin/${id}`, {
+        method: "DELETE",
+      });
+    } catch {
+      throw err;
+    }
+  }
+}
+
+export async function adminHardDeleteProduct(id: string) {
+  return fetchAdminEnvelope(`/admin/products/${id}?hard=true`, {
     method: "DELETE",
+  });
+}
+
+export async function adminToggleProductStatus(id: string, active: boolean) {
+  return fetchAdminEnvelope(`/admin/products/${id}/status?active=${active}`, {
+    method: "PATCH",
   });
 }

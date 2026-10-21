@@ -77,6 +77,7 @@ interface ApiProductRaw {
   hot?: boolean;
   onSale?: boolean;
   inStock?: boolean;
+  active?: boolean;
 }
 
 interface ApiPaginated<T> {
@@ -163,7 +164,7 @@ function mapCategory(raw: ApiCategoryRaw): Category {
   };
 }
 
-function mapProduct(raw: ApiProductRaw): Product {
+export function mapProduct(raw: ApiProductRaw): Product {
 
   const price = raw.originalPrice ?? raw.price;
   const discount = Math.max(0, price - raw.price);
@@ -189,6 +190,7 @@ function mapProduct(raw: ApiProductRaw): Product {
     stock: raw.stockQuantity ?? 0,
     status,
     isFeatured: !!raw.featured,
+    active: raw.active ?? true,
 
     description: raw.description ?? raw.shortDescription,
   };

@@ -16,4 +16,6 @@ public interface OrderItemRepository
     );
 
     long countByOrderId(UUID orderId);
+
+    boolean existsByProductId(UUID productId);
 }

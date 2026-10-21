@@ -45,6 +45,7 @@ export interface Product {
   status?: ProductStatus;
   variant?: ProductVariant;
   isFeatured: boolean;
+  active?: boolean;
 }
 
 export interface Author {

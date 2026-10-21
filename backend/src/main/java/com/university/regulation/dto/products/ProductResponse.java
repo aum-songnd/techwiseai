@@ -28,5 +28,6 @@ public record ProductResponse(
         boolean featured,
         boolean hot,
         boolean onSale,
-        boolean inStock) {
+        boolean inStock,
+        boolean active) {
 }

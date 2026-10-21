@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
+  Check,
   ChevronLeft,
   ChevronRight,
   EllipsisVertical,
+  Eye,
+  EyeOff,
   PackageOpen,
   Pencil,
   Plus,
@@ -14,12 +17,20 @@ import {
   X,
 } from "lucide-react";
 import { getCategories } from "@/lib/api";
-import { fetchAllAdminProducts, normalizeAdminText } from "@/lib/admin-products";
+import {
+  fetchAllAdminProducts,
+  normalizeAdminText,
+  saveHiddenProduct,
+  removeHiddenProduct,
+} from "@/lib/admin-products";
+import { clearRequestCache } from "@/lib/request-cache";
 import ProductImage from "@/components/admin/ProductImage";
 import {
   adminCreateProduct,
   adminUpdateProduct,
   adminDeleteProduct,
+  adminHardDeleteProduct,
+  adminToggleProductStatus,
   ProductPayload,
 } from "@/lib/admin-api";
 import type { Category, Product } from "@/app/data/types";
@@ -56,10 +67,30 @@ const AdminProductsPage = () => {
   const [form, setForm] = useState<ProductPayload>(emptyForm);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toastUndoAction, setToastUndoAction] = useState<(() => void) | null>(null);
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const showToast = useCallback((msg: string, undo?: () => void) => {
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    setToastMessage(msg);
+    setToastUndoAction(undo ? () => undo : null);
+    toastTimeoutRef.current = setTimeout(() => {
+      setToastMessage(null);
+      setToastUndoAction(null);
+    }, 4500);
+  }, []);
+
+  const closeActionMenu = (e: React.MouseEvent) => {
+    const details = e.currentTarget.closest("details");
+    if (details) details.removeAttribute("open");
+  };
+
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [brandFilter, setBrandFilter] = useState("");
   const [popularFilter, setPopularFilter] = useState(false);
+  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "inactive">("all");
   const [showForm, setShowForm] = useState(false);
   const [newBrandMode, setNewBrandMode] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -75,17 +106,23 @@ const AdminProductsPage = () => {
   }, [products]);
 
   const filteredProducts = useMemo(() => {
+    const statusProducts =
+      statusFilter === "active"
+        ? products.filter((p) => p.active !== false)
+        : statusFilter === "inactive"
+        ? products.filter((p) => p.active === false)
+        : products;
     const selectedCategory = categories.find(
       (category) => category.slug === categoryFilter
     );
     const categoryProducts = categoryFilter
-      ? products.filter((product) =>
+      ? statusProducts.filter((product) =>
           selectedCategory &&
           product.categories?.some(
             (category) => normalizeAdminText(category) === normalizeAdminText(selectedCategory.title)
           )
         )
-      : products;
+      : statusProducts;
     const brandProducts = brandFilter
       ? categoryProducts.filter((product) => product.brand === brandFilter)
       : categoryProducts;
@@ -101,7 +138,7 @@ const AdminProductsPage = () => {
 
       return tokens.every((t) => haystack.includes(t));
     });
-  }, [brandFilter, categories, categoryFilter, popularFilter, products, search]);
+  }, [brandFilter, categories, categoryFilter, popularFilter, products, search, statusFilter]);
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PAGE_SIZE));
   const safePage = Math.min(currentPage, totalPages);
@@ -179,7 +216,7 @@ const AdminProductsPage = () => {
       featured: product.isFeatured,
       hot: product.status === "hot",
       onSale: product.status === "sale",
-      active: true,
+      active: product.active ?? true,
     });
     setShowForm(true);
   };
@@ -203,15 +240,140 @@ const AdminProductsPage = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Xóa (mềm) sản phẩm này?")) return;
+  const handleDelete = (id: string) => {
     setError(null);
-    try {
-      await adminDeleteProduct(id);
-      await loadData(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Xóa sản phẩm thất bại");
+    const targetProduct = products.find((p) => p.id === id);
+    if (targetProduct) {
+      saveHiddenProduct(targetProduct);
     }
+
+    // 1. Cập nhật UI ngay lập tức (Optimistic Update)
+    setProducts((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, active: false } : p))
+    );
+    if (productSnapshot) {
+      productSnapshot = {
+        ...productSnapshot,
+        products: productSnapshot.products.map((p) =>
+          p.id === id ? { ...p, active: false } : p
+        ),
+        at: Date.now(),
+      };
+    }
+    clearRequestCache("catalog:");
+    showToast("Đã ẩn sản phẩm khỏi website.", () => handleToggleStatus(id, true));
+
+    // 2. Chạy ngầm BE không reload lại danh sách
+    adminDeleteProduct(id).catch((err) => {
+      // Rollback nếu BE lỗi
+      removeHiddenProduct(id);
+      setProducts((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, active: true } : p))
+      );
+      if (productSnapshot) {
+        productSnapshot = {
+          ...productSnapshot,
+          products: productSnapshot.products.map((p) =>
+            p.id === id ? { ...p, active: true } : p
+          ),
+          at: Date.now(),
+        };
+      }
+      clearRequestCache("catalog:");
+      setError(err instanceof Error ? err.message : "Ẩn sản phẩm thất bại");
+      showToast("Ẩn sản phẩm thất bại. Đã khôi phục trạng thái.");
+    });
+  };
+
+  const handleToggleStatus = (id: string, active: boolean) => {
+    setError(null);
+    if (active) {
+      removeHiddenProduct(id);
+    } else {
+      const targetProduct = products.find((p) => p.id === id);
+      if (targetProduct) saveHiddenProduct(targetProduct);
+    }
+
+    // 1. Cập nhật UI ngay lập tức
+    setProducts((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, active } : p))
+    );
+    if (productSnapshot) {
+      productSnapshot = {
+        ...productSnapshot,
+        products: productSnapshot.products.map((p) =>
+          p.id === id ? { ...p, active } : p
+        ),
+        at: Date.now(),
+      };
+    }
+    clearRequestCache("catalog:");
+    showToast(active ? "Đã mở bán lại sản phẩm trên web." : "Đã ẩn sản phẩm khỏi website.");
+
+    // 2. Chạy ngầm BE
+    adminToggleProductStatus(id, active).catch((err) => {
+      if (active) {
+        const targetProduct = products.find((p) => p.id === id);
+        if (targetProduct) saveHiddenProduct(targetProduct);
+      } else {
+        removeHiddenProduct(id);
+      }
+      setProducts((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, active: !active } : p))
+      );
+      if (productSnapshot) {
+        productSnapshot = {
+          ...productSnapshot,
+          products: productSnapshot.products.map((p) =>
+            p.id === id ? { ...p, active: !active } : p
+          ),
+          at: Date.now(),
+        };
+      }
+      clearRequestCache("catalog:");
+      setError(err instanceof Error ? err.message : "Cập nhật trạng thái thất bại");
+      showToast("Cập nhật trạng thái thất bại. Đã khôi phục.");
+    });
+  };
+
+  const handleHardDelete = (id: string) => {
+    if (!confirm("CẢNH BÁO: Bạn có chắc chắn muốn xóa vĩnh viễn sản phẩm này khỏi cơ sở dữ liệu?")) return;
+    setError(null);
+    removeHiddenProduct(id);
+
+    const deletedProduct = products.find((p) => p.id === id);
+    // 1. Xóa ngay trên giao diện
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+    if (productSnapshot) {
+      productSnapshot = {
+        ...productSnapshot,
+        products: productSnapshot.products.filter((p) => p.id !== id),
+        at: Date.now(),
+      };
+    }
+    clearRequestCache("catalog:");
+    showToast("Đang xóa vĩnh viễn sản phẩm...");
+
+    // 2. Chạy ngầm BE
+    adminHardDeleteProduct(id)
+      .then(() => {
+        showToast("Đã xóa vĩnh viễn sản phẩm khỏi hệ thống.");
+      })
+      .catch((err) => {
+        if (deletedProduct) {
+          setProducts((prev) => [deletedProduct, ...prev]);
+          if (productSnapshot) {
+            productSnapshot = {
+              ...productSnapshot,
+              products: [deletedProduct, ...productSnapshot.products],
+              at: Date.now(),
+            };
+          }
+        }
+        clearRequestCache("catalog:");
+        setError(err instanceof Error ? err.message : "Xóa vĩnh viễn thất bại");
+        showToast("Xóa sản phẩm thất bại.");
+      });
   };
 
   const inputClass =
@@ -248,6 +410,21 @@ const AdminProductsPage = () => {
             Thêm sản phẩm mới
           </button>
         </div>
+
+        {/* Error notification banner */}
+        {!showForm && error && (
+          <div className="flex items-center justify-between border border-red-200 bg-red-50 p-4 text-xs text-red-600 font-medium">
+            <span>{error}</span>
+            <button
+              type="button"
+              onClick={() => setError(null)}
+              className="text-neutral-500 hover:text-neutral-900 transition-colors ml-4 font-bold"
+              aria-label="Đóng thông báo lỗi"
+            >
+              ✕
+            </button>
+          </div>
+        )}
 
         {/* Product Create / Edit Form */}
         {showForm && (
@@ -436,6 +613,15 @@ const AdminProductsPage = () => {
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
+                    checked={form.active ?? true}
+                    onChange={(e) => setForm({ ...form, active: e.target.checked })}
+                    className="accent-shop_dark_green"
+                  />
+                  Đang kinh doanh (Hiển thị trên web)
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
                     checked={form.featured}
                     onChange={(e) => setForm({ ...form, featured: e.target.checked })}
                     className="accent-shop_dark_green"
@@ -558,6 +744,19 @@ const AdminProductsPage = () => {
               <option value="all">Tất cả sản phẩm</option>
               <option value="popular">Sản phẩm nổi bật</option>
             </select>
+            <select
+              value={statusFilter}
+              onChange={(e) => {
+                setStatusFilter(e.target.value as "all" | "active" | "inactive");
+                setCurrentPage(1);
+              }}
+              className="border border-neutral-300 bg-white px-3 py-1.5 text-xs text-neutral-700 outline-none focus:border-shop_dark_green transition-colors"
+              aria-label="Lọc theo trạng thái kinh doanh"
+            >
+              <option value="all">Tất cả trạng thái</option>
+              <option value="active">Đang kinh doanh</option>
+              <option value="inactive">Đã ẩn / Ngưng bán</option>
+            </select>
           </div>
         </div>
 
@@ -600,27 +799,64 @@ const AdminProductsPage = () => {
                       >
                         <EllipsisVertical className="h-3.5 w-3.5" />
                       </summary>
-                      <div className="absolute right-0 top-full z-20 mt-1 w-36 border border-neutral-200 bg-white py-1 text-xs shadow-md">
+                      <div className="absolute right-0 top-full z-20 mt-1 w-44 border border-neutral-200 bg-white py-1 text-xs shadow-md">
                         <button
                           type="button"
-                          onClick={() => startEdit(product)}
+                          onClick={(e) => {
+                            closeActionMenu(e);
+                            startEdit(product);
+                          }}
                           className="flex w-full items-center gap-2 px-3 py-2 text-left text-neutral-700 hover:bg-neutral-50 font-medium"
                         >
                           <Pencil className="h-3.5 w-3.5 text-neutral-500" /> Sửa sản phẩm
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(product.id)}
-                          className="flex w-full items-center gap-2 px-3 py-2 text-left text-red-600 hover:bg-red-50 font-medium"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" /> Xóa sản phẩm
-                        </button>
+                        {product.active === false ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                closeActionMenu(e);
+                                handleToggleStatus(product.id, true);
+                              }}
+                              className="flex w-full items-center gap-2 px-3 py-2 text-left text-shop_dark_green hover:bg-emerald-50 font-medium"
+                            >
+                              <Eye className="h-3.5 w-3.5 text-shop_dark_green" /> Mở bán lại (Bật)
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                closeActionMenu(e);
+                                handleHardDelete(product.id);
+                              }}
+                              className="flex w-full items-center gap-2 px-3 py-2 text-left text-red-600 hover:bg-red-50 font-medium border-t border-neutral-100"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" /> Xóa vĩnh viễn khỏi DB
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              closeActionMenu(e);
+                              handleDelete(product.id);
+                            }}
+                            className="flex w-full items-center gap-2 px-3 py-2 text-left text-amber-700 hover:bg-amber-50 font-medium"
+                          >
+                            <EyeOff className="h-3.5 w-3.5 text-amber-700" /> Ẩn khỏi web (Ngưng bán)
+                          </button>
+                        )}
                       </div>
                     </details>
-                    {(product.isFeatured || product.status === "hot") && (
-                      <span className="absolute bottom-3 left-3 border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-mono font-semibold text-amber-800">
-                        Nổi bật
+                    {product.active === false ? (
+                      <span className="absolute top-3 left-3 border border-red-200 bg-red-50 px-2 py-0.5 text-[10px] font-mono font-semibold text-red-700">
+                        Đã ẩn / Ngưng bán
                       </span>
+                    ) : (
+                      (product.isFeatured || product.status === "hot") && (
+                        <span className="absolute bottom-3 left-3 border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-mono font-semibold text-amber-800">
+                          Nổi bật
+                        </span>
+                      )
                     )}
                   </div>
 
@@ -694,6 +930,30 @@ const AdminProductsPage = () => {
               )}
             </div>
           </>
+        )}
+        {/* Toast Notification */}
+        {toastMessage && (
+          <aside
+            role="status"
+            aria-live="polite"
+            className="fixed bottom-6 right-6 z-50 flex items-center gap-3 border border-neutral-800 bg-neutral-900 px-4 py-3 text-xs font-medium text-white shadow-2xl"
+          >
+            <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+            <span>{toastMessage}</span>
+            {toastUndoAction && (
+              <button
+                type="button"
+                onClick={() => {
+                  toastUndoAction();
+                  setToastMessage(null);
+                  setToastUndoAction(null);
+                }}
+                className="ml-2 font-bold text-emerald-400 hover:text-emerald-300 underline transition-colors"
+              >
+                Hoàn tác
+              </button>
+            )}
+          </aside>
         )}
       </div>
     </div>

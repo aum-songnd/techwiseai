@@ -47,6 +47,8 @@ public record ProductDetailResponse(
 
         boolean inStock,
 
+        boolean active,
+
         Map<String, String> specifications,
 
         List<ProductImageResponse> images
