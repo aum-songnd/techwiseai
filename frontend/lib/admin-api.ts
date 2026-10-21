@@ -161,7 +161,17 @@ export async function adminHardDeleteProduct(id: string) {
 }
 
 export async function adminToggleProductStatus(id: string, active: boolean) {
-  return fetchAdminEnvelope(`/admin/products/${id}/status?active=${active}`, {
-    method: "PATCH",
-  });
+  try {
+    return await fetchAdminEnvelope(`/admin/products/${id}/status?active=${active}`, {
+      method: "PATCH",
+    });
+  } catch (err) {
+    try {
+      return await fetchAdminEnvelope(`/admin/${id}/status?active=${active}`, {
+        method: "PATCH",
+      });
+    } catch {
+      throw err;
+    }
+  }
 }

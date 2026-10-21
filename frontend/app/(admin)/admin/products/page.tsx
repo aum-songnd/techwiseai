@@ -29,7 +29,6 @@ import {
   adminCreateProduct,
   adminUpdateProduct,
   adminDeleteProduct,
-  adminHardDeleteProduct,
   adminToggleProductStatus,
   ProductPayload,
 } from "@/lib/admin-api";
@@ -334,46 +333,6 @@ const AdminProductsPage = () => {
       setError(err instanceof Error ? err.message : "Cập nhật trạng thái thất bại");
       showToast("Cập nhật trạng thái thất bại. Đã khôi phục.");
     });
-  };
-
-  const handleHardDelete = (id: string) => {
-    if (!confirm("CẢNH BÁO: Bạn có chắc chắn muốn xóa vĩnh viễn sản phẩm này khỏi cơ sở dữ liệu?")) return;
-    setError(null);
-    removeHiddenProduct(id);
-
-    const deletedProduct = products.find((p) => p.id === id);
-    // 1. Xóa ngay trên giao diện
-    setProducts((prev) => prev.filter((p) => p.id !== id));
-    if (productSnapshot) {
-      productSnapshot = {
-        ...productSnapshot,
-        products: productSnapshot.products.filter((p) => p.id !== id),
-        at: Date.now(),
-      };
-    }
-    clearRequestCache("catalog:");
-    showToast("Đang xóa vĩnh viễn sản phẩm...");
-
-    // 2. Chạy ngầm BE
-    adminHardDeleteProduct(id)
-      .then(() => {
-        showToast("Đã xóa vĩnh viễn sản phẩm khỏi hệ thống.");
-      })
-      .catch((err) => {
-        if (deletedProduct) {
-          setProducts((prev) => [deletedProduct, ...prev]);
-          if (productSnapshot) {
-            productSnapshot = {
-              ...productSnapshot,
-              products: [deletedProduct, ...productSnapshot.products],
-              at: Date.now(),
-            };
-          }
-        }
-        clearRequestCache("catalog:");
-        setError(err instanceof Error ? err.message : "Xóa vĩnh viễn thất bại");
-        showToast("Xóa sản phẩm thất bại.");
-      });
   };
 
   const inputClass =
@@ -755,7 +714,7 @@ const AdminProductsPage = () => {
             >
               <option value="all">Tất cả trạng thái</option>
               <option value="active">Đang kinh doanh</option>
-              <option value="inactive">Đã ẩn / Ngưng bán</option>
+              <option value="inactive">Tạm ngưng bán (Đã ẩn)</option>
             </select>
           </div>
         </div>
@@ -811,28 +770,16 @@ const AdminProductsPage = () => {
                           <Pencil className="h-3.5 w-3.5 text-neutral-500" /> Sửa sản phẩm
                         </button>
                         {product.active === false ? (
-                          <>
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                closeActionMenu(e);
-                                handleToggleStatus(product.id, true);
-                              }}
-                              className="flex w-full items-center gap-2 px-3 py-2 text-left text-shop_dark_green hover:bg-emerald-50 font-medium"
-                            >
-                              <Eye className="h-3.5 w-3.5 text-shop_dark_green" /> Mở bán lại (Bật)
-                            </button>
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                closeActionMenu(e);
-                                handleHardDelete(product.id);
-                              }}
-                              className="flex w-full items-center gap-2 px-3 py-2 text-left text-red-600 hover:bg-red-50 font-medium border-t border-neutral-100"
-                            >
-                              <Trash2 className="h-3.5 w-3.5" /> Xóa vĩnh viễn khỏi DB
-                            </button>
-                          </>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              closeActionMenu(e);
+                              handleToggleStatus(product.id, true);
+                            }}
+                            className="flex w-full items-center gap-2 px-3 py-2 text-left text-shop_dark_green hover:bg-emerald-50 font-medium"
+                          >
+                            <Eye className="h-3.5 w-3.5 text-shop_dark_green" /> Mở bán lại (Bật)
+                          </button>
                         ) : (
                           <button
                             type="button"
@@ -842,14 +789,14 @@ const AdminProductsPage = () => {
                             }}
                             className="flex w-full items-center gap-2 px-3 py-2 text-left text-amber-700 hover:bg-amber-50 font-medium"
                           >
-                            <EyeOff className="h-3.5 w-3.5 text-amber-700" /> Ẩn khỏi web (Ngưng bán)
+                            <EyeOff className="h-3.5 w-3.5 text-amber-700" /> Tạm ngưng bán (Ẩn)
                           </button>
                         )}
                       </div>
                     </details>
                     {product.active === false ? (
-                      <span className="absolute top-3 left-3 border border-red-200 bg-red-50 px-2 py-0.5 text-[10px] font-mono font-semibold text-red-700">
-                        Đã ẩn / Ngưng bán
+                      <span className="absolute top-3 left-3 border border-neutral-300 bg-neutral-100 px-2 py-0.5 text-[10px] font-mono font-medium text-neutral-600 shadow-sm">
+                        Tạm ngưng bán
                       </span>
                     ) : (
                       (product.isFeatured || product.status === "hot") && (
