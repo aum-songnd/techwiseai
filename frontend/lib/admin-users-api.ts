@@ -83,7 +83,16 @@ export async function getAdminUsers(
   const headers: Record<string, string> = {};
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  let data: any = null;
+  let data:
+    | AdminUser[]
+    | {
+        content?: AdminUser[];
+        items?: AdminUser[];
+        totalElements?: number;
+        total?: number;
+        totalPages?: number;
+      }
+    | null = null;
 
   try {
     const localRes = await fetch(`/api/admin/users?${qs.toString()}`, {
