@@ -64,13 +64,15 @@ const SearchBar = () => {
   const [hasSearched, setHasSearched] = useState(false);
   const [searchedKeyword, setSearchedKeyword] = useState("");
   const [searchMode, setSearchMode] = useState<"keyword" | "image">("keyword");
-
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
-
   const { addToCart, updateQuantity, getItemByProductId, requiresLogin } =
     useCart();
   const { isSignedIn } = useAuth();
   const router = useRouter();
+  const [searchImagePreview, setSearchImagePreview] = useState<string | null>(
+    null,
+  );
+  const [isSearchingByImage, setIsSearchingByImage] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -169,7 +171,6 @@ const SearchBar = () => {
         setSearchResults(results);
         setSearchedKeyword(searchKeyword);
         setHasSearched(true);
-
         if (results.length > 0) {
           saveToHistory(searchKeyword);
         }
@@ -213,16 +214,30 @@ const SearchBar = () => {
       return;
     }
 
-    try {
-      setSearchMode("image");
-      setKeyword("");
-      setIsLoading(true);
-      setError("");
-      setHasSearched(false);
-      setSearchResults([]);
-      setSearchedKeyword(file.name);
+    const previewUrl = URL.createObjectURL(file);
 
-      const results = await searchProductsByImage(file, 10);
+    // Chuẩn bị giao diện trước khi gọi API.
+    setSearchMode("image");
+    setKeyword("");
+    setError("");
+    setHasSearched(false);
+    setSearchResults([]);
+    setSearchedKeyword(file.name);
+
+    // Hiển thị ảnh đang được AI phân tích.
+    setSearchImagePreview(previewUrl);
+    setIsSearchingByImage(true);
+    setIsLoading(true);
+
+    try {
+      const [results] = await Promise.all([
+        searchProductsByImage(file, 10),
+
+        // Giữ hiệu ứng tối thiểu 1 giây để tránh nháy quá nhanh.
+        new Promise<void>((resolve) => {
+          setTimeout(resolve, 1000);
+        }),
+      ]);
 
       setSearchResults(results);
       setHasSearched(true);
@@ -237,6 +252,12 @@ const SearchBar = () => {
       setHasSearched(true);
     } finally {
       setIsLoading(false);
+      setIsSearchingByImage(false);
+      setSearchImagePreview(null);
+
+      URL.revokeObjectURL(previewUrl);
+
+      // Cho phép chọn lại cùng một ảnh.
       input.value = "";
     }
   };
@@ -303,6 +324,33 @@ const SearchBar = () => {
 
   return (
     <>
+      {mounted &&
+        isSearchingByImage &&
+        searchImagePreview &&
+        createPortal(
+          <div
+            role="status"
+            aria-live="polite"
+            className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/45 backdrop-blur-[2px]"
+          >
+            <div className="flex flex-col items-center gap-5">
+              <div className="overflow-hidden rounded-2xl bg-white p-2 shadow-2xl">
+                <img
+                  src={searchImagePreview}
+                  alt="Ảnh đang được tìm kiếm"
+                  className="image-search-processing h-72 w-72 rounded-xl object-contain"
+                />
+              </div>
+
+              <div className="text-center text-white">
+                <p className="text-lg font-semibold">
+                  Đang tìm kiếm sản phẩm tương tự...
+                </p>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
       <button
         type="button"
         onClick={() => setIsSearchOpen(true)}
