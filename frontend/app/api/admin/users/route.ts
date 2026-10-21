@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
   const keyword = (searchParams.get("keyword") || "").toLowerCase().trim();
   const authHeader = req.headers.get("authorization");
 
-  let backendUsers: any[] = [];
+  let backendUsers: Record<string, unknown>[] = [];
   let total = 0;
   let totalPages = 1;
   let backendOk = false;
@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
   if (backendOk && backendUsers.length > 0) {
     // Enrich backend users with local status overrides
     const merged = backendUsers.map((u) => {
-      const key = (u.username || "").toLowerCase();
+      const key = String(u.username ?? "").toLowerCase();
       const p = serverProfiles[key];
       const isLocked = p?.locked === true || p?.active === false;
       return {
