@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import {
   AlertCircle,
+  Check,
   Lock,
   LockOpen,
   RefreshCw,
@@ -52,6 +53,19 @@ const AdminUsersPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toastUndoAction, setToastUndoAction] = useState<(() => void) | null>(null);
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const showToast = useCallback((msg: string, undo?: () => void) => {
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    setToastMessage(msg);
+    setToastUndoAction(undo ? () => undo : null);
+    toastTimeoutRef.current = setTimeout(() => {
+      setToastMessage(null);
+      setToastUndoAction(null);
+    }, 4500);
+  }, []);
 
   const [searchInput, setSearchInput] = useState("");
   const [keyword, setKeyword] = useState("");
@@ -88,32 +102,40 @@ const AdminUsersPage = () => {
     load();
   }, [load]);
 
-  const handleToggle = async (user: AdminUser) => {
+  const handleToggle = (user: AdminUser) => {
     if (isAdmin(user)) {
-      window.alert("Không thể khóa tài khoản Quản trị viên");
+      showToast("Không thể khóa tài khoản Quản trị viên");
       return;
     }
 
     const willActivate = !isActiveUser(user);
     const name = user.fullName?.trim() || user.username;
-    const ok = window.confirm(
-      willActivate
-        ? `Mở khóa tài khoản "${name}"?`
-        : `Khóa tài khoản "${name}"? Người dùng sẽ không đăng nhập được.`
-    );
-    if (!ok) return;
 
-    setBusyId(user.id);
-    try {
-      await setAdminUserActive(user.id, willActivate);
+    // 1. Cập nhật UI ngay lập tức (Optimistic Update)
+    setUsers((prev) =>
+      prev.map((u) => (u.id === user.id ? { ...u, active: willActivate } : u))
+    );
+    showToast(
+      willActivate
+        ? `Đã mở khóa tài khoản "${name}".`
+        : `Đã khóa tài khoản "${name}".`,
+      () => {
+        // Hoàn tác
+        setUsers((prev) =>
+          prev.map((u) => (u.id === user.id ? { ...u, active: !willActivate } : u))
+        );
+        setAdminUserActive(user.id, !willActivate).catch(() => {});
+      }
+    );
+
+    // 2. Chạy ngầm BE không gián đoạn
+    setAdminUserActive(user.id, willActivate).catch((e) => {
+      // Rollback nếu BE lỗi
       setUsers((prev) =>
-        prev.map((u) => (u.id === user.id ? { ...u, active: willActivate } : u))
+        prev.map((u) => (u.id === user.id ? { ...u, active: !willActivate } : u))
       );
-    } catch (e) {
-      window.alert(e instanceof Error ? e.message : "Cập nhật thất bại");
-    } finally {
-      setBusyId(null);
-    }
+      showToast(`Cập nhật tài khoản "${name}" thất bại. Đã khôi phục.`);
+    });
   };
 
   const searchBox = (className = "") => (
@@ -417,6 +439,30 @@ const AdminUsersPage = () => {
           )}
         </div>
       </div>
+      {/* Toast Notification */}
+      {toastMessage && (
+        <aside
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 border border-neutral-800 bg-neutral-900 px-4 py-3 text-xs font-medium text-white shadow-2xl"
+        >
+          <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+          <span>{toastMessage}</span>
+          {toastUndoAction && (
+            <button
+              type="button"
+              onClick={() => {
+                toastUndoAction();
+                setToastMessage(null);
+                setToastUndoAction(null);
+              }}
+              className="ml-2 font-bold text-emerald-400 hover:text-emerald-300 underline transition-colors"
+            >
+              Hoàn tác
+            </button>
+          )}
+        </aside>
+      )}
     </div>
   );
 };

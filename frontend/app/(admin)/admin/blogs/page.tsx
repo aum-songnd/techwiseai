@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import Link from "next/link";
 import {
   BookOpen,
+  Check,
   ChevronLeft,
   ChevronRight,
   Pencil,
@@ -54,10 +55,23 @@ const AdminBlogsPage = () => {
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toastUndoAction, setToastUndoAction] = useState<(() => void) | null>(null);
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const showToast = useCallback((msg: string, undo?: () => void) => {
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    setToastMessage(msg);
+    setToastUndoAction(undo ? () => undo : null);
+    toastTimeoutRef.current = setTimeout(() => {
+      setToastMessage(null);
+      setToastUndoAction(null);
+    }, 4500);
+  }, []);
   const [autoSlug, setAutoSlug] = useState(true);
   const formRef = useRef<HTMLFormElement | null>(null);
   const listTopRef = useRef<HTMLDivElement | null>(null);
@@ -183,17 +197,36 @@ const AdminBlogsPage = () => {
     }
   };
 
-  const handleDelete = async (id: string, title: string) => {
-    if (!confirm(`Xóa bài viết "${title}"?\n\nHành động này không thể hoàn tác.`)) return;
-    setDeleting(id);
-    try {
-      await adminDeleteBlog(id);
-      await loadData();
-    } catch (e) {
+  const handleDelete = (id: string, title: string) => {
+    setError(null);
+    const targetBlog = blogs.find((b) => b.id === id);
+
+    // 1. Cập nhật UI ngay lập tức (Optimistic Update)
+    setBlogs((prev) => prev.filter((b) => b.id !== id));
+    showToast(`Đã xóa bài viết "${title}".`, () => {
+      if (targetBlog) {
+        setBlogs((prev) => [targetBlog, ...prev]);
+        adminCreateBlog({
+          title: targetBlog.title,
+          slug: targetBlog.slug,
+          authorId: targetBlog.authorId,
+          mainImageUrl: targetBlog.mainImageUrl,
+          blogCategoryIds: targetBlog.blogCategoryIds,
+          publishedAt: targetBlog.publishedAt,
+          isLatest: targetBlog.isLatest,
+          body: targetBlog.body,
+        }).catch(() => {});
+      }
+    });
+
+    // 2. Chạy ngầm BE không reload lại danh sách bài viết
+    adminDeleteBlog(id).catch((e) => {
+      if (targetBlog) {
+        setBlogs((prev) => [targetBlog, ...prev]);
+      }
       setError((e as Error).message);
-    } finally {
-      setDeleting(null);
-    }
+      showToast("Xóa bài viết thất bại. Đã khôi phục.");
+    });
   };
 
   const formatDate = (d: string) =>
@@ -671,6 +704,31 @@ const AdminBlogsPage = () => {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <aside
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 border border-neutral-800 bg-neutral-900 px-4 py-3 text-xs font-medium text-white shadow-2xl"
+        >
+          <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+          <span>{toastMessage}</span>
+          {toastUndoAction && (
+            <button
+              type="button"
+              onClick={() => {
+                toastUndoAction();
+                setToastMessage(null);
+                setToastUndoAction(null);
+              }}
+              className="ml-2 font-bold text-emerald-400 hover:text-emerald-300 underline transition-colors"
+            >
+              Hoàn tác
+            </button>
+          )}
+        </aside>
       )}
     </div>
   );

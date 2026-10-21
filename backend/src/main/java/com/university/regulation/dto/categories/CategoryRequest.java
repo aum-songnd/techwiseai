@@ -16,5 +16,11 @@ public record CategoryRequest (
         @JsonProperty("image_url")
         String imageUrl,
         @JsonProperty("display_order")
-        Integer displayOrder
-) {}
+        Integer displayOrder,
+        @JsonProperty("active")
+        Boolean active
+) {
+        public CategoryRequest(String name, String slug, String description, String imageUrl, Integer displayOrder) {
+                this(name, slug, description, imageUrl, displayOrder, true);
+        }
+}

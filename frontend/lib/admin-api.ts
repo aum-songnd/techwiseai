@@ -97,9 +97,38 @@ export async function adminUpdateCategory(
 }
 
 export async function adminDeleteCategory(id: string) {
-  return fetchAdminEnvelope(`/admin/categories/${id}`, {
-    method: "DELETE",
-  });
+  try {
+    return await fetchAdminEnvelope(`/admin/categories/${id}`, {
+      method: "DELETE",
+    });
+  } catch (err) {
+    try {
+      return await fetchAdminEnvelope(`/admin/${id}`, {
+        method: "DELETE",
+      });
+    } catch {
+      throw err;
+    }
+  }
+}
+
+export async function adminToggleCategoryStatus(id: string, active: boolean) {
+  try {
+    return await fetchAdminEnvelope(`/admin/categories/${id}/status?active=${active}`, {
+      method: "PATCH",
+    });
+  } catch (err) {
+    try {
+      return await fetchAdminEnvelope(`/admin/${id}/status?active=${active}`, {
+        method: "PATCH",
+      });
+    } catch {
+      return await fetchAdminEnvelope(`/admin/categories/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({ active }),
+      });
+    }
+  }
 }
 
 export interface ProductPayload {

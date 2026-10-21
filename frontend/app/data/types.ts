@@ -7,6 +7,7 @@ export interface Category {
   featured: boolean;
   imageUrl?: string;
   displayOrder?: number;
+  active?: boolean;
 }
 
 export interface BlogCategory {
