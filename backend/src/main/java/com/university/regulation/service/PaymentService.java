@@ -100,13 +100,10 @@ public class PaymentService {
          */
         @Transactional(readOnly = true)
         public PaymentResponse getPaymentByOrderId(UUID orderId) {
-                Payment payment = paymentRepository
+                return paymentRepository
                                 .findByOrderId(orderId)
-                                .orElseThrow(() -> new ResponseStatusException(
-                                                HttpStatus.NOT_FOUND,
-                                                "Không tìm thấy thông tin thanh toán"));
-
-                return toResponse(payment);
+                                .map(this::toResponse)
+                                .orElse(null);
         }
 
         /**
@@ -114,11 +111,27 @@ public class PaymentService {
          */
         @Transactional
         public void markCodAsPaid(UUID orderId) {
-                Payment payment = paymentRepository
-                                .findByOrderId(orderId)
-                                .orElseThrow(() -> new ResponseStatusException(
-                                                HttpStatus.NOT_FOUND,
-                                                "Không tìm thấy thông tin thanh toán"));
+                Optional<Payment> optionalPayment = paymentRepository.findByOrderId(orderId);
+
+                if (optionalPayment.isEmpty()) {
+                        Order order = orderRepository.findById(orderId)
+                                        .orElseThrow(() -> new ResponseStatusException(
+                                                        HttpStatus.NOT_FOUND,
+                                                        "Không tìm thấy đơn hàng"));
+
+                        Payment payment = new Payment();
+                        payment.setOrder(order);
+                        payment.setPaymentMethod(PaymentMethod.COD);
+                        payment.setStatus(PaymentStatus.PAID);
+                        payment.setAmount(order.getTotalAmount());
+                        payment.setCurrency("VND");
+                        payment.setTransactionCode(generateTransactionCode());
+                        payment.setPaidAt(OffsetDateTime.now());
+                        paymentRepository.save(payment);
+                        return;
+                }
+
+                Payment payment = optionalPayment.get();
 
                 if (payment.getPaymentMethod() != PaymentMethod.COD) {
                         throw new ResponseStatusException(
@@ -143,11 +156,27 @@ public class PaymentService {
 
         @Transactional
         public void handleOrderDelivered(UUID orderId) {
-                Payment payment = paymentRepository
-                                .findByOrderId(orderId)
-                                .orElseThrow(() -> new ResponseStatusException(
-                                                HttpStatus.NOT_FOUND,
-                                                "Không tìm thấy thông tin thanh toán"));
+                Optional<Payment> optionalPayment = paymentRepository.findByOrderId(orderId);
+
+                if (optionalPayment.isEmpty()) {
+                        Order order = orderRepository.findById(orderId)
+                                        .orElseThrow(() -> new ResponseStatusException(
+                                                        HttpStatus.NOT_FOUND,
+                                                        "Không tìm thấy đơn hàng"));
+
+                        Payment payment = new Payment();
+                        payment.setOrder(order);
+                        payment.setPaymentMethod(PaymentMethod.COD);
+                        payment.setStatus(PaymentStatus.PAID);
+                        payment.setAmount(order.getTotalAmount());
+                        payment.setCurrency("VND");
+                        payment.setTransactionCode(generateTransactionCode());
+                        payment.setPaidAt(OffsetDateTime.now());
+                        paymentRepository.save(payment);
+                        return;
+                }
+
+                Payment payment = optionalPayment.get();
 
                 if (payment.getPaymentMethod() == PaymentMethod.COD) {
                         if (payment.getStatus() == PaymentStatus.CANCELLED) {
@@ -236,7 +265,7 @@ public class PaymentService {
                 return order;
         }
 
-        @Transactional(readOnly = true)
+        @Transactional
         public PaymentResponse processVnpayReturn(
                         Map<String, String> params) {
                 if (!vnpayService.verifySignature(params)) {
@@ -273,7 +302,31 @@ public class PaymentService {
                                         "Số tiền thanh toán không hợp lệ");
                 }
 
-                // Không cập nhật database tại Return URL.
+                // Cập nhật trạng thái thanh toán nếu chữ ký hợp lệ và giao dịch đang PENDING
+                if (payment.getStatus() == PaymentStatus.PENDING) {
+                        String responseCode = params.get("vnp_ResponseCode");
+                        String transactionStatus = params.get("vnp_TransactionStatus");
+                        String providerTransactionId = params.get("vnp_TransactionNo");
+
+                        payment.setProviderTransactionId(emptyToNull(providerTransactionId));
+                        payment.setPaymentUrl(null);
+
+                        if ("00".equals(responseCode)
+                                        && ("00".equals(transactionStatus) || transactionStatus == null)) {
+                                payment.setStatus(PaymentStatus.PAID);
+                                payment.setPaidAt(OffsetDateTime.now());
+                                payment.setFailureReason(null);
+                        } else if ("24".equals(responseCode)) {
+                                payment.setStatus(PaymentStatus.CANCELLED);
+                                payment.setFailureReason("Giao dịch VNPAY đã bị hủy");
+                        } else {
+                                payment.setStatus(PaymentStatus.FAILED);
+                                payment.setFailureReason("Thanh toán VNPAY thất bại, mã phản hồi: " + responseCode);
+                        }
+
+                        payment = paymentRepository.save(payment);
+                }
+
                 return toResponse(payment);
         }
 

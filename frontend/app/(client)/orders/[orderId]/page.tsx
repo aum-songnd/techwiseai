@@ -28,10 +28,13 @@ import {
 import {
   cancelOrder,
   getOrderById,
+  getPaymentByOrder,
+  createOrGetPayment,
   OrderAuthRequiredError,
   type OrderData,
   type OrderStatus,
   type PaymentMethod,
+  type PaymentData,
 } from "../../../../lib/orders-api";
 import Loading from "@/app/(client)/loading";
 import { useCart } from "../../../../context/CartContext";
@@ -149,7 +152,10 @@ const OrderDetailPage = () => {
   const [cancelReason, setCancelReason] = useState("");
   const [cancelDialogError, setCancelDialogError] = useState<string | null>(null);
   const [justPlaced, setJustPlaced] = useState(false);
+  const [vnpayErrorAlert, setVnpayErrorAlert] = useState(false);
   const [isNavigatingToCart, setIsNavigatingToCart] = useState(false);
+  const [paymentInfo, setPaymentInfo] = useState<PaymentData | null>(null);
+  const [isPayingVnpay, setIsPayingVnpay] = useState(false);
 
   // Copy feedback toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -174,8 +180,9 @@ const OrderDetailPage = () => {
   };
 
   useEffect(() => {
-    const placed = new URLSearchParams(window.location.search).get("placed");
-    if (placed === "1") setJustPlaced(true);
+    const sp = new URLSearchParams(window.location.search);
+    if (sp.get("placed") === "1") setJustPlaced(true);
+    if (sp.get("vnpay_error") === "1") setVnpayErrorAlert(true);
   }, []);
 
   const load = useCallback(
@@ -187,7 +194,16 @@ const OrderDetailPage = () => {
       }
       try {
         const data = await getOrderById(orderId);
-        if (!isCancelled()) setOrder(data);
+        if (!isCancelled()) {
+          setOrder(data);
+          if (data.paymentMethod === "VNPAY") {
+            getPaymentByOrder(orderId)
+              .then((pmt) => {
+                if (!isCancelled()) setPaymentInfo(pmt);
+              })
+              .catch(() => {});
+          }
+        }
       } catch (err) {
         if (err instanceof OrderAuthRequiredError) {
           router.push("/sign-in");
@@ -298,6 +314,30 @@ const OrderDetailPage = () => {
     router.push("/cart");
   };
 
+  const handlePayNow = async () => {
+    if (!order) return;
+    setIsPayingVnpay(true);
+    try {
+      const payment = await createOrGetPayment({
+        orderId: order.id,
+        paymentMethod: "VNPAY",
+      });
+      if (payment?.paymentUrl) {
+        window.location.href = payment.paymentUrl;
+        return;
+      }
+      showToast("Không tìm thấy liên kết thanh toán VNPAY.");
+    } catch (err) {
+      showToast(
+        err instanceof Error
+          ? err.message
+          : "Không thể kết nối đến cổng thanh toán VNPAY."
+      );
+    } finally {
+      setIsPayingVnpay(false);
+    }
+  };
+
   if (isLoading || isNavigatingToCart) {
     return (
       <Loading
@@ -393,6 +433,21 @@ const OrderDetailPage = () => {
               <p className="text-neutral-600 mt-0.5">
                 Cửa hàng đã ghi nhận đơn hàng của bạn. Bạn có thể theo dõi tiến
                 trình xử lý và giao hàng chi tiết ngay bên dưới.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* VNPay Error / Unpaid Alert */}
+        {vnpayErrorAlert && !isCancelled && (
+          <div className="mb-6 flex items-start gap-3 border border-amber-300 bg-amber-50 p-4">
+            <AlertCircle className="h-4 w-4 mt-0.5 text-amber-700 shrink-0" />
+            <div className="text-xs text-amber-900">
+              <p className="font-bold uppercase tracking-tight text-amber-800">
+                Chưa hoàn tất thanh toán VNPAY
+              </p>
+              <p className="mt-0.5 text-amber-700">
+                Đơn hàng đã được tạo thành công nhưng chưa hoàn tất thanh toán. Vui lòng nhấn nút <strong>&quot;Thanh toán ngay qua VNPAY&quot;</strong> bên dưới để hoàn tất đơn hàng.
               </p>
             </div>
           </div>
@@ -701,6 +756,27 @@ const OrderDetailPage = () => {
                   </span>
                 </div>
 
+                {order.paymentMethod === "VNPAY" && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-neutral-500">Trạng thái thanh toán:</span>
+                    <span
+                      className={`font-semibold ${
+                        paymentInfo?.status === "PAID"
+                          ? "text-emerald-600"
+                          : paymentInfo?.status === "CANCELLED"
+                          ? "text-neutral-500"
+                          : "text-amber-600"
+                      }`}
+                    >
+                      {paymentInfo?.status === "PAID"
+                        ? "Đã thanh toán"
+                        : paymentInfo?.status === "CANCELLED"
+                        ? "Đã hủy"
+                        : "Chờ thanh toán"}
+                    </span>
+                  </div>
+                )}
+
                 <div className="flex items-center justify-between">
                   <span className="text-neutral-500">Tạm tính hàng hóa:</span>
                   <span className="text-neutral-800">
@@ -733,6 +809,27 @@ const OrderDetailPage = () => {
                   </span>
                 </div>
               </div>
+
+              {order.paymentMethod === "VNPAY" &&
+                paymentInfo?.status !== "PAID" &&
+                !isCancelled &&
+                !isReturned && (
+                  <button
+                    type="button"
+                    onClick={handlePayNow}
+                    disabled={isPayingVnpay}
+                    className="mt-4 w-full flex items-center justify-center gap-2 bg-[#005BAA] hover:bg-[#004885] text-white px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors disabled:opacity-50"
+                  >
+                    {isPayingVnpay ? (
+                      "Đang kết nối VNPAY..."
+                    ) : (
+                      <>
+                        <CreditCard className="h-4 w-4" />
+                        Thanh toán ngay qua VNPAY
+                      </>
+                    )}
+                  </button>
+                )}
 
               {canCancel && (
                 <button

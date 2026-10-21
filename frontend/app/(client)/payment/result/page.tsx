@@ -16,10 +16,14 @@ type Summary = {
   paidAt: string | null;
 };
 
-const API_BASE_URL = (
+const RAW_API_URL = (
   process.env.NEXT_PUBLIC_API_URL ??
   "https://techwiseai-prod.up.railway.app"
 ).replace(/\/$/, "");
+
+const BACKEND_API_BASE = RAW_API_URL.endsWith("/api/v1")
+  ? RAW_API_URL
+  : `${RAW_API_URL}/api/v1`;
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
@@ -198,9 +202,11 @@ const PaymentResultContent = () => {
 
     const verify = async () => {
       try {
-        const res = await fetch(
-          `${API_BASE_URL}/api/v1/payments/vnpay/return?${searchParams.toString()}`
-        );
+        const verifyUrl =
+          typeof window !== "undefined"
+            ? `/api/payments/vnpay/return?${searchParams.toString()}`
+            : `${BACKEND_API_BASE}/payments/vnpay/return?${searchParams.toString()}`;
+        const res = await fetch(verifyUrl);
         const json = await res.json();
         const data = json?.data;
 
@@ -219,7 +225,7 @@ const PaymentResultContent = () => {
         }
 
         const paymentStatus = String(data?.status ?? "").toUpperCase();
-        if (paymentStatus === "PAID") setStatus("PAID");
+        if (paymentStatus === "PAID" || responseCode === "00") setStatus("PAID");
         else if (paymentStatus === "PENDING") setStatus("PENDING");
         else setStatus(failedStatus);
       } catch {
