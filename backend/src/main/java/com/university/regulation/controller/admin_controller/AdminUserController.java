@@ -63,10 +63,11 @@ public class AdminUserController {
     }
 
     @Transactional
-    @PatchMapping("/{id}/status")
+    @PatchMapping({"/{id}/status", "{id}/status"})
     public ApiResponse<AdminUserResponse> updateUserStatus(
             @PathVariable UUID id,
-            @Valid @RequestBody UpdateUserStatusRequest request,
+            @RequestParam(required = false) Boolean active,
+            @RequestBody(required = false) UpdateUserStatusRequest request,
             Authentication authentication,
             HttpServletRequest httpRequest
     ) {
@@ -76,7 +77,9 @@ public class AdminUserController {
                         "Không tìm thấy người dùng"
                 ));
 
-        boolean willActivate = Boolean.TRUE.equals(request.active());
+        boolean willActivate = active != null
+                ? active
+                : (request != null && Boolean.TRUE.equals(request.active()));
 
         // Do not allow admin to self-lock
         if (!willActivate && authentication != null && user.getUsername().equalsIgnoreCase(authentication.getName())) {

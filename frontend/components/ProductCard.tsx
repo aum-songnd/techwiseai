@@ -83,11 +83,15 @@ const ProductCard = ({ product, hideFavorite = false }: ProductCardProps) => {
             </div>
           )}
 
-          {product.status && (
-            <span className="absolute top-2 left-2 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-shop_orange/90 text-white">
+          {product.isFeatured ? (
+            <span className="absolute top-2 left-2 z-10 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-600 text-white shadow-sm flex items-center gap-1">
+              ★ Nổi bật
+            </span>
+          ) : product.status ? (
+            <span className="absolute top-2 left-2 z-10 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-shop_orange/90 text-white shadow-sm">
               {statusLabel[product.status] ?? product.status}
             </span>
-          )}
+          ) : null}
 
           {!hideFavorite && (
             <button

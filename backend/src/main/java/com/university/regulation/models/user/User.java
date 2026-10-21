@@ -93,4 +93,14 @@ public class User implements UserDetails {
     public String getPassword() {
         return passwordHash;
     }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled && !locked;
+    }
 }

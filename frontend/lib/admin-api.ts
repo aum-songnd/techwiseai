@@ -161,10 +161,21 @@ export async function adminUpdateProduct(
   id: string,
   payload: ProductPayload
 ) {
-  return fetchAdminEnvelope(`/admin/products/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(payload),
-  });
+  try {
+    return await fetchAdminEnvelope(`/admin/products/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    try {
+      return await fetchAdminEnvelope(`/admin/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+      });
+    } catch {
+      throw err;
+    }
+  }
 }
 
 export async function adminDeleteProduct(id: string) {

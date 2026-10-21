@@ -6,6 +6,9 @@ import {
 } from "@/constants/queriesShopPage";
 import type { Product, Category } from "@/app/data/types";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type ShopPageProps = {
   searchParams: Promise<{ category?: string }>;
 };

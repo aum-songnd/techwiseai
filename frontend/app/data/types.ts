@@ -32,9 +32,13 @@ export interface Product {
   id: string;
   name: string;
   slug: string;
+  sku?: string;
+  categoryId?: string;
   images: string[];
   description?: string;
+  shortDescription?: string;
   price: number;
+  originalPrice?: number;
   discount: number;
   finalPrice: number;
 
@@ -67,6 +71,7 @@ export interface Blog {
   publishedAt: string;
   isLatest: boolean;
   body: string;
+  active?: boolean;
 }
 
 export interface Address {

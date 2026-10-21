@@ -19,6 +19,7 @@ import {
   setAdminUserActive,
   type AdminUser,
 } from "@/lib/admin-users-api";
+import { subscribeTabSync } from "@/lib/tab-sync";
 import Loading from "@/app/(client)/loading";
 
 const PAGE_SIZE = 10;
@@ -100,6 +101,26 @@ const AdminUsersPage = () => {
 
   useEffect(() => {
     load();
+    const unsubscribe = subscribeTabSync((event) => {
+      if (event.type === "USER_STATUS_CHANGED") {
+        if (event.payload?.username || event.payload?.id) {
+          const { id, username, active } = event.payload;
+          setUsers((prev) =>
+            prev.map((u) =>
+              (id && u.id === id) ||
+              (username && u.username.toLowerCase() === username.toLowerCase())
+                ? { ...u, active: active !== false }
+                : u
+            )
+          );
+        } else {
+          load();
+        }
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
   }, [load]);
 
   const handleToggle = (user: AdminUser) => {
@@ -124,12 +145,12 @@ const AdminUsersPage = () => {
         setUsers((prev) =>
           prev.map((u) => (u.id === user.id ? { ...u, active: !willActivate } : u))
         );
-        setAdminUserActive(user.id, !willActivate).catch(() => {});
+        setAdminUserActive(user.id, !willActivate, user.username).catch(() => {});
       }
     );
 
     // 2. Chạy ngầm BE không gián đoạn
-    setAdminUserActive(user.id, willActivate).catch((e) => {
+    setAdminUserActive(user.id, willActivate, user.username).catch((e) => {
       // Rollback nếu BE lỗi
       setUsers((prev) =>
         prev.map((u) => (u.id === user.id ? { ...u, active: !willActivate } : u))
