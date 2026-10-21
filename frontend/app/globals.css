@@ -505,3 +505,22 @@ html, body {
     transform: none;
   }
 }
+
+@keyframes image-search-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    filter: brightness(0.8);
+    transform: scale(0.985);
+  }
+}
+
+.image-search-processing {
+  animation: image-search-pulse 1.6s ease-in-out infinite;
+}
