@@ -25,7 +25,7 @@ import { FREE_SHIP_THRESHOLD } from "@/components/ServiceFeatures";
 import { getSavedUserProfile, saveUserProfile, setStoredUser } from "@/lib/auth";
 import {
   createOrder,
-  createPayment,
+  createOrGetPayment,
   getOrders,
   OrderAuthRequiredError,
   type PaymentMethod,
@@ -516,17 +516,20 @@ const CheckoutPage = () => {
 
       let payment;
       try {
-        payment = await createPayment({
+        payment = await createOrGetPayment({
           orderId: order.id,
           paymentMethod,
         });
-      } catch {
-        router.push(`/orders/${order.id}?placed=1`);
-        return;
+      } catch (paymentErr) {
+        console.error("Lỗi khi khởi tạo thanh toán:", paymentErr);
       }
 
-      if (payment.paymentUrl) {
-        window.location.href = payment.paymentUrl;
+      if (paymentMethod === "VNPAY") {
+        if (payment?.paymentUrl) {
+          window.location.href = payment.paymentUrl;
+          return;
+        }
+        router.push(`/orders/${order.id}?placed=1&vnpay_error=1`);
         return;
       }
 

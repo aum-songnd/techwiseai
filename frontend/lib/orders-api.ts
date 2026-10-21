@@ -309,15 +309,22 @@ export interface CreatePaymentPayload {
 export type PaymentStatus = "PENDING" | "PAID" | "FAILED" | "CANCELLED";
 
 export interface PaymentData {
-  paymentId: string;
+  id?: string;
+  paymentId?: string;
   orderId: string;
   paymentMethod: PaymentMethod;
 
   paymentUrl?: string;
   amount: number;
   status: PaymentStatus;
+  currency?: string;
+  transactionCode?: string;
   transactionNo?: string;
+  providerTransactionId?: string;
+  failureReason?: string;
   paidAt?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export async function createPayment(
@@ -332,4 +339,20 @@ export async function createPayment(
 
 export async function getPaymentByOrder(orderId: string): Promise<PaymentData> {
   return fetchOrderEnvelope<PaymentData>(`/payments/orders/${orderId}`);
+}
+
+export async function createOrGetPayment(
+  payload: CreatePaymentPayload
+): Promise<PaymentData> {
+  try {
+    return await createPayment(payload);
+  } catch (err) {
+    try {
+      const existing = await getPaymentByOrder(payload.orderId);
+      if (existing) return existing;
+    } catch {
+      // ignore
+    }
+    throw err;
+  }
 }

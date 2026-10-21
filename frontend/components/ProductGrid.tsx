@@ -9,8 +9,8 @@ import { Title } from "./ui/text";
 import ProductCard from "./ProductCard";
 import NoProductAvailable from "./NoProductAvailable";
 import { useHomeProductFeed } from "./HomeProductFeed";
-import type { Product } from "@/app/data/types";
-import { getProducts } from "@/lib/api";
+import type { Category, Product } from "@/app/data/types";
+import { getCategories, getProducts } from "@/lib/api";
 
 const ChevronIcon = ({ direction }: { direction: "left" | "right" }) => (
   <svg
@@ -27,19 +27,19 @@ const ChevronIcon = ({ direction }: { direction: "left" | "right" }) => (
   </svg>
 );
 
-interface LaptopCarouselSectionProps {
+interface ProductCarouselSectionProps {
   title: string;
   products: Product[];
   viewAllHref: string;
   autoplayDelay?: number;
 }
 
-const LaptopCarouselSection = ({
+const ProductCarouselSection = ({
   title,
   products,
   viewAllHref,
   autoplayDelay = 4500,
-}: LaptopCarouselSectionProps) => {
+}: ProductCarouselSectionProps) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       align: "start",
@@ -47,34 +47,17 @@ const LaptopCarouselSection = ({
       slidesToScroll: 1,
       dragFree: false,
     },
-    [Autoplay({ delay: autoplayDelay, stopOnInteraction: false, stopOnMouseEnter: true })]
+    [
+      Autoplay({
+        delay: autoplayDelay,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    ]
   );
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [snapCount, setSnapCount] = useState(0);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    const onInit = () => {
-      setSnapCount(emblaApi.scrollSnapList().length);
-      onSelect();
-    };
-    onInit();
-    emblaApi.on("reInit", onInit);
-    emblaApi.on("select", onSelect);
-    return () => {
-      emblaApi.off("reInit", onInit);
-      emblaApi.off("select", onSelect);
-    };
-  }, [emblaApi, onSelect]);
 
   if (!products.length) return null;
 
@@ -138,13 +121,29 @@ const LaptopCarouselSection = ({
   );
 };
 
-interface ProductGridProps {
-  initialLaptops?: Product[];
+export const LaptopCarouselSection = ProductCarouselSection;
+
+export interface CategorySectionData {
+  category: Category;
+  products: Product[];
 }
 
-const ProductGrid = ({ initialLaptops }: ProductGridProps = {}) => {
+export interface ProductGridProps {
+  initialLaptops?: Product[];
+  initialCategorySections?: CategorySectionData[];
+}
+
+const ProductGrid = ({
+  initialLaptops,
+  initialCategorySections,
+}: ProductGridProps = {}) => {
   const sharedProducts = useHomeProductFeed();
-  const [laptopsData, setLaptopsData] = useState<Product[]>(initialLaptops ?? []);
+  const [laptopsData, setLaptopsData] = useState<Product[]>(
+    initialLaptops ?? []
+  );
+  const [categorySections, setCategorySections] = useState<CategorySectionData[]>(
+    initialCategorySections ?? []
+  );
 
   useEffect(() => {
     if (initialLaptops && initialLaptops.length > 0) {
@@ -152,7 +151,7 @@ const ProductGrid = ({ initialLaptops }: ProductGridProps = {}) => {
       return;
     }
 
-    getProducts({ category: "laptop", size: 60 })
+    getProducts({ category: "laptop", size: 60, noStore: true })
       .then((res) => {
         if (res && res.length > 0) {
           setLaptopsData(res);
@@ -160,6 +159,45 @@ const ProductGrid = ({ initialLaptops }: ProductGridProps = {}) => {
       })
       .catch(() => {});
   }, [initialLaptops]);
+
+  useEffect(() => {
+    if (initialCategorySections && initialCategorySections.length > 0) {
+      setCategorySections(initialCategorySections);
+      return;
+    }
+
+    // Client-side fallback: fetch other categories and their products
+    getCategories({ noStore: true })
+      .then(async (cats) => {
+        const others = cats
+          .filter((c) => {
+            const s = (c.slug || "").toLowerCase();
+            const t = (c.title || "").toLowerCase();
+            return !s.includes("laptop") && !t.includes("laptop");
+          })
+          .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
+
+        const sections = await Promise.all(
+          others.map(async (cat) => {
+            try {
+              const items = await getProducts({
+                category: cat.slug,
+                size: 15,
+                noStore: true,
+              });
+              return { category: cat, products: items };
+            } catch {
+              return { category: cat, products: [] };
+            }
+          })
+        );
+
+        setCategorySections(sections.filter((s) => s.products.length > 0));
+      })
+      .catch(() => {});
+  }, [initialCategorySections]);
+
+
 
   // Lọc sản phẩm thuộc nhóm Laptop (loại trừ các linh kiện, phụ kiện)
   const allLaptops = useMemo(() => {
@@ -232,35 +270,53 @@ const ProductGrid = ({ initialLaptops }: ProductGridProps = {}) => {
     return [...sorted, ...remainder].slice(0, 10);
   }, [allLaptops]);
 
-  if (!allLaptops.length) {
-    return <NoProductAvailable selectedTab="Laptop" />;
+  if (!allLaptops.length && !categorySections.length) {
+    return <NoProductAvailable selectedTab="Sản phẩm" />;
   }
 
   return (
     <div className="space-y-4">
-      {/* Mục 1: Laptop nổi bật */}
-      <LaptopCarouselSection
-        title="Laptop nổi bật"
-        products={featuredLaptops}
-        viewAllHref="/shop?category=laptop"
-        autoplayDelay={4000}
-      />
+      {/* 3 Mục của Laptop */}
+      {allLaptops.length > 0 ? (
+        <>
+          {/* Mục 1: Laptop nổi bật */}
+          <ProductCarouselSection
+            title="Laptop nổi bật"
+            products={featuredLaptops}
+            viewAllHref="/shop?category=laptop"
+            autoplayDelay={4000}
+          />
 
-      {/* Mục 2: Laptop cấu hình cao */}
-      <LaptopCarouselSection
-        title="Laptop cấu hình cao"
-        products={highEndLaptops}
-        viewAllHref="/shop?category=laptop"
-        autoplayDelay={4800}
-      />
+          {/* Mục 2: Laptop cấu hình cao */}
+          <ProductCarouselSection
+            title="Laptop cấu hình cao"
+            products={highEndLaptops}
+            viewAllHref="/shop?category=laptop"
+            autoplayDelay={4800}
+          />
 
-      {/* Mục 3: Laptop giảm giá */}
-      <LaptopCarouselSection
-        title="Laptop giảm giá"
-        products={saleLaptops}
-        viewAllHref="/shop?category=laptop"
-        autoplayDelay={5400}
-      />
+          {/* Mục 3: Laptop giảm giá */}
+          <ProductCarouselSection
+            title="Laptop giảm giá"
+            products={saleLaptops}
+            viewAllHref="/shop?category=laptop"
+            autoplayDelay={5400}
+          />
+        </>
+      ) : (
+        <NoProductAvailable selectedTab="Laptop" />
+      )}
+
+      {/* Mỗi loại sản phẩm khác 1 mục dưới 3 mục laptop */}
+      {categorySections.map((section, idx) => (
+        <ProductCarouselSection
+          key={section.category.id || section.category.slug}
+          title={section.category.title}
+          products={section.products}
+          viewAllHref={`/shop?category=${section.category.slug}`}
+          autoplayDelay={4200 + ((idx * 400) % 2000)}
+        />
+      ))}
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import Blog from "../../../components/Blog";
 import {
   getAllBlogs,

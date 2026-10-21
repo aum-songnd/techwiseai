@@ -38,15 +38,20 @@ export function getHiddenBlogsMap(): Record<string, boolean> {
 export async function syncHiddenBlogs(): Promise<Record<string, boolean>> {
   if (typeof window === "undefined") return {};
   try {
-    const localMap = getHiddenBlogsMap();
-    if (Object.keys(localMap).length > 0) {
+    const raw = localStorage.getItem(HIDDEN_BLOGS_KEY);
+    if (raw !== null) {
+      // Local state exists (even if empty {} when all blogs are active)
+      // Sync it to server to ensure server cache matches admin selection
+      const localMap = JSON.parse(raw);
       await fetch("/api/blogs/status", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ hiddenMap: localMap }),
       }).catch(() => {});
+      return localMap;
     }
 
+    // First time visitor (no local key yet): pull from server
     const res = await fetch("/api/blogs/status", { cache: "no-store" });
     if (res.ok) {
       const json = await res.json();
@@ -65,6 +70,7 @@ export function saveHiddenBlog(id: string) {
     const map = getHiddenBlogsMap();
     map[id] = true;
     localStorage.setItem(HIDDEN_BLOGS_KEY, JSON.stringify(map));
+    localStorage.setItem("techwiseai_catalog_updated_at", String(Date.now()));
     broadcastTabEvent({
       type: "BLOGS_STATUS_CHANGED",
       payload: { blogId: id, active: false, timestamp: Date.now() },
@@ -72,7 +78,7 @@ export function saveHiddenBlog(id: string) {
     fetch("/api/blogs/status", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, active: false }),
+      body: JSON.stringify({ hiddenMap: map, id, active: false }),
     }).catch(() => {});
   } catch {}
 }
@@ -83,6 +89,7 @@ export function removeHiddenBlog(id: string) {
     const map = getHiddenBlogsMap();
     delete map[id];
     localStorage.setItem(HIDDEN_BLOGS_KEY, JSON.stringify(map));
+    localStorage.setItem("techwiseai_catalog_updated_at", String(Date.now()));
     broadcastTabEvent({
       type: "BLOGS_STATUS_CHANGED",
       payload: { blogId: id, active: true, timestamp: Date.now() },
@@ -90,7 +97,7 @@ export function removeHiddenBlog(id: string) {
     fetch("/api/blogs/status", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, active: true }),
+      body: JSON.stringify({ hiddenMap: map, id, active: true }),
     }).catch(() => {});
   } catch {}
 }

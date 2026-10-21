@@ -23,6 +23,8 @@ import {
   adminUpdateCategory,
   CategoryPayload,
 } from "@/lib/admin-api";
+import { clearRequestCache } from "@/lib/request-cache";
+import { notifyCatalogUpdated } from "@/lib/tab-sync";
 import type { Category } from "@/app/data/types";
 
 const emptyForm: CategoryPayload = {
@@ -54,6 +56,9 @@ const getCategoryImage = (category: Category) => {
   return "/accessory.webp";
 };
 
+let categoryCountsSnapshot: { counts: Record<string, number>; at: number } | null = null;
+const COUNTS_SNAPSHOT_MS = 60 * 1000;
+
 const AdminCategoriesPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryProductCounts, setCategoryProductCounts] = useState<Record<string, number>>({});
@@ -79,7 +84,7 @@ const AdminCategoriesPage = () => {
     }, 4500);
   }, []);
 
-  const loadCategories = async () => {
+  const loadCategories = async (force = false) => {
     setLoading(true);
     setError(null);
     try {
@@ -111,8 +116,15 @@ const AdminCategoriesPage = () => {
           }
         )
       );
-      const products = await fetchAllAdminProducts();
-      setCategoryProductCounts(countProductsByCategory(products, data));
+
+      if (!force && categoryCountsSnapshot && Date.now() - categoryCountsSnapshot.at < COUNTS_SNAPSHOT_MS) {
+        setCategoryProductCounts(categoryCountsSnapshot.counts);
+      } else {
+        const products = await fetchAllAdminProducts();
+        const counts = countProductsByCategory(products, data);
+        setCategoryProductCounts(counts);
+        categoryCountsSnapshot = { counts, at: Date.now() };
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Không tải được danh mục");
     } finally {
@@ -169,8 +181,11 @@ const AdminCategoriesPage = () => {
       } else {
         await adminCreateCategory(form);
       }
+      categoryCountsSnapshot = null;
+      clearRequestCache("catalog:");
+      notifyCatalogUpdated("categories");
       resetForm();
-      await loadCategories();
+      await loadCategories(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Lưu danh mục thất bại");
     } finally {
@@ -184,8 +199,12 @@ const AdminCategoriesPage = () => {
 
     // 1. Cập nhật UI ngay lập tức (Optimistic Update)
     setCategories((prev) => prev.filter((c) => c.id !== category.id));
+    clearRequestCache("catalog:");
+    notifyCatalogUpdated("categories");
     showToast(`Đã xóa danh mục "${category.title}".`, () => {
       setCategories((prev) => [...prev, category].sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)));
+      clearRequestCache("catalog:");
+      notifyCatalogUpdated("categories");
       adminToggleCategoryStatus(category.id, true).catch(() => {
         adminUpdateCategory(category.id, {
           name: category.title,

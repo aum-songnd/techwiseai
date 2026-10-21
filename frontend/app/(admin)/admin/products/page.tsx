@@ -24,6 +24,7 @@ import {
   removeHiddenProduct,
 } from "@/lib/admin-products";
 import { clearRequestCache } from "@/lib/request-cache";
+import { notifyCatalogUpdated } from "@/lib/tab-sync";
 import ProductImage from "@/components/admin/ProductImage";
 import {
   adminCreateProduct,
@@ -261,6 +262,7 @@ const AdminProductsPage = () => {
         await adminCreateProduct(form);
       }
       clearRequestCache("catalog:");
+      notifyCatalogUpdated("products");
       productSnapshot = null;
       resetForm();
       showToast(editingId ? "Cập nhật sản phẩm thành công!" : "Tạo sản phẩm mới thành công!");
@@ -293,6 +295,7 @@ const AdminProductsPage = () => {
       };
     }
     clearRequestCache("catalog:");
+    notifyCatalogUpdated("products");
     showToast("Đã ẩn sản phẩm khỏi website.", () => handleToggleStatus(id, true));
 
     // 2. Chạy ngầm BE không reload lại danh sách
@@ -312,6 +315,7 @@ const AdminProductsPage = () => {
         };
       }
       clearRequestCache("catalog:");
+      notifyCatalogUpdated("products");
       setError(err instanceof Error ? err.message : "Ẩn sản phẩm thất bại");
       showToast("Ẩn sản phẩm thất bại. Đã khôi phục trạng thái.");
     });
@@ -340,6 +344,7 @@ const AdminProductsPage = () => {
       };
     }
     clearRequestCache("catalog:");
+    notifyCatalogUpdated("products");
     showToast(active ? "Đã mở bán lại sản phẩm trên web." : "Đã ẩn sản phẩm khỏi website.");
 
     // 2. Chạy ngầm BE với fallback đảm bảo kích hoạt thành công trên DB
@@ -399,6 +404,7 @@ const AdminProductsPage = () => {
         };
       }
       clearRequestCache("catalog:");
+      notifyCatalogUpdated("products");
       setError(err instanceof Error ? err.message : "Cập nhật trạng thái thất bại");
       showToast("Cập nhật trạng thái thất bại. Đã khôi phục.");
     });

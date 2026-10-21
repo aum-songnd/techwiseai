@@ -262,7 +262,7 @@ const InfoRow = ({ label, value }: { label: string; value: React.ReactNode }) =>
 
 type OrdersSnapshot = { items: AdminOrderListItem[]; totalPages: number; totalElements: number; at: number };
 const orderSnapshots = new Map<string, OrdersSnapshot>();
-const ORDER_SNAPSHOT_MS = 60 * 1000;
+const ORDER_SNAPSHOT_MS = 2 * 60 * 1000;
 const orderKey = (tab: TabKey, page: number) => JSON.stringify([getToken(), tab, page]);
 let countsSnapshot: { token: string | null; counts: Partial<Record<TabKey, number>>; at: number } | null = null;
 
@@ -387,12 +387,14 @@ const AdminOrdersPage = () => {
             : []
         ) as AdminOrderListItem[];
 
+        const tabTotal = (raw.totalElements as number) ?? list.length;
         setItems(list);
         setTotalPages((raw.totalPages as number) ?? 1);
-        setTotalElements((raw.totalElements as number) ?? list.length);
+        setTotalElements(tabTotal);
+        setStatusCounts((prev) => ({ ...prev, [activeTab]: tabTotal }));
         orderSnapshots.set(key, {
           items: list, totalPages: (raw.totalPages as number) ?? 1,
-          totalElements: (raw.totalElements as number) ?? list.length, at: Date.now(),
+          totalElements: tabTotal, at: Date.now(),
         });
 
         setSelectedId((cur) =>

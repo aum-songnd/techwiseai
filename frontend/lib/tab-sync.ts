@@ -45,6 +45,15 @@ export type TabSyncEvent =
       timestamp: number;
     }
   | {
+      type: "CATALOG_UPDATED";
+      payload?: {
+        scope?: "products" | "categories" | "all";
+        timestamp?: number;
+      };
+      senderTabId: string;
+      timestamp: number;
+    }
+  | {
       type: "BLOGS_STATUS_CHANGED";
       payload?: {
         blogId?: string;
@@ -157,6 +166,7 @@ export function broadcastTabEvent(
     | { type: "CART_UPDATED"; payload?: { cart?: CartData; timestamp?: number } }
     | { type: "FAVORITES_UPDATED"; payload?: { timestamp?: number } }
     | { type: "ADMIN_ORDERS_CHANGED"; payload?: { timestamp?: number } }
+    | { type: "CATALOG_UPDATED"; payload?: { scope?: "products" | "categories" | "all"; timestamp?: number } }
     | { type: "BLOGS_STATUS_CHANGED"; payload?: { blogId?: string; active?: boolean; timestamp?: number } }
     | { type: "USER_STATUS_CHANGED"; payload?: { id?: string; username?: string; active?: boolean; timestamp?: number } }
     | { type: "TAB_PING"; payload?: Record<string, never> }
@@ -197,3 +207,18 @@ export function subscribeTabSync(
     listeners.delete(listener);
   };
 }
+
+export function notifyCatalogUpdated(
+  scope: "products" | "categories" | "all" = "all"
+): void {
+  if (typeof window === "undefined") return;
+  const now = Date.now();
+  try {
+    localStorage.setItem("techwiseai_catalog_updated_at", String(now));
+  } catch {}
+  broadcastTabEvent({
+    type: "CATALOG_UPDATED",
+    payload: { scope, timestamp: now },
+  });
+}
+

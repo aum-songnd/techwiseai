@@ -66,7 +66,10 @@ export const getBlogBySlug = async (slug: string): Promise<Blog | undefined> => 
     const blog = await apiFetch<Blog>(`/blogs/${slug}`, `/api/blogs/${slug}`, fallback as Blog);
     const candidate = blog ?? fallback;
     if (candidate) {
-      const hiddenMap = getHiddenBlogsMap();
+      const hiddenMap =
+        typeof window !== "undefined"
+          ? getHiddenBlogsMap()
+          : getServerHiddenBlogsMap();
       if (candidate.active === false || hiddenMap[candidate.id]) {
         return undefined;
       }

@@ -9,6 +9,8 @@ import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { FavoriteProvider } from "@/context/FavoriteContext";
 import Chat from "@/components/Chat";
+import ScrollToTop from "@/components/ScrollToTop";
+import CatalogSyncWatcher from "@/components/CatalogSyncWatcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +50,8 @@ export default function RootLayout({
                 </AdminRedirect>
 
                 <Chat />
+                <ScrollToTop />
+                <CatalogSyncWatcher />
               </TooltipProvider>
             </FavoriteProvider>
           </CartProvider>

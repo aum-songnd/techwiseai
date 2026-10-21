@@ -158,13 +158,20 @@ async function fetchEnvelopeUncached<T>(
 }
 
 async function fetchEnvelope<T>(path: string, init?: RequestInit): Promise<T> {
-  const isCatalog = /^\/(products|categories|brands)(?:\/|\?|$)/.test(path) &&
+  const isCatalog =
+    /^\/(products|categories|brands)(?:\/|\?|$)/.test(path) &&
     !path.startsWith("/products/search");
-  const cacheable = isCatalog && (init?.method ?? "GET").toUpperCase() === "GET" &&
-    init?.cache !== "no-store" && !init?.signal;
-  return cacheable
-    ? cachedRequest("catalog:" + path, 45000, () => fetchEnvelopeUncached<T>(path, init))
-    : fetchEnvelopeUncached<T>(path, init);
+  const isGet = (init?.method ?? "GET").toUpperCase() === "GET";
+
+  if (isCatalog && isGet && !init?.signal) {
+    const isNoStore = init?.cache === "no-store";
+    const ttl = isNoStore ? 3000 : 45000;
+    return cachedRequest("catalog:" + path, ttl, () =>
+      fetchEnvelopeUncached<T>(path, init)
+    );
+  }
+
+  return fetchEnvelopeUncached<T>(path, init);
 }
 
 async function fetchEnvelopeAuthed<T>(

@@ -179,10 +179,12 @@ export default function TabSessionGuard({
     };
     window.addEventListener("focus", handleFocus);
 
-    // Periodic check every 6 seconds
+    // Periodic check every 30 seconds when tab is active (focus checks immediately)
     sessionCheckTimerRef.current = setInterval(() => {
-      checkBrowserSession();
-    }, 6000);
+      if (typeof document !== "undefined" && document.visibilityState === "visible") {
+        checkBrowserSession();
+      }
+    }, 30000);
 
     return () => {
       window.removeEventListener("focus", handleFocus);

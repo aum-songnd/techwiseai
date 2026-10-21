@@ -5,6 +5,9 @@ import HomeCategories from '@/components/HomeCategories';
 import HomeProductSections from '@/components/HomeProductSections';
 import HomeLatestBlog from '@/components/HomeLatestBlog';
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const Home = () => {
   return (
     <div className="font-sans min-h-screen bg-white text-neutral-900">
