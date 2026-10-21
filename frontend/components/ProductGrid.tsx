@@ -11,7 +11,6 @@ import NoProductAvailable from "./NoProductAvailable";
 import { useHomeProductFeed } from "./HomeProductFeed";
 import type { Category, Product } from "@/app/data/types";
 import { getCategories, getProducts } from "@/lib/api";
-import { subscribeTabSync } from "@/lib/tab-sync";
 
 const ChevronIcon = ({ direction }: { direction: "left" | "right" }) => (
   <svg
@@ -198,48 +197,7 @@ const ProductGrid = ({
       .catch(() => {});
   }, [initialCategorySections]);
 
-  // Lắng nghe sự kiện CATALOG_UPDATED để tự động cập nhật dữ liệu mới nhất mà không cần F5
-  useEffect(() => {
-    const unsubscribe = subscribeTabSync((event) => {
-      if (event.type === "CATALOG_UPDATED") {
-        getProducts({ category: "laptop", size: 60, noStore: true })
-          .then((res) => {
-            if (res && res.length > 0) setLaptopsData(res);
-          })
-          .catch(() => {});
 
-        getCategories({ noStore: true })
-          .then(async (cats) => {
-            const others = cats
-              .filter((c) => {
-                const s = (c.slug || "").toLowerCase();
-                const t = (c.title || "").toLowerCase();
-                return !s.includes("laptop") && !t.includes("laptop");
-              })
-              .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
-
-            const sections = await Promise.all(
-              others.map(async (cat) => {
-                try {
-                  const items = await getProducts({
-                    category: cat.slug,
-                    size: 15,
-                    noStore: true,
-                  });
-                  return { category: cat, products: items };
-                } catch {
-                  return { category: cat, products: [] };
-                }
-              })
-            );
-            setCategorySections(sections.filter((s) => s.products.length > 0));
-          })
-          .catch(() => {});
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   // Lọc sản phẩm thuộc nhóm Laptop (loại trừ các linh kiện, phụ kiện)
   const allLaptops = useMemo(() => {

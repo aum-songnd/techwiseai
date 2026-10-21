@@ -13,9 +13,9 @@ const HomeProductSections = async () => {
   try {
     const [allResult, laptopResult, categoriesResult] =
       await Promise.allSettled([
-        getProducts({ size: 60, noStore: true }),
-        getProducts({ category: "laptop", size: 60, noStore: true }),
-        getCategories({ noStore: true }),
+        getProducts({ size: 60 }),
+        getProducts({ category: "laptop", size: 60 }),
+        getCategories(),
       ]);
 
     products = allResult.status === "fulfilled" ? allResult.value : [];
@@ -34,7 +34,7 @@ const HomeProductSections = async () => {
     if (otherCategories.length > 0) {
       const catResults = await Promise.allSettled(
         otherCategories.map((cat) =>
-          getProducts({ category: cat.slug, size: 15, noStore: true }).then((items) => ({
+          getProducts({ category: cat.slug, size: 15 }).then((items) => ({
             category: cat,
             products: items,
           }))

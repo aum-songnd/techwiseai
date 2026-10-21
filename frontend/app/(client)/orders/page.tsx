@@ -191,36 +191,41 @@ const OrdersHistoryPage = () => {
     load();
   }, [load]);
 
+  const checkedEnrichRef = useRef<Set<string>>(new Set());
+
   // Background detail loader for enriched information
   useEffect(() => {
     if (allItems.length === 0) return;
     let isMounted = true;
 
     const enrichItems = async () => {
-      const pendingOrders = allItems.filter(
-        (o) => !detailsMap[o.id] && (!o.items || o.items.length === 0)
+      // Only enrich visible orders that genuinely lack items and haven't been checked yet
+      const pendingOrders = allItems.slice(0, 10).filter(
+        (o) =>
+          !checkedEnrichRef.current.has(o.id) &&
+          !detailsMap[o.id] &&
+          (!o.items || o.items.length === 0)
       );
 
-      const BATCH_SIZE = 3;
-      for (let i = 0; i < pendingOrders.length; i += BATCH_SIZE) {
-        if (!isMounted) break;
-        const batch = pendingOrders.slice(i, i + BATCH_SIZE);
-        const results = await Promise.allSettled(
-          batch.map((order) => getOrderById(order.id))
-        );
+      if (pendingOrders.length === 0) return;
 
-        if (!isMounted) break;
+      pendingOrders.forEach((o) => checkedEnrichRef.current.add(o.id));
 
-        const freshEntries: Record<string, OrderData> = {};
-        results.forEach((res, idx) => {
-          if (res.status === "fulfilled" && res.value) {
-            freshEntries[batch[idx].id] = res.value;
-          }
-        });
+      const results = await Promise.allSettled(
+        pendingOrders.map((order) => getOrderById(order.id))
+      );
 
-        if (Object.keys(freshEntries).length > 0) {
-          setDetailsMap((prev) => ({ ...prev, ...freshEntries }));
+      if (!isMounted) return;
+
+      const freshEntries: Record<string, OrderData> = {};
+      results.forEach((res, idx) => {
+        if (res.status === "fulfilled" && res.value) {
+          freshEntries[pendingOrders[idx].id] = res.value;
         }
+      });
+
+      if (Object.keys(freshEntries).length > 0) {
+        setDetailsMap((prev) => ({ ...prev, ...freshEntries }));
       }
     };
 
@@ -229,7 +234,7 @@ const OrdersHistoryPage = () => {
     return () => {
       isMounted = false;
     };
-  }, [allItems]);
+  }, [allItems, detailsMap]);
 
   // Stats calculation
   const stats = useMemo(() => {

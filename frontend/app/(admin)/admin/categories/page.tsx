@@ -56,6 +56,9 @@ const getCategoryImage = (category: Category) => {
   return "/accessory.webp";
 };
 
+let categoryCountsSnapshot: { counts: Record<string, number>; at: number } | null = null;
+const COUNTS_SNAPSHOT_MS = 60 * 1000;
+
 const AdminCategoriesPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryProductCounts, setCategoryProductCounts] = useState<Record<string, number>>({});
@@ -81,7 +84,7 @@ const AdminCategoriesPage = () => {
     }, 4500);
   }, []);
 
-  const loadCategories = async () => {
+  const loadCategories = async (force = false) => {
     setLoading(true);
     setError(null);
     try {
@@ -113,8 +116,15 @@ const AdminCategoriesPage = () => {
           }
         )
       );
-      const products = await fetchAllAdminProducts();
-      setCategoryProductCounts(countProductsByCategory(products, data));
+
+      if (!force && categoryCountsSnapshot && Date.now() - categoryCountsSnapshot.at < COUNTS_SNAPSHOT_MS) {
+        setCategoryProductCounts(categoryCountsSnapshot.counts);
+      } else {
+        const products = await fetchAllAdminProducts();
+        const counts = countProductsByCategory(products, data);
+        setCategoryProductCounts(counts);
+        categoryCountsSnapshot = { counts, at: Date.now() };
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Không tải được danh mục");
     } finally {
@@ -171,10 +181,11 @@ const AdminCategoriesPage = () => {
       } else {
         await adminCreateCategory(form);
       }
+      categoryCountsSnapshot = null;
       clearRequestCache("catalog:");
       notifyCatalogUpdated("categories");
       resetForm();
-      await loadCategories();
+      await loadCategories(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Lưu danh mục thất bại");
     } finally {
