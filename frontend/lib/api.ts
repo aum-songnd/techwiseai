@@ -1,5 +1,5 @@
 import { cachedRequest } from "./request-cache";
-import type { Product, Category, Brand } from "../app/data/types";
+import type { Product, Category, Brand, ProductVariant } from "../app/data/types";
 import { getToken } from "./auth";
 
 const API_BASE_URL =
@@ -165,7 +165,6 @@ function mapCategory(raw: ApiCategoryRaw): Category {
 }
 
 export function mapProduct(raw: ApiProductRaw): Product {
-
   const price = raw.originalPrice ?? raw.price;
   const discount = Math.max(0, price - raw.price);
   const finalPrice = raw.price;
@@ -175,11 +174,27 @@ export function mapProduct(raw: ApiProductRaw): Product {
   else if (raw.onSale) status = "sale";
   else if (raw.featured) status = "new";
 
+  let variant: ProductVariant | undefined;
+  const cat = `${raw.category?.slug ?? ""} ${raw.category?.name ?? ""}`.toLowerCase();
+  const name = (raw.name ?? "").toLowerCase();
+  if (cat.includes("laptop") || name.includes("laptop") || name.includes("macbook") || name.includes("surface")) {
+    variant = "laptop";
+  } else if (cat.includes("dien-thoai") || cat.includes("phone") || name.includes("iphone") || name.includes("galaxy") || name.includes("xiaomi")) {
+    variant = "phone";
+  } else if (cat.includes("tai-nghe") || cat.includes("earphone") || cat.includes("headphone") || name.includes("airpods")) {
+    variant = "earphone";
+  } else {
+    variant = "others";
+  }
+
   return {
     id: raw.id,
     slug: raw.slug,
     name: raw.name,
+    sku: raw.sku,
+    categoryId: raw.category?.id,
     price,
+    originalPrice: raw.originalPrice ?? raw.price,
     discount,
     finalPrice,
     images: raw.thumbnailUrl ? [raw.thumbnailUrl] : [],
@@ -189,12 +204,16 @@ export function mapProduct(raw: ApiProductRaw): Product {
     brand: raw.brand,
     stock: raw.stockQuantity ?? 0,
     status,
+    variant,
     isFeatured: !!raw.featured,
     active: raw.active ?? true,
 
     description: raw.description ?? raw.shortDescription,
+    shortDescription: raw.shortDescription,
   };
 }
+
+
 
 export interface GetProductsParams {
   page?: number;
@@ -261,7 +280,8 @@ export async function getProductsPaginated(
 }
 
 export async function getAllProductsByCategory(
-  category?: string
+  category?: string,
+  noStore = true
 ): Promise<Product[]> {
   const query = new URLSearchParams({
     page: "0",
@@ -271,10 +291,11 @@ export async function getAllProductsByCategory(
 
   const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
     `/products?${query}`,
-    { next: { revalidate: 60 } }
+    noStore ? { cache: "no-store" } : { next: { revalidate: 60 } }
   );
   return normalizeList(data).map(mapProduct);
 }
+
 
 export async function searchProducts(
   keyword: string,

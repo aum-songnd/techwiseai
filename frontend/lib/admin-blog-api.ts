@@ -1,6 +1,8 @@
 import type { Blog, BlogCategory, Author } from "@/app/data/types";
 import { getToken } from "./auth";
 
+import { blogs as defaultSeedBlogs } from "@/app/data/blogs";
+
 export interface BlogPayload {
   title: string;
   slug: string;
@@ -10,6 +12,7 @@ export interface BlogPayload {
   publishedAt: string;
   isLatest: boolean;
   body: string;
+  active?: boolean;
 }
 
 const API_BASE_URL =
@@ -17,6 +20,93 @@ const API_BASE_URL =
   "https://techwiseai-prod.up.railway.app/api/v1";
 
 const LOCAL_BASE = "/api/blogs";
+
+const HIDDEN_BLOGS_KEY = "admin_hidden_blogs_map";
+
+import { broadcastTabEvent } from "./tab-sync";
+
+export function getHiddenBlogsMap(): Record<string, boolean> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(HIDDEN_BLOGS_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+export async function syncHiddenBlogs(): Promise<Record<string, boolean>> {
+  if (typeof window === "undefined") return {};
+  try {
+    const localMap = getHiddenBlogsMap();
+    if (Object.keys(localMap).length > 0) {
+      await fetch("/api/blogs/status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hiddenMap: localMap }),
+      }).catch(() => {});
+    }
+
+    const res = await fetch("/api/blogs/status", { cache: "no-store" });
+    if (res.ok) {
+      const json = await res.json();
+      if (json && json.data) {
+        localStorage.setItem(HIDDEN_BLOGS_KEY, JSON.stringify(json.data));
+        return json.data;
+      }
+    }
+  } catch {}
+  return getHiddenBlogsMap();
+}
+
+export function saveHiddenBlog(id: string) {
+  if (typeof window === "undefined" || !id) return;
+  try {
+    const map = getHiddenBlogsMap();
+    map[id] = true;
+    localStorage.setItem(HIDDEN_BLOGS_KEY, JSON.stringify(map));
+    broadcastTabEvent({
+      type: "BLOGS_STATUS_CHANGED",
+      payload: { blogId: id, active: false, timestamp: Date.now() },
+    });
+    fetch("/api/blogs/status", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, active: false }),
+    }).catch(() => {});
+  } catch {}
+}
+
+export function removeHiddenBlog(id: string) {
+  if (typeof window === "undefined" || !id) return;
+  try {
+    const map = getHiddenBlogsMap();
+    delete map[id];
+    localStorage.setItem(HIDDEN_BLOGS_KEY, JSON.stringify(map));
+    broadcastTabEvent({
+      type: "BLOGS_STATUS_CHANGED",
+      payload: { blogId: id, active: true, timestamp: Date.now() },
+    });
+    fetch("/api/blogs/status", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, active: true }),
+    }).catch(() => {});
+  } catch {}
+}
+
+export function isHiddenBlog(id: string): boolean {
+  const map = getHiddenBlogsMap();
+  return Boolean(map[id]);
+}
+
+export function getMissingSeedBlogs(currentBlogs: Blog[]): Blog[] {
+  const currentSlugs = new Set(currentBlogs.map((b) => b.slug));
+  const currentIds = new Set(currentBlogs.map((b) => b.id));
+  return defaultSeedBlogs.filter(
+    (seed) => !currentSlugs.has(seed.slug) && !currentIds.has(seed.id)
+  );
+}
 
 function getAuthHeaders(): HeadersInit {
   const token = getToken();
@@ -30,20 +120,29 @@ function getAuthHeaders(): HeadersInit {
 }
 
 export async function adminGetAllBlogs(): Promise<Blog[]> {
+  let list: Blog[] = [];
   try {
     const res = await fetch(`${API_BASE_URL}/blogs`, { cache: "no-store" });
     if (res.ok) {
       const json = await res.json();
-      if (json && json.data) return json.data;
+      if (json && json.data) list = json.data;
     }
   } catch {
     // Backend unreachable, fallback to local
   }
 
-  const res = await fetch(LOCAL_BASE, { cache: "no-store" });
-  const json = await res.json();
-  if (!res.ok) throw new Error(json.message ?? "Lỗi tải danh sách bài viết");
-  return json.data;
+  if (!list || list.length === 0) {
+    const res = await fetch(LOCAL_BASE, { cache: "no-store" });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.message ?? "Lỗi tải danh sách bài viết");
+    list = json.data;
+  }
+
+  const hiddenMap = getHiddenBlogsMap();
+  return list.map((b) => ({
+    ...b,
+    active: hiddenMap[b.id] ? false : b.active !== false,
+  }));
 }
 
 export async function adminCreateBlog(payload: BlogPayload): Promise<Blog> {

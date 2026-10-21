@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Calendar, User, Clock, ArrowRight } from "lucide-react";
 import Container from "@/components/Container";
 import { Blog as BlogType, BlogCategory, Author } from "../app/data/types";
+import { getHiddenBlogsMap, syncHiddenBlogs } from "@/lib/admin-blog-api";
+import { subscribeTabSync } from "@/lib/tab-sync";
 
 interface Props {
   blogs: BlogType[];
@@ -38,17 +40,59 @@ const BlogCardImage = ({ src, alt }: { src?: string; alt: string }) => {
 
 const Blog = ({ blogs, blogCategories, authors, children }: Props) => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [hiddenMap, setHiddenMap] = useState<Record<string, boolean>>(() =>
+    typeof window !== "undefined" ? getHiddenBlogsMap() : {}
+  );
+
+  useEffect(() => {
+    syncHiddenBlogs().then((map) => {
+      if (map) setHiddenMap(map);
+    });
+    const unsubscribe = subscribeTabSync((event) => {
+      if (event.type === "BLOGS_STATUS_CHANGED") {
+        setHiddenMap(getHiddenBlogsMap());
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const visibleBlogs = blogs.filter(
+    (b) => b.active !== false && !hiddenMap[b.id]
+  );
 
   const getAuthor = (authorId: string) =>
     authors.find((a) => a.id === authorId);
 
   const filteredBlogs =
     activeCategory === "all"
-      ? blogs
-      : blogs.filter((blog) => blog.blogCategoryIds.includes(activeCategory));
+      ? visibleBlogs
+      : visibleBlogs.filter((blog) => blog.blogCategoryIds.includes(activeCategory));
 
   return (
     <Container className="py-8 sm:py-10">
+      {/* Breadcrumb Navigation */}
+      <nav className="flex items-center gap-2 text-xs text-neutral-500 mb-6">
+        <Link href="/" className="hover:text-shop_dark_green transition-colors">
+          Trang chủ
+        </Link>
+        <span>/</span>
+        <span className="text-neutral-900 font-medium">Blog & Tin tức</span>
+      </nav>
+
+      {/* Header Bar */}
+      <div className="flex flex-col gap-4 border-b border-neutral-200 pb-5 sm:flex-row sm:items-end sm:justify-between mb-8">
+        <div className="flex items-end gap-3">
+          <h1 className="text-xl font-bold uppercase tracking-tight text-neutral-900">
+            Blog & Tin tức
+          </h1>
+          <span className="pb-0.5 text-xs text-neutral-500 font-mono">
+            [ {visibleBlogs.length} bài viết ]
+          </span>
+        </div>
+      </div>
+
       {children}
 
       {/* Category Filter Pills - Styled like Cart page tags/buttons */}
@@ -62,10 +106,10 @@ const Blog = ({ blogs, blogCategories, authors, children }: Props) => {
               : "bg-white text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 border border-neutral-200"
           }`}
         >
-          Tất cả ({blogs.length})
+          Tất cả ({visibleBlogs.length})
         </button>
         {blogCategories.map((cat) => {
-          const count = blogs.filter((b) => b.blogCategoryIds.includes(cat.id)).length;
+          const count = visibleBlogs.filter((b) => b.blogCategoryIds.includes(cat.id)).length;
           return (
             <button
               type="button"

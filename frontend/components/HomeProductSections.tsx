@@ -11,8 +11,8 @@ const HomeProductSections = async () => {
 
   try {
     const [allResult, laptopResult] = await Promise.allSettled([
-      getProducts({ size: 60 }),
-      getProducts({ category: "laptop", size: 60 }),
+      getProducts({ size: 60, noStore: true }),
+      getProducts({ category: "laptop", size: 60, noStore: true }),
     ]);
 
     products = allResult.status === "fulfilled" ? allResult.value : [];

@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import Link from "next/link";
 import {
   BookOpen,
+  Check,
   ChevronLeft,
   ChevronRight,
   Pencil,
@@ -17,6 +18,9 @@ import {
   User,
   Calendar,
   Star,
+  Eye,
+  EyeOff,
+  RotateCcw,
 } from "lucide-react";
 import Loading from "@/app/(client)/loading";
 import {
@@ -27,9 +31,14 @@ import {
   adminUpdateBlog,
   adminDeleteBlog,
   generateSlug,
+  saveHiddenBlog,
+  removeHiddenBlog,
+  syncHiddenBlogs,
+  getMissingSeedBlogs,
   type BlogPayload,
 } from "@/lib/admin-blog-api";
 import type { Blog, BlogCategory, Author } from "@/app/data/types";
+import { subscribeTabSync } from "@/lib/tab-sync";
 
 const PAGE_SIZE = 10;
 
@@ -54,10 +63,25 @@ const AdminBlogsPage = () => {
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toastUndoAction, setToastUndoAction] = useState<(() => void) | null>(null);
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "hidden">("all");
   const [showForm, setShowForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [restoring, setRestoring] = useState(false);
+
+  const showToast = useCallback((msg: string, undo?: () => void) => {
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    setToastMessage(msg);
+    setToastUndoAction(undo ? () => undo : null);
+    toastTimeoutRef.current = setTimeout(() => {
+      setToastMessage(null);
+      setToastUndoAction(null);
+    }, 4500);
+  }, []);
   const [autoSlug, setAutoSlug] = useState(true);
   const formRef = useRef<HTMLFormElement | null>(null);
   const listTopRef = useRef<HTMLDivElement | null>(null);
@@ -65,6 +89,7 @@ const AdminBlogsPage = () => {
   const loadData = async () => {
     setLoading(true);
     try {
+      await syncHiddenBlogs();
       const [b, c, a] = await Promise.all([
         adminGetAllBlogs(),
         adminGetBlogCategories(),
@@ -82,16 +107,41 @@ const AdminBlogsPage = () => {
 
   useEffect(() => {
     loadData();
+
+    const unsubscribe = subscribeTabSync((event) => {
+      if (event.type === "BLOGS_STATUS_CHANGED") {
+        if (event.payload?.blogId !== undefined) {
+          const { blogId, active } = event.payload;
+          setBlogs((prev) =>
+            prev.map((b) =>
+              b.id === blogId ? { ...b, active: active !== false } : b
+            )
+          );
+        } else {
+          loadData();
+        }
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
+
+  const missingSeedBlogs = useMemo(() => getMissingSeedBlogs(blogs), [blogs]);
+  const activeBlogsCount = useMemo(() => blogs.filter((b) => b.active !== false).length, [blogs]);
+  const hiddenBlogsCount = useMemo(() => blogs.filter((b) => b.active === false).length, [blogs]);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     return blogs.filter((b) => {
+      if (statusFilter === "active" && b.active === false) return false;
+      if (statusFilter === "hidden" && b.active !== false) return false;
       if (q && !b.title.toLowerCase().includes(q) && !b.slug.includes(q)) return false;
       if (categoryFilter && !b.blogCategoryIds.includes(categoryFilter)) return false;
       return true;
     });
-  }, [blogs, search, categoryFilter]);
+  }, [blogs, search, categoryFilter, statusFilter]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const page = Math.min(currentPage, totalPages);
@@ -99,7 +149,7 @@ const AdminBlogsPage = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, categoryFilter]);
+  }, [search, categoryFilter, statusFilter]);
 
   const categoryMap = useMemo(
     () => Object.fromEntries(categories.map((c) => [c.id, c.title])),
@@ -183,16 +233,95 @@ const AdminBlogsPage = () => {
     }
   };
 
-  const handleDelete = async (id: string, title: string) => {
-    if (!confirm(`Xóa bài viết "${title}"?\n\nHành động này không thể hoàn tác.`)) return;
+  const handleToggleStatus = (id: string, active: boolean) => {
+    setError(null);
+    const targetBlog = blogs.find((b) => b.id === id);
+    if (!targetBlog) return;
+
+    if (active) {
+      removeHiddenBlog(id);
+    } else {
+      saveHiddenBlog(id);
+    }
+
+    // 1. Cập nhật UI tức thì (Optimistic update)
+    setBlogs((prev) =>
+      prev.map((b) => (b.id === id ? { ...b, active } : b))
+    );
+
+    showToast(
+      active
+        ? `Đã mở hiển thị lại bài viết "${targetBlog.title}".`
+        : `Đã tạm ẩn bài viết "${targetBlog.title}".`,
+      () => handleToggleStatus(id, !active)
+    );
+  };
+
+  const handleDelete = (id: string, title: string) => {
+    setError(null);
+    const targetBlog = blogs.find((b) => b.id === id);
+    if (!targetBlog) return;
+
+    // Nếu bài viết đang hiển thị, chuyển thành Tạm ẩn (Soft delete an toàn)
+    if (targetBlog.active !== false) {
+      handleToggleStatus(id, false);
+      showToast(
+        `Đã chuyển bài viết "${title}" sang danh sách tạm ẩn.`,
+        () => handleToggleStatus(id, true)
+      );
+      return;
+    }
+
+    // Nếu đã ở trạng thái Tạm ẩn, hỏi xác nhận nếu muốn xóa vĩnh viễn khỏi Database
+    const confirmHardDelete = window.confirm(
+      `Bài viết "${title}" đang ở trạng thái Tạm ẩn.\n\nBạn có CHẮC CHẮN muốn xóa vĩnh viễn khỏi cơ sở dữ liệu không? Thao tác này sẽ xóa vĩnh viễn dữ liệu khỏi server!`
+    );
+    if (!confirmHardDelete) return;
+
     setDeleting(id);
+    setBlogs((prev) => prev.filter((b) => b.id !== id));
+    removeHiddenBlog(id);
+
+    showToast(`Đã xóa vĩnh viễn bài viết "${title}".`);
+
+    adminDeleteBlog(id)
+      .catch((e) => {
+        setBlogs((prev) => [targetBlog, ...prev]);
+        setError((e as Error).message);
+        showToast("Xóa bài viết thất bại. Đã khôi phục.");
+      })
+      .finally(() => {
+        setDeleting(null);
+      });
+  };
+
+  const handleRestoreMissingBlogs = async () => {
+    if (missingSeedBlogs.length === 0) return;
+    setRestoring(true);
+    setError(null);
+    let count = 0;
     try {
-      await adminDeleteBlog(id);
+      for (const seed of missingSeedBlogs) {
+        await adminCreateBlog({
+          title: seed.title,
+          slug: seed.slug,
+          authorId: seed.authorId,
+          mainImageUrl: seed.mainImageUrl,
+          blogCategoryIds: seed.blogCategoryIds,
+          publishedAt: seed.publishedAt,
+          isLatest: seed.isLatest,
+          body: seed.body,
+        });
+        count++;
+      }
       await loadData();
+      showToast(`Đã khôi phục thành công ${count} bài viết mẫu đã xóa!`);
     } catch (e) {
       setError((e as Error).message);
+      showToast(`Khôi phục gặp lỗi: ${(e as Error).message}`);
+      await loadData();
     } finally {
-      setDeleting(null);
+      setRestoring(false);
     }
   };
 
@@ -219,7 +348,18 @@ const AdminBlogsPage = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {missingSeedBlogs.length > 0 && (
+            <button
+              onClick={handleRestoreMissingBlogs}
+              disabled={restoring || loading}
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold uppercase tracking-wider bg-emerald-600 hover:bg-emerald-700 text-white transition-colors shadow-sm disabled:opacity-50"
+              title="Khôi phục lại các bài viết mẫu bị thiếu hoặc đã xóa"
+            >
+              <RotateCcw className={`w-3.5 h-3.5 ${restoring ? "animate-spin" : ""}`} />
+              <span>Khôi phục bài mẫu ({missingSeedBlogs.length})</span>
+            </button>
+          )}
           <button
             onClick={() => loadData()}
             disabled={loading}
@@ -422,7 +562,7 @@ const AdminBlogsPage = () => {
                 className="w-4 h-4 accent-shop_dark_green"
               />
               <label htmlFor="isLatest" className="text-xs font-semibold text-neutral-700 cursor-pointer">
-                Đánh dấu là bài viết nổi bật (Latest)
+                Nổi bật
               </label>
             </div>
 
@@ -474,37 +614,76 @@ const AdminBlogsPage = () => {
       )}
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-400 pointer-events-none" />
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Tìm theo tiêu đề hoặc slug..."
-            className="w-full pl-9 pr-3 py-2 text-xs border border-neutral-200 bg-white text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-shop_dark_green transition-colors"
-          />
-          {search && (
-            <button
-              onClick={() => setSearch("")}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          )}
+      <div className="space-y-3">
+        {/* Status Filter Tabs */}
+        <div className="flex flex-wrap items-center gap-2 border-b border-neutral-200 pb-3">
+          <button
+            type="button"
+            onClick={() => setStatusFilter("all")}
+            className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
+              statusFilter === "all"
+                ? "bg-shop_dark_green text-white"
+                : "bg-white text-neutral-600 border border-neutral-200 hover:bg-neutral-50"
+            }`}
+          >
+            Tất cả ({blogs.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setStatusFilter("active")}
+            className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
+              statusFilter === "active"
+                ? "bg-shop_dark_green text-white"
+                : "bg-white text-neutral-600 border border-neutral-200 hover:bg-neutral-50"
+            }`}
+          >
+            Đang hiển thị ({activeBlogsCount})
+          </button>
+          <button
+            type="button"
+            onClick={() => setStatusFilter("hidden")}
+            className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
+              statusFilter === "hidden"
+                ? "bg-amber-600 text-white"
+                : "bg-white text-neutral-600 border border-neutral-200 hover:bg-neutral-50"
+            }`}
+          >
+            Đã ẩn ({hiddenBlogsCount})
+          </button>
         </div>
 
-        <select
-          value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
-          className="border border-neutral-200 px-3 py-2 text-xs text-neutral-700 bg-white focus:outline-none focus:border-shop_dark_green transition-colors"
-        >
-          <option value="">Tất cả danh mục</option>
-          {categories.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.title}
-            </option>
-          ))}
-        </select>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-400 pointer-events-none" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Tìm theo tiêu đề hoặc slug..."
+              className="w-full pl-9 pr-3 py-2 text-xs border border-neutral-200 bg-white text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-shop_dark_green transition-colors"
+            />
+            {search && (
+              <button
+                onClick={() => setSearch("")}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          <select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            className="border border-neutral-200 px-3 py-2 text-xs text-neutral-700 bg-white focus:outline-none focus:border-shop_dark_green transition-colors"
+          >
+            <option value="">Tất cả danh mục</option>
+            {categories.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.title}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Blog List */}
@@ -517,9 +696,11 @@ const AdminBlogsPage = () => {
           <div className="border border-neutral-200 bg-white px-6 py-16 text-center">
             <BookOpen className="mx-auto mb-3 w-8 h-8 text-neutral-200" />
             <p className="text-xs text-neutral-400 font-mono uppercase tracking-wider">
-              {search || categoryFilter ? "Không tìm thấy bài viết phù hợp" : "Chưa có bài viết nào"}
+              {search || categoryFilter || statusFilter !== "all"
+                ? "Không tìm thấy bài viết phù hợp"
+                : "Chưa có bài viết nào"}
             </p>
-            {!search && !categoryFilter && (
+            {!search && !categoryFilter && statusFilter === "all" && (
               <button onClick={openCreate} className="mt-4 text-xs font-semibold text-shop_dark_green hover:underline">
                 + Thêm bài viết đầu tiên
               </button>
@@ -528,7 +709,12 @@ const AdminBlogsPage = () => {
         ) : (
           <div className="border border-neutral-200 bg-white divide-y divide-neutral-100">
             {paginated.map((blog) => (
-              <div key={blog.id} className="flex items-start gap-4 p-4 hover:bg-neutral-50/80 transition-colors group">
+              <div
+                key={blog.id}
+                className={`flex items-start gap-4 p-4 hover:bg-neutral-50/80 transition-colors group ${
+                  blog.active === false ? "bg-neutral-50/40" : ""
+                }`}
+              >
                 {/* Thumbnail */}
                 {blog.mainImageUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -547,13 +733,21 @@ const AdminBlogsPage = () => {
                 {/* Content */}
                 <div className="flex-1 min-w-0 space-y-1.5">
                   <div className="flex items-start gap-2 flex-wrap">
-                    <p className="text-sm font-semibold text-neutral-900 leading-snug line-clamp-2 flex-1 min-w-0">
+                    <p className={`text-sm font-semibold leading-snug line-clamp-2 flex-1 min-w-0 ${
+                      blog.active === false ? "text-neutral-500 line-through" : "text-neutral-900"
+                    }`}>
                       {blog.title}
                     </p>
                     {blog.isLatest && (
-                      <span className="flex items-center gap-1 shrink-0 text-[10px] font-bold uppercase px-1.5 py-0.5 bg-amber-100 text-amber-700 border border-amber-200">
-                        <Star className="w-2.5 h-2.5" />
+                      <span className="flex items-center gap-1 shrink-0 text-[10px] font-mono font-semibold px-1.5 py-0.5 bg-amber-50 text-amber-800 border border-amber-300">
+                        <Star className="w-2.5 h-2.5 fill-amber-500 text-amber-500" />
                         Nổi bật
+                      </span>
+                    )}
+                    {blog.active === false && (
+                      <span className="flex items-center gap-1 shrink-0 text-[10px] font-mono px-1.5 py-0.5 bg-neutral-100 text-neutral-600 border border-neutral-300">
+                        <EyeOff className="w-2.5 h-2.5" />
+                        Đã ẩn
                       </span>
                     )}
                   </div>
@@ -597,22 +791,47 @@ const AdminBlogsPage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-1.5 text-neutral-400 hover:text-shop_dark_green transition-colors"
-                    title="Xem bài viết"
+                    title="Xem bài viết trên web"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
                   </Link>
                   <button
                     onClick={() => openEdit(blog)}
                     className="p-1.5 text-neutral-400 hover:text-shop_dark_green transition-colors"
-                    title="Chỉnh sửa"
+                    title="Chỉnh sửa bài viết"
                   >
                     <Pencil className="w-3.5 h-3.5" />
                   </button>
+                  {blog.active === false ? (
+                    <button
+                      onClick={() => handleToggleStatus(blog.id, true)}
+                      className="p-1.5 text-neutral-400 hover:text-emerald-600 transition-colors"
+                      title="Mở hiển thị lại bài viết trên website"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleToggleStatus(blog.id, false)}
+                      className="p-1.5 text-neutral-400 hover:text-amber-600 transition-colors"
+                      title="Tạm ẩn bài viết (không hiển thị trên website)"
+                    >
+                      <EyeOff className="w-3.5 h-3.5" />
+                    </button>
+                  )}
                   <button
                     onClick={() => handleDelete(blog.id, blog.title)}
                     disabled={deleting === blog.id}
-                    className="p-1.5 text-neutral-400 hover:text-red-500 transition-colors disabled:opacity-50"
-                    title="Xóa bài viết"
+                    className={`p-1.5 transition-colors disabled:opacity-50 ${
+                      blog.active === false
+                        ? "text-red-500 hover:text-red-700"
+                        : "text-neutral-400 hover:text-red-500"
+                    }`}
+                    title={
+                      blog.active === false
+                        ? "Xóa vĩnh viễn khỏi Database"
+                        : "Tạm ẩn bài viết"
+                    }
                   >
                     {deleting === blog.id ? (
                       <RefreshCw className="w-3.5 h-3.5 animate-spin" />
@@ -671,6 +890,31 @@ const AdminBlogsPage = () => {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <aside
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 border border-neutral-800 bg-neutral-900 px-4 py-3 text-xs font-medium text-white shadow-2xl"
+        >
+          <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+          <span>{toastMessage}</span>
+          {toastUndoAction && (
+            <button
+              type="button"
+              onClick={() => {
+                toastUndoAction();
+                setToastMessage(null);
+                setToastUndoAction(null);
+              }}
+              className="ml-2 font-bold text-emerald-400 hover:text-emerald-300 underline transition-colors"
+            >
+              Hoàn tác
+            </button>
+          )}
+        </aside>
       )}
     </div>
   );

@@ -192,9 +192,11 @@ const ProductGrid = ({ initialLaptops }: ProductGridProps = {}) => {
     return list;
   }, [laptopsData, sharedProducts]);
 
-  // 1. Laptop nổi bật: 10 sản phẩm
+  // 1. Laptop nổi bật: 10 sản phẩm (ưu tiên sản phẩm được tích nổi bật)
   const featuredLaptops = useMemo(() => {
-    return allLaptops.slice(0, 10);
+    const featured = allLaptops.filter((p) => Boolean(p.isFeatured));
+    const others = allLaptops.filter((p) => !p.isFeatured);
+    return [...featured, ...others].slice(0, 10);
   }, [allLaptops]);
 
   // 2. Laptop cấu hình cao: 10 sản phẩm giá từ cao nhất

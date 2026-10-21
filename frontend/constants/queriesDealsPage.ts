@@ -4,8 +4,8 @@ import type { Product } from "../app/data/types";
 
 export const getHotProducts = async (): Promise<Product[]> => {
   try {
-    const products = await getAllProductsByCategory();
-    return products.filter((product) => product.status === "hot");
+    const products = await getAllProductsByCategory(undefined, true);
+    return products.filter((product) => Boolean(product.isFeatured));
   } catch {
     return [];
   }

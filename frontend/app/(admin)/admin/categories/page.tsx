@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Loading from "@/app/(client)/loading";
 import {
+  Check,
   MoreVertical,
   PencilLine,
   Plus,
@@ -18,6 +19,7 @@ import {
 import {
   adminCreateCategory,
   adminDeleteCategory,
+  adminToggleCategoryStatus,
   adminUpdateCategory,
   CategoryPayload,
 } from "@/lib/admin-api";
@@ -62,7 +64,20 @@ const AdminCategoriesPage = () => {
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toastUndoAction, setToastUndoAction] = useState<(() => void) | null>(null);
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
+
+  const showToast = useCallback((msg: string, undo?: () => void) => {
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    setToastMessage(msg);
+    setToastUndoAction(undo ? () => undo : null);
+    toastTimeoutRef.current = setTimeout(() => {
+      setToastMessage(null);
+      setToastUndoAction(null);
+    }, 4500);
+  }, []);
 
   const loadCategories = async () => {
     setLoading(true);
@@ -163,22 +178,41 @@ const AdminCategoriesPage = () => {
     }
   };
 
-  const handleDelete = async (category: Category) => {
-    if (!window.confirm(`Bạn có chắc muốn xóa danh mục "${category.title}" không?`)) {
-      return;
-    }
-
-    setDeletingId(category.id);
+  const handleDelete = (category: Category) => {
     setError(null);
-    try {
-      await adminDeleteCategory(category.id);
-      if (editingId === category.id) resetForm();
-      await loadCategories();
-    } catch (err) {
+    if (editingId === category.id) resetForm();
+
+    // 1. Cập nhật UI ngay lập tức (Optimistic Update)
+    setCategories((prev) => prev.filter((c) => c.id !== category.id));
+    showToast(`Đã xóa danh mục "${category.title}".`, () => {
+      setCategories((prev) => [...prev, category].sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)));
+      adminToggleCategoryStatus(category.id, true).catch(() => {
+        adminUpdateCategory(category.id, {
+          name: category.title,
+          slug: category.slug,
+          description: category.description,
+          imageUrl: category.imageUrl,
+          displayOrder: category.displayOrder,
+          active: true,
+        }).catch(() => {
+          adminCreateCategory({
+            name: category.title,
+            slug: category.slug,
+            description: category.description,
+            imageUrl: category.imageUrl,
+            displayOrder: category.displayOrder,
+            active: true,
+          }).catch(() => {});
+        });
+      });
+    });
+
+    // 2. Chạy ngầm BE không reload lại danh mục
+    adminDeleteCategory(category.id).catch((err) => {
+      setCategories((prev) => [...prev, category].sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)));
       setError(err instanceof Error ? err.message : "Xóa danh mục thất bại");
-    } finally {
-      setDeletingId(null);
-    }
+      showToast("Xóa danh mục thất bại. Đã khôi phục.");
+    });
   };
 
   const stats = categories.slice(0, 4).map((category, index) => ({
@@ -510,6 +544,30 @@ const AdminCategoriesPage = () => {
           )}
         </div>
       </div>
+      {/* Toast Notification */}
+      {toastMessage && (
+        <aside
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 border border-neutral-800 bg-neutral-900 px-4 py-3 text-xs font-medium text-white shadow-2xl"
+        >
+          <Check className="h-4 w-4 text-emerald-400 shrink-0" />
+          <span>{toastMessage}</span>
+          {toastUndoAction && (
+            <button
+              type="button"
+              onClick={() => {
+                toastUndoAction();
+                setToastMessage(null);
+                setToastUndoAction(null);
+              }}
+              className="ml-2 font-bold text-emerald-400 hover:text-emerald-300 underline transition-colors"
+            >
+              Hoàn tác
+            </button>
+          )}
+        </aside>
+      )}
     </div>
   );
 };
