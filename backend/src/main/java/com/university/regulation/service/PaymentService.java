@@ -19,7 +19,9 @@ import com.university.regulation.models.enums.PaymentMethod;
 import com.university.regulation.models.enums.PaymentStatus;
 import com.university.regulation.models.order.Order;
 import com.university.regulation.models.payment.Payment;
+import com.university.regulation.models.order.OrderStatusHistory;
 import com.university.regulation.repository.OrderRepository;
+import com.university.regulation.repository.OrderStatusHistoryRepository;
 import com.university.regulation.repository.PaymentRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,7 @@ public class PaymentService {
 
         private final PaymentRepository paymentRepository;
         private final OrderRepository orderRepository;
+        private final OrderStatusHistoryRepository historyRepository;
         private final VnpayService vnpayService;
 
         /**
@@ -42,26 +45,38 @@ public class PaymentService {
                         String clientIp) {
                 Order order = getOwnedOrder(request.orderId(), username);
 
-                if (paymentRepository.existsByOrderId(order.getId())) {
-                        throw new ResponseStatusException(
-                                        HttpStatus.CONFLICT,
-                                        "Đơn hàng đã có thông tin thanh toán");
-                }
-
                 if (order.getStatus() == OrderStatus.CANCELLED) {
                         throw new ResponseStatusException(
                                         HttpStatus.BAD_REQUEST,
                                         "Không thể thanh toán đơn hàng đã hủy");
                 }
 
-                Payment payment = new Payment();
+                Optional<Payment> existingPaymentOpt = paymentRepository.findByOrderId(order.getId());
+                Payment payment;
 
-                payment.setOrder(order);
-                payment.setPaymentMethod(request.paymentMethod());
-                payment.setStatus(PaymentStatus.PENDING);
-                payment.setAmount(order.getTotalAmount());
-                payment.setCurrency("VND");
-                payment.setTransactionCode(generateTransactionCode());
+                if (existingPaymentOpt.isPresent()) {
+                        payment = existingPaymentOpt.get();
+                        if (payment.getStatus() == PaymentStatus.PAID) {
+                                throw new ResponseStatusException(
+                                                HttpStatus.BAD_REQUEST,
+                                                "Đơn hàng đã được thanh toán thành công");
+                        }
+                        // Làm mới thông tin thanh toán và tạo URL mới cho đơn hàng chưa hoàn tất
+                        payment.setPaymentMethod(request.paymentMethod());
+                        payment.setStatus(PaymentStatus.PENDING);
+                        payment.setAmount(order.getTotalAmount());
+                        payment.setCurrency("VND");
+                        payment.setTransactionCode(generateTransactionCode());
+                        payment.setFailureReason(null);
+                } else {
+                        payment = new Payment();
+                        payment.setOrder(order);
+                        payment.setPaymentMethod(request.paymentMethod());
+                        payment.setStatus(PaymentStatus.PENDING);
+                        payment.setAmount(order.getTotalAmount());
+                        payment.setCurrency("VND");
+                        payment.setTransactionCode(generateTransactionCode());
+                }
 
                 Payment savedPayment = paymentRepository.save(payment);
 
@@ -316,6 +331,15 @@ public class PaymentService {
                                 payment.setStatus(PaymentStatus.PAID);
                                 payment.setPaidAt(OffsetDateTime.now());
                                 payment.setFailureReason(null);
+
+                                // Chuyển trạng thái đơn hàng thẳng sang bước chuẩn bị hàng (PROCESSING)
+                                Order order = payment.getOrder();
+                                if (order.getStatus() == OrderStatus.PENDING || order.getStatus() == OrderStatus.CONFIRMED) {
+                                        OrderStatus oldStatus = order.getStatus();
+                                        order.setStatus(OrderStatus.PROCESSING);
+                                        orderRepository.save(order);
+                                        saveStatusHistory(order, oldStatus, OrderStatus.PROCESSING, "Thanh toán VNPAY thành công, tự động chuyển sang chuẩn bị hàng");
+                                }
                         } else if ("24".equals(responseCode)) {
                                 payment.setStatus(PaymentStatus.CANCELLED);
                                 payment.setFailureReason("Giao dịch VNPAY đã bị hủy");
@@ -409,6 +433,15 @@ public class PaymentService {
                         payment.setPaidAt(OffsetDateTime.now());
                         payment.setFailureReason(null);
 
+                        // Chuyển trạng thái đơn hàng thẳng sang bước chuẩn bị hàng (PROCESSING)
+                        Order order = payment.getOrder();
+                        if (order.getStatus() == OrderStatus.PENDING || order.getStatus() == OrderStatus.CONFIRMED) {
+                                OrderStatus oldStatus = order.getStatus();
+                                order.setStatus(OrderStatus.PROCESSING);
+                                orderRepository.save(order);
+                                saveStatusHistory(order, oldStatus, OrderStatus.PROCESSING, "Thanh toán VNPAY thành công qua IPN, tự động chuyển sang chuẩn bị hàng");
+                        }
+
                 } else {
 
                         payment.setStatus(PaymentStatus.FAILED);
@@ -451,5 +484,18 @@ public class PaymentService {
                 return value == null || value.isBlank()
                                 ? null
                                 : value;
+        }
+
+        private void saveStatusHistory(
+                        Order order,
+                        OrderStatus oldStatus,
+                        OrderStatus newStatus,
+                        String note) {
+                OrderStatusHistory history = new OrderStatusHistory();
+                history.setOrder(order);
+                history.setOldStatus(oldStatus);
+                history.setNewStatus(newStatus);
+                history.setNote(note);
+                historyRepository.save(history);
         }
 }

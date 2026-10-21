@@ -51,6 +51,19 @@ const NEXT_STEP: Partial<
   SHIPPING: { status: "DELIVERED", label: "Đánh dấu đã giao" },
 };
 
+const getNextStep = (
+  orderStatus: OrderStatus,
+  paymentMethod?: string | null
+): { status: OrderStatus; label: string } | undefined => {
+  const isVnpay =
+    paymentMethod === "VNPAY" ||
+    paymentMethod?.toUpperCase().includes("VNPAY");
+  if (orderStatus === "PENDING" && isVnpay) {
+    return { status: "PROCESSING", label: "Bắt đầu chuẩn bị hàng" };
+  }
+  return NEXT_STEP[orderStatus];
+};
+
 const ADMIN_CANCELLABLE: OrderStatus[] = ["PENDING", "CONFIRMED", "PROCESSING"];
 
 const PAYMENT_STATUS_LABEL: Record<PaymentStatus, string> = {
@@ -147,7 +160,7 @@ const AdminOrderDetailPage = () => {
 
   const handleAdvance = async () => {
     if (!order) return;
-    const next = NEXT_STEP[order.status];
+    const next = getNextStep(order.status, order.paymentMethod);
     if (!next) return;
     const ok = await applyStatus(next.status, note);
     if (ok) setNote("");
@@ -185,7 +198,7 @@ const AdminOrderDetailPage = () => {
     );
   }
 
-  const next = NEXT_STEP[order.status];
+  const next = getNextStep(order.status, order.paymentMethod);
   const canCancel = ADMIN_CANCELLABLE.includes(order.status);
   const isFinal =
     order.status === "DELIVERED" ||
@@ -241,7 +254,9 @@ const AdminOrderDetailPage = () => {
                 <>
                   <p className="text-xs text-neutral-500 mb-3">
                     {order.status === "PENDING"
-                      ? "Đơn mới đang chờ quản trị viên xác nhận."
+                      ? order.paymentMethod === "VNPAY"
+                        ? "Đơn thanh toán VNPAY: bỏ qua bước xác nhận, chuyển thẳng sang bước chuẩn bị hàng."
+                        : "Đơn mới đang chờ quản trị viên xác nhận."
                       : `Bước tiếp theo trong quy trình: ${STATUS_LABEL[next!.status]}.`}
                   </p>
                   <label className="block text-xs font-semibold text-neutral-700 mb-1.5">

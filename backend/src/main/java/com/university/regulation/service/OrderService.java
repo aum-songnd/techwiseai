@@ -508,6 +508,7 @@ public class OrderService {
 
                         case PENDING ->
                                 newStatus == OrderStatus.CONFIRMED
+                                                || newStatus == OrderStatus.PROCESSING
                                                 || newStatus == OrderStatus.CANCELLED;
 
                         case CONFIRMED ->
