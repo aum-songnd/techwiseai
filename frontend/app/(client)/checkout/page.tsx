@@ -17,6 +17,7 @@ import {
   PenLine,
   Building2,
   CalendarDays,
+  Loader2,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
@@ -118,6 +119,7 @@ const CheckoutPage = () => {
   const [loadingWards, setLoadingWards] = useState(false);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Load provinces whenever adminVersion changes
@@ -431,7 +433,23 @@ const CheckoutPage = () => {
     );
   }
 
-  if (items.length === 0) {
+  if (isRedirecting) {
+    return (
+      <div className="font-sans min-h-screen bg-white flex flex-col items-center justify-center gap-4 text-neutral-700">
+        <Loader2 className="w-8 h-8 animate-spin text-shop_dark_green" />
+        <p className="text-sm font-semibold uppercase tracking-wider text-neutral-800">
+          {paymentMethod === "VNPAY"
+            ? "Đang chuyển hướng sang cổng thanh toán VNPAY..."
+            : "Đang chuyển đến trang chi tiết đơn hàng..."}
+        </p>
+        <p className="text-xs text-neutral-500">
+          Vui lòng đợi trong giây lát, hệ thống đang hoàn tất đơn hàng của bạn.
+        </p>
+      </div>
+    );
+  }
+
+  if (items.length === 0 && !isRedirecting && !isSubmitting) {
     return (
       <div className="font-sans min-h-screen bg-white text-neutral-900">
         <div className="mx-auto w-[90%] py-8 sm:py-10">
@@ -512,28 +530,35 @@ const CheckoutPage = () => {
         setStoredUser(updatedUser);
       }
 
-      clearCart();
-
-      let payment;
-      try {
-        payment = await createOrGetPayment({
-          orderId: order.id,
-          paymentMethod,
-        });
-      } catch (paymentErr) {
-        console.error("Lỗi khi khởi tạo thanh toán:", paymentErr);
-      }
-
       if (paymentMethod === "VNPAY") {
+        let payment;
+        try {
+          payment = await createOrGetPayment({
+            orderId: order.id,
+            paymentMethod: "VNPAY",
+          });
+        } catch (paymentErr) {
+          console.error("Lỗi khi khởi tạo thanh toán VNPAY:", paymentErr);
+        }
+
         if (payment?.paymentUrl) {
+          setIsRedirecting(true);
+          clearCart();
           window.location.href = payment.paymentUrl;
           return;
         }
-        router.push(`/orders/${order.id}?placed=1&vnpay_error=1`);
+
+        setIsSubmitting(false);
+        setErrorMessage(
+          "Không thể tạo liên kết thanh toán VNPAY. Vui lòng thử lại hoặc chọn phương thức khác."
+        );
         return;
       }
 
-      router.push(`/orders/${order.id}?placed=1`);
+      // COD: nhảy thẳng tới trang chi tiết đơn hàng
+      setIsRedirecting(true);
+      clearCart();
+      router.push(`/orders/${order.id}`);
     } catch (err) {
       if (err instanceof OrderAuthRequiredError) {
         router.push("/sign-in");

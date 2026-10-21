@@ -173,6 +173,19 @@ const NEXT_ACTION: Partial<
   SHIPPING: { next: "DELIVERED", label: "Đã giao hàng" },
 };
 
+const getNextAction = (
+  orderStatus: OrderStatus,
+  paymentMethod?: string | null
+): { next: OrderStatus; label: string } | undefined => {
+  const isVnpay =
+    paymentMethod === "VNPAY" ||
+    paymentMethod?.toUpperCase().includes("VNPAY");
+  if (orderStatus === "PENDING" && isVnpay) {
+    return { next: "PROCESSING", label: "Chuẩn bị hàng" };
+  }
+  return NEXT_ACTION[orderStatus];
+};
+
 const getHistoryTime = (
   detail: AdminOrderDetail,
   status: OrderStatus
@@ -540,7 +553,11 @@ const AdminOrdersPage = () => {
 
   const handleAdvanceStatus = async () => {
     if (!detail) return;
-    const action = NEXT_ACTION[detail.status];
+    const paymentLabel = getPaymentLabel(detail);
+    const action = getNextAction(
+      detail.status,
+      paymentLabel ?? (detail as unknown as { paymentMethod?: string }).paymentMethod
+    );
     if (!action) return;
     if (isAwaitingPayment(detail, payment?.status)) {
       setDetailError("Đơn thanh toán online phải được thanh toán trước khi xác nhận.");
@@ -795,15 +812,17 @@ const AdminOrdersPage = () => {
       );
     }
 
-    const action = NEXT_ACTION[detail.status];
+    const paymentLabel = getPaymentLabel(detail) ?? null;
+    const action = getNextAction(
+      detail.status,
+      paymentLabel ?? (detail as unknown as { paymentMethod?: string }).paymentMethod
+    );
     const awaitingPayment = isAwaitingPayment(detail, payment?.status);
     const currentIndex = PROGRESS_STEPS.findIndex(
       (s) => s.status === detail.status
     );
     const cancelled = detail.status === "CANCELLED";
     const itemsList = (detail.items ?? []) as unknown[];
-
-    const paymentLabel = getPaymentLabel(detail) ?? null;
     const paymentStatusValue = payment?.status ?? detail.paymentStatus ?? null;
     const paymentStatusLabel = paymentStatusValue
       ? PAYMENT_STATUS_LABELS[paymentStatusValue as PaymentStatus] ??
