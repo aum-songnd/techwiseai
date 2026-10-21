@@ -15,6 +15,7 @@ import {
   Package,
   ShoppingCart,
   Store,
+  MessageSquare,
   User as UserIcon,
   Users,
   X,
@@ -75,6 +76,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/admin/categories", label: "Danh mục", icon: Layers },
   { href: "/admin/blogs", label: "Blog", icon: BookOpen },
   { href: "/admin/products", label: "Sản phẩm", icon: Package },
+  { href: "/admin/reviews", label: "Đánh giá", icon: MessageSquare },
   { href: "/admin/users", label: "Người dùng", icon: Users },
 ];
 

@@ -51,6 +51,33 @@ export interface Product {
   variant?: ProductVariant;
   isFeatured: boolean;
   active?: boolean;
+  ratingAverage?: number;
+  reviewCount?: number;
+}
+
+export interface Review {
+  id: string;
+  productId: string;
+  productName?: string;
+  userId?: string;
+  userFullName: string;
+  userAvatarUrl?: string;
+  rating: number;
+  title?: string;
+  comment: string;
+  isVerifiedPurchase: boolean;
+  likesCount: number;
+  status: "APPROVED" | "HIDDEN" | "PENDING";
+  adminReply?: string;
+  adminReplyAt?: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface ReviewSummary {
+  averageRating: number;
+  totalReviews: number;
+  ratingDistribution: Record<number, number>;
 }
 
 export interface Author {

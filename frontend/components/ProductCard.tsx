@@ -4,7 +4,7 @@ import React from "react";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Heart } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import { Product } from "../app/data/types";
 import { productImages } from "../images";
 import AddToCart from "./AddToCart";
@@ -130,15 +130,27 @@ const ProductCard = ({ product, hideFavorite = false }: ProductCardProps) => {
           </h3>
         </Link>
 
-        <div className="flex items-center gap-2">
-          <p className="text-xs font-medium text-neutral-600">In Stock</p>
-          <p
-            className={`text-xs font-semibold ${
-              product?.stock === 0 ? "text-red-600" : "text-shop_dark_green"
-            }`}
-          >
-            {(product?.stock as number) > 0 ? product?.stock : "unavailable"}
-          </p>
+        <div className="flex items-center justify-between gap-2 mt-0.5">
+          <div className="flex items-center gap-1 text-[11px] text-neutral-500">
+            <Star className="w-3 h-3 fill-amber-400 text-amber-400 shrink-0" />
+            <span className="font-bold text-neutral-800">
+              {product.ratingAverage ? Number(product.ratingAverage).toFixed(1) : "5.0"}
+            </span>
+            <span className="text-[10px] text-neutral-400">
+              ({product.reviewCount ?? 0})
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5 text-xs">
+            <span className="text-[11px] text-neutral-500">Kho:</span>
+            <span
+              className={`text-[11px] font-semibold ${
+                product?.stock === 0 ? "text-red-600" : "text-shop_dark_green"
+              }`}
+            >
+              {(product?.stock as number) > 0 ? product?.stock : "Hết hàng"}
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-2 mt-0.5 min-h-[20px]">

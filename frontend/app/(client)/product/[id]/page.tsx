@@ -18,8 +18,10 @@ import {
   ArrowRight,
   Check,
   X,
+  Star,
 } from "lucide-react";
 import ServiceFeatures from "@/components/ServiceFeatures";
+import ProductReviewsSection from "@/components/ProductReviewsSection";
 
 export const revalidate = 60;
 
@@ -191,6 +193,32 @@ const ProductPage = async ({ params }: ProductPageProps) => {
             )}
           </div>
 
+          {/* Rating Summary Link */}
+          <div className="mt-3 flex items-center gap-2 text-xs">
+            <div className="flex items-center text-amber-400">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star
+                  key={star}
+                  className={`w-3.5 h-3.5 ${
+                    star <= Math.round(product!.ratingAverage || 5)
+                      ? "fill-amber-400 text-amber-400"
+                      : "fill-neutral-200 text-neutral-200"
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="font-bold text-neutral-800">
+              {product!.ratingAverage ? product!.ratingAverage.toFixed(1) : "5.0"}
+            </span>
+            <span className="text-neutral-300">·</span>
+            <a
+              href="#reviews"
+              className="text-neutral-500 hover:text-shop_dark_green hover:underline cursor-pointer"
+            >
+              {product!.reviewCount ? `${product!.reviewCount} đánh giá & bình luận` : "Đánh giá & bình luận"}
+            </a>
+          </div>
+
           <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1">
             <span className="text-3xl font-bold text-gray-900">
               {formatPrice(finalPrice)}
@@ -257,6 +285,15 @@ const ProductPage = async ({ params }: ProductPageProps) => {
       <Suspense fallback={null}>
         <ProductRecommendations productId={product!.id} mainCategory={mainCategory} />
       </Suspense>
+
+      <ProductReviewsSection
+        productId={product!.id}
+        productName={product!.name}
+        initialSummary={{
+          ratingAverage: product!.ratingAverage,
+          reviewCount: product!.reviewCount,
+        }}
+      />
     </div>
   );
 };
