@@ -71,7 +71,9 @@ public class SecurityConfig {
                                                 .permitAll()
                                                 .requestMatchers(
                                                                 HttpMethod.POST,
-                                                                "/api/v1/products/search-by-image")
+                                                                "/api/v1/products/search-by-image",
+                                                                "/api/v1/products/*/reviews",
+                                                                "/api/v1/reviews/*/like")
                                                 .permitAll()
 
                                                 // API quản trị

@@ -261,6 +261,8 @@ export function mapProduct(raw: ApiProductRaw): Product {
     variant,
     isFeatured: !!raw.featured,
     active: raw.active ?? true,
+    ratingAverage: raw.ratingAverage ?? 0,
+    reviewCount: raw.reviewCount ?? 0,
 
     description: raw.description ?? raw.shortDescription,
     shortDescription: raw.shortDescription,
