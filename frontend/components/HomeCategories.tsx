@@ -117,7 +117,7 @@ const HomeCategories = async () => {
   let categories: CategoryWithImage[] = [];
 
   try {
-    categories = (await getCategories()) as CategoryWithImage[];
+    categories = (await getCategories({ noStore: true })) as CategoryWithImage[];
 
     categories = [...categories].sort((a, b) => {
       const orderA = a.displayOrder ?? Number.MAX_SAFE_INTEGER;

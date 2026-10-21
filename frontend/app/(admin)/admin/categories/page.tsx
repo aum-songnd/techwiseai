@@ -23,6 +23,8 @@ import {
   adminUpdateCategory,
   CategoryPayload,
 } from "@/lib/admin-api";
+import { clearRequestCache } from "@/lib/request-cache";
+import { notifyCatalogUpdated } from "@/lib/tab-sync";
 import type { Category } from "@/app/data/types";
 
 const emptyForm: CategoryPayload = {
@@ -169,6 +171,8 @@ const AdminCategoriesPage = () => {
       } else {
         await adminCreateCategory(form);
       }
+      clearRequestCache("catalog:");
+      notifyCatalogUpdated("categories");
       resetForm();
       await loadCategories();
     } catch (err) {
@@ -184,8 +188,12 @@ const AdminCategoriesPage = () => {
 
     // 1. Cập nhật UI ngay lập tức (Optimistic Update)
     setCategories((prev) => prev.filter((c) => c.id !== category.id));
+    clearRequestCache("catalog:");
+    notifyCatalogUpdated("categories");
     showToast(`Đã xóa danh mục "${category.title}".`, () => {
       setCategories((prev) => [...prev, category].sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)));
+      clearRequestCache("catalog:");
+      notifyCatalogUpdated("categories");
       adminToggleCategoryStatus(category.id, true).catch(() => {
         adminUpdateCategory(category.id, {
           name: category.title,

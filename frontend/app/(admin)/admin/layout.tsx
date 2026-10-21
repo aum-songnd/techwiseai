@@ -33,6 +33,7 @@ import {
   isAdminUser,
 } from "@/lib/auth";
 import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
+import { clearRequestCache } from "@/lib/request-cache";
 
 const OPEN_ORDER_STATUSES = [
   "PENDING",
@@ -99,6 +100,14 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const [showProfile, setShowProfile] = useState(false);
 
   const menuRef = useOutsideClick<HTMLDivElement>(() => setIsMenuOpen(false));
+
+  const handleGoHome = (e: React.MouseEvent) => {
+    e.preventDefault();
+    clearRequestCache("catalog:");
+    setIsMenuOpen(false);
+    setSidebarOpen(false);
+    window.location.href = "/";
+  };
 
   useEffect(() => {
     const token = getToken();
@@ -247,6 +256,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="px-3 py-3 border-t border-neutral-200">
           <Link
             href="/"
+            onClick={handleGoHome}
             className="flex items-center gap-3 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:bg-neutral-100 hover:text-shop_dark_green transition-colors"
             title="Về trang chủ TechWise AI"
           >
@@ -280,6 +290,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="flex items-center gap-3 sm:gap-4 text-xs font-mono text-neutral-500 shrink-0">
             <Link
               href="/"
+              onClick={handleGoHome}
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium border border-neutral-200 text-neutral-700 hover:bg-neutral-50 hover:text-shop_dark_green transition-colors"
               title="Về trang chủ TechWise AI"
             >
@@ -357,7 +368,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                     </button>
                     <Link
                       href="/"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={handleGoHome}
                       className="w-full flex items-center gap-2.5 px-3.5 py-2 text-left font-medium text-neutral-700 hover:bg-neutral-50 hover:text-shop_dark_green transition-colors"
                     >
                       <Home className="w-4 h-4 text-neutral-400" />
