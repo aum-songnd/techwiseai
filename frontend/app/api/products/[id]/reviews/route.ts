@@ -62,6 +62,13 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
   const { id } = await params;
   const authHeader = req.headers.get("authorization");
 
+  if (!authHeader) {
+    return NextResponse.json(
+      { success: false, message: "Vui lòng đăng nhập để đánh giá sản phẩm." },
+      { status: 401 }
+    );
+  }
+
   try {
     const body = await req.json();
 
@@ -81,30 +88,60 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
     }
 
     // Try posting to backend
-    let backendSuccess = false;
-    let backendResult = null;
-
     try {
       const res = await fetch(`${API_BASE_URL}/products/${encodeURIComponent(id)}/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          ...(authHeader ? { Authorization: authHeader } : {}),
+          Authorization: authHeader,
         },
         body: JSON.stringify(body),
       });
 
-      if (res.ok) {
-        backendResult = await res.json();
-        if (backendResult?.success) {
-          backendSuccess = true;
-        }
+      const backendResult = await res.json().catch(() => ({}));
+
+      if (!res.ok || backendResult?.success === false) {
+        return NextResponse.json(
+          {
+            success: false,
+            message:
+              backendResult?.message ||
+              "Chỉ khách hàng đã mua sản phẩm này mới có thể gửi đánh giá & bình luận.",
+          },
+          { status: res.status || 403 }
+        );
       }
+
+      // Backend succeeded - sync to local cache
+      try {
+        addReviewToProduct(id, {
+          productName: body.productName,
+          userId: body.userId,
+          userFullName: body.userFullName || "Khách hàng Techwise",
+          userAvatarUrl: body.userAvatarUrl,
+          rating: body.rating,
+          title: body.title,
+          comment: body.comment,
+          isVerifiedPurchase: true,
+        });
+      } catch {}
+
+      return NextResponse.json(backendResult);
     } catch {
-      // Backend request failed, will use local persistence
+      // Backend request network error, will check offline fallback
     }
 
-    // Always persist to local cache as well so the user immediately sees it
+    // Fallback mode validation
+    if (!body.isVerifiedPurchase) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Chỉ khách hàng đã mua sản phẩm này mới có thể gửi đánh giá & bình luận.",
+        },
+        { status: 403 }
+      );
+    }
+
     const saved = addReviewToProduct(id, {
       productName: body.productName,
       userId: body.userId,
@@ -113,13 +150,13 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
       rating: body.rating,
       title: body.title,
       comment: body.comment,
-      isVerifiedPurchase: !!body.isVerifiedPurchase,
+      isVerifiedPurchase: true,
     });
 
     return NextResponse.json({
       success: true,
       message: "Đăng đánh giá và bình luận thành công",
-      data: backendSuccess && backendResult?.data ? backendResult.data : saved,
+      data: saved,
     });
   } catch (error) {
     return NextResponse.json(

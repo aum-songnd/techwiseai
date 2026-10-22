@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import Link from "next/link";
 import {
   Star,
   ThumbsUp,
@@ -13,6 +14,9 @@ import {
   AlertCircle,
   Loader2,
   Filter,
+  Lock,
+  LogIn,
+  ShoppingBag,
 } from "lucide-react";
 import { Review, ReviewSummary } from "@/app/data/types";
 import { useAuth } from "@/context/AuthContext";
@@ -20,7 +24,9 @@ import {
   fetchProductReviews,
   submitProductReview,
   likeProductReview,
+  checkReviewEligibility,
   type ProductReviewsData,
+  type ReviewEligibility,
 } from "@/lib/reviews-api";
 
 interface ProductReviewsSectionProps {
@@ -82,6 +88,10 @@ const ProductReviewsSection = ({
   const [selectedRatingFilter, setSelectedRatingFilter] = useState<number | undefined>(undefined);
   const [likedMap, setLikedMap] = useState<Record<string, boolean>>({});
 
+  // Review Eligibility State
+  const [eligibility, setEligibility] = useState<ReviewEligibility | null>(null);
+  const [checkingEligibility, setCheckingEligibility] = useState<boolean>(true);
+
   // Review Form Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ratingInput, setRatingInput] = useState<number>(5);
@@ -113,6 +123,24 @@ const ProductReviewsSection = ({
   useEffect(() => {
     loadReviews(selectedRatingFilter);
   }, [loadReviews, selectedRatingFilter]);
+
+  // Load eligibility
+  const loadEligibility = useCallback(async () => {
+    if (!productId) return;
+    setCheckingEligibility(true);
+    try {
+      const data = await checkReviewEligibility(productId);
+      setEligibility(data);
+    } catch (err) {
+      console.error("Lỗi kiểm tra quyền đánh giá:", err);
+    } finally {
+      setCheckingEligibility(false);
+    }
+  }, [productId, isSignedIn]);
+
+  useEffect(() => {
+    loadEligibility();
+  }, [loadEligibility]);
 
   // Set user profile to input if available
   useEffect(() => {
@@ -182,6 +210,16 @@ const ProductReviewsSection = ({
     e.preventDefault();
     setFormError(null);
 
+    if (!isSignedIn) {
+      setFormError("Vui lòng đăng nhập để đánh giá sản phẩm.");
+      return;
+    }
+
+    if (eligibility && !eligibility.hasPurchased) {
+      setFormError("Chỉ khách hàng đã mua sản phẩm này mới có thể gửi đánh giá.");
+      return;
+    }
+
     const displayName = nameInput.trim() || user?.fullName || user?.username || "Khách hàng";
     const comment = commentInput.trim();
 
@@ -201,7 +239,7 @@ const ProductReviewsSection = ({
         userEmail: emailInput.trim() || user?.email || undefined,
         userId: user?.id,
         userAvatarUrl: user?.avatarUrl,
-        isVerifiedPurchase: !!user,
+        isVerifiedPurchase: true,
       });
 
       setSubmitSuccess(true);
@@ -211,6 +249,7 @@ const ProductReviewsSection = ({
         setTitleInput("");
         setCommentInput("");
         loadReviews(selectedRatingFilter);
+        loadEligibility();
       }, 1400);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Đăng đánh giá thất bại";
@@ -251,15 +290,89 @@ const ProductReviewsSection = ({
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsModalOpen(true)}
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-shop_dark_green text-white text-xs font-bold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-all shadow-sm shrink-0 hover:shadow"
-        >
-          <PenLine className="w-4 h-4" />
-          <span>Viết đánh giá & bình luận</span>
-        </button>
+        <div>
+          {!isSignedIn ? (
+            <Link
+              href={`/login?redirect=/product/${encodeURIComponent(productId)}#reviews`}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-neutral-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-neutral-800 transition-all shadow-sm shrink-0"
+            >
+              <LogIn className="w-4 h-4 text-emerald-400" />
+              <span>Đăng nhập để đánh giá</span>
+            </Link>
+          ) : checkingEligibility ? (
+            <div className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-100 text-neutral-500 text-xs font-semibold uppercase tracking-wider border border-neutral-200">
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-shop_dark_green" />
+              <span>Kiểm tra quyền...</span>
+            </div>
+          ) : eligibility?.alreadyReviewed ? (
+            <div className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold tracking-wider">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>Bạn đã gửi đánh giá</span>
+            </div>
+          ) : !eligibility?.hasPurchased ? (
+            <button
+              type="button"
+              onClick={() => {
+                alert("Chỉ khách hàng đã mua sản phẩm này tại Techwise AI mới có thể gửi đánh giá & bình luận.");
+              }}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-100 border border-neutral-300 text-neutral-500 text-xs font-bold uppercase tracking-wider cursor-not-allowed transition-all"
+              title="Bạn cần mua sản phẩm này để có thể đánh giá"
+            >
+              <Lock className="w-3.5 h-3.5 text-neutral-400" />
+              <span>Chưa mua sản phẩm</span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-shop_dark_green text-white text-xs font-bold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-all shadow-sm shrink-0 hover:shadow"
+            >
+              <PenLine className="w-4 h-4" />
+              <span>Viết đánh giá & bình luận</span>
+            </button>
+          )}
+        </div>
       </div>
+
+      {/* Buyer verification info note */}
+      {isSignedIn && !checkingEligibility && eligibility && !eligibility.hasPurchased && (
+        <div className="mb-6 p-4 bg-amber-50/90 border border-amber-200 text-amber-900 rounded-sm flex items-start sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-start sm:items-center gap-2.5">
+            <Lock className="w-4 h-4 text-amber-600 shrink-0 mt-0.5 sm:mt-0" />
+            <p>
+              <strong className="font-bold">Chỉ khách hàng đã mua sản phẩm mới được đánh giá:</strong> Bạn chưa có đơn hàng cho sản phẩm này. Hãy đặt mua để trải nghiệm và để lại nhận xét chân thực nhé!
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              const buyBtn = document.querySelector("#add-to-cart-section") || document.querySelector("button[type='submit']");
+              if (buyBtn) buyBtn.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="hidden sm:inline-flex items-center gap-1 text-xs font-bold text-amber-800 underline hover:text-amber-900 shrink-0"
+          >
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>Mua ngay</span>
+          </button>
+        </div>
+      )}
+
+      {!isSignedIn && (
+        <div className="mb-6 p-3.5 bg-neutral-50 border border-neutral-200 text-neutral-600 rounded-sm flex items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-shop_dark_green shrink-0" />
+            <p>
+              <strong className="text-neutral-800">Đánh giá xác thực:</strong> Tất cả đánh giá đều đến từ khách hàng đã mua sản phẩm thực tế tại Techwise AI.
+            </p>
+          </div>
+          <Link
+            href={`/login?redirect=/product/${encodeURIComponent(productId)}#reviews`}
+            className="text-xs font-bold text-shop_dark_green hover:underline shrink-0"
+          >
+            Đăng nhập
+          </Link>
+        </div>
+      )}
 
       {/* Overview Score Card */}
       <div className="border border-neutral-200 bg-neutral-50/70 p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center mb-8">
@@ -401,13 +514,33 @@ const ProductReviewsSection = ({
             <p className="text-xs text-neutral-500 mt-1 max-w-md">
               Hãy là người đầu tiên trải nghiệm và để lại đánh giá để giúp những người mua khác có lựa chọn tốt nhất!
             </p>
-            <button
-              type="button"
-              onClick={() => setIsModalOpen(true)}
-              className="mt-4 px-4 py-2 bg-shop_dark_green text-white text-xs font-bold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors"
-            >
-              Viết đánh giá ngay
-            </button>
+            {!isSignedIn ? (
+              <Link
+                href={`/login?redirect=/product/${encodeURIComponent(productId)}#reviews`}
+                className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-neutral-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-neutral-800 transition-colors"
+              >
+                <LogIn className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Đăng nhập để đánh giá</span>
+              </Link>
+            ) : eligibility?.alreadyReviewed ? (
+              <div className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Bạn đã gửi đánh giá cho sản phẩm này</span>
+              </div>
+            ) : !eligibility?.hasPurchased ? (
+              <div className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-neutral-100 border border-neutral-300 text-neutral-500 text-xs font-semibold">
+                <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                <span>Chỉ khách hàng đã mua sản phẩm mới có thể đánh giá</span>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="mt-4 px-4 py-2 bg-shop_dark_green text-white text-xs font-bold uppercase tracking-wider hover:bg-shop_dark_green/90 transition-colors"
+              >
+                Viết đánh giá ngay
+              </button>
+            )}
           </div>
         ) : (
           reviewsList.map((review) => {
@@ -683,39 +816,32 @@ const ProductReviewsSection = ({
                 </div>
 
                 {/* User info */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                  <div>
-                    <label className="block text-[11px] font-semibold text-neutral-600 mb-1">
-                      Họ và tên của bạn:
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={nameInput}
-                      onChange={(e) => setNameInput(e.target.value)}
-                      placeholder="Nguyễn Văn A"
-                      className="w-full px-3 py-1.5 border border-neutral-300 text-xs focus:border-shop_dark_green focus:outline-none"
-                    />
+                <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-shop_dark_green/10 text-shop_dark_green border border-shop_dark_green/20 flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
+                      {user?.avatarUrl ? (
+                        <img src={user.avatarUrl} alt={nameInput || "User"} className="w-full h-full object-cover" />
+                      ) : (
+                        (nameInput || user?.fullName || user?.username || "K").charAt(0).toUpperCase()
+                      )}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-1.5 font-bold text-neutral-900 text-xs">
+                        <span>{nameInput || user?.fullName || user?.username}</span>
+                        <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-emerald-700 bg-white border border-emerald-300 px-1.5 py-0.5 rounded-full">
+                          <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                          Đã mua hàng
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-neutral-500 font-mono">
+                        {user?.email || emailInput}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-[11px] font-semibold text-neutral-600 mb-1">
-                      Email (bảo mật):
-                    </label>
-                    <input
-                      type="email"
-                      value={emailInput}
-                      onChange={(e) => setEmailInput(e.target.value)}
-                      placeholder="email@example.com"
-                      className="w-full px-3 py-1.5 border border-neutral-300 text-xs focus:border-shop_dark_green focus:outline-none"
-                    />
-                  </div>
+                  <span className="text-[10px] font-semibold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded">
+                    Xác thực chính hãng
+                  </span>
                 </div>
-
-                {!isSignedIn && (
-                  <p className="text-[11px] text-neutral-400 italic">
-                    💡 Mẹo: Đăng nhập tài khoản trước khi đánh giá để nhận huy hiệu &quot;Đã mua hàng&quot; chính thức.
-                  </p>
-                )}
 
                 {/* Actions */}
                 <div className="flex items-center justify-end gap-3 pt-3 border-t border-neutral-200">

@@ -27,7 +27,13 @@ const HomeProductSections = async () => {
       .filter((c) => {
         const slug = (c.slug || "").toLowerCase();
         const title = (c.title || "").toLowerCase();
-        return !slug.includes("laptop") && !title.includes("laptop");
+        return (
+          !slug.includes("laptop") &&
+          !title.includes("laptop") &&
+          slug !== "man-hinh" &&
+          !title.includes("quân ka") &&
+          !title.includes("quan ka")
+        );
       })
       .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
 

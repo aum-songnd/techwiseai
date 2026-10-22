@@ -21,4 +21,7 @@ public interface OrderItemRepository
 
     @org.springframework.data.jpa.repository.Query("SELECT COUNT(oi) > 0 FROM OrderItem oi WHERE oi.order.user.id = :userId AND oi.product.id = :productId")
     boolean existsByUserIdAndProductId(@org.springframework.data.repository.query.Param("userId") UUID userId, @org.springframework.data.repository.query.Param("productId") UUID productId);
+
+    @org.springframework.data.jpa.repository.Query("SELECT COUNT(oi) > 0 FROM OrderItem oi WHERE oi.order.user.id = :userId AND oi.product.id = :productId AND oi.order.status NOT IN (com.university.regulation.models.enums.OrderStatus.CANCELLED, com.university.regulation.models.enums.OrderStatus.RETURNED)")
+    boolean existsPurchasedByUserIdAndProductId(@org.springframework.data.repository.query.Param("userId") UUID userId, @org.springframework.data.repository.query.Param("productId") UUID productId);
 }

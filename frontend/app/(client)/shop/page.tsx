@@ -31,7 +31,13 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
   }
 
   if (categoriesResult.status === "fulfilled") {
-    categories = categoriesResult.value;
+    // Ẩn danh mục phục vụ AI khỏi thanh chọn danh mục trên giao diện shop
+    categories = categoriesResult.value.filter(
+      (c) =>
+        c.slug !== "man-hinh" &&
+        !c.title?.toLowerCase().includes("quân ka") &&
+        !c.title?.toLowerCase().includes("quan ka")
+    );
   }
 
   if (loadError) {

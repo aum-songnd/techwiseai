@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.university.regulation.common.response.ApiResponse;
 import com.university.regulation.dto.reviews.CreateReviewRequest;
 import com.university.regulation.dto.reviews.ProductReviewsPageResponse;
+import com.university.regulation.dto.reviews.ReviewEligibilityResponse;
 import com.university.regulation.dto.reviews.ReviewResponse;
 import com.university.regulation.service.ReviewService;
 
@@ -47,6 +48,22 @@ public class ReviewController {
 
         return ApiResponse.success(
                 "Lấy danh sách đánh giá sản phẩm thành công",
+                data,
+                request.getRequestURI()
+        );
+    }
+
+    @GetMapping("/products/{productId}/reviews/eligibility")
+    public ApiResponse<ReviewEligibilityResponse> checkEligibility(
+            @PathVariable UUID productId,
+            Authentication authentication,
+            HttpServletRequest request
+    ) {
+        String username = authentication != null ? authentication.getName() : null;
+        ReviewEligibilityResponse data = reviewService.checkEligibility(productId, username);
+
+        return ApiResponse.success(
+                "Kiểm tra quyền đánh giá sản phẩm thành công",
                 data,
                 request.getRequestURI()
         );

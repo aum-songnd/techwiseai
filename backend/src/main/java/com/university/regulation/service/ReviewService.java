@@ -20,6 +20,7 @@ import com.university.regulation.common.api.PageResponse;
 import com.university.regulation.dto.reviews.AdminReplyReviewRequest;
 import com.university.regulation.dto.reviews.CreateReviewRequest;
 import com.university.regulation.dto.reviews.ProductReviewsPageResponse;
+import com.university.regulation.dto.reviews.ReviewEligibilityResponse;
 import com.university.regulation.dto.reviews.ReviewResponse;
 import com.university.regulation.dto.reviews.ReviewSummaryResponse;
 import com.university.regulation.dto.reviews.UpdateReviewStatusRequest;
@@ -101,6 +102,67 @@ public class ReviewService {
         return new ReviewSummaryResponse(roundedAverage, totalReviews, distribution);
     }
 
+    @Transactional(readOnly = true)
+    public ReviewEligibilityResponse checkEligibility(UUID productId, String username) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy sản phẩm"));
+
+        if (username == null || username.isBlank() || "anonymousUser".equalsIgnoreCase(username.trim())) {
+            return new ReviewEligibilityResponse(
+                    product.getId(),
+                    false,
+                    false,
+                    false,
+                    "Vui lòng đăng nhập để đánh giá sản phẩm"
+            );
+        }
+
+        User user = userRepository.findByUsername(username)
+                .or(() -> userRepository.findByEmailIgnoreCase(username))
+                .orElse(null);
+
+        if (user == null) {
+            return new ReviewEligibilityResponse(
+                    product.getId(),
+                    false,
+                    false,
+                    false,
+                    "Không tìm thấy tài khoản người dùng"
+            );
+        }
+
+        boolean hasPurchased = orderItemRepository.existsPurchasedByUserIdAndProductId(user.getId(), product.getId());
+        boolean alreadyReviewed = reviewRepository.existsByProductIdAndUserId(product.getId(), user.getId());
+
+        if (!hasPurchased) {
+            return new ReviewEligibilityResponse(
+                    product.getId(),
+                    false,
+                    false,
+                    alreadyReviewed,
+                    "Chỉ khách hàng đã mua sản phẩm này mới có thể gửi đánh giá & bình luận"
+            );
+        }
+
+        if (alreadyReviewed) {
+            return new ReviewEligibilityResponse(
+                    product.getId(),
+                    false,
+                    true,
+                    true,
+                    "Bạn đã gửi đánh giá cho sản phẩm này rồi"
+            );
+        }
+
+        return new ReviewEligibilityResponse(
+                product.getId(),
+                true,
+                true,
+                false,
+                "Bạn đủ điều kiện để đánh giá sản phẩm này"
+        );
+    }
+
     @Transactional
     public ReviewResponse createReview(
             UUID productId,
@@ -110,38 +172,42 @@ public class ReviewService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy sản phẩm"));
 
-        User user = null;
-        if (username != null && !username.isBlank()) {
-            user = userRepository.findByUsername(username)
-                    .or(() -> userRepository.findByEmailIgnoreCase(username))
-                    .orElse(null);
+        if (username == null || username.isBlank() || "anonymousUser".equalsIgnoreCase(username.trim())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Vui lòng đăng nhập để đánh giá sản phẩm.");
         }
 
-        String displayName = request.userFullName();
-        String avatarUrl = null;
-        boolean verifiedPurchase = false;
+        User user = userRepository.findByUsername(username)
+                .or(() -> userRepository.findByEmailIgnoreCase(username))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Không tìm thấy tài khoản người dùng."));
 
-        if (user != null) {
-            if (displayName == null || displayName.isBlank()) {
-                displayName = user.getFullName() != null && !user.getFullName().isBlank()
-                        ? user.getFullName()
-                        : user.getUsername();
-            }
-            avatarUrl = user.getAvatarUrl();
-            verifiedPurchase = orderItemRepository.existsByUserIdAndProductId(user.getId(), product.getId());
-        } else if (displayName == null || displayName.isBlank()) {
-            displayName = "Khách hàng Techwise";
+        boolean hasPurchased = orderItemRepository.existsPurchasedByUserIdAndProductId(user.getId(), product.getId());
+        if (!hasPurchased) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Chỉ khách hàng đã mua sản phẩm này mới có thể gửi đánh giá & bình luận."
+            );
         }
+
+        if (reviewRepository.existsByProductIdAndUserId(product.getId(), user.getId())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Bạn đã gửi đánh giá cho sản phẩm này rồi."
+            );
+        }
+
+        String displayName = (user.getFullName() != null && !user.getFullName().isBlank())
+                ? user.getFullName()
+                : ((request.userFullName() != null && !request.userFullName().isBlank()) ? request.userFullName().trim() : user.getUsername());
 
         Review review = new Review();
         review.setProduct(product);
         review.setUser(user);
         review.setUserFullName(displayName);
-        review.setUserAvatarUrl(avatarUrl);
+        review.setUserAvatarUrl(user.getAvatarUrl());
         review.setRating(request.rating());
         review.setTitle(request.title());
         review.setComment(request.comment());
-        review.setVerifiedPurchase(verifiedPurchase);
+        review.setVerifiedPurchase(true);
         review.setLikesCount(0);
         review.setStatus("APPROVED");
 
