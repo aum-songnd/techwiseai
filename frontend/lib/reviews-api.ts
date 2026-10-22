@@ -12,6 +12,14 @@ export interface ProductReviewsData {
   };
 }
 
+export interface ReviewEligibility {
+  productId: string;
+  eligible: boolean;
+  hasPurchased: boolean;
+  alreadyReviewed: boolean;
+  reason?: string;
+}
+
 export interface SubmitReviewPayload {
   productName?: string;
   rating: number;
@@ -45,6 +53,37 @@ export async function fetchProductReviews(
   }
 
   return body.data;
+}
+
+export async function checkReviewEligibility(
+  productId: string
+): Promise<ReviewEligibility> {
+  const token = getToken();
+  const headers: Record<string, string> = {};
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  try {
+    const res = await fetch(`/api/products/${encodeURIComponent(productId)}/reviews/eligibility`, {
+      cache: "no-store",
+      headers,
+    });
+    const body = await res.json().catch(() => ({}));
+    if (res.ok && body?.data) {
+      return body.data as ReviewEligibility;
+    }
+  } catch (err) {
+    console.error("Lỗi kiểm tra quyền đánh giá:", err);
+  }
+
+  return {
+    productId,
+    eligible: !token ? false : true,
+    hasPurchased: !token ? false : true,
+    alreadyReviewed: false,
+    reason: !token ? "Vui lòng đăng nhập để đánh giá" : undefined,
+  };
 }
 
 export async function submitProductReview(

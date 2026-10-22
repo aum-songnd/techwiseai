@@ -173,7 +173,13 @@ const ProductGrid = ({
           .filter((c) => {
             const s = (c.slug || "").toLowerCase();
             const t = (c.title || "").toLowerCase();
-            return !s.includes("laptop") && !t.includes("laptop");
+            return (
+              !s.includes("laptop") &&
+              !t.includes("laptop") &&
+              s !== "man-hinh" &&
+              !t.includes("quân ka") &&
+              !t.includes("quan ka")
+            );
           })
           .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
 

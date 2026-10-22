@@ -179,7 +179,14 @@ const Shop = ({
   categories: categoriesProp,
 }: ShopProps) => {
   const initialProducts = Array.isArray(productsProp) ? productsProp : [];
-  const categories = Array.isArray(categoriesProp) ? categoriesProp : [];
+  const categories = (
+    Array.isArray(categoriesProp) ? categoriesProp : []
+  ).filter(
+    (c) =>
+      c.slug !== "man-hinh" &&
+      !c.title?.toLowerCase().includes("quân ka") &&
+      !c.title?.toLowerCase().includes("quan ka")
+  );
 
   const searchParams = useSearchParams();
   const categorySlugParam = searchParams.get("category");

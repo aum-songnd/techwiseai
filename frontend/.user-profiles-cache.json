@@ -20,9 +20,18 @@
   },
   "admin": {
     "username": "admin",
-    "updatedAt": 1792561167812,
+    "updatedAt": 1792575926664,
     "fullName": "System Administrator",
     "email": "admin@regulation.local",
+    "avatarUrl": null
+  },
+  "song": {
+    "username": "song",
+    "updatedAt": 1792576816960,
+    "fullName": "Sông Nguyễn Đình",
+    "email": "nsong568@gmail.com",
+    "phoneNumber": "0984457243",
+    "phone": "0984457243",
     "avatarUrl": null
   }
 }

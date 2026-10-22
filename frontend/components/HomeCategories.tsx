@@ -119,11 +119,18 @@ const HomeCategories = async () => {
   try {
     categories = (await getCategories()) as CategoryWithImage[];
 
-    categories = [...categories].sort((a, b) => {
-      const orderA = a.displayOrder ?? Number.MAX_SAFE_INTEGER;
-      const orderB = b.displayOrder ?? Number.MAX_SAFE_INTEGER;
-      return orderA - orderB;
-    });
+    categories = [...categories]
+      .filter(
+        (c) =>
+          c.slug !== "man-hinh" &&
+          !c.title?.toLowerCase().includes("quân ka") &&
+          !c.title?.toLowerCase().includes("quan ka")
+      )
+      .sort((a, b) => {
+        const orderA = a.displayOrder ?? Number.MAX_SAFE_INTEGER;
+        const orderB = b.displayOrder ?? Number.MAX_SAFE_INTEGER;
+        return orderA - orderB;
+      });
   } catch {
 
   }
