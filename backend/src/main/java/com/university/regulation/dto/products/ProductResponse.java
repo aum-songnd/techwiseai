@@ -1,6 +1,7 @@
 package com.university.regulation.dto.products;
 
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.UUID;
 
 import com.university.regulation.dto.categories.CategoryResponse;
@@ -29,5 +30,32 @@ public record ProductResponse(
         boolean hot,
         boolean onSale,
         boolean inStock,
-        boolean active) {
+        boolean active,
+        Map<String, String> specifications) {
+
+    public ProductResponse(
+            UUID id,
+            String name,
+            String slug,
+            String sku,
+            String brand,
+            String shortDescription,
+            String description,
+            String thumbnailUrl,
+            CategoryResponse category,
+            BigDecimal price,
+            BigDecimal originalPrice,
+            int discountPercent,
+            int stockQuantity,
+            BigDecimal ratingAverage,
+            int reviewCount,
+            boolean featured,
+            boolean hot,
+            boolean onSale,
+            boolean inStock,
+            boolean active) {
+        this(id, name, slug, sku, brand, shortDescription, description, thumbnailUrl,
+                category, price, originalPrice, discountPercent, stockQuantity,
+                ratingAverage, reviewCount, featured, hot, onSale, inStock, active, Map.of());
+    }
 }

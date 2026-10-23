@@ -124,7 +124,8 @@ public class ProductService {
                                 product.isHot(),
                                 onSale,
                                 inStock,
-                                product.isActive());
+                                product.isActive(),
+                                product.getSpecifications());
         }
 
         private boolean isOnSale(Product product) {
@@ -326,11 +327,22 @@ public class ProductService {
 
         int safeLimit = Math.max(1, Math.min(limit, 20));
 
+        BigDecimal price = currentProduct.getPrice();
+        BigDecimal minPrice = null;
+        BigDecimal maxPrice = null;
+        if (price != null && price.signum() > 0) {
+                // Ngưỡng chênh lệch giá tối đa 35%: không đề xuất sản phẩm chênh lệch quá xa
+                minPrice = price.multiply(BigDecimal.valueOf(0.65));
+                maxPrice = price.multiply(BigDecimal.valueOf(1.35));
+        }
+
         List<Product> candidates =
                 productRepository.findRecommendedCandidates(
                         currentProduct.getId(),
                         currentProduct.getCategory().getId(),
                         currentProduct.getBrand(),
+                        minPrice,
+                        maxPrice,
                         PageRequest.of(0, safeLimit)
                 );
 

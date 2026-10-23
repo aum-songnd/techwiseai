@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   ArrowLeft,
   Eye,
@@ -19,9 +19,19 @@ import { saveUserProfile } from "@/lib/auth";
 import Logo from "@/components/Logo";
 import Container from "@/components/Container";
 
-const SignUpPage = () => {
+const SignUpForm = () => {
   const { register } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectParam = searchParams.get("redirect") || searchParams.get("redirectTo");
+  const safeRedirect =
+    redirectParam &&
+    redirectParam.startsWith("/") &&
+    !redirectParam.startsWith("//") &&
+    !redirectParam.startsWith("/sign-in") &&
+    !redirectParam.startsWith("/sign-up")
+      ? redirectParam
+      : null;
 
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
@@ -49,7 +59,11 @@ const SignUpPage = () => {
       saveUserProfile({ username, email, fullName, phoneNumber });
       await register({ username, email, password, fullName, phoneNumber });
       saveUserProfile({ username, email, fullName, phoneNumber });
-      router.push("/sign-in?registered=1");
+      router.push(
+        safeRedirect
+          ? `/sign-in?registered=1&redirect=${encodeURIComponent(safeRedirect)}`
+          : "/sign-in?registered=1"
+      );
     } catch (err) {
       setError(err instanceof Error ? err.message : "Đăng ký thất bại");
     } finally {
@@ -273,7 +287,11 @@ const SignUpPage = () => {
             <div className="mt-8 pt-5 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
               <span>Đã có tài khoản TechWise AI?</span>
               <Link
-                href="/sign-in"
+                href={
+                  safeRedirect
+                    ? `/sign-in?redirect=${encodeURIComponent(safeRedirect)}`
+                    : "/sign-in"
+                }
                 className="font-bold text-shop_dark_green hover:underline flex items-center gap-1"
               >
                 <span>Đăng nhập ngay</span>
@@ -303,6 +321,14 @@ const SignUpPage = () => {
         </div>
       </Container>
     </div>
+  );
+};
+
+const SignUpPage = () => {
+  return (
+    <Suspense fallback={null}>
+      <SignUpForm />
+    </Suspense>
   );
 };
 

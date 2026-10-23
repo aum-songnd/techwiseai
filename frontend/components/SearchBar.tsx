@@ -6,100 +6,114 @@ import {
   X,
   Camera,
   Clock,
-  Trash2,
   ShoppingCart,
-  PackageSearch,
-  Minus,
-  Plus,
+  ArrowRight,
+  TrendingUp,
+  Sparkles,
+  Tag,
 } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import type { Product } from "@/app/data/types";
-import { productImages } from "@/images";
-import type { StaticImageData } from "next/image";
-import Loading from "@/app/(client)/loading";
 
 const SEARCH_HISTORY_KEY = "techwise_search_history";
-const MAX_HISTORY_ITEMS = 10;
+const MAX_HISTORY_ITEMS = 8;
 
 const POPULAR_SEARCHES = [
-  "Laptop Gaming",
-  "MacBook",
-  "iPhone 16",
-  "Tai nghe Bluetooth",
-  "Bàn phím cơ",
-  "Màn hình 4K",
-  "Chuột không dây",
-  "iPad",
+  "MacBook Air M3",
+  "Laptop Gaming RTX 4060",
+  "iPhone 16 Pro Max",
+  "Tai nghe chống ồn",
+  "Bàn phím cơ không dây",
+  "SSD 1TB Kingston",
+  "Dell XPS 13",
+  "Chuột Logitech MX Master 3S",
+];
+
+const SUGGESTED_CATEGORIES = [
+  { name: "Laptop & MacBook", slug: "laptop" },
+  { name: "Điện thoại & Tablet", slug: "dien-thoai" },
+  { name: "Tai nghe & Âm thanh", slug: "tai-nghe" },
+  { name: "Máy ảnh & Flycam", slug: "may-anh" },
+  { name: "Linh kiện PC", slug: "linh-kien" },
+  { name: "Phụ kiện công nghệ", slug: "phu-kien" },
+];
+
+const SUGGESTED_BRANDS = [
+  "Apple",
+  "ASUS",
+  "Dell",
+  "Lenovo",
+  "HP",
+  "Acer",
+  "MSI",
+  "Samsung",
+  "Sony",
+  "Logitech",
 ];
 
 const formatPrice = (value: number) =>
-  new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
-    value,
-  );
+  new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(value);
 
-const resolveProductImage = (
-  fileName?: string,
-): StaticImageData | string | null => {
-  if (!fileName) return null;
-  const localImage = (
-    productImages as Record<string, StaticImageData | undefined>
-  )[fileName];
-  return localImage ?? fileName;
-};
+interface SearchBarProps {
+  variant?: "prominent" | "icon";
+}
 
-const SearchBar = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+const SearchBar = ({ variant = "prominent" }: SearchBarProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   const [keyword, setKeyword] = useState("");
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-
+  const [, setError] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
-  const [searchedKeyword, setSearchedKeyword] = useState("");
-  const [searchMode, setSearchMode] = useState<"keyword" | "image">("keyword");
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
-  const { addToCart, updateQuantity, getItemByProductId, requiresLogin } =
-    useCart();
+
+  // AI Image Search states
+  const [searchImagePreview, setSearchImagePreview] = useState<string | null>(null);
+  const [isSearchingByImage, setIsSearchingByImage] = useState(false);
+
+  const { addToCart, getItemByProductId, requiresLogin } = useCart();
   const { isSignedIn } = useAuth();
   const router = useRouter();
-  const [searchImagePreview, setSearchImagePreview] = useState<string | null>(
-    null,
-  );
-  const [isSearchingByImage, setIsSearchingByImage] = useState(false);
+
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  // Read search history from localStorage when search modal opens
-  useEffect(() => {
-    if (!isSearchOpen || typeof window === "undefined") return;
     try {
       const saved = localStorage.getItem(SEARCH_HISTORY_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setSearchHistory(parsed);
-        }
+        if (Array.isArray(parsed)) setSearchHistory(parsed);
       }
     } catch {
-      // Ignore localStorage parse error
+      // ignore
     }
-  }, [isSearchOpen]);
+  }, []);
 
+  // Close dropdown on outside click
   useEffect(() => {
-    document.body.style.overflow = isSearchOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(e.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
     };
-  }, [isSearchOpen]);
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
 
   const saveToHistory = useCallback((term: string) => {
     const clean = term.trim();
@@ -112,7 +126,7 @@ const SearchBar = () => {
       try {
         localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(next));
       } catch {
-        // Ignore localStorage write error
+        // ignore
       }
       return next;
     });
@@ -124,7 +138,7 @@ const SearchBar = () => {
       try {
         localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(next));
       } catch {
-        // Ignore localStorage write error
+        // ignore
       }
       return next;
     });
@@ -135,155 +149,117 @@ const SearchBar = () => {
     try {
       localStorage.removeItem(SEARCH_HISTORY_KEY);
     } catch {
-      // Ignore localStorage remove error
+      // ignore
     }
   }, []);
 
-  const handleSelectTerm = (term: string) => {
-    setSearchMode("keyword");
-    setKeyword(term);
-    saveToHistory(term);
-  };
-
+  // Debounced search
   useEffect(() => {
-    if (searchMode !== "keyword") {
-      return;
-    }
-    const searchKeyword = keyword.trim();
-
-    if (!searchKeyword) {
+    const term = keyword.trim();
+    if (!term) {
       setSearchResults([]);
-      setError("");
       setIsLoading(false);
-      setSearchedKeyword("");
+      setError("");
       setHasSearched(false);
       return;
     }
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(async () => {
+    const timeout = setTimeout(async () => {
       try {
         setIsLoading(true);
         setError("");
-
-        const results = await searchProducts(searchKeyword, controller.signal);
-
+        const results = await searchProducts(term, controller.signal);
         setSearchResults(results);
-        setSearchedKeyword(searchKeyword);
         setHasSearched(true);
         if (results.length > 0) {
-          saveToHistory(searchKeyword);
+          saveToHistory(term);
         }
-      } catch (err: unknown) {
+      } catch (err) {
         if (controller.signal.aborted) return;
-        const message =
-          err instanceof Error ? err.message : "Đã xảy ra lỗi khi tìm kiếm.";
-
-        setError(message);
+        setError(err instanceof Error ? err.message : "Lỗi tìm kiếm");
         setSearchResults([]);
       } finally {
         if (!controller.signal.aborted) setIsLoading(false);
       }
-    }, 400);
+    }, 350);
 
     return () => {
-      clearTimeout(timeoutId);
+      clearTimeout(timeout);
       controller.abort();
     };
-  }, [keyword, searchMode, saveToHistory]);
+  }, [keyword, saveToHistory]);
 
-  const handleImageSearch = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleImageSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.currentTarget;
     const file = input.files?.[0];
-
     if (!file) return;
 
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
-    if (!allowedTypes.includes(file.type)) {
-      setError("Chỉ hỗ trợ ảnh JPEG, PNG hoặc WEBP.");
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowed.includes(file.type)) {
+      setError("Chỉ hỗ trợ ảnh JPEG, PNG hoặc WEBP");
       input.value = "";
       return;
     }
 
-    const maxFileSize = 10 * 1024 * 1024;
-    if (file.size > maxFileSize) {
-      setError("Dung lượng ảnh không được vượt quá 10 MB.");
+    if (file.size > 10 * 1024 * 1024) {
+      setError("Dung lượng ảnh tối đa 10 MB");
       input.value = "";
       return;
     }
 
     const previewUrl = URL.createObjectURL(file);
-
-    // Chuẩn bị giao diện trước khi gọi API.
-    setSearchMode("image");
     setKeyword("");
     setError("");
-    setHasSearched(false);
     setSearchResults([]);
-    setSearchedKeyword(file.name);
-
-    // Hiển thị ảnh đang được AI phân tích.
     setSearchImagePreview(previewUrl);
     setIsSearchingByImage(true);
     setIsLoading(true);
+    setIsModalOpen(true);
+    setIsDropdownOpen(false);
 
     try {
       const [results] = await Promise.all([
         searchProductsByImage(file, 10),
-
-        // Giữ hiệu ứng tối thiểu 1 giây để tránh nháy quá nhanh.
-        new Promise<void>((resolve) => {
-          setTimeout(resolve, 1000);
-        }),
+        new Promise<void>((r) => setTimeout(r, 1000)),
       ]);
-
       setSearchResults(results);
       setHasSearched(true);
-    } catch (error: unknown) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : "Hệ thống xảy ra lỗi, vui lòng thử lại.";
-
-      setError(message);
-      setSearchResults([]);
-      setHasSearched(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Lỗi tìm kiếm bằng hình ảnh");
     } finally {
-      setIsLoading(false);
       setIsSearchingByImage(false);
-      setSearchImagePreview(null);
-
-      URL.revokeObjectURL(previewUrl);
-
-      // Cho phép chọn lại cùng một ảnh.
+      setIsLoading(false);
       input.value = "";
     }
   };
 
-  const handleSubmit = (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    const clean = keyword.trim();
-    if (!clean) return;
-    saveToHistory(clean);
+  const handleSelectTerm = (term: string) => {
+    setKeyword(term);
+    saveToHistory(term);
+    setIsDropdownOpen(true);
+  };
+
+  const handleSubmitSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!keyword.trim()) return;
+    saveToHistory(keyword.trim());
+    setIsDropdownOpen(false);
+    setIsModalOpen(false);
+    router.push(`/shop?keyword=${encodeURIComponent(keyword.trim())}`);
   };
 
   const handleAddToCart = (product: Product, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (product?.stock === 0) return;
-
-    if (!isSignedIn || requiresLogin) {
-      closeSearch();
+    if (requiresLogin && !isSignedIn) {
       const redirectTo =
         typeof window !== "undefined"
           ? window.location.pathname + window.location.search
-          : "/shop";
+          : "/";
       router.push(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
       return;
     }
-
     addToCart(product.id, 1, {
       id: `temp-${product.id}`,
       productId: product.id,
@@ -298,32 +274,31 @@ const SearchBar = () => {
     });
   };
 
-  const handleDecreaseQuantity = (
-    item: { id: string; quantity: number },
-    e: React.MouseEvent,
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    updateQuantity(item.id, item.quantity - 1);
-  };
+  // Matched categories & brands for autocomplete
+  const matchedCategories = SUGGESTED_CATEGORIES.filter((c) =>
+    keyword.trim()
+      ? c.name.toLowerCase().includes(keyword.toLowerCase().trim())
+      : false
+  );
 
-  const handleIncreaseQuantity = (
-    item: { id: string; quantity: number },
-    stockLimit: number,
-    e: React.MouseEvent,
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (item.quantity >= stockLimit) return;
-    updateQuantity(item.id, item.quantity + 1);
-  };
-
-  const closeSearch = () => {
-    setIsSearchOpen(false);
-  };
+  const matchedBrands = SUGGESTED_BRANDS.filter((b) =>
+    keyword.trim()
+      ? b.toLowerCase().includes(keyword.toLowerCase().trim())
+      : false
+  );
 
   return (
     <>
+      {/* Hidden File Input for AI Image Search */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        className="hidden"
+        onChange={handleImageSearch}
+      />
+
+      {/* AI Processing Overlay */}
       {mounted &&
         isSearchingByImage &&
         searchImagePreview &&
@@ -331,403 +306,390 @@ const SearchBar = () => {
           <div
             role="status"
             aria-live="polite"
-            className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/45 backdrop-blur-[2px]"
+            className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/50 backdrop-blur-sm animate-in fade-in"
           >
-            <div className="flex flex-col items-center gap-5">
+            <div className="flex flex-col items-center gap-4 bg-white/10 p-6 rounded-3xl backdrop-blur-md border border-white/20">
               <div className="overflow-hidden rounded-2xl bg-white p-2 shadow-2xl">
                 <img
                   src={searchImagePreview}
-                  alt="Ảnh đang được tìm kiếm"
-                  className="image-search-processing h-72 w-72 rounded-xl object-contain"
+                  alt="Ảnh tìm kiếm"
+                  className="h-64 w-64 rounded-xl object-contain animate-pulse"
                 />
               </div>
-
               <div className="text-center text-white">
-                <p className="text-lg font-semibold">
-                  Đang tìm kiếm sản phẩm tương tự...
+                <p className="text-base font-bold flex items-center gap-2 justify-center">
+                  <Sparkles className="w-5 h-5 text-amber-300 animate-spin" />
+                  <span>AI đang phân tích và tìm kiếm sản phẩm...</span>
                 </p>
+                <p className="text-xs text-neutral-300 mt-1">Đang so khớp vector hình ảnh catalog</p>
               </div>
             </div>
           </div>,
-          document.body,
+          document.body
         )}
-      <button
-        type="button"
-        onClick={() => setIsSearchOpen(true)}
-        aria-label="Mở tìm kiếm"
-        className="cursor-pointer"
-      >
-        <Search className="h-5 w-5 hover:text-shop_light_green transition-colors" />
-      </button>
 
-      {mounted &&
-        isSearchOpen &&
-        createPortal(
-          <div
-            className="fixed inset-0 z-[9999] flex items-start justify-center overflow-y-auto bg-black/75 px-4 py-8 sm:py-10"
-            onClick={closeSearch}
+      {/* PROMINENT INLINE SEARCH BAR */}
+      {variant === "prominent" ? (
+        <div ref={searchContainerRef} className="relative flex-1 max-w-xl mx-2 sm:mx-4">
+          <form
+            onSubmit={handleSubmitSearch}
+            className={`relative flex items-center w-full rounded-2xl border transition-all duration-200 ${isDropdownOpen
+                ? "border-shop_dark_green bg-white shadow-md"
+                : "border-neutral-200/90 bg-neutral-100/70 hover:bg-white hover:border-neutral-300 hover:shadow-xs"
+              }`}
           >
-            <div
-              role="dialog"
-              aria-modal="true"
-              className="font-sans antialiased text-neutral-900 relative flex flex-col h-[calc(100dvh-4rem)] sm:h-[640px] max-h-[720px] w-full max-w-4xl overflow-hidden rounded-2xl bg-white p-5 sm:p-6 shadow-2xl"
-              onClick={(event) => event.stopPropagation()}
-            >
-              {/* Header */}
-              <div className="flex shrink-0 items-center justify-between pb-3">
-                <h2 className="text-base sm:text-lg font-bold uppercase tracking-tight text-neutral-900">
-                  Tìm kiếm sản phẩm
-                </h2>
+            <div className="pl-3.5 text-neutral-400">
+              <Search className="w-4 h-4 text-neutral-500" />
+            </div>
+
+            <input
+              ref={inputRef}
+              type="text"
+              value={keyword}
+              onChange={(e) => {
+                setKeyword(e.target.value);
+                if (!isDropdownOpen) setIsDropdownOpen(true);
+              }}
+              onFocus={() => setIsDropdownOpen(true)}
+              placeholder="Bạn muốn tìm gì? Laptop, iPhone 16, RTX 4060, AI Chip..."
+              className="w-full py-2.5 pl-2.5 pr-20 text-xs sm:text-sm text-neutral-900 bg-transparent placeholder-neutral-400 focus:outline-none"
+            />
+
+            <div className="absolute right-2 flex items-center gap-1">
+              {keyword && (
                 <button
                   type="button"
-                  onClick={closeSearch}
-                  aria-label="Đóng tìm kiếm"
-                  className="rounded-full p-1 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-900 transition-colors cursor-pointer"
+                  onClick={() => {
+                    setKeyword("");
+                    setSearchResults([]);
+                  }}
+                  className="p-1 text-neutral-400 hover:text-neutral-600 rounded-full hover:bg-neutral-200/60 transition-colors"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="w-3.5 h-3.5" />
                 </button>
-              </div>
+              )}
 
-              {/* Search Bar Form */}
-              <form
-                onSubmit={handleSubmit}
-                className="flex shrink-0 h-12 w-full overflow-hidden border border-neutral-300 bg-white transition-all focus-within:border-shop_dark_green focus-within:ring-2 focus-within:ring-shop_dark_green/15"
+              {/* AI Camera Search Button */}
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="flex items-center gap-1 p-1.5 rounded-lg text-neutral-500 hover:text-shop_dark_green hover:bg-emerald-50 transition-colors cursor-pointer group"
+                title="Tìm kiếm bằng ảnh chụp / hình ảnh AI"
               >
-                <div className="flex shrink-0 items-center pl-3.5 text-neutral-400">
-                  <Search className="h-5 w-5" />
-                </div>
+                <Camera className="w-4 h-4 text-shop_dark_green group-hover:scale-110 transition-transform" />
+              </button>
+            </div>
+          </form>
 
-                <div className="relative flex-1 flex items-center min-w-0 h-full">
-                  <input
-                    type="text"
-                    value={keyword}
-                    onChange={(event) => {
-                      setSearchMode("keyword");
-                      setKeyword(event.target.value);
-                      if (error) setError("");
-                    }}
-                    placeholder="Tìm kiếm sản phẩm, thương hiệu (VD: Laptop Gaming, MacBook, iPhone)..."
-                    autoFocus
-                    className="h-full w-full pl-3 pr-9 text-xs sm:text-sm text-neutral-900 outline-none placeholder:text-neutral-400 bg-transparent"
-                  />
-
-                  {keyword && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setKeyword("");
-                        setHasSearched(false);
-                        setSearchResults([]);
-                      }}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full text-neutral-400 hover:bg-neutral-100 hover:text-neutral-900 transition-colors cursor-pointer"
-                      title="Xóa từ khóa"
+          {/* AUTOCOMPLETE POPUP DROPDOWN */}
+          {isDropdownOpen && (
+            <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-neutral-200 overflow-hidden z-50 animate-in fade-in-50 zoom-in-95 duration-150 max-h-[520px] overflow-y-auto">
+              {/* Category / Brand match suggestions */}
+              {keyword.trim().length > 0 && (matchedCategories.length > 0 || matchedBrands.length > 0) && (
+                <div className="p-3 bg-neutral-50/80 border-b border-neutral-100 flex flex-wrap items-center gap-2">
+                  <span className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">
+                    Gợi ý nhanh:
+                  </span>
+                  {matchedCategories.map((c) => (
+                    <Link
+                      key={c.slug}
+                      href={`/shop?category=${c.slug}`}
+                      onClick={() => setIsDropdownOpen(false)}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-neutral-200 text-xs font-semibold text-shop_dark_green hover:border-shop_dark_green transition-colors"
                     >
-                      <X className="h-3.5 w-3.5" />
-                    </button>
-                  )}
+                      <Tag className="w-3 h-3 text-emerald-600" />
+                      <span>{c.name}</span>
+                    </Link>
+                  ))}
+                  {matchedBrands.map((b) => (
+                    <Link
+                      key={b}
+                      href={`/shop?brand=${encodeURIComponent(b)}`}
+                      onClick={() => setIsDropdownOpen(false)}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-neutral-200 text-xs font-semibold text-neutral-700 hover:text-shop_dark_green hover:border-shop_dark_green transition-colors"
+                    >
+                      <span>Hãng {b}</span>
+                    </Link>
+                  ))}
                 </div>
+              )}
 
-                <input
-                  id="image-search-input"
-                  type="file"
-                  accept="image/jpeg,image/png,image/webp"
-                  onChange={handleImageSearch}
-                  disabled={isLoading}
-                  className="hidden"
-                />
-
-                <label
-                  htmlFor="image-search-input"
-                  title="Tìm kiếm bằng hình ảnh AI"
-                  className="flex shrink-0 w-12 cursor-pointer items-center justify-center border-l border-neutral-200 bg-neutral-50 text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-shop_dark_green"
-                >
-                  <Camera className="h-5 w-5" />
-                  <span className="sr-only">Tìm kiếm bằng hình ảnh</span>
-                </label>
-
-                <button
-                  disabled={isLoading}
-                  type="submit"
-                  title="Tìm kiếm"
-                  className="flex shrink-0 w-12 items-center justify-center border-l border-neutral-200 bg-shop_dark_green text-white hover:bg-shop_dark_green/90 transition-colors disabled:opacity-60 cursor-pointer"
-                >
-                  <Search className="h-5 w-5" />
-                </button>
-              </form>
-
-              {/* Main Content Area */}
-              <div className="mt-4 flex-1 min-h-0 overflow-y-auto overscroll-contain  border border-neutral-200 bg-white">
-                {/* 1. INITIAL STATE: Search History & Popular Suggestions */}
-                {!hasSearched && !isLoading && !keyword.trim() && (
-                  <div className="p-4 sm:p-5 space-y-5">
-                    {/* Search History */}
-                    {searchHistory.length > 0 && (
-                      <div>
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900">
-                            <Clock className="h-4 w-4 text-shop_dark_green" />
-                            <span>Lịch sử tìm kiếm</span>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={clearAllHistory}
-                            className="inline-flex items-center gap-1 text-xs text-neutral-500 hover:text-red-600 transition-colors cursor-pointer"
-                          >
-                            <Trash2 className="h-3.5 w-3.5" />
-                            <span>Xóa tất cả</span>
-                          </button>
-                        </div>
-
-                        <div className="flex flex-wrap gap-2">
-                          {searchHistory.map((item) => (
-                            <div
-                              key={item}
-                              onClick={() => handleSelectTerm(item)}
-                              className="group inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-50 hover:bg-neutral-100 hover:border-shop_dark_green/40 pl-3 pr-2 py-1.5 text-xs text-neutral-700 transition cursor-pointer"
-                            >
-                              <Clock className="h-3 w-3 text-neutral-400 group-hover:text-shop_dark_green transition-colors" />
-                              <span className="font-medium">{item}</span>
-                              <button
-                                type="button"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  removeHistoryItem(item);
-                                }}
-                                className="ml-0.5 rounded-full p-0.5 text-neutral-400 hover:bg-neutral-200 hover:text-red-600 transition-colors cursor-pointer"
-                                aria-label={`Xóa "${item}" khỏi lịch sử`}
-                                title="Xóa"
-                              >
-                                <X className="h-3 w-3" />
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+              {/* Live search products results */}
+              {keyword.trim().length > 0 ? (
+                <div className="p-3">
+                  <div className="flex items-center justify-between mb-2 px-1">
+                    <span className="text-xs font-bold text-neutral-600 uppercase tracking-wider">
+                      Sản phẩm khớp từ khoá ({searchResults.length})
+                    </span>
+                    {isLoading && (
+                      <span className="text-xs text-shop_dark_green animate-pulse">
+                        Đang tìm kiếm...
+                      </span>
                     )}
-
-                    {/* Gợi ý tìm kiếm */}
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-wider text-neutral-900 mb-2.5">
-                        Gợi ý tìm kiếm
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {POPULAR_SEARCHES.map((term) => (
-                          <button
-                            key={term}
-                            type="button"
-                            onClick={() => handleSelectTerm(term)}
-                            className="rounded-full border border-neutral-200 bg-white hover:border-shop_dark_green hover:text-shop_dark_green hover:bg-shop_light_green/5 px-3.5 py-1.5 text-xs font-medium text-neutral-600 transition-colors cursor-pointer"
-                          >
-                            {term}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Banner đơn giản giống giỏ hàng */}
-                    <div className="rounded-xl bg-neutral-100 px-4 py-3.5 text-xs sm:text-sm text-neutral-600">
-                      <p className="font-medium">
-                        Tìm kiếm và khám phá các sản phẩm từ{" "}
-                        <span className="font-bold text-shop_light_green">
-                          TECHWISE
-                        </span>
-                      </p>
-                    </div>
                   </div>
-                )}
 
-                {/* 2. LOADING STATE */}
-                {isLoading && (
-                  <Loading
-                    message="Đang tìm kiếm sản phẩm..."
-                    className="h-full min-h-[300px] py-12"
-                  />
-                )}
-
-                {/* 3. ERROR STATE */}
-                {!isLoading && error && (
-                  <div className="flex flex-col h-64 items-center justify-center p-6 text-center text-xs text-red-500">
-                    <p>{error}</p>
-                  </div>
-                )}
-
-                {/* 4. EMPTY RESULTS */}
-                {!isLoading &&
-                  !error &&
-                  hasSearched &&
-                  searchResults.length === 0 && (
-                    <div className="flex flex-col h-64 items-center justify-center gap-2 p-6 text-center">
-                      <PackageSearch className="h-10 w-10 text-neutral-300" />
-                      <p className="text-sm font-bold uppercase tracking-tight text-neutral-900">
-                        Không tìm thấy sản phẩm nào
-                      </p>
-                      <p className="text-xs text-neutral-500 max-w-md">
-                        {searchMode === "image" ? (
-                          `Không tìm thấy sản phẩm tương đồng với ảnh "${searchedKeyword}".`
-                        ) : (
-                          <>
-                            Không tìm thấy kết quả phù hợp cho &ldquo;
-                            <strong className="text-neutral-900 font-semibold">
-                              {searchedKeyword}
-                            </strong>
-                            &rdquo;. Hãy thử kiểm tra lỗi chính tả hoặc tìm kiếm
-                            bằng từ khóa khác.
-                          </>
-                        )}
-                      </p>
+                  {searchResults.length === 0 && !isLoading && hasSearched ? (
+                    <div className="py-6 text-center text-xs text-neutral-500">
+                      Không tìm thấy sản phẩm nào khớp với &ldquo;{keyword}&rdquo;.
                     </div>
-                  )}
-
-                {/* 5. SEARCH RESULTS LIST */}
-                {!isLoading && !error && searchResults.length > 0 && (
-                  <div>
-                    <div className="border-b border-neutral-200 bg-neutral-50/60 px-4 py-2.5 text-xs text-neutral-500">
-                      Tìm thấy{" "}
-                      <strong className="text-neutral-900 font-semibold">
-                        {searchResults.length}
-                      </strong>{" "}
-                      sản phẩm phù hợp
-                    </div>
-
-                    <div className="divide-y divide-neutral-100">
-                      {searchResults.map((product) => {
-                        const image = resolveProductImage(product.images?.[0]);
-                        const imgSrc =
-                          typeof image === "string" ? image : image?.src;
-                        const hasDiscount =
-                          product.discount > 0 ||
-                          (product.finalPrice &&
-                            product.finalPrice < product.price);
-
+                  ) : (
+                    <div className="space-y-1">
+                      {searchResults.slice(0, 6).map((product) => {
                         const itemInCart = getItemByProductId(product.id);
-                        const quantityInCart = itemInCart?.quantity ?? 0;
-                        const isOutOfStock = product?.stock === 0;
-                        const stockLimit =
-                          itemInCart?.stockQuantity ??
-                          product.stock ??
-                          Infinity;
+                        const qty = itemInCart?.quantity ?? 0;
+                        const finalPrice = product.finalPrice || product.price;
 
                         return (
                           <div
                             key={product.id}
-                            className="flex items-center gap-4 px-4 py-3.5 hover:bg-neutral-50/60 transition-colors"
+                            className="group flex items-center justify-between p-2 rounded-xl hover:bg-neutral-50 border border-transparent hover:border-neutral-200 transition-all"
                           >
                             <Link
-                              href={`/product/${product.slug ?? product.id}`}
-                              onClick={closeSearch}
-                              className="shrink-0"
+                              href={`/product/${product.id}`}
+                              onClick={() => {
+                                setIsDropdownOpen(false);
+                                saveToHistory(product.name);
+                              }}
+                              className="flex items-center gap-3 flex-1 min-w-0 pr-3"
                             >
-                              {imgSrc ? (
-                                <img
-                                  src={imgSrc}
-                                  alt={product.name}
-                                  className="h-16 w-16 sm:h-20 sm:w-20 rounded-lg border border-neutral-200 bg-white object-cover"
-                                  loading="lazy"
-                                />
-                              ) : (
-                                <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-lg border border-neutral-200 bg-neutral-50 text-neutral-400">
-                                  <PackageSearch className="h-6 w-6" />
-                                </div>
-                              )}
-                            </Link>
-
-                            <div className="flex flex-1 items-center justify-between gap-4 min-w-0">
-                              <div className="min-w-0 flex-1">
-                                <Link
-                                  href={`/product/${product.slug ?? product.id}`}
-                                  onClick={closeSearch}
-                                  className="text-xs sm:text-sm font-semibold text-neutral-900 hover:text-shop_dark_green transition-colors line-clamp-2"
-                                >
-                                  {product.name}
-                                </Link>
-
-                                {product.brand && (
-                                  <span className="mt-0.5 inline-block text-[11px] text-neutral-500">
-                                    Hãng:{" "}
-                                    <strong className="text-neutral-700 font-medium">
-                                      {product.brand}
-                                    </strong>
-                                  </span>
+                              <div className="relative w-12 h-12 bg-white rounded-lg border border-neutral-200 overflow-hidden shrink-0 flex items-center justify-center">
+                                {product.images?.[0] ? (
+                                  <Image
+                                    src={product.images[0]}
+                                    alt={product.name}
+                                    fill
+                                    unoptimized
+                                    sizes="48px"
+                                    className="object-cover"
+                                  />
+                                ) : (
+                                  <span className="text-[9px] text-neutral-400">No pic</span>
                                 )}
+                              </div>
 
-                                <div className="mt-1 flex items-baseline gap-2">
-                                  <span className="text-sm sm:text-base font-bold text-shop_dark_green">
-                                    {formatPrice(
-                                      product.finalPrice || product.price,
-                                    )}
+                              <div className="flex-1 min-w-0">
+                                <p className="text-xs sm:text-sm font-semibold text-neutral-800 group-hover:text-shop_dark_green transition-colors line-clamp-1">
+                                  {product.name}
+                                </p>
+                                <div className="flex items-center gap-2 mt-0.5">
+                                  <span className="text-xs font-bold text-shop_dark_green">
+                                    {formatPrice(finalPrice)}
                                   </span>
-                                  {hasDiscount && (
-                                    <span className="text-[11px] text-neutral-400 line-through">
+                                  {product.discount > 0 && (
+                                    <span className="text-[10px] text-neutral-400 line-through">
                                       {formatPrice(product.price)}
+                                    </span>
+                                  )}
+                                  {product.brand && (
+                                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-neutral-100 text-neutral-500 font-medium">
+                                      {product.brand}
                                     </span>
                                   )}
                                 </div>
                               </div>
+                            </Link>
 
-                              {itemInCart && quantityInCart > 0 ? (
-                                <div className="shrink-0 flex items-center gap-2">
-                                  <div className="flex items-center border border-neutral-300 bg-white">
-                                    <button
-                                      type="button"
-                                      onClick={(e) =>
-                                        handleDecreaseQuantity(itemInCart, e)
-                                      }
-                                      aria-label="Giảm số lượng"
-                                      className="flex h-6 w-6 items-center justify-center text-neutral-600 hover:bg-neutral-100 hover:text-shop_dark_green transition-colors cursor-pointer"
-                                    >
-                                      <Minus className="h-3 w-3" />
-                                    </button>
-                                    <span className="w-6 text-center text-xs font-semibold tabular-nums text-neutral-900">
-                                      {quantityInCart}
-                                    </span>
-                                    <button
-                                      type="button"
-                                      onClick={(e) =>
-                                        handleIncreaseQuantity(
-                                          itemInCart,
-                                          stockLimit,
-                                          e,
-                                        )
-                                      }
-                                      disabled={quantityInCart >= stockLimit}
-                                      aria-label="Tăng số lượng"
-                                      className="flex h-6 w-6 items-center justify-center text-neutral-600 hover:bg-neutral-100 hover:text-shop_dark_green transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
-                                    >
-                                      <Plus className="h-3 w-3" />
-                                    </button>
-                                  </div>
-                                  <Link
-                                    href="/cart"
-                                    onClick={closeSearch}
-                                    className="hidden sm:inline-flex items-center text-xs font-medium text-shop_dark_green hover:underline whitespace-nowrap"
-                                  >
-                                    Giỏ hàng
-                                  </Link>
-                                </div>
-                              ) : (
-                                <button
-                                  type="button"
-                                  onClick={(e) => handleAddToCart(product, e)}
-                                  disabled={isOutOfStock}
-                                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg bg-shop_dark_green text-white hover:bg-shop_dark_green/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                                >
-                                  <ShoppingCart className="h-3.5 w-3.5" />
-                                  <span className="hidden sm:inline">
-                                    {isOutOfStock ? "Hết hàng" : "Thêm vào giỏ"}
-                                  </span>
-                                </button>
-                              )}
-                            </div>
+                            <button
+                              type="button"
+                              onClick={(e) => handleAddToCart(product, e)}
+                              disabled={product.stock === 0}
+                              className={`p-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${qty > 0
+                                  ? "bg-emerald-100 text-shop_dark_green"
+                                  : "bg-neutral-100 text-neutral-700 hover:bg-shop_dark_green hover:text-white"
+                                }`}
+                              title={qty > 0 ? `Đã có ${qty} trong giỏ` : "Thêm vào giỏ"}
+                            >
+                              <ShoppingCart className="w-3.5 h-3.5" />
+                            </button>
                           </div>
                         );
                       })}
                     </div>
+                  )}
+
+                  {searchResults.length > 6 && (
+                    <div className="pt-2 mt-2 border-t border-neutral-100 text-center">
+                      <button
+                        type="button"
+                        onClick={handleSubmitSearch}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-shop_dark_green hover:underline cursor-pointer"
+                      >
+                        <span>Xem tất cả {searchResults.length} sản phẩm phù hợp</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* History & Popular search default view */
+                <div className="p-4 space-y-4">
+                  {/* Recent searches */}
+                  {searchHistory.length > 0 && (
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider flex items-center gap-1.5">
+                          <Clock className="w-3.5 h-3.5 text-neutral-400" />
+                          <span>Lịch sử tìm kiếm</span>
+                        </span>
+                        <button
+                          type="button"
+                          onClick={clearAllHistory}
+                          className="text-[11px] text-neutral-400 hover:text-red-500 transition-colors"
+                        >
+                          Xoá lịch sử
+                        </button>
+                      </div>
+
+                      <div className="flex flex-wrap gap-1.5">
+                        {searchHistory.map((term) => (
+                          <span
+                            key={term}
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 hover:bg-emerald-50 text-xs text-neutral-700 transition-colors group"
+                          >
+                            <button
+                              type="button"
+                              onClick={() => handleSelectTerm(term)}
+                              className="hover:text-shop_dark_green font-medium"
+                            >
+                              {term}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeHistoryItem(term);
+                              }}
+                              className="text-neutral-400 hover:text-neutral-600"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Popular searches */}
+                  <div>
+                    <div className="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                      <TrendingUp className="w-3.5 h-3.5 text-orange-500" />
+                      <span>Xu hướng tìm kiếm</span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {POPULAR_SEARCHES.map((term) => (
+                        <button
+                          key={term}
+                          type="button"
+                          onClick={() => handleSelectTerm(term)}
+                          className="px-3 py-1.5 rounded-xl bg-neutral-50 hover:bg-emerald-50 text-xs font-medium text-neutral-700 hover:text-shop_dark_green border border-neutral-200/80 transition-all cursor-pointer"
+                        >
+                          {term}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ) : (
+        /* ICON VARIANT (for mobile or compact button) */
+        <button
+          type="button"
+          onClick={() => setIsModalOpen(true)}
+          aria-label="Mở tìm kiếm"
+          className="p-2 rounded-xl text-neutral-700 hover:text-shop_dark_green hover:bg-emerald-50 transition-colors cursor-pointer"
+        >
+          <Search className="w-5 h-5" />
+        </button>
+      )}
+
+      {/* FULL SEARCH MODAL DIALOG (when triggered on mobile or from image search) */}
+      {isModalOpen &&
+        mounted &&
+        createPortal(
+          <div className="fixed inset-0 z-[9999] flex items-start justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in">
+            <div className="w-full max-w-3xl max-h-[85vh] bg-white rounded-2xl shadow-2xl border border-neutral-200 overflow-hidden flex flex-col mt-12 animate-in zoom-in-95">
+              <div className="p-4 border-b border-neutral-200 flex items-center gap-3">
+                <Search className="w-5 h-5 text-neutral-400" />
+                <input
+                  type="text"
+                  autoFocus
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
+                  placeholder="Nhập tên sản phẩm, hãng hoặc cấu hình cần tìm..."
+                  className="flex-1 text-sm font-medium text-neutral-900 focus:outline-none"
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="p-1.5 text-neutral-500 hover:text-shop_dark_green hover:bg-emerald-50 rounded-lg transition-colors cursor-pointer"
+                  title="Tìm bằng ảnh"
+                >
+                  <Camera className="w-5 h-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="p-1.5 text-neutral-400 hover:text-neutral-700 rounded-full hover:bg-neutral-100"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-4">
+                {searchResults.length > 0 ? (
+                  <div className="space-y-2">
+                    {searchResults.map((product) => (
+                      <Link
+                        key={product.id}
+                        href={`/product/${product.id}`}
+                        onClick={() => setIsModalOpen(false)}
+                        className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-neutral-50 border border-neutral-100 transition-colors"
+                      >
+                        <div className="relative w-14 h-14 bg-white rounded-lg border border-neutral-200 overflow-hidden shrink-0 flex items-center justify-center">
+                          {product.images?.[0] ? (
+                            <Image
+                              src={product.images[0]}
+                              alt={product.name}
+                              fill
+                              unoptimized
+                              sizes="56px"
+                              className="object-cover"
+                            />
+                          ) : (
+                            <span className="text-[9px] text-neutral-400">Không ảnh</span>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-neutral-800 line-clamp-1">
+                            {product.name}
+                          </p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-sm font-bold text-shop_dark_green">
+                              {formatPrice(product.finalPrice || product.price)}
+                            </span>
+                            {product.discount > 0 && (
+                              <span className="text-xs text-neutral-400 line-through">
+                                {formatPrice(product.price)}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-10 text-xs text-neutral-500">
+                    {keyword ? "Không tìm thấy sản phẩm" : "Nhập từ khoá để bắt đầu tìm kiếm"}
                   </div>
                 )}
               </div>
             </div>
           </div>,
-          document.body,
+          document.body
         )}
     </>
   );

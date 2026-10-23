@@ -57,11 +57,11 @@ public class AiRecommendationService {
     private static final Locale VI = Locale.forLanguageTag("vi-VN");
     private static final Set<String> BADGES = Set.of("BEST", "CHOICE");
 
-    /** Vùng giá ưu tiên: chênh tối đa 5% so với giá sản phẩm đang xem. */
-    private static final double PRICE_TOLERANCE = 0.05;
+    /** Vùng giá ưu tiên: chênh tối đa 15% so với giá sản phẩm đang xem. */
+    private static final double PRICE_TOLERANCE = 0.15;
 
-    /** Giới hạn cứng: không đủ limit thì mở rộng tới 10%; quá 10% thì LOẠI HẲN (thà hiển thị ít). */
-    private static final double PRICE_HARD_LIMIT = 0.10;
+    /** Giới hạn cứng: quá 35% thì LOẠI HẲN (thà không đề xuất thay vì đề xuất sai lệch giá). */
+    private static final double PRICE_HARD_LIMIT = 0.35;
 
     // Trọng số khi so cấu hình: chỉ dùng CPU và RAM (chỉ tính thông số cả hai sản phẩm đều có).
     private static final double WC_CPU = 0.50;
@@ -269,13 +269,18 @@ public class AiRecommendationService {
             }
         }
 
-        // Không đủ ứng viên (hoặc AI tắt/lỗi): bổ sung từ query cũ (cùng danh mục/thương hiệu).
+        // Không đủ ứng viên (hoặc AI tắt/lỗi): bổ sung từ query cũ (chỉ cùng danh mục và trong ngưỡng giá).
         if (similarity.size() < limit) {
             String brand = current.getBrand() == null ? "" : current.getBrand();
+            BigDecimal price = current.getPrice();
+            BigDecimal minPrice = (price != null && price.signum() > 0) ? price.multiply(BigDecimal.valueOf(1 - PRICE_HARD_LIMIT)) : null;
+            BigDecimal maxPrice = (price != null && price.signum() > 0) ? price.multiply(BigDecimal.valueOf(1 + PRICE_HARD_LIMIT)) : null;
             productRepository.findRecommendedCandidates(
                     current.getId(),
                     current.getCategory().getId(),
                     brand,
+                    minPrice,
+                    maxPrice,
                     PageRequest.of(0, Math.max(limit * 15, 100)))
                     .forEach(p -> similarity.putIfAbsent(p.getId(), 0.0));
         }
@@ -290,7 +295,8 @@ public class AiRecommendationService {
             if (!p.isActive()
                     || p.getCategory() == null
                     || !p.getCategory().isActive()
-                    || p.getStockQuantity() <= 0) {
+                    || p.getStockQuantity() <= 0
+                    || !p.getCategory().getId().equals(current.getCategory().getId())) {
                 continue;
             }
             try {

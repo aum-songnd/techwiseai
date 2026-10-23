@@ -72,7 +72,10 @@
     "isVerifiedPurchase": true,
     "likesCount": 11,
     "status": "APPROVED",
-    "createdAt": "2026-10-17T11:00:00Z"
+    "createdAt": "2026-10-17T11:00:00Z",
+    "adminReply": "Cảm ơn bạn đã tin dùng sản phẩm của Techwise AI! Chúc bạn có những trải nghiệm tuyệt vời.",
+    "adminReplyAt": "2026-10-23T07:25:24.535Z",
+    "updatedAt": "2026-10-23T07:25:24.535Z"
   },
   {
     "id": "rev-iphone-1",
@@ -88,6 +91,7 @@
     "status": "APPROVED",
     "adminReply": "Techwise AI chân thành cảm ơn đánh giá của bạn! Rất vui vì bạn hài lòng với chiếc iPhone 16 mới.",
     "adminReplyAt": "2026-10-20T08:20:00Z",
-    "createdAt": "2026-10-19T18:00:00Z"
+    "createdAt": "2026-10-19T18:00:00Z",
+    "updatedAt": "2026-10-23T07:25:12.818Z"
   }
 ]

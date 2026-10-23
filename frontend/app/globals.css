@@ -5,7 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme{
-  --font-poppins: Poppins, sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-heading: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-poppins: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --color-shop_light_pink: #fcf0e4;
   --color-shop_dark_green: #063c28;
   --color-shop_btn_dark_green: #063d29;
@@ -20,9 +23,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-inter);
+  --font-heading: var(--font-inter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -62,7 +65,12 @@
 }
 
 :root {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-inter: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-inter);
+  --font-heading: var(--font-inter);
+  --font-geist-sans: var(--font-inter);
+  --font-geist-mono: var(--font-inter);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -149,10 +157,18 @@
   }
 }
 
+html,
+body,
+input,
+button,
+select,
+textarea {
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
 }
 
 * {

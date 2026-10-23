@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import Image from "next/image";
 import "../globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +21,9 @@ export default function AuthRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="vi" className={inter.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased text-neutral-900 min-h-screen relative bg-neutral-950`}
+        className={`${inter.className} ${inter.variable} font-sans antialiased text-neutral-900 min-h-screen relative bg-neutral-950`}
       >
         <AuthProvider>
           {/* Fullscreen Tech Background Image */}

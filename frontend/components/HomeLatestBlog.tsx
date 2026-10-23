@@ -104,7 +104,7 @@ const HomeLatestBlog = () => {
                 <Link
                   href={`/blog/${blog.slug}`}
                   draggable={false}
-                  className="group flex w-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white font-sans transition-all duration-200 hover:border-neutral-300 hover:shadow-md"
+                  className="group flex w-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white font-sans transition-all duration-200 hover:shadow-md"
                 >
                   <div className="relative aspect-[11/5] w-full shrink-0 overflow-hidden bg-neutral-100">
                     {blog.mainImageUrl ? (

@@ -33,7 +33,7 @@ const faqs = [
   {
     question: "TechWise AI hỗ trợ những phương thức thanh toán nào?",
     answer:
-      "Chúng tôi hỗ trợ đa dạng phương thức: Thanh toán khi nhận hàng (COD), chuyển khoản ngân hàng qua mã VietQR, thẻ ATM nội địa, Visa/Mastercard và trả góp 0% lãi suất.",
+      "Chúng tôi hỗ trợ đa dạng phương thức: Thanh toán khi nhận hàng (COD), chuyển khoản ngân hàng qua mã VietQR, thẻ ATM nội địa và thẻ quốc tế Visa/Mastercard.",
   },
   {
     question: "Tôi cần liên hệ ai khi gặp sự cố kỹ thuật hoặc cần tư vấn?",

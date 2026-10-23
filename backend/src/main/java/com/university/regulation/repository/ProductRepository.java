@@ -1,5 +1,6 @@
 package com.university.regulation.repository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.List;
@@ -79,15 +80,10 @@ public interface ProductRepository extends JpaRepository<Product, UUID>,
             WHERE p.active = true
             AND c.active = true
             AND p.id <> :productId
-            AND (
-                c.id = :categoryId
-                OR (
-                    :brand IS NOT NULL
-                    AND LOWER(p.brand) = LOWER(:brand)
-                )
-            )
+            AND c.id = :categoryId
+            AND (:minPrice IS NULL OR p.price >= :minPrice)
+            AND (:maxPrice IS NULL OR p.price <= :maxPrice)
             ORDER BY
-            CASE WHEN c.id = :categoryId THEN 0 ELSE 1 END,
             CASE
                 WHEN :brand IS NOT NULL
                     AND LOWER(p.brand) = LOWER(:brand)
@@ -100,6 +96,8 @@ public interface ProductRepository extends JpaRepository<Product, UUID>,
             @Param("productId") UUID productId,
             @Param("categoryId") UUID categoryId,
             @Param("brand") String brand,
+            @Param("minPrice") BigDecimal minPrice,
+            @Param("maxPrice") BigDecimal maxPrice,
             Pageable pageable
         );
 }
