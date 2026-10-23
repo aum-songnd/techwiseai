@@ -18,10 +18,7 @@ export default function RecommendationCarousel({ aiRecommendations, relatedProdu
   const usingAi = aiRecommendations.length > 0;
   const items = useMemo<(RecommendedProduct | Product)[]>(() => {
     if (!usingAi) return relatedProducts;
-    return [...aiRecommendations].sort((a, b) => {
-      const bestDiff = Number(b.badge === "BEST") - Number(a.badge === "BEST");
-      return bestDiff || (Number(b.score) || 0) - (Number(a.score) || 0);
-    });
+    return aiRecommendations;
   }, [aiRecommendations, relatedProducts, usingAi]);
 
   const first = items[0];

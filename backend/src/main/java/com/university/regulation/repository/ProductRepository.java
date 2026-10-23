@@ -84,6 +84,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID>,
             AND (:minPrice IS NULL OR p.price >= :minPrice)
             AND (:maxPrice IS NULL OR p.price <= :maxPrice)
             ORDER BY
+            ABS(p.price - :currentPrice) ASC,
             CASE
                 WHEN :brand IS NOT NULL
                     AND LOWER(p.brand) = LOWER(:brand)
@@ -96,6 +97,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID>,
             @Param("productId") UUID productId,
             @Param("categoryId") UUID categoryId,
             @Param("brand") String brand,
+            @Param("currentPrice") BigDecimal currentPrice,
             @Param("minPrice") BigDecimal minPrice,
             @Param("maxPrice") BigDecimal maxPrice,
             Pageable pageable
