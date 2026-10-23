@@ -430,7 +430,7 @@ const MegaMenu = () => {
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
-        className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-neutral-800 bg-neutral-100/90 hover:bg-emerald-50 hover:text-shop_dark_green transition-all cursor-pointer border border-neutral-200/80 shadow-2xs"
+        className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-neutral-800  transition-all cursor-pointer border border-neutral-200/80 shadow-2xs"
       >
         <span className="flex flex-col gap-0.5">
           <span className="w-3.5 h-0.5 bg-current rounded-full" />

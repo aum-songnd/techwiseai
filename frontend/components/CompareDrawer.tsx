@@ -129,8 +129,8 @@ const CompareDrawer = () => {
                   onClick={() => setCompareModalOpen(true)}
                   disabled={compareProducts.length < 2}
                   className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl font-semibold text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer ${compareProducts.length >= 2
-                      ? "bg-shop_dark_green text-white hover:bg-emerald-800 hover:shadow-md"
-                      : "bg-neutral-200 text-neutral-400 cursor-not-allowed"
+                    ? "bg-shop_dark_green text-white hover:bg-emerald-800 hover:shadow-md"
+                    : "bg-neutral-200 text-neutral-400 cursor-not-allowed"
                     }`}
                 >
                   <ArrowLeftRight className="w-3.5 h-3.5" />

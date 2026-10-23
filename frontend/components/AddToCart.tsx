@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { ShoppingBag, Minus, Plus } from "lucide-react";
 import { Product } from "../app/data/types";
-import { useCart } from "../context/CartContext";
+import { useCart, clearPendingBundleItems } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 
 interface AddToCartProps {
@@ -69,6 +69,7 @@ const AddToCart = ({ product, selectedColor, selectedConfig }: AddToCartProps) =
 
     if (!isSignedIn || requiresLogin) {
       if (typeof window !== "undefined") {
+        clearPendingBundleItems();
         sessionStorage.setItem("pending_cart_product_id", product.id);
         if (selectedColor) sessionStorage.setItem("pending_cart_color", selectedColor);
         if (selectedConfig) sessionStorage.setItem("pending_cart_config", selectedConfig);

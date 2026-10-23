@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Check, ShoppingBag, ExternalLink } from "lucide-react";
 import type { Product } from "@/app/data/types";
-import { useCart } from "@/context/CartContext";
+import { useCart, setPendingBundleItems, type PendingCartItem } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
@@ -48,7 +48,7 @@ const HomeTechCombos = ({
   const [activeComboIndex, setActiveComboIndex] = useState(0);
   const [selectedItems, setSelectedItems] = useState<Record<string, boolean>>({});
 
-  const { addToCart, requiresLogin } = useCart();
+  const { addToCart, addMultipleToCart, requiresLogin } = useCart();
   const { isSignedIn } = useAuth();
   const router = useRouter();
 
@@ -292,22 +292,14 @@ const HomeTechCombos = ({
   const activeCount = combo.items.filter((item) => selectedItems[item.id]).length;
 
   const handleBuyCombo = () => {
-    if (requiresLogin && !isSignedIn) {
-      const redirectTo =
-        typeof window !== "undefined"
-          ? window.location.pathname + window.location.search
-          : "/";
-      router.push(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
-      return;
-    }
-
     const activeList = combo.items.filter((item) => selectedItems[item.id]);
     if (activeList.length === 0) return;
 
-    // Add all selected products to cart
-    activeList.forEach((item) => {
-      addToCart(item.id, 1, {
-        id: `cart-${item.id}`,
+    const itemsToAdd: PendingCartItem[] = activeList.map((item) => ({
+      productId: item.id,
+      quantity: 1,
+      optimisticItem: {
+        id: `temp-${item.id}`,
         productId: item.id,
         name: item.name,
         unitPrice: item.comboPrice,
@@ -317,9 +309,16 @@ const HomeTechCombos = ({
         stockQuantity: item.rawProduct.stock || 10,
         available: true,
         thumbnailUrl: item.image,
-      });
-    });
+      },
+    }));
 
+    if (!isSignedIn || requiresLogin) {
+      setPendingBundleItems(itemsToAdd);
+      router.push(`/sign-in?redirect=${encodeURIComponent("/cart")}`);
+      return;
+    }
+
+    addMultipleToCart(itemsToAdd);
     router.push("/cart");
   };
 

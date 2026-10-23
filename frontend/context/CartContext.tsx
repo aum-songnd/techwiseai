@@ -25,6 +25,51 @@ import { getToken } from "@/lib/auth";
 
 export type { CartItem };
 
+export interface PendingCartItem {
+  productId: string;
+  quantity: number;
+  optimisticItem?: Partial<CartItem>;
+}
+
+export const PENDING_BUNDLE_KEY = "techwise_pending_bundle_items";
+
+export function getPendingBundleItems(): PendingCartItem[] | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw =
+      sessionStorage.getItem(PENDING_BUNDLE_KEY) ||
+      localStorage.getItem(PENDING_BUNDLE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed;
+    }
+  } catch (err) {
+    console.error("Failed to parse pending bundle items", err);
+  }
+  return null;
+}
+
+export function clearPendingBundleItems(): void {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.removeItem(PENDING_BUNDLE_KEY);
+    localStorage.removeItem(PENDING_BUNDLE_KEY);
+  } catch {}
+}
+
+export function setPendingBundleItems(items: PendingCartItem[]): void {
+  if (typeof window === "undefined") return;
+  try {
+    const serialized = JSON.stringify(items);
+    sessionStorage.setItem(PENDING_BUNDLE_KEY, serialized);
+    localStorage.setItem(PENDING_BUNDLE_KEY, serialized);
+    sessionStorage.removeItem("pending_cart_product_id");
+    sessionStorage.removeItem("pending_cart_color");
+    sessionStorage.removeItem("pending_cart_config");
+  } catch {}
+}
+
 interface CartContextValue {
   items: CartItem[];
   cartId?: string;
@@ -38,6 +83,7 @@ interface CartContextValue {
     quantity?: number,
     optimisticItem?: Partial<CartItem>
   ) => Promise<void>;
+  addMultipleToCart: (items: PendingCartItem[]) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
   removeFromCart: (itemId: string) => Promise<void>;
   clearCart: () => Promise<void>;
@@ -153,6 +199,137 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
+  const addMultipleToCart = useCallback(
+    async (items: PendingCartItem[]) => {
+      if (!items || items.length === 0) return;
+
+      if (!isSignedIn) {
+        setRequiresLogin(true);
+        return;
+      }
+
+      // 1. Optimistically update cart with all items in one batch
+      setCart((prev) => {
+        let newItems = [...prev.items];
+
+        for (const it of items) {
+          const tempId = it.optimisticItem?.id ?? `temp-${it.productId}`;
+          pendingDeleteProductIdsRef.current.delete(it.productId);
+          pendingDeleteIdsRef.current.delete(tempId);
+
+          const existingIndex = newItems.findIndex((existing) =>
+            isSameProduct(existing.productId, it.productId)
+          );
+
+          const quantityToAdd = it.quantity || 1;
+
+          if (existingIndex >= 0) {
+            const existing = newItems[existingIndex];
+            const newQty = existing.quantity + quantityToAdd;
+            newItems[existingIndex] = {
+              ...existing,
+              quantity: newQty,
+              subtotal: existing.unitPrice * newQty,
+            };
+          } else {
+            const unitPrice =
+              it.optimisticItem?.unitPrice ??
+              it.optimisticItem?.originalPrice ??
+              0;
+            newItems.push({
+              id: tempId,
+              productId: it.productId,
+              name: it.optimisticItem?.name ?? "Sản phẩm",
+              sku: it.optimisticItem?.sku,
+              slug: it.optimisticItem?.slug,
+              thumbnailUrl: it.optimisticItem?.thumbnailUrl,
+              unitPrice,
+              originalPrice: it.optimisticItem?.originalPrice,
+              quantity: quantityToAdd,
+              subtotal: unitPrice * quantityToAdd,
+              stockQuantity: it.optimisticItem?.stockQuantity ?? 999,
+              available: it.optimisticItem?.available ?? true,
+            });
+          }
+        }
+
+        const updatedCart: CartData = {
+          ...prev,
+          items: newItems,
+          totalItems: newItems.length,
+          totalQuantity: newItems.reduce((sum, item) => sum + item.quantity, 0),
+          totalAmount: newItems.reduce((sum, item) => sum + item.subtotal, 0),
+        };
+
+        broadcastTabEvent({
+          type: "CART_UPDATED",
+          payload: { cart: updatedCart, timestamp: Date.now() },
+        });
+
+        return updatedCart;
+      });
+
+      // 2. Mark product IDs as pending
+      setPendingProductIds((prev) => {
+        const next = new Set(prev);
+        items.forEach((it) => next.add(it.productId));
+        return next;
+      });
+
+      // 3. Sequentially post each item to server
+      try {
+        for (const it of items) {
+          try {
+            await addCartItem(it.productId, it.quantity || 1);
+          } catch (err) {
+            if (err instanceof CartAuthRequiredError) {
+              setRequiresLogin(true);
+              break;
+            }
+            console.error(`Lỗi khi thêm sản phẩm combo (${it.productId}) vào giỏ:`, err);
+          }
+        }
+        setRequiresLogin(false);
+      } finally {
+        setPendingProductIds((prev) => {
+          const next = new Set(prev);
+          items.forEach((it) => next.delete(it.productId));
+          return next;
+        });
+        await fetchCartFromServer();
+      }
+    },
+    [isSignedIn, fetchCartFromServer]
+  );
+
+  const isProcessingBundleRef = useRef(false);
+
+  const processPendingBundleIfAny = useCallback(async () => {
+    if (isProcessingBundleRef.current) return;
+    const pendingBundle = getPendingBundleItems();
+    if (!pendingBundle || pendingBundle.length === 0) return;
+
+    isProcessingBundleRef.current = true;
+    clearPendingBundleItems();
+
+    try {
+      // Fetch latest server cart first so previous items aren't overwritten
+      const serverCart = await getCart().catch(() => EMPTY_CART);
+      setCart(serverCart);
+      setIsLoaded(true);
+      setRequiresLogin(false);
+
+      // Add all bundle items
+      await addMultipleToCart(pendingBundle);
+    } catch (err) {
+      console.error("Lỗi khi xử lý combo chờ sau khi đăng nhập:", err);
+      await fetchCartFromServer();
+    } finally {
+      isProcessingBundleRef.current = false;
+      setIsLoaded(true);
+    }
+  }, [addMultipleToCart, fetchCartFromServer]);
+
   useEffect(() => {
     if (isAuthLoading) return;
 
@@ -173,13 +350,24 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     setRequiresLogin(false);
-    fetchCartFromServer();
-  }, [isSignedIn, isAuthLoading, fetchCartFromServer]);
+
+    const pendingBundle = getPendingBundleItems();
+    if (pendingBundle && pendingBundle.length > 0) {
+      processPendingBundleIfAny();
+    } else {
+      fetchCartFromServer();
+    }
+  }, [isSignedIn, isAuthLoading, fetchCartFromServer, processPendingBundleIfAny]);
 
   useEffect(() => {
     const handleLogin = () => {
       invalidateCartCache();
-      fetchCartFromServer();
+      const pendingBundle = getPendingBundleItems();
+      if (pendingBundle && pendingBundle.length > 0) {
+        processPendingBundleIfAny();
+      } else {
+        fetchCartFromServer();
+      }
     };
     const handleLogout = () => {
       invalidateCartCache();
@@ -783,6 +971,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     isLoaded: isLoaded && !isAuthLoading,
     requiresLogin: !isSignedIn || requiresLogin,
     addToCart,
+    addMultipleToCart,
     updateQuantity,
     removeFromCart,
     clearCart,

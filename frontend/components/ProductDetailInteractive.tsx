@@ -7,7 +7,7 @@ import type { Product } from "@/app/data/types";
 import { useCompare } from "@/context/CompareContext";
 import { useFavorite } from "@/context/FavoriteContext";
 import { useRecentlyViewed } from "@/context/RecentlyViewedContext";
-import { useCart } from "@/context/CartContext";
+import { useCart, setPendingBundleItems, type PendingCartItem } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import AddToCart from "./AddToCart";
@@ -166,7 +166,7 @@ const ProductDetailInteractive = ({
   const { isComparing, toggleCompare } = useCompare();
   const { isFavorite, toggleFavorite } = useFavorite();
   const { addToRecentlyViewed } = useRecentlyViewed();
-  const { addToCart, requiresLogin } = useCart();
+  const { addToCart, addMultipleToCart, requiresLogin } = useCart();
   const { isSignedIn } = useAuth();
   const router = useRouter();
 
@@ -287,52 +287,55 @@ const ProductDetailInteractive = ({
   const activeConfigName = validVariants.length > 1 ? currentVariantLabel : hardwareSpecLabel;
 
   const handleBuyBundle = () => {
-    if (requiresLogin && !isSignedIn) {
-      const redirectTo =
-        typeof window !== "undefined"
-          ? window.location.pathname + window.location.search
-          : `/product/${currentProduct.id}`;
-      router.push(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
-      return;
-    }
-
     const variantSuffix = [selectedColor, activeConfigName].filter(Boolean).join(" • ");
     const mainItemName = variantSuffix
       ? `${currentProduct.name} (${variantSuffix})`
       : currentProduct.name;
 
-    // Add main product
-    addToCart(currentProduct.id, 1, {
-      id: `main-${currentProduct.id}`,
-      productId: currentProduct.id,
-      name: mainItemName,
-      unitPrice: calculatedBasePrice,
-      originalPrice: currentProduct.price,
-      quantity: 1,
-      subtotal: calculatedBasePrice,
-      stockQuantity: currentProduct.stock ?? 99,
-      available: (currentProduct.stock ?? 1) > 0,
-      thumbnailUrl: currentProduct.images?.[0] || currentProduct.thumbnailUrl,
-    });
-
-    // Add selected accessories
-    accessories
-      .filter((a) => selectedAccessories[a.id])
-      .forEach((a) => {
-        addToCart(a.id, 1, {
-          id: `bundle-${a.id}`,
-          productId: a.id,
-          name: `${a.name} (Mua kèm giảm giá)`,
-          unitPrice: a.comboPrice,
-          originalPrice: a.originalPrice,
+    const itemsToAdd: PendingCartItem[] = [
+      {
+        productId: currentProduct.id,
+        quantity: 1,
+        optimisticItem: {
+          id: `temp-${currentProduct.id}`,
+          productId: currentProduct.id,
+          name: mainItemName,
+          unitPrice: calculatedBasePrice,
+          originalPrice: currentProduct.price,
           quantity: 1,
-          subtotal: a.comboPrice,
-          stockQuantity: 99,
-          available: true,
-          thumbnailUrl: a.image,
-        });
-      });
+          subtotal: calculatedBasePrice,
+          stockQuantity: currentProduct.stock ?? 99,
+          available: (currentProduct.stock ?? 1) > 0,
+          thumbnailUrl: currentProduct.images?.[0] || currentProduct.thumbnailUrl,
+        },
+      },
+      ...accessories
+        .filter((a) => selectedAccessories[a.id])
+        .map((a) => ({
+          productId: a.id,
+          quantity: 1,
+          optimisticItem: {
+            id: `temp-${a.id}`,
+            productId: a.id,
+            name: `${a.name} (Mua kèm giảm giá)`,
+            unitPrice: a.comboPrice,
+            originalPrice: a.originalPrice,
+            quantity: 1,
+            subtotal: a.comboPrice,
+            stockQuantity: 99,
+            available: true,
+            thumbnailUrl: a.image,
+          },
+        })),
+    ];
 
+    if (!isSignedIn || requiresLogin) {
+      setPendingBundleItems(itemsToAdd);
+      router.push(`/sign-in?redirect=${encodeURIComponent("/cart")}`);
+      return;
+    }
+
+    addMultipleToCart(itemsToAdd);
     router.push("/cart");
   };
 
@@ -425,7 +428,7 @@ const ProductDetailInteractive = ({
         <button
           type="button"
           onClick={() => toggleCompare(currentProduct)}
-          className={`flex items-center justify-center gap-1.5 px-3.5 py-3 rounded-xl border text-xs font-bold transition-all cursor-pointer shrink-0 ${isProductComparing
+          className={`flex items-center justify-center gap-1.5 px-1.5 py-1.5 rounded-xl border text-xs font-bold transition-all cursor-pointer shrink-0 ${isProductComparing
             ? "border-shop_dark_green bg-emerald-50 text-shop_dark_green shadow-xs"
             : "border-neutral-200 text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300"
             }`}
@@ -440,8 +443,8 @@ const ProductDetailInteractive = ({
         <button
           type="button"
           onClick={() => toggleFavorite(currentProduct)}
-          className={`flex items-center justify-center p-3 rounded-xl border text-xs font-bold transition-all cursor-pointer shrink-0 ${isProductFavorite
-            ? "border-red-200 bg-red-50 text-red-500 shadow-xs"
+          className={`flex items-center justify-center p-1.5 rounded-xl border text-xs font-bold transition-all cursor-pointer shrink-0 ${isProductFavorite
+            ? "border-shop_dark_green bg-shop_dark_green/200 text-shop_dark_green shadow-xs"
             : "border-neutral-200 text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300"
             }`}
           title={isProductFavorite ? "Bỏ yêu thích" : "Lưu vào yêu thích"}
