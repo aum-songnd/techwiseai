@@ -44,11 +44,10 @@ const Deals = ({ products, children }: DealsProps) => {
           <button
             type="button"
             onClick={() => setActiveTab("all")}
-            className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${
-              activeTab === "all"
-                ? "bg-shop_dark_green text-white shadow-sm"
-                : "bg-white text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 border border-neutral-200"
-            }`}
+            className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${activeTab === "all"
+              ? "bg-shop_dark_green text-white shadow-sm"
+              : "bg-white text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 border border-neutral-200"
+              }`}
           >
             Tất cả ({products.length})
           </button>
@@ -59,11 +58,10 @@ const Deals = ({ products, children }: DealsProps) => {
                 type="button"
                 key={variant}
                 onClick={() => setActiveTab(variant)}
-                className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${
-                  activeTab === variant
-                    ? "bg-shop_dark_green text-white shadow-sm"
-                    : "bg-white text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 border border-neutral-200"
-                }`}
+                className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${activeTab === variant
+                  ? "bg-shop_dark_green text-white shadow-sm"
+                  : "bg-white text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 border border-neutral-200"
+                  }`}
               >
                 {variantLabels[variant] ?? variant} ({count})
               </button>
@@ -112,7 +110,7 @@ const Deals = ({ products, children }: DealsProps) => {
             <h4 className="text-xs font-bold uppercase tracking-tight text-neutral-900">
               Giao hàng nhanh
             </h4>
-            <p className="text-[11px] text-neutral-500">Miễn phí ship cho đơn từ 1.000.000đ</p>
+            <p className="text-[11px] text-neutral-500">Miễn phí ship cho đơn từ 500.000đ</p>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ const slides: BannerSlide[] = [
   },
   {
     id: "free-shipping",
-    titleLines: ["Miễn phí giao hàng", "cho đơn từ 100$"],
+    titleLines: ["Miễn phí giao hàng", "cho đơn từ 500.000đ"],
     buttonLabel: "Mua sắm ngay",
     href: "/shop",
     image: banner_1,
