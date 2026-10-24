@@ -1,6 +1,6 @@
 "use client";
 
-import { searchProducts, searchProductsByImage } from "@/lib/api";
+import { searchProducts, searchProductsByImage, getProducts } from "@/lib/api";
 import {
   Search,
   X,
@@ -24,15 +24,15 @@ import type { Product } from "@/app/data/types";
 const SEARCH_HISTORY_KEY = "techwise_search_history";
 const MAX_HISTORY_ITEMS = 8;
 
-const POPULAR_SEARCHES = [
-  "MacBook Air M3",
-  "Laptop Gaming RTX 4060",
-  "iPhone 16 Pro Max",
-  "Tai nghe chống ồn",
-  "Bàn phím cơ không dây",
-  "SSD 1TB Kingston",
-  "Dell XPS 13",
-  "Chuột Logitech MX Master 3S",
+const DEFAULT_POPULAR_SEARCHES = [
+  "iPhone 18 Pro Max",
+  "iPhone 18 Pro",
+  "Samsung Galaxy Z Fold8",
+  "Laptop MSI Stealth 16",
+  "AirPods 5",
+  "Máy ảnh Fujifilm X100VI",
+  "Sony Alpha",
+  "SSD Samsung 990 PRO",
 ];
 
 const SUGGESTED_CATEGORIES = [
@@ -75,6 +75,7 @@ const SearchBar = ({ variant = "prominent" }: SearchBarProps) => {
   const [, setError] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
+  const [popularSearches, setPopularSearches] = useState<string[]>(DEFAULT_POPULAR_SEARCHES);
 
   // AI Image Search states
   const [searchImagePreview, setSearchImagePreview] = useState<string | null>(null);
@@ -99,6 +100,112 @@ const SearchBar = ({ variant = "prominent" }: SearchBarProps) => {
     } catch {
       // ignore
     }
+
+    // Dynamic load trending products from DB prioritizing iPhone 18
+    let isMounted = true;
+    async function loadTrendingFromDb() {
+      try {
+        const products = await getProducts({ size: 100 });
+        if (!isMounted || !products || products.length === 0) return;
+
+        const trending: string[] = [];
+
+        // 1. Luôn ưu tiên iPhone 18 từ DB lên vị trí đầu tiên
+        const hasIphone18ProMax = products.some((p) =>
+          /iphone\s*18\s*pro\s*max/i.test(p.name)
+        );
+        const hasIphone18Pro = products.some((p) =>
+          /iphone\s*18\s*pro(?!\s*max)/i.test(p.name)
+        );
+
+        if (hasIphone18ProMax) trending.push("iPhone 18 Pro Max");
+        if (hasIphone18Pro) trending.push("iPhone 18 Pro");
+        if (trending.length === 0 && products.some((p) => /iphone\s*18/i.test(p.name))) {
+          trending.push("iPhone 18");
+        }
+
+        // 2. Lấy thêm các sản phẩm đa dạng danh mục, không để lặp lại một loại phụ kiện/sạc
+        const categoriesSeen = new Set<string>(["Điện thoại"]); // iPhone 18 đã đại diện cho Điện thoại
+        let accessoryCount = 0;
+
+        for (const p of products) {
+          if (/iphone\s*18/i.test(p.name)) continue;
+
+          const catName = p.categories?.[0] || "Khác";
+          const isAccessory = catName === "Phụ kiện" || /sạc|cáp/i.test(p.name);
+          if (isAccessory && accessoryCount >= 1) {
+            continue; // Tối đa 1 phụ kiện sạc, không để bị tràn ngập sạc
+          }
+
+          if (categoriesSeen.has(catName) && !isAccessory) {
+            continue;
+          }
+
+          let clean = p.name
+            .replace(
+              /^(Điện thoại|Laptop|Máy ảnh|Máy ảnh kỹ thuật số|Tai nghe Bluetooth|Tai nghe|Bluetooth|Ổ cứng|Ổ cứng di động|Pin sạc dự phòng|Pin sạc dự phòng không dây|Pin sạc|Sạc nhanh|Sạc|Bàn phím|Chuột)\s+/i,
+              ""
+            )
+            .replace(/\|.*$/g, "")
+            .replace(/\(.*?\)/g, "")
+            .replace(/\b(Chính hãng|VN\/A|WiFi|Type-C|Gen \d+|PCIE|NVMe|Sạc Có Dây|Sạc Không Dây|\d+GB|\d+TB)\b/gi, "")
+            .replace(/\s+/g, " ")
+            .trim();
+
+          const words = clean.split(" ");
+          if (words.length > 4) {
+            clean = words.slice(0, 4).join(" ");
+          }
+
+          if (clean.length >= 4 && !trending.some((t) => t.toLowerCase() === clean.toLowerCase())) {
+            trending.push(clean);
+            categoriesSeen.add(catName);
+            if (isAccessory) accessoryCount++;
+          }
+          if (trending.length >= 8) break;
+        }
+
+        // 3. Nếu danh sách chưa đủ 8 thì bổ sung thêm các sản phẩm nổi bật khác
+        if (trending.length < 8) {
+          for (const p of products) {
+            if (/iphone\s*18/i.test(p.name)) continue;
+            if (/sạc|cáp/i.test(p.name) && accessoryCount >= 1) continue;
+
+            let clean = p.name
+              .replace(
+                /^(Điện thoại|Laptop|Máy ảnh|Máy ảnh kỹ thuật số|Tai nghe Bluetooth|Tai nghe|Bluetooth|Ổ cứng|Ổ cứng di động|Pin sạc dự phòng|Pin sạc dự phòng không dây|Pin sạc|Sạc nhanh|Sạc|Bàn phím|Chuột)\s+/i,
+                ""
+              )
+              .replace(/\|.*$/g, "")
+              .replace(/\(.*?\)/g, "")
+              .replace(/\b(Chính hãng|VN\/A|WiFi|Type-C|Gen \d+|PCIE|NVMe|Sạc Có Dây|Sạc Không Dây|\d+GB|\d+TB)\b/gi, "")
+              .replace(/\s+/g, " ")
+              .trim();
+
+            const words = clean.split(" ");
+            if (words.length > 4) {
+              clean = words.slice(0, 4).join(" ");
+            }
+
+            if (clean.length >= 4 && !trending.some((t) => t.toLowerCase() === clean.toLowerCase())) {
+              trending.push(clean);
+            }
+            if (trending.length >= 8) break;
+          }
+        }
+
+        if (trending.length >= 4) {
+          setPopularSearches(trending);
+        }
+      } catch {
+        // Fallback to DEFAULT_POPULAR_SEARCHES
+      }
+    }
+
+    loadTrendingFromDb();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   // Close dropdown on outside click
@@ -351,7 +458,7 @@ const SearchBar = ({ variant = "prominent" }: SearchBarProps) => {
                 if (!isDropdownOpen) setIsDropdownOpen(true);
               }}
               onFocus={() => setIsDropdownOpen(true)}
-              placeholder="Bạn muốn tìm gì? Laptop, iPhone 16, RTX 4060, AI Chip..."
+              placeholder="Bạn muốn tìm gì? iPhone 18 Pro Max, Laptop AI, RTX 4060..."
               className="w-full py-2.5 pl-2.5 pr-20 text-xs sm:text-sm text-neutral-900 bg-transparent placeholder-neutral-400 focus:outline-none"
             />
 
@@ -577,16 +684,24 @@ const SearchBar = ({ variant = "prominent" }: SearchBarProps) => {
                     </div>
 
                     <div className="flex flex-wrap gap-2">
-                      {POPULAR_SEARCHES.map((term) => (
-                        <button
-                          key={term}
-                          type="button"
-                          onClick={() => handleSelectTerm(term)}
-                          className="px-3 py-1.5 rounded-xl bg-neutral-50 hover:bg-emerald-50 text-xs font-medium text-neutral-700 hover:text-shop_dark_green border border-neutral-200/80 transition-all cursor-pointer"
-                        >
-                          {term}
-                        </button>
-                      ))}
+                      {popularSearches.map((term) => {
+                        const isIphone18 = /iphone\s*18/i.test(term);
+                        return (
+                          <button
+                            key={term}
+                            type="button"
+                            onClick={() => handleSelectTerm(term)}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all cursor-pointer ${
+                              isIphone18
+                                ? "bg-amber-50 border-amber-300 text-amber-900 font-bold hover:bg-amber-100 shadow-2xs"
+                                : "bg-neutral-50 hover:bg-emerald-50 text-neutral-700 hover:text-shop_dark_green border-neutral-200/80"
+                            }`}
+                          >
+                            {isIphone18 && <span className="mr-1">🔥</span>}
+                            {term}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

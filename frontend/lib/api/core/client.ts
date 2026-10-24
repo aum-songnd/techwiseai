@@ -1,12 +1,12 @@
-import { cachedRequest } from "./request-cache";
-import type { Product, Category, Brand, ProductVariant } from "../app/data/types";
-import { getToken } from "./auth";
+import { cachedRequest } from "./cache";
+import type { Product, Category, Brand, ProductVariant } from "@/app/data/types";
+import { getToken } from "@/lib/auth";
 
-const API_BASE_URL =
+export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ??
   "https://techwiseai-prod.up.railway.app/api/v1";
 
-interface ApiEnvelope<T> {
+export interface ApiEnvelope<T> {
   success: boolean;
   status: number;
   code: string;
@@ -17,7 +17,7 @@ interface ApiEnvelope<T> {
   path?: string;
 }
 
-interface ApiImageSearchResultRaw {
+export interface ApiImageSearchResultRaw {
   rank: number;
   productId: string;
   sku?: string;
@@ -39,7 +39,7 @@ interface ApiImageSearchResultRaw {
   similarity: number;
 }
 
-interface ApiImageSearchDataRaw {
+export interface ApiImageSearchDataRaw {
   queryFileName: string;
   topK: number;
   resultCount: number;
@@ -47,7 +47,7 @@ interface ApiImageSearchDataRaw {
   results: ApiImageSearchResultRaw[];
 }
 
-interface ApiCategoryRaw {
+export interface ApiCategoryRaw {
   id: string;
   name: string;
   slug: string;
@@ -56,12 +56,11 @@ interface ApiCategoryRaw {
   displayOrder?: number;
 }
 
-interface ApiProductRaw {
+export interface ApiProductRaw {
   id: string;
   name: string;
   slug: string;
   sku?: string;
-
   brand?: string;
   shortDescription?: string;
   description?: string;
@@ -82,7 +81,7 @@ interface ApiProductRaw {
   images?: Array<{ imageUrl?: string }>;
 }
 
-interface ApiPaginated<T> {
+export interface ApiPaginated<T> {
   items: T[];
   page: number;
   size: number;
@@ -92,7 +91,7 @@ interface ApiPaginated<T> {
   last: boolean;
 }
 
-function getApiErrorMessage(
+export function getApiErrorMessage(
   status: number,
   response?: Partial<ApiEnvelope<unknown>>,
 ): string {
@@ -117,7 +116,7 @@ function getApiErrorMessage(
   return response?.message || "Yêu cầu không thể thực hiện.";
 }
 
-async function fetchEnvelopeUncached<T>(
+export async function fetchEnvelopeUncached<T>(
   path: string,
   init?: RequestInit,
 ): Promise<T> {
@@ -159,7 +158,7 @@ async function fetchEnvelopeUncached<T>(
   return body.data;
 }
 
-async function fetchEnvelope<T>(path: string, init?: RequestInit): Promise<T> {
+export async function fetchEnvelope<T>(path: string, init?: RequestInit): Promise<T> {
   const isCatalog =
     /^\/(products|categories|brands)(?:\/|\?|$)/.test(path) &&
     !path.startsWith("/products/search");
@@ -176,7 +175,7 @@ async function fetchEnvelope<T>(path: string, init?: RequestInit): Promise<T> {
   return fetchEnvelopeUncached<T>(path, init);
 }
 
-async function fetchEnvelopeAuthed<T>(
+export async function fetchEnvelopeAuthed<T>(
   path: string,
   init?: RequestInit
 ): Promise<T> {
@@ -195,7 +194,7 @@ async function fetchEnvelopeAuthed<T>(
   });
 }
 
-function normalizeList<T>(
+export function normalizeList<T>(
   data: T[] | ApiPaginated<T> | null | undefined
 ): T[] {
   if (!data) return [];
@@ -206,16 +205,14 @@ function normalizeList<T>(
   return [];
 }
 
-function mapCategory(raw: ApiCategoryRaw): Category {
+export function mapCategory(raw: ApiCategoryRaw): Category {
   return {
     id: raw.id,
     slug: raw.slug,
     title: raw.name,
     description: raw.description,
     imageUrl: raw.imageUrl,
-
     displayOrder: raw.displayOrder,
-
     featured: false,
   };
 }
@@ -390,9 +387,7 @@ export function mapProduct(raw: ApiProductRaw): Product {
     finalPrice,
     images: images.length > 0 ? images : (raw.thumbnailUrl ? [raw.thumbnailUrl] : []),
     thumbnailUrl: raw.thumbnailUrl || images[0] || "",
-
     categories: raw.category ? [raw.category.name] : [],
-
     brand: raw.brand,
     stock: raw.stockQuantity ?? 0,
     status,
@@ -401,301 +396,8 @@ export function mapProduct(raw: ApiProductRaw): Product {
     active: raw.active ?? true,
     ratingAverage: raw.ratingAverage ?? 0,
     reviewCount: raw.reviewCount ?? 0,
-
     description: raw.description ?? raw.shortDescription,
     shortDescription: raw.shortDescription,
     specifications,
   };
-}
-
-
-
-export interface GetProductsParams {
-  page?: number;
-  size?: number;
-
-  category?: string;
-
-  brand?: string;
-  noStore?: boolean;
-}
-
-export interface GetProductsResult {
-  items: Product[];
-  page: number;
-  size: number;
-  totalElements: number;
-  totalPages: number;
-  first: boolean;
-  last: boolean;
-}
-
-function buildProductsQuery(params: GetProductsParams): string {
-  const { page = 0, size = 20, category, brand } = params;
-  return new URLSearchParams({
-    page: String(page),
-    size: String(size),
-    ...(category ? { category } : {}),
-    ...(brand ? { brand } : {}),
-  }).toString();
-}
-
-async function fetchProductsPage(
-  params: GetProductsParams
-): Promise<ApiPaginated<ApiProductRaw>> {
-  const query = buildProductsQuery(params);
-  const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
-    `/products?${query}`,
-    params.noStore ? { cache: "no-store" } : { next: { revalidate: 60 } }
-  );
-  return data;
-}
-
-export async function getProducts(
-  params: GetProductsParams = {}
-): Promise<Product[]> {
-  const data = await fetchProductsPage(params);
-  return normalizeList(data).map(mapProduct);
-}
-
-export async function getProductsPaginated(
-  params: GetProductsParams = {}
-): Promise<GetProductsResult> {
-  const data = await fetchProductsPage(params);
-
-  return {
-    items: normalizeList(data).map(mapProduct),
-    page: data.page,
-    size: data.size,
-    totalElements: data.totalElements,
-    totalPages: data.totalPages,
-    first: data.first,
-    last: data.last,
-  };
-}
-
-export async function getAllProductsByCategory(
-  category?: string,
-  noStore = true
-): Promise<Product[]> {
-  const query = new URLSearchParams({
-    page: "0",
-    size: "2000",
-    ...(category ? { category } : {}),
-  }).toString();
-
-  const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
-    `/products?${query}`,
-    noStore ? { cache: "no-store" } : { next: { revalidate: 60 } }
-  );
-  return normalizeList(data).map(mapProduct);
-}
-
-
-export async function searchProducts(
-  keyword: string,
-  signal?: AbortSignal
-): Promise<Product[]> {
-  const query = new URLSearchParams({
-    keyword
-  }).toString();
-
-  const data = await fetchEnvelope<ApiPaginated<ApiProductRaw>>(
-    `/products/search?${query}`,
-    { cache: "no-store", signal }
-  );
-  return normalizeList(data).map(mapProduct);
-}
-
-export async function searchProductsByImage(
-  file: File,
-  topK = 10
-): Promise<Product[]> {
-  const formData = new FormData();
-
-  formData.append("file", file);
-
-  const query = new URLSearchParams({
-    topK: String(topK),
-  }).toString();
-
-  const data = await fetchEnvelope<ApiImageSearchDataRaw>(
-    `/products/search-by-image?${query}`,
-    {
-      method: "POST",
-      body: formData,
-      cache: "no-store",
-    }
-  );
-
-  return data.results.map((result) =>
-    mapProduct({
-      id: result.productId,
-
-      // API tìm kiếm ảnh chưa trả slug.
-      // Trang chi tiết hiện dùng product ID nên tạm dùng ID làm slug.
-      slug: result.productId,
-
-      sku: result.sku,
-      name: result.name,
-      brand: result.brand,
-      price: result.price,
-      originalPrice: result.originalPrice ?? undefined,
-      thumbnailUrl: result.thumbnailUrl,
-      shortDescription: result.shortDescription,
-      stockQuantity: result.stockQuantity,
-      ratingAverage: result.ratingAverage,
-      reviewCount: result.reviewCount,
-      category: result.category,
-      inStock: result.stockQuantity > 0,
-    })
-  );
-}
-
-export async function getProductBySlug(slug: string): Promise<Product> {
-  const raw = await fetchEnvelope<ApiProductRaw>(`/products/${slug}`, {
-    next: { revalidate: 60 },
-  });
-  return mapProduct(raw);
-}
-
-export async function getProductRecommendations(productId: string, limit = 8): Promise<Product[]> {
-  const safeLimit = Math.max(1, Math.min(limit, 20));
-
-  const rawProducts = await fetchEnvelope<ApiProductRaw[]>(
-    `/products/${encodeURIComponent(productId)}/recommendations?limit=${safeLimit}`, {
-    next: { revalidate: 60 }
-  });
-
-  return rawProducts.map(mapProduct);
-}
-
-// ---------------------------------------------------------------- Đề xuất AI
-
-export interface RecommendedProduct {
-  product: Product;
-  badge: "BEST" | "HOT" | "CHOICE" | null;
-  reason: string | null;
-  keySpecs: Record<string, string>;
-  score: number;
-}
-
-interface ApiRecommendedRaw {
-  product: ApiProductRaw;
-  badge: "BEST" | "HOT" | "CHOICE" | null;
-  reason: string | null;
-  keySpecs: Record<string, string> | null;
-  score: number;
-}
-
-export async function getAiRecommendations(
-  productId: string,
-  limit = 8
-): Promise<RecommendedProduct[]> {
-  const safeLimit = Math.max(1, Math.min(limit, 12));
-
-  const raw = await fetchEnvelope<ApiRecommendedRaw[]>(
-    `/products/${encodeURIComponent(productId)}/recommendations/ai?limit=${safeLimit}`,
-    { next: { revalidate: 60 } }
-  );
-
-  return (raw ?? []).map((r) => ({
-    product: mapProduct(r.product),
-    badge: r.badge ?? null,
-    reason: r.reason ?? null,
-    keySpecs: r.keySpecs ?? {},
-    score: r.score,
-  }));
-}
-
-export async function getCategories(
-  options: { noStore?: boolean } = {}
-): Promise<Category[]> {
-  const data = await fetchEnvelope<ApiCategoryRaw[] | ApiPaginated<ApiCategoryRaw>>(
-    "/categories",
-    options.noStore ? { cache: "no-store" } : { next: { revalidate: 300 } }
-  );
-  return normalizeList(data).map(mapCategory);
-}
-
-export async function getBrands(): Promise<Brand[]> {
-  try {
-    const data = await fetchEnvelope<
-      ApiCategoryRaw[] | ApiPaginated<ApiCategoryRaw>
-    >("/brands", { next: { revalidate: 300 } });
-
-    return normalizeList(data).map((b) => ({
-      id: b.id,
-      slug: b.slug,
-      title: b.name,
-    }));
-  } catch {
-    return [];
-  }
-}
-
-export async function getProductById(id: string): Promise<Product> {
-  const raw = await fetchEnvelope<ApiProductRaw>(`/products/${id}`, {
-    next: { revalidate: 60 },
-  });
-  return mapProduct(raw);
-}
-
-// ---------------------------------------------------------------- Thông số kỹ thuật
-
-export async function getProductSpecs(id: string): Promise<Record<string, string>> {
-  const raw = await fetchEnvelope<ApiProductRaw & { specifications?: unknown }>(
-    `/products/${id}`,
-    { next: { revalidate: 60 } }
-  );
-  return flattenSpecs(raw.specifications);
-}
-
-interface ApiFavoriteRaw {
-  id: string;
-  createdAt: string;
-  product: ApiProductRaw;
-}
-
-interface ApiFavoriteCreatedRaw {
-  id: string;
-  createdAt: string;
-  product?: ApiProductRaw;
-}
-
-export async function getFavorites(): Promise<Product[]> {
-  const data = await fetchEnvelopeAuthed<ApiFavoriteRaw[]>("/favorites", {
-    cache: "no-store",
-  });
-
-  const list = normalizeList(data);
-  return list
-    .filter((f) => !!f.product)
-    .map((f) => mapProduct(f.product));
-}
-
-export async function addFavorite(productId: string): Promise<void> {
-  await fetchEnvelopeAuthed<ApiFavoriteCreatedRaw>("/favorites", {
-    method: "POST",
-    body: JSON.stringify({ productId }),
-  });
-}
-
-export async function removeFavorite(productId: string): Promise<void> {
-  await fetchEnvelopeAuthed<null>(`/favorites/${productId}`, {
-    method: "DELETE",
-  });
-}
-
-export async function removeAllFavorites(): Promise<void> {
-  await fetchEnvelopeAuthed<null>("/favorites", {
-    method: "DELETE",
-  });
-}
-
-export async function checkFavorite(productId: string): Promise<boolean> {
-  const data = await fetchEnvelopeAuthed<{ isFavorite: boolean }>(
-    `/favorites/check?productId=${encodeURIComponent(productId)}`
-  );
-  return data.isFavorite;
 }

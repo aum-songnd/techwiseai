@@ -33,6 +33,7 @@ public class AiRecommendationClient {
     ) {}
 
     public AiRecommendationClient(
+            RestClient.Builder restClientBuilder,
             @Value("${app.recommendation-service.base-url:http://localhost:8001}") String baseUrl
     ) {
         HttpClient httpClient = HttpClient.newBuilder()
@@ -43,7 +44,7 @@ public class AiRecommendationClient {
         JdkClientHttpRequestFactory factory = new JdkClientHttpRequestFactory(httpClient);
         factory.setReadTimeout(Duration.ofSeconds(8));
 
-        this.recommendationRestClient = RestClient.builder()
+        this.recommendationRestClient = restClientBuilder
                 .baseUrl(baseUrl)
                 .requestFactory(factory)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -66,7 +67,7 @@ public class AiRecommendationClient {
                 return response.data();
             }
         } catch (Exception e) {
-            log.warn("Không kết nối được recommendation-service Python cho sản phẩm {}: {}, chuyển sang engine dự phòng", productId, e.getMessage());
+            log.warn("Không kết nối được recommendation-service Python cho sản phẩm {}: {}, chi tiết:", productId, e.getMessage(), e);
         }
         return null;
     }

@@ -23,7 +23,7 @@ import {
   adminReplyToReview,
   adminChangeReviewStatus,
   adminRemoveReview,
-} from "@/lib/reviews-api";
+} from "@/lib/api/reviews";
 
 const formatDateTime = (isoString?: string) => {
   if (!isoString) return "";

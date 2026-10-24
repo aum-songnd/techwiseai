@@ -4,7 +4,7 @@ import {
   verifyActiveSession,
   removeActiveSession,
   touchActiveSession,
-} from "@/lib/server-session-manager";
+} from "@/lib/server/session-manager";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

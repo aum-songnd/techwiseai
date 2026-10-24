@@ -1,5 +1,5 @@
 import type { Blog, BlogCategory, Author } from "@/app/data/types";
-import { getToken } from "./auth";
+import { getToken } from "@/lib/auth";
 
 import { blogs as defaultSeedBlogs } from "@/app/data/blogs";
 
@@ -23,7 +23,7 @@ const LOCAL_BASE = "/api/blogs";
 
 const HIDDEN_BLOGS_KEY = "admin_hidden_blogs_map";
 
-import { broadcastTabEvent } from "./tab-sync";
+import { broadcastTabEvent } from "@/lib/auth/tab-sync";
 
 export function getHiddenBlogsMap(): Record<string, boolean> {
   if (typeof window === "undefined") return {};

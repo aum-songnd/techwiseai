@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { subscribeTabSync } from "@/lib/tab-sync";
-import { clearRequestCache } from "@/lib/request-cache";
+import { subscribeTabSync } from "@/lib/auth/tab-sync";
+import { clearRequestCache } from "@/lib/api/core";
 
 export default function CatalogSyncWatcher() {
   const router = useRouter();

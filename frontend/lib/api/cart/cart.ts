@@ -1,4 +1,4 @@
-import { cachedRequest, clearRequestCache } from "@/lib/request-cache";
+import { cachedRequest, clearRequestCache } from "../core";
 import { getToken, clearToken, clearStoredUser } from "@/lib/auth";
 
 const API_BASE_URL = "/api";

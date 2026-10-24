@@ -3,7 +3,7 @@ import {
   getServerHiddenBlogsMap,
   setServerBlogHidden,
   setServerHiddenBlogsMap,
-} from "@/lib/server-blog-status";
+} from "@/lib/server/blog-status";
 
 export async function GET() {
   const data = getServerHiddenBlogsMap();

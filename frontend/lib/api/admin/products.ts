@@ -1,4 +1,5 @@
-import { getProductsPaginated, mapProduct } from "@/lib/api";
+import { getProductsPaginated } from "../catalog";
+import { mapProduct } from "../core";
 import { getToken } from "@/lib/auth";
 import type { Category, Product } from "@/app/data/types";
 

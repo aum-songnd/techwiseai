@@ -346,6 +346,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
       <ProductReviewsSection
         productId={product!.id}
         productName={product!.name}
+        product={product!}
         initialSummary={{
           ratingAverage: product!.ratingAverage,
           reviewCount: product!.reviewCount,

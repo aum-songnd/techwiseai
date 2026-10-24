@@ -18,8 +18,8 @@ import {
   getAdminUsers,
   setAdminUserActive,
   type AdminUser,
-} from "@/lib/admin-users-api";
-import { subscribeTabSync } from "@/lib/tab-sync";
+} from "@/lib/api/admin";
+import { subscribeTabSync } from "@/lib/auth/tab-sync";
 import Loading from "@/app/(client)/loading";
 
 const PAGE_SIZE = 10;
@@ -488,4 +488,4 @@ const AdminUsersPage = () => {
   );
 };
 
-export default AdminUsersPage;
+export default AdminUsersPage;

@@ -40,8 +40,8 @@ async function apiFetch<T>(backendPath: string, localPath: string, fallback: T):
   return fallback;
 }
 
-import { getHiddenBlogsMap } from "../lib/admin-blog-api";
-import { getServerHiddenBlogsMap } from "../lib/server-blog-status";
+import { getHiddenBlogsMap } from "@/lib/api/admin";
+import { getServerHiddenBlogsMap } from "@/lib/server/blog-status";
 
 export const getAllBlogs = async (): Promise<Blog[]> => {
   const blogs = await apiFetch<Blog[]>("/blogs", "/api/blogs", defaultBlogs);

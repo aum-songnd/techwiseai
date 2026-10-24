@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Star,
   ThumbsUp,
@@ -18,8 +19,9 @@ import {
   LogIn,
   ShoppingBag,
 } from "lucide-react";
-import { Review, ReviewSummary } from "@/app/data/types";
+import { Product, Review, ReviewSummary } from "@/app/data/types";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 import {
   fetchProductReviews,
   submitProductReview,
@@ -27,11 +29,12 @@ import {
   checkReviewEligibility,
   type ProductReviewsData,
   type ReviewEligibility,
-} from "@/lib/reviews-api";
+} from "@/lib/api/reviews";
 
 interface ProductReviewsSectionProps {
   productId: string;
   productName: string;
+  product?: Product;
   initialSummary?: {
     ratingAverage?: number;
     reviewCount?: number;
@@ -79,9 +82,13 @@ const formatRelativeTime = (isoString?: string) => {
 const ProductReviewsSection = ({
   productId,
   productName,
+  product,
   initialSummary,
 }: ProductReviewsSectionProps) => {
   const { user, isSignedIn } = useAuth();
+  const { addToCart, requiresLogin } = useCart();
+  const router = useRouter();
+  const [isBuyingNow, setIsBuyingNow] = useState(false);
 
   const [reviewsData, setReviewsData] = useState<ProductReviewsData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -271,6 +278,41 @@ const ProductReviewsSection = ({
 
   const reviewsList = reviewsData?.reviews?.items ?? [];
 
+  const handleBuyNow = async () => {
+    if (isBuyingNow) return;
+    setIsBuyingNow(true);
+    try {
+      if (!isSignedIn || requiresLogin) {
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("pending_cart_product_id", productId);
+        }
+        router.push(`/sign-in?redirect=${encodeURIComponent("/cart")}`);
+        return;
+      }
+
+      const price = product?.finalPrice || product?.price || 0;
+      await addToCart(productId, 1, {
+        id: `temp-${productId}`,
+        productId: productId,
+        name: productName,
+        unitPrice: price,
+        originalPrice: product?.price || price,
+        quantity: 1,
+        subtotal: price,
+        stockQuantity: product?.stock ?? 999,
+        available: (product?.stock ?? 1) > 0,
+        thumbnailUrl: product?.images?.[0] || product?.thumbnailUrl,
+      });
+
+      router.push("/cart");
+    } catch (err) {
+      console.error("Lỗi thêm vào giỏ hàng:", err);
+      router.push("/cart");
+    } finally {
+      setIsBuyingNow(false);
+    }
+  };
+
   return (
     <section id="reviews" className="mt-14 border-t border-neutral-200 pt-10 scroll-mt-20">
       {/* Title */}
@@ -336,7 +378,7 @@ const ProductReviewsSection = ({
 
       {/* Buyer verification info note */}
       {isSignedIn && !checkingEligibility && eligibility && !eligibility.hasPurchased && (
-        <div className="mb-6 p-4 bg-amber-50/90 border border-amber-200 text-amber-900 rounded-sm flex items-start sm:items-center justify-between gap-3 text-xs">
+        <div className="mb-6 p-4 bg-amber-50/90 border border-amber-200 text-amber-900 rounded-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
           <div className="flex items-start sm:items-center gap-2.5">
             <Lock className="w-4 h-4 text-amber-600 shrink-0 mt-0.5 sm:mt-0" />
             <p>
@@ -345,14 +387,16 @@ const ProductReviewsSection = ({
           </div>
           <button
             type="button"
-            onClick={() => {
-              const buyBtn = document.querySelector("#add-to-cart-section") || document.querySelector("button[type='submit']");
-              if (buyBtn) buyBtn.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="hidden sm:inline-flex items-center gap-1 text-xs font-bold text-amber-800 underline hover:text-amber-900 shrink-0"
+            onClick={handleBuyNow}
+            disabled={isBuyingNow}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-600 hover:bg-amber-700 active:scale-95 text-white rounded-md text-xs font-bold transition-all shadow-xs disabled:opacity-70 shrink-0 cursor-pointer"
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
-            <span>Mua ngay</span>
+            {isBuyingNow ? (
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <ShoppingBag className="w-3.5 h-3.5" />
+            )}
+            <span>{isBuyingNow ? "Đang xử lý..." : "Mua ngay"}</span>
           </button>
         </div>
       )}
@@ -385,11 +429,10 @@ const ProductReviewsSection = ({
             {[1, 2, 3, 4, 5].map((star) => (
               <Star
                 key={star}
-                className={`w-5 h-5 ${
-                  star <= Math.round(summary.averageRating)
+                className={`w-5 h-5 ${star <= Math.round(summary.averageRating)
                     ? "fill-amber-400 text-amber-400"
                     : "fill-neutral-200 text-neutral-200"
-                }`}
+                  }`}
               />
             ))}
           </div>
@@ -418,9 +461,8 @@ const ProductReviewsSection = ({
                 onClick={() =>
                   setSelectedRatingFilter((prev) => (prev === star ? undefined : star))
                 }
-                className={`w-full flex items-center gap-3 text-left py-1 px-2 rounded transition-colors group ${
-                  isSelected ? "bg-amber-50/80" : "hover:bg-neutral-100/60"
-                }`}
+                className={`w-full flex items-center gap-3 text-left py-1 px-2 rounded transition-colors group ${isSelected ? "bg-amber-50/80" : "hover:bg-neutral-100/60"
+                  }`}
                 title={`Lọc đánh giá ${star} sao (${count})`}
               >
                 <div className="flex items-center gap-1 w-14 shrink-0 text-xs font-semibold text-neutral-700">
@@ -430,13 +472,12 @@ const ProductReviewsSection = ({
 
                 <div className="flex-1 h-2.5 bg-neutral-200 rounded-full overflow-hidden">
                   <div
-                    className={`h-full transition-all duration-500 rounded-full ${
-                      star >= 4
+                    className={`h-full transition-all duration-500 rounded-full ${star >= 4
                         ? "bg-amber-400 group-hover:bg-amber-500"
                         : star === 3
-                        ? "bg-amber-300 group-hover:bg-amber-400"
-                        : "bg-neutral-400 group-hover:bg-neutral-500"
-                    }`}
+                          ? "bg-amber-300 group-hover:bg-amber-400"
+                          : "bg-neutral-400 group-hover:bg-neutral-500"
+                      }`}
                     style={{ width: `${percent}%` }}
                   />
                 </div>
@@ -460,11 +501,10 @@ const ProductReviewsSection = ({
         <button
           type="button"
           onClick={() => setSelectedRatingFilter(undefined)}
-          className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
-            selectedRatingFilter === undefined
+          className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all border ${selectedRatingFilter === undefined
               ? "bg-shop_dark_green text-white border-shop_dark_green shadow-sm"
               : "bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400"
-          }`}
+            }`}
         >
           Tất cả ({summary.totalReviews})
         </button>
@@ -480,11 +520,10 @@ const ProductReviewsSection = ({
               onClick={() =>
                 setSelectedRatingFilter((prev) => (prev === star ? undefined : star))
               }
-              className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold tracking-wider transition-all border ${
-                active
+              className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold tracking-wider transition-all border ${active
                   ? "bg-shop_dark_green text-white border-shop_dark_green shadow-sm"
                   : "bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400"
-              }`}
+                }`}
             >
               <span>{star}</span>
               <Star className={`w-3 h-3 ${active ? "fill-white text-white" : "fill-amber-400 text-amber-400"}`} />
@@ -585,11 +624,10 @@ const ProductReviewsSection = ({
                         {[1, 2, 3, 4, 5].map((s) => (
                           <Star
                             key={s}
-                            className={`w-3.5 h-3.5 ${
-                              s <= review.rating
+                            className={`w-3.5 h-3.5 ${s <= review.rating
                                 ? "fill-amber-400 text-amber-400"
                                 : "fill-neutral-200 text-neutral-200"
-                            }`}
+                              }`}
                           />
                         ))}
                         <span className="ml-1 text-[11px] font-medium text-neutral-500">
@@ -641,17 +679,15 @@ const ProductReviewsSection = ({
                   <button
                     type="button"
                     onClick={() => handleLike(review.id)}
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium transition-colors ${
-                      isLiked
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium transition-colors ${isLiked
                         ? "text-shop_dark_green bg-emerald-50 border border-emerald-200 font-bold"
                         : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 border border-transparent"
-                    }`}
+                      }`}
                     title="Đánh giá nhận xét này hữu ích"
                   >
                     <ThumbsUp
-                      className={`w-3.5 h-3.5 ${
-                        isLiked ? "fill-shop_dark_green text-shop_dark_green" : ""
-                      }`}
+                      className={`w-3.5 h-3.5 ${isLiked ? "fill-shop_dark_green text-shop_dark_green" : ""
+                        }`}
                     />
                     <span>
                       Hữu ích {review.likesCount ? `(${review.likesCount})` : ""}
@@ -744,11 +780,10 @@ const ProductReviewsSection = ({
                           aria-label={`${star} sao`}
                         >
                           <Star
-                            className={`w-7 h-7 ${
-                              isFilled
+                            className={`w-7 h-7 ${isFilled
                                 ? "fill-amber-400 text-amber-400"
                                 : "fill-neutral-200 text-neutral-200"
-                            }`}
+                              }`}
                           />
                         </button>
                       );

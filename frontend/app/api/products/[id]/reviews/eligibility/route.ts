@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readServerReviews } from "@/lib/server-reviews";
+import { readServerReviews } from "@/lib/server/reviews";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||

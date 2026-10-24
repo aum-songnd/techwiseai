@@ -6,7 +6,7 @@ import {
   isEmailTakenByOtherUser,
   isPhoneTakenByOtherUser,
   importServerProfiles,
-} from "@/lib/server-user-profiles";
+} from "@/lib/server/user-profiles";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||

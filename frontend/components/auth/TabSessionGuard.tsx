@@ -7,7 +7,7 @@ import {
   CURRENT_TAB_ID,
   subscribeTabSync,
   broadcastTabEvent,
-} from "@/lib/tab-sync";
+} from "@/lib/auth/tab-sync";
 import { AlertTriangle, ShieldAlert, ArrowRight, RefreshCw, XCircle } from "lucide-react";
 
 const ACTIVE_TAB_STORAGE_KEY = "techwiseai_active_tab_leader";

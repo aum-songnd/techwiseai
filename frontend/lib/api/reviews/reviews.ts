@@ -1,5 +1,5 @@
 import { Review, ReviewSummary } from "@/app/data/types";
-import { getToken } from "./auth";
+import { getToken } from "@/lib/auth";
 
 export interface ProductReviewsData {
   summary: ReviewSummary;

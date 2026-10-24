@@ -30,7 +30,7 @@ import {
   getOrders,
   OrderAuthRequiredError,
   type PaymentMethod,
-} from "@/lib/orders-api";
+} from "@/lib/api/orders";
 import {
   fetchProvincesV1,
   fetchDistrictsV1,
@@ -40,7 +40,7 @@ import {
   type Province,
   type District,
   type Ward,
-} from "@/lib/provinces-api";
+} from "@/lib/api/orders";
 import Loading from "@/app/(client)/loading";
 
 const formatPrice = (value: number) =>

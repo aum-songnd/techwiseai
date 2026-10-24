@@ -1,7 +1,7 @@
 "use client";
 
-import type { User } from "@/lib/auth";
-import type { CartData } from "@/lib/cart-api";
+import type { User } from "./auth";
+import type { CartData } from "@/lib/api/cart";
 
 export type TabSyncEvent =
   | {

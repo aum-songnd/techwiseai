@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendOtpEmail } from "@/lib/mailer";
+import { sendOtpEmail } from "@/lib/server/mailer";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||

@@ -6,8 +6,8 @@ import Link from "next/link";
 import { Calendar, User, Clock, ArrowRight } from "lucide-react";
 import Container from "@/components/common/Container";
 import { Blog as BlogType, BlogCategory, Author } from "@/app/data/types";
-import { getHiddenBlogsMap, syncHiddenBlogs } from "@/lib/admin-blog-api";
-import { subscribeTabSync } from "@/lib/tab-sync";
+import { getHiddenBlogsMap, syncHiddenBlogs } from "@/lib/api/admin";
+import { subscribeTabSync } from "@/lib/auth/tab-sync";
 
 interface Props {
   blogs: BlogType[];

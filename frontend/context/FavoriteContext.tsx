@@ -16,7 +16,7 @@ import {
   removeFavorite as removeFavoriteApi,
   removeAllFavorites as removeAllFavoritesApi,
 } from "@/lib/api";
-import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
+import { broadcastTabEvent, subscribeTabSync } from "@/lib/auth/tab-sync";
 
 export type FavoriteProduct = Product & {
   categories?: string[];

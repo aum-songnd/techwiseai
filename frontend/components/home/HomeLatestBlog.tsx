@@ -8,8 +8,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { blogs, blogCategories } from "@/app/data";
 import { Title } from "@/components/ui/text";
-import { getHiddenBlogsMap } from "@/lib/admin-blog-api";
-import { subscribeTabSync } from "@/lib/tab-sync";
+import { getHiddenBlogsMap } from "@/lib/api/admin";
+import { subscribeTabSync } from "@/lib/auth/tab-sync";
 
 const formatDate = (isoDate: string) =>
   new Intl.DateTimeFormat("en-US", {

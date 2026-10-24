@@ -1,7 +1,7 @@
-import { cachedRequest, clearRequestCache } from "./request-cache";
+import { cachedRequest, clearRequestCache } from "../core";
 
 
-import { getToken } from "./auth";
+import { getToken } from "@/lib/auth";
 
 const API_BASE_URL =
   typeof window !== "undefined"

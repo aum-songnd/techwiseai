@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   getReviewsForProduct,
   addReviewToProduct,
-} from "@/lib/server-reviews";
+} from "@/lib/server/reviews";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||

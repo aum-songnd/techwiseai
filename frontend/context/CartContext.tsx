@@ -18,8 +18,8 @@ import {
   CartAuthRequiredError,
   type CartItem,
   type CartData,
-} from "@/lib/cart-api";
-import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
+} from "@/lib/api/cart";
+import { broadcastTabEvent, subscribeTabSync } from "@/lib/auth/tab-sync";
 import { useAuth } from "@/context/AuthContext";
 import { getToken } from "@/lib/auth";
 

@@ -1,4 +1,4 @@
-import { getToken } from "./auth";
+import { getToken } from "@/lib/auth";
 
 export type AdminUser = {
   id: string;
@@ -70,7 +70,7 @@ async function fetchAdminEnvelope<T>(
   return body.data as T;
 }
 
-import { broadcastTabEvent } from "./tab-sync";
+import { broadcastTabEvent } from "@/lib/auth/tab-sync";
 
 export async function getAdminUsers(
   params: GetAdminUsersParams = {}
