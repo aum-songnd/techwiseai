@@ -148,7 +148,7 @@ class RecommendationService:
                 data = resp.json()
                 embedding = data["data"][0]["embedding"]
                 cursor.execute(
-                    "UPDATE products SET embedding = %s WHERE id = %s",
+                    "UPDATE products SET embedding = %s::vector WHERE id = %s",
                     (embedding, product["id"]),
                 )
                 connection.commit()
@@ -199,7 +199,7 @@ class RecommendationService:
                         p.rating_average, p.review_count, p.featured, p.hot,
                         p.active, p.specifications, p.embedding,
                         c.id AS category_id_ref, c.name AS category_name, c.slug AS category_slug,
-                        1 - (p.embedding <=> %s) AS similarity
+                        1 - (p.embedding <=> %s::vector) AS similarity
                     FROM products p
                     JOIN categories c ON c.id = p.category_id
                     WHERE p.id <> %s
@@ -209,7 +209,7 @@ class RecommendationService:
                       AND p.embedding IS NOT NULL
                       AND p.category_id = %s
                       AND p.price BETWEEN %s AND %s
-                    ORDER BY p.embedding <=> %s
+                    ORDER BY p.embedding <=> %s::vector
                     LIMIT %s
                     """,
                     (

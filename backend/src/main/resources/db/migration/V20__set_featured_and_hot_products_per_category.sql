@@ -1,3 +1,11 @@
+-- Xoá dữ liệu mock cũ (ảnh placehold.co) nếu có
+DELETE FROM products 
+WHERE thumbnail_url LIKE '%placehold.co%' 
+   OR sku IN (
+       'LAP-MBA-M3-13', 'LAP-ASUS-TUF-A15', 'PHONE-IP16-128', 'PHONE-SS-S25',
+       'HEADPHONE-AIRPODS-3', 'HEADPHONE-AIRPODS-MAX', 'CAMERA-CANON-250D', 'ACC-LOGI-MX3S'
+   );
+
 -- Đặt lại trạng thái featured và hot
 UPDATE products
 SET featured = FALSE, hot = FALSE;

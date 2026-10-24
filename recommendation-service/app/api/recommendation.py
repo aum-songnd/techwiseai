@@ -4,6 +4,10 @@ from starlette.concurrency import run_in_threadpool
 from app.schemas.recommendation import RecommendationResponse
 from app.services.recommendation_service import get_recommendation_service
 
+import logging
+
+logger = logging.getLogger("uvicorn.error")
+
 router = APIRouter(
     prefix="/api/v1/recommendations",
     tags=["Product Recommendations"],
@@ -31,6 +35,7 @@ async def get_product_recommendations(
             data=items,
         )
     except Exception as e:
+        logger.exception("Lỗi khi xử lý gợi ý sản phẩm cho ID '%s': %s", product_id, e)
         raise HTTPException(
             status_code=500,
             detail=f"Lỗi xử lý gợi ý sản phẩm: {str(e)}",
