@@ -13,6 +13,11 @@ from conversation_state import (
     build_search_question,
 )
 
+from product_context import (
+    ProductContext,
+    verified_reference_answer,
+)
+
 from retriever import hybrid_search
 
 MODEL_NAME = "qwen3:4b"
@@ -386,9 +391,7 @@ def select_evidence(question, results):
 
     return verified
 
-def answer_question(question, analysis=None):
-
-    # Bản hiện tại chưa có lịch sử hội thoại.
+def answer_question(question, analysis=None, product_context=None):
 
     if re.search(
 
@@ -486,6 +489,9 @@ def answer_question(question, analysis=None):
 
     )
 
+    if product_context is not None:
+        product_context.remember(results)
+
     if not results:
 
         return (
@@ -554,9 +560,10 @@ def answer_question(question, analysis=None):
 
 def main():
     session = ConversationState()
+    product_context = ProductContext()
 
     print("Tư vấn laptop — nhập exit để thoát.")
-    print("Nhập reset để xóa điều kiện đang lưu.")
+    print("Nhập reset để xóa điều kiện và danh sách máy.")
 
     while True:
         question = input("\nBạn: ").strip()
@@ -566,28 +573,60 @@ def main():
 
         if question.lower() == "reset":
             session.reset()
-            print("\nTrợ lý: Đã xóa điều kiện tìm kiếm.")
+            product_context.reset()
+            print("\nTrợ lý: Đã bắt đầu hội thoại mới.")
             continue
 
         if not question:
             continue
 
-        # Chưa triển khai chọn sản phẩm từ danh sách trước.
-        if re.search(
-            r"\b(máy này|máy đó|máy ấy|máy thứ|con này|con đó|"
-            r"chiếc này|chiếc đó|sản phẩm này)\b",
-            question.casefold(),
-        ):
-            print(
-                "\nTrợ lý: Bạn vui lòng gửi tên hoặc mã máy. "
-                "Bản này mới lưu điều kiện tìm kiếm, "
-                "chưa lưu sản phẩm được chọn."
-            )
-            continue
-
         try:
+            # 1. Kiểm tra câu hỏi có tham chiếu máy đã hiển thị không.
+            reference = product_context.resolve(question)
+
+            if reference["action"] == "clarify":
+                print("\nTrợ lý:\n" + reference["question"])
+                continue
+
+            if reference["action"] in {
+                "product_question",
+                "comparison",
+            }:
+                print(
+                    "Sản phẩm được chọn:",
+                    [item["id"] for item in reference["results"]],
+                )
+                print("Câu hỏi đã làm rõ:", reference["question"])
+
+                answer = verified_reference_answer(
+                    question=reference["question"],
+                    results=reference["results"],
+                    build_table=build_table,
+                    select_evidence=select_evidence,
+                )
+
+                print("\nTrợ lý:\n" + answer)
+                continue
+
+            # Chưa có danh sách máy để giải quyết tham chiếu.
+            if not product_context.items and re.search(
+                r"\b(máy này|máy đó|máy ấy|máy thứ|"
+                r"con này|con đó|hai máy đầu|"
+                r"chiếc này|chiếc đó|sản phẩm này)\b",
+                question.casefold(),
+            ):
+                print(
+                    "\nTrợ lý: Chưa có danh sách máy để đối chiếu. "
+                    "Bạn hãy tìm sản phẩm hoặc gửi tên/mã máy."
+                )
+                continue
+
+            # 2. Câu tìm kiếm mới hoặc thay đổi điều kiện.
             analysis = session.update(question)
             search_question = build_search_question(analysis)
+
+            # Yêu cầu tìm mới làm mất lựa chọn sản phẩm trước đó.
+            product_context.reset()
 
             print("Trạng thái:", analysis.model_dump())
             print("Câu hỏi tìm kiếm:", search_question)
@@ -595,6 +634,7 @@ def main():
             answer = answer_question(
                 search_question,
                 analysis=analysis,
+                product_context=product_context,
             )
 
             print("\nTrợ lý:\n" + answer)
