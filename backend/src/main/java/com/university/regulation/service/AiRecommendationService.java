@@ -38,6 +38,7 @@ import com.university.regulation.ai.AiClient;
 import com.university.regulation.config.AiProperties;
 import com.university.regulation.dto.products.ProductResponse;
 import com.university.regulation.dto.products.RecommendedProductResponse;
+import com.university.regulation.integration.ai.AiRecommendationClient;
 import com.university.regulation.models.product.Product;
 import com.university.regulation.repository.ProductEmbeddingRepository;
 import com.university.regulation.repository.ProductRepository;
@@ -114,6 +115,7 @@ public class AiRecommendationService {
     private final AiClient aiClient;
     private final ObjectMapper objectMapper;
     private final ExecutorService aiExecutor;
+    private final AiRecommendationClient aiRecommendationClient;
 
     private final Cache<UUID, List<Annotation>> annotationCache;
     private final Cache<UUID, Boolean> failedRecently;
@@ -129,7 +131,8 @@ public class AiRecommendationService {
             AiClient aiClient,
             AiProperties props,
             ObjectMapper objectMapper,
-            @Qualifier("aiExecutor") ExecutorService aiExecutor) {
+            @Qualifier("aiExecutor") ExecutorService aiExecutor,
+            AiRecommendationClient aiRecommendationClient) {
         this.productRepository = productRepository;
         this.productService = productService;
         this.embeddingRepository = embeddingRepository;
@@ -141,6 +144,7 @@ public class AiRecommendationService {
         this.aiClient = aiClient;
         this.objectMapper = objectMapper;
         this.aiExecutor = aiExecutor;
+        this.aiRecommendationClient = aiRecommendationClient;
 
         this.annotationCache = Caffeine.newBuilder()
                 .expireAfterWrite(props.getAnnotationTtl())
@@ -154,15 +158,26 @@ public class AiRecommendationService {
 
     @Transactional(readOnly = true)
     public List<RecommendedProductResponse> getRecommendations(UUID productId, int limit) {
+        int safeLimit = Math.max(1, Math.min(limit, 12));
+
+        // 1. Thử gọi microservice ai-service (Python) trước
+        if (aiRecommendationClient != null) {
+            List<RecommendedProductResponse> pyResult = aiRecommendationClient.getRecommendations(productId, safeLimit);
+            if (pyResult != null && !pyResult.isEmpty()) {
+                return pyResult;
+            }
+        }
+
+        // 2. Fallback sang logic Java nội bộ
         try {
-            return buildRecommendations(productId, limit);
+            return buildRecommendations(productId, safeLimit);
         } catch (ResponseStatusException e) {
             throw e;
         } catch (RuntimeException e) {
             // Ghi đầy đủ stack trace; không trả 500 chỉ vì tính năng AI phụ trợ lỗi.
             log.error("AI recommendations lỗi cho sản phẩm {}, dùng gợi ý thông thường", productId, e);
             try {
-                return productService.getRecommendations(productId, Math.max(1, Math.min(limit, 12)))
+                return productService.getRecommendations(productId, safeLimit)
                         .stream()
                         .map(p -> new RecommendedProductResponse(p, null, null, Map.of(), 0.0))
                         .toList();
