@@ -27,7 +27,7 @@ import {
   type UpdateProfilePayload,
 } from "@/lib/auth";
 
-import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
+import { broadcastTabEvent, subscribeTabSync } from "@/lib/auth/tab-sync";
 
 interface AuthContextValue {
   user: User | null;

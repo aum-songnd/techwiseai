@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerProfile, saveServerProfile } from "@/lib/server-user-profiles";
+import { getServerProfile, saveServerProfile } from "@/lib/server/user-profiles";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||

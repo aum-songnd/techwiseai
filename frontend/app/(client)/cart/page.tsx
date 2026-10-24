@@ -17,7 +17,7 @@ import {
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { productImages } from "@/images";
-import { FREE_SHIP_THRESHOLD } from "@/components/ServiceFeatures";
+import { FREE_SHIP_THRESHOLD } from "@/components/common/ServiceFeatures";
 import Loading from "@/app/(client)/loading";
 
 const formatPrice = (value: number) =>

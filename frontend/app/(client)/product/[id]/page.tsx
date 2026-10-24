@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
-import ProductGallery from "@/components/ProductGallery";
-import RecommendationCarousel from "@/components/RecommendationCarousel";
+import ProductGallery from "@/components/product/ProductGallery";
+import RecommendationCarousel from "@/components/product/RecommendationCarousel";
 import {
   getProductById,
   getProducts,
@@ -20,10 +20,10 @@ import {
   X,
   Star,
 } from "lucide-react";
-import ServiceFeatures from "@/components/ServiceFeatures";
-import ProductReviewsSection from "@/components/ProductReviewsSection";
-import ProductDetailInteractive from "@/components/ProductDetailInteractive";
-import HomeRecentlyViewed from "@/components/HomeRecentlyViewed";
+import ServiceFeatures from "@/components/common/ServiceFeatures";
+import ProductReviewsSection from "@/components/product/ProductReviewsSection";
+import ProductDetailInteractive from "@/components/product/ProductDetailInteractive";
+import HomeRecentlyViewed from "@/components/home/HomeRecentlyViewed";
 
 export const revalidate = 60;
 
@@ -346,6 +346,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
       <ProductReviewsSection
         productId={product!.id}
         productName={product!.name}
+        product={product!}
         initialSummary={{
           ratingAverage: product!.ratingAverage,
           reviewCount: product!.reviewCount,

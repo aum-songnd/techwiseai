@@ -10,7 +10,7 @@ import {
   Headphones,
   FileQuestion,
 } from "lucide-react";
-import Container from "@/components/Container";
+import Container from "@/components/common/Container";
 
 export const metadata: Metadata = {
   title: "Trung tâm trợ giúp | TechWise AI",

@@ -73,7 +73,8 @@ class RecommendationService:
                 p.price, p.original_price, p.stock_quantity,
                 p.rating_average, p.review_count, p.featured, p.hot,
                 p.active, p.specifications, p.embedding,
-                c.id AS category_id_ref, c.name AS category_name, c.slug AS category_slug
+                c.id AS category_id_ref, c.name AS category_name, c.slug AS category_slug,
+                c.description AS category_description, c.image_url AS category_image_url, c.display_order AS category_display_order
             FROM products p
             JOIN categories c ON c.id = p.category_id
             WHERE p.id = %s AND p.active = TRUE AND c.active = TRUE
@@ -101,6 +102,10 @@ class RecommendationService:
         if original_price and original_price > price:
             discount_percent = round((original_price - price) / original_price * 100)
 
+        desc = row[22] if len(row) > 22 and row[22] is not None else None
+        img = row[23] if len(row) > 23 and row[23] is not None else None
+        disp_order = int(row[24]) if len(row) > 24 and row[24] is not None else 0
+
         return {
             "id": str(row[0]),
             "categoryId": str(row[1]),
@@ -126,6 +131,9 @@ class RecommendationService:
                 "id": str(row[19]),
                 "name": row[20],
                 "slug": row[21],
+                "description": desc,
+                "imageUrl": img,
+                "displayOrder": disp_order,
             },
         }
 
@@ -199,6 +207,7 @@ class RecommendationService:
                         p.rating_average, p.review_count, p.featured, p.hot,
                         p.active, p.specifications, p.embedding,
                         c.id AS category_id_ref, c.name AS category_name, c.slug AS category_slug,
+                        c.description AS category_description, c.image_url AS category_image_url, c.display_order AS category_display_order,
                         1 - (p.embedding <=> %s::vector) AS similarity
                     FROM products p
                     JOIN categories c ON c.id = p.category_id
@@ -223,8 +232,8 @@ class RecommendationService:
                     ),
                 )
                 for row in cursor.fetchall():
-                    item = self._map_product_row(row[:22])
-                    item["similarity"] = float(row[22])
+                    item = self._map_product_row(row[:25])
+                    item["similarity"] = float(row[25])
                     if item["id"] not in candidates_map:
                         candidates_map[item["id"]] = item
                 if len(candidates_map) >= limit:
@@ -242,7 +251,8 @@ class RecommendationService:
                     p.price, p.original_price, p.stock_quantity,
                     p.rating_average, p.review_count, p.featured, p.hot,
                     p.active, p.specifications, p.embedding,
-                    c.id AS category_id_ref, c.name AS category_name, c.slug AS category_slug
+                    c.id AS category_id_ref, c.name AS category_name, c.slug AS category_slug,
+                    c.description AS category_description, c.image_url AS category_image_url, c.display_order AS category_display_order
                 FROM products p
                 JOIN categories c ON c.id = p.category_id
                 WHERE p.id <> %s

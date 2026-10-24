@@ -1,5 +1,5 @@
 
-import { getAllProductsByCategory } from "../lib/api";
+import { getAllProductsByCategory } from "@/lib/api";
 import type { Product } from "../app/data/types";
 
 export const getHotProducts = async (): Promise<Product[]> => {

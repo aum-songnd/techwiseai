@@ -1,9 +1,9 @@
 import React from 'react';
-import Container from '@/components/Container';
-import HomeBanner from '@/components/HomeBanner';
-import HomeCategories from '@/components/HomeCategories';
-import HomeProductSections from '@/components/HomeProductSections';
-import HomeLatestBlog from '@/components/HomeLatestBlog';
+import Container from "@/components/common/Container";
+import HomeBanner from "@/components/home/HomeBanner";
+import HomeCategories from "@/components/home/HomeCategories";
+import HomeProductSections from "@/components/home/HomeProductSections";
+import HomeLatestBlog from "@/components/home/HomeLatestBlog";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import Shop from "../../../components/Shop";
+import Shop from "@/components/product/Shop";
 import {
   getAllProductsByCategory,
   getCategories,

@@ -22,9 +22,9 @@ import {
   normalizeAdminText,
   saveHiddenProduct,
   removeHiddenProduct,
-} from "@/lib/admin-products";
-import { clearRequestCache } from "@/lib/request-cache";
-import { notifyCatalogUpdated } from "@/lib/tab-sync";
+} from "@/lib/api/admin";
+import { clearRequestCache } from "@/lib/api/core";
+import { notifyCatalogUpdated } from "@/lib/auth/tab-sync";
 import ProductImage from "@/components/admin/ProductImage";
 import {
   adminCreateProduct,
@@ -32,7 +32,7 @@ import {
   adminDeleteProduct,
   adminToggleProductStatus,
   ProductPayload,
-} from "@/lib/admin-api";
+} from "@/lib/api/admin";
 import Loading from "@/app/(client)/loading";
 import type { Category, Product } from "@/app/data/types";
 

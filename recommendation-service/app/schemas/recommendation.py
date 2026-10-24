@@ -6,6 +6,9 @@ class CategoryDetail(BaseModel):
     id: str
     name: str
     slug: str
+    description: str | None = None
+    imageUrl: str | None = None
+    displayOrder: int = 0
 
 
 class ProductDetail(BaseModel):

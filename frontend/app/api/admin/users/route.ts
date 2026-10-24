@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   listAllServerProfiles,
   readServerProfiles,
-} from "@/lib/server-user-profiles";
+} from "@/lib/server/user-profiles";
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||

@@ -22,7 +22,7 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { productImages } from "@/images";
-import { FREE_SHIP_THRESHOLD } from "@/components/ServiceFeatures";
+import { FREE_SHIP_THRESHOLD } from "@/components/common/ServiceFeatures";
 import { getSavedUserProfile, saveUserProfile, setStoredUser } from "@/lib/auth";
 import {
   createOrder,
@@ -30,7 +30,7 @@ import {
   getOrders,
   OrderAuthRequiredError,
   type PaymentMethod,
-} from "@/lib/orders-api";
+} from "@/lib/api/orders";
 import {
   fetchProvincesV1,
   fetchDistrictsV1,
@@ -40,7 +40,7 @@ import {
   type Province,
   type District,
   type Ward,
-} from "@/lib/provinces-api";
+} from "@/lib/api/orders";
 import Loading from "@/app/(client)/loading";
 
 const formatPrice = (value: number) =>

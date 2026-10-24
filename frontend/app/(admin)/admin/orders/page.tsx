@@ -21,14 +21,14 @@ import {
   OrderAuthRequiredError,
   type AdminOrderListItem,
   type AdminOrderDetail,
-} from "../../../../lib/admin-orders-api";
+} from "@/lib/api/admin";
 import {
   type OrderStatus,
   type PaymentStatus,
-} from "../../../../lib/orders-api";
+} from "@/lib/api/orders";
 import StatusBadge from "@/components/admin/StatusBadge";
 import { getToken } from "@/lib/auth";
-import { broadcastTabEvent } from "@/lib/tab-sync";
+import { broadcastTabEvent } from "@/lib/auth/tab-sync";
 
 const PAGE_SIZE = 10;
 

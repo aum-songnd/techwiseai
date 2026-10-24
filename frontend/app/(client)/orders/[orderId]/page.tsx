@@ -35,7 +35,7 @@ import {
   type OrderStatus,
   type PaymentMethod,
   type PaymentData,
-} from "../../../../lib/orders-api";
+} from "@/lib/api/orders";
 import Loading from "@/app/(client)/loading";
 import { useCart } from "../../../../context/CartContext";
 

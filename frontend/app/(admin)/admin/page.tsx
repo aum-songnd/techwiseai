@@ -15,7 +15,7 @@ import {
   XCircle,
   type LucideIcon,
 } from "lucide-react";
-import { fetchAllAdminProducts } from "@/lib/admin-products";
+import { fetchAllAdminProducts } from "@/lib/api/admin";
 import ProductImage from "@/components/admin/ProductImage";
 import Loading from "@/app/(client)/loading";
 import type { Product } from "@/app/data/types";

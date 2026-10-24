@@ -21,11 +21,11 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
-import Logo from "@/components/Logo";
+import Logo from "@/components/layout/Logo";
 import { useAuth } from "@/context/AuthContext";
 import { useOutsideClick } from "@/hooks";
-import UserProfileModal from "@/components/UserProfileModal";
-import { getAdminOrders } from "@/lib/admin-orders-api";
+import UserProfileModal from "@/components/auth/UserProfileModal";
+import { getAdminOrders } from "@/lib/api/admin";
 import {
   clearStoredUser,
   clearToken,
@@ -33,8 +33,8 @@ import {
   getToken,
   isAdminUser,
 } from "@/lib/auth";
-import { broadcastTabEvent, subscribeTabSync } from "@/lib/tab-sync";
-import { clearRequestCache } from "@/lib/request-cache";
+import { broadcastTabEvent, subscribeTabSync } from "@/lib/auth/tab-sync";
+import { clearRequestCache } from "@/lib/api/core";
 
 const OPEN_ORDER_STATUSES = [
   "PENDING",

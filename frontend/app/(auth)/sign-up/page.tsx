@@ -16,8 +16,8 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { saveUserProfile } from "@/lib/auth";
-import Logo from "@/components/Logo";
-import Container from "@/components/Container";
+import Logo from "@/components/layout/Logo";
+import Container from "@/components/common/Container";
 
 const SignUpForm = () => {
   const { register } = useAuth();
@@ -26,10 +26,10 @@ const SignUpForm = () => {
   const redirectParam = searchParams.get("redirect") || searchParams.get("redirectTo");
   const safeRedirect =
     redirectParam &&
-    redirectParam.startsWith("/") &&
-    !redirectParam.startsWith("//") &&
-    !redirectParam.startsWith("/sign-in") &&
-    !redirectParam.startsWith("/sign-up")
+      redirectParam.startsWith("/") &&
+      !redirectParam.startsWith("//") &&
+      !redirectParam.startsWith("/sign-in") &&
+      !redirectParam.startsWith("/sign-up")
       ? redirectParam
       : null;
 
@@ -303,7 +303,7 @@ const SignUpForm = () => {
           {/* Right Column: AI Tech Showcase Image (5 Cols) */}
           <div className="lg:col-span-5 relative hidden lg:block bg-neutral-950 overflow-hidden min-h-[560px]">
             <Image
-              src="/votay.gif"
+              src="/auth-showcase.jpg"
               alt="TechWise AI Ecosystem Showcase"
               fill
               priority

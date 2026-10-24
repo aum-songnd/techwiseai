@@ -8,6 +8,12 @@ public record CategoryResponse(
         String slug,
         String description,
         String imageUrl,
-        int displayOrder
+        Integer displayOrder
 ) {
+    public CategoryResponse {
+        if (displayOrder == null) {
+            displayOrder = 0;
+        }
+    }
 }
+

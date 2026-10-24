@@ -36,9 +36,9 @@ import {
   syncHiddenBlogs,
   getMissingSeedBlogs,
   type BlogPayload,
-} from "@/lib/admin-blog-api";
+} from "@/lib/api/admin";
 import type { Blog, BlogCategory, Author } from "@/app/data/types";
-import { subscribeTabSync } from "@/lib/tab-sync";
+import { subscribeTabSync } from "@/lib/auth/tab-sync";
 
 const PAGE_SIZE = 10;
 

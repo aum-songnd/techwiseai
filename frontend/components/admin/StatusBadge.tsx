@@ -1,4 +1,4 @@
-import type { OrderStatus } from "@/lib/orders-api";
+import type { OrderStatus } from "@/lib/api/orders";
 
 export const STATUS_LABEL: Record<OrderStatus, string> = {
   PENDING: "Chờ xác nhận",

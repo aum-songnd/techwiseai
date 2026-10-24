@@ -2,20 +2,20 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import AdminRedirect from "@/components/AdminRedirect";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import AdminRedirect from "@/components/auth/AdminRedirect";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { FavoriteProvider } from "@/context/FavoriteContext";
 import { CompareProvider } from "@/context/CompareContext";
 import { RecentlyViewedProvider } from "@/context/RecentlyViewedContext";
 import { QuickViewProvider } from "@/context/QuickViewContext";
-import CompareDrawer from "@/components/CompareDrawer";
-import QuickViewModal from "@/components/QuickViewModal";
-import Chat from "@/components/Chat";
-import ScrollToTop from "@/components/ScrollToTop";
-import CatalogSyncWatcher from "@/components/CatalogSyncWatcher";
+import CompareDrawer from "@/components/compare/CompareDrawer";
+import QuickViewModal from "@/components/product/QuickViewModal";
+import Chat from "@/components/chatbot/Chat";
+import ScrollToTop from "@/components/common/ScrollToTop";
+import CatalogSyncWatcher from "@/components/common/CatalogSyncWatcher";
 
 const inter = Inter({
   variable: "--font-inter",

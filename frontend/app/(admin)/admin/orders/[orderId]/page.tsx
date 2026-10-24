@@ -9,11 +9,11 @@ import {
   updateOrderStatus,
   OrderAuthRequiredError,
   type AdminOrderDetail,
-} from "../../../../../lib/admin-orders-api";
+} from "@/lib/api/admin";
 import {
   type OrderStatus,
   type PaymentStatus,
-} from "../../../../../lib/orders-api";
+} from "@/lib/api/orders";
 import Loading from "@/app/(client)/loading";
 
 const formatPrice = (value: number) =>

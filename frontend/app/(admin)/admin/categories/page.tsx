@@ -15,16 +15,16 @@ import { getCategories } from "@/lib/api";
 import {
   countProductsByCategory,
   fetchAllAdminProducts,
-} from "@/lib/admin-products";
+} from "@/lib/api/admin";
 import {
   adminCreateCategory,
   adminDeleteCategory,
   adminToggleCategoryStatus,
   adminUpdateCategory,
   CategoryPayload,
-} from "@/lib/admin-api";
-import { clearRequestCache } from "@/lib/request-cache";
-import { notifyCatalogUpdated } from "@/lib/tab-sync";
+} from "@/lib/api/admin";
+import { clearRequestCache } from "@/lib/api/core";
+import { notifyCatalogUpdated } from "@/lib/auth/tab-sync";
 import type { Category } from "@/app/data/types";
 
 const emptyForm: CategoryPayload = {
