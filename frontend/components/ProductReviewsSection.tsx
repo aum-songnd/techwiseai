@@ -293,7 +293,7 @@ const ProductReviewsSection = ({
         <div>
           {!isSignedIn ? (
             <Link
-              href={`/login?redirect=/product/${encodeURIComponent(productId)}#reviews`}
+              href={`/sign-in?redirect=/product/${encodeURIComponent(productId)}#reviews`}
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-neutral-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-neutral-800 transition-all shadow-sm shrink-0"
             >
               <LogIn className="w-4 h-4 text-emerald-400" />
@@ -366,7 +366,7 @@ const ProductReviewsSection = ({
             </p>
           </div>
           <Link
-            href={`/login?redirect=/product/${encodeURIComponent(productId)}#reviews`}
+            href={`/sign-in?redirect=/product/${encodeURIComponent(productId)}#reviews`}
             className="text-xs font-bold text-shop_dark_green hover:underline shrink-0"
           >
             Đăng nhập
@@ -516,7 +516,7 @@ const ProductReviewsSection = ({
             </p>
             {!isSignedIn ? (
               <Link
-                href={`/login?redirect=/product/${encodeURIComponent(productId)}#reviews`}
+                href={`/sign-in?redirect=/product/${encodeURIComponent(productId)}#reviews`}
                 className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-neutral-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-neutral-800 transition-colors"
               >
                 <LogIn className="w-3.5 h-3.5 text-emerald-400" />
