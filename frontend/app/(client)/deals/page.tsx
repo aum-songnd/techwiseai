@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Flame } from "lucide-react";
-import Deals from "@/components/Deals";
+import Deals from "@/components/home/Deals";
 import { getHotProducts } from "@/constants/queriesDealsPage";
 
 export const dynamic = "force-dynamic";

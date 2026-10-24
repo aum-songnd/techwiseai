@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FileText, ShieldCheck, ArrowRight } from "lucide-react";
-import Container from "@/components/Container";
+import Container from "@/components/common/Container";
 
 export const metadata: Metadata = {
   title: "Điều khoản & Điều kiện | TechWise AI",

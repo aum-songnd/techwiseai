@@ -21,10 +21,10 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
-import Logo from "@/components/Logo";
+import Logo from "@/components/layout/Logo";
 import { useAuth } from "@/context/AuthContext";
 import { useOutsideClick } from "@/hooks";
-import UserProfileModal from "@/components/UserProfileModal";
+import UserProfileModal from "@/components/auth/UserProfileModal";
 import { getAdminOrders } from "@/lib/admin-orders-api";
 import {
   clearStoredUser,

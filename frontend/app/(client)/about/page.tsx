@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, Headphones, Sparkles } from "lucide-react";
-import Container from "@/components/Container";
+import Container from "@/components/common/Container";
 
 export const metadata: Metadata = {
   title: "Về chúng tôi | TechWise AI",

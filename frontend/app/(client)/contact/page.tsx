@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Phone, Mail, MapPin, Headphones, Clock, CheckCircle2, Send, MessageSquare } from "lucide-react";
-import Container from "@/components/Container";
+import Container from "@/components/common/Container";
 
 const contactInfo = [
   {

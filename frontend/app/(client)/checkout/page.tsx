@@ -22,7 +22,7 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { productImages } from "@/images";
-import { FREE_SHIP_THRESHOLD } from "@/components/ServiceFeatures";
+import { FREE_SHIP_THRESHOLD } from "@/components/common/ServiceFeatures";
 import { getSavedUserProfile, saveUserProfile, setStoredUser } from "@/lib/auth";
 import {
   createOrder,

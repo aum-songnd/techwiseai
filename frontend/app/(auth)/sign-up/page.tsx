@@ -16,8 +16,8 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { saveUserProfile } from "@/lib/auth";
-import Logo from "@/components/Logo";
-import Container from "@/components/Container";
+import Logo from "@/components/layout/Logo";
+import Container from "@/components/common/Container";
 
 const SignUpForm = () => {
   const { register } = useAuth();
