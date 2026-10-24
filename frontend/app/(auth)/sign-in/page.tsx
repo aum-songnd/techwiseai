@@ -25,6 +25,15 @@ const SignInForm = () => {
   const justRegistered = searchParams.get("registered") === "1";
   const sessionExpired = searchParams.get("expired") === "1";
   const justResetPassword = searchParams.get("reset") === "1";
+  const redirectParam = searchParams.get("redirect") || searchParams.get("redirectTo");
+  const safeRedirect =
+    redirectParam &&
+    redirectParam.startsWith("/") &&
+    !redirectParam.startsWith("//") &&
+    !redirectParam.startsWith("/sign-in") &&
+    !redirectParam.startsWith("/sign-up")
+      ? redirectParam
+      : null;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +48,13 @@ const SignInForm = () => {
 
     try {
       await login(username, password);
-      router.replace(isAdminUser() ? "/admin" : "/");
+      if (safeRedirect) {
+        router.replace(safeRedirect);
+      } else if (isAdminUser()) {
+        router.replace("/admin");
+      } else {
+        router.replace("/");
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Đăng nhập thất bại");
     } finally {
@@ -202,7 +217,11 @@ const SignInForm = () => {
             <div className="mt-8 pt-5 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500 font-sans">
               <span>Chưa có tài khoản TechWise AI?</span>
               <Link
-                href="/sign-up"
+                href={
+                  safeRedirect
+                    ? `/sign-up?redirect=${encodeURIComponent(safeRedirect)}`
+                    : "/sign-up"
+                }
                 className="font-bold uppercase tracking-wider text-shop_dark_green hover:underline flex items-center gap-1"
               >
                 <span>Tạo tài khoản mới</span>

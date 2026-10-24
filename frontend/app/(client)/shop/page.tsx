@@ -20,7 +20,7 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
   let loadError: string | null = null;
 
   const [productsResult, categoriesResult] = await Promise.allSettled([
-    getAllProductsByCategory(category),
+    getAllProductsByCategory(undefined),
     getCategories(),
   ]);
 

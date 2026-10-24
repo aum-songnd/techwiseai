@@ -2,7 +2,10 @@ package com.university.regulation.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -45,6 +48,7 @@ public class ProductService {
         private final CartItemRepository cartItemRepository;
         private final OrderItemRepository orderItemRepository;
         private final ImageStorageService imageStorageService;
+        private final ProductSpecReader specReader;
 
         @Transactional(readOnly = true)
         public ProductResponse getProductById(UUID id) {
@@ -124,7 +128,8 @@ public class ProductService {
                                 product.isHot(),
                                 onSale,
                                 inStock,
-                                product.isActive());
+                                product.isActive(),
+                                product.getSpecifications());
         }
 
         private boolean isOnSale(Product product) {
@@ -326,17 +331,99 @@ public class ProductService {
 
         int safeLimit = Math.max(1, Math.min(limit, 20));
 
+        BigDecimal price = currentProduct.getPrice();
+        BigDecimal minPrice = null;
+        BigDecimal maxPrice = null;
+        if (price != null && price.signum() > 0) {
+                // Ngưỡng chênh lệch giá tối đa 35%: không đề xuất sản phẩm chênh lệch quá xa
+                minPrice = price.multiply(BigDecimal.valueOf(0.65));
+                maxPrice = price.multiply(BigDecimal.valueOf(1.35));
+        }
+
+        // Lấy danh sách sản phẩm ứng viên cùng category và trong tầm giá 35%
         List<Product> candidates =
                 productRepository.findRecommendedCandidates(
                         currentProduct.getId(),
                         currentProduct.getCategory().getId(),
                         currentProduct.getBrand(),
-                        PageRequest.of(0, safeLimit)
+                        price != null ? price : BigDecimal.ZERO,
+                        minPrice,
+                        maxPrice,
+                        PageRequest.of(0, Math.min(safeLimit * 4, 60))
                 );
 
-        return candidates.stream()
-                .map(this::toResponse)
-                .toList();
+        Map<String, String> currentSpecs = specReader.keySpecs(specReader.flatten(currentProduct.getSpecifications()));
+        String currentBrand = currentProduct.getBrand() == null ? "" : currentProduct.getBrand().trim().toLowerCase();
+
+        // Xếp hạng: Cùng danh mục (đã lọc ở query) → Giá gần nhất → Cấu hình tương đồng/mạnh hơn → Cùng hãng
+        List<Product> sortedCandidates = new ArrayList<>(candidates);
+        sortedCandidates.sort((p1, p2) -> {
+                double dev1 = priceDeviation(currentProduct.getPrice(), p1.getPrice());
+                double dev2 = priceDeviation(currentProduct.getPrice(), p2.getPrice());
+
+                // 1. Giá gần nhất (nếu chênh lệch khoảng cách giá >= 1.5%)
+                double priceDistDiff = Math.abs(dev1 - dev2);
+                if (priceDistDiff >= 0.015) {
+                        return Double.compare(dev1, dev2);
+                }
+
+                // 2. Cấu hình tương đồng / mạnh hơn (khi khoảng cách giá tương đương < 1.5%)
+                Map<String, String> specs1 = specReader.keySpecs(specReader.flatten(p1.getSpecifications()));
+                Map<String, String> specs2 = specReader.keySpecs(specReader.flatten(p2.getSpecifications()));
+                double score1 = specReader.evaluateConfigPower(currentSpecs, specs1, 1.0);
+                double score2 = specReader.evaluateConfigPower(currentSpecs, specs2, 1.0);
+
+                double scoreDiff = score2 - score1;
+                if (Math.abs(scoreDiff) > 0.05) {
+                        return Double.compare(score2, score1);
+                }
+
+                // 3. Cùng hãng
+                boolean sameBrand1 = p1.getBrand() != null && p1.getBrand().trim().equalsIgnoreCase(currentBrand);
+                boolean sameBrand2 = p2.getBrand() != null && p2.getBrand().trim().equalsIgnoreCase(currentBrand);
+                if (sameBrand1 != sameBrand2) {
+                        return sameBrand2 ? 1 : -1;
+                }
+
+                // 4. Giá gần nhất tuyệt đối
+                return Double.compare(dev1, dev2);
+        });
+
+        // Đảm bảo đa dạng thương hiệu: không để một hãng chiếm trọn toàn bộ danh sách đề xuất
+        List<ProductResponse> responses = new ArrayList<>();
+        Map<String, Integer> brandCounts = new HashMap<>();
+        int maxPerBrand = Math.max(3, safeLimit / 2);
+
+        List<Product> leftover = new ArrayList<>();
+        for (Product candidate : sortedCandidates) {
+                String b = candidate.getBrand() == null ? "" : candidate.getBrand().trim().toLowerCase();
+                int count = brandCounts.getOrDefault(b, 0);
+                if (count < maxPerBrand) {
+                        responses.add(toResponse(candidate));
+                        brandCounts.put(b, count + 1);
+                } else {
+                        leftover.add(candidate);
+                }
+                if (responses.size() >= safeLimit) {
+                        break;
+                }
+        }
+
+        for (Product candidate : leftover) {
+                if (responses.size() >= safeLimit) {
+                        break;
+                }
+                responses.add(toResponse(candidate));
+        }
+
+        return responses;
+        }
+
+        private double priceDeviation(BigDecimal currentPrice, BigDecimal price) {
+                if (currentPrice == null || price == null || currentPrice.signum() <= 0) {
+                        return Double.MAX_VALUE;
+                }
+                return price.subtract(currentPrice).abs().doubleValue() / currentPrice.doubleValue();
         }
 
         @Transactional(readOnly = true)

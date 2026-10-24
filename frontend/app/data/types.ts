@@ -35,6 +35,7 @@ export interface Product {
   sku?: string;
   categoryId?: string;
   images: string[];
+  thumbnailUrl?: string;
   description?: string;
   shortDescription?: string;
   price: number;
@@ -53,6 +54,25 @@ export interface Product {
   active?: boolean;
   ratingAverage?: number;
   reviewCount?: number;
+  specifications?: Record<string, string>;
+}
+
+export type ShoppingDemand =
+  | "gaming"
+  | "office"
+  | "student"
+  | "developer"
+  | "creator"
+  | "entertainment";
+
+export interface DemandOption {
+  id: ShoppingDemand;
+  label: string;
+  tagline: string;
+  iconName: string;
+  color: string;
+  categorySlug?: string;
+  keywords: string[];
 }
 
 export interface Review {

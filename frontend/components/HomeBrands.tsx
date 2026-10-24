@@ -88,7 +88,13 @@ const BrandItem = ({ brand }: { brand: BrandCard }) => (
   </Link>
 );
 
-const HomeBrands = ({ products }: { products: Product[] }) => {
+const HomeBrands = ({
+  products,
+  showFeatures = false,
+}: {
+  products: Product[];
+  showFeatures?: boolean;
+}) => {
   const brands = getFeaturedBrands(products);
 
   if (brands.length === 0) return null;
@@ -97,7 +103,7 @@ const HomeBrands = ({ products }: { products: Product[] }) => {
     <section className="my-8 font-sans">
       <div className="mb-4 flex items-center justify-between gap-4">
         <Title className="font-sans text-xl font-bold uppercase tracking-tight text-shop_dark_green">
-          Thương hiệu nổi bật
+          Thương hiệu phổ biến
         </Title>
         <Link
           href="/shop"
@@ -114,10 +120,12 @@ const HomeBrands = ({ products }: { products: Product[] }) => {
         ))}
       </MarqueeRow>
 
-      <ServiceFeatures
-        className="mt-6"
-        items={["shipping", "returns", "support", "refund"]}
-      />
+      {showFeatures && (
+        <ServiceFeatures
+          className="mt-6"
+          items={["shipping", "returns", "support", "refund"]}
+        />
+      )}
     </section>
   );
 };

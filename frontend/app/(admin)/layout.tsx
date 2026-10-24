@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "../globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -24,9 +20,9 @@ export default function AdminRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi">
+    <html lang="vi" className={inter.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-neutral-50 text-neutral-900`}
+        className={`${inter.className} ${inter.variable} font-sans antialiased bg-neutral-50 text-neutral-900`}
       >
         <AuthProvider>{children}</AuthProvider>
       </body>

@@ -21,7 +21,7 @@ public class AiProperties {
 
     // ---- Embedding (server Python sentence-transformers, API giống OpenAI) ----
     private boolean embeddingEnabled = false;
-    private String embeddingBaseUrl = "http://localhost:8000/v1";
+    private String embeddingBaseUrl = "https://api-production-b778.up.railway.app/v1";
     private String embeddingApiKey = "";
     private String embeddingModel = "all-MiniLM-L6-v2";
     /** Phải khớp với vector(N) trong migration. all-MiniLM-L6-v2 = 384. */

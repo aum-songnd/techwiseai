@@ -181,7 +181,8 @@ const ProductGrid = ({
               !t.includes("quan ka")
             );
           })
-          .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
+          .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999))
+          .slice(0, 2);
 
         const sections = await Promise.all(
           others.map(async (cat) => {
@@ -236,44 +237,36 @@ const ProductGrid = ({
     return list;
   }, [laptopsData, sharedProducts]);
 
-  // 1. Laptop nổi bật: 10 sản phẩm (ưu tiên sản phẩm được tích nổi bật)
-  const featuredLaptops = useMemo(() => {
+  // Gộp 3 hàng laptop thành 1 hàng Laptop duy nhất
+  const laptopProducts = useMemo(() => {
+    if (!allLaptops.length) return [];
+
+    // Kết hợp laptop nổi bật, giảm giá và đánh giá cao
     const featured = allLaptops.filter((p) => Boolean(p.isFeatured));
-    const others = allLaptops.filter((p) => !p.isFeatured);
-    return [...featured, ...others].slice(0, 10);
-  }, [allLaptops]);
-
-  // 2. Laptop cấu hình cao: 10 sản phẩm giá từ cao nhất
-  const highEndLaptops = useMemo(() => {
-    return [...allLaptops]
-      .sort((a, b) => (b.finalPrice || b.price) - (a.finalPrice || a.price))
-      .slice(0, 10);
-  }, [allLaptops]);
-
-  // 3. Laptop giảm giá: 10 sản phẩm sale
-  const saleLaptops = useMemo(() => {
     const discounted = allLaptops.filter(
       (p) =>
         (p.price > 0 && p.finalPrice < p.price) ||
         (p.discount && p.discount > 0) ||
         p.status === "sale"
     );
-
-    // Sắp xếp theo % giảm giá cao nhất
-    const sorted = [...discounted].sort((a, b) => {
-      const discA = a.price > 0 ? (a.price - a.finalPrice) / a.price : 0;
-      const discB = b.price > 0 ? (b.price - b.finalPrice) / b.price : 0;
-      return discB - discA;
+    const popular = [...allLaptops].sort((a, b) => {
+      const scoreB = (b.reviewCount ?? 0) * 10 + (b.ratingAverage ?? 0) * 5;
+      const scoreA = (a.reviewCount ?? 0) * 10 + (a.ratingAverage ?? 0) * 5;
+      return scoreB - scoreA;
     });
 
-    if (sorted.length >= 10) {
-      return sorted.slice(0, 10);
+    const combined: Product[] = [];
+    const addedIds = new Set<string>();
+
+    for (const p of [...featured, ...discounted, ...popular, ...allLaptops]) {
+      if (!addedIds.has(p.id)) {
+        addedIds.add(p.id);
+        combined.push(p);
+      }
+      if (combined.length >= 15) break;
     }
 
-    // Nếu số lượng giảm giá ít hơn 10, bù thêm các laptop khác để đủ 10 sản phẩm
-    const existingIds = new Set(sorted.map((p) => p.id));
-    const remainder = allLaptops.filter((p) => !existingIds.has(p.id));
-    return [...sorted, ...remainder].slice(0, 10);
+    return combined;
   }, [allLaptops]);
 
   if (!allLaptops.length && !categorySections.length) {
@@ -282,38 +275,19 @@ const ProductGrid = ({
 
   return (
     <div className="space-y-4">
-      {/* 3 Mục của Laptop */}
+      {/* 1 Hàng Laptop duy nhất */}
       {allLaptops.length > 0 ? (
-        <>
-          {/* Mục 1: Laptop nổi bật */}
-          <ProductCarouselSection
-            title="Laptop nổi bật"
-            products={featuredLaptops}
-            viewAllHref="/shop?category=laptop"
-            autoplayDelay={4000}
-          />
-
-          {/* Mục 2: Laptop cấu hình cao */}
-          <ProductCarouselSection
-            title="Laptop cấu hình cao"
-            products={highEndLaptops}
-            viewAllHref="/shop?category=laptop"
-            autoplayDelay={4800}
-          />
-
-          {/* Mục 3: Laptop giảm giá */}
-          <ProductCarouselSection
-            title="Laptop giảm giá"
-            products={saleLaptops}
-            viewAllHref="/shop?category=laptop"
-            autoplayDelay={5400}
-          />
-        </>
+        <ProductCarouselSection
+          title="Laptop"
+          products={laptopProducts}
+          viewAllHref="/shop?category=laptop"
+          autoplayDelay={4500}
+        />
       ) : (
         <NoProductAvailable selectedTab="Laptop" />
       )}
 
-      {/* Mỗi loại sản phẩm khác 1 mục dưới 3 mục laptop */}
+      {/* Mỗi loại sản phẩm khác 1 mục dưới laptop */}
       {categorySections.map((section, idx) => (
         <ProductCarouselSection
           key={section.category.id || section.category.slug}

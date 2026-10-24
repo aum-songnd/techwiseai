@@ -2,11 +2,11 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
 import ProductGallery from "@/components/ProductGallery";
-import AddToCart from "@/components/AddToCart";
 import RecommendationCarousel from "@/components/RecommendationCarousel";
 import {
   getProductById,
   getProducts,
+  getAllProductsByCategory,
   getProductRecommendations,
   getAiRecommendations,
   getProductSpecs,
@@ -22,6 +22,8 @@ import {
 } from "lucide-react";
 import ServiceFeatures from "@/components/ServiceFeatures";
 import ProductReviewsSection from "@/components/ProductReviewsSection";
+import ProductDetailInteractive from "@/components/ProductDetailInteractive";
+import HomeRecentlyViewed from "@/components/HomeRecentlyViewed";
 
 export const revalidate = 60;
 
@@ -68,6 +70,17 @@ const categoryHref = (name: string) =>
 
 const brandHref = (name: string) => `/shop?brand=${encodeURIComponent(name)}`;
 
+const getBaseModelName = (name: string): string => {
+  return name
+    .replace(/\s*\|\s*chính hãng(\s*vn\/a)?/gi, "")
+    .replace(/\s*chính hãng(\s*vn\/a)?/gi, "")
+    .replace(/\b(64|128|256|512)\s*gb\b/gi, "")
+    .replace(/\b(1|2|4)\s*tb\b/gi, "")
+    .replace(/\b(4|6|8|12|16|24|32|64|128)\s*gb\b/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
 export async function generateStaticParams() {
   return [];
 }
@@ -80,6 +93,8 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   const { id } = await params;
 
   let product: Awaited<ReturnType<typeof getProductById>>;
+  let compatibleAccessories: Awaited<ReturnType<typeof getProducts>> = [];
+  let siblingVariants: Awaited<ReturnType<typeof getProducts>> = [];
 
   try {
     product = await getProductById(id);
@@ -89,6 +104,38 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   const categoryNames = product!.categories ?? [];
   const mainCategory = categoryNames[0];
+
+  try {
+    const [accessoriesResult, categoryProductsResult] = await Promise.allSettled([
+      getProducts({ category: "phu-kien", size: 4 }),
+      getAllProductsByCategory(
+        mainCategory ? toSlug(mainCategory) : undefined
+      ),
+    ]);
+
+    if (accessoriesResult.status === "fulfilled" && accessoriesResult.value.length > 0) {
+      compatibleAccessories = accessoriesResult.value;
+    } else {
+      compatibleAccessories = await getProducts({ category: "tai-nghe", size: 4 }).catch(() => []);
+    }
+
+    if (categoryProductsResult.status === "fulfilled") {
+      const currentBase = getBaseModelName(product!.name);
+      siblingVariants = categoryProductsResult.value.filter(
+        (p) =>
+          p.brand?.trim().toLowerCase() === product!.brand?.trim().toLowerCase() &&
+          getBaseModelName(p.name) === currentBase
+      );
+      if (!siblingVariants.some((s) => s.id === product!.id)) {
+        siblingVariants.push(product!);
+      }
+      siblingVariants.sort((a, b) => (a.finalPrice || a.price) - (b.finalPrice || b.price));
+    }
+  } catch {
+    compatibleAccessories = [];
+    siblingVariants = [product!];
+  }
+
   const brandTitle = product!.brand;
 
   const descriptionItems = parseDescription(product!.description);
@@ -257,7 +304,11 @@ const ProductPage = async ({ params }: ProductPageProps) => {
           )}
 
           <div className="mt-6">
-            <AddToCart product={product!} />
+            <ProductDetailInteractive
+              product={product!}
+              siblingVariants={siblingVariants}
+              compatibleAccessories={compatibleAccessories}
+            />
           </div>
 
           <ServiceFeatures className="mt-6" variant="compact" items={["shipping", "warranty", "returns"]}/>
@@ -283,8 +334,14 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         <ProductSpecifications productId={product!.id} />
       </Suspense>
       <Suspense fallback={null}>
-        <ProductRecommendations productId={product!.id} mainCategory={mainCategory} />
+        <ProductRecommendations
+          productId={product!.id}
+          mainCategory={mainCategory}
+          currentPrice={product!.finalPrice || product!.price}
+        />
       </Suspense>
+
+      <HomeRecentlyViewed title="Sản phẩm bạn đã xem gần đây" />
 
       <ProductReviewsSection
         productId={product!.id}
@@ -325,7 +382,15 @@ async function ProductSpecifications({ productId }: { productId: string }) {
   );
 }
 
-async function ProductRecommendations({ productId, mainCategory }: { productId: string; mainCategory?: string }) {
+async function ProductRecommendations({
+  productId,
+  mainCategory,
+  currentPrice,
+}: {
+  productId: string;
+  mainCategory?: string;
+  currentPrice?: number;
+}) {
   let aiRecommendations: RecommendedProduct[] = [];
   let relatedProducts: Awaited<ReturnType<typeof getProductRecommendations>> = [];
   try {
@@ -340,11 +405,36 @@ async function ProductRecommendations({ productId, mainCategory }: { productId: 
       console.error("Không thể tải sản phẩm gợi ý:", error);
     }
   }
-  if (!aiRecommendations.length && !relatedProducts.length) return null;
+
+  // Bộ lọc nghiêm ngặt: CHỈ HIỂN THỊ CÙNG CATEGORY VÀ GIÁ KHÔNG ĐƯỢC CHÊNH LỆCH VƯỢT NGƯỠNG (<= 35%)
+  const isValidCandidate = (p: { categories?: string[]; price: number; finalPrice?: number }) => {
+    // 1. Phải cùng category
+    if (mainCategory && p.categories && p.categories.length > 0) {
+      const match = p.categories.some(
+        (cat) => cat.trim().toLowerCase() === mainCategory.trim().toLowerCase()
+      );
+      if (!match) return false;
+    }
+    // 2. Không chênh lệch vượt ngưỡng (tối đa 35%)
+    if (currentPrice && currentPrice > 0) {
+      const pPrice = p.finalPrice || p.price;
+      const deviation = Math.abs(pPrice - currentPrice) / currentPrice;
+      if (deviation > 0.35) return false;
+    }
+    return true;
+  };
+
+  const filteredAi = aiRecommendations.filter((item) => isValidCandidate(item.product));
+  const filteredRelated = relatedProducts.filter((item) => isValidCandidate(item));
+
+  if (!filteredAi.length && !filteredRelated.length) return null;
+
   return (
     <section className="mt-14 border-t border-gray-200 pt-8">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-gray-900">{aiRecommendations.length ? "Sản phẩm đề xuất" : "Sản phẩm liên quan"}</h2>
+        <h2 className="text-lg font-bold text-gray-900">
+          {filteredAi.length ? "Sản phẩm đề xuất" : "Sản phẩm liên quan"}
+        </h2>
         {mainCategory && (
           <Link href={categoryHref(mainCategory)} className="inline-flex items-center gap-1 text-sm text-shop_dark_green hover:underline">
             Xem thêm {mainCategory}<ArrowRight className="w-4 h-4" />
@@ -352,8 +442,8 @@ async function ProductRecommendations({ productId, mainCategory }: { productId: 
         )}
       </div>
       <RecommendationCarousel
-        aiRecommendations={aiRecommendations}
-        relatedProducts={relatedProducts}
+        aiRecommendations={filteredAi}
+        relatedProducts={filteredRelated}
       />
     </section>
   );

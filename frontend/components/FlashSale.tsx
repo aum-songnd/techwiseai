@@ -1,53 +1,175 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import Image from "next/image";
-import Container from "./Container";
+import Link from "next/link";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import FlashSaleCountdown from "./FlashSaleCountdown";
 import { getProducts } from "../lib/api";
 import { Product } from "../app/data/types";
 import { useOptionalHomeProductFeed } from "./HomeProductFeed";
+import { productImages } from "../images";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const FETCH_SIZE = 60;
-const FLASH_LIMIT = 10;
+const ITEMS_PER_PAGE = 5;
 
-const shopHref = (categorySlug?: string) => {
-  const params = new URLSearchParams();
-  if (categorySlug) params.set("category", categorySlug);
-  params.set("sale", "1");
-  return `/shop?${params.toString()}`;
+const formatPrice = (value: number) =>
+  new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(value);
+
+const resolveImage = (fileName?: string) => {
+  if (!fileName) return "/laptop.webp";
+  const localImage = (productImages as Record<string, any>)[fileName];
+  return localImage ?? fileName;
 };
 
-const SIDE_CARDS = [
-  {
-    eyebrow: "Ưu đãi phụ kiện đang diễn ra",
-    headline: "Giảm đến 20%",
-    image: "/accessory.webp",
-    alt: "Phụ kiện giảm giá",
-    href: shopHref("phu-kien"),
-    reverse: false,
-  },
-  {
-    eyebrow: "Laptop và thiết bị làm việc mỗi ngày",
-    headline: "Giảm đến 50%",
-    image: "/laptop.webp",
-    alt: "Laptop giảm giá",
-    href: shopHref("laptop"),
-    reverse: true,
-  },
-];
-
-type ProductExtras = { flashSaleEndsAt?: string };
-
-const getFlashEnd = (p: Product) => {
-  const t = Date.parse((p as unknown as ProductExtras).flashSaleEndsAt ?? "");
-  return Number.isNaN(t) ? undefined : t;
+const getDiscountPercent = (p: Product) => {
+  if (p.discount > 0 && p.price > 0) {
+    return Math.round(((p.price - p.finalPrice) / p.price) * 100);
+  }
+  if (p.price > 0 && p.finalPrice < p.price) {
+    return Math.round(((p.price - p.finalPrice) / p.price) * 100);
+  }
+  const hash = p.id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  return 10 + (hash % 6); // 10% - 15%
 };
 
-const getDiscountPercent = (p: Product) =>
-  p.price > 0 && p.finalPrice < p.price
-    ? Math.round(((p.price - p.finalPrice) / p.price) * 100)
-    : 0;
+const getCategoryKey = (p: Product) => {
+  const cat = (p.categories?.[0] || "").toLowerCase();
+  const name = (p.name || "").toLowerCase();
+
+  if (
+    cat.includes("linh kiện") ||
+    cat.includes("component") ||
+    cat.includes("ram") ||
+    cat.includes("ssd") ||
+    name.includes("ram ") ||
+    name.includes("ssd ") ||
+    name.includes("nvme") ||
+    name.includes("ổ cứng")
+  )
+    return "linh-kien";
+
+  if (
+    cat.includes("phụ kiện") ||
+    cat.includes("accessory") ||
+    name.includes("cáp ") ||
+    name.includes("sạc ") ||
+    name.includes("pin sạc") ||
+    name.includes("pin dự phòng") ||
+    name.includes("chuột ") ||
+    name.includes("bàn phím")
+  )
+    return "phu-kien";
+
+  if (
+    cat.includes("tai nghe") ||
+    cat.includes("headphone") ||
+    cat.includes("audio") ||
+    name.includes("airpods") ||
+    name.includes("buds") ||
+    name.includes("tai nghe") ||
+    name.includes("wh-") ||
+    name.includes("soundcore")
+  )
+    return "tai-nghe";
+
+  if (
+    cat.includes("máy ảnh") ||
+    cat.includes("camera") ||
+    name.includes("canon") ||
+    name.includes("eos") ||
+    name.includes("máy ảnh")
+  )
+    return "may-anh";
+
+  if (
+    cat.includes("thoại") ||
+    cat.includes("phone") ||
+    name.includes("iphone") ||
+    name.includes("galaxy") ||
+    name.includes("oppo") ||
+    name.includes("redmi") ||
+    name.includes("xiaomi")
+  )
+    return "dien-thoai";
+
+  if (
+    cat.includes("laptop") ||
+    name.includes("laptop") ||
+    name.includes("macbook") ||
+    name.includes("surface") ||
+    name.includes("thinkpad") ||
+    name.includes("zenbook") ||
+    name.includes("legion")
+  )
+    return "laptop";
+
+  return "other";
+};
+
+// Build diverse product list across categories using round-robin interleaving
+const buildDiverseFlashSaleList = (items: Product[], targetCount = 15): Product[] => {
+  const buckets: Record<string, Product[]> = {
+    laptop: [],
+    "dien-thoai": [],
+    "tai-nghe": [],
+    "may-anh": [],
+    "linh-kien": [],
+    "phu-kien": [],
+    other: [],
+  };
+
+  for (const p of items) {
+    const k = getCategoryKey(p);
+    buckets[k].push(p);
+  }
+
+  // Sort within each bucket: prioritize highest discount, then rating/reviews
+  for (const k of Object.keys(buckets)) {
+    buckets[k].sort((a, b) => {
+      const discB = getDiscountPercent(b);
+      const discA = getDiscountPercent(a);
+      if (discB !== discA) return discB - discA;
+      return (b.ratingAverage ?? 0) - (a.ratingAverage ?? 0);
+    });
+  }
+
+  // Interleave categories to ensure max diversity across every 5-item page
+  const order = ["laptop", "dien-thoai", "tai-nghe", "may-anh", "linh-kien", "phu-kien"];
+  const result: Product[] = [];
+  const addedIds = new Set<string>();
+
+  let round = 0;
+  while (result.length < targetCount && round < 10) {
+    let addedThisRound = false;
+    for (const cat of order) {
+      const candidate = buckets[cat]?.[round];
+      if (candidate && !addedIds.has(candidate.id)) {
+        result.push(candidate);
+        addedIds.add(candidate.id);
+        addedThisRound = true;
+        if (result.length >= targetCount) break;
+      }
+    }
+    if (!addedThisRound) break;
+    round++;
+  }
+
+  // Fallback to fill remaining slots if needed
+  if (result.length < targetCount) {
+    for (const p of items) {
+      if (!addedIds.has(p.id)) {
+        result.push(p);
+        addedIds.add(p.id);
+        if (result.length >= targetCount) break;
+      }
+    }
+  }
+
+  return result.slice(0, targetCount);
+};
 
 const endOfToday = () => {
   const d = new Date();
@@ -55,35 +177,118 @@ const endOfToday = () => {
   return d.getTime();
 };
 
-const BrushStroke = ({
-  className = "mx-auto",
-}: {
-  className?: string;
-}) => (
-  <svg
-    viewBox="0 0 200 10"
-    preserveAspectRatio="none"
-    className={`h-2 w-36 ${className}`}
-    aria-hidden="true"
-  >
-    <path
-      d="M2 6 C 45 2, 120 2, 198 5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="4"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-type FlashSaleProps = {
-  variant?: "full" | "banner";
+const getSoldStats = (product: Product, index: number) => {
+  const stock = product.stock > 0 ? product.stock : 15;
+  // Deterministic calculation based on product id
+  const hash = product.id.split("").reduce((acc, c) => acc + c.charCodeAt(0), index * 7);
+  const ratio = 0.45 + ((hash % 45) / 100); // 45% - 90%
+  const total = Math.max(10, Math.round(stock * 2));
+  const sold = Math.min(total - 1, Math.max(3, Math.round(total * ratio)));
+  const percent = Math.round((sold / total) * 100);
+  return { sold, total, percent };
 };
 
-const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
+interface FlashSaleItemProps {
+  product: Product;
+  index: number;
+}
+
+const FlashSaleItem = ({ product, index }: FlashSaleItemProps) => {
+  const [imgError, setImgError] = useState(false);
+  const discountPercent = getDiscountPercent(product);
+  const finalPrice =
+    product.finalPrice < product.price
+      ? product.finalPrice
+      : Math.round(product.price * (1 - discountPercent / 100));
+  const originalPrice =
+    product.price > finalPrice
+      ? product.price
+      : Math.round(finalPrice / (1 - discountPercent / 100));
+  const { sold, total, percent } = getSoldStats(product, index);
+
+  const rawImage = product.images?.[0] || product.thumbnailUrl;
+  const imageSrc = imgError
+    ? product.thumbnailUrl
+      ? resolveImage(product.thumbnailUrl)
+      : "/laptop.webp"
+    : resolveImage(rawImage);
+
+  return (
+    <Link
+      href={`/product/${product.id}`}
+      className="group flex flex-col h-full bg-white transition-transform duration-200"
+    >
+      {/* Square Image Box with light slate background */}
+      <div className="relative aspect-square w-full rounded-xl bg-[#f1f5f9] overflow-hidden group-hover:bg-[#e2e8f0]/80 transition-colors">
+        {/* Top-Left Discount Badge */}
+        {discountPercent > 0 && (
+          <span className="absolute top-0 left-0 bg-[#ea580c] text-white font-bold text-[11px] sm:text-xs px-2 py-0.5 rounded-tl-xl rounded-br-lg shadow-2xs z-10">
+            -{discountPercent}%
+          </span>
+        )}
+
+        {/* Product Image */}
+        <div className="relative w-full h-full">
+          <Image
+            src={imageSrc}
+            alt={product.name}
+            fill
+            unoptimized
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+            onError={() => setImgError(true)}
+          />
+        </div>
+      </div>
+
+      {/* Product Title */}
+      <h3 className="text-xs sm:text-sm font-medium text-neutral-800 group-hover:text-[#ea580c] line-clamp-1 mt-2.5 mb-1 transition-colors">
+        {product.name}
+      </h3>
+
+      {/* Price row */}
+      <div className="flex items-baseline gap-1.5 flex-wrap">
+        <span className="text-sm sm:text-base font-bold text-[#ea580c]">
+          {formatPrice(finalPrice)}
+        </span>
+        {originalPrice > finalPrice && (
+          <span className="text-[11px] sm:text-xs text-neutral-400 line-through font-normal">
+            {formatPrice(originalPrice)}
+          </span>
+        )}
+      </div>
+
+      {/* Sold Progress Bar */}
+      <div className="relative h-5 w-full bg-[#fed7aa]/60 rounded-full overflow-hidden flex items-center mt-2 select-none shadow-2xs">
+        {/* Fill progress */}
+        <div
+          className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-[#ea580c] to-[#f97316] rounded-full transition-all duration-500"
+          style={{ width: `${percent}%` }}
+        />
+
+        {/* Flame icon */}
+        <div className="relative z-10 pl-1.5 flex items-center leading-none">
+          <span className="text-xs filter drop-shadow">🔥</span>
+        </div>
+
+        {/* Sold text centered */}
+        <span className="relative z-10 w-full text-center pr-3 text-[10px] sm:text-[11px] font-bold text-white uppercase tracking-tight drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)] truncate">
+          Đã bán {sold}/ {total}
+        </span>
+      </div>
+    </Link>
+  );
+};
+
+interface FlashSaleProps {
+  variant?: "full" | "banner";
+}
+
+const FlashSale = (_props: FlashSaleProps) => {
   const sharedProducts = useOptionalHomeProductFeed();
   const [fallbackProducts, setFallbackProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(!sharedProducts);
+
   const products = sharedProducts ?? fallbackProducts;
 
   useEffect(() => {
@@ -93,195 +298,139 @@ const FlashSale = ({ variant = "full" }: FlashSaleProps) => {
     }
 
     let ignore = false;
-
     async function load() {
       try {
         const result = await getProducts({ size: FETCH_SIZE });
         if (!ignore) setFallbackProducts(result);
       } catch {
-
+        // ignore
       } finally {
         if (!ignore) setLoading(false);
       }
     }
-
     load();
     return () => {
       ignore = true;
     };
   }, [sharedProducts]);
 
-  const { deals, endsAt, maxDiscount } = useMemo(() => {
-    const now = Date.now();
-
-    const list = products
-      .filter((p) => {
-        const end = getFlashEnd(p);
-        return (
-          (end !== undefined && end > now) ||
-          getDiscountPercent(p) > 0 ||
-          p.status === "sale"
-        );
-      })
-      .sort((a, b) => getDiscountPercent(b) - getDiscountPercent(a))
-      .slice(0, FLASH_LIMIT);
-
-    const upcomingEnds = list
-      .map(getFlashEnd)
-      .filter((t): t is number => t !== undefined && t > now);
-
+  const { deals, endsAt } = useMemo(() => {
     return {
-      deals: list,
-      endsAt: upcomingEnds.length ? Math.min(...upcomingEnds) : endOfToday(),
-      maxDiscount: list.length ? getDiscountPercent(list[0]) : 0,
+      deals: buildDiverseFlashSaleList(products, 20),
+      endsAt: endOfToday(),
     };
   }, [products]);
 
-  const [showDiscount, setShowDiscount] = useState(false);
-  useEffect(() => {
-    if (maxDiscount <= 0) {
-      setShowDiscount(false);
-      return;
-    }
-    const id = setInterval(() => setShowDiscount((v) => !v), 5000);
-    return () => clearInterval(id);
-  }, [maxDiscount]);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      loop: true,
+      slidesToScroll: 1,
+      dragFree: false,
+    },
+    [
+      Autoplay({
+        delay: 3800,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    ]
+  );
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   if (!loading && deals.length === 0) return null;
 
-  if (variant === "banner") {
-    return (
-      <div className="flex flex-col items-center gap-2 rounded-2xl bg-gradient-to-br from-blue-700 to-blue-600 px-4 py-3 text-center font-sans sm:flex-row sm:justify-between sm:gap-4 sm:text-left">
-        <div className="min-w-0">
-          <h2 className="grid font-sans text-xl font-bold uppercase tracking-tight leading-tight text-white sm:text-2xl">
-            <span
-              className={`col-start-1 row-start-1 transition-opacity duration-500 ${showDiscount ? "opacity-0" : "opacity-100"
-                }`}
-              aria-hidden={showDiscount}
-            >
-              Flash Sale
-            </span>
-            <span
-              className={`col-start-1 row-start-1 transition-opacity duration-500 ${showDiscount ? "opacity-100" : "opacity-0"
-                }`}
-              aria-hidden={!showDiscount}
-            >
-              Giảm đến {maxDiscount}%
-            </span>
-          </h2>
-          <p className="mt-0.5 font-sans text-[10px] font-medium uppercase tracking-wider text-white/90">
-            Ưu đãi chớp nhoáng - Số lượng có hạn
-          </p>
-        </div>
-
-        <div className="shrink-0 origin-center scale-75">
-          <FlashSaleCountdown endsAt={endsAt} />
-        </div>
-
-        <Link
-          href={shopHref()}
-          className="shrink-0 rounded-full bg-white px-5 py-2 font-sans text-xs font-semibold uppercase tracking-wider text-neutral-900 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          Mua ngay
-        </Link>
-      </div>
-    );
-  }
-
   return (
-    <Container className="my-10 font-sans lg:px-0">
-      <div className="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
-        <div className="relative flex flex-col items-center overflow-hidden rounded-3xl bg-gradient-to-br from-blue-700 to-blue-600 px-4 pt-8 text-center font-sans md:px-6 md:pt-10 lg:col-span-1">
-          <h2 className="font-sans text-5xl font-extrabold uppercase tracking-tight leading-[1.05] text-white md:text-6xl">
-            {maxDiscount > 0 ? (
-              <>
-                Giảm đến
-                <br />
-                {maxDiscount}%
-              </>
-            ) : (
-              <>
-                Flash
-                <br />
-                Sale
-              </>
-            )}
-          </h2>
-
-          <BrushStroke className="mx-auto mt-5 text-white" />
-
-          <p className="mt-4 max-w-[16rem] font-sans text-xs font-medium uppercase tracking-wider text-white/90">
-            Ưu đãi chớp nhoáng - Số lượng có hạn
-          </p>
-
-          <div className="mt-5">
-            <FlashSaleCountdown endsAt={endsAt} />
-          </div>
-
+    <section className="my-8 font-sans">
+      <div className="rounded-2xl border border-neutral-200/90 bg-white p-4 sm:p-5 shadow-2xs">
+        {/* Header Row */}
+        <div className="flex items-center justify-between border-b border-neutral-200/80 pb-3 mb-4">
+          {/* Left Title: Giá Sốc ⚡ Hôm Nay */}
           <Link
-            href={shopHref()}
-            className="mt-5 rounded-full bg-white px-7 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-neutral-900 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            href="/shop?sale=1"
+            className="group flex items-center gap-1 hover:opacity-90 transition-opacity"
           >
-            Mua ngay
+            <span className="text-xl sm:text-2xl font-black italic tracking-wide text-[#ea580c] flex items-center select-none">
+              Giá Sốc
+              <span className="inline-flex items-center justify-center mx-1.5 text-amber-400 drop-shadow-xs">
+                ⚡
+              </span>
+              Hôm Nay
+            </span>
           </Link>
 
-          <div className="relative mt-4 h-60 w-full md:h-64">
-            <div className="absolute -bottom-2 left-0 h-[75%] w-[52%]">
-              <Image
-                src="/earphone.webp"
-                alt="Tai nghe"
-                fill
-                className="object-contain object-left-bottom mix-blend-multiply"
-                sizes="(max-width: 1024px) 50vw, 18vw"
-              />
-            </div>
-            <div className="absolute -bottom-3 -right-8 h-[100%] w-[50%]">
-              <Image
-                src="/mobile.webp"
-                alt="Điện thoại"
-                fill
-                className="object-contain object-right-bottom mix-blend-multiply"
-                sizes="(max-width: 1024px) 50vw, 18vw"
-              />
+          {/* Right Area: Countdown & Navigation Buttons */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <FlashSaleCountdown endsAt={endsAt} />
+
+            <div className="flex items-center ml-1">
+              <button
+                type="button"
+                onClick={scrollPrev}
+                aria-label="Deals trước"
+                className="w-7 h-7 rounded-md flex items-center justify-center text-neutral-400 hover:text-[#ea580c] hover:bg-orange-50 transition-colors cursor-pointer"
+                title="Deals trước"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <button
+                type="button"
+                onClick={scrollNext}
+                aria-label="Deals tiếp theo"
+                className="w-7 h-7 rounded-md flex items-center justify-center text-neutral-400 hover:text-[#ea580c] hover:bg-orange-50 transition-colors cursor-pointer"
+                title="Deals tiếp theo"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 lg:col-span-2 lg:gap-4">
-          {SIDE_CARDS.map((card) => (
-            <Link
-              key={card.headline}
-              href={card.href}
-              className={`group flex flex-1 flex-col overflow-hidden rounded-3xl bg-[#f1f1f8] font-sans sm:min-h-[220px] sm:items-center ${card.reverse ? "sm:flex-row-reverse" : "sm:flex-row"
-                }`}
-            >
-              <div className="relative h-44 w-full sm:h-full sm:min-h-[220px] sm:w-1/2">
-                <Image
-                  src={card.image}
-                  alt={card.alt}
-                  fill
-                  className="object-contain p-6 mix-blend-multiply transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                />
-              </div>
+        {/* Carousel Track with Auto-Slide (giống các mục laptop) */}
+        <div className="relative group/carousel">
+          <div
+            className="cursor-grab overflow-hidden px-1 py-1 active:cursor-grabbing"
+            ref={emblaRef}
+          >
+            <div className="-ml-3 sm:-ml-4 flex">
+              {deals.map((product, idx) => (
+                <div
+                  key={`${product.id}-${idx}`}
+                  className="flex min-w-0 shrink-0 grow-0 basis-1/2 pl-3 sm:pl-4 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
+                >
+                  <div className="w-full h-full">
+                    <FlashSaleItem product={product} index={idx} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-              <div className="flex w-full flex-col items-center px-4 pb-6 text-center sm:w-1/2 sm:pb-0">
-                <p className="max-w-[16rem] font-sans text-xs uppercase tracking-wide text-neutral-600 md:text-sm">
-                  {card.eyebrow}
-                </p>
-                <p className="mt-2 font-sans text-2xl font-bold uppercase tracking-tight text-neutral-900 md:text-3xl">
-                  {card.headline}
-                </p>
-                <BrushStroke className="mx-auto mt-3 text-blue-700" />
-                <span className="mt-4 rounded-full bg-blue-700 px-6 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-white transition-colors group-hover:bg-blue-800">
-                  Mua ngay
-                </span>
-              </div>
-            </Link>
-          ))}
+          {/* Floating Prev Button */}
+          <button
+            type="button"
+            onClick={scrollPrev}
+            aria-label="Deals trước"
+            className="absolute -left-2 sm:-left-3.5 top-1/2 z-10 flex h-8 w-8 sm:h-9 sm:w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-neutral-700 shadow-md border border-neutral-200 transition-all hover:bg-white hover:text-[#ea580c] hover:scale-105 active:scale-95 cursor-pointer"
+          >
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+          </button>
+
+          {/* Floating Next Button */}
+          <button
+            type="button"
+            onClick={scrollNext}
+            aria-label="Deals kế tiếp"
+            className="absolute -right-2 sm:-right-3.5 top-1/2 z-10 flex h-8 w-8 sm:h-9 sm:w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-neutral-700 shadow-md border border-neutral-200 transition-all hover:bg-white hover:text-[#ea580c] hover:scale-105 active:scale-95 cursor-pointer"
+          >
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+          </button>
         </div>
       </div>
-    </Container>
+    </section>
   );
 };
 

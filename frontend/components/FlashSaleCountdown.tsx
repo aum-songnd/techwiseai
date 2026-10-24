@@ -1,19 +1,18 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
 const TimeBox = ({ value }: { value: string }) => (
-  <div className="flex flex-col items-center gap-1.5 font-sans">
-    <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-blue-100 text-2xl font-bold tabular-nums text-neutral-900 sm:h-16 sm:w-16 sm:text-3xl md:h-[72px] md:w-[72px] md:text-4xl">
-      {value}
-    </span>
-  </div>
+  <span className="flex items-center justify-center min-w-[28px] sm:min-w-[32px] h-6 sm:h-7 px-1.5 rounded-md bg-[#ea580c] text-white font-extrabold text-xs sm:text-sm tabular-nums shadow-2xs">
+    {value}
+  </span>
 );
 
 const Colon = () => (
   <span
-    className="flex h-14 items-center font-sans text-2xl font-bold text-neutral-900 sm:h-16 sm:text-3xl md:h-[72px] md:text-4xl"
+    className="text-[#ea580c] font-black text-xs sm:text-sm mx-0.5 select-none"
     aria-hidden="true"
   >
     :
@@ -30,30 +29,37 @@ const FlashSaleCountdown = ({ endsAt }: { endsAt: number }) => {
     return () => clearInterval(timer);
   }, [endsAt]);
 
-  if (remaining === null) return <div className="h-24 md:h-28" aria-hidden="true" />;
+  if (remaining === null) {
+    return (
+      <div className="flex items-center gap-1 font-sans">
+        <TimeBox value="00" />
+        <Colon />
+        <TimeBox value="00" />
+        <Colon />
+        <TimeBox value="00" />
+      </div>
+    );
+  }
 
   if (remaining === 0) {
-    return <span className="font-sans text-xs font-medium text-neutral-500">Deal đã kết thúc</span>;
+    return (
+      <span className="font-sans text-xs font-semibold text-neutral-500">
+        Deal đã kết thúc
+      </span>
+    );
   }
 
   const totalSeconds = Math.floor(remaining / 1000);
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
   return (
     <div
-      className="flex items-start justify-center gap-1.5 font-sans sm:gap-3"
+      className="flex items-center gap-0.5 font-sans"
       role="timer"
-      aria-live="off"
+      aria-label="Thời gian còn lại"
     >
-      {days > 0 && (
-        <>
-          <TimeBox value={pad(days)} />
-          <Colon />
-        </>
-      )}
       <TimeBox value={pad(hours)} />
       <Colon />
       <TimeBox value={pad(minutes)} />

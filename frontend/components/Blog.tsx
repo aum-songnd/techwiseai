@@ -146,7 +146,7 @@ const Blog = ({ blogs, blogCategories, authors, children }: Props) => {
             return (
               <article
                 key={blog.id}
-                className="group flex flex-col border border-neutral-200 bg-white transition-all duration-200 hover:border-shop_dark_green/40 hover:shadow-md"
+                className="group flex flex-col border border-neutral-200 bg-white transition-all duration-200 hover:shadow-md"
               >
                 {/* Card Thumbnail Container */}
                 <Link

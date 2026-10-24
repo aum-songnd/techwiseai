@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "../globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/Header";
@@ -8,23 +8,24 @@ import AdminRedirect from "@/components/AdminRedirect";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { FavoriteProvider } from "@/context/FavoriteContext";
+import { CompareProvider } from "@/context/CompareContext";
+import { RecentlyViewedProvider } from "@/context/RecentlyViewedContext";
+import { QuickViewProvider } from "@/context/QuickViewContext";
+import CompareDrawer from "@/components/CompareDrawer";
+import QuickViewModal from "@/components/QuickViewModal";
 import Chat from "@/components/Chat";
 import ScrollToTop from "@/components/ScrollToTop";
 import CatalogSyncWatcher from "@/components/CatalogSyncWatcher";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "TechWise AI",
-  description: "AI-powered technology e-commerce platform",
+  title: "TechWise AI - Nền tảng mua sắm thiết bị công nghệ hàng đầu",
+  description: "Trải nghiệm mua sắm Laptop, Điện thoại, Phụ kiện công nghệ cao cấp chính hãng cùng TechWise AI",
 };
 
 export default function RootLayout({
@@ -33,26 +34,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="vi" className={inter.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-white text-neutral-900`}
+        className={`${inter.className} ${inter.variable} font-sans antialiased bg-white text-neutral-900`}
       >
         <AuthProvider>
           <CartProvider>
             <FavoriteProvider>
-              <TooltipProvider>
-                <AdminRedirect>
-                  <div className="flex flex-col min-h-screen">
-                    <Header />
-                    <main className="flex-1">{children}</main>
-                    <Footer />
-                  </div>
-                </AdminRedirect>
+              <CompareProvider>
+                <RecentlyViewedProvider>
+                  <QuickViewProvider>
+                    <TooltipProvider>
+                      <AdminRedirect>
+                        <div className="flex flex-col min-h-screen">
+                          <Header />
+                          <main className="flex-1">{children}</main>
+                          <Footer />
+                        </div>
+                      </AdminRedirect>
 
-                <Chat />
-                <ScrollToTop />
-                <CatalogSyncWatcher />
-              </TooltipProvider>
+                      <CompareDrawer />
+                      <QuickViewModal />
+                      <Chat />
+                      <ScrollToTop />
+                      <CatalogSyncWatcher />
+                    </TooltipProvider>
+                  </QuickViewProvider>
+                </RecentlyViewedProvider>
+              </CompareProvider>
             </FavoriteProvider>
           </CartProvider>
         </AuthProvider>

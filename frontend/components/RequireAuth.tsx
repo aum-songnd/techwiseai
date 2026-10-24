@@ -10,7 +10,11 @@ const RequireAuth = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!isLoading && !isSignedIn) {
-      router.replace("/sign-in");
+      const redirectTo =
+        typeof window !== "undefined"
+          ? window.location.pathname + window.location.search
+          : "/";
+      router.replace(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
     }
   }, [isLoading, isSignedIn, router]);
 
