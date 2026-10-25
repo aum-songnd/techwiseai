@@ -111,7 +111,7 @@ class RecommendationService:
                     # 3. Hai nhánh truy vấn độc lập (Đo lường thời gian thực thi)
                     t_sql = time.perf_counter()
                     sql_candidates = self._sql_candidate_retrieval(
-                        cursor, current, safe_limit
+                        cursor, current, safe_limit, allowed_categories
                     )
                     sql_duration_ms = (time.perf_counter() - t_sql) * 1000
 
@@ -421,11 +421,15 @@ class RecommendationService:
         return allowed
 
     def _sql_candidate_retrieval(
-        self, cursor, current: dict[str, Any], limit: int
+        self,
+        cursor,
+        current: dict[str, Any],
+        limit: int,
+        allowed_categories: list[str] | None = None,
     ) -> list[dict[str, Any]]:
-        """Nhánh A: Truy vấn SQL chuẩn tập trung cùng danh mục và tiệm cận giá."""
+        """Nhánh A: Truy vấn SQL chuẩn tập trung danh mục cho phép và tiệm cận giá."""
         curr_price = current["price"]
-        category_id = current["categoryId"]
+        cat_ids = allowed_categories or ([current["categoryId"]] if current.get("categoryId") else [])
         product_id = current["id"]
 
         min_price = curr_price * (1.0 - self.settings.rec_price_hard_limit) if curr_price > 0 else 0
@@ -443,7 +447,7 @@ class RecommendationService:
         FROM products p
         JOIN categories c ON c.id = p.category_id
         WHERE p.id <> %s
-          AND p.category_id = %s
+          AND p.category_id = ANY(%s)
           AND p.active = TRUE
           AND c.active = TRUE
           AND p.stock_quantity > 0
@@ -453,7 +457,7 @@ class RecommendationService:
         """
         cursor.execute(
             query,
-            (product_id, category_id, min_price, max_price, curr_price, max(limit * 5, 40)),
+            (product_id, cat_ids, min_price, max_price, curr_price, max(limit * 5, 40)),
         )
         candidates = []
         for row in cursor.fetchall():
