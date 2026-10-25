@@ -2,12 +2,14 @@ import ProductCard from "@/components/product/ProductCard";
 import type { RecommendedProduct } from "@/lib/api";
 
 const badgeStyle: Record<string, string> = {
+  FOR_YOU: "bg-emerald-600 text-white font-bold tracking-wide shadow-emerald-200",
   BEST: "bg-red-500 text-white",
   HOT: "bg-orange-500 text-white",
   CHOICE: "bg-blue-600 text-white",
 };
 
 const badgeLabel: Record<string, string> = {
+  FOR_YOU: "Dành riêng cho bạn",
   BEST: "Phù hợp nhất",
   HOT: "Hot",
   CHOICE: "Đáng chọn",

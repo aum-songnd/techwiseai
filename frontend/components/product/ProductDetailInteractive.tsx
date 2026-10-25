@@ -11,6 +11,7 @@ import { useCart, setPendingBundleItems, type PendingCartItem } from "@/context/
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import AddToCart from "@/components/cart/AddToCart";
+import { useProductTracking } from "@/hooks/useProductTracking";
 
 interface ProductDetailInteractiveProps {
   product: Product;
@@ -179,6 +180,8 @@ const ProductDetailInteractive = ({
 
   const isProductFavorite = isFavorite(currentProduct.id);
   const isProductComparing = isComparing(currentProduct.id);
+
+  const { trackFavorite } = useProductTracking(currentProduct.id);
 
   // Record to recently viewed on mount
   useEffect(() => {
@@ -442,7 +445,12 @@ const ProductDetailInteractive = ({
 
         <button
           type="button"
-          onClick={() => toggleFavorite(currentProduct)}
+          onClick={() => {
+            if (!isProductFavorite) {
+              trackFavorite();
+            }
+            toggleFavorite(currentProduct);
+          }}
           className={`flex items-center justify-center p-1.5 rounded-xl border text-xs font-bold transition-all cursor-pointer shrink-0 ${isProductFavorite
             ? "border-shop_dark_green bg-shop_dark_green/200 text-shop_dark_green shadow-xs"
             : "border-neutral-200 text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300"

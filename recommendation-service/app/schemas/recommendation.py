@@ -47,3 +47,23 @@ class RecommendationResponse(BaseModel):
     success: bool = True
     message: str = "Lấy danh sách sản phẩm gợi ý thành công"
     data: list[RecommendationItem]
+
+
+class InteractionCreateRequest(BaseModel):
+    productId: str
+    eventType: str
+    sessionId: str | None = None
+    userId: str | None = None
+    durationSeconds: int | None = None
+    metadata: str | None = None
+
+
+class ForYouResponse(BaseModel):
+    success: bool = True
+    message: str = "Lấy danh sách sản phẩm gợi ý dành riêng cho bạn thành công"
+    mode: str
+    title: str
+    subtitle: str
+    interactionCount: int = 0
+    preferredCategory: str | None = None
+    data: list[RecommendationItem]

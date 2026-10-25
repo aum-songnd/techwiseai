@@ -7,6 +7,7 @@ import { ShoppingBag, Minus, Plus } from "lucide-react";
 import { Product } from "@/app/data/types";
 import { useCart, clearPendingBundleItems } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
+import { recordInteraction } from "@/lib/api/recommendation/personalized";
 
 interface AddToCartProps {
   product: Product;
@@ -93,6 +94,11 @@ const AddToCart = ({ product, selectedColor, selectedConfig }: AddToCartProps) =
       stockQuantity: product.stock ?? 999,
       available: (product.stock ?? 1) > 0,
       thumbnailUrl: product.images?.[0] || product.thumbnailUrl,
+    });
+
+    recordInteraction({
+      productId: product.id,
+      eventType: "ADD_TO_CART",
     });
   };
 

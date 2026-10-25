@@ -2,15 +2,11 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
 import ProductGallery from "@/components/product/ProductGallery";
-import RecommendationCarousel from "@/components/product/RecommendationCarousel";
 import {
   getProductById,
   getProducts,
   getAllProductsByCategory,
-  getProductRecommendations,
-  getAiRecommendations,
   getProductSpecs,
-  type RecommendedProduct,
 } from "@/lib/api";
 import {
   ChevronRight,
@@ -331,13 +327,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
       <Suspense fallback={null}>
         <ProductSpecifications productId={product!.id} />
       </Suspense>
-      <Suspense fallback={null}>
-        <ProductRecommendations
-          productId={product!.id}
-          mainCategory={mainCategory}
-          currentPrice={product!.finalPrice || product!.price}
-        />
-      </Suspense>
 
       <HomeRecentlyViewed title="Sản phẩm bạn đã xem gần đây" />
 
@@ -378,73 +367,6 @@ async function ProductSpecifications({ productId }: { productId: string }) {
           ))}
         </tbody></table>
       </div>
-    </section>
-  );
-}
-
-async function ProductRecommendations({
-  productId,
-  mainCategory,
-  currentPrice,
-}: {
-  productId: string;
-  mainCategory?: string;
-  currentPrice?: number;
-}) {
-  let aiRecommendations: RecommendedProduct[] = [];
-  let relatedProducts: Awaited<ReturnType<typeof getProductRecommendations>> = [];
-  try {
-    aiRecommendations = await getAiRecommendations(productId, 8);
-  } catch (error) {
-    console.error("Không thể tải đề xuất AI:", error);
-  }
-  if (!aiRecommendations.length) {
-    try {
-      relatedProducts = await getProductRecommendations(productId, 8);
-    } catch (error) {
-      console.error("Không thể tải sản phẩm gợi ý:", error);
-    }
-  }
-
-  // Bộ lọc nghiêm ngặt: CHỈ HIỂN THỊ CÙNG CATEGORY VÀ GIÁ KHÔNG ĐƯỢC CHÊNH LỆCH VƯỢT NGƯỠNG (<= 35%)
-  const isValidCandidate = (p: { categories?: string[]; price: number; finalPrice?: number }) => {
-    // 1. Phải cùng category
-    if (mainCategory && p.categories && p.categories.length > 0) {
-      const match = p.categories.some(
-        (cat) => cat.trim().toLowerCase() === mainCategory.trim().toLowerCase()
-      );
-      if (!match) return false;
-    }
-    // 2. Không chênh lệch vượt ngưỡng (tối đa 35%)
-    if (currentPrice && currentPrice > 0) {
-      const pPrice = p.finalPrice || p.price;
-      const deviation = Math.abs(pPrice - currentPrice) / currentPrice;
-      if (deviation > 0.35) return false;
-    }
-    return true;
-  };
-
-  const filteredAi = aiRecommendations.filter((item) => isValidCandidate(item.product));
-  const filteredRelated = relatedProducts.filter((item) => isValidCandidate(item));
-
-  if (!filteredAi.length && !filteredRelated.length) return null;
-
-  return (
-    <section className="mt-14 border-t border-gray-200 pt-8">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-gray-900">
-          {filteredAi.length ? "Sản phẩm đề xuất" : "Sản phẩm liên quan"}
-        </h2>
-        {mainCategory && (
-          <Link href={categoryHref(mainCategory)} className="inline-flex items-center gap-1 text-sm text-shop_dark_green hover:underline">
-            Xem thêm {mainCategory}<ArrowRight className="w-4 h-4" />
-          </Link>
-        )}
-      </div>
-      <RecommendationCarousel
-        aiRecommendations={filteredAi}
-        relatedProducts={filteredRelated}
-      />
     </section>
   );
 }
