@@ -24,6 +24,7 @@ import ServiceFeatures from "@/components/common/ServiceFeatures";
 import ProductReviewsSection from "@/components/product/ProductReviewsSection";
 import ProductDetailInteractive from "@/components/product/ProductDetailInteractive";
 import HomeRecentlyViewed from "@/components/home/HomeRecentlyViewed";
+import { HomeCategories } from "@/components";
 
 export const revalidate = 60;
 
@@ -205,9 +206,8 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
           {product!.status && (
             <span
-              className={`self-start text-[11px] font-semibold px-2.5 py-1 rounded-2xl mb-3 ${
-                statusStyle[product!.status] ?? "bg-gray-700 text-white"
-              }`}
+              className={`self-start text-[11px] font-semibold px-2.5 py-1 rounded-2xl mb-3 ${statusStyle[product!.status] ?? "bg-gray-700 text-white"
+                }`}
             >
               {statusLabel[product!.status] ?? product!.status}
             </span>
@@ -246,11 +246,10 @@ const ProductPage = async ({ params }: ProductPageProps) => {
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                   key={star}
-                  className={`w-3.5 h-3.5 ${
-                    star <= Math.round(product!.ratingAverage || 5)
-                      ? "fill-amber-400 text-amber-400"
-                      : "fill-neutral-200 text-neutral-200"
-                  }`}
+                  className={`w-3.5 h-3.5 ${star <= Math.round(product!.ratingAverage || 5)
+                    ? "fill-amber-400 text-amber-400"
+                    : "fill-neutral-200 text-neutral-200"
+                    }`}
                 />
               ))}
             </div>
@@ -285,9 +284,8 @@ const ProductPage = async ({ params }: ProductPageProps) => {
           </div>
 
           <p
-            className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium ${
-              inStock ? "text-green-600" : "text-red-600"
-            }`}
+            className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium ${inStock ? "text-green-600" : "text-red-600"
+              }`}
           >
             {inStock ? (
               <Check className="w-4 h-4" />
@@ -311,7 +309,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
             />
           </div>
 
-          <ServiceFeatures className="mt-6" variant="compact" items={["shipping", "warranty", "returns"]}/>
+          <ServiceFeatures className="mt-6" variant="compact" items={["shipping", "warranty", "returns"]} />
         </div>
       </div>
 
@@ -353,6 +351,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         }}
       />
     </div>
+
   );
 };
 

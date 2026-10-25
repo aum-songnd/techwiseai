@@ -38,5 +38,6 @@ async def get_product_recommendations(
         logger.exception("Lỗi khi xử lý gợi ý sản phẩm cho ID '%s': %s", product_id, e)
         raise HTTPException(
             status_code=500,
-            detail=f"Lỗi xử lý gợi ý sản phẩm: {str(e)}",
+            detail="Đã xảy ra lỗi khi xử lý đề xuất sản phẩm. Vui lòng thử lại sau.",
         ) from e
+
