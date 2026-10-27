@@ -16,14 +16,9 @@ type Summary = {
   paidAt: string | null;
 };
 
-const RAW_API_URL = (
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-prod.up.railway.app"
-).replace(/\/$/, "");
+import { API_BASE_URL } from "@/lib/config/api";
 
-const BACKEND_API_BASE = RAW_API_URL.endsWith("/api/v1")
-  ? RAW_API_URL
-  : `${RAW_API_URL}/api/v1`;
+const BACKEND_API_BASE = API_BASE_URL;
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(

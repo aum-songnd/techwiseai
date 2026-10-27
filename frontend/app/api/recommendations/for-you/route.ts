@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { API_BASE_URL } from "@/lib/config/api";
 
 export const dynamic = "force-dynamic";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://techwiseai-prod.up.railway.app/api/v1";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

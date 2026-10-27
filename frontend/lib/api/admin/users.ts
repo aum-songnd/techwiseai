@@ -1,4 +1,5 @@
 import { getToken } from "@/lib/auth";
+import { API_BASE_URL } from "@/lib/config/api";
 
 export type AdminUser = {
   id: string;
@@ -23,9 +24,6 @@ export type GetAdminUsersParams = {
   keyword?: string;
 };
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-prod.up.railway.app/api/v1";
 
 interface ApiEnvelope<T> {
   success: boolean;

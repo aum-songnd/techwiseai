@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { updateServerReviewStatus } from "@/lib/server/reviews";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://techwiseai-prod.up.railway.app/api/v1";
+import { API_BASE_URL } from "@/lib/config/api";
 
 interface RouteParams {
   params: Promise<{ id: string }>;

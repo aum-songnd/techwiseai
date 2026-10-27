@@ -13,6 +13,7 @@ import {
   Loader2,
 } from "lucide-react";
 import Loading from "@/app/(client)/loading";
+import { API_BASE_URL } from "@/lib/config/api";
 import {
   getAdminOrders,
   getAdminOrderById,
@@ -41,9 +42,6 @@ type AdminPayment = {
   paidAt?: string | null;
 };
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-prod.up.railway.app/api/v1";
 
 const ITEM_IMAGE_KEYS = [
   "thumbnailUrl",

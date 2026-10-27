@@ -1,5 +1,6 @@
 import type { Blog, BlogCategory, Author } from "@/app/data/types";
 import { getToken } from "@/lib/auth";
+import { API_BASE_URL } from "@/lib/config/api";
 
 import { blogs as defaultSeedBlogs } from "@/app/data/blogs";
 
@@ -15,9 +16,6 @@ export interface BlogPayload {
   active?: boolean;
 }
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-prod.up.railway.app/api/v1";
 
 const LOCAL_BASE = "/api/blogs";
 

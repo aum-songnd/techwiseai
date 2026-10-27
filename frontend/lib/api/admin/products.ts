@@ -1,11 +1,8 @@
 import { getProductsPaginated } from "../catalog";
 import { mapProduct } from "../core";
 import { getToken } from "@/lib/auth";
+import { API_BASE_URL } from "@/lib/config/api";
 import type { Category, Product } from "@/app/data/types";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-prod.up.railway.app/api/v1";
 
 const FETCH_SIZE = 2000;
 const MAX_PAGES = 100;

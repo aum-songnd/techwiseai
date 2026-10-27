@@ -3,10 +3,7 @@ import {
   listAllServerProfiles,
   readServerProfiles,
 } from "@/lib/server/user-profiles";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://techwiseai-prod.up.railway.app/api/v1";
+import { API_BASE_URL } from "@/lib/config/api";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

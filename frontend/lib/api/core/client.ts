@@ -1,10 +1,8 @@
 import { cachedRequest } from "./cache";
 import type { Product, Category, Brand, ProductVariant } from "@/app/data/types";
 import { getToken } from "@/lib/auth";
-
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-prod.up.railway.app/api/v1";
+import { API_BASE_URL } from "@/lib/config/api";
+export { API_BASE_URL };
 
 export interface ApiEnvelope<T> {
   success: boolean;

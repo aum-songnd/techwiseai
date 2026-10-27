@@ -1,7 +1,6 @@
 import { cachedRequest, clearRequestCache } from "../core";
-
-
 import { getToken } from "@/lib/auth";
+import { API_BASE_URL } from "@/lib/config/api";
 import { normalizeStatusHistory } from "../orders";
 import type {
   OrderItem,
@@ -11,9 +10,6 @@ import type {
   PaymentStatus,
 } from "../orders";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-prod.up.railway.app/api/v1";
 
 interface ApiEnvelope<T> {
   success: boolean;
