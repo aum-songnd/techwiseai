@@ -1,10 +1,5 @@
-
-
 import { getToken } from "@/lib/auth";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://techwiseai-prod.up.railway.app/api/v1";
+import { API_BASE_URL } from "@/lib/config/api";
 
 interface ApiEnvelope<T> {
   success: boolean;

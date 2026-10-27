@@ -1,13 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const RAW_API_URL = (
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://techwiseai-prod.up.railway.app"
-).replace(/\/$/, "");
-
-const API_BASE_URL = RAW_API_URL.endsWith("/api/v1")
-  ? RAW_API_URL
-  : `${RAW_API_URL}/api/v1`;
+import { API_BASE_URL } from "@/lib/config/api";
 
 export async function GET(
   req: NextRequest,

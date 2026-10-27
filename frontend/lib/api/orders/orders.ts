@@ -1,13 +1,11 @@
 import { cachedRequest, clearRequestCache } from "../core";
-
-
 import { getToken } from "@/lib/auth";
+import { API_BASE_URL as BACKEND_API_URL } from "@/lib/config/api";
 
 const API_BASE_URL =
   typeof window !== "undefined"
     ? "/api"
-    : process.env.NEXT_PUBLIC_API_URL ??
-      "https://techwiseai-prod.up.railway.app/api/v1";
+    : BACKEND_API_URL;
 
 interface ApiEnvelope<T> {
   success: boolean;

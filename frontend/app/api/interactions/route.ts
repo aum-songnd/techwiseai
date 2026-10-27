@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://techwiseai-prod.up.railway.app/api/v1";
+import { API_BASE_URL } from "@/lib/config/api";
 
 export async function POST(req: NextRequest) {
   const sessionId = req.headers.get("x-session-id") || req.cookies.get("tw_guest_session")?.value;
