@@ -21,13 +21,9 @@ import org.springframework.http.MediaType;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
-import com.university.regulation.dto.products.RecommendedProductResponse;
-import com.university.regulation.service.AiRecommendationService;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.university.regulation.dto.ai.AiImageSearchData;
 import com.university.regulation.service.ImageSearchService;
 
@@ -36,7 +32,6 @@ import com.university.regulation.service.ImageSearchService;
 @RequiredArgsConstructor
 public class ProductController {
         private final ProductService productService;
-        private final AiRecommendationService aiRecommendationService;
         private final ImageSearchService imageSearchService;
 
         @GetMapping("/{id}")
@@ -87,30 +82,6 @@ public class ProductController {
                 return ApiResponse.success(
                                 "Tìm kiếm sản phẩm thành công",
                                 products,
-                                request.getRequestURI());
-        }
-
-        @GetMapping("/{id}/recommendations")
-        public ApiResponse<List<ProductResponse>> getRecommendations(
-                        @PathVariable UUID id,
-                        @RequestParam(defaultValue = "8") int limit,
-                        HttpServletRequest request) {
-                List<ProductResponse> products = productService.getRecommendations(id, limit);
-
-                return ApiResponse.success(
-                                "Lấy danh sách sản phẩm gợi ý thành công",
-                                products,
-                                request.getRequestURI());
-        }
-
-        @GetMapping("/{id}/recommendations/ai")
-        public ApiResponse<List<RecommendedProductResponse>> getAiRecommendations(
-                        @PathVariable UUID id,
-                        @RequestParam(defaultValue = "8") int limit,
-                        HttpServletRequest request) {
-                return ApiResponse.success(
-                                "Lấy danh sách sản phẩm gợi ý thành công",
-                                aiRecommendationService.getRecommendations(id, limit),
                                 request.getRequestURI());
         }
 

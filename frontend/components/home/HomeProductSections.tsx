@@ -8,6 +8,11 @@ import HomeBestSellersNew from "@/components/home/HomeBestSellersNew";
 import HomePriceDeals from "@/components/home/HomePriceDeals";
 import HomeTechCombos from "@/components/home/HomeTechCombos";
 import HomeRecentlyViewed from "@/components/home/HomeRecentlyViewed";
+import ForYouRecommendations from "@/components/home/ForYouRecommendations";
+import {
+  getForYouRecommendations,
+  type PersonalizedRecommendationData,
+} from "@/lib/api/recommendation/personalized";
 import ServiceFeatures from "@/components/common/ServiceFeatures";
 
 const HomeProductSections = async () => {
@@ -17,6 +22,7 @@ const HomeProductSections = async () => {
   let audio: Product[] = [];
   let components: Product[] = [];
   let categorySections: CategorySectionData[] = [];
+  let forYouData: PersonalizedRecommendationData | null = null;
 
   try {
     const [
@@ -28,6 +34,7 @@ const HomeProductSections = async () => {
       componentResult,
       cameraResult,
       phoneResult,
+      forYouResult,
     ] = await Promise.allSettled([
       getProducts({ size: 60 }),
       getProducts({ category: "laptop", size: 30 }),
@@ -37,8 +44,10 @@ const HomeProductSections = async () => {
       getProducts({ category: "linh-kien", size: 20 }),
       getProducts({ category: "may-anh", size: 20 }),
       getProducts({ category: "dien-thoai", size: 20 }),
+      getForYouRecommendations(undefined, 8),
     ]);
 
+    forYouData = forYouResult.status === "fulfilled" ? forYouResult.value : null;
     laptops = laptopResult.status === "fulfilled" ? laptopResult.value : [];
     accessories = accessoriesResult.status === "fulfilled" ? accessoriesResult.value : [];
     audio = audioResult.status === "fulfilled" ? audioResult.value : [];
@@ -105,16 +114,19 @@ const HomeProductSections = async () => {
       {/* 1. Flash Sale with timer & sold progress */}
       <FlashSale />
 
-      {/* 2. Sản phẩm bán chạy & Mới về (Tabbed) */}
+      {/* 2. Dành riêng cho bạn (AI Personalized Recommendations) */}
+      <ForYouRecommendations initialData={forYouData} />
+
+      {/* 3. Sản phẩm bán chạy & Mới về (Tabbed) */}
       <HomeBestSellersNew products={products} />
 
-      {/* 3. Deal theo mức giá */}
+      {/* 4. Deal theo mức giá */}
       <HomePriceDeals products={products} />
 
-      {/* 4. Thương hiệu phổ biến (được đẩy lên trước combo) */}
+      {/* 5. Thương hiệu phổ biến (được đẩy lên trước combo) */}
       <HomeBrands products={products} />
 
-      {/* 5. Combo công nghệ tiết kiệm */}
+      {/* 6. Combo công nghệ tiết kiệm */}
       <HomeTechCombos
         laptops={laptops}
         accessories={accessories}
@@ -122,13 +134,13 @@ const HomeProductSections = async () => {
         components={components}
       />
 
-      {/* 6. Highlighted Category Carousels (Compact & focused) */}
+      {/* 7. Highlighted Category Carousels (Compact & focused) */}
       <ProductGrid
         initialLaptops={laptops}
         initialCategorySections={categorySections}
       />
 
-      {/* 7. Sản phẩm đã xem gần đây */}
+      {/* 8. Sản phẩm đã xem gần đây */}
       <HomeRecentlyViewed />
 
       {/* 8. Dịch vụ cam kết */}

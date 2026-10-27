@@ -102,4 +102,20 @@ public interface ProductRepository extends JpaRepository<Product, UUID>,
             @Param("maxPrice") BigDecimal maxPrice,
             Pageable pageable
         );
+
+        @Query("""
+            SELECT p
+            FROM Product p
+            JOIN FETCH p.category c
+            WHERE p.active = true
+            AND c.active = true
+            AND p.stockQuantity > 0
+            ORDER BY
+            p.featured DESC,
+            p.hot DESC,
+            p.ratingAverage DESC,
+            p.reviewCount DESC,
+            p.createdAt DESC
+            """)
+        List<Product> findTopTrendingProducts(Pageable pageable);
 }

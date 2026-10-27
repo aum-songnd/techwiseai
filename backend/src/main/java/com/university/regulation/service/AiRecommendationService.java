@@ -336,33 +336,33 @@ public class AiRecommendationService {
             double devA = priceDeviation(current.getPrice(), a.response().price());
             double devB = priceDeviation(current.getPrice(), b.response().price());
 
-            // 1. Giá gần nhất: nếu độ lệch giá chênh nhau đáng kể (>= 1.5% = 0.015),
-            // ưu tiên sản phẩm có giá gần nhất trước.
-            double priceDistDiff = Math.abs(devA - devB);
-            if (priceDistDiff >= 0.015) {
-                return Double.compare(devA, devB);
+            // 1. Phân nhóm khoảng giá: Band 0 (ngân sách <= 15%) trước Band 1 (15% - 35%)
+            int bandA = devA <= PRICE_TOLERANCE ? 0 : 1;
+            int bandB = devB <= PRICE_TOLERANCE ? 0 : 1;
+            if (bandA != bandB) {
+                return Integer.compare(bandA, bandB);
             }
 
-            // 2. Cấu hình tương đồng / mạnh hơn: khi khoảng cách giá tương đương (< 1.5%),
-            // ưu tiên sản phẩm có cấu hình mạnh hơn / tương đương tốt hơn
-            double scoreDiff = b.score() - a.score();
-            if (Math.abs(scoreDiff) > 0.05) {
-                return Double.compare(b.score(), a.score());
+            // 2. Giá gần nhất (độ lệch giá nhỏ nhất)
+            int priceCmp = Double.compare(devA, devB);
+            if (priceCmp != 0) {
+                return priceCmp;
             }
 
-            // 3. Cùng hãng: ưu tiên sản phẩm cùng thương hiệu với sản phẩm đang xem
+            // 3. Cấu hình / Điểm xếp hạng cao nhất
+            int scoreCmp = Double.compare(b.score(), a.score());
+            if (scoreCmp != 0) {
+                return scoreCmp;
+            }
+
+            // 4. Cùng thương hiệu với sản phẩm đang xem
             boolean sameBrandA = a.response().brand() != null && a.response().brand().trim().equalsIgnoreCase(currentBrand);
             boolean sameBrandB = b.response().brand() != null && b.response().brand().trim().equalsIgnoreCase(currentBrand);
             if (sameBrandA != sameBrandB) {
                 return sameBrandB ? 1 : -1;
             }
 
-            // 4. Giá gần nhất tuyệt đối
-            if (Double.compare(devA, devB) != 0) {
-                return Double.compare(devA, devB);
-            }
-
-            // 5. Đánh giá người dùng
+            // 5. Đánh giá người dùng (Rating & Review)
             double ratingB = b.response().ratingAverage() != null ? b.response().ratingAverage().doubleValue() : 0.0;
             double ratingA = a.response().ratingAverage() != null ? a.response().ratingAverage().doubleValue() : 0.0;
             int ratingCompare = Double.compare(ratingB, ratingA);
@@ -372,6 +372,7 @@ public class AiRecommendationService {
 
             return Integer.compare(b.response().reviewCount(), a.response().reviewCount());
         });
+
 
         List<Scored> result = new ArrayList<>();
         Map<String, Integer> brandCounts = new HashMap<>();

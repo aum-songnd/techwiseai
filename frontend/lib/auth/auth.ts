@@ -267,6 +267,20 @@ export function clearToken() {
   clearAuthSessionId();
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(EXPIRES_KEY);
+
+  // ĐĂNG XUẤT: Xóa session cũ và xoay vòng sang guest session mới toanh độc lập
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("tw_session_id");
+    fetch("/api/auth/logout", { method: "POST" })
+      .then((res) => {
+        const newSid = res.headers.get("X-Session-Id");
+        if (newSid) {
+          localStorage.setItem("tw_session_id", newSid);
+        }
+      })
+      .catch(() => {});
+  }
+
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("auth:logout"));
     broadcastTabEvent({ type: "AUTH_LOGOUT" });

@@ -13,6 +13,8 @@ public interface CategoryRepository
     boolean existsByNameIgnoreCase(String name);
     boolean existsBySlugIgnoreCase(String slug);
     Optional<Category> findBySlugIgnoreCase(String slug);
+    Optional<Category> findByNameIgnoreCase(String name);
+    Optional<Category> findFirstByNameContainingIgnoreCase(String name);
     boolean existsByNameIgnoreCaseAndIdNot(String name, UUID id);
     boolean existsBySlugIgnoreCaseAndIdNot(String slug, UUID id);
     List<Category> findAllByActiveTrueOrderByDisplayOrderAsc();

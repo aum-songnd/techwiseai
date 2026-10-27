@@ -1,15 +1,22 @@
 from contextlib import contextmanager
-from typing import Generator
+from typing import Any, Generator
 
-import psycopg
-from pgvector.psycopg import register_vector
-from psycopg import Connection
+try:
+    import psycopg
+    from pgvector.psycopg import register_vector
+    from psycopg import Connection
+except ImportError:
+    psycopg = None
+    register_vector = None
+    Connection = Any
 
 from app.core.config import get_settings
 
 
 @contextmanager
 def get_database_connection() -> Generator[Connection, None, None]:
+    if psycopg is None:
+        raise RuntimeError("Thư viện 'psycopg' chưa được cài đặt trong môi trường này. Vui lòng kích hoạt venv hoặc chạy 'pip install -r requirements.txt'.")
     settings = get_settings()
 
     connection = psycopg.connect(

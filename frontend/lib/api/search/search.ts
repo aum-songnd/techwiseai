@@ -10,7 +10,7 @@ import type { Product } from "@/app/data/types";
 
 export interface RecommendedProduct {
   product: Product;
-  badge: "BEST" | "HOT" | "CHOICE" | null;
+  badge: "BEST" | "HOT" | "CHOICE" | "FOR_YOU" | null;
   reason: string | null;
   keySpecs: Record<string, string>;
   score: number;
@@ -18,7 +18,7 @@ export interface RecommendedProduct {
 
 interface ApiRecommendedRaw {
   product: ApiProductRaw;
-  badge: "BEST" | "HOT" | "CHOICE" | null;
+  badge: "BEST" | "HOT" | "CHOICE" | "FOR_YOU" | null;
   reason: string | null;
   keySpecs: Record<string, string> | null;
   score: number;
@@ -77,35 +77,4 @@ export async function searchProductsByImage(
       inStock: result.stockQuantity > 0,
     })
   );
-}
-
-export async function getProductRecommendations(productId: string, limit = 8): Promise<Product[]> {
-  const safeLimit = Math.max(1, Math.min(limit, 20));
-
-  const rawProducts = await fetchEnvelope<ApiProductRaw[]>(
-    `/products/${encodeURIComponent(productId)}/recommendations?limit=${safeLimit}`, {
-    next: { revalidate: 60 }
-  });
-
-  return rawProducts.map(mapProduct);
-}
-
-export async function getAiRecommendations(
-  productId: string,
-  limit = 8
-): Promise<RecommendedProduct[]> {
-  const safeLimit = Math.max(1, Math.min(limit, 12));
-
-  const raw = await fetchEnvelope<ApiRecommendedRaw[]>(
-    `/products/${encodeURIComponent(productId)}/recommendations/ai?limit=${safeLimit}`,
-    { next: { revalidate: 60 } }
-  );
-
-  return (raw ?? []).map((r) => ({
-    product: mapProduct(r.product),
-    badge: r.badge ?? null,
-    reason: r.reason ?? null,
-    keySpecs: r.keySpecs ?? {},
-    score: r.score,
-  }));
 }

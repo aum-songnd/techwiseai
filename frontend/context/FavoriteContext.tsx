@@ -17,6 +17,7 @@ import {
   removeAllFavorites as removeAllFavoritesApi,
 } from "@/lib/api";
 import { broadcastTabEvent, subscribeTabSync } from "@/lib/auth/tab-sync";
+import { recordInteraction } from "@/lib/api/recommendation/personalized";
 
 export type FavoriteProduct = Product & {
   categories?: string[];
@@ -99,6 +100,11 @@ export const FavoriteProvider = ({ children }: { children: React.ReactNode }) =>
 
       try {
         await addFavoriteApi(product.id);
+        recordInteraction({
+          productId: product.id,
+          eventType: "FAVORITE",
+          durationSeconds: 15,
+        });
         broadcastTabEvent({
           type: "FAVORITES_UPDATED",
           payload: { timestamp: Date.now() },

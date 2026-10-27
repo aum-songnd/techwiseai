@@ -49,6 +49,7 @@ public class SecurityConfig {
                                                 .requestMatchers(
                                                                 "/actuator/health",
                                                                 "/api/v1/auth/login",
+                                                                "/api/v1/auth/logout",
                                                                 "/api/v1/auth/register",
                                                                 "/api/v1/auth/forgot-password",
                                                                 "/api/v1/auth/reset-password")
@@ -60,6 +61,8 @@ public class SecurityConfig {
                                                                 "/api/v1/categories/**",
                                                                 "/api/v1/products",
                                                                 "/api/v1/products/**",
+                                                                "/api/v1/recommendations",
+                                                                "/api/v1/recommendations/**",
                                                                 "/api/v1/blogs",
                                                                 "/api/v1/blogs/**",
                                                                 "/api/v1/blog-categories",
@@ -72,7 +75,8 @@ public class SecurityConfig {
                                                 .requestMatchers(
                                                                 HttpMethod.POST,
                                                                 "/api/v1/products/search-by-image",
-                                                                "/api/v1/reviews/*/like")
+                                                                "/api/v1/reviews/*/like",
+                                                                "/api/v1/interactions")
                                                 .permitAll()
 
                                                 // API quản trị
@@ -127,11 +131,8 @@ public class SecurityConfig {
                                                 "DELETE",
                                                 "OPTIONS"));
 
-                configuration.setAllowedHeaders(
-                                List.of(
-                                                "Authorization",
-                                                "Content-Type",
-                                                "Accept"));
+                configuration.setAllowedHeaders(List.of("*"));
+                configuration.setExposedHeaders(List.of("*"));
 
                 // JWT được gửi bằng Authorization
                 configuration.setAllowCredentials(false);

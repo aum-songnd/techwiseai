@@ -26,9 +26,20 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    const sessionId = req.headers.get("x-session-id") || req.cookies.get("tw_guest_session")?.value;
+    const cookieHeader = req.headers.get("cookie");
+
+    const reqHeaders: Record<string, string> = { "Content-Type": "application/json" };
+    if (sessionId) {
+      reqHeaders["X-Session-Id"] = sessionId;
+    }
+    if (cookieHeader) {
+      reqHeaders["Cookie"] = cookieHeader;
+    }
+
     const res = await fetch(`${API_BASE_URL}/auth/login`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: reqHeaders,
       body: JSON.stringify(body),
     });
 
@@ -78,7 +89,16 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json(data, { status: res.status });
+    const responseHeaders: Record<string, string> = {};
+    const setCookie = res.headers.get("set-cookie");
+    if (setCookie) {
+      responseHeaders["Set-Cookie"] = setCookie;
+    }
+
+    return NextResponse.json(data, {
+      status: res.status,
+      headers: responseHeaders,
+    });
   } catch (error) {
     const isFetchFailed = error instanceof Error && error.message.toLowerCase().includes("fetch failed");
     return NextResponse.json(

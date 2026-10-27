@@ -14,12 +14,21 @@ import com.university.regulation.dto.favorites.FavoriteResponse;
 import com.university.regulation.models.favorite.Favorite;
 import com.university.regulation.models.product.Product;
 import com.university.regulation.models.user.User;
+import com.university.regulation.models.recommendation.InteractionEventType;
+import com.university.regulation.models.recommendation.UserInteractionEvent;
 import com.university.regulation.repository.FavoriteRepository;
 import com.university.regulation.repository.ProductRepository;
+import com.university.regulation.repository.UserInteractionRepository;
 import com.university.regulation.repository.UserRepository;
+import com.university.regulation.service.recommendation.UserProfileService;
+
+import org.springframework.context.ApplicationEventPublisher;
+import com.university.regulation.event.recommendation.UserInteractionRecordedEvent;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FavoriteService {
@@ -28,6 +37,8 @@ public class FavoriteService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final ProductService productService;
+    private final UserInteractionRepository interactionRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional(readOnly = true)
     public List<FavoriteResponse> getFavorites(String username) {
@@ -70,6 +81,22 @@ public class FavoriteService {
 
                     Favorite savedFavorite =
                             favoriteRepository.save(favorite);
+
+                    try {
+                        UserInteractionEvent event = UserInteractionEvent.builder()
+                                .user(user)
+                                .sessionId("u:" + user.getId().toString())
+                                .product(product)
+                                .eventType(InteractionEventType.FAVORITE)
+                                .durationSeconds(15)
+                                .metadata("{\"source\":\"WISHLIST\"}")
+                                .build();
+                        interactionRepository.save(event);
+                        eventPublisher.publishEvent(new UserInteractionRecordedEvent(
+                                user.getId(), "u:" + user.getId().toString(), product.getId()));
+                    } catch (Exception e) {
+                        log.warn("Không thể ghi nhận interaction FAVORITE: {}", e.getMessage());
+                    }
 
                     return toResponse(savedFavorite);
                 });

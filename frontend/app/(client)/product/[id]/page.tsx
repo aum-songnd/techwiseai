@@ -2,15 +2,11 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
 import ProductGallery from "@/components/product/ProductGallery";
-import RecommendationCarousel from "@/components/product/RecommendationCarousel";
 import {
   getProductById,
   getProducts,
   getAllProductsByCategory,
-  getProductRecommendations,
-  getAiRecommendations,
   getProductSpecs,
-  type RecommendedProduct,
 } from "@/lib/api";
 import {
   ChevronRight,
@@ -24,6 +20,7 @@ import ServiceFeatures from "@/components/common/ServiceFeatures";
 import ProductReviewsSection from "@/components/product/ProductReviewsSection";
 import ProductDetailInteractive from "@/components/product/ProductDetailInteractive";
 import HomeRecentlyViewed from "@/components/home/HomeRecentlyViewed";
+import { HomeCategories } from "@/components";
 
 export const revalidate = 60;
 
@@ -205,9 +202,8 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
           {product!.status && (
             <span
-              className={`self-start text-[11px] font-semibold px-2.5 py-1 rounded-2xl mb-3 ${
-                statusStyle[product!.status] ?? "bg-gray-700 text-white"
-              }`}
+              className={`self-start text-[11px] font-semibold px-2.5 py-1 rounded-2xl mb-3 ${statusStyle[product!.status] ?? "bg-gray-700 text-white"
+                }`}
             >
               {statusLabel[product!.status] ?? product!.status}
             </span>
@@ -246,11 +242,10 @@ const ProductPage = async ({ params }: ProductPageProps) => {
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                   key={star}
-                  className={`w-3.5 h-3.5 ${
-                    star <= Math.round(product!.ratingAverage || 5)
-                      ? "fill-amber-400 text-amber-400"
-                      : "fill-neutral-200 text-neutral-200"
-                  }`}
+                  className={`w-3.5 h-3.5 ${star <= Math.round(product!.ratingAverage || 5)
+                    ? "fill-amber-400 text-amber-400"
+                    : "fill-neutral-200 text-neutral-200"
+                    }`}
                 />
               ))}
             </div>
@@ -285,9 +280,8 @@ const ProductPage = async ({ params }: ProductPageProps) => {
           </div>
 
           <p
-            className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium ${
-              inStock ? "text-green-600" : "text-red-600"
-            }`}
+            className={`mt-3 inline-flex items-center gap-1.5 text-sm font-medium ${inStock ? "text-green-600" : "text-red-600"
+              }`}
           >
             {inStock ? (
               <Check className="w-4 h-4" />
@@ -311,7 +305,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
             />
           </div>
 
-          <ServiceFeatures className="mt-6" variant="compact" items={["shipping", "warranty", "returns"]}/>
+          <ServiceFeatures className="mt-6" variant="compact" items={["shipping", "warranty", "returns"]} />
         </div>
       </div>
 
@@ -333,13 +327,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
       <Suspense fallback={null}>
         <ProductSpecifications productId={product!.id} />
       </Suspense>
-      <Suspense fallback={null}>
-        <ProductRecommendations
-          productId={product!.id}
-          mainCategory={mainCategory}
-          currentPrice={product!.finalPrice || product!.price}
-        />
-      </Suspense>
 
       <HomeRecentlyViewed title="Sản phẩm bạn đã xem gần đây" />
 
@@ -353,6 +340,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
         }}
       />
     </div>
+
   );
 };
 
@@ -379,73 +367,6 @@ async function ProductSpecifications({ productId }: { productId: string }) {
           ))}
         </tbody></table>
       </div>
-    </section>
-  );
-}
-
-async function ProductRecommendations({
-  productId,
-  mainCategory,
-  currentPrice,
-}: {
-  productId: string;
-  mainCategory?: string;
-  currentPrice?: number;
-}) {
-  let aiRecommendations: RecommendedProduct[] = [];
-  let relatedProducts: Awaited<ReturnType<typeof getProductRecommendations>> = [];
-  try {
-    aiRecommendations = await getAiRecommendations(productId, 8);
-  } catch (error) {
-    console.error("Không thể tải đề xuất AI:", error);
-  }
-  if (!aiRecommendations.length) {
-    try {
-      relatedProducts = await getProductRecommendations(productId, 8);
-    } catch (error) {
-      console.error("Không thể tải sản phẩm gợi ý:", error);
-    }
-  }
-
-  // Bộ lọc nghiêm ngặt: CHỈ HIỂN THỊ CÙNG CATEGORY VÀ GIÁ KHÔNG ĐƯỢC CHÊNH LỆCH VƯỢT NGƯỠNG (<= 35%)
-  const isValidCandidate = (p: { categories?: string[]; price: number; finalPrice?: number }) => {
-    // 1. Phải cùng category
-    if (mainCategory && p.categories && p.categories.length > 0) {
-      const match = p.categories.some(
-        (cat) => cat.trim().toLowerCase() === mainCategory.trim().toLowerCase()
-      );
-      if (!match) return false;
-    }
-    // 2. Không chênh lệch vượt ngưỡng (tối đa 35%)
-    if (currentPrice && currentPrice > 0) {
-      const pPrice = p.finalPrice || p.price;
-      const deviation = Math.abs(pPrice - currentPrice) / currentPrice;
-      if (deviation > 0.35) return false;
-    }
-    return true;
-  };
-
-  const filteredAi = aiRecommendations.filter((item) => isValidCandidate(item.product));
-  const filteredRelated = relatedProducts.filter((item) => isValidCandidate(item));
-
-  if (!filteredAi.length && !filteredRelated.length) return null;
-
-  return (
-    <section className="mt-14 border-t border-gray-200 pt-8">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-gray-900">
-          {filteredAi.length ? "Sản phẩm đề xuất" : "Sản phẩm liên quan"}
-        </h2>
-        {mainCategory && (
-          <Link href={categoryHref(mainCategory)} className="inline-flex items-center gap-1 text-sm text-shop_dark_green hover:underline">
-            Xem thêm {mainCategory}<ArrowRight className="w-4 h-4" />
-          </Link>
-        )}
-      </div>
-      <RecommendationCarousel
-        aiRecommendations={filteredAi}
-        relatedProducts={filteredRelated}
-      />
     </section>
   );
 }

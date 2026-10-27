@@ -62,6 +62,7 @@ public class OrderService {
 
         private final PaymentService paymentService;
         private final PaymentRepository paymentRepository;
+        private final com.university.regulation.service.recommendation.UserInteractionService userInteractionService;
 
         @Transactional
         public OrderDetailResponse createOrder(
@@ -208,6 +209,11 @@ public class OrderService {
                  * Không xóa bản ghi carts.
                  */
                 cartItemRepository.deleteAllByCartId(cart.getId());
+
+                try {
+                        userInteractionService.recordOrderPurchase(user, null, new ArrayList<>(lockedProducts.values()));
+                } catch (Exception ignored) {
+                }
 
                 return toOrderDetailResponse(savedOrder);
         }

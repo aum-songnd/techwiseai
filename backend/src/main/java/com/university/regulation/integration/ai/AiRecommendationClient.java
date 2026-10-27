@@ -33,7 +33,6 @@ public class AiRecommendationClient {
     ) {}
 
     public AiRecommendationClient(
-            RestClient.Builder restClientBuilder,
             @Value("${app.recommendation-service.base-url:http://localhost:8001}") String baseUrl
     ) {
         HttpClient httpClient = HttpClient.newBuilder()
@@ -44,7 +43,7 @@ public class AiRecommendationClient {
         JdkClientHttpRequestFactory factory = new JdkClientHttpRequestFactory(httpClient);
         factory.setReadTimeout(Duration.ofSeconds(8));
 
-        this.recommendationRestClient = restClientBuilder
+        this.recommendationRestClient = RestClient.builder()
                 .baseUrl(baseUrl)
                 .requestFactory(factory)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
