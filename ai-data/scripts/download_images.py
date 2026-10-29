@@ -15,7 +15,7 @@ from urllib3.util.retry import Retry
 
 
 AI_DATA_DIR = Path(__file__).resolve().parents[1]
-CATALOG_PATH = AI_DATA_DIR / "raw" / "laptops_catalog.json"
+CATALOG_PATH = AI_DATA_DIR / "raw" / "products_catalog.json"
 IMAGES_DIR = AI_DATA_DIR / "images"
 MANIFESTS_DIR = AI_DATA_DIR / "manifests"
 

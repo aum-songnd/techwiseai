@@ -458,7 +458,7 @@ def main() -> int:
     args = parse_arguments()
     ks = validate_arguments(args)
 
-    load_dotenv(PROJECT_ROOT / ".env")
+    load_dotenv(PROJECT_ROOT / "backend" / ".env")
     model_name = os.getenv("SIGLIP_MODEL_NAME", DEFAULT_MODEL_NAME)
 
     with connect_database() as connection:
