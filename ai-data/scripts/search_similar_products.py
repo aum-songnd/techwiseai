@@ -312,7 +312,7 @@ def main() -> int:
     if candidate_limit < args.top_k:
         raise ValueError("--candidate-limit phải lớn hơn hoặc bằng --top-k.")
 
-    load_dotenv(PROJECT_ROOT / ".env")
+    load_dotenv(PROJECT_ROOT / "backend" / ".env")
     model_name = os.getenv("SIGLIP_MODEL_NAME", DEFAULT_MODEL_NAME)
 
     with connect_database() as connection:

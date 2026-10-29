@@ -19,7 +19,7 @@ from transformers import AutoModel, AutoProcessor
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-ENV_PATH = PROJECT_ROOT / ".env"
+ENV_PATH = PROJECT_ROOT / "backend" / ".env"
 
 DEFAULT_MODEL_NAME = "google/siglip-base-patch16-224"
 DEFAULT_MODEL_REVISION = "main"

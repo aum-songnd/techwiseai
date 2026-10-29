@@ -26,7 +26,7 @@ FAILURE_LOG_PATH = (
     AI_DATA_DIRECTORY / "logs" / "embedding_failures.jsonl"
 )
 
-load_dotenv(PROJECT_ROOT / ".env")
+load_dotenv(PROJECT_ROOT / "backend" / ".env")
 
 
 def parse_arguments():

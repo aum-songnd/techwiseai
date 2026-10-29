@@ -18,7 +18,7 @@ EXPECTED_DIMENSION = 768
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-load_dotenv(PROJECT_ROOT / ".env")
+load_dotenv(PROJECT_ROOT / "backend" / ".env")
 
 
 def parse_arguments():
