@@ -43,11 +43,6 @@ class RecommendationItem(BaseModel):
     score: float = 0.0
 
 
-class RecommendationResponse(BaseModel):
-    success: bool = True
-    message: str = "Lấy danh sách sản phẩm gợi ý thành công"
-    data: list[RecommendationItem]
-
 
 class InteractionCreateRequest(BaseModel):
     productId: str

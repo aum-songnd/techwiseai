@@ -266,6 +266,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setStoredUser(fullUser);
     setToken(token);
     setUser(fullUser);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("auth:login"));
+    }
     broadcastTabEvent({
       type: "AUTH_LOGIN",
       payload: { user: fullUser, token },

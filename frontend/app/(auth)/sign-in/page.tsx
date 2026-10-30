@@ -14,6 +14,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { getPendingBundleItems } from "@/context/CartContext";
 import { isAdminUser } from "@/lib/auth";
 import Logo from "@/components/layout/Logo";
 import Container from "@/components/common/Container";
@@ -48,7 +49,10 @@ const SignInForm = () => {
 
     try {
       await login(username, password);
-      if (safeRedirect) {
+      const pendingItems = getPendingBundleItems();
+      if (pendingItems && pendingItems.length > 0) {
+        router.replace("/cart");
+      } else if (safeRedirect) {
         router.replace(safeRedirect);
       } else if (isAdminUser()) {
         router.replace("/admin");

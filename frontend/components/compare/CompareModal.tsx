@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { X, ArrowLeftRight, Check, ShoppingCart, Star } from "lucide-react";
 import { useCompare } from "@/context/CompareContext";
-import { useCart } from "@/context/CartContext";
+import { useCart, addPendingCartItem } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import type { Product } from "@/app/data/types";
@@ -63,12 +63,25 @@ const CompareModal = () => {
   }, [setCompareModalOpen]);
 
   const handleAddToCart = (product: Product) => {
-    if (requiresLogin && !isSignedIn) {
-      const redirectTo =
-        typeof window !== "undefined"
-          ? window.location.pathname + window.location.search
-          : "/";
-      router.push(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
+    if (requiresLogin || !isSignedIn) {
+      addPendingCartItem({
+        productId: product.id,
+        quantity: 1,
+        optimisticItem: {
+          id: `temp-${product.id}`,
+          productId: product.id,
+          name: product.name,
+          unitPrice: product.finalPrice || product.price,
+          originalPrice: product.price,
+          quantity: 1,
+          subtotal: product.finalPrice || product.price,
+          stockQuantity: product.stock ?? 999,
+          available: (product.stock ?? 1) > 0,
+          thumbnailUrl: product.images?.[0],
+        },
+      });
+      setCompareModalOpen(false);
+      router.push(`/sign-in?redirect=${encodeURIComponent("/cart")}`);
       return;
     }
     addToCart(product.id, 1, {

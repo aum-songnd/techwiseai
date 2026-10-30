@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { X, Star, ShoppingCart, ArrowRight, ShieldCheck, Truck, RefreshCw, Heart } from "lucide-react";
 import { useQuickView } from "@/context/QuickViewContext";
-import { useCart } from "@/context/CartContext";
+import { useCart, addPendingCartItem } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useFavorite } from "@/context/FavoriteContext";
@@ -70,12 +70,25 @@ const QuickViewModal = () => {
   const activeConfig = selectedConfig || (configOptions.length > 0 ? configOptions[0] : null);
 
   const handleAddToCart = () => {
-    if (requiresLogin && !isSignedIn) {
-      const redirectTo =
-        typeof window !== "undefined"
-          ? window.location.pathname + window.location.search
-          : `/product/${product.id}`;
-      router.push(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
+    if (requiresLogin || !isSignedIn) {
+      addPendingCartItem({
+        productId: product.id,
+        quantity,
+        optimisticItem: {
+          id: `temp-${product.id}`,
+          productId: product.id,
+          name: product.name,
+          unitPrice: product.finalPrice || product.price,
+          originalPrice: product.price,
+          quantity,
+          subtotal: (product.finalPrice || product.price) * quantity,
+          stockQuantity: product.stock ?? 999,
+          available: (product.stock ?? 1) > 0,
+          thumbnailUrl: product.images?.[0],
+        },
+      });
+      closeQuickView();
+      router.push(`/sign-in?redirect=${encodeURIComponent("/cart")}`);
       return;
     }
     addToCart(product.id, quantity, {

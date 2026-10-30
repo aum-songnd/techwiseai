@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { Product, Review, ReviewSummary } from "@/app/data/types";
 import { useAuth } from "@/context/AuthContext";
-import { useCart } from "@/context/CartContext";
+import { useCart, addPendingCartItem } from "@/context/CartContext";
 import {
   fetchProductReviews,
   submitProductReview,
@@ -283,9 +283,23 @@ const ProductReviewsSection = ({
     setIsBuyingNow(true);
     try {
       if (!isSignedIn || requiresLogin) {
-        if (typeof window !== "undefined") {
-          sessionStorage.setItem("pending_cart_product_id", productId);
-        }
+        const price = product?.finalPrice || product?.price || 0;
+        addPendingCartItem({
+          productId: productId,
+          quantity: 1,
+          optimisticItem: {
+            id: `temp-${productId}`,
+            productId: productId,
+            name: productName,
+            unitPrice: price,
+            originalPrice: product?.price || price,
+            quantity: 1,
+            subtotal: price,
+            stockQuantity: product?.stock ?? 999,
+            available: (product?.stock ?? 1) > 0,
+            thumbnailUrl: product?.images?.[0] || product?.thumbnailUrl,
+          },
+        });
         router.push(`/sign-in?redirect=${encodeURIComponent("/cart")}`);
         return;
       }
