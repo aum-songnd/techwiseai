@@ -17,7 +17,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/context/CartContext";
+import { useCart, addPendingCartItem } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import type { Product } from "@/app/data/types";
 
@@ -359,12 +359,26 @@ const SearchBar = ({ variant = "prominent" }: SearchBarProps) => {
   const handleAddToCart = (product: Product, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (requiresLogin && !isSignedIn) {
-      const redirectTo =
-        typeof window !== "undefined"
-          ? window.location.pathname + window.location.search
-          : "/";
-      router.push(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
+    if (requiresLogin || !isSignedIn) {
+      addPendingCartItem({
+        productId: product.id,
+        quantity: 1,
+        optimisticItem: {
+          id: `temp-${product.id}`,
+          productId: product.id,
+          name: product.name,
+          unitPrice: product.finalPrice || product.price,
+          originalPrice: product.price,
+          quantity: 1,
+          subtotal: product.finalPrice || product.price,
+          stockQuantity: product.stock ?? 999,
+          available: (product.stock ?? 1) > 0,
+          thumbnailUrl: product.images?.[0],
+        },
+      });
+      setIsDropdownOpen(false);
+      setIsModalOpen(false);
+      router.push(`/sign-in?redirect=${encodeURIComponent("/cart")}`);
       return;
     }
     addToCart(product.id, 1, {

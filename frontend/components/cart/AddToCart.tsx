@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, Minus, Plus } from "lucide-react";
 import { Product } from "@/app/data/types";
-import { useCart, clearPendingBundleItems } from "@/context/CartContext";
+import { useCart, addPendingCartItem } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { recordInteraction } from "@/lib/api/recommendation/personalized";
 
@@ -30,21 +30,19 @@ const AddToCart = ({ product, selectedColor, selectedConfig }: AddToCartProps) =
   const itemInCart = getItemByProductId(product.id);
   const quantityInCart = itemInCart?.quantity ?? 0;
 
-  // Auto-add product to cart if returning from sign-in
-  useEffect(() => {
-    if (isSignedIn && !requiresLogin && typeof window !== "undefined") {
-      const pendingId = sessionStorage.getItem("pending_cart_product_id");
-      if (pendingId && pendingId === product?.id && !isOutOfStock) {
-        const savedColor = sessionStorage.getItem("pending_cart_color") || selectedColor;
-        const savedConfig = sessionStorage.getItem("pending_cart_config") || selectedConfig;
-        sessionStorage.removeItem("pending_cart_product_id");
-        sessionStorage.removeItem("pending_cart_color");
-        sessionStorage.removeItem("pending_cart_config");
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isOutOfStock) return;
 
-        const variantSuffix = [savedColor, savedConfig].filter(Boolean).join(" • ");
-        const itemName = variantSuffix ? `${product.name} (${variantSuffix})` : product.name;
+    const variantSuffix = [selectedColor, selectedConfig].filter(Boolean).join(" • ");
+    const itemName = variantSuffix ? `${product.name} (${variantSuffix})` : product.name;
 
-        addToCart(product.id, 1, {
+    if (!isSignedIn || requiresLogin) {
+      addPendingCartItem({
+        productId: product.id,
+        quantity: 1,
+        optimisticItem: {
           id: `temp-${product.id}`,
           productId: product.id,
           name: itemName,
@@ -55,31 +53,9 @@ const AddToCart = ({ product, selectedColor, selectedConfig }: AddToCartProps) =
           stockQuantity: product.stock ?? 999,
           available: (product.stock ?? 1) > 0,
           thumbnailUrl: product.images?.[0] || product.thumbnailUrl,
-        });
-      }
-    }
-  }, [isSignedIn, requiresLogin, product, isOutOfStock, addToCart, selectedColor, selectedConfig]);
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (isOutOfStock) return;
-
-    const variantSuffix = [selectedColor, selectedConfig].filter(Boolean).join(" • ");
-    const itemName = variantSuffix ? `${product.name} (${variantSuffix})` : product.name;
-
-    if (!isSignedIn || requiresLogin) {
-      if (typeof window !== "undefined") {
-        clearPendingBundleItems();
-        sessionStorage.setItem("pending_cart_product_id", product.id);
-        if (selectedColor) sessionStorage.setItem("pending_cart_color", selectedColor);
-        if (selectedConfig) sessionStorage.setItem("pending_cart_config", selectedConfig);
-      }
-      const redirectTo =
-        typeof window !== "undefined"
-          ? window.location.pathname + window.location.search
-          : "/shop";
-      router.push(`/sign-in?redirect=${encodeURIComponent(redirectTo)}`);
+        },
+      });
+      router.push(`/sign-in?redirect=${encodeURIComponent("/cart")}`);
       return;
     }
 
