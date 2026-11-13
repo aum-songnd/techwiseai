@@ -5,3 +5,5 @@ python-dotenv
 pgvector
 sentence_transformers
 tqdm
+google-genai
+numpy
