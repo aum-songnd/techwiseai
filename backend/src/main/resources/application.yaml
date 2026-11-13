@@ -66,6 +66,8 @@ app:
     base-url: ${AI_SERVICE_BASE_URL:https://api-production-b778.up.railway.app}
   recommendation-service:
     base-url: ${RECOMMENDATION_SERVICE_BASE_URL:http://localhost:8001}
+  rag-service:
+    base-url: ${RAG_SERVICE_BASE_URL:http://localhost:8003}
 
 ai:
   embedding-enabled: ${AI_EMBEDDING_ENABLED:true}
