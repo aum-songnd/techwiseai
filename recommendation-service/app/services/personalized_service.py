@@ -274,12 +274,12 @@ class PersonalizedService:
         elif n_interactions <= 10:
             mode = "PERSONALIZED"
             vector_w = 0.50
-            title = f"Dành riêng cho bạn - {preferred_category}" if preferred_category else "Dành riêng cho bạn"
+            title = "Dành riêng cho bạn"
             subtitle = "Cá nhân hóa theo hành vi mua sắm và sở thích cấu hình"
         else:
             mode = "PERSONALIZED"
             vector_w = 0.60
-            title = f"Dành riêng cho bạn - {preferred_category}" if preferred_category else "Dành riêng cho bạn"
+            title = "Dành riêng cho bạn"
             subtitle = "Thuật toán học sâu từ lịch sử tương tác và quan tâm của bạn"
 
         # Lấy sản phẩm nổi bật / cold-start

@@ -53,18 +53,14 @@ public class BehaviorScoringService {
             mode = RecommendationMode.PERSONALIZED;
             vectorWeight = 0.70;
             fallbackWeight = 0.30;
-            title = categorySuffix != null
-                    ? "Dành riêng cho bạn - " + categorySuffix
-                    : "Dành riêng cho bạn";
+            title = "Dành riêng cho bạn";
             subtitle = "Cá nhân hóa theo phân khúc và cấu hình bạn đang quan tâm";
         } else {
             // Trên 10 tương tác: 85% vector, 15% fallback (Độ chính xác cao, vẫn giữ độ đa dạng)
             mode = RecommendationMode.PERSONALIZED;
             vectorWeight = 0.85;
             fallbackWeight = 0.15;
-            title = categorySuffix != null
-                    ? "Dành riêng cho bạn - " + categorySuffix
-                    : "Dành riêng cho bạn";
+            title = "Dành riêng cho bạn";
             subtitle = "Thuật toán học sâu từ lịch sử tương tác và đa cụm ý định của bạn";
         }
 

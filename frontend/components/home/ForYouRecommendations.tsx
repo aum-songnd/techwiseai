@@ -1,34 +1,12 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { Sparkles, Compass, Flame, RefreshCw, Zap } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import {
   getForYouRecommendations,
   type PersonalizedRecommendationData,
-  type RecommendationMode,
 } from "@/lib/api/recommendation/personalized";
 import AiRecommendedCard from "@/components/product/AiRecommendedCard";
-
-const modeConfig: Record<
-  RecommendationMode,
-  { label: string; icon: React.ElementType; badgeClass: string }
-> = {
-  COLD_START: {
-    label: "Gợi ý xu hướng",
-    icon: Flame,
-    badgeClass: "bg-amber-500/10 text-amber-700 border-amber-300/60",
-  },
-  EXPLORING: {
-    label: "Đang khám phá gu của bạn",
-    icon: Compass,
-    badgeClass: "bg-blue-500/10 text-blue-700 border-blue-300/60",
-  },
-  PERSONALIZED: {
-    label: "AI Cá nhân hóa 100%",
-    icon: Zap,
-    badgeClass: "bg-emerald-500/10 text-emerald-700 border-emerald-300/60",
-  },
-};
 
 interface ForYouRecommendationsProps {
   initialData?: PersonalizedRecommendationData | null;
@@ -87,35 +65,21 @@ export default function ForYouRecommendations({ initialData = null }: ForYouReco
     return null;
   }
 
-  const modeInfo = modeConfig[data.mode] || modeConfig.COLD_START;
-  const ModeIcon = modeInfo.icon;
-
   return (
     <section className="my-10 font-sans">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-3 border-b border-neutral-200/80">
         <div className="space-y-1">
-          <div className="flex items-center gap-2.5">
-            <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100">
-              <Sparkles className="w-4 h-4" />
-            </div>
-            <h2 className="text-xl font-bold uppercase tracking-tight text-shop_dark_green">
-              {data.title}
-            </h2>
-            <div
-              className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${modeInfo.badgeClass}`}
-            >
-              <ModeIcon className="w-3 h-3" />
-              <span>{modeInfo.label}</span>
-            </div>
-          </div>
-          <p className="text-xs text-neutral-500 pl-8">
+          <h2 className="text-xl font-bold uppercase tracking-tight text-shop_dark_green">
+            DÀNH RIÊNG CHO BẠN
+          </h2>
+          {/* <p className="text-xs text-neutral-500">
             {data.subtitle}
             {data.interactionCount > 0 && (
               <span className="ml-1 text-neutral-400 font-normal">
                 (Dựa trên {data.interactionCount} tương tác gần đây)
               </span>
             )}
-          </p>
+          </p> */}
         </div>
 
         <button
