@@ -1,9 +1,11 @@
 fastapi
-uvicorn
+uvicorn[standard]
+pydantic-settings
 psycopg[binary]
-python-dotenv
 pgvector
-sentence_transformers
-tqdm
+sentence-transformers
 google-genai
+requests
 numpy
+python-dotenv
+tqdm
