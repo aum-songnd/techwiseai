@@ -38,9 +38,8 @@ class RagService:
         _ = self.retrieval_service.embedding_model
         _ = self.reranker_service.reranker_model
         logger.info(
-            "RAG Service sử dụng mô hình Qwen 2 (Ollama: %s | Model: %s)",
-            self.settings.ollama_base_url,
-            self.settings.llm_model,
+            "RAG Service sử dụng mô hình Gemini (Model: %s)",
+            self.settings.gemini_model,
         )
 
     def search_and_rerank(self, conn: Connection, query: str) -> dict[str, Any]:

@@ -31,12 +31,6 @@ try:
         gemini_temperature: float = 0.2
         gemini_max_output_tokens: int = 2048
 
-        # Legacy Ollama settings
-        llm_model: str = "qwen2"
-        ollama_base_url: str = "http://localhost:11434"
-        llm_temperature: float = 0.2
-        llm_max_output_tokens: int = 2048
-
         # Retrieval
         search_top_k: int = 5
         candidate_limit: int = 30
